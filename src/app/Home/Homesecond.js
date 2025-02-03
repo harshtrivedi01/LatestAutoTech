@@ -1,6 +1,6 @@
 
 
-export default function Homefirst () {
+export default function Homesecond () {
 
     return  (
         <div>
