@@ -1,9 +1,7 @@
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
 import { Providers } from "./reduxrtk/providers";
-import Navbar from "./component/Header/Navbar";
+import NavbarWrapper from "./component/Header/NavbarWrapper"; // Import the new wrapper
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +24,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <Providers>
-        <Navbar/>
-         {children}
-         </Providers> 
+        <Providers>
+          <NavbarWrapper /> {/* Use NavbarWrapper instead of Navbar */}
+          {children}
+        </Providers>
       </body>
     </html>
   );
