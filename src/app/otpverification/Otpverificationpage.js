@@ -77,12 +77,12 @@ export default function OtpVerificationPage() {
 
             </span>
           </div>
-          <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible">
+          <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl rounded-b-xl group-hover:visible">
             <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-              Sunday
+              English
             </a>
             <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-              Monday
+              Hindi
             </a>
           
           </div>
@@ -94,7 +94,7 @@ export default function OtpVerificationPage() {
         </div>
       </nav>
 <div className="min-h-screen flex justify-center items-center  bg-[#FFEEE2]">
-  <div className="p-10  -mt-10 border-slate-200 rounded-3xl flex flex-col items-center space-y-4 bg-white">
+  <div className="p-10  -mt-5 border-slate-200 rounded-3xl flex flex-col items-center space-y-4 bg-white">
     <div className="">
       <img width={45} className=""   src="https://www.punyasetu.com/assets/images/logo.png" />
     </div>
@@ -118,7 +118,7 @@ export default function OtpVerificationPage() {
     </div>
     <form action method="post">
   <div className="flex flex-col space-y-16">
-    <div className="flex flex-row items-center gap-8 justify-between mx-auto w-full max-w-xs">
+    <div className="flex flex-row items-center gap-8 justify-between mx-auto w-full max-w-sm">
       <div className="w-20 h-16 ">
         <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text" name id />
       </div>
