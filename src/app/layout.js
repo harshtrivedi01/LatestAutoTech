@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google"; // Import Roboto font
 import "./globals.css";
 import { Providers } from "./reduxrtk/providers";
 import NavbarWrapper from "./component/Header/NavbarWrapper"; // Import the new wrapper
+import FooterWrapper from "./component/Footer/FooterWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <NavbarWrapper /> {/* Use NavbarWrapper instead of Navbar */}
           {children}
+          <FooterWrapper/>
         </Providers>
       </body>
     </html>

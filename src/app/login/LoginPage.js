@@ -54,7 +54,7 @@ export default function LoginPage() {
     });
 
     try {
-      const response = await axios.post(`${process.env.baseurl}authentication`, data);
+      const response = await axios.post(`http://13.235.230.223/api/authentication`, data);
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
@@ -126,9 +126,15 @@ export default function LoginPage() {
       <img width={45} className=""   src="https://www.punyasetu.com/assets/images/logo.png" />
     </div>
     <p className="font-bold text-4xl">Sign in</p>
+
+    <form onSubmit={handleSubmit} className="space-y-4">
     <p className="font-semibol text-[15px] text-center py-4">Access all Punyasetu services, explore 1000+ devotional <br/> songs, and discover a variety of spiritual offerings.</p>
     <input className="p-2 border-[1px] text-sm  rounded-lg w-80"
-     placeholder="Enter Phone No" />
+     placeholder="Enter Phone No"
+     type="text" name="phone"
+      onChange={handleChange}
+       required
+     />
    
     <div className="flex space-x-1  text-sm">
     <p className="text-center mt-4 text-sm text-gray-700">
@@ -156,11 +162,17 @@ export default function LoginPage() {
     </div>
     
     <div className="flex flex-col space-y-5  p-5 w-full">
-    <Link href={"/otpverification"}>
+    {/* <Link href={"/otpverification"}>
     <button className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 hover:bg-[#E5644E]">Send OTP</button>
-    </Link>
+    </Link> */}
+
+    
+    <button className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 hover:bg-[#E5644E]"
+    type="submit"
+    >Send OTP</button>
+    
          </div>
-   
+         </form>
 
     <div className="flex space-x-1  text-sm">
     <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">
@@ -180,7 +192,13 @@ export default function LoginPage() {
   </p>
     </div>
   </div>
-  <Image src={belowimage} alt="test" className="absolute right-0 w-[500px]  bottom-0" />
+  <Image
+  src={belowimage}
+  alt="test"
+  height={100}
+  className="absolute right-0 bottom-0 w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] max-w-full"
+/>
+
 </div>
 
 

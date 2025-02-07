@@ -4,11 +4,11 @@ const initialState = {
   formData: {
     type : "login",
     phone: "",
-    language: "",
-    longitude: "",
-    latitude: "",
-    ip_address: "",
-    device_id:" ",
+    // language: "en",
+    // longitude: "",
+    // latitude: "",
+    // ip_address: "",
+    device_id:"13",
   },
 
   otpdata: {

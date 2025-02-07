@@ -13,6 +13,7 @@ import Kalash from "../../../public/Assests/Service/Kalash.png";
 import music from "../../../public/Assests/Service/music.png";
 
 import { FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Homefive() {
   return (
@@ -37,8 +38,8 @@ export default function Homefive() {
        
         <div className="max-w-7xl mx-auto my-8 px-2">
  
-  <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
-    <li className="relative bg-white flex flex-col justify-between border rounded-2xl shadow-md hover:shadow-teal-400">
+  <ul className="grid gap-8 sm:grid-cols-2 justify-center lg:grid-cols-3 p-2 xl:p-5">
+    <li >
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
   <a href="#">
     <img className="w-full rounded-xl" src="/images/BANNER.jpg 1.png" alt="" />
@@ -61,7 +62,7 @@ export default function Homefive() {
 </div>
 
     </li>
-    <li className="relative bg-white flex flex-col justify-between border rounded-2xl shadow-md hover:shadow-teal-400">
+    <li >
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
   <a href="#">
     <img className="w-full rounded-xl" src="/images/BANNER.jpg 1.png" alt="" />
@@ -84,7 +85,7 @@ export default function Homefive() {
 </div>
 
     </li>
-    <li className="relative bg-white flex flex-col justify-between border rounded-2xl shadow-md hover:shadow-teal-400">
+    <li >
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
   <a href="#">
     <img className="w-full rounded-xl" src="/images/BANNER.jpg 1.png" alt="" />
@@ -111,10 +112,10 @@ export default function Homefive() {
   </ul>
 </div>
 <div className="flex justify-center">
-                        
+                        <Link href={"/poojabooking"}>
 <button className="p-2 px-8 shadow-black shadow-2xl  text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
                             View More
-                          </button>
+                          </button></Link>
 </div>
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

@@ -4,6 +4,9 @@ import Homesecond from "./Home/Homesecond";
 import Homethird from "./Home/Homethird";
 import Homefourth from "./Home/Homefourth";
 import Homefive from "./Home/Homefive";
+import Homesix from "./Home/Homesix";
+import { Homeseven } from "./Home/Homeseven";
+import Homeeight from "./Home/Homeeight";
 
 export default function Page() {
   return (
@@ -13,6 +16,10 @@ export default function Page() {
    <Homethird/>
    <Homefourth/>
    <Homefive/>
+   <Homesix/>
+   <Homeeight/>
+   <Homeseven/>
+ 
  </>
   );
 }

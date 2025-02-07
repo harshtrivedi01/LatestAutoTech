@@ -35,11 +35,11 @@ export default function Homesecond () {
   {/* Content */}
   <div className="relative z-10">
     <Image src={service3} alt="" className="mx-auto h-[136px] w-[119px]" />
-    <h3 className="my-3 font-display">
+    <div className="my-3 font-display">
       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
         Guru Ji
       </h1>
-    </h3>
+    </div>
     <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
       Book an Online Guru Ji for personalized spiritual guidance, rituals, and consultations.
     </p>
@@ -59,11 +59,11 @@ export default function Homesecond () {
   {/* Content */}
   <div className="relative z-10">
     <Image src={service1} alt="" className="mx-auto h-[136px] w-[119px]" />
-    <h3 className="my-3 font-display">
+    <div className="my-3 font-display">
       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
       Pandit Ji
       </h1>
-    </h3>
+    </div>
     <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
       Book an Online Guru Ji for personalized spiritual guidance, rituals, and consultations.
     </p>
@@ -83,11 +83,11 @@ export default function Homesecond () {
   {/* Content */}
   <div className="relative z-10">
     <Image src={service6} alt="" className="mx-auto h-[136px] w-[119px]" />
-    <h3 className="my-3 font-display">
+    <div className="my-3 font-display">
       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
       Pooja
       </h1>
-    </h3>
+    </div>
     <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
       Book an Online Guru Ji for personalized spiritual guidance, rituals, and consultations.
     </p>
@@ -107,11 +107,11 @@ export default function Homesecond () {
   {/* Content */}
   <div className="relative z-10">
     <Image src={service4} alt="" className="mx-auto h-[136px] w-[119px]" />
-    <h3 className="my-3 font-display">
+    <div className="my-3 font-display">
       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
       Granth
       </h1>
-    </h3>
+    </div>
     <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
       Book an Online Guru Ji for personalized spiritual guidance, rituals, and consultations.
     </p>
@@ -131,11 +131,11 @@ export default function Homesecond () {
   {/* Content */}
   <div className="relative z-10">
     <Image src={service5} alt="" className="mx-auto h-[136px] w-[119px]" />
-    <h3 className="my-3 font-display">
+    <div className="my-3 font-display">
       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
       Online Classes
       </h1>
-    </h3>
+    </div>
     <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
       Book an Online Guru Ji for personalized spiritual guidance, rituals, and consultations.
     </p>
@@ -155,11 +155,11 @@ export default function Homesecond () {
   {/* Content */}
   <div className="relative z-10">
     <Image src={service2} alt="" className="mx-auto h-[136px] w-[119px]" />
-    <h3 className="my-3 font-display">
+    <div className="my-3 font-display">
       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
       Live Darshan
       </h1>
-    </h3>
+    </div>
     <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
       Book an Online Guru Ji for personalized spiritual guidance, rituals, and consultations.
     </p>

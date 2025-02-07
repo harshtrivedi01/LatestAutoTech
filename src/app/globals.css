@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,4 +19,36 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-roboto), sans-serif;
+}
+
+.splide__slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Default slide styling */
+.slide-item {
+  background: #3498db;
+  color: white;
+  padding: 40px;
+  text-align: center;
+  
+ border-radius: 40px;
+  height: 350px; /* Default height */
+  transition: all 0.4s ease-in-out;
+  opacity: 0.6; /* Default transparency */
+  filter: blur(1px); /* Blur effect on side slides */
+}
+
+/* Make the center slide bigger */
+.splide__slide.is-active .slide-item {
+  transform: scale(1.4);
+  width: 1000px; /* Increase width */
+  height: 380px; /* Increase height */
+  opacity: 50; /* Fully visible */
+  filter: blur(0); /* Remove blur effect */
+  background: #e74c3c; /* Highlighted color */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
