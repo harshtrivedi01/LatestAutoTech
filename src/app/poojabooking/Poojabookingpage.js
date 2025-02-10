@@ -23,7 +23,7 @@ export default function Poojabookingpage() {
   <li id="homeTab" className="tab flex flex-col justify-center items-start text-5xl font-bolder min-w-[70px] cursor-pointer transition-all">
   <VscSettings />
     </li>
-    <li id="homeTab" className="tab flex flex-col justify-center items-center border-2 bg-[#FA8128] hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-white hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
+    <li id="homeTab" className="tab flex flex-col justify-center items-center border-2 bg-[#FA8128] hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg  hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
     Pooja Essentials
     </li>
     <li id="settingTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">

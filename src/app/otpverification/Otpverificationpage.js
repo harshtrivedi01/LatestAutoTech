@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import topimage from '../../../public/Assests/circle-vector.svg';
 import belowimage from '../../../public/Assests/bird.svg';
+import { TbWorld } from "react-icons/tb";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
@@ -69,14 +71,18 @@ export default function OtpVerificationPage() {
     try {
       const response = await axios.post("https://dakshhousing.com/satsambhav/api/authentication", data);
 
-      if (response.data.success) {
-        toast.success("OTP verified successfully! Redirecting...");
+      if (response.data.status === "1") {
+        toast.success(response.data.message || "OTP verified successfully! Redirecting...");
+        const token = response.data.data.token; // Assuming the API returns a token       
+        if (token) {
+          localStorage.setItem("authToken", token); // ✅ Save token
+        }
         setTimeout(() => {
           router.push("/");
         }, 2000);
       } else {
         setAttempts((prev) => prev + 1);
-        toast.error("Invalid OTP! Please try again.");
+        toast.error(response.data.message || "Invalid OTP! Please try again.");
 
         if (attempts + 1 >= 3) {
           toast.error("Too many wrong attempts! Please try again later.");
@@ -95,13 +101,13 @@ export default function OtpVerificationPage() {
       toast.info("Resending OTP...");
 
       const response = await axios.post("https://dakshhousing.com/satsambhav/api/authentication", {
-        phone
+        phone,
       });
 
-      if (response.data.success) {
+      if (response.data.status === 1) {
         toast.success("OTP Resent Successfully!");
       } else {
-        toast.error("Failed to resend OTP.");
+        toast.error(response.data.message || "Failed to resend OTP.");
       }
     } catch (error) {
       toast.error("Error resending OTP. Try again later.");
@@ -122,6 +128,46 @@ export default function OtpVerificationPage() {
   return (
     <>
       <Image src={topimage} alt="test" className="absolute" />
+           <nav className=" w-full z-20 top-0 start-0  dark:border-gray-600   bg-[#FFEEE2]">
+             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+               <a
+                 href="/"
+                 className="flex items-center space-x-5 rtl:space-x-reverse"
+               >
+     
+                 <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
+     
+                 </span>
+               </a>
+               <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                 <div className="">
+                   <div className="group relative cursor-pointer py-2">
+                     <div className="flex items-center justify-between bg-black px-4 p-1 rounded-xl">
+                       <a className="menu-hover flex gap-1 items-center  text-[12px]   text-white " >
+                         <TbWorld className="text-white" />
+                         Choose language
+                       </a>
+                       <span className="font-bold">
+                         <RiArrowDropDownLine className="text-2xl text-white" />
+     
+                       </span>
+                     </div>
+                     <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible">
+                       <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
+                         English
+                       </a>
+                       <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
+                         Hindi
+                       </a>
+     
+                     </div>
+                   </div>
+                 </div>
+     
+               </div>
+     
+             </div>
+           </nav>
       <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
         <div className="p-10 rounded-3xl bg-white flex flex-col items-center">
           <div className="">

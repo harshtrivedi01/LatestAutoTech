@@ -1,7 +1,21 @@
 import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
+  const token = localStorage.getItem("authToken");
+  useEffect(() => {
+    
+    if (token) {
+      setIsLoggedIn(true);
+      // Fetch user profile if needed
+      setProfileImage("/Assests/Service/Vector.png"); // Replace with actual user profile image
+    }
+  }, []);
+
+
   return (
     <>
       <nav className="bg-white dark:bg-gray-900 
@@ -44,14 +58,26 @@ export default function Navbar() {
           
           </div>
         </div>
-      </div>    <Link href={"/login"}>
-            <button
-              type="button"
-              className="text-white  hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl text- px-12 py-3 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-           style={{backgroundColor: '#E5644E'}}
-           >
-      Login 
-            </button> </Link>  
+      </div> 
+      <div>
+      {isLoggedIn ? (
+        <img
+          src={profileImage}
+          alt="Profile"
+          className="w-12 h-12 border-2 border-orange-500 rounded-full cursor-pointer"
+        />
+      ) : (
+        <Link href="/login">
+          <button
+            type="button"
+            className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-12 py-3 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+            style={{ backgroundColor: "#E5644E" }}
+          >
+            Login
+          </button>
+        </Link>
+      )}
+    </div>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
