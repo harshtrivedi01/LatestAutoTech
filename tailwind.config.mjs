@@ -11,6 +11,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      container: {
+        center: true,
+        padding: "1rem", // Add padding to prevent edge sticking
+      },
     },
   },
   plugins: [],
