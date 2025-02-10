@@ -49,7 +49,7 @@ export default function Poojadetailpage() {
             <div className="h-[200px] w-full">
               <img
                 className="w-full h-full rounded-xl"
-                src="/images/BANNER.jpg"
+                src="/images/banner.png"
                 alt="Pooja Banner"
               />
             </div>
