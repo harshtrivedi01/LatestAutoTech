@@ -55,7 +55,7 @@ export default function Homefive() {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data",
             "language": "en",
             "user_type": "guest",
             "longitude": userLocation.longitude,
@@ -84,7 +84,7 @@ export default function Homefive() {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
             language: "en",
             user_type: "guest",
             longitude: userLocation.longitude,
