@@ -52,7 +52,7 @@ export default function LoginPage() {
     });
 
     try {
-      const response = await axios.post(`https://dakshhousing.com/satsambhav/api/authentication`, data);
+      const response = await axios.post(`https://dakshhousing.com/satsambhav/api/authentication`, data); 
 
       if (response.status === 200) {
         const token = response.data.token; // Assuming the API returns a token
@@ -63,7 +63,7 @@ export default function LoginPage() {
         
         toast.success("Submitted successfully! Redirecting...");
         setTimeout(() => {
-          router.push("/otp"); // ✅ Redirect to OTP page
+          router.push("/otpverification"); // ✅ Redirect to OTP page
         }, 2000);
       }
     } catch (error) {
@@ -130,6 +130,7 @@ export default function LoginPage() {
               type="text" name="phone"
               onChange={handleChange}
               required
+              maxLength={10}
             />
 
             <div className="flex space-x-1  text-sm">
