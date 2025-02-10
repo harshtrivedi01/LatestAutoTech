@@ -9,6 +9,7 @@ import { TbWorld } from "react-icons/tb";
 import topimage from '../../../public/Assests/circle-vector.svg';
 import belowimage from '../../../public/Assests/bird.svg';
 import Link from "next/link.js";
+import ToastExample from "../component/Toast/Toater.js";
 
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
@@ -150,7 +151,7 @@ export default function OtpVerificationPage() {
     </a>
    
 
-
+<ToastExample/>
   </p>
     </div>
     <div className="flex flex-col space-y-5  p-5 w-full">
