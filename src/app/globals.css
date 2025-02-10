@@ -6,6 +6,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary:#E5644E;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,4 +52,66 @@ body {
   filter: blur(0); /* Remove blur effect */
   background: #e74c3c; /* Highlighted color */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+.p-60{
+  padding:60px 0
+}
+.p-30{
+  padding:30px 0
+}
+.bg-grey{
+  background-color: #F9F9F9;
+}
+.title{
+  font-size: 30px;
+  line-height: 38px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.content p{
+  color: #171717;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+footer{
+  /* background-color: antiquewhite; */
+}
+.red{
+  color: #C70000;
+}
+.top-card{
+  background-color: #c3cbdc;
+background-image: linear-gradient(147deg, #ffffff 0%, #FFE2D7 74%);
+
+}
+
+.f-34{
+  font-size: 34px;
+  line-height:39px;
+}
+.f-26{
+  font-size: 26px;
+  line-height: 30px;
+}
+.f-30{
+  font-size: 30px;
+  line-height: 36px;
+}
+.common-btn{
+  background-color: var(--primary);
+}
+@media (max-width:1200px){
+  .f-34{
+    font-size: 28px;
+    line-height:39px;
+  }
+  .f-26{
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .f-30{
+    font-size: 26px;
+    line-height: 36px;
+  }
 }

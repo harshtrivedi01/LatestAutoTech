@@ -8,8 +8,8 @@ export default function Poojabookingpage() {
 
 
   <div className="bg-[#FFEEE2]">
-<div className="font-sans px-6 py-12 overflow-hidden">
-  <div className="max-w-7xl max-md:max-w-md mx-auto">
+<div className="font-sans p-60 overflow-hidden">
+  <div className="container">
     <div className=" items-center gap-12">
       <div>
         <h2 className=" lg:text-3xl md:text-2xl text-3xl font-bold mb- lg:!leading-[55px]">Upcoming Poojas on Punyasetu</h2>
@@ -21,9 +21,10 @@ export default function Poojabookingpage() {
      
   <ul className="flex max-sm:flex-col gap-x-2 gap-y-4 w-max rounded-2xl">
   <li id="homeTab" className="tab flex flex-col justify-center items-start text-5xl font-bolder min-w-[70px] cursor-pointer transition-all">
-  <VscSettings />
+
+<img src="/images/filter.svg" />
     </li>
-    <li id="homeTab" className="tab flex flex-col justify-center items-center border-2 bg-[#FA8128] hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg  hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
+    <li id="homeTab" className="tab flex flex-col justify-center items-center border-2 bg-[#FA8128] hover:bg-[#FA8128] rounded-2xl text-lg text-lg text-white hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
     Pooja Essentials
     </li>
     <li id="settingTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
@@ -64,9 +65,9 @@ export default function Poojabookingpage() {
      
     </div>
   </div>
+<List/>
 </div>
 
-<List/>
 
   </div>
   );
