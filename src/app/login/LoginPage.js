@@ -129,7 +129,7 @@ export default function LoginPage() {
 
     <form onSubmit={handleSubmit} className="space-y-4">
     <p className="font-semibol text-[15px] text-center py-4">Access all Punyasetu services, explore 1000+ devotional <br/> songs, and discover a variety of spiritual offerings.</p>
-    <input className="p-2 border-[1px] text-sm  rounded-lg w-80"
+    <input className="p-2 border-[1px] text-sm  rounded-lg w-full"
      placeholder="Enter Phone No"
      type="text" name="phone"
       onChange={handleChange}
