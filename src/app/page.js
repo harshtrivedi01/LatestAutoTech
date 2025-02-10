@@ -17,8 +17,8 @@ export default function Page() {
    <Homefourth/>
    <Homefive/>
    <Homesix/>
-   <Homeeight/>
    <Homeseven/>
+   <Homeeight/>
  
  </>
   );
