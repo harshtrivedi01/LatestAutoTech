@@ -1,187 +1,185 @@
-'use client';
+"use client";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setOtp } from "./../reduxrtk/slice.js";
 import Image from "next/image.js";
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { TbWorld } from "react-icons/tb";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import topimage from '../../../public/Assests/circle-vector.svg';
 import belowimage from '../../../public/Assests/bird.svg';
-import Link from "next/link.js";
 
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
-  const otp = useSelector((state) => state.auth.otp);
+  const router = useRouter();
+  const phone = useSelector((state) => state.auth.formData.phone);
+  const type = useSelector((state) => state.auth.otpdata.type);
+  
+  const [otp, setOtpValues] = useState(["", "", "", ""]);
+  const [attempts, setAttempts] = useState(0);
+  const [timer, setTimer] = useState(30);
+  const [resendVisible, setResendVisible] = useState(false);
+  const inputRefs = useRef([]);
 
-  const handleOtpChange = (e) => {
-    dispatch(setOtp(e.target.value));
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setResendVisible(true);
+    }
+  }, [timer]);
+
+  const handleChange = (index, e) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    if (value.length > 1) return;
+
+    let newOtp = [...otp];
+    newOtp[index] = value;
+    setOtpValues(newOtp);
+    dispatch(setOtp(newOtp.join("")));
+
+    if (index < 3 && value) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleBackspace = (index, e) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (e.key === "Backspace" && otp[index] === "") {
+      let newOtp = [...otp];
+      newOtp[index] = "";
+      setOtpValues(newOtp);
+    }
   };
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("otp", otp);
+    data.append("otp", otp.join(""));
+    data.append("phone", phone);
+    data.append("type", type);
 
     try {
-      const response = await axios.post("http://13.235.230.223/api/otpVerification", data);
-      console.log("OTP Verification Response:", response.data);
+      const response = await axios.post("https://dakshhousing.com/satsambhav/api/authentication", data);
+
+      if (response.data.success) {
+        toast.success("OTP verified successfully! Redirecting...");
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        setAttempts((prev) => prev + 1);
+        toast.error("Invalid OTP! Please try again.");
+
+        if (attempts + 1 >= 3) {
+          toast.error("Too many wrong attempts! Please try again later.");
+        }
+      }
     } catch (error) {
-      console.error("OTP Verification Error:", error);
+      setAttempts((prev) => prev + 1);
+      toast.error("OTP verification failed. Please try again.");
     }
   };
 
+  const handleResendOtp = async () => {
+    try {
+      setTimer(30);
+      setResendVisible(false);
+      toast.info("Resending OTP...");
+
+      const response = await axios.post("https://dakshhousing.com/satsambhav/api/authentication", {
+        phone
+      });
+
+      if (response.data.success) {
+        toast.success("OTP Resent Successfully!");
+      } else {
+        toast.error("Failed to resend OTP.");
+      }
+    } catch (error) {
+      toast.error("Error resending OTP. Try again later.");
+    }
+  };
+
+  if (attempts >= 3) {
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-red-100">
+        <div className="p-10 border rounded-xl bg-white">
+          <h1 className="text-red-600 text-2xl font-bold">Too Many Attempts</h1>
+          <p className="text-gray-700 mt-2">Please wait and try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    // <div className="flex items-center justify-center min-h-screen bg-gray-100">
-    //   <div className="bg-white p-8 rounded-lg shadow-md w-96">
-    //     <h2 className="text-2xl font-bold text-center mb-6">OTP Verification</h2>
-    //     <form onSubmit={handleOtpSubmit} className="space-y-4">
-    //       <input
-    //         type="text"
-    //         name="otp"
-    //         placeholder="Enter OTP"
-    //         className="w-full p-2 border rounded"
-    //         onChange={handleOtpChange}
-    //         required
-    //       />
-    //       <button type="submit" className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-    //         Verify OTP
-    //       </button>
-    //     </form>
-    //   </div>
-    // </div>
-
     <>
-     <Image src={topimage} alt="test" className="absolute" />
-   <nav className=" w-full z-20 top-0 start-0  dark:border-gray-600   bg-[#FFEEE2]">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="/"
-            className="flex items-center space-x-5 rtl:space-x-reverse"
-          >
-          
-            <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
-           
-            </span>
-          </a>
-          <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <Image src={topimage} alt="test" className="absolute" />
+      <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
+        <div className="p-10 rounded-3xl bg-white flex flex-col items-center">
           <div className="">
-        <div className="group relative cursor-pointer py-2">
-          <div className="flex items-center justify-between bg-black px-4 p-1 rounded-xl">
-            <a className="menu-hover flex gap-1 items-center  text-[12px]   text-white " >
-            <TbWorld className="text-white" />
-            Choose language
-            </a>
-            <span className="font-bold">
-            <RiArrowDropDownLine className="text-2xl text-white" />
-
-            </span>
+            <img width={45} className="" src="https://www.punyasetu.com/assets/images/logo.png" />
           </div>
-          <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl rounded-b-xl group-hover:visible">
-            <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-              English
-            </a>
-            <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-              Hindi
-            </a>
-          
+
+          <p className="font-bold text-4xl">OTP Verification</p>
+          <p className="text-center mt-4 text-xl font-semibold text-gray-700">
+            We sent you a one-time OTP on this <br />
+            Mobile Number +91 <span className="text-[#FA8128] hover:underline">{phone}</span>
+          </p>
+
+          <form onSubmit={handleOtpSubmit} className="flex flex-col mt-5 space-y-5">
+            <div className="flex justify-center gap-7">
+              {otp.map((val, index) => (
+                <input
+                  key={index}
+                  ref={(el) => (inputRefs.current[index] = el)}
+                  className="w-20 h-20 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
+                  type="text"
+                  maxLength="1"
+                  value={val}
+                  onChange={(e) => handleChange(index, e)}
+                  onKeyDown={(e) => handleBackspace(index, e)}
+                />
+              ))}
+            </div>
+
+            {!resendVisible ? (
+              <p className="text-sm text-gray-700 text-center mt-3">
+                Resend OTP in <span className="text-[#FA8128]">{`00:${timer < 10 ? `0${timer}` : timer}`}</span>
+              </p>
+            ) : (
+              <button
+                onClick={handleResendOtp}
+                className="text-[#FA8128] font-semibold hover:underline text-center mt-3"
+              >
+                Resend OTP
+              </button>
+            )}
+
+            <button className="bg-[#E5644E] text-white font-bold py-2 rounded-lg" type="submit">
+              Submit
+            </button>
+          </form>
+
+          <div className="flex space-x-1 mt-5 text-sm">
+            <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">
+              <IoArrowBackOutline className="text-lg item-end" />
+              Back To{" "}
+              <a href="/login" className="text-[#FA8128] hover:underline " rel="noopener noreferrer">
+                Login
+              </a>
+            </p>
           </div>
         </div>
-      </div> 
-           
-          </div>
-          
-        </div>
-      </nav>
-<div className="min-h-screen flex justify-center items-center  bg-[#FFEEE2]">
-  <div className="p-10  -mt-5 border-slate-200 rounded-3xl flex flex-col items-center space-y-4 bg-white">
-    <div className="">
-      <img width={45} className=""   src="https://www.punyasetu.com/assets/images/logo.png" />
-    </div>
-    <p className="font-bold text-4xl">OTP Verification</p>
- 
-   
-    <div className="flex space-x-1  text-sm">
-    <p className="text-center mt-4 text-xl font-semibold text-gray-700">
-    We sent you a one time OTP on this<br/>
-    Mobile Number
-    <a
-      href="https://www.creative-tim.com/david-ui/docs/html/button"
-      className="text-[#FA8128] hover:underline"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-  {" "}  +91 - 12989200823 {" "}
-    </a>
-    
-  </p>
-    </div>
-    <form action method="post">
-  <div className="flex flex-col space-y-16">
-    <div className="flex flex-row items-center gap-8 justify-between mx-auto w-full max-w-sm">
-      <div className="w-20 h-16 ">
-        <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text" name id />
+        <Image src={belowimage} alt="test" className="absolute right-0 w-[500px] bottom-0" />
       </div>
-      <div className="w-20 h-16 ">
-        <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text" name id />
-      </div>
-      <div className="w-20 h-16 ">
-        <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text" name id />
-      </div>
-      <div className="w-20 h-16 ">
-        <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text" name id />
-      </div>
-    </div>
-    
-  </div>
-</form>
-
-<div className="flex space-x-1  text-sm">
-    <p className="text-center gap-1 font-light flex text-sm text-gray-700">
-    
-   Resend OTP in {" "}
-    <a
-      href="/login"
-      className="text-[#FA8128] hover:underline "
-     
-      rel="noopener noreferrer"
-    >
-  {" "}00:30 {" "}
-    </a>
-   
-
-
-  </p>
-    </div>
-    <div className="flex flex-col space-y-5  p-5 w-full">
-    <Link href={"/otpverification"}>
-    <button className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 hover:bg-[#E5644E]">Submit</button>
-    </Link>
-         </div>
-   
-
-    <div className="flex space-x-1  text-sm">
-    <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">
-    <IoArrowBackOutline className="text-lg item-end" />
-    Back To {" "}
-    <a
-      href="/login"
-      className="text-[#FA8128] hover:underline "
-     
-      rel="noopener noreferrer"
-    >
-  {" "}Login {" "}
-    </a>
-   
-
-
-  </p>
-    </div>
-  </div>
-  <Image src={belowimage} alt="test" className="absolute right-0 w-[500px]  bottom-0" />
-</div>
-    
-    
     </>
   );
 }

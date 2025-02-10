@@ -1,18 +1,5 @@
 "use client";
-import Image from "next/image";
-import service1 from "../../../public/Assests/Service/service (1).jpg";
-import service2 from "../../../public/Assests/Service/service (2).jpg";
-import service3 from "../../../public/Assests/Service/service (3).jpg";
-import service4 from "../../../public/Assests/Service/service (4).jpg";
-import service5 from "../../../public/Assests/Service/service (5).jpg";
-import service6 from "../../../public/Assests/Service/service (6).jpg";
-import bookpooja2 from "../../../public/Assests/Service/BOOK POOJA (1).jpg";
-import Anahata from "../../../public/Assests/Service/Anahata.png";
 import Heading from "../component/Headingname/Heading";
-import Kalash from "../../../public/Assests/Service/Kalash.png";
-import music from "../../../public/Assests/Service/music.png";
-
-import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Homefive() {

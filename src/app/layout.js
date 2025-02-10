@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./reduxrtk/providers";
 import NavbarWrapper from "./component/Header/NavbarWrapper"; // Import the new wrapper
 import FooterWrapper from "./component/Footer/FooterWrapper";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} font-roboto antialiased`}
       >
         <Providers>
+        <ToastContainer position="top-right" autoClose={5000} />
           <NavbarWrapper /> {/* Use NavbarWrapper instead of Navbar */}
           {children}
           <FooterWrapper/>
