@@ -4,99 +4,55 @@ import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css"; // Import Splide styles
 
-
-const  Homesix= () => {
+const Homesix = () => {
   return (
     <Splide
       options={{
         type: "loop",
-        perPage: 3,
+        perPage: 3, // Default: 3 slides
         focus: "center",
-        padding: { left: "2rem", right: "2rem" }, // Side padding
+        padding: { left: "2rem", right: "2rem" },
         gap: "2rem",
-        height  : "40rem",
+        height: "40rem",
+        autoplay: true, // Auto slide for better UX
+        interval: 3000, // Slide every 3 seconds
         breakpoints: {
-          768: { perPage: 1 }, // Responsive behavior
+          1280: { perPage: 2, padding: { left: "1.5rem", right: "1.5rem" } }, // Laptops & Tablets
+          1024: { perPage: 1, padding: { left: "1rem", right: "1rem" } }, // Tablets
+          768: { perPage: 1, padding: { left: "0.5rem", right: "0.5rem" }, height: "30rem" }, // Mobile
+          480: { perPage: 1, padding: { left: "0rem", right: "0rem" }, height: "25rem" }, // Small Mobile
         },
       }}
     >
-      <SplideSlide className>
-        <div className="slide-item rounded-[290px]" 
-            style={{ backgroundImage: `url('/Assests/Service/image.png')`, backgroundSize: "cover", backgroundPosition: "center" }}>  
-          <div className="w-80 z-10">
-          
-          <div className="my-3 font-display w-96 rounded-2xl">
-            <h1 className="text-2xl font-bold text-start text-black">
-            Perform Puja with <br/>
-          <span className="text-[#FD1818]">Amazing Offers</span>
-            </h1>
+      {[...Array(4)].map((_, index) => (
+        <SplideSlide key={index}>
+          <div
+            className="slide-item rounded-[190px] p-4 flex flex-col justify-center items-center"
+            style={{
+              backgroundImage: `url('/Assests/Service/image.png')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg text-center">
+              <div className="my-3 font-display w-full rounded-2xl">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black">
+                  Perform Puja with <br />
+                  <span className="text-[#FD1818]">Amazing Offers</span>
+                </h1>
+              </div>
+              <p className="mt-1.5 text-sm sm:text-base md:text-lg leading-6 text-black">
+                Our experienced Pandits perform each ceremony with care and
+                devotion, ensuring a meaningful experience for you and your
+                loved ones. With our dedication to Sanatan Dharma and
+                authenticity, we believe that each ritual should be done with
+                devotion and purpose, making every ceremony special and
+                impactful.
+              </p>
+            </div>
           </div>
-          <p className="mt-1.5 text-[17px] text-start leading-6 mx-2 text-black">
-          Our experienced Pandits perform each ceremony with care and devotion, 
-          ensuring a meaningful experience for you and your loved ones. With our dedication
-           to Sanatan Dharma and authenticity, we believe that each ritual should be done with 
-           devotion and purpose, making every ceremony special and impactful.
-          </p>
-        
-        </div></div>
-      </SplideSlide>
-      <SplideSlide>
-        <div className="slide-item rounded-[190px]"     style={{ backgroundImage: `url('/Assests/Service/image.png')`, backgroundSize: "cover", backgroundPosition: "center" }}>  
-          <div className="w-80 z-10">
-          
-          <div className="my-3 font-display w-80 rounded-2xl">
-            <h1 className="text-2xl font-bold text-start bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
-            Perform Puja with
-            Amazing Offers
-            </h1>
-          </div>
-          <p className="mt-1.5 text-[15px] text-start leading-6 mx-2 text-black">
-          Our experienced Pandits perform each ceremony with care and devotion, 
-          ensuring a meaningful experience for you and your loved ones. With our dedication
-           to Sanatan Dharma and authenticity, we believe that each ritual should be done with 
-           devotion and purpose, making every ceremony special and impactful.
-          </p>
-        
-        </div></div>
-      </SplideSlide>
-      <SplideSlide>
-        <div className="slide-item rounded-[190px]"     style={{ backgroundImage: `url('/Assests/Service/image.png')`, backgroundSize: "cover", backgroundPosition: "center" }}>  
-          <div className="w-80 z-10">
-          
-          <div className="my-3 font-display w-80 rounded-2xl">
-            <h1 className="text-2xl font-bold text-start bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
-            Perform Puja with
-            Amazing Offers
-            </h1>
-          </div>
-          <p className="mt-1.5 text-[15px] text-start leading-6 mx-2 text-black">
-          Our experienced Pandits perform each ceremony with care and devotion, 
-          ensuring a meaningful experience for you and your loved ones. With our dedication
-           to Sanatan Dharma and authenticity, we believe that each ritual should be done with 
-           devotion and purpose, making every ceremony special and impactful.
-          </p>
-        
-        </div></div>
-      </SplideSlide>
-      <SplideSlide>
-        <div className="slide-item rounded-[190px]"     style={{ backgroundImage: `url('/Assests/Service/image.png')`, backgroundSize: "cover", backgroundPosition: "center" }}>  
-          <div className="w-80 z-10">
-          
-          <div className="my-3 font-display w-80 rounded-2xl">
-            <h1 className="text-2xl font-bold text-start bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
-            Perform Puja with
-            Amazing Offers
-            </h1>
-          </div>
-          <p className="mt-1.5 text-[15px] text-start leading-6 mx-2 text-black">
-          Our experienced Pandits perform each ceremony with care and devotion, 
-          ensuring a meaningful experience for you and your loved ones. With our dedication
-           to Sanatan Dharma and authenticity, we believe that each ritual should be done with 
-           devotion and purpose, making every ceremony special and impactful.
-          </p>
-        
-        </div></div>
-      </SplideSlide>
+        </SplideSlide>
+      ))}
     </Splide>
   );
 };

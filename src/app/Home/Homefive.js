@@ -47,30 +47,30 @@ export default function Homefive() {
     try {
       let formData = new FormData();
       formData.append("type", "new_puja_list");
-      formData.append("page", "1");
-   
-
+      formData.append("page", "1"); // Ensure it's a string
+  
       const response = await axios.post(
         "https://dakshhousing.com/satsambhav/api/puja",
         formData,
         {
           headers: {
-            // "Content-Type": "multipart/form-data",
+            // Convert header keys to lowercase manually
             "language": "en",
             "user_type": "guest",
-            "longitude": userLocation.longitude,
-            "latitude": userLocation.latitude,
-            "ip_address": ipAddress,
+            "longitude": String(userLocation.longitude).toLowerCase(),
+            "latitude": String(userLocation.latitude).toLowerCase(),
+            "ip_address": String(ipAddress).toLowerCase(),
           },
         }
       );
-
+  
+      console.log("Puja API Response:", response.data);
+  
       setPujaData(response.data?.data?.slice(0, 3)); // Show only 3 cards
     } catch (error) {
       console.error("Error fetching puja data:", error);
     }
   };
-
   // Function to handle Participate click
   const handleParticipate = async (pujaId) => {
     try {
@@ -84,12 +84,11 @@ export default function Homefive() {
         formData,
         {
           headers: {
-            "Content-Type": "application/json",
-            language: "en",
-            user_type: "guest",
-            longitude: userLocation.longitude,
-            latitude: userLocation.latitude,
-            ip_address: ipAddress,
+            "language": "en",
+            "user_type": "guest",
+            "longitude": userLocation.longitude,
+            "latitude": userLocation.latitude,
+            "ip_address": ipAddress,
           },
         }
       );
@@ -123,7 +122,7 @@ export default function Homefive() {
         {/* Puja Cards Section */}
         <div className="max-w-7xl mx-auto my-8 px-2">
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
-            {pujaData?.map((puja, index) => (
+            {/* {pujaData?.map((puja, index) => (
               <li key={index}>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                   <a href="#">
@@ -148,7 +147,7 @@ export default function Homefive() {
                   </div>
                 </div>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
 

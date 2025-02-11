@@ -1,10 +1,10 @@
 'use client';
-import { VscSettings } from "react-icons/vsc";
-import List from "./List";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
+import List from "./List";
 
-export default function Poojabookingpage() {
+export default function Poojaboxpage() {
   const [userLocation, setUserLocation] = useState({ latitude: "", longitude: "" });
   const [ipAddress, setIpAddress] = useState("");
   const [pujaData, setPujaData] = useState([]);
@@ -103,47 +103,16 @@ export default function Poojabookingpage() {
           <div className="items-center gap-12">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-                Upcoming Poojas on Punyasetu
+              Pooja Box on Punyasetu
               </h2>
               <p className="leading-relaxed text-lg text-gray-600">
-                Perform sacred rituals from the comfort of your home. Book a pooja in your name and gotra, 
-                receive a recorded video of the ceremony, and get the divine Aashirwad Box delivered to you. 
-                Experience spiritual fulfillment and divine blessings with Punyasetu.
+              Perform sacred rituals from the comfort of your home.
+               Book a pooja in your name and gotra, receive a recorded video of the ceremony,
+                and get the divine Aashirwad Box delivered to you. Experience spiritual fulfillment
+                 and divine blessings with Punyasetu.
               </p>
 
-              <div className="font-sans p-4">
-     
-     <ul className="flex max-sm:flex-col gap-x-2 gap-y-4 w-max rounded-2xl">
-     <li id="homeTab" className="tab flex flex-col justify-center items-start text-5xl font-bolder min-w-[70px] cursor-pointer transition-all">
-   
-   <img src="/images/filter.svg" />
-       </li>
-       <li id="homeTab" className="tab flex flex-col justify-center items-center border-2 bg-[#FA8128] hover:bg-[#FA8128] rounded-2xl text-lg text-lg text-white hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-       Pooja Essentials
-       </li>
-       <li id="settingTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-        
-       Krishna Pooja
-       </li>
-       <li id="profileTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
          
-       Divine Articles
-       </li>
-       <li id="inboxTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-       <li id="notificationTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-       <li id="notificationTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-     </ul>
-    
-   </div>
               <div className="mt-5">
                 <form onSubmit={handleSearch} className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden font-[sans-serif]">
                   <input 

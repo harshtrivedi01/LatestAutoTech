@@ -1,32 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import Heading from "../component/Headingname/Heading";
-import Viewmore from "../component/Viewmorebutton/Viewmore";
-
-export default function Homefourth() {
+export default function List() {
   return (
-    <div>
-      <div className="bg-[#FFFFFF] px-2 ">
-        <div className="mx-auto max-w-6xl relative">
-          <div className="flex justify-center">
-            <Heading text="Pooja Box" color="black" />
-          </div>
-        </div>
+    <div className="container leading-relaxed">
+   
 
-        <div className="max-w-7xl mx-auto my-8 px-2">
-
-          <ul className="grid gap-8 sm:grid-cols-2 justify-center lg:grid-cols-3 p-2 xl:p-5">
-          <li >
-           <div className="bg-white rounded-lg border">
-  <Link className=" mx-3 mt-3 flex  rounded-xl" href="#">
-    <img className="object-cover " src="/images/poojabox.png" alt="product image" />
+          <ul className="grid gap-6 sm:grid-cols-2 justify-center lg:grid-cols-3 p-60">
+            <li >
+            <div className="bg-white rounded-lg">
+  <a className=" mx-3 mt-3 flex rounded-xl" href="/poojaboxdetail">
+    <img className="object-cover h-auto max-w-full" src="/images/poojabox.png" alt="product image" />
     <span className="m-2 rounded-full  px-2  text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
         <div className=" mt-5 text-base font-medium text-sm leading-relaxed">
 Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         </div>
     </span>
-  </Link>
+  </a>
   <div className="mt-4 px-5 pb-5">
    
     <div className="flex items-center">
@@ -55,24 +44,25 @@ Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
       </p>
       
     </div>
-    <Link href="#" className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+    <a href="/poojaboxdetail" className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
       <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
-      Add to cart</Link>
+      Add to cart</a>
   </div>
 </div>
+
             </li>
             <li >
-        <div className="bg-white rounded-lg border">
-  <Link className=" mx-3 mt-3 flex  rounded-xl" href="#">
+            <div className="bg-white rounded-lg">
+  <a className=" mx-3 mt-3 flex   rounded-xl" href="/poojaboxdetail">
     <img className="object-cover " src="/images/poojabox.png" alt="product image" />
     <span className="m-2 rounded-full  px-2  text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
-        <div className=" mt-5 text-base font-medium text-sm leading-relaxed">
+        <div className=" mt-5 text-base font-medium text-lg sm:text-sm leading-relaxed">
 Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         </div>
     </span>
-  </Link>
+  </a>
   <div className="mt-4 px-5 pb-5">
    
     <div className="flex items-center">
@@ -101,24 +91,25 @@ Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
       </p>
       
     </div>
-    <Link href="#" className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+    <a href="/poojaboxdetail" className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
       <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
-      Add to cart</Link>
+      Add to cart</a>
   </div>
 </div>
+
             </li>
             <li >
-         <div className="bg-white rounded-lg border">
-  <Link className=" mx-3 mt-3 flex  rounded-xl" href="#">
+            <div className="bg-white rounded-lg">
+  <a className=" mx-3 mt-3 flex  rounded-xl" href="/poojaboxdetail">
     <img className="object-cover " src="/images/poojabox.png" alt="product image" />
     <span className="m-2 rounded-full  px-2  text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
         <div className=" mt-5 text-base font-medium text-sm leading-relaxed">
 Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         </div>
     </span>
-  </Link>
+  </a>
   <div className="mt-4 px-5 pb-5">
    
     <div className="flex items-center">
@@ -147,19 +138,23 @@ Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
       </p>
       
     </div>
-    <Link href="#" className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+    <a href="/poojaboxdetail" className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
       <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
-      Add to cart</Link>
+      Add to cart</a>
   </div>
 </div>
             </li>
+
+            
 
           </ul>
-        </div>
-<Viewmore/>
-      </div>
+       
+
+
+
+  
     </div>
   );
 }

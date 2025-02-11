@@ -48,8 +48,9 @@ const PoojaDatePopup = ({ onClose }) => {
           <button
             className="w-full bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition"
             onClick={() => alert("Date selected: " + selectedDate.toLocaleDateString())}
+
           >
-            Save & Continue
+          <Link hre>  Save & Continue</Link>
           </button>
         </div>
       </div>

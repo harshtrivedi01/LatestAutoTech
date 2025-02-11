@@ -1,12 +1,6 @@
 "use client";
 import Image from "next/image";
-import service1 from "../../../public/Assests/Service/service (1).jpg";
-import service2 from "../../../public/Assests/Service/service (2).jpg";
-import service3 from "../../../public/Assests/Service/service (3).jpg";
-import service4 from "../../../public/Assests/Service/service (4).jpg";
-import service5 from "../../../public/Assests/Service/service (5).jpg";
-import service6 from "../../../public/Assests/Service/service (6).jpg";
-import bookpooja2 from "../../../public/Assests/Service/BOOK POOJA (1).jpg";
+
 import Anahata from "../../../public/Assests/Service/Anahata.png";
 import Heading from "../component/Headingname/Heading";
 import Kalash from "../../../public/Assests/Service/Kalash.png";
@@ -32,7 +26,7 @@ export default function Homethird() {
             <Heading text="About" color="white" />
           </div>
 
-          <p className="absolute top-48 text-center text-white text-[20px] md:text-2xl">
+          <p className=" text-center text-white text-[20px] md:text-2xl">
             At Punyasetu, we offer a range of spiritual services designed to
             guide you on your journey to inner peace, enlightenment, and
             personal transformation. Whether you seek divine wisdom, emotional
@@ -48,7 +42,7 @@ export default function Homethird() {
         <br /> <br />
         <br />
         <div>
-          <div className="">
+          <div className=" ">
             <div className="container mx-auto px-4 py-8">
               <section className="">
                 <div className="py-4 px-2 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
