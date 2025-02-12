@@ -1,10 +1,12 @@
 import Image from "next/image";
 
-
+import { MdArrowOutward } from "react-icons/md";
+import Homethird from "../Home/Homethird";
+import Homeeight from "../Home/Homeeight";
 export default function Aboutpage () {
     return (
         <>
-       <section className="pt-20 md:pt-40">
+       <section className="pt-20 md:pt-20 bg-[#FFF8F5]">
   <div className="container mx-auto px-8 lg:flex">
     <div className="text-center lg:text-left lg:w-1/2">
       <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">Spiritual Services for Inner Peace and Transformation</h1>
@@ -22,10 +24,39 @@ export default function Aboutpage () {
     
     </div>
     <div className="lg:w-1/2">
-   <Image src={"/images/aboutimage.png"}/></div>
+   <img src="/images/aboutimage.png"  /></div>
+   <div className="flex absolute w-80 hidden lg:flex lg:right-60 lg:top-80 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
+  <div className="w-full text-left">
+   
+   <div className="flex gap-5 border-b-2 border-gray-300">
+   <p className="text-lg text-orange-600 text-left leading-normal mb-2 font-lf-normal">
+    More than 725 users are <br/>with us on WellSpring. 
+    </p>
+    <MdArrowOutward className="border border-2 border-orange-400 text-red-700 rounded-full p-2 text-5xl" />
+    </div>
+
+    <span className="flex items-center justify-between mt-2">
+    <div className="flex mr-2">
+  <img className="border-2 border-white rounded-full h-14 w-14 -mr-6" src="https://randomuser.me/api/portraits/men/32.jpg" alt="" />
+ 
+
+  <img className="border-2 border-white rounded-full h-14 w-14 -mr-6" src="https://randomuser.me/api/portraits/men/44.jpg" alt="" />
+  <img className="border-2 border-white rounded-full h-14 w-14 -mr-6" src="https://randomuser.me/api/portraits/women/42.jpg" alt="" />
+
+</div>
+
+      <div className="float-right">
+        <p className="text-2xl font-bold float-right">10K +</p> 
+    
+      </div>
+    </span>
+  </div>
+</div>
+
   </div>
 </section>
-
+<Homethird/>
+<Homeeight/>
         </>
     )
 }
