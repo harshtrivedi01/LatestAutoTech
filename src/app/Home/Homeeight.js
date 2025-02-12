@@ -1,4 +1,5 @@
-'use client';
+
+  'use client';
 
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -6,14 +7,14 @@ import "@splidejs/splide/css"; // Import Splide styles
 
 const Homeeight = () => {
   return (
-    <div className="my-10">
+    <div className="p-80">
       <div className="md:mb-12 mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
       </div>
       <Splide 
         options={{
           type: "loop",
-          perPage: 3,
+          perPage: 3.4,
           breakpoints: {
             1024: { perPage: 2 },
             768: { perPage: 1 },
@@ -31,7 +32,7 @@ const Homeeight = () => {
       >
         {[...Array(2)].map((_, index) => (
           <SplideSlide key={index}>
-            <div className="p-6 mx-auto  relative max-w-md  shadow-xl">
+            <div className="p-6 mb-3   relative  shadow-xl">
               <div className="flex items-center gap-4">
                 <img
                   src="https://readymadeui.com/team-2.webp"

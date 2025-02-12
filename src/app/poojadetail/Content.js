@@ -2,7 +2,7 @@ import React from 'react';
   
   const Content = () =>  {
 	return (
-	  <div className='p-60 bg-grey content'>
+	  <div className='p-60 bg-grey content'  id="about-section" >
         <div className='container'>
 
         <h2 className='title'>About Pooja</h2>

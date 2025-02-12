@@ -38,6 +38,21 @@
     color: #ffffff;
     
 }
+.qr{
+    display: block;
+    height: 140px;
+    width: 100px;
+}
+.qr img{
+    height: 100%;
+    width: 100%;
+}
+.isuccess{
+    color: green;
+    position: absolute;
+    right: 2px;
+    top: 0;
+}
 /* .date-img{
     height: 200px;
     width: 100%;

@@ -17,7 +17,11 @@ import app from "../../../public/Assests/Service/downloadapp.png";
              <p className="text-gray-700 my-10 text-base md:text-2xl">
              Experience divine blessings at your fingertips!</p>
            </div>
-           <h2 className='mb-2 mt-3 f-18'><b>Download App</b></h2>
+           <h2 className='mb-2 mt-3 f-18'><b>Scan to Download the App</b></h2>
+           <i className='qr'>
+
+           <img src="images/qr.png" className="object-cover object-top w-full h-auto mx-auto" alt="" height="100%" width="" />
+           </i>
            <div className="flex items-center space-x-3">
              <a href="/" className="block transition duration-300 hover:shadow-lg">
                <img src="https://kitwind.io/assets/kometa/app-store.png" className="object-cover object-top w-full h-auto mx-auto" alt="" height="100%" width="" />

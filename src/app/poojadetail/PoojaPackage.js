@@ -54,7 +54,7 @@ const PoojaPackages = () => {
   ];
   const [showPopup, setShowPopup] = useState(false);
   return (
-    <div className="package p-60 bg-grey">
+    <div className="package p-60 bg-grey" id="Package-section">
       <div className="container">
         <h1 className="title ">Select Pooja Package</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
