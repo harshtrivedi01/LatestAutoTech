@@ -126,6 +126,7 @@ export default function Poojadetailpage() {
       <PoojaPackage />
       <Faq />
       <Homeeight />
+      <Downlo
     </>
   );
 }
