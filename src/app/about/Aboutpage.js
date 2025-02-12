@@ -1,4 +1,14 @@
-import Image from "next/image";
+import React from 'react';
+  
+  const Aboutpage = () =>  {
+	return (
+	  <div>
+	  </div>
+	);
+  }
+  
+  export default Aboutpage;
+  import Image from "next/image";
 
 
 export default function Aboutpage () {
