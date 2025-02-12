@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Section } from "lucide-react";
+import { Download, Section } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import './Poojadetail.css'
@@ -11,6 +11,7 @@ import PoojaPackage from "./PoojaPackage";
 import { FaFontAwesome } from "react-icons/fa";
 import Faq from "./Faq";
 import PoojaDatePopup from "./PoojaDatePopup";
+import Downloadapp from "./Downloadapp";
 
 const slides = [
   { image: "img", text: "Pooja Anytime Anywhere" },
@@ -104,6 +105,7 @@ export default function Poojadetailpage() {
     <Content />
     <Benifit />
     <PoojaPackage/>
+<Downloadapp/>
     <Faq/>
     </>
 
