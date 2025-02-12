@@ -9,6 +9,7 @@ import Benifit from "./Benifit";
 import PoojaPackage from "./PoojaPackage";
 import Faq from "./Faq";
 import Homeeight from "../Home/Homeeight";
+import { Homeseven } from "../Home/Homeseven";
 
 const slides = [
   { image: "img", text: "Pooja Anytime Anywhere" },
@@ -124,6 +125,7 @@ export default function Poojadetailpage() {
       </div>
 
       <PoojaPackage />
+      <Homeseven/>
       <Faq />
       <Homeeight />
       <Downlo
