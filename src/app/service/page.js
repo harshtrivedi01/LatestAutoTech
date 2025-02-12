@@ -1,4 +1,5 @@
-import Servicepage from "./Servicepage";
+
+  import Servicepage from "./Servicepage";
 
 export default function Page (){
 
