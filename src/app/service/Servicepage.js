@@ -1,4 +1,7 @@
 import Homesecond from "../Home/Homesecond";
+import Faq from "../poojadetail/Faq";
+import Cards from "./Cards";
+
 import List from "./List";
 
 
@@ -13,10 +16,6 @@ export default function Servicepage () {
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
               Our Service
               </h2>
-          
-
-         
-             
             </div>
           </div>
         </div>
@@ -24,6 +23,8 @@ export default function Servicepage () {
       </div>
     </div>
     <List/>
+    <Cards/>
+    <Faq/>
 </>
     )
 }

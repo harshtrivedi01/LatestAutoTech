@@ -39,14 +39,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between bg-white px-4">
             <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black " >
             <TbWorld className="text-xl" />
-            En
+            English
             </a>
             <span className="font-bold">
             <RiArrowDropDownLine className="text-3xl" />
 
             </span>
           </div>
-          <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
+          <div className="invisible absolute top-10 z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
             <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
               Hindi
             </a>
@@ -112,14 +112,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between bg-white px-4">
             <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black " >
             <TbWorld className="text-xl" />
-            En
+            English
             </a>
             <span className="font-bold">
             <RiArrowDropDownLine className="text-3xl" />
 
             </span>
           </div>
-          <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
+          <div className="invisible absolute  z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
             <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
               Hindi
             </a>

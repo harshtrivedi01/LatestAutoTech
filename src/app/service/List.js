@@ -20,7 +20,7 @@ export default function List () {
   <div id="features" className="mx-auto max-w-6xl">
   
 
-    <ul className=" mt-5 grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3">
+    <ul className=" mt-10 grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3">
     <li 
   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A]  px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center"
   style={{ backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}
