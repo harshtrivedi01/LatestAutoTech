@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Sankalp from "./Sankalp";
+import { FaTrash } from "react-icons/fa";
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -10,13 +11,14 @@ const Cart = () => {
       setCurrentStep(currentStep + 1);
     }
   };
-  const token = localStorage.getItem("authToken");
-  console.log(token)
+ 
   return (
     <div className="cart bg-gray-50 min-h-screen p-60">
       <div className="container">
-        <h1 className="f-34 mb-2 font-semibold text-lg">Cart</h1>
-
+        <h1 className="f-34 mb-2 font-semibold text-lg">Shopping Cart
+        </h1>
+        <h1 className=" mb-2  text-xl">You have <span className="text-orange-600">1 item(s)</span> in your cart
+        </h1>
         {/* Progress Steps */}
         <div className="flex items-center bg-orange-100 rounded-2xl justify-center p-30 mb-4">
           {/* Step 1 */}
@@ -46,9 +48,9 @@ const Cart = () => {
               <span className="font-bold">{currentStep > 2 ? "✔" : "02"}</span>
             </div>
             <p className="ml-2 text-sm font-semibold text-gray-700">
-              Pay
+            Add Address
               <br />
-              <span className="text-sm font-semibold text-gray-700">Select a payment method</span>
+              <span className="text-sm font-lighter text-gray-400">Select a delivery address</span>
             </p>
           </div>
           <div className="w-10 border-t-2 border-gray-300 mx-4"></div>
@@ -62,9 +64,9 @@ const Cart = () => {
             >
               <span className="font-bold">03</span>
             </div>
-            <p className="ml-2 text-sm font-semibold text-gray-700">Sankalp Form
+            <p className="ml-2 text-sm font-semibold text-gray-700">Payment info
             <br />
-            <span className="text-sm font-semibold text-gray-700">Fill Name , Gotra & Address
+            <span className="text-sm font-semibold text-gray-400">Select a payment method
             </span>
 
 
@@ -77,15 +79,16 @@ const Cart = () => {
         {currentStep === 1 && (
           <div className="flex flex-col md:flex-row gap-6">
             {/* Left Section */}
-            <div className="w-full md:w-2/3">
-              <div className="bg-white p-4 rounded-lg shadow">
+           <div className="md:w-2/3">
+           <div className="w-full  my-5">
+              <div className="bg-white p-4 rounded-lg shadow-xl">
                 {/* Pooja Item */}
                 <div className="flex items-start gap-4">
-                  <div className="w-1/2">
+                  <div className="">
                     <img
-                      src="/images/banner.png"
+                      src="/images/poojabox.png"
                       alt="Pooja"
-                      className="rounded-lg object-cover"
+                      className="rounded-lg object-cover h-40 w-40"
                       height="100%"
                       width="100%"
                     />
@@ -101,23 +104,85 @@ const Cart = () => {
                     <p className="text-gray-800 text-sm font-semibold mt-2">
                       Package for Individual Pooja
                     </p>
-                    <p className="text-gray-700 text-lg">₹1000</p>
+           
                     <p className="text-gray-500 text-sm mt-1 flex gap-2">
                       <i>
                         <img src="/images/poojaPackage/date.svg" />
                       </i>
                       <span className="font-medium">21 December, Saturday</span>
                     </p>
+                    <div className="mt-4 flex items-center">
+  <span className="mr-2 text-gray-600">Quantity:</span>
+  <div className="flex items-center">
+    <button className="bg-gray-200  px-2 py-1" disabled>-</button>
+    <span className="mx-2 text-gray-600">1</span>
+    <button className="bg-gray-200  px-2 py-1" disabled>+</button>
+  </div>
+  <FaTrash className="ms-3 text-gray-700"/>
+  <span className="ml-auto font-bold">₹1000</span>
+</div>
+
                   </div>
                 </div>
               </div>
             </div>
+            <div className="w-full  ">
+              <div className="bg-white p-4 rounded-lg shadow-xl">
+                {/* Pooja Item */}
+                <div className="flex items-start gap-4">
+                  <div className="">
+                    <img
+                      src="/images/poojabox.png"
+                      alt="Pooja"
+                      className="rounded-lg object-cover h-40 w-40"
+                      height="100%"
+                      width="100%"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-gray-800 text-lg">
+                      11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path
+                    </h3>
+                    <p className="text-gray-500 text-lg mt-1">
+                      For Mental and Physical Strength to Destroy Negativity in Life
+                    </p>
+                    <hr className="my-1" />
+                    <p className="text-gray-800 text-sm font-semibold mt-2">
+                      Package for Individual Pooja
+                    </p>
+           
+                    <p className="text-gray-500 text-sm mt-1 flex gap-2">
+                      <i>
+                        <img src="/images/poojaPackage/date.svg" />
+                      </i>
+                      <span className="font-medium">21 December, Saturday</span>
+                    </p>
+                    <div className="mt-4 flex items-center">
+  <span className="mr-2 text-gray-600">Quantity:</span>
+  <div className="flex items-center">
+    <button className="bg-gray-200  px-2 py-1" disabled>-</button>
+    <span className="mx-2 text-gray-600">1</span>
+    <button className="bg-gray-200  px-2 py-1" disabled>+</button>
+  </div>
+  <FaTrash className="ms-3 text-gray-700"/>
+  <span className="ml-auto font-bold">₹1000</span>
+</div>
 
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
             {/* Right Section */}
             <div className="w-full md:w-1/3">
-              <div className="bg-white p-6 rounded-lg shadow">
-                <h3 className="font-semibold text-gray-800 text-lg mb-3">Bill details</h3>
+              <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
+                <h3 className="font-semibold text-gray-800 text-xl mb-3">SubTotal</h3>
+                <div className="flex justify-between mb-4">
+                  <span className="text-gray-600 font-semibold text-xl">Shipping Charges</span>
+                  <span className="text-gray-800 font-semibold text-lg">₹1000</span>
+                </div>
                 <hr className="my-3" />
+                
                 <div className="flex justify-between mb-4">
                   <span className="text-gray-600 text-lg">Total</span>
                   <span className="text-gray-800 font-semibold text-lg">₹1000</span>
@@ -140,15 +205,16 @@ const Cart = () => {
 
             <div className="flex flex-col md:flex-row gap-6">
             {/* Left Section */}
-            <div className="w-full md:w-2/3">
-              <div className="bg-white p-4 rounded-lg shadow">
+            <div className="md:w-2/3">
+           <div className="w-full  my-5">
+              <div className="bg-white p-4 rounded-lg shadow-xl">
                 {/* Pooja Item */}
                 <div className="flex items-start gap-4">
-                  <div className="w-1/2">
+                  <div className="">
                     <img
-                      src="/images/banner.png"
+                      src="/images/poojabox.png"
                       alt="Pooja"
-                      className="rounded-lg object-cover"
+                      className="rounded-lg object-cover h-40 w-40"
                       height="100%"
                       width="100%"
                     />
@@ -164,16 +230,74 @@ const Cart = () => {
                     <p className="text-gray-800 text-sm font-semibold mt-2">
                       Package for Individual Pooja
                     </p>
-                    <p className="text-gray-700 text-lg">₹1000</p>
+           
                     <p className="text-gray-500 text-sm mt-1 flex gap-2">
                       <i>
                         <img src="/images/poojaPackage/date.svg" />
                       </i>
                       <span className="font-medium">21 December, Saturday</span>
                     </p>
+                    <div className="mt-4 flex items-center">
+  <span className="mr-2 text-gray-600">Quantity:</span>
+  <div className="flex items-center">
+    <button className="bg-gray-200  px-2 py-1" disabled>-</button>
+    <span className="mx-2 text-gray-600">1</span>
+    <button className="bg-gray-200  px-2 py-1" disabled>+</button>
+  </div>
+  <FaTrash className="ms-3 text-gray-700"/>
+  <span className="ml-auto font-bold">₹1000</span>
+</div>
+
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="w-full  ">
+              <div className="bg-white p-4 rounded-lg shadow-xl">
+                {/* Pooja Item */}
+                <div className="flex items-start gap-4">
+                  <div className="">
+                    <img
+                      src="/images/poojabox.png"
+                      alt="Pooja"
+                      className="rounded-lg object-cover h-40 w-40"
+                      height="100%"
+                      width="100%"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-gray-800 text-lg">
+                      11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path
+                    </h3>
+                    <p className="text-gray-500 text-lg mt-1">
+                      For Mental and Physical Strength to Destroy Negativity in Life
+                    </p>
+                    <hr className="my-1" />
+                    <p className="text-gray-800 text-sm font-semibold mt-2">
+                      Package for Individual Pooja
+                    </p>
+           
+                    <p className="text-gray-500 text-sm mt-1 flex gap-2">
+                      <i>
+                        <img src="/images/poojaPackage/date.svg" />
+                      </i>
+                      <span className="font-medium">21 December, Saturday</span>
+                    </p>
+                    <div className="mt-4 flex items-center">
+  <span className="mr-2 text-gray-600">Quantity:</span>
+  <div className="flex items-center">
+    <button className="bg-gray-200  px-2 py-1" disabled>-</button>
+    <span className="mx-2 text-gray-600">1</span>
+    <button className="bg-gray-200  px-2 py-1" disabled>+</button>
+  </div>
+  <FaTrash className="ms-3 text-gray-700"/>
+  <span className="ml-auto font-bold">₹1000</span>
+</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
 
             {/* Right Section */}

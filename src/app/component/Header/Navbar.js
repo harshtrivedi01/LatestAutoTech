@@ -1,7 +1,27 @@
 import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Link from "next/link";
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { useEffect, useState } from "react";
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+ 
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsLoggedIn(true);
+      // Fetch user profile if needed
+      setProfileImage("/Assests/Service/Vector.png"); // Replace with actual user profile image
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // Remove auth token
+    setIsLoggedIn(false);
+    window.location.reload(); // Refresh page after logout
+  };
   return (
     <>
       <nav className="bg-white dark:bg-gray-900 
@@ -27,7 +47,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between bg-white px-4">
             <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black " >
             <TbWorld className="text-xl" />
-            English
+            En
             </a>
             <span className="font-bold">
             <RiArrowDropDownLine className="text-3xl" />
@@ -44,14 +64,53 @@ export default function Navbar() {
           
           </div>
         </div>
-      </div>    <Link href={"/login"}>
-            <button
-              type="button"
-              className="text-white  hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl text- px-12 py-3 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-           style={{backgroundColor: '#E5644E'}}
-           >
-      Login 
-            </button> </Link>  
+      </div> 
+      <div>
+      {isLoggedIn ? (
+     <div className="flex items-center gap-4">
+        <div className="relative">
+          {/* Profile Image */}
+          <img
+            src={profileImage}
+            alt="Profile"
+            className="w-10 h-10 rounded-full cursor-pointer border-2 hover:border-orange-500"
+            onClick={() => setShowDropdown(!showDropdown)}
+          />
+
+
+          {/* Dropdown Menu */}
+          {showDropdown && (
+            <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
+               <div
+                className="px-4 py-2 cursor-pointer text-red-600 hover:bg-gray-100 hover:rounded-lg"
+                onClick={handleLogout}
+              >
+                Logout
+              </div>
+              {/* <Link href="/profile">
+                <div className="px-4 py-2 cursor-pointer hover:bg-gray-100">Profile</div>
+              </Link> */}
+             
+            </div>
+          )}
+        </div>
+        <Link href="/Cart">
+        <HiOutlineShoppingCart className="w-10 h-8" />
+              </Link>
+       
+     </div>
+      ) : (
+        <Link href="/login">
+          <button
+            type="button"
+            className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-12 py-3 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+            style={{ backgroundColor: "#E5644E" }}
+          >
+            Login
+          </button>
+        </Link>
+      )}
+    </div>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
