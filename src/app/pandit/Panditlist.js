@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import List from './List';
 
   
   const Panditlist = () =>  {
@@ -39,7 +40,7 @@ import React from 'react';
 				</div>
 			  </div>
 			</div>
-	
+	<List/>
 		  </div>
 		  </div>
 	  </div>

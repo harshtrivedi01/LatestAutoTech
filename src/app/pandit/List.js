@@ -8,7 +8,7 @@ const pandits = Array(10).fill({
   language: "English",
   rating: 5,
   reviews: 135,
-  image: "https://via.placeholder.com/80", // Replace with actual image URL
+  image: "/images/panditji.png", // Replace with actual image URL
 });
 
 const PanditCard = ({ pandit }) => {
@@ -37,11 +37,11 @@ const PanditCard = ({ pandit }) => {
         <p><span className="font-semibold">Language:</span> {pandit.language}</p>
       </div>
 
-      <div className="mt-4 flex justify-between">
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">
+      <div className="mt-4 flex justify-between gap-3">
+        <button className="bg-orange-500 w-full text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">
           Book Now
         </button>
-        <button className="border border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-100">
+        <button className="border w-full border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-100">
           Ask Question
         </button>
       </div>

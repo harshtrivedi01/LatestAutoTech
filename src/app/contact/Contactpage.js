@@ -22,15 +22,15 @@ export default function Contactpage () {
         <br />   <br />  
         <div className="flex items-center mt-5">
         <BiSolidPhoneCall className="text-xl" />
-          <span className="text-xs text-light text-gray-300 m-4 ms-6">+1012 3456 789</span>
+          <span className="text-sm text-light  m-4 ms-6">+1012 3456 789</span>
         </div>
         <div className="flex items-center mt-5">
         <MdEmail className="text-xl" />
-          <span className="text-xs text-light text-gray-300 m-3 ms-6">demo@gmail.com</span>
+          <span className="text-sm text-light m-3 ms-6">demo@gmail.com</span>
         </div>
         <div className="flex items-center mt-5">
         <FaLocationDot className="text-xl" />
-          <span className="text-xs text-light text-gray-300 m-4 ms-6">132 Dartmouth Street Boston, Massachusetts 02156 United States</span>
+          <span className="text-sm text-light m-4 ms-6">132 Dartmouth Street Boston, Massachusetts 02156 United States</span>
         </div>
         <br /><br /><br /><br />
         <div className="grid grid-cols-6 g">

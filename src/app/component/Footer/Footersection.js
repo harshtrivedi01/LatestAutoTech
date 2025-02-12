@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export default function Footersection() {
@@ -7,7 +8,7 @@ export default function Footersection() {
         
 	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
 		<div className="lg:w-1/3">
-			<a rel="noopener noreferrer" href="#" className="flex justify-center space-x-3 lg:justify-start">
+			<a rel="noopener noreferrer" href="/" className="flex justify-center space-x-3 lg:justify-start">
 				<div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-600">
                 <img src="https://www.punyasetu.com/assets/images/logo.png" alt="logo" className="" />
 				</div>
@@ -37,20 +38,24 @@ export default function Footersection() {
 	<div>
     <div className="flex justify-end lg:gap-14 md:gap-10 gap-5">
 			<div className="space-y-3">
+				<Link href={"/"}>
 				<h3 className="  dark:text-gray-900">Home</h3>
-				
+				</Link>
 			</div>
 			<div className="space-y-3">
+			<Link href={"/about"}>
 				<h3 className="  dark:text-gray-900">About</h3>
-			
+				</Link>
 			</div>
 			<div className="space-y-3">
+			<Link href={"/service"}>
 				<h3 className=" dark:text-gray-900">Service</h3>
-				
+				</Link>
 			</div>
 			<div className="space-y-3">
+			<Link href={"/contact"}>
             <div className=" dark:text-gray-900 ">Contact US</div>
-				
+			</Link>
 			</div>
 		</div>
         <div className="flex justify-end mt-4 space-x-2">

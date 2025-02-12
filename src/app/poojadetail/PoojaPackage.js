@@ -102,3 +102,73 @@ const PoojaPackages = () => {
 };
 
 export default PoojaPackages;
+
+
+
+
+
+// import React from "react";
+// import PoojaDatePopup from "./PoojaDatePopup";
+// import { useEffect, useState } from "react";
+// import Image from "next/image";
+
+
+
+// const PoojaPackages = ({detail}) => {
+
+//   const [showPopup, setShowPopup] = useState(false);
+//   return (
+//     <div className="package p-60 bg-grey" id="Package-section">
+//       <div className="container">
+//         <h1 className="title ">Select Pooja Package</h1>
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+//           {detail?.packages?.map((pkg, index) => (
+//             <div
+//               key={index}
+//               className={` border rounded-lg border-orange-600 ${pkg.highlight ? "border-3 bg-orange-100 border-orange-500 active-package" : "bg-white border-1"}`}
+//             >
+//               <div className="flex gap-2 justify-content-between top-card p-4 rounded-lg align-items-center">
+//                 <div className="pack-img">
+//                <Image  src={pkg.image}layout="fill"
+//     objectFit="cover" />
+//                 </div>
+//                 <div className="text-left">
+//                 <h2 className="text-lg font-bold  mb-2 f-26">{pkg.name}</h2>
+//               <h2 className="text-lg font-bold  mb-2">{pkg.no_of_member}</h2>
+//               <p className=" font-bold red f-28 text-xl f-34">{pkg.price_inr}</p>
+//                 </div>
+           
+//               </div>
+// <div className="p-5 mt-4">
+
+//               <ul className=" text-sm list-disc">
+//               {Array.isArray(pkg?.description) ? (
+//   pkg.description.map((desc, i) => (
+//     <li key={i} className="mb-2 list">{desc}</li>
+//   ))
+// ) : (
+//   <li className="mb-2 list">{pkg?.description || "No description available"}</li>
+// )}
+
+//               </ul>
+//               <div className="mt-4 text-center">
+//                 <button
+//                  onClick={() => setShowPopup(true)}
+//                   className={`py-4 px-5 rounded-lg text-white w-full uppercase font-bold tracking-normal ${pkg.highlight ? " package-dark-btn" : "package-light-btn"}`}
+//                 >
+//                   Participate
+//                 </button>
+                 
+//               </div>
+// </div>
+
+// {showPopup && <PoojaDatePopup onClose={() => setShowPopup(false)} />}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PoojaPackages;
