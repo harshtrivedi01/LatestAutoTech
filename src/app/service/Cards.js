@@ -1,4 +1,6 @@
-import Image from "next/image";
+
+
+  import Image from "next/image";
 import { FaChevronRight } from "react-icons/fa";
 import Kalash from "../../../public/Assests/Service/Kalash.png";
 
