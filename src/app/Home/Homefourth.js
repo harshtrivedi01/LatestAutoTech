@@ -18,10 +18,10 @@ export default function Homefourth() {
 
           <ul className="grid gap-8 sm:grid-cols-2 justify-center lg:grid-cols-3 p-2 xl:p-5">
           <li >
-           <div className="bg-white rounded-lg border">
+           <div className="bg-white w-full rounded-lg border">
   <Link className=" mx-3 mt-3 flex  rounded-xl" href="#">
     <img className="object-cover " src="/images/poojabox.png" alt="product image" />
-    <span className="m-2 rounded-full  px-2  text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
+    <span className="m-2 rounded-full  px-2  lg:text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
         <div className=" mt-5 text-base font-medium text-sm leading-relaxed">
 Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         </div>
@@ -67,7 +67,7 @@ Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         <div className="bg-white rounded-lg border">
   <Link className=" mx-3 mt-3 flex  rounded-xl" href="#">
     <img className="object-cover " src="/images/poojabox.png" alt="product image" />
-    <span className="m-2 rounded-full  px-2  text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
+    <span className="m-2 rounded-full  px-2  lg:text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
         <div className=" mt-5 text-base font-medium text-sm leading-relaxed">
 Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         </div>
@@ -113,7 +113,7 @@ Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
          <div className="bg-white rounded-lg border">
   <Link className=" mx-3 mt-3 flex  rounded-xl" href="#">
     <img className="object-cover " src="/images/poojabox.png" alt="product image" />
-    <span className="m-2 rounded-full  px-2  text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
+    <span className="m-2 rounded-full  px-2  lg:text-xl font-bold leading-relaxed">MAHA RUDRA HOMAM/HAVAN
         <div className=" mt-5 text-base font-medium text-sm leading-relaxed">
 Samagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gms....
         </div>

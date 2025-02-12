@@ -1,17 +1,23 @@
-
-
-
 export default function Heading({
-    text = "Default Text",
-    color = "black",
+  text = "Default Text",
+  color = "black",
 }) { 
-    return (
-   <>
-   <div className="text-center font-display text-lg font-bold tracking-tight  content-center text-slate-900 md:text-4xl"
- style={{ backgroundImage: `url('/Assests/Service/service-frame.svg')`, backgroundSize: "", backgroundPosition: "center",height:"254px" ,width:"554px" , backgroundRepeat:"no-repeat" }} >
-    <p className="text-[60px]  content-center" style={{color: color}}>
-    {text}
-    </p>
-     </div>
-   </>
-    )}          
+  return (
+    <div 
+      className="text-center font-display font-bold tracking-tight flex justify-center items-center mx-auto bg-no-repeat bg-center bg-contain"
+      style={{ 
+        backgroundImage: `url('/Assests/Service/service-frame.svg')`, 
+        height: "254px",
+        width: "100%",
+        maxWidth: "554px"
+      }} 
+    >
+      <p 
+        className="text-[60px] md:text-[50px] sm:text-[40px] xs:text-[30px]" 
+        style={{ color: color }}
+      >
+        {text}
+      </p>
+    </div>
+  );
+}

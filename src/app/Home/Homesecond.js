@@ -16,7 +16,7 @@ export default function Homesecond () {
 
     return  (
         <div>
-            <div className="bg-[#FFFFFF] px-2 pb-10">
+            <div className="bg-[#FFFFFF] px- pb-10">
   <div id="features" className="mx-auto max-w-6xl">
   
     <div className="flex justify-center">
@@ -24,7 +24,7 @@ export default function Homesecond () {
 
         <Heading text="Our Services" />
     </div>
-    <ul className=" grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3">
+    <ul className=" grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
     <li 
   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A]  px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center"
   style={{ backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}

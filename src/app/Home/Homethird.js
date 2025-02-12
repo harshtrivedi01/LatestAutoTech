@@ -99,7 +99,7 @@ export default function Homethird() {
                           alt=""
                           className="absolute top-20 left-10 h-14 w-16 top-0"
                         />
-                        <h3 className="z-10 text-2xl font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
+                        <h3 className="z-10 text-xl font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
                           Mantra & Vecharan-{" "}
                           <span className="font-normal">
                             Listen to devotional bhajans for a soulful
@@ -108,7 +108,7 @@ export default function Homethird() {
                         </h3>{" "}
                         <br />
                         <br />
-                        <h3 className="z-10 text-2xl font-semibold absolute top-72 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
+                        <h3 className="z-10 text-xl font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
                           Granth Reading –{" "}
                           <span className="font-normal">
                             Access and read sacred scriptures digitally.

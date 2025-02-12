@@ -35,7 +35,7 @@ export default function Footersection() {
             </div>
 		</div>
 	<div>
-    <div className="flex gap-14">
+    <div className="flex justify-end lg:gap-14 md:gap-10 gap-5">
 			<div className="space-y-3">
 				<h3 className="  dark:text-gray-900">Home</h3>
 				

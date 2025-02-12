@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import img from './../../../public/Assests/sliderbackground.jpg'
 import Image from "next/image";
+import img from './../../../public/Assests/sliderbackground.jpg';
+
 const slides = [
   { image: img, text: "Pooja Anytime Anywhere" },
   { image: img, text: "Pooja Anytime Anywhere" },
@@ -29,7 +30,7 @@ const Homefirst = () => {
   };
 
   return (
-    <div className="relative w-full h-[596px] overflow-hidden rounded-lg">
+    <div className="relative w-full h-[596px] sm:h-[450px] xs:h-[350px] overflow-hidden rounded-lg">
       {/* Slide Animation */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -38,27 +39,27 @@ const Homefirst = () => {
           animate={{ x: "0%" }}
           exit={{ x: "-100%" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute  flex justify-center items-center   text-white text-center text-6xl font-bold w-full  bg-cover bg-center"
+          className="absolute flex justify-center items-center text-white text-center font-bold w-full bg-cover bg-center"
           style={{ backgroundImage: `url(${slides[index].image})` }}
         >
-             <Image
+          <Image
             src={slides[index].image}
             alt={`Slide ${index + 1}`}
             layout="fill"
             objectFit="cover"
             className="absolute inset-0 -z-10"
           />
-          <div className="bg-black/40 py-20 rounded-lg w-full h-[596px]">
-            <p className=" text-center leading-tight">Pooja Anytime<br/> Anywhere</p>
+          <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-[596px] sm:h-[450px] xs:h-[350px] flex flex-col items-center justify-center">
+            <p className="text-6xl sm:text-4xl xs:text-3xl leading-tight">Pooja Anytime<br /> Anywhere</p>
             <br />
-            <p className="text-xl text-center w-full">
-              Join the divine Kumbh experience and book Pooja online seamlessly with the <br />
+            <p className="text-xl sm:text-lg xs:text-sm text-center w-3/4">
+              Join the divine Kumbh experience and book Pooja online seamlessly with the <br className="hidden sm:block" />
               Punyasetu App – your gateway to spiritual bliss!
             </p>
             <br />
             <button
               type="button"
-              className="text-white font-bold rounded-full text-lg px-12 py-3"
+              className="text-white font-bold rounded-full text-lg sm:text-base xs:text-sm px-12 py-3 sm:px-8 sm:py-2 xs:px-6 xs:py-1"
               style={{ backgroundColor: '#FA8128' }}
             >
               Book Now
@@ -68,12 +69,12 @@ const Homefirst = () => {
       </AnimatePresence>
 
       {/* Dots Indicator (Clickable) */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-8 xs:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => handleDotClick(i)}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`w-3 h-3 xs:w-2 xs:h-2 rounded-full transition-all ${
               index === i ? "bg-orange-400 scale-125" : "bg-gray-400"
             }`}
           />
