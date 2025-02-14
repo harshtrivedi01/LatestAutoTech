@@ -8,7 +8,7 @@ const pandits = Array(10).fill({
   language: "English",
   rating: 5,
   reviews: 135,
-  image: "https://via.placeholder.com/80", // Replace with actual image URL
+  image: "/images/pandit.png", // Replace with actual image URL
 });
 
 const PanditCard = ({ pandit }) => {
@@ -37,11 +37,11 @@ const PanditCard = ({ pandit }) => {
         <p><span className="font-semibold">Language:</span> {pandit.language}</p>
       </div>
 
-      <div className="mt-4 flex justify-between">
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600">
+      <div className="mt-4 flex justify-between gap-2">
+        <button className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 w-full">
           Book Now
         </button>
-        <button className="border border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-100">
+        <button className="border border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-100 w-full">
           Ask Question
         </button>
       </div>
@@ -52,7 +52,7 @@ const PanditCard = ({ pandit }) => {
 const List = () => {
   return (
     <div className="container mx-auto px-4 py-6">
-      <h2 className="text-2xl font-bold text-center mb-6">Book Your Pandit Ji</h2>
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {pandits.map((pandit, index) => (
           <PanditCard key={index} pandit={pandit} />
