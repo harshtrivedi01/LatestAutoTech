@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-
+import DOMPurify from 'dompurify';
 import Anahata from "../../../public/Assests/Service/Anahata.png";
 import Heading from "../component/Headingname/Heading";
 import Kalash from "../../../public/Assests/Service/Kalash.png";
@@ -8,7 +8,7 @@ import music from "../../../public/Assests/Service/music.png";
 
 import { FaChevronRight } from "react-icons/fa";
 
-export default function Homethird() {
+export default function Homethird({pujaData}) {
   return (
     <div className="relative w-full min-h-screen bg-white">
       <div
@@ -26,16 +26,9 @@ export default function Homethird() {
             <Heading text="About" color="white" />
           </div>
 
-          <p className=" text-center text-white text-[20px] md:text-2xl">
-            At Punyasetu, we offer a range of spiritual services designed to
-            guide you on your journey to inner peace, enlightenment, and
-            personal transformation. Whether you seek divine wisdom, emotional
-            healing, or a deeper connection with your higher self, our expert
-            practitioners provide personalized guidance to help you navigate
-            life’s challenges with clarity and purpose. Through sacred rituals,
-            meditative practices, and holistic healing, we create a space for
-            spiritual growth and self-discovery.
-          </p>
+          <p className="text-center text-white text-[20px] md:text-2xl" 
+   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData?.data?.aboutus_description) }}>
+</p>
         </div>
         <br />
         <br />

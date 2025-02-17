@@ -8,36 +8,20 @@ export default function Poojabookingpage() {
   const [userLocation, setUserLocation] = useState({ latitude: "", longitude: "" });
   const [ipAddress, setIpAddress] = useState("");
   const [pujaData, setPujaData] = useState([]);
+  const [pujaDatalist, setPujaDatalist] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
-  // Fetch user's IP address
   useEffect(() => {
-    
-    const axios = require('axios');
-    const FormData = require('form-data');
-    let data = new FormData();
-    data.append('type', 'find_account');
-    data.append('phone', '8619807171');
-    
-    let config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      url: 'http://13.235.230.223/api/account',
-      headers: { 
-        ...data
-      },
-      data : data
+    const fetchIpAddress = async () => {
+      try {
+        const response = await axios.get("https://api64.ipify.org?format=json");
+        setIpAddress(response.data.ip);
+      } catch (error) {
+        console.error("Error fetching IP address:", error);
+      }
     };
-    
-    axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    
-  
+
+    fetchIpAddress();
   }, []);
 
   // Fetch user's location
@@ -55,7 +39,8 @@ export default function Poojabookingpage() {
 
   useEffect(() => {
     if (userLocation.latitude && userLocation.longitude && ipAddress) {
-      fetchPujaData(""); // Fetch all pujas initially
+      fetchPujaData("");
+      fetchPujaDatalist();
     }
   }, [userLocation, ipAddress]);
 
@@ -67,18 +52,16 @@ export default function Poojabookingpage() {
       formData.append("search", search);
 
       const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/api/puja",
+        "https://dakshhousing.com/satsambhav/websiteapi/puja",
         formData,
         {
           headers: {
-            "Content-Type": "application/json",
-            "userId":"2",
+            // Convert header keys to lowercase manually
             "language": "en",
             "user_type": "guest",
-            "device_id":"BA482D66-2558-477B-86FA-E1B59397A92B",
-            "longitude": userLocation.longitude,
-            "latitude": userLocation.latitude,
-            "ip_address": ipAddress,
+            "longitude": String(userLocation.longitude).toLowerCase(),
+            "latitude": String(userLocation.latitude).toLowerCase(),
+            "ip_address": String(ipAddress).toLowerCase(),
           },
         }
       );
@@ -89,6 +72,35 @@ export default function Poojabookingpage() {
     }
   };
 
+  const fetchPujaDatalist = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "new_puja_list");
+      formData.append("page", "1");
+      // formData.append("page", "1"); // Ensure it's a string
+  
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/puja",
+        formData,
+        {
+          headers: {
+            // Convert header keys to lowercase manually
+            "language": "en",
+            "user_type": "guest",
+            "longitude": String(userLocation.longitude).toLowerCase(),
+            "latitude": String(userLocation.latitude).toLowerCase(),
+            "ip_address": String(ipAddress).toLowerCase(),
+          },
+        }
+      );
+  
+      console.log("Puja API Response:", response.data);
+      setPujaDatalist(response.data)
+     
+    } catch (error) {
+      console.error("Error fetching puja data:", error);
+    }
+  };
   const handleSearch = (e) => {
     e.preventDefault();
     fetchPujaData(searchQuery);
@@ -111,39 +123,7 @@ export default function Poojabookingpage() {
                 Experience spiritual fulfillment and divine blessings with Punyasetu.
               </p>
 
-              <div className="font-sans p-4">
-     
-     <ul className="flex max-sm:flex-col gap-x-2 gap-y-4 w-max rounded-2xl">
-     <li id="homeTab" className="tab flex flex-col justify-center items-start text-5xl font-bolder min-w-[70px] cursor-pointer transition-all">
-   
-   <img src="/images/filter.svg" />
-       </li>
-       <li id="homeTab" className="tab flex flex-col justify-center items-center border-2 bg-[#FA8128] hover:bg-[#FA8128] rounded-2xl text-lg text-lg text-white hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-       Pooja Essentials
-       </li>
-       <li id="settingTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-        
-       Krishna Pooja
-       </li>
-       <li id="profileTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-       <li id="inboxTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-       <li id="notificationTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-       <li id="notificationTab" className="tab flex flex-col justify-center items-center border-2 hover:bg-[#FA8128] rounded-2xl bg-gray-100 text-lg text-lg text-gray-500 hover:text-white py-2 px-4 min-w-[120px] cursor-pointer transition-all">
-         
-       Divine Articles
-       </li>
-     </ul>
-    
-   </div>
+          
               <div className="mt-5">
                 <form onSubmit={handleSearch} className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden font-[sans-serif]">
                   <input 
@@ -163,7 +143,8 @@ export default function Poojabookingpage() {
             </div>
           </div>
         </div>
-        <List pujaData={pujaData} />
+    <List pujaData={searchQuery ? pujaData : pujaDatalist} />
+
       </div>
     </div>
   );

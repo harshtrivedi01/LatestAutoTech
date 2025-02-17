@@ -1,20 +1,19 @@
-
-  'use client';
+'use client';
 
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css"; // Import Splide styles
 
-const Homeeight = () => {
+const Homeeight = ({ pujaData ,detail}) => {
   return (
-    <div className="p-80">
+    <div className="my-10">
       <div className="md:mb-12 mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
       </div>
       <Splide 
         options={{
           type: "loop",
-          perPage: 3.4,
+          perPage: 3,
           breakpoints: {
             1024: { perPage: 2 },
             768: { perPage: 1 },
@@ -30,36 +29,68 @@ const Homeeight = () => {
           pagination: true,
         }}
       >
-        {[...Array(2)].map((_, index) => (
-          <SplideSlide key={index}>
-            <div className="p-6 mb-3   relative  shadow-xl">
+        {/* Loop through testimonials */}
+        {pujaData?.data?.testimonials?.map((testimonial, index) => (
+          <SplideSlide key={testimonial.id || index}>
+            <div className="p-6 mx-auto relative max-w-md shadow-xl">
               <div className="flex items-center gap-4">
+                {/* Client image */}
                 <img
-                  src="https://readymadeui.com/team-2.webp"
+                  src={testimonial?.image || "https://readymadeui.com/team-2.webp"} // Default image if no image provided
                   className="w-14 h-14 rounded-full border-2 shadow shadow-2xl"
-                  alt="Client"
+                  alt={testimonial?.name || "Client"}
                 />
                 <div>
-                  <h4 className="text-gray-800 text-lg font-semibold">Pankaj Sharma</h4>
-                
+                  {/* Client name */}
+                  <h4 className="text-gray-800 text-lg font-semibold">{testimonial?.name || "Client Name"}</h4>
                 </div>
               </div>
 
-              
-               <p className="font-semibold mt-4">
-               It was a very good experience
-               </p>
-           
+              {/* Testimonial short description */}
+              <p className="font-semibold mt-4">
+                {testimonial?.testimonials_description?.split('\r\n')[0] || "It was a very good experience"}
+              </p>
 
+              {/* Full testimonial description */}
               <div className="mt-4">
-                <p className=" text-s l">
-                  The service was amazing. I never had to wait that long for my food.
-                  The staff was friendly and attentive, and the delivery was impressively prompt.
+                <p className="text-sm">
+                  {testimonial?.testimonials_description?.split('\r\n')[1] || "The service was amazing. I never had to wait that long for my food."}
                 </p>
               </div>
             </div>
           </SplideSlide>
-        ))}
+        )) || 
+        detail?.testimonials?.map((testimonial, index) => (
+          <SplideSlide key={testimonial.id || index}>
+            <div className="p-6 mx-auto relative max-w-md shadow-xl">
+              <div className="flex items-center gap-4">
+                {/* Client image */}
+                <img
+                  src={testimonial?.image || "https://readymadeui.com/team-2.webp"} // Default image if no image provided
+                  className="w-14 h-14 rounded-full border-2 shadow shadow-2xl"
+                  alt={testimonial?.name || "Client"}
+                />
+                <div>
+                  {/* Client name */}
+                  <h4 className="text-gray-800 text-lg font-semibold">{testimonial?.name || "Client Name"}</h4>
+                </div>
+              </div>
+
+              {/* Testimonial short description */}
+              <p className="font-semibold mt-4">
+                {testimonial?.testimonials_description?.split('\r\n')[0] || "It was a very good experience"}
+              </p>
+
+              {/* Full testimonial description */}
+              <div className="mt-4">
+                <p className="text-sm">
+                  {testimonial?.testimonials_description?.split('\r\n')[1] || "The service was amazing. I never had to wait that long for my food."}
+                </p>
+              </div>
+            </div>
+          </SplideSlide>
+        ))
+        }
       </Splide>
     </div>
   );

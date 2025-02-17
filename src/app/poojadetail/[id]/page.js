@@ -1,4 +1,4 @@
-import Poojadetailpage from "./Poojadetailpage";
+import Poojadetailpage from "../Poojadetailpage";
 
 
 export default function Page() {
