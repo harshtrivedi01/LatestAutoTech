@@ -1,7 +1,7 @@
 
   
 
-  import Poojaboxdetailpage from "./Poojaboxdetailpage";
+  import Poojaboxdetailpage from "../Poojaboxdetailpage";
 
 
 export default function Page() {

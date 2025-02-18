@@ -26,6 +26,7 @@ const slides = [
 ];
 
 export default function Poojadetailpage() {
+  
   const [inputDate, setInputDate] = useState('');
 
   const handleDateChange = (e) => {

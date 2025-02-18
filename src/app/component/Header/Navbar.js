@@ -1,21 +1,34 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
 import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Link from "next/link";
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileImage, setProfileImage] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
       setIsLoggedIn(true);
-      setProfileImage("/Assests/Service/Vector.png"); // Replace with actual user profile image
+      setProfileImage("/Assests/Service/Vector.png");
     }
+
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false); 
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -28,10 +41,7 @@ export default function Navbar() {
     <>
       <nav className="bg-white relative dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="/"
-            className="flex items-center space-x-5 rtl:space-x-reverse"
-          >
+          <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
               src="https://www.punyasetu.com/assets/images/logo.png"
               className="h-16 mb-2"
@@ -45,9 +55,9 @@ export default function Navbar() {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="group relative hidden md:flex cursor-pointer py-2">
               <div className="flex items-center justify-between bg-white px-4">
-                <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black ">
+                <a className="menu-hover flex gap-1 items-center text-lg font-bold text-black">
                   <TbWorld className="text-xl" />
-                  En
+                  English
                 </a>
                 <span className="font-bold">
                   <RiArrowDropDownLine className="text-3xl" />
@@ -65,15 +75,18 @@ export default function Navbar() {
 
             {isLoggedIn ? (
               <div className="flex items-center lg:gap-2">
-                <div className="relative">
+                <div className="relative" ref={dropdownRef}>
                   <img
                     src={profileImage}
                     alt="Profile"
                     className="w-8 h-8 me-2 rounded-full cursor-pointer border-2 hover:border-orange-500"
-                    onClick={() => setShowDropdown(!showDropdown)}
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      setShowDropdown(!showDropdown); 
+                    }}
                   />
                   {showDropdown && (
-                    <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
+                    <div className="absolute left-0 z-50 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg">
                       <a className="my-1 block border-b border-gray-100 px-4 py-2 font-semibold text-gray-500 hover:text-black">
                         <Link href="/profile">Profile</Link>
                       </a>
@@ -144,7 +157,7 @@ export default function Navbar() {
                   <div className="flex items-center justify-between bg-white px-4">
                     <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black ">
                       <TbWorld className="text-xl" />
-                      En
+                      English
                     </a>
                     <span className="font-bold">
                       <RiArrowDropDownLine className="text-3xl" />

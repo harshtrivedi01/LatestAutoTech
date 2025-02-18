@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// ✅ Load stored data from localStorage safely
+// ✅ Utility functions for localStorage
+const saveToLocalStorage = (key, value) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};
+
 const loadFromLocalStorage = (key) => {
   if (typeof window !== "undefined") {
-    const storedData = localStorage.getItem(key);
-    return storedData ? JSON.parse(storedData) : null;
+    const savedData = localStorage.getItem(key);
+    return savedData ? JSON.parse(savedData) : null;
   }
   return null;
 };
@@ -16,14 +22,15 @@ const initialState = {
     phone: "",
     Language: "en",
     Longitude: "",
-    Ltitude: "",
-    Ip_address: "", 
+    Latitude: "", // ✅ Fixed typo
+    Ip_address: "",
     Device_id: "upen",
   },
-  otpdata:  {
+  otpdata: loadFromLocalStorage("otpdata") || {
     type: "otp",
+    type2: "resend otp",
     otp: "",
-    phone: loadFromLocalStorage("formData")?.phone || "", // ✅ Safe access
+    phone: loadFromLocalStorage("formData")?.phone || "",
     firebase_id: "",
   },
 };
@@ -34,18 +41,22 @@ const slice = createSlice({
   reducers: {
     setFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
-      if (typeof window !== "undefined") {
-        localStorage.setItem("formData", JSON.stringify(state.formData)); // ✅ Save formData
-      }
+      saveToLocalStorage("formData", state.formData); // ✅ Save formData
     },
     setOtp: (state, action) => {
       state.otpdata = { ...state.otpdata, ...action.payload };
+      saveToLocalStorage("otpdata", state.otpdata); // ✅ Save otpdata
+    },
+    clearAuthData: (state) => {
+      state.formData = initialState.formData;
+      state.otpdata = initialState.otpdata;
       if (typeof window !== "undefined") {
-        localStorage.setItem("otpdata", JSON.stringify(state.otpdata)); // ✅ Save otpdata
+        localStorage.removeItem("formData");
+        localStorage.removeItem("otpdata");
       }
     },
   },
 });
 
-export const { setFormData, setOtp } = slice.actions;
+export const { setFormData, setOtp, clearAuthData } = slice.actions;
 export default slice.reducer;

@@ -12,6 +12,7 @@ import topimage from '../../../public/Assests/circle-vector.svg';
 import belowimage from '../../../public/Assests/bird.svg';
 import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { Toaster } from "react-hot-toast";
 
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ export default function OtpVerificationPage() {
   const [attempts, setAttempts] = useState(0);
   const [timer, setTimer] = useState(30);
   const [resendVisible, setResendVisible] = useState(false);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
   const inputRefs = useRef([]);
 
   useEffect(() => {
@@ -67,13 +70,13 @@ export default function OtpVerificationPage() {
     data.append("otp", otp.join(""));
     data.append("phone", phone);
     data.append("type", type);
-
+    setIsResendDisabled(true); 
     try {
-      const response = await axios.post("https://dakshhousing.com/satsambhav/api/authentication", data);
+      const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
 
       if (response.data.status === "1") {
         toast.success(response.data.message || "OTP verified successfully! Redirecting...");
-        const token = response.data.data.token; // Assuming the API returns a token       
+        const token = response.data.data.web_token; // Assuming the API returns a token       
         if (token) {
           localStorage.setItem("authToken", token); // ✅ Save token
         }
@@ -83,7 +86,7 @@ export default function OtpVerificationPage() {
       } else {
         setAttempts((prev) => prev + 1);
         toast.error(response.data.message || "Invalid OTP! Please try again.");
-
+        setIsResendDisabled(false);
         if (attempts + 1 >= 3) {
           toast.error("Too many wrong attempts! Please try again later.");
         }
@@ -91,21 +94,23 @@ export default function OtpVerificationPage() {
     } catch (error) {
       setAttempts((prev) => prev + 1);
       toast.error("OTP verification failed. Please try again.");
+      setIsResendDisabled(false);
     }
   };
 
   const handleResendOtp = async () => {
+     const data = new FormData();
+    data.append("phone", phone);
+    data.append("type", "resend otp");
     try {
       setTimer(30);
       setResendVisible(false);
       toast.info("Resending OTP...");
 
-      const response = await axios.post("https://dakshhousing.com/satsambhav/api/authentication", {
-        phone,
-      });
+      const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
 
-      if (response.data.status === 1) {
-        toast.success("OTP Resent Successfully!");
+      if (response.data.status == 1) {
+        toast.success(response.data.message||"OTP Resent Successfully!");
       } else {
         toast.error(response.data.message || "Failed to resend OTP.");
       }
@@ -127,6 +132,7 @@ export default function OtpVerificationPage() {
 
   return (
     <>
+        <Toaster position="top-right" reverseOrder={false} />  
       <Image src={topimage} alt="test" className="absolute" />
            <nav className=" w-full z-20 top-0 start-0  dark:border-gray-600   bg-[#FFEEE2]">
              <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -169,7 +175,7 @@ export default function OtpVerificationPage() {
              </div>
            </nav>
       <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
-        <div className="p-10 rounded-3xl bg-white flex flex-col items-center">
+        <div className=" p-4 lg:p-10 rounded-3xl bg-white flex flex-col items-center">
           <div className="">
             <img width={45} className="" src="https://www.punyasetu.com/assets/images/logo.png" />
           </div>
@@ -186,7 +192,7 @@ export default function OtpVerificationPage() {
                 <input
                   key={index}
                   ref={(el) => (inputRefs.current[index] = el)}
-                  className="w-20 h-20 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
+                  className="w-16 h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
                   type="text"
                   maxLength="1"
                   value={val}
@@ -209,9 +215,14 @@ export default function OtpVerificationPage() {
               </button>
             )}
 
-            <button className="bg-[#E5644E] text-white font-bold py-2 rounded-lg" type="submit">
-              Submit
-            </button>
+<button
+                className={`w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 
+                  ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-[#E5644E]"}`}
+                type="submit"
+                disabled={isResendDisabled}
+              >
+                {isResendDisabled ? "Wait..." : "Submit"}
+              </button>
           </form>
 
           <div className="flex space-x-1 mt-5 text-sm">

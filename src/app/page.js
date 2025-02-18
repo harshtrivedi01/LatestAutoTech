@@ -85,7 +85,7 @@ console.log(pujaData?.data?.slider_list)
   return (
  <>
    <Homefirst sliderList={pujaData?.data?.slider_list} />
-   <Homesecond pujaData={pujaData} />
+   <Homesecond module_category_details={pujaData?.data?.module_category_details} />
    <Homethird  pujaData={pujaData}/>
    <Homefourth  pujaData={pujaData}/>
    <Homefive  pujaData={pujaData}/>

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const Sankalp = () => {
+const Sankalp = ({handleNextStep}) => {
   const [members, setMembers] = useState([
     { name: "", fatherName: "", gotra: "", email: "", address: "", sameAsAbove: false },
     { name: "", fatherName: "", gotra: "", sameAsAbove: false },
@@ -114,6 +114,12 @@ const Sankalp = () => {
         <button className="bg-red-600 text-white py-2 px-6 rounded-md font-semibold hover:bg-red-400 transition">
           Cancel
         </button>
+        <button
+                  className="w-full common-btn text-white font-semibold py-2  rounded-lg"
+                  onClick={handleNextStep}
+                >
+                 Save & Next
+                </button>
       </div>
     </div>
   );

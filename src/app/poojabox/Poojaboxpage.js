@@ -5,85 +5,74 @@ import axios from "axios";
 import List from "./List";
 
 export default function Poojaboxpage() {
-  const [userLocation, setUserLocation] = useState({ latitude: "", longitude: "" });
-  const [ipAddress, setIpAddress] = useState("");
+
   const [pujaData, setPujaData] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
+  const [pujaDatalist, setPujaDatalist] = useState([]);
 
-  // Fetch user's IP address
   useEffect(() => {
-    
-    const axios = require('axios');
-    const FormData = require('form-data');
-    let data = new FormData();
-    data.append('type', 'find_account');
-    data.append('phone', '8619807171');
-    
-    let config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      url: 'http://13.235.230.223/api/account',
-      headers: { 
-        ...data
-      },
-      data : data
-    };
-    
-    axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    
+  
+
+      fetchPujaDatalist();
   
   }, []);
-
-  // Fetch user's location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      (error) => console.error("Error fetching location:", error)
-    );
-  }, []);
-
-  useEffect(() => {
-    if (userLocation.latitude && userLocation.longitude && ipAddress) {
-      fetchPujaData(""); // Fetch all pujas initially
-    }
-  }, [userLocation, ipAddress]);
 
   const fetchPujaData = async (search) => {
     try {
       let formData = new FormData();
-      formData.append("type", "new_puja_search");
+      formData.append("type", "product_search");
       formData.append("page", "1");
       formData.append("search", search);
 
       const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/api/puja",
+        "https://dakshhousing.com/satsambhav/websiteapi/products",
         formData,
         {
           headers: {
-            "Content-Type": "application/json",
-            "userId":"2",
             "language": "en",
-            "user_type": "guest",
-            "device_id":"BA482D66-2558-477B-86FA-E1B59397A92B",
-            "longitude": userLocation.longitude,
-            "latitude": userLocation.latitude,
-            "ip_address": ipAddress,
+              "userId": "2",
+              "user_type": "user",
+              "Device_id": "upen",
+              "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+              "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+              "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+              "web_token":localStorage.getItem("authToken")
           },
         }
       );
 
       setPujaData(response.data?.data || []); 
+    } catch (error) {
+      console.error("Error fetching puja data:", error);
+    }
+  };
+
+  const fetchPujaDatalist = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "product_list");
+      formData.append("category_id", "1");
+      // formData.append("page", "1"); // Ensure it's a string
+  
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/products",
+        formData,
+        {
+          headers: {
+            "language": "en",
+              "userId": "2",
+              "user_type": "user",
+              "Device_id": "upen",
+              "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+              "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+              "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+          },
+        }
+      );
+  
+      console.log("Puja API Response:", response.data);
+      setPujaDatalist(response.data?.data || []); 
+     
     } catch (error) {
       console.error("Error fetching puja data:", error);
     }
@@ -132,7 +121,7 @@ export default function Poojaboxpage() {
             </div>
           </div>
         </div>
-        <List pujaData={pujaData} />
+         <List pujaData={searchQuery ? pujaData : pujaDatalist} />
       </div>
     </div>
   );

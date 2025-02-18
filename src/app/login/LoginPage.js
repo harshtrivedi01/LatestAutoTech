@@ -63,7 +63,7 @@ export default function LoginPage() {
       data.append(key, formData[key]);
     });
     if (phoneError) {
-      toast.error("Please fix the phone number error.");
+      toast.error("Please Check the phone number.");
       return;
     }
 
@@ -141,7 +141,7 @@ export default function LoginPage() {
         </div>
       </nav>
       <div className="min-h-screen flex justify-center items-center  bg-[#FFEEE2]">
-        <div className="p-10  -mt-10 border-slate-200 rounded-3xl flex flex-col items-center space-y-3 bg-white">
+        <div className="p-10 m-4  -mt-10 border-slate-200 rounded-3xl flex flex-col items-center space-y-3 bg-white">
           <div className="">
             <img width={45} className="" src="https://www.punyasetu.com/assets/images/logo.png" />
           </div>
@@ -152,7 +152,7 @@ export default function LoginPage() {
             <input 
               className="p-2 border-[1px] text-sm rounded-lg w-full"
               placeholder="Enter Phone No"
-              type="text"
+              type="number"
               name="phone"
               onChange={handleChange}
               required
@@ -222,7 +222,7 @@ export default function LoginPage() {
           src={belowimage}
           alt="test"
           height={100}
-          className="absolute right-0 bottom-0 w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] max-w-full"
+         className="absolute right-0 bottom-0 w-[300px] sm:w-[200px] md:w-[300px] lg:w-[400px] max-w-full hidden sm:block"
         />
 
       </div>
@@ -230,23 +230,3 @@ export default function LoginPage() {
     </>
   );
 }
-
-
-
-
-  {/* <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="phone" placeholder="Phone" className="w-full p-2 border rounded" onChange={handleChange} required />
-          <input type="text" name="language" placeholder="Language" className="w-full p-2 border rounded" onChange={handleChange} required />
-          <input type="text" name="longitude" value={formData.longitude} readOnly className="w-full p-2 border rounded bg-gray-200" />
-          <input type="text" name="latitude" value={formData.latitude} readOnly className="w-full p-2 border rounded bg-gray-200" />
-          <input type="text" name="ip_address" value={formData.ip_address} readOnly className="w-full p-2 border rounded bg-gray-200" />
-          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Login</button>
-        </form>
-      </div>
-    </div> */}
-
-
-      {/* component */}
