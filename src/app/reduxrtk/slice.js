@@ -14,11 +14,11 @@ const initialState = {
   formData: loadFromLocalStorage("formData") || {
     type: "login",
     phone: "",
-    language: "en",
-    longitude: "",
-    latitude: "",
-    ip_address: "", 
-    device_id: "2",
+    Language: "en",
+    Longitude: "",
+    Ltitude: "",
+    Ip_address: "", 
+    Device_id: "upen",
   },
   otpdata:  {
     type: "otp",

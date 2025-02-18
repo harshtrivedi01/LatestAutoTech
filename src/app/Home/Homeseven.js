@@ -12,6 +12,10 @@ export const Homeseven = () => {
             <h2 className="text-3xl sm:text-6xl font-bold text-gray-900">
               Get <span className="text-[#9E200B]">Punyasetu</span> App
             </h2>
+            <i className='qr'>
+
+<img src="/images/qr.png" className="object-cover object-toph-40 w-40 " alt="" height="100%" width="" />
+</i>
             <p className="text-gray-700 mt-6 text-base sm:text-lg md:text-xl">
               Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app.
             </p>

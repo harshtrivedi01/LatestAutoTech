@@ -16,9 +16,10 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter(); // ✅ FIXED: Added parentheses
-  
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.auth.formData);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   useEffect(() => {
     axios.get("https://api64.ipify.org?format=json")
@@ -41,7 +42,18 @@ export default function LoginPage() {
   }, [dispatch]);
 
   const handleChange = (e) => {
-    dispatch(setFormData({ [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+
+    // Validate phone number (only numbers, exactly 10 digits)
+    if (name === "phone") {
+      if (!/^\d{10}$/.test(value)) {
+        setPhoneError("Please enter a valid 10-digit phone number.");
+      } else {
+        setPhoneError("");
+      }
+    }
+
+    dispatch(setFormData({ [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -50,24 +62,36 @@ export default function LoginPage() {
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
     });
+    if (phoneError) {
+      toast.error("Please fix the phone number error.");
+      return;
+    }
 
+    setIsResendDisabled(true); 
     try {
-      const response = await axios.post(`https://dakshhousing.com/satsambhav/api/authentication`, data); 
+      const response = await axios.post(`https://dakshhousing.com/satsambhav/websiteapi/authentication`, data); 
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.status === "0") {
+        // Handle error when status is "0"
+        toast.error(response.data.message || "Something went wrong!");
+        setIsResendDisabled(false); // Re-enable button on error
+      }
+
+      if (response.status === 200 && response.data.status === "1") {
+       
         const token = response.data.token; // Assuming the API returns a token
         
         if (token) {
           localStorage.setItem("authToken", token); // ✅ Save token
         }
         
-        toast.success("Submitted successfully! Redirecting...");
-        setTimeout(() => {
-          router.push("/otpverification"); // ✅ Redirect to OTP page
-        }, 2000);
+        localStorage.setItem("authToken", response.data.token);
+        toast.success("OTP Sent! Redirecting...");
+        setTimeout(() => router.push("/otpverification"), 2000);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong!");
+      setIsResendDisabled(false); // Re-enable button on error
     }
   };
 
@@ -125,14 +149,16 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <p className="font-semibol text-[15px] text-center py-4">Access all Punyasetu services, explore 1000+ devotional <br /> songs, and discover a variety of spiritual offerings.</p>
-            <input className="p-2 border-[1px] text-sm  rounded-lg w-full"
+            <input 
+              className="p-2 border-[1px] text-sm rounded-lg w-full"
               placeholder="Enter Phone No"
-              type="text" name="phone"
+              type="text"
+              name="phone"
               onChange={handleChange}
               required
               maxLength={10}
             />
-
+            {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
             <div className="flex space-x-1  text-sm">
               <p className="text-center mt-4 text-sm text-gray-700">
                 By proceeding you agree  to the<br />
@@ -159,14 +185,17 @@ export default function LoginPage() {
             </div>
 
             <div className="flex flex-col space-y-5  p-5 w-full">
-              {/* <Link href={"/otpverification"}>
-    <button className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 hover:bg-[#E5644E]">Send OTP</button>
-    </Link> */}
+             
 
 
-              <button className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 hover:bg-[#E5644E]"
+            <button
+                className={`w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 
+                  ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-[#E5644E]"}`}
                 type="submit"
-              >Send OTP</button>
+                disabled={isResendDisabled}
+              >
+                {isResendDisabled ? "Sending..." : "Send OTP"}
+              </button>
 
             </div>
           </form>

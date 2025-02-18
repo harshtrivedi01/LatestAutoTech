@@ -224,7 +224,12 @@ export default function OtpVerificationPage() {
             </p>
           </div>
         </div>
-        <Image src={belowimage} alt="test" className="absolute right-0 w-[500px] bottom-0" />
+        <Image
+                  src={belowimage}
+                  alt="test"
+                  height={100}
+                  className="absolute right-0 bottom-0 w-[300px] sm:w-[200px] md:w-[300px] lg:w-[400px] max-w-full hidden sm:block"
+                />
       </div>
     </>
   );
