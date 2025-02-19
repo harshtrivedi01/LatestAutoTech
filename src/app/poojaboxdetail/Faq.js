@@ -1,29 +1,28 @@
 import React from 'react';
-  
-  const Faq = () =>  {
-	return (
-	  <div className='faq p-60'>
-         {/* FAQ Section */}
-      <div className="container bg-[#FFDCC0] p-10">
-        <h2 className="text-3xl font-bold mb-4 text-">FAQ</h2>
-        <div className="space-y-">
-          {Array.from({ length: 4 }).map((_, index) => (
+
+const Faq = ({ faqs }) => {
+  return (
+    <div className='faq p-60 bg-[#FFDCC0]'>
+      {/* FAQ Section */}
+      <div className="container">
+        <h2 className="text-2xl font-bold mb-4 ">FAQ</h2>
+        <div className="space-y-4">
+          {/* Dynamically render FAQs based on the response */}
+          {faqs?.map((faq, index) => (
             <details
               key={index}
-              className="p-4 border  bg-white cursor-pointer"
+              className="p-4 border border-b bg-white cursor-pointer"
             >
-              <summary className="font-medium">How to know status of pooja?</summary>
+              <summary className="font-medium text-gray-500">{faq?.title || 'No Title'}</summary>
               <p className="mt-2 text-sm text-gray-700">
-                You can check the status of your pooja in the booking history section or
-                via the WhatsApp number you registered with.
+                {faq?.description || 'No description available.'}
               </p>
             </details>
           ))}
         </div>
       </div>
-	  </div>
-	);
-  }
-  
-  export default Faq;
-  
+    </div>
+  );
+}
+
+export default Faq;

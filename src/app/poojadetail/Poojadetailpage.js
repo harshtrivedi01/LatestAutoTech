@@ -109,7 +109,7 @@ export default function Poojadetailpage() {
       );
   
       console.log("Puja API Response:", response.data);
-      setPujaData(response.data)
+      setPujaData(response.data.data)
      
     } catch (error) {
       console.error("Error fetching puja data:", error);

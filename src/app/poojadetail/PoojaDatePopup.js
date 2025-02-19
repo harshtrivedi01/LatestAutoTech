@@ -107,7 +107,10 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
         if (response.data?.status == "1") {
           // Handle error when status is "0"
           toast.success(response.data?.message || "Something went wrong!");
-          router.push("/Cart");
+          
+          const bookingID = response.data?.data?.booking_id
+          localStorage.setItem("bookingID", bookingID);
+          router.push("/cart");
           
         }
         else {

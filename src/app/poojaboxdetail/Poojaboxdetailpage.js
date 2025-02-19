@@ -1,175 +1,244 @@
+
+
 "use client";
 
-import Content from './Content';
-import Faq from './Faq';
-import './Poojadetail.css'
-
+import { useParams } from "next/navigation";
+import Content from "./Content";
+import Faq from "./Faq";
+import "./Poojadetail.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import SliderOne from "./SliderOne";
+import SliderTwo from "./SliderTwo";
+import { Heart, HeartIcon } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Poojaboxdetailpage() {
- 
+  const { id } = useParams();
+  const [pujaData, setPujaData] = useState(null);
 
+  const [cartStatus, setCartStatus] = useState(); // Track cart status
+  const [wishlistStatus, setWishlistStatus] = useState();
+
+
+
+  useEffect(() => {
+    fetchPujaData();
+  }, []);
+
+  const fetchPujaData = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "product_detail");
+      formData.append("product_id", id);
+
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/products",
+        formData,
+        {
+          headers: {
+            "language": "en",
+            "userId": "2",
+            "user_type": "user",
+            "Device_id": "upen",
+            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+          },
+        }
+      );
+
+      console.log("Puja API Response:", response.data);
+      setPujaData(response.data.data);
+      setCartStatus(response.data.data.cart_status)
+      setWishlistStatus(response.data.data.wishlist_status)
+      
+    } catch (error) {
+      console.error("Error fetching puja data:", error);
+    }
+  };
+
+  if (!pujaData) return <div>Loading...</div>;
+  
+  const handleCartAction = async (id) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", cartStatus ? "remove_cart" : "add_to_cart");
+      formData.append("product_id", id);
+      formData.append("quantity", "1");
+
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/cart",
+        formData,
+        {
+          headers: {
+            "language": "en",
+            "userId": "2",
+            "user_type": "user",
+            "Device_id": "upen",
+            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+            "web_token": localStorage.getItem("authToken"),
+          },
+        }
+      );
+
+      console.log("Cart Action Response:", response.data);
+
+      if (response.data.status == 0) {
+        toast.error(response.data.message || "Action failed!");
+      } else {
+        setCartStatus(!cartStatus); // Toggle cart status
+        toast.success(response.data.message || (cartStatus ? "Removed from cart!" : "Added to cart!"));
+      }
+    } catch (error) {
+      toast.error("Something went wrong! Please try again.");
+      console.error("Error handling cart action:", error);
+    }
+  };
+
+  
+  const handleWishlistAction = async (id) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", wishlistStatus ? "remove_from_wishlist" : "add_to_wishlist");
+      formData.append("product_id", id);
+
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/products",
+        formData,
+        {
+          headers: {
+            "language": "en",
+            "userId": "2",
+            "user_type": "user",
+            "Device_id": "upen",
+            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+            "web_token": localStorage.getItem("authToken"),
+          },
+        }
+      );
+
+      console.log("Wishlist Action Response:", response.data);
+
+      if (response.data.status === 0) {
+        toast.error(response.data.message || "Action failed!");
+      } else {
+        setWishlistStatus(!wishlistStatus);
+        toast.success(response.data.message || (wishlistStatus ? "Removed from wishlist!" : "Added to wishlist!"));
+      }
+    } catch (error) {
+      toast.error("Something went wrong! Please try again.");
+      console.error("Error handling wishlist action:", error);
+    }
+  };
   return (
     <>
-    <section className="poojadetail p-60">
-    <div className="container">
-    <div className="flex flex-col justify-center ">
-  <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-4xl mx-auto border border-white bg-white">
-    <div className="w-full  bg-white grid place-items-center">
-      <img     src="/images/poojabox.png" alt="tailwind logo" className="h-80 " />
-    </div>
-    <div className="w-full md:w-2/2 bg-white flex flex-col space-y-2 p-3">
-    <h3 className="font-black text-[#BA1A1A] border-b border-b-[#BA1A1A] md:text-3xl text-xl">Ganpati Pooja Box</h3>
-      <div className="flex justify-between item-center">
-        
-        
-        <div className="flex items-center my-5">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-          <p className="text-gray-600 font-bold text-sm ml-1">
-            4.96
-            <span className="text-gray-500 font-normal">(76 reviews)</span>
-          </p>
-        </div>
-        
-        <div className>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 my-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-          </svg>
-        </div>
-       
-      </div>
-     
-      <p className="md:text-lg text-gray-500 text-lg font-bold">Samagri - Turmeric Powder 100 gms ,
-         Kumkum. 50 gms, gmSamagri - Turmeric Powder 100 gms , Kumkum. 50 gms, gmSamagri - 
-         Turmeric Powder 100 gms , Kumkum. 50 gms</p>
-         <p>
-        <span className="text-3xl font-bold text-orange-600">₹745</span>
-        <span className="text-sm text-slate-900 line-through ms-2">M.R.P ₹699  </span> <span className="text-red-700 text-lg ms-3">(50% off)</span>
-      </p>
-  
-       <div className="flex gap-2">
-       <button className="p-2 px-16 shadow-black shadow-2xl text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]">
-        Buy Now
+      <Toaster position="top-right" reverseOrder={false} /> 
+      <section className="poojadetail p-60">
+        <div className="container">
+          <div className="flex flex-col justify-center">
+            <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-4xl mx-auto border border-white bg-white">
+              {/* Product Image */}
+              <div className="w-full bg-white grid place-items-center">
+                <img src={pujaData.image} alt="product image" className="h-80" />
+              </div>
+
+              {/* Product Details */}
+              <div className="w-full md:w-2/2 bg-white flex flex-col space-y-2 p-3">
+                <h3 className="font-black flex justify-between text-[#BA1A1A] border-b border-b-[#BA1A1A] md:text-3xl text-xl">
+                  {pujaData.name || "Product Name"}
+                  <button onClick={() => handleWishlistAction(pujaData.id)} className=" focus:outline-none">
+        <HeartIcon className={`h-6 w-6 ${wishlistStatus ? "fill-red-600" : "fill-white"}`} />
       </button>
-       
-        <a href="/cartpoojabox" className="flex items-center justify-center rounded-lg border-2 border-[#E5644E] px-10 py-2.5 text-center text-sm font-medium text-[#E5644E] hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-      <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6 text-[#E5644E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </h3>
+
+                {/* Rating Section */}
+                <div className="flex justify-between item-center">
+                  <div className="flex items-center my-5">
+                    <p className="text-gray-600 font-bold text-sm ml-1">
+                      {pujaData.rating}
+                      <span className="text-gray-500 font-normal"> ({pujaData.rating_user} reviews)</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Description */}
+               
+
+                {/* Pricing */}
+                <p>
+                  <span className="text-3xl font-bold text-orange-600">₹{Math.floor(pujaData.discounted_price)}</span>
+                  <span className="text-sm text-slate-900 line-through ms-2">M.R.P ₹{Math.floor(pujaData.price)}</span>
+                  <span className="text-red-700 text-lg ms-3">({Math.floor(pujaData.discount)}% off)</span>
+                </p>
+
+                {/* Wishlist & Cart Status */}
+                {/* <div className="flex items-center gap-3">
+                
+                  {pujaData.cart_status && (
+                    <span className="text-green-600 font-semibold"> In Cart</span>
+                  )}
+                </div> */}
+
+                {/* Shipping Date */}
+                <p className="text-gray-600 text-sm"> 🛒 Ships by: {pujaData.shipping_date}</p>
+
+                {/* Action Buttons */}
+             <div className="flex gap-2">
+             <button className="p-2 px-10 shadow-black shadow-2xl text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]">
+    Buy Now
+  </button>
+                <button
+   onClick={() => handleCartAction(pujaData.id)}
+      className={`flex items-center justify-center w-full rounded-md px-10 py-2.5 text-center text-sm font-medium text-white
+        ${cartStatus ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
+      `}
+    >
+    
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mr-2 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+        />
       </svg>
-      Add to cart</a>
-            
-       </div>
-    </div>
-  </div>
-</div>
+      {cartStatus ? "Remove from cart" : "Add to cart"}
+    </button>
+             </div>
 
-    </div>
-    </section>
-  <Content/>
-  <Faq/>
+                {/* Image Gallery */}
+                {pujaData.gallery && pujaData.gallery.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold mb-2">Gallery</h4>
+                    <div className="flex gap-2 overflow-x-auto">
+                      {pujaData.gallery.map((img, index) => (
+                        <img key={index} src={img} alt="Gallery" className="h-24 rounded-lg shadow-lg" />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Other Components */}
+      <Content description={pujaData.description} />
+      <SliderOne testimonials={pujaData.testimonials}/>
+      <SliderTwo pujaData={pujaData.related_products}/>
+      <Faq faqs={pujaData.faqs} />
     </>
-
-  
   );
 }
-
-
-
-// "use client";
-
-// import { useParams } from 'next/navigation';
-// import Content from './Content';
-// import Faq from './Faq';
-// import './Poojadetail.css'
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-// export default function Poojaboxdetailpage() {
-//   const { id } = useParams();  
-//   const [pujaData, setPujaData] = useState(null);  // Changed from an array to null
-
-//   useEffect(() => {    
-//     fetchPujaData();   
-//   }, []);
-
-//   const fetchPujaData = async () => {
-//     try {
-//       let formData = new FormData();
-//       formData.append("type", "product_detail");
-//       formData.append("product_id", id);
-  
-//       const response = await axios.post(
-//         "https://dakshhousing.com/satsambhav/websiteapi/products",
-//         formData,
-//         {
-//           headers: {
-//             "language": "en",
-//             "userId": "2",
-//             "user_type": "user",
-//             "Device_id": "upen",
-//             "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-//             "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-//             "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-//           },
-//         }
-//       );
-  
-//       console.log("Puja API Response:", response.data);
-//       setPujaData(response.data.data);  // Accessing the 'data' property
-
-//     } catch (error) {
-//       console.error("Error fetching puja data:", error);
-//     }
-//   };
-
-//   // Check if pujaData is available before rendering
-//   if (!pujaData) return <div>Loading...</div>;
-
-//   return (
-//     <>
-//       <section className="poojadetail p-60">
-//         <div className="container">
-//           <div className="flex flex-col justify-center">
-//             <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-4xl mx-auto border border-white bg-white">
-//               <div className="w-full bg-white grid place-items-center">
-//                 <img src={pujaData.image} alt="product image" className="h-80" />
-//               </div>
-//               <div className="w-full md:w-2/2 bg-white flex flex-col space-y-2 p-3">
-//                 <h3 className="font-black text-[#BA1A1A] border-b border-b-[#BA1A1A] md:text-3xl text-xl">{pujaData.name}</h3>
-//                 <div className="flex justify-between item-center">
-//                   <div className="flex items-center my-5">
-//                     {/* Rating display */}
-//                     <p className="text-gray-600 font-bold text-sm ml-1">
-//                       {pujaData.rating}
-//                       <span className="text-gray-500 font-normal">({pujaData.rating_user} reviews)</span>
-//                     </p>
-//                   </div>
-//                 </div>
-//                 <p className="md:text-lg text-gray-500 text-lg font-bold">{pujaData.description}</p>
-//                 <p>
-//                   <span className="text-3xl font-bold text-orange-600">₹{pujaData.discounted_price}</span>
-//                   <span className="text-sm text-slate-900 line-through ms-2">M.R.P ₹{pujaData.price}</span>
-//                   <span className="text-red-700 text-lg ms-3">({pujaData.discount}% off)</span>
-//                 </p>
-//                 <div className="flex gap-2">
-//                   <button className="p-2 px-16 shadow-black shadow-2xl text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]">
-//                     Buy Now
-//                   </button>
-//                   <a href="/cartpoojabox" className="flex items-center justify-center rounded-lg border-2 border-[#E5644E] px-10 py-2.5 text-center text-sm font-medium text-[#E5644E] hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-//                     <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6 text-[#E5644E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-//                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-//                     </svg>
-//                     Add to cart
-//                   </a>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//       <Content />
-//       <Faq />
-//     </>
-//   );
-// }

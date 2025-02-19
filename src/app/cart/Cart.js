@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Sankalp from "./Sankalp";
 import AuthGuard from "../component/AuthGuard";
+import Homeeight from "../Home/Homeeight";
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(2);
@@ -11,8 +12,9 @@ const Cart = () => {
       setCurrentStep(currentStep + 1);
     }
   };
-  const token = localStorage.getItem("authToken");
-  console.log(token)
+ 
+
+
   return (
     <AuthGuard>
     <div className="cart bg-gray-50 min-h-screen p-60">
@@ -20,45 +22,40 @@ const Cart = () => {
         <h1 className="f-34 mb-2 font-semibold text-lg">Cart</h1>
 
         {/* Progress Steps */}
-        <div className="flex items-center bg-orange-100 rounded-2xl justify-center p-30 mb-4">
-                 
-          <div className="flex items-center">
-            <div
+        <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+  <div className="flex items-center mb-4 md:mb-0">
+  <div
               className={`w-10 h-10 flex items-center justify-center rounded-full ${
                 currentStep === 2 ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"
               }`}
             >
-              <span className="font-bold">01</span>
-            </div>
-            <p className="ml-2 text-sm font-semibold text-gray-700">Sankalp Form
-            <br />
-            <span className="text-sm font-semibold text-gray-700">Fill Name , Gotra & Address
-            </span>
+      <span className="font-bold">01</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+      Sankalp Form
+      <br />
+      <span className="text-sm font-semibold text-gray-700">Fill Name, Gotra & Address</span>
+    </p>
+  </div>
+  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
 
+  <div className="flex items-center">
+    <div
+      className={`w-10 h-10 flex items-center justify-center rounded-full ${
+        currentStep >= 3 ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"
+      }`}
+    >
+      <span className="font-bold">{currentStep > 3 ? "✔" : "02"}</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+      Pay
+      <br />
+      <span className="text-sm font-semibold text-gray-700">Select a payment method</span>
+    </p>
+  </div>
+</div>
 
-
-            </p>
-          </div>
-          <div className="w-10 border-t-2 border-gray-300 mx-4"></div>
-
-          <div className="flex items-center">
-            <div
-              className={`w-10 h-10 flex items-center justify-center rounded-full ${
-                currentStep >= 3 ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"
-              }`}
-            >
-              <span className="font-bold">{currentStep > 3 ? "✔" : "02"}</span>
-            </div>
-            <p className="ml-2 text-sm font-semibold text-gray-700">
-              Pay
-              <br />
-              <span className="text-sm font-semibold text-gray-700">Select a payment method</span>
-            </p>
-          </div>
-        
-        </div>
-
-        {currentStep === 2 && <Sankalp handleNextStep={handleNextStep} />}
+        {currentStep === 2 && <Sankalp handleNextStep={handleNextStep}  />}
 
         {currentStep === 3 &&  (
           <div>
@@ -165,6 +162,7 @@ const Cart = () => {
         )}
       </div>
     </div>
+    <Homeeight/>
     </AuthGuard>
   );
 };
