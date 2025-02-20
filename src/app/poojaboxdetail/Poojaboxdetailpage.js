@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Content from "./Content";
 import Faq from "./Faq";
 import "./Poojadetail.css";
@@ -19,8 +19,18 @@ export default function Poojaboxdetailpage() {
 
   const [cartStatus, setCartStatus] = useState(); // Track cart status
   const [wishlistStatus, setWishlistStatus] = useState();
+  const router = useRouter(); // Initialize router
 
-
+  const header = {
+    "language": "en",
+    "userId": "2",
+    "user_type": "user",
+    "Device_id": "upen",
+    "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+    "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+    "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+    "web_token": localStorage.getItem("authToken"),
+  }
 
   useEffect(() => {
     fetchPujaData();
@@ -36,15 +46,7 @@ export default function Poojaboxdetailpage() {
         "https://dakshhousing.com/satsambhav/websiteapi/products",
         formData,
         {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-          },
+          headers: header
         }
       );
 
@@ -71,16 +73,7 @@ export default function Poojaboxdetailpage() {
         "https://dakshhousing.com/satsambhav/websiteapi/cart",
         formData,
         {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-            "web_token": localStorage.getItem("authToken"),
-          },
+          headers: header
         }
       );
 
@@ -98,27 +91,55 @@ export default function Poojaboxdetailpage() {
     }
   };
 
+ 
+  const handleBuyNow = async (id) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "add_to_cart");
+      formData.append("product_id", id);
+      formData.append("quantity", "1");
+
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/cart",
+        formData,
+        {
+          headers: header
+        }
+      );
+
+      console.log("Buy Now Response:", response.data);
+
+      if (response.data.status == 0 && response.data.message.trim() === "product is already in the cart") {
+        toast.error("Product is already in the cart. Redirecting...");
+        setTimeout(() => {
+          router.push("/cartpoojabox");
+        }, 50); // Short delay before redirecting
+      } else if (response.data.status == 0) {
+        toast.error(response.data.message || "Action failed!");
+      } else {
+        toast.success("Added to cart! Redirecting...");
+        setTimeout(() => {
+          router.push("/cartpoojabox");
+        }, 1000);
+      }
+    } catch (error) {
+      toast.error("Something went wrong! Please try again.");
+      console.error("Error in Buy Now action:", error);
+    }
+  };
+   
   
   const handleWishlistAction = async (id) => {
     try {
       let formData = new FormData();
-      formData.append("type", wishlistStatus ? "remove_from_wishlist" : "add_to_wishlist");
+      formData.append("type", wishlistStatus ? "add_to_wishlist" : "add_to_wishlist");
       formData.append("product_id", id);
 
       const response = await axios.post(
         "https://dakshhousing.com/satsambhav/websiteapi/products",
         formData,
         {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-            "web_token": localStorage.getItem("authToken"),
-          },
+          headers: header
         }
       );
 
@@ -143,7 +164,7 @@ export default function Poojaboxdetailpage() {
           <div className="flex flex-col justify-center">
             <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-4xl mx-auto border border-white bg-white">
               {/* Product Image */}
-              <div className="w-full bg-white grid place-items-center">
+              <div className=" bg-white grid place-items-center">
                 <img src={pujaData.image} alt="product image" className="h-80" />
               </div>
 
@@ -176,32 +197,28 @@ export default function Poojaboxdetailpage() {
                   <span className="text-red-700 text-lg ms-3">({Math.floor(pujaData.discount)}% off)</span>
                 </p>
 
-                {/* Wishlist & Cart Status */}
-                {/* <div className="flex items-center gap-3">
                 
-                  {pujaData.cart_status && (
-                    <span className="text-green-600 font-semibold"> In Cart</span>
-                  )}
-                </div> */}
-
-                {/* Shipping Date */}
                 <p className="text-gray-600 text-sm"> 🛒 Ships by: {pujaData.shipping_date}</p>
 
                 {/* Action Buttons */}
              <div className="flex gap-2">
-             <button className="p-2 px-10 shadow-black shadow-2xl text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]">
-    Buy Now
-  </button>
+             <button
+   onClick={() => handleBuyNow(pujaData.id)}
+      className="p-2 px-5 shadow-black shadow-2xl w-full text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]"
+    >
+    
+     Buy Now
+    </button>
                 <button
    onClick={() => handleCartAction(pujaData.id)}
-      className={`flex items-center justify-center w-full rounded-md px-10 py-2.5 text-center text-sm font-medium text-white
-        ${cartStatus ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
+      className={`flex g items-center justify-center w-full rounded-md px-5 py-2.5 text-center text- font-medium text-white
+        ${cartStatus ? "bg-[#E5644E] hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
       `}
     >
     
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="mr-2 h-6 w-6"
+        className=" h-9 w-9"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -213,7 +230,7 @@ export default function Poojaboxdetailpage() {
           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
         />
       </svg>
-      {cartStatus ? "Remove from cart" : "Add to cart"}
+      {cartStatus ? "Remove from Cart" : "Add to Cart"}
     </button>
              </div>
 
