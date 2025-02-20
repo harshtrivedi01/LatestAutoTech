@@ -1,18 +1,83 @@
 "use client";
 
+import axios from "axios";
 import { HeartIcon } from "lucide-react";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function List({ pujaData }) {
-  console.log(pujaData)
-  const dataToDisplay = pujaData?.puja_list || pujaData?.data?.puja_list || [];
+  const [pujaDataState, setPujaDataState] = useState(pujaData);
+
+  const [dataToDisplay, setDataToDisplay] = useState(
+    pujaData?.product_list || []
+  );
+  
+
+  const [cartStatus, setCartStatus] = useState(pujaData?.puja_list?.cart_status || pujaData?.data?.puja_list?.cart_status || []);
+
+  const handleCartAction = async (id, currentStatus) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", currentStatus ? "remove_cart" : "add_to_cart");
+      formData.append("product_id", id);
+      formData.append("quantity", "1");
+  
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/cart",
+        formData,
+        {
+          headers: {
+            "language": "en",
+            "userId": "2",
+            "user_type": "user",
+            "Device_id": "upen",
+            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+            "web_token": localStorage.getItem("authToken"),
+          },
+        }
+      );
+  
+      if (response.data.status == 0) {
+        toast.error(response.data.message || "Action failed!");
+      } else {
+        toast.success(response.data.message || (currentStatus ? "Removed from cart!" : "Added to cart!"));
+  
+        // Update `pujaDataState` and `dataToDisplay`
+        setPujaDataState((prevData) => ({
+          ...prevData,
+          product_list: prevData.product_list?.map((product) =>
+            product.id === id ? { ...product, cart_status: !currentStatus } : product
+          ),
+        }));
+  
+        // Also update `dataToDisplay`
+        setDataToDisplay((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === id ? { ...product, cart_status: !currentStatus } : product
+          )
+        );
+      }
+    } catch (error) {
+      toast.error("Something went wrong! Please try again.");
+      console.error("Error handling cart action:", error);
+    }
+  };
+  
+  
+  
+
   return (
+    
     <div className="container leading-relaxed">
+        <Toaster position="top-right" reverseOrder={false} /> 
       <ul className="grid gap-6 sm:grid-cols-2 justify-center lg:grid-cols-3 p-60">
       {dataToDisplay && Array.isArray(pujaData.product_list) && pujaData.product_list.length > 0 ? (
       pujaData.product_list.map((product) => (
           <li key={product.id}>
             <div className="bg-white rounded-lg">
-              <a className="mx-3 mt-3 flex rounded-xl" href="/poojaboxdetail">
+              <a className="mx-3 mt-3 flex rounded-xl"  href={`/poojaboxdetail/${product.id}`}>
                 <img className="object-cover h-auto max-w-full" src={product.image} alt="product image" />
                 <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed">
                   {product.name}
@@ -47,16 +112,36 @@ export default function List({ pujaData }) {
                     </span>{" "}
                     <span className="text-red-700 text-lg ms-3">({Math.floor(product.discount)}% off)</span>
                   </p>
-                  <HeartIcon/>
+                  {product.wishlist_status ?   <HeartIcon className="fill-red-400"/> :   <HeartIcon />}
+                
                 </div>
                 <a
-                  href={`/poojaboxdetail/${product.id}`}
-                  className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                  Add to cart
-                </a>
+  onClick={() => handleCartAction(product.id, product.cart_status)}
+  className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="mr-2 h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d={
+        product.cart_status
+          ? "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+          : "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+      }
+    />
+  </svg>
+  {product.cart_status ? "Remove from cart" : "Add to cart"}
+</a>
+
+
+
               </div>
             </div>
           </li>
