@@ -162,7 +162,13 @@ const Cart = () => {
           <Address
           handleNextStep={() => setCurrentStep(3)}
         />)}
-        {currentStep === 3 && <Sankalp />}
+        {currentStep === 3 && <Sankalp
+          handleNextStep={() => setCurrentStep(2)}
+          list={pujaData}
+          updateCartQuantity={updateCartQuantity}
+          quantities={quantities}
+          handleCartAction={handleCartAction}
+        />}
       </div>
     </div>
   );

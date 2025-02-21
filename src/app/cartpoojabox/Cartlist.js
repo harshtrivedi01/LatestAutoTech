@@ -1,7 +1,5 @@
 import { FaTrash } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-
+import { useRouter } from "next/navigation"; // Use Next.js router for navigation
 
 export default function Cartlist({ handleNextStep, list, updateCartQuantity, quantities, handleCartAction }) {
   const router = useRouter();
@@ -11,115 +9,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
     0
   );
 
-// Razorpay credentials
-const razorpayKey = "rzp_test_x2cu9iCvlGjlRs";
-
-const handlePayment = async (method) => {
-  if (cartItems.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-
-  if (method === "razorpay") {
-    // ✅ Load Razorpay dynamically if not already loaded
-    if (!window.Razorpay) {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.async = true;
-      document.body.appendChild(script);
-
-      script.onload = () => openRazorpayPayment();
-      script.onerror = () => alert("Failed to load Razorpay. Please try again.");
-    } else {
-      openRazorpayPayment();
-    }
-  } else {
-    // Handle PhonePe Payment
-    processPayment("12345", "phonepe");
-  }
-};
-
-const openRazorpayPayment = () => {
-  const options = {
-    key: razorpayKey,
-    amount: subtotal * 100, // Convert to paise
-    currency: "INR",
-    name: "Your Store",
-    description: "Test Transaction",
-    handler: async function (response) {
-      console.log("Razorpay Response:", response);
-      if (response.razorpay_payment_id) {
-        processPayment(response.razorpay_payment_id, "razorpay");
-      } else {
-        alert("Payment failed!");
-      }
-    },
-    prefill: {
-      name: "Test User",
-      email: "test@example.com",
-      contact: "9999999999",
-    },
-    theme: {
-      color: "#3399cc",
-    },
-  };
-
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-};
-
-const processPayment = async (paymentId, paymentType) => {
-  let formData = new FormData();
-  formData.append("type", "order");
-  formData.append("address_id", 1);
-  formData.append("shipping_cost", 0);
-  formData.append("payment_type", paymentType);
-  formData.append("payment_status", "success");
-  formData.append("coin_discount", 0);
-  formData.append("use_coin_status", false);
-  formData.append("coin_discount_amount", 0);
-  formData.append("grand_total", subtotal);
-  formData.append("sub_total", subtotal);
-  formData.append("country", "IN");
-  formData.append("payment_id", paymentId);
-  formData.append("payment_type", paymentType);
-  try {
-
-
-    const response = await axios.post(
-      "https://dakshhousing.com/satsambhav/websiteapi/cart",
-      formData,
-      {
-        headers: {
-          language: "en",
-    userId: "2",
-    user_type: "user",
-    Device_id: "upen",
-    Longitude: JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-    Latitude: JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-    Ip_address: JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-    web_token: localStorage.getItem("authToken"),
-        },
-      }
-    );
-
-    console.log("Payment Response:", response.data);
-
-    // ✅ Check API response status
-    if (!response.data || response.data.status === "0") {
-      console.error(`Error: ${response.data?.message || "Invalid request"}`);
-      return;
-    }
-
-    alert("Payment successful!");
-    handleNextStep();
-  } catch (error) {
-    console.error("Error processing payment:", error);
-    alert("Payment failed! Please try again.");
-  }
-};
-
-
+  // If cart is empty
   if (subtotal === 0 || cartItems.length === 0) {
     return (
       <div className="text-center py-10">
@@ -127,7 +17,7 @@ const processPayment = async (paymentId, paymentType) => {
         <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p>
         <button
           className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/")} // Redirect to home page
         >
           Go to Home
         </button>
@@ -161,6 +51,7 @@ const processPayment = async (paymentId, paymentType) => {
                   
                   <div className="mt-3 flex items-center">
                     <div className="flex items-center rounded-lg shadow-lg border border-orange-400">
+                      {/* Decrease Button */}
                       <button
                         className="text-orange-600 text-lg px-3 py-1"
                         onClick={() => updateCartQuantity(item.product_id, -1)}
@@ -171,6 +62,7 @@ const processPayment = async (paymentId, paymentType) => {
 
                       <span className="mx-2 text-gray-600">{quantities[item.product_id] || item.quantity}</span>
 
+                      {/* Increase Button */}
                       <button
                         className="text-orange-600 text-lg px-3 py-1"
                         onClick={() => updateCartQuantity(item.product_id, 1)}
@@ -180,13 +72,14 @@ const processPayment = async (paymentId, paymentType) => {
                       </button>
                     </div>
 
+                    {/* Remove from cart */}
                     <FaTrash
                       className="ms-5 text-gray-700 cursor-pointer hover:text-red-600"
                       onClick={() => handleCartAction(item.product_id)}
                     />
 
-                    <span className="ml-auto font-bold p-1 lg:p-3 rounded-lg text-white bg-orange-400">
-                      ₹{Math.floor((quantities[item.product_id] || item.quantity) * item.discounted_price)}
+                    <span className="ml-auto font-bold p-1 m lg:p-3 rounded-lg text-white bg-orange-400">
+                     ₹{Math.floor((quantities[item.product_id] || item.quantity) * item.discounted_price)}
                     </span>
                   </div>
                 </div>
@@ -196,6 +89,7 @@ const processPayment = async (paymentId, paymentType) => {
         ))}
       </div>
 
+      {/* Right Section */}
       <div className="w-full md:w-1/3">
         <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
           <h3 className="font-semibold text-gray-800 text-xl mb-3">SubTotal</h3>
@@ -204,12 +98,11 @@ const processPayment = async (paymentId, paymentType) => {
             <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
           </div>
           <button
-            className="w-full common-btn text-white font-semibold py-2 rounded-lg mb-2"
-            onClick={() => handlePayment("razorpay")}
+            className="w-full common-btn text-white font-semibold py-2 rounded-lg"
+            onClick={handleNextStep}
           >
-            Pay with Razorpay
+            Checkout
           </button>
-         
         </div>
       </div>
     </div>

@@ -90,8 +90,9 @@ console.log(pujaData?.data?.slider_list)
    <Homefourth  pujaData={pujaData}/>
    <Homefive  pujaData={pujaData}/>
    <Homesix  pujaData={pujaData}/>
-   <Homeseven  pujaData={pujaData}/>
    <Homeeight  pujaData={pujaData}/>
+   <Homeseven  pujaData={pujaData}/>
+  
  
  </>
   );
