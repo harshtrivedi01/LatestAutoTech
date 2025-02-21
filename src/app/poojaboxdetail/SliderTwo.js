@@ -1,47 +1,87 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css"; // Import Splide styles
 import { HeartIcon } from "lucide-react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const SliderTwo = ({ pujaData }) => {
+const SliderTwo = () => {
+  const [pujaData, setPujaData] = useState([]);
+  const [cartStatus, setCartStatus] = useState([]); // Track cart status for each product
 
-  const [cartStatus, setCartStatus] = useState(pujaData?.id); // Track cart status
-  const [wishlistStatus, setWishlistStatus] = useState();
+  const header = {
+    "language": "en",
+    "userId": "2",
+    "user_type": "user",
+    "Device_id": "upen",
+    "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
+    "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
+    "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
+    "web_token": localStorage.getItem("authToken"),
+  }
 
+  useEffect(() => {
+    fetchPujaData();
+  }, []);
 
-  const handleCartAction = async (id) => {
+  const fetchPujaData = async () => {
     try {
       let formData = new FormData();
-      formData.append("type", cartStatus ? "remove_cart" : "add_to_cart");
+      formData.append("type", "product_list");
+      formData.append("category_id", "1");
+
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/products",
+        formData,
+        {
+          headers: header
+        }
+      );
+
+      console.log("Puja API Response:", response.data);
+      setPujaData(response.data.data.product_list); // Set the product list data properly
+
+      // Initialize cartStatus array for each product as false
+      const initialCartStatus = response.data.data.product_list.map(() => false);
+      setCartStatus(initialCartStatus);
+
+    } catch (error) {
+      console.error("Error fetching puja data:", error);
+    }
+  };
+
+  const handleCartAction = async (id, index) => {
+    try {
+      let formData = new FormData();
+      const actionType = cartStatus[index] ? "remove_cart" : "add_to_cart";
+      formData.append("type", actionType);
       formData.append("product_id", id);
-      formData.append("quantity", "1");
+
+      if (!cartStatus[index]) {
+        formData.append("quantity", "1");
+      }
 
       const response = await axios.post(
         "https://dakshhousing.com/satsambhav/websiteapi/cart",
         formData,
         {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-            "web_token": localStorage.getItem("authToken"),
-          },
+          headers: header
         }
       );
 
       console.log("Cart Action Response:", response.data);
 
-      if (response.data.status == 0) {
+      if (response.data.status === 0) {
         toast.error(response.data.message || "Action failed!");
       } else {
-        setCartStatus(!cartStatus); // Toggle cart status
-        toast.success(response.data.message || (cartStatus ? "Removed from cart!" : "Added to cart!"));
+        // Update the cartStatus for the specific product
+        const newCartStatus = [...cartStatus];
+        newCartStatus[index] = !cartStatus[index]; // Toggle cart status for that product
+        setCartStatus(newCartStatus); // Update the state with the new status array
+
+        toast.success(response.data.message || (cartStatus[index] ? "Removed from cart!" : "Added to cart!"));
       }
     } catch (error) {
       toast.error("Something went wrong! Please try again.");
@@ -49,43 +89,6 @@ const SliderTwo = ({ pujaData }) => {
     }
   };
 
-  
-  const handleWishlistAction = async (id) => {
-    try {
-      let formData = new FormData();
-      formData.append("type", wishlistStatus ? "remove_from_wishlist" : "add_to_wishlist");
-      formData.append("product_id", id);
-
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-            "web_token": localStorage.getItem("authToken"),
-          },
-        }
-      );
-
-      console.log("Wishlist Action Response:", response.data);
-
-      if (response.data.status === 0) {
-        toast.error(response.data.message || "Action failed!");
-      } else {
-        setWishlistStatus(!wishlistStatus);
-        toast.success(response.data.message || (wishlistStatus ? "Removed from wishlist!" : "Added to wishlist!"));
-      }
-    } catch (error) {
-      toast.error("Something went wrong! Please try again.");
-      console.error("Error handling wishlist action:", error);
-    }
-  };
   return (
     <div className="my-10 py-10">
       <div className="md:mb-12 mb-8 text-center">
@@ -110,14 +113,12 @@ const SliderTwo = ({ pujaData }) => {
           pagination: true,
         }}
       >
-        {/* Loop through testimonials */}
+        {/* Loop through product list */}
         {pujaData?.map((product, index) => (
-          <SplideSlide key={product.id || index}>
-
-
+          <SplideSlide key={product.id}>
             <div className="bg-white shadow-2xl m-2 my-8 rounded-lg">
-              <a className="mx-3 mt-3 flex rounded-xl"   href={`/poojaboxdetail/${product.id}`}>
-                <img className="object-cover h-auto max-w-full" src={product.image} alt="product image" />
+              <a className="mx-3 mt-3 flex rounded-xl" href={`/poojaboxdetail/${product.id}`}>
+                <img className="object-cover h-auto max-w-full" src={"https://www.punyasetu.com/assets/images/logo.png"||product.image} alt={product.name} />
                 <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed">
                   {product.name}
                   <div className="mt-5 text-base font-medium text-sm leading-relaxed">
@@ -127,12 +128,12 @@ const SliderTwo = ({ pujaData }) => {
               </a>
               <div className="mt-4 px-5 pb-5">
                 <div className="flex items-center">
-                  {/* Add rating dynamically */}
-                  {[...Array(5)].map((_, index) => (
+                  {/* Render dynamic rating */}
+                  {[...Array(5)].map((_, idx) => (
                     <svg
-                      key={index}
+                      key={idx}
                       aria-hidden="true"
-                      className={`h-5 w-5 ${index < Math.round(product.rating_user / 2) ? 'text-yellow-300' : 'text-gray-300'}`}
+                      className={`h-5 w-5 ${idx < Math.round(product.rating_user / 2) ? 'text-yellow-300' : 'text-gray-300'}`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg">
@@ -151,28 +152,34 @@ const SliderTwo = ({ pujaData }) => {
                     </span>{" "}
                     <span className="text-red-700 text-lg ms-3">({Math.floor(product.discount)}% off)</span>
                   </p>
-                  <HeartIcon/>
                 </div>
-                <a
-                  href={`/poojaboxdetail/${product.id}`}
-                  className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                <button
+                  onClick={() => handleCartAction(product.id, index)}
+                  className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
+                    ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
+                  `}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-2 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
                   </svg>
-                  Add to cart
-                </a>
+                  {cartStatus[index] ? "Remove from cart" : "Add to cart"}
+                </button>
               </div>
-              
             </div>
-        
-            <br/>
-
-            
           </SplideSlide>
-        )) 
-        }
+        ))}
       </Splide>
-      
     </div>
   );
 };

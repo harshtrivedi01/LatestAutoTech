@@ -112,7 +112,7 @@ const processPayment = async (paymentId, paymentType) => {
     }
 
     alert("Payment successful!");
-    handleNextStep();
+    
   } catch (error) {
     console.error("Error processing payment:", error);
     alert("Payment failed! Please try again.");
