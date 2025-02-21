@@ -158,7 +158,10 @@ const Cart = () => {
           />
         )}
 
-        {currentStep === 2 && <Address/>}
+        {currentStep === 2 && (
+          <Address
+          handleNextStep={() => setCurrentStep(3)}
+        />)}
         {currentStep === 3 && <Sankalp />}
       </div>
     </div>
