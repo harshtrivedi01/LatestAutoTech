@@ -145,7 +145,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
           {/* Date Selection */}
           <div className="w-full">
-            <h3 className="text-lg font-semibold mb-1">Select a Date to Complete Your Pooja Booking</h3>
+            <h3 className="text-lg font-semibold mb-1">Select a Date to  Pooja Booking</h3>
             <p className="mb-3">
               You've chosen your desired package <b>Individual Package</b> – now pick an auspicious
               date to finalize your booking.
@@ -190,7 +190,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
         {/* Save & Continue Button */}
         <div className="mt-6">
       <button
-        className={`w-full bg-green-700 text-white font-semibold py-2 rounded-lg transition 
+        className={`w-full bg-green-600 text-white font-semibold p-2 px- rounded-lg transition 
           ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"}`}
         onClick={handleSubmit}
         disabled={isResendDisabled}

@@ -17,7 +17,7 @@ const Cart = () => {
 
   return (
     <AuthGuard>
-    <div className="cart bg-gray-50 min-h-screen p-60">
+    <div className="cart b50 min-h-screen p-60">
       <div className="container">
         <h1 className="f-34 mb-2 font-semibold text-lg text-black">Cart</h1>
 
@@ -147,7 +147,7 @@ const Cart = () => {
       
       <button
                   className="w-full common-btn text-white font-semibold py-2 mt-5 rounded-lg"
-                  onClick={handleNextStep}
+                  // onClick={handleNextStep}
                 >
                   Pay Now
                 </button>

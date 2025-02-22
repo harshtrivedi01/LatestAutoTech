@@ -85,7 +85,7 @@ export default function Homefourth({ pujaData }) {
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
             {pujaData?.data?.product_list.map((puja, index) => (
               <li key={index}>
-                <div className="bg-white w-full rounded-lg border">
+                <div className="bg-white w-full rounded-lg shadow-2xl">
                   <Link className="mx-3 mt-3 flex rounded-xl" href={`poojaboxdetail/${puja.id}`}>
                     <img
                       className="object-cover"
@@ -130,8 +130,8 @@ export default function Homefourth({ pujaData }) {
                     </div>
                     <button
                       onClick={() => handleCartAction(puja.id, index)}
-                      className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
-                        ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
+                      className={`flex items-center justify-center  rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
+                        ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
                       `}
                     >
                       <svg

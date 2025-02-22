@@ -2,10 +2,10 @@ import React from 'react';
 
 const Faq = ({ detail }) => {
   return (
-    <div className='faq p-60 bg-grey'>
+    <div className='faq p-60 bg-[#FFEEE2]'>
       {/* FAQ Section */}
       <div className="container">
-        <h2 className="text-2xl font-bold mb-4 text-center">FAQ</h2>
+        <h2 className="text-2xl font-bold mb-4 text-start">FAQ</h2>
         <div className="space-y-4">
           {/* Dynamically render FAQs based on the response */}
           {detail?.faqs?.map((faq, index) => (
