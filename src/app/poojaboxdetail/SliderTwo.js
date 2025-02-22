@@ -119,7 +119,7 @@ const SliderTwo = () => {
             <div className="bg-white shadow-2xl m-2 my-8 rounded-lg">
               <a className="mx-3 mt-3 flex rounded-xl" href={`/poojaboxdetail/${product.id}`}>
                 <img className="object-cover h-auto max-w-full" src={"https://www.punyasetu.com/assets/images/logo.png"||product.image} alt={product.name} />
-                <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed">
+                <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed text-black">
                   {product.name}
                   <div className="mt-5 text-base font-medium text-sm leading-relaxed">
                     {product.description}

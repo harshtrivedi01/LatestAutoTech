@@ -92,9 +92,9 @@ export default function Homefourth({ pujaData }) {
                       src={"https://www.punyasetu.com/assets/images/logo.png"||puja.image}
                       alt={puja.name || "product image"}
                     />
-                    <span className="m-2 rounded-full px-2 lg:text-xl font-bold leading-relaxed">
+                    <span className="m-2 rounded-full px-2 lg:text-xl font-bold text-black leading-relaxed">
                       {puja.name || "Puja Title"}
-                      <div className="mt-5 text-base font-medium text-sm leading-relaxed">
+                      <div className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
                         {puja.description || "Puja description goes here."}
                       </div>
                     </span>

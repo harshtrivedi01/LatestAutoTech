@@ -114,7 +114,7 @@ export default function Poojabookingpage() {
         <div className="container">
           <div className="items-center gap-12">
             <div>
-              <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
+              <h2 className="lg:text-3xl text-black md:text-2xl text-3xl font-bold mb-4">
                 Upcoming Poojas on Punyasetu
               </h2>
               <p className="leading-relaxed text-lg text-gray-600">

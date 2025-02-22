@@ -44,7 +44,7 @@
      
         <div className='container'>
 
-        <h2 className='title'>Pooja Benefits</h2>
+        <h2 className='title text-black'>Pooja Benefits</h2>
 
         {detail?.puja_benefits?.length > 0 ? (
    <ul className="list-disc pl-3 ">

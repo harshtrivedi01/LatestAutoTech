@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios";
+import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; 
 import { useParams } from "next/navigation";
@@ -18,8 +19,9 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
     setIsLoggedIn(!!token); // Convert token existence to boolean
   }, []);
 
-  const local = localStorage.getItem("formData");
+  localStorage.setItem("membernumber",pujaData?.no_of_member);
   
+  console.log(localStorage.getItem("membernumber"),"tes")
   console.log(pujaData,"te")
 
   // Extract available dates
@@ -109,6 +111,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
           toast.success(response.data?.message || "Something went wrong!");
           
           const bookingID = response.data?.data?.booking_id
+       
           localStorage.setItem("bookingID", bookingID);
           router.push("/cart");
           
@@ -129,7 +132,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <Toaster position="top-right" reverseOrder={false} />  
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-xl w-full relative">
+      <div className="bg-white text-black rounded-lg shadow-lg p-6 max-w-xl w-full relative">
         {/* Close Button */}
         <button
           className="absolute top-0 right-3 text-red-500 hover:text-red-700 text-3xl font-bold"
@@ -153,10 +156,10 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
 
             {/* Button to Show Calendar */}
             <button
-              className="w-full p-2 border rounded-lg text-left bg-gray-100"
+              className="w-full p-2 border flex gap-2 rounded-lg text-left bg-gray-100"
               onClick={() => setShowCalendar(!showCalendar)}
             >
-              {selectedDate ? selectedDate.toDateString() : "Select a Date"}
+        <Calendar/>     {selectedDate ? selectedDate.toDateString() : "Select a Date"} 
             </button>
 
             {/* Calendar (Hidden until clicked) */}

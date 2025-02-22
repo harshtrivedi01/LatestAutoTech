@@ -5,6 +5,7 @@ import Cartlist from "./Cartlist";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Address from "./Address";
+import AuthGuard from "../component/AuthGuard";
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -117,7 +118,8 @@ const Cart = () => {
   
   
   return (
-    <div className="cart bg-gray-50 min-h-screen p-60">
+    <AuthGuard>
+      <div className="cart bg-gray-50 min-h-screen p-60">
        <Toaster position="top-right" reverseOrder={false} /> 
       <div className="container">
         <h1 className="f-34 mb-2 font-semibold text-lg">Shopping Cart</h1>
@@ -171,6 +173,7 @@ const Cart = () => {
         />}
       </div>
     </div>
+      </AuthGuard>
   );
 };
 

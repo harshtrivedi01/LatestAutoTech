@@ -16,7 +16,7 @@ export default function Aboutpage() {
             <p className="mt-8 md:mt-12">
               <button
                 type="button"
-                className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-2xl px-2 lg:px-10 lg:py-3 py-2 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-2xl px-2 lg:px-10 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                 style={{ backgroundColor: "#E5644E" }}
               >
                 Learn More

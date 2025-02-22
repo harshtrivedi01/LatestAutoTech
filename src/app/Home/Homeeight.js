@@ -7,10 +7,11 @@ import "@splidejs/splide/css"; // Import Splide styles
 const Homeeight = ({ pujaData ,detail}) => {
   return (
     <div className="my-10">
-      <div className="md:mb-12 mb-8 text-center">
+      <div className="md:mb-20 mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
       </div>
       <Splide 
+      
         options={{
           type: "loop",
           perPage: 3,
@@ -47,13 +48,13 @@ const Homeeight = ({ pujaData ,detail}) => {
               </div>
 
               {/* Testimonial short description */}
-              <p className="font-semibold mt-4">
+              <p className="font-semibold text-black mt-4">
                 {testimonial?.testimonials_description?.split('\r\n')[0] || "It was a very good experience"}
               </p>
 
               {/* Full testimonial description */}
               <div className="mt-4">
-                <p className="text-sm">
+                <p className="text-sm text-black">
                   {testimonial?.testimonials_description?.split('\r\n')[1] || "The service was amazing. I never had to wait that long for my food."}
                 </p>
               </div>

@@ -47,13 +47,13 @@ const SliderOne = ({ testimonials }) => {
               </div>
 
               {/* Testimonial short description */}
-              <p className="font-semibold mt-4">
+              <p className="font-semibold text-black mt-4">
                 {testimonial?.testimonials_description?.split('\r\n')[0] || "It was a very good experience"}
               </p>
 
               {/* Full testimonial description */}
               <div className="mt-4">
-                <p className="text-sm">
+                <p className="text-sm text-black">
                   {testimonial?.testimonials_description?.split('\r\n')[1] || "The service was amazing. I never had to wait that long for my food."}
                 </p>
               </div>

@@ -1,31 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PoojaDatePopup from "./PoojaDatePopup";
 
 const PoojaPackages = ({ detail }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
 
+  // Set the first package as default selected when component mounts
+  useEffect(() => {
+    if (detail?.puja_detail?.packages?.length > 0) {
+      setSelectedPackage(detail.puja_detail.packages[0]);
+    }
+  }, [detail]);
+
   const handleParticipate = (pkg) => {
-    setSelectedPackage(pkg); // Set selected package data
+    setSelectedPackage(pkg); // Update the selected package
     setShowPopup(true);
   };
 
   return (
     <div className="package p-60 bg-grey" id="Package-section">
       <div className="container">
-        <h1 className="title">Select Pooja Package</h1>
+        <h1 className="title text-black">Select Pooja Package</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
-          {detail?.puja_detail?.packages?.map((pkg, index) => {
-            const isHighlighted = index === 0 || pkg.highlight;
+          {detail?.puja_detail?.packages?.map((pkg) => {
+            const isHighlighted = selectedPackage?.id === pkg.id;
 
             return (
               <div
-                key={pkg.id} // Use `pkg.id` instead of `index` for better keying
-                className={`border rounded-lg ${
+                key={pkg.id}
+                className={`border text-black rounded-lg cursor-pointer ${
                   isHighlighted
                     ? "border-3 p-2 bg-orange-100 border-orange-500 active-package"
                     : "bg-white border-2 border-orange-600"
                 }`}
+                onClick={() => setSelectedPackage(pkg)} // Highlight selected package
               >
                 <div className="flex gap-2 justify-between top-card rounded-t-3xl p-4 rounded-lg items-center">
                   <div className="pack-img w-20 h-20 relative">
@@ -68,7 +76,7 @@ const PoojaPackages = ({ detail }) => {
 
                   <div className="mt-4 text-center">
                     <button
-                      onClick={() => handleParticipate(pkg)} // Pass package data on click
+                      onClick={() => handleParticipate(pkg)}
                       className={`py-4 px-5 rounded-lg text-white w-full uppercase font-bold tracking-normal ${
                         isHighlighted ? "package-dark-btn" : "package-light-btn"
                       }`}
@@ -83,9 +91,13 @@ const PoojaPackages = ({ detail }) => {
         </div>
       </div>
 
-      {/* ✅ Show Popup with selected package data */}
+      {/* Show Popup with selected package data */}
       {showPopup && selectedPackage && (
-        <PoojaDatePopup pujaData={selectedPackage} date={detail} onClose={() => setShowPopup(false)} />
+        <PoojaDatePopup
+          pujaData={selectedPackage}
+          date={detail}
+          onClose={() => setShowPopup(false)}
+        />
       )}
     </div>
   );

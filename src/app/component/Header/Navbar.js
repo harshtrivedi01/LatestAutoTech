@@ -39,7 +39,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white relative dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <nav className="bg-white relative  w-full z-20 top-0 start-0 border-b border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
@@ -47,7 +47,7 @@ export default function Navbar() {
               className="h-16 mb-2"
               alt="PunyaSetu Logo"
             />
-            <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-black">
               PunyaSetu
             </span>
           </a>
@@ -103,15 +103,15 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
-                <Link href="/Cart">
-                  <HiOutlineShoppingCart className="w-8 h-8" />
+                <Link href="/cartpoojabox">
+                  <HiOutlineShoppingCart className="w-8 h-8 text-black" />
                 </Link>
               </div>
             ) : (
               <Link href="/login">
                 <button
                   type="button"
-                  className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-4 lg:px-12 lg:py-3 py-2 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                  className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-4 lg:px-12 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                   style={{ backgroundColor: "#E5644E" }}
                 >
                   Login
@@ -123,7 +123,7 @@ export default function Navbar() {
 
             <button
               type="button"
-              className="inline-flex items-center p-2 w-8 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-8 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
               <span className="sr-only">Open main menu</span>

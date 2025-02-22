@@ -134,14 +134,14 @@ export default function OtpVerificationPage() {
     <>
         <Toaster position="top-right" reverseOrder={false} />  
       <Image src={topimage} alt="test" className="absolute" />
-           <nav className=" w-full z-20 top-0 start-0  dark:border-gray-600   bg-[#FFEEE2]">
+           <nav className=" w-full z-20 top-0 start-0  border-gray-600   bg-[#FFEEE2]">
              <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                <a
                  href="/"
                  className="flex items-center space-x-5 rtl:space-x-reverse"
                >
      
-                 <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
+                 <span className="self-center text-3xl font-semibold whitespace-nowrap text-white">
      
                  </span>
                </a>

@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <link rel="icon" href="https://www.punyasetu.com/assets/images/logo.png" sizes="any" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} font-roboto antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} font-roboto antialiased bg-white`}
       >
         <Providers>
         <ToastContainer position="top-right" autoClose={5000} />

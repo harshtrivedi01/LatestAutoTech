@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const Homefirst = ({ sliderList = [] }) => {
   const [index, setIndex] = useState(0);
@@ -52,6 +53,7 @@ const Homefirst = ({ sliderList = [] }) => {
           
             className="absolute inset-0 -z-10"
           />
+          
           <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-[596px] sm:h-[450px] xs:h-[350px] flex flex-col items-center justify-center">
             <p className="text-6xl sm:text-4xl xs:text-3xl leading-tight">Pooja Anytime<br /> Anywhere</p>
             <br />
@@ -60,13 +62,15 @@ const Homefirst = ({ sliderList = [] }) => {
               Punyasetu App – your gateway to spiritual bliss!
             </p>
             <br />
-            <button
+           <Link href={"/poojabooking"}>
+           <button
               type="button"
               className="text-white font-bold rounded-full text-lg sm:text-base xs:text-sm px-12 py-3 sm:px-8 sm:py-2 xs:px-6 xs:py-1"
               style={{ backgroundColor: '#FA8128' }}
             >
               {sliderList[index]?.button_name || 'Book Now'}
             </button>
+           </Link>
           </div>
         </motion.div>
       </AnimatePresence>

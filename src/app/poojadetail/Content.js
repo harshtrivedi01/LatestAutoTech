@@ -5,7 +5,7 @@ import React from 'react';
 	  <div className='p-60 bg-grey content'  id="about-section" >
         <div className='container'>
 
-        <h2 className='title'>About Pooja</h2>
+        <h2 className='title text-black'>About Pooja</h2>
         <p >
        {detail?.puja_detail?.puja_description}
   
