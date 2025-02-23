@@ -1,3 +1,4 @@
+import Homeeight from "../Home/Homeeight";
 import Homesecond from "../Home/Homesecond";
 import Faq from "../poojadetail/Faq";
 import Cards from "./Cards";
@@ -23,8 +24,10 @@ export default function Servicepage () {
       </div>
     </div>
     <List/>
-    <Cards/>
-    <Faq/>
+    <div className="bg-gray-100">
+    <Cards />
+    </div>
+    <Homeeight/>
 </>
     )
 }

@@ -33,8 +33,10 @@ export default function Homefive({pujaData}) {
         {/* Image Section */}
         <a href={`poojadetail/${puja.id}`} className="flex justify-center">
           <img className="h-60  rounded-t-lg" 
-               src={"https://www.punyasetu.com/assets/images/logo.png"||puja.image} 
-               alt={puja.title} />
+               src={puja.image||"https://www.punyasetu.com/assets/images/logo.png"} 
+               alt={puja.title} 
+               onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+               />
         </a>
 
         {/* Content Section */}

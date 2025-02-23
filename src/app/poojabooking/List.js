@@ -21,21 +21,22 @@ export default function List({ pujaData }) {
                 <a href={`poojadetail/${puja.id}`} className="flex justify-center">
                   <img
                     className="h-60  object-cove rounded-t-lg"
-                    src={"https://www.punyasetu.com/assets/images/logo.png" ||puja.image}
+                    src={puja.image || "https://www.punyasetu.com/assets/images/logo.png" }
                     alt={puja.title}
+                    onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                   />
                 </a>
 
                 {/* Content Section */}
                 <div className="p-5 flex flex-col flex-grow">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-red-800 text-center text-white">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-red-800 text-center ">
                     {puja.name || "Puja Title"}
                   </h5>
                   <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
                   <p className="mb-3 font-bold text-xl text-gray-400 flex-grow">
                     {puja.sub_title || "Puja description goes here."}
                   </p>
-                  <p className="mb-3 text-gray-400 text-xl flex-grow">
+                  <p className="mb-3 text-gray-400 text-lg flex-grow">
                     {puja.short_description || "Puja description goes here."}
                   </p>
 

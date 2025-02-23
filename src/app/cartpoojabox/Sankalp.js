@@ -142,7 +142,7 @@ const processPayment = async (paymentId, paymentType) => {
           <div key={item.id} className="w-full my-5">
             <div className="bg-white p-4 rounded-lg border shadow-xl">
               <div className="flex items-start gap-4">
-                <img src={item.image} alt={item.product_name} className="rounded-lg object-cover h-40 w-40" />
+                <img src={"https://www.punyasetu.com/assets/images/logo.png"||item.image} alt={item.product_name} className="rounded-lg object-cove h-40 w40" />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 text-lg">{item.product_name}</h3>
                   <p className="text-gray-500 text-lg mt-1">Special discounted price for you!</p>

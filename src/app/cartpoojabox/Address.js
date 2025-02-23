@@ -6,7 +6,7 @@ import Sankalp from "./Sankalp";
 
 export default function Address({handleNextStep}) {
   const [pujaData, setPujaData] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const [countries, setCountries] = useState([]);
   
   const [selectedAddress, setSelectedAddress] = useState(null);

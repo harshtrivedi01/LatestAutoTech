@@ -28,6 +28,17 @@ export default function OtpVerificationPage() {
   const [phoneError, setPhoneError] = useState("");
   const inputRefs = useRef([]);
 
+ 
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      // ✅ Redirect logged-in users away from OTP screen
+      router.replace("/");
+    }
+  }, []);
+
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => {
@@ -70,23 +81,35 @@ export default function OtpVerificationPage() {
     data.append("otp", otp.join(""));
     data.append("phone", phone);
     data.append("type", type);
-    setIsResendDisabled(true); 
+  
+    setIsResendDisabled(true);
+  
     try {
-      const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
-
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/authentication",
+        data
+      );
+  
       if (response.data.status === "1") {
         toast.success(response.data.message || "OTP verified successfully! Redirecting...");
-        const token = response.data.data.web_token; // Assuming the API returns a token       
+  
+        const token = response.data.data.web_token; // Assuming the API returns a token
         if (token) {
           localStorage.setItem("authToken", token); // ✅ Save token
         }
+  
+        // ✅ Retrieve and use the stored redirect path (or fallback to "/")
+        const redirectPath = localStorage.getItem("redirectPath") || "/";
+        localStorage.removeItem("redirectPath"); // Clear it after use
+  
         setTimeout(() => {
-          router.push("/");
+          router.push(redirectPath);
         }, 2000);
       } else {
         setAttempts((prev) => prev + 1);
         toast.error(response.data.message || "Invalid OTP! Please try again.");
         setIsResendDisabled(false);
+  
         if (attempts + 1 >= 3) {
           toast.error("Too many wrong attempts! Please try again later.");
         }
@@ -97,6 +120,7 @@ export default function OtpVerificationPage() {
       setIsResendDisabled(false);
     }
   };
+  
 
   const handleResendOtp = async () => {
      const data = new FormData();

@@ -46,13 +46,14 @@ const Homefirst = ({ sliderList = [] }) => {
           className="absolute flex justify-center items-center text-white text-center font-bold w-full bg-cover bg-center"
           style={{ backgroundImage: `url(${sliderList[index].slider})` }}
         >
-          <img
-            src={sliderList[index].slider}
-            alt={`Slide ${index + 1}`}
-            layout="fill"
-          
-            className="absolute inset-0 -z-10"
-          />
+        <img
+  src={sliderList[index]?.slider || "/images/sliderbackground.jpg"}
+  alt={`Slide ${index + 1}`}
+  className="absolute inset-0 -z-10 w-full h-full object-cover"
+  onError={(e) => (e.target.src = "/images/sliderbackground.jpg")}
+/>
+
+
           
           <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-[596px] sm:h-[450px] xs:h-[350px] flex flex-col items-center justify-center">
             <p className="text-6xl sm:text-4xl xs:text-3xl leading-tight">Pooja Anytime<br /> Anywhere</p>

@@ -14,6 +14,8 @@ const Homesix = () => {
         padding: { left: "2rem", right: "2rem" },
         gap: "2rem",
         height: "40rem",
+        arrows: false, // Disable default arrows (we use custom below)
+        pagination: false,
         autoplay: true, // Auto slide for better UX
         interval: 3000, // Slide every 3 seconds
         breakpoints: {

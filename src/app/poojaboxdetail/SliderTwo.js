@@ -11,8 +11,9 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const SliderTwo = () => {
   const [pujaData, setPujaData] = useState([]);
-  const [cartStatus, setCartStatus] = useState([]); // Track cart status for each product
-
+  const [cartStatus, setCartStatus] = useState([]);
+ const pathname = usePathname();
+   const isSpecialPage = pathname.includes("/cart");
   const header = {
     "language": "en",
     "userId": "2",
@@ -108,11 +109,11 @@ const SliderTwo = () => {
   
 
   return (
-    <div className="my-10 py-10">
+    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA] " : "bg-white"} p-6  transition-all duration-300`}>
       <div className="md:mb-12 mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">Related Pooja Box</h2>
       </div>
-      <div className="relative w-full mx-auto ">
+      <div className="relative w-full mx-auto container">
               {/* Slider */}
               <Splide
                 ref={splideRef}
@@ -139,7 +140,10 @@ const SliderTwo = () => {
           <SplideSlide key={product.id}>
             <div className="bg-white shadow-xl m-2 my-10 rounded-lg">
               <a className="mx-3 mt-3 flex rounded-xl" href={`/poojaboxdetail/${product.id}`}>
-                <img className="object-cover h-auto max-w-full" src={"https://www.punyasetu.com/assets/images/logo.png"||product.image} alt={product.name} />
+                <img className="object-cover h-auto max-w-full" 
+                src={product.image ||"https://www.punyasetu.com/assets/images/logo.png"} 
+                  onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                   alt={product.name} />
                 <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed text-black">
                   {product.name}
                   <div className="mt-5 text-base font-medium text-sm leading-relaxed">

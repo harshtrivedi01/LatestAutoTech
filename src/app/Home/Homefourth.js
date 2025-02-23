@@ -87,11 +87,14 @@ export default function Homefourth({ pujaData }) {
               <li key={index}>
                 <div className="bg-white w-full rounded-lg shadow-2xl">
                   <Link className="mx-3 mt-3 flex rounded-xl" href={`poojaboxdetail/${puja.id}`}>
-                    <img
+                   <div className="w-40 flex justify-center">
+                   <img
                       className="object-cover"
-                      src={"https://www.punyasetu.com/assets/images/logo.png"||puja.image}
+                      src={puja.image ||"https://www.punyasetu.com/assets/images/logo.png"}
                       alt={puja.name || "product image"}
+                      onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                     />
+                   </div>
                     <span className="m-2 rounded-full px-2 lg:text-xl font-bold text-black leading-relaxed">
                       {puja.name || "Puja Title"}
                       <div className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
@@ -116,40 +119,44 @@ export default function Homefourth({ pujaData }) {
                       <span className="mr-2 rounded text-yellow-900 px-2.5 py-0.5 text-xs font-semibold">({puja.rating_user})</span>
                     </div>
                     <div className="mt-2 mb-5 flex items-center justify-between">
-                      <p>
-                        <span className="text-3xl font-bold text-slate-900">
-                          ₹{puja.discounted_price}
-                        </span>
-                        <span className="text-sm ms-2 text-slate-900 line-through">
-                          {" "} M.R.P ₹{puja.discounted_price}
-                        </span>
-                        <span className="text-red-700 text-lg ms-3">
-                          ({puja.discount}% off)
-                        </span>
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleCartAction(puja.id, index)}
-                      className={`flex items-center justify-center  rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
-                        ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
-                      `}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mr-2 h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                      {cartStatus[index] ? "Remove from cart" : "Add to cart"}
-                    </button>
+  <p>
+    <span className="text-3xl font-bold text-slate-900">
+      ₹{puja.discounted_price}
+    </span>
+    <span className="text-sm ms-2 text-slate-900 line-through">
+      {" "} M.R.P ₹{puja.discounted_price}
+    </span>
+    <span className="text-red-700 text-lg ms-3">
+      ({puja.discount}% off)
+    </span>
+  </p>
+</div>
+
+<div className="flex justify-end">
+  <button
+    onClick={() => handleCartAction(puja.id, index)}
+    className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
+      ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
+    `}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="mr-2 h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+      />
+    </svg>
+    {cartStatus[index] ? "Remove from cart" : "Add to cart"}
+  </button>
+</div>
+
                   </div>
                 </div>
               </li>

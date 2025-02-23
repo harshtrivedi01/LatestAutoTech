@@ -119,6 +119,13 @@ const Sankalp = ({ handleNextStep }) => {
       toast.error("Failed to submit data!");
     }
   };
+  const fieldPlaceholders = {
+    name: "First Member Name",
+    father_name: "Enter your Father's Name",
+    gotra: "Enter your Gotra",
+    email: "Enter your Email",
+    address: "Enter your Full Address",
+  };
 
   return (
     <div className="p-6 min-h-screen">
@@ -163,12 +170,13 @@ Choose Pervious Sankalp Detail
             <div key={idx}>
               <input
                 type="text"
-                placeholder={field.replace("_", " ")}
+                placeholder={fieldPlaceholders[field]}
                 value={defaultFields[field]}
                 onChange={(e) => handleDefaultChange(field, e.target.value)}
                 className={`border text-sm p-3 rounded-xl shadow-xl w-full ${
                   errors[field] ? "border-red-500" : "border-gray-300"
                 }`}
+                required
               />
               {errors[field] && <p className="text-red-500 text-xs mt-1">{errors[field]}</p>}
             </div>

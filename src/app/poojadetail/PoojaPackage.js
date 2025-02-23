@@ -40,12 +40,14 @@ const PoojaPackages = ({ detail }) => {
                 <div className="pack-img w-20 h-10 ">
                   <img
                     src={
-                      "https://www.punyasetu.com/assets/images/logo.png" ||
-                      pkg.image.replace(/([^:]\/)\/+/g, "$1")
+                      pkg.image.replace(/([^:]\/)\/+/g, "$1")||
+                      "https://www.punyasetu.com/assets/images/logo.png" 
+                     
                     }
                     alt={pkg.name}
                     width={80}
                     height={80}
+                    onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                     className="object-cove h-24 rounded-lg"
                   />
                 </div>

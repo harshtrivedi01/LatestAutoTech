@@ -165,7 +165,9 @@ export default function Poojaboxdetailpage() {
           <div className="relative flex flex-col md:flex-row md:flex-row md:space-x-5 lg:mx-[40px] space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-white bg-white">
   {/* Product Image */}
   <div className="w-full md:w-1/2 bg-white grid place-items-center">
-    <img src={"/images/poojabox.png"||pujaData.image} alt="product image" className="w-full h-[400px]" />
+    <img src={pujaData.image || "/images/poojabox.png"}
+      onError={(e) => (e.target.src = "/images/poojabox.png")}
+    alt="product image" className="w-full h-[400px]" />
   </div>
 
   {/* Product Details */}

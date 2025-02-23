@@ -4,6 +4,7 @@ import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Link from "next/link";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import Language from "../Language/Language";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,25 +54,7 @@ export default function Navbar() {
           </a>
 
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <div className="group relative hidden md:flex cursor-pointer py-2">
-              <div className="flex items-center justify-between bg-white px-4">
-                <a className="menu-hover flex gap-1 items-center text-lg font-bold text-black">
-                  <TbWorld className="text-xl" />
-                  English
-                </a>
-                <span className="font-bold">
-                  <RiArrowDropDownLine className="text-3xl" />
-                </span>
-              </div>
-              <div className="invisible absolute top-10 z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
-                <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                  Hindi
-                </a>
-                <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                  English
-                </a>
-              </div>
-            </div>
+        <Language/>
 
             {isLoggedIn ? (
               <div className="flex items-center lg:gap-2">

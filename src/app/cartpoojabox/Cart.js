@@ -6,6 +6,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Address from "./Address";
 import AuthGuard from "../component/AuthGuard";
+import SliderTwo from "../poojaboxdetail/SliderTwo";
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -173,7 +174,10 @@ const Cart = () => {
         />}
       </div>
     </div>
+
+    <SliderTwo/>
       </AuthGuard>
+
   );
 };
 

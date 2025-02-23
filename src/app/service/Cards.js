@@ -8,7 +8,7 @@ export default function Cards (){
 
     return(
         <>
-        <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+        <div className="max-w-screen-xl mx-auto  p-5 sm:p-10 md:p-16">
             <h1 className="text-center font-bold lg:text-4xl text-2xl my-14">
             How does PUNYASETU Online Pooja Works?
             </h1>

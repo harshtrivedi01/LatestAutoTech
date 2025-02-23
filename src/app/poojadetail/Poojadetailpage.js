@@ -181,11 +181,12 @@ export default function Poojadetailpage() {
                 >
                   <div className="h-[200px] w-full flex justify-center img-ratio">
                     <img
-                      className="w-40 h-full"
-                      src={ "https://www.punyasetu.com/assets/images/logo.png" || pujaData?.puja_detail?.image }
+                      className="w-full  h-full"
+                      src={ pujaData?.puja_detail?.image || "https://www.punyasetu.com/assets/images/logo.png"}
                       alt="Pooja Banner"
                       height="100%"
                       width="100%"
+                      onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                     />
                   </div>
                 </motion.div>
