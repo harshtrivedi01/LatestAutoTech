@@ -27,7 +27,7 @@ const Homeeight = ({ pujaData, detail }) => {
 
 
   return (
-    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA] " : "bg-white"} p-6 transition-all duration-300`}>
+    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA] " : "bg-white"} p-6 transition-all  duration-300`}>
   
       <div className="mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">
@@ -60,8 +60,8 @@ const Homeeight = ({ pujaData, detail }) => {
         >
           {testimonials.map((testimonial, index) => (
             <SplideSlide key={testimonial.id || index}>
-              <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg ">
-                <div className="flex items-center gap-4">
+              <div className="p-6 mx-auto  relative max-w-md mb-10 bg-white rounded-lg ">
+                <div className="flex items-center  gap-4">
                   {/* Client image */}
                   <img
                     src={testimonial?.image || "https://readymadeui.com/team-2.webp"}

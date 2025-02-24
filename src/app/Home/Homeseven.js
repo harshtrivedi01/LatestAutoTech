@@ -22,10 +22,11 @@ export const Homeseven = () => {
 </i>
 <h1 className="text-black text-2xl">Download App from</h1>
             <div className="flex justify-center lg:justify-start items-center gap-3 mt-8">
-              <a href="/" className="w-32 transition duration-300 hover:shadow-lg">
+              
+              <a href="https://apps.apple.com/us/app/punyasetu/id6683311967" className="w-32 transition duration-300 hover:shadow-lg">
                 <img src="https://kitwind.io/assets/kometa/app-store.png" className="object-cover w-full h-auto" alt="App Store" />
               </a>
-              <a href="/" className="w-32 transition duration-300 hover:shadow-lg">
+              <a href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" className="w-32 transition duration-300 hover:shadow-lg">
                 <img src="https://kitwind.io/assets/kometa/google-play.png" className="object-cover w-full h-auto" alt="Google Play" />
               </a>
             </div>

@@ -77,7 +77,7 @@ export default function Navbar() {
                         <Link href="/mybooking">My Booking</Link>
                       </a>
 
-                      <div
+                      <div data-translate
                         className="px-4 py-2 cursor-pointer text-red-600 hover:bg-gray-100 hover:rounded-lg"
                         onClick={handleLogout}
                       >
@@ -92,7 +92,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link href="/login">
-                <button
+                <button data-translate
                   type="button"
                   className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-4 lg:px-12 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                   style={{ backgroundColor: "#E5644E" }}
@@ -138,7 +138,7 @@ export default function Navbar() {
               <li>
                 <div className="group relative cursor-pointer py-2">
                   <div className="flex items-center justify-between bg-white px-4">
-                    <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black ">
+                    <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black " data-translate>
                       <TbWorld className="text-xl" />
                       English
                     </a>
@@ -147,17 +147,17 @@ export default function Navbar() {
                     </span>
                   </div>
                   <div className="invisible absolute  z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
-                    <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
+                    <a data-translate className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
                       Hindi
                     </a>
-                    <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
+                    <a data-translate className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
                       English
                     </a>
                   </div>
                 </div>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
@@ -165,7 +165,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/about"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
@@ -173,7 +173,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/service"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
@@ -181,7 +181,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/contact"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
@@ -189,7 +189,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/join"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
@@ -203,27 +203,27 @@ export default function Navbar() {
           <div className="hidden md:flex md:items-center md:w-auto md:order-1">
             <ul className="flex flex-row space-x-8 text-lg font-semibold">
               <li>
-                <a href="/" className="text-black hover:text-orange-700">
+                <a data-translate href="/" className="text-black hover:text-orange-700">
                   Home
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-black hover:text-orange-700">
+                <a data-translate href="/about" className="text-black hover:text-orange-700">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="/service" className="text-black hover:text-orange-700">
+                <a data-translate href="/service" className="text-black hover:text-orange-700">
                   Service
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-black hover:text-orange-700">
+                <a data-translate href="/contact" className="text-black hover:text-orange-700">
                   Contact Us
                 </a>
               </li>
               <li>
-                <a href="/join" className="text-black hover:text-orange-700">
+                <a data-translate href="/join" className="text-black hover:text-orange-700">
                   Join Us
                 </a>
               </li>

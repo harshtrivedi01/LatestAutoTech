@@ -7,6 +7,7 @@ import Kalash from "../../../public/Assests/Service/Kalash.png";
 import music from "../../../public/Assests/Service/music.png";
 
 import { FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Homethird({pujaData}) {
   return (
@@ -82,9 +83,9 @@ export default function Homethird({pujaData}) {
                       </div>
                     </div>
                     <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">
-                      <a
-                        href
-                        className="group relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
+                      <div
+                       
+                        className=" relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
                       >
                         <div className="absolute inset-0 " />
                         <Image
@@ -108,17 +109,25 @@ export default function Homethird({pujaData}) {
                           </span>
                         </h3>{" "}
                         <br />
-                        <div>
-                          <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
-                            Download App
-                          </button>
-                        </div>
+                    
+                        <a
+  href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="z-10"
+>
+  <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
+    Download App
+  </button>
+</a>
+
+                     
                         <Image
                           src={Anahata}
                           alt=""
                           className="absolute right-10 h-44 w-44 top-0"
                         />
-                      </a>
+                      </div>
                     </div>
 
                     <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">

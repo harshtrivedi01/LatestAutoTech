@@ -5,6 +5,7 @@ import { Providers } from "./reduxrtk/providers";
 import NavbarWrapper from "./component/Header/NavbarWrapper"; // Import the new wrapper
 import FooterWrapper from "./component/Footer/FooterWrapper";
 import { ToastContainer } from "react-toastify";
+import { LanguageProvider } from "../context/LanguageContext.js";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,12 +35,16 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} font-roboto antialiased bg-white text-black`}
       >
+
         <Providers>
+        <LanguageProvider>
         <ToastContainer position="top-right" autoClose={5000} />
-          <NavbarWrapper /> {/* Use NavbarWrapper instead of Navbar */}
-          {children}
+          <NavbarWrapper data-translate /> {/* Use NavbarWrapper instead of Navbar */}
+         {children}
           <FooterWrapper/>
+          </LanguageProvider>
         </Providers>
+        
       </body>
     </html>
   );

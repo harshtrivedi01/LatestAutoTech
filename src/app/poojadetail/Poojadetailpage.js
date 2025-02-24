@@ -124,19 +124,31 @@ export default function Poojadetailpage() {
     const handleScroll = () => {
       const benefitSection = document.getElementById("About-section");
       const packageSection = document.getElementById("Package-section");
-
-      if (benefitSection && packageSection) {
+      const downloadAppSection = document.getElementById("Downloadapp-section");
+      const homeEightSection = document.getElementById("Homeeight-section");
+      const faqSection = document.getElementById("Faq-section");
+  
+      if (benefitSection && packageSection && downloadAppSection && homeEightSection && faqSection) {
         const benefitTop = benefitSection.getBoundingClientRect().top;
         const packageTop = packageSection.getBoundingClientRect().top;
-
-        // Show button when Benefit section is visible but hide it when hovering over the Package section
-        setShowButton(benefitTop < window.innerHeight / 2 && packageTop > 100);
+        const downloadAppTop = downloadAppSection.getBoundingClientRect().top;
+        const homeEightTop = homeEightSection.getBoundingClientRect().top;
+        const faqTop = faqSection.getBoundingClientRect().top;
+  
+        // Show button when any of these sections are visible and hide it when hovering over the Package section
+        setShowButton(
+          (benefitTop < window.innerHeight / 2 && packageTop > 100) ||
+          (downloadAppTop < window.innerHeight && downloadAppTop > 0) ||
+          (homeEightTop < window.innerHeight && homeEightTop > 0) ||
+          (faqTop < window.innerHeight && faqTop > 0)
+        );
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   
   useEffect(() => {
@@ -268,8 +280,8 @@ export default function Poojadetailpage() {
       </section>
     
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black"> <Homeeight  detail={pujaData} /></section>
-      <section id="Faq-section" className="text-black"> </section> <Faq  detail={pujaData} />
+      <section id="Homeeight-section" className="text-black absoulte"> <Homeeight  detail={pujaData} /></section>
+      <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
     </>
   );
 }

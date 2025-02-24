@@ -113,7 +113,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
           const bookingID = response.data?.data?.booking_id
        
           localStorage.setItem("bookingID", bookingID);
-          router.push("/cart");
+          router.push("/sankalpage");
           
         }
         else {

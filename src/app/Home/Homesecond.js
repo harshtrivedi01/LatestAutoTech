@@ -25,6 +25,8 @@ export default function Homesecond({ module_category_details }) {
 
   return (
     <div>
+      
+
       <div className="bg-[#FFFFFF] px- pb-10">
         <div id="features" className="mx-auto max-w-6xl">
           <div className="flex justify-center">

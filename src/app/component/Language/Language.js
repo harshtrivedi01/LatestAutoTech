@@ -75,3 +75,97 @@ export default function Language() {
     </>
   );
 }
+
+
+
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import { RiArrowDropDownLine } from "react-icons/ri";
+// import { TbWorld } from "react-icons/tb";
+
+// export default function Language() {
+//   const [languages, setLanguages] = useState([]);
+ 
+//   const googleTranslateElementInit = () => {
+//     new window.google.translate.TranslateElement(
+//       {
+//         pageLanguage: "en",
+//         autoDisplay: false
+//       },
+//       "google_translate_element"
+//     );
+//   };
+//   useEffect(() => {
+//     var addScript = document.createElement("script");
+//     addScript.setAttribute(
+//       "src",
+//       "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+//     );
+//     document.body.appendChild(addScript);
+//     window.googleTranslateElementInit = googleTranslateElementInit;
+//   }, []);
+
+//   return (
+//     <>
+//       <div className="group relative hidden md:flex cursor-pointer py-2">
+//       <div id="google_translate_element"></div>
+       
+
+       
+//       </div>
+//     </>
+//   );
+// }
+// 
+// 
+// 
+
+// "use client";
+// import { useEffect } from "react";
+// import { useLanguage } from "../../../context/LanguageContext.js";
+
+// const Language = () => {
+//   const { language, changeLanguage } = useLanguage();
+
+//   useEffect(() => {
+//     const savedLang = localStorage.getItem("appLanguage") || "en";
+//     const savedTranslations = JSON.parse(localStorage.getItem("appTranslations") || "{}");
+
+//     // ✅ Check if translations for savedLang exist; if not, fetch translations
+//     const needsApiCall = !Object.values(savedTranslations).some((t) => t[savedLang]);
+
+//     if (language !== savedLang) {
+//       if (needsApiCall) {
+//         changeLanguage(savedLang); // Call API to fetch missing translations
+//       } else {
+//         // ✅ Apply stored translations directly
+//         document.querySelectorAll("[data-translate]").forEach((el) => {
+//           const originalText = el.getAttribute("data-original-text") || el.innerText;
+//           if (savedTranslations[originalText]?.[savedLang]) {
+//             el.innerText = savedTranslations[originalText][savedLang];
+//           }
+//         });
+//       }
+//     }
+//   }, []);
+
+  
+//   useEffect(() => {
+//     handleLanguageChange()
+//     changeLanguage
+//   }, []);
+//   const handleLanguageChange = async (e) => {
+//     await changeLanguage(e.target.value);
+//   };
+
+//   return (
+//     <select value={language} onChange={handleLanguageChange}>
+//       <option value="en">English</option>
+//       <option value="hi">Hindi</option>
+//       <option value="es">Spanish</option>
+//       <option value="fr">French</option>
+//     </select>
+//   );
+// };
+
+// export default Language;
