@@ -1,3 +1,5 @@
+
+import api from "../../lib/axiosInstance";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -6,17 +8,6 @@ import { useEffect, useState } from "react";
 export default function Footersection() {
 
 	const [pujaData, setPujaData] = useState(null);
-
-	const header = {
-	  "language": "en",
-	  "userId": "2",
-	  "user_type": "user",
-	  "Device_id": "upen",
-	  "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-	  "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-	  "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-	  "web_token": localStorage.getItem("authToken"),
-	}
   
 	useEffect(() => {
 	  fetchPujaData();
@@ -26,10 +17,7 @@ export default function Footersection() {
 	  try {
 		let formData = new FormData();
 		formData.append("type", "footer");
-	
-  
-		  const response = await api.post("/cart", footer);
-  
+		  const response = await api.post("/cart", footer);  
 		console.log("Puja API Response:", response.data);
 		setPujaData(response.data.data);
 		
