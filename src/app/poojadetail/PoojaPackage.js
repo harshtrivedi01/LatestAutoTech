@@ -36,31 +36,28 @@ const PoojaPackages = ({ detail }) => {
               onClick={() => setSelectedPackage(pkg)}
             >
               {/* Package Header */}
-              <div className="flex gap-2 justify-between top-card rounded-t-3xl p-4 rounded-lg items-center">
-                <div className="pack-img w-20 h-10 ">
-                  <img
-                    src={
-                      pkg.image.replace(/([^:]\/)\/+/g, "$1")||
-                      "https://www.punyasetu.com/assets/images/logo.png" 
-                     
-                    }
-                    alt={pkg.name}
-                    width={80}
-                    height={80}
-                    onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
-                    className="object-cove h-24 rounded-lg"
-                  />
-                </div>
-                <div className="text-left">
-                  <h2 className="text-lg font-bold mb-2 f-26">{pkg.name}</h2>
-                  <h2 className="text-lg font-bold mb-2">
-                    Package for {pkg.no_of_member} Person
-                  </h2>
-                  <p className="font-bold text-red-600 text-xl f-34">
-                    ₹{Math.floor(pkg.price)}
-                  </p>
-                </div>
-              </div>
+              <div className="flex gap-2 justify-between top-card rounded-t-3xl p-2 rounded-lg items-center">
+  <div className="pack-img w-40 h-24 aspect-[4/3]">
+    <img
+      src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "https://www.punyasetu.com/assets/images/logo.png"}
+      alt={pkg.name}
+      width={160}
+      height={96}
+      onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+      className="object-contain w-full h-full"
+    />
+  </div>
+  <div className="text-left">
+    <h2 className="text-lg font-bold mb-1 f-25">{pkg.name}</h2>
+    <h2 className="text-lg font-bold mb-1">
+      Package for {pkg.no_of_member} Person
+    </h2>
+    <p className="font-bold text-red-600 text-xl f-34">
+      ₹{Math.floor(pkg.price)}
+    </p>
+  </div>
+</div>
+
             
               {/* Description & Features */}
               <div className="p-3 flex-grow">

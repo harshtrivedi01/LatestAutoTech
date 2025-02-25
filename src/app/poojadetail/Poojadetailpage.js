@@ -151,7 +151,7 @@ export default function Poojadetailpage() {
                 >
                   <div className="h-[200px] w-full flex justify-center img-ratio">
                     <img
-                      className="w-full  h-full"
+                      className="w-full  object-contain h-full"
                       src={ pujaData?.puja_detail?.image || "https://www.punyasetu.com/assets/images/logo.png"}
                       alt="Pooja Banner"
                       height="100%"

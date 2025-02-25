@@ -91,7 +91,7 @@ const processPayment = async (paymentId, paymentType) => {
     console.log("Payment Response:", response.data);
 
     // ✅ Check API response status
-    if (!response.data || response.data.status === "0") {
+    if (!response.data || response.data.status == "0") {
       console.error(`Error: ${response.data?.message || "Invalid request"}`);
       return;
     }
