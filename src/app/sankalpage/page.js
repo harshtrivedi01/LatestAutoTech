@@ -1,10 +1,12 @@
+import AuthGuard from "../component/AuthGuard";
 import Form from "./Form";
 
 
 
 const Page = () => {
     return (
-      <div className="p-6 md:px-20">
+    <AuthGuard>
+        <div className="p-6 md:px-20">
           <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
   <div className="flex items-center mb-4 md:mb-0">
   <div
@@ -35,6 +37,7 @@ const Page = () => {
 </div>
     <Form/>
       </div>
+    </AuthGuard>
     );
   };
   

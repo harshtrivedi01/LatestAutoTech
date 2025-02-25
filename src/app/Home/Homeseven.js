@@ -16,7 +16,7 @@ export const Homeseven = () => {
             <p className="text-gray-700 mt-6 text-base sm:text-lg md:text-2xl">
               Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app.
             </p>
-            <i className='qr'>
+            <i className='qr flex justify-center md:justify-start'>
 
 <img src="/images/qr.png" className="object-cover object-toph-40 w-40 " alt="" height="100%" width="" />
 </i>

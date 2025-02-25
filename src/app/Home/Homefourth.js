@@ -95,7 +95,7 @@ export default function Homefourth({ pujaData }) {
                       onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                     />
                    </div>
-                    <span className="m-2 rounded-full px-2 lg:text-xl font-bold text-black leading-relaxed">
+                    <span className="m-2 rounded-full px-2 lg:text-xl text-yellow-700 text-black leading-relaxed">
                       {puja.name || "Puja Title"}
                       <div className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
                         {puja.description || "Puja description goes here."}
@@ -136,7 +136,7 @@ export default function Homefourth({ pujaData }) {
   <button
     onClick={() => handleCartAction(puja.id, index)}
     className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
-      ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
+      ${cartStatus[index] ? "bg-green-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
     `}
   >
     <svg

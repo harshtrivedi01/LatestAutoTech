@@ -1,4 +1,4 @@
-'use client'; 
+"use client"; 
 import Image from "next/image";
 import service1 from "../../../public/Assests/Service/service (1).jpg";
 import service2 from "../../../public/Assests/Service/service (2).jpg";
@@ -7,11 +7,16 @@ import service4 from "../../../public/Assests/Service/service (4).jpg";
 import service5 from "../../../public/Assests/Service/service (5).jpg";
 import service6 from "../../../public/Assests/Service/service (6).jpg";
 import Heading from "../component/Headingname/Heading";
+import DOMPurify from 'dompurify';
+import { useState } from "react";
+
+const MAX_WORDS = 10;
 
 export default function Homesecond({ module_category_details }) {
+  const [expandedItems, setExpandedItems] = useState({}); // Track expanded state for each category
 
   if (!module_category_details) {
-    return <div>Loading...</div>; // Or handle the case where data is missing
+    return <div>Loading...</div>;
   }
 
   const serviceImages = {
@@ -23,10 +28,15 @@ export default function Homesecond({ module_category_details }) {
     "Live Darshan": service6,
   };
 
+  const toggleReadMore = (id) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id], // Toggle the state for this category
+    }));
+  };
+
   return (
     <div>
-      
-
       <div className="bg-[#FFFFFF] px- pb-10">
         <div id="features" className="mx-auto max-w-6xl">
           <div className="flex justify-center">
@@ -34,12 +44,17 @@ export default function Homesecond({ module_category_details }) {
           </div>
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.map((category) => {
-              const { modulecategory } = category;
-              const imageSrc = serviceImages[modulecategory] || service1; // fallback image if not found
+              const { modulecategory, short_description, id } = category;
+              const imageSrc = serviceImages[modulecategory] || service1;
+
+              const words = short_description.split(" ");
+              const shortText = words.slice(0, MAX_WORDS).join(" ");
+              const isLongText = words.length > MAX_WORDS;
+              const isExpanded = expandedItems[id] || false;
 
               return (
-                <li 
-                  key={category.id}
+                <li
+                  key={id}
                   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center"
                   style={{ backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}
                 >
@@ -51,10 +66,22 @@ export default function Homesecond({ module_category_details }) {
                         {modulecategory}
                       </h1>
                     </div>
-                    <p className="mt-1.5 text-[17px] leading-6 mx-2 text-black">
-                      Book an Online {modulecategory} for personalized spiritual guidance, rituals, and consultations.
-                    </p>
-                    <p className="text-[#E5644E] underline">Read More</p>
+                    <div>
+                      <p
+                        className="mt-1.5 text-[17px] leading-6 mx-2 text-black"
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(isExpanded ? short_description : shortText),
+                        }}
+                      ></p>
+                      {isLongText && (
+                        <p
+                          className="text-[#E5644E] underline cursor-pointer"
+                          onClick={() => toggleReadMore(id)}
+                        >
+                          {isExpanded ? "Read Less" : "Read More"}
+                        </p>
+                      )}
+                    </div>
                     <button className="px-8 py-2 mt-4 shadow-gray-400 shadow-xl text-white bg-[#E5644E] rounded-xl hover:bg-[#7B2502]">
                       Book Now
                     </button>

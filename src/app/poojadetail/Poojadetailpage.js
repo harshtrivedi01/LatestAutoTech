@@ -93,20 +93,7 @@ export default function Poojadetailpage() {
       formData.append("puja_id", id);
       // formData.append("page", "1"); // Ensure it's a string
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/landingpage",
-        formData,
-        {
-          headers: {
-            // Convert header keys to lowercase manually
-            "language": "en",
-            "user_type": "guest",
-            "longitude": String(userLocation.longitude).toLowerCase(),
-            "latitude": String(userLocation.latitude).toLowerCase(),
-            "ip_address": String(ipAddress).toLowerCase(),
-          },
-        }
-      );
+      const response = await api.post("/products", formData);
   
       console.log("Puja API Response:", response.data);
       setPujaData(response.data.data)
@@ -266,7 +253,7 @@ export default function Poojadetailpage() {
       {showButton && (
         <a
           onClick={() => document.getElementById("Package-section")?.scrollIntoView({ behavior: "smooth" })}
-          className="fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-4 text-white bg-green-600 rounded-lg shadow-lg hover:bg-green-700"
+          className="fixed bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-4 text-white bg-green-600 rounded-lg shadow-lg hover:bg-green-700"
         >
           Select Pooja Package
         </a>
@@ -280,7 +267,7 @@ export default function Poojadetailpage() {
       </section>
     
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black absoulte"> <Homeeight  detail={pujaData} /></section>
+      <section id="Homeeight-section" className="text-black relative "> <Homeeight  detail={pujaData} /></section>
       <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
     </>
   );

@@ -13,7 +13,7 @@ export default function Heading({
       }} 
     >
       <p 
-        className="text-[60px] md:text-[50px] sm:text-[40px] xs:text-[30px]" 
+        className="text-[40px] md:text-[50px] sm:text-[40px] xs:text-[30px]" 
         style={{ color: color }}
       >
         {text}

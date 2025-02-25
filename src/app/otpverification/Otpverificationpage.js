@@ -22,13 +22,15 @@ export default function OtpVerificationPage() {
   
   const [otp, setOtpValues] = useState(["", "", "", ""]);
   const [attempts, setAttempts] = useState(0);
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(60);
   const [resendVisible, setResendVisible] = useState(false);
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [phoneError, setPhoneError] = useState("");
   const inputRefs = useRef([]);
 
- 
+  const redirectPath = localStorage.getItem("redirectPath") ;
+
+  console.log(redirectPath,"ter")
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -127,7 +129,7 @@ export default function OtpVerificationPage() {
     data.append("phone", phone);
     data.append("type", "resend otp");
     try {
-      setTimer(30);
+      setTimer(60);
       setResendVisible(false);
       toast.info("Resending OTP...");
 

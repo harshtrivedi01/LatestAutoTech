@@ -7,22 +7,12 @@ import toast, { Toaster } from "react-hot-toast";
 import Address from "./Address";
 import AuthGuard from "../component/AuthGuard";
 import SliderTwo from "../poojaboxdetail/SliderTwo";
+import api from "../lib/axiosInstance";
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [pujaData, setPujaData] = useState(null);
   const [quantities, setQuantities] = useState({}); // Store product quantities
-
-  const header = {
-    language: "en",
-    userId: "2",
-    user_type: "user",
-    Device_id: "upen",
-    Longitude: JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-    Latitude: JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-    Ip_address: JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-    web_token: localStorage.getItem("authToken"),
-  };
 
   useEffect(() => {
     fetchPujaData();
@@ -34,11 +24,7 @@ const Cart = () => {
       formData.append("type", "cart_list");
       formData.append("page", 1);
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        { headers: header }
-      );
+      const response = await api.post("/cart", formData);
 
       console.log("Puja API Response:", response.data);
       setPujaData(response.data.data);
@@ -76,11 +62,7 @@ const Cart = () => {
         JSON.stringify([{ product_id: productId, quantity: newQuantity }])
       );
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        { headers: header }
-      );
+      const response = await api.post("/cart", formData);
   
       console.log("Quantity Update Response:", response.data);
       fetchPujaData(); // Refresh cart
@@ -96,11 +78,7 @@ const Cart = () => {
       formData.append("product_id", id);
       // formData.append("quantity", "1");
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        { headers: header }
-      );
+      const response = await api.post("/cart", formData);
   
       console.log("Cart Action Response:", response.data);
   

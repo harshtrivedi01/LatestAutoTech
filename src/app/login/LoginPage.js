@@ -79,13 +79,7 @@ export default function LoginPage() {
 
       if (response.status === 200 && response.data.status === "1") {
        
-        const token = response.data.token; // Assuming the API returns a token
-        
-        if (token) {
-          localStorage.setItem("authToken", token); // ✅ Save token
-        }
-        
-        localStorage.setItem("authToken", response.data.token);
+      
         toast.success("OTP Sent! Redirecting...");
         setTimeout(() => router.push("/otpverification"), 2000);
       }

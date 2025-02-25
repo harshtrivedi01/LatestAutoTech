@@ -2,7 +2,7 @@
 import axios from "axios";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; 
+import { usePathname, useRouter } from "next/navigation"; 
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 
 const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
+    const pathname = usePathname(); // Get current path
   const router = useRouter();
    const { id } = useParams(); 
   // Check if the user is logged in based on the token
@@ -18,6 +19,8 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
     const token = localStorage.getItem("authToken"); // Get token from localStorage
     setIsLoggedIn(!!token); // Convert token existence to boolean
   }, []);
+
+  
 
   localStorage.setItem("membernumber",pujaData?.no_of_member);
   
@@ -83,23 +86,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
 
       setIsResendDisabled(true); 
       try {
-        const response = await axios.post(
-          "https://dakshhousing.com/satsambhav/websiteapi/puja", // Your API URL
-          formData,
-          {
-            headers: {
-              // Your headers if needed, like auth tokens, etc.
-              "language": "en",
-              "userId": "2",
-              "user_type": "user",
-              "Device_id": "upen",
-              "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-              "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-              "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-              "web_token":localStorage.getItem("authToken")
-            },
-          }
-        );
+        const response = await api.post("/puja", formData);
 
         if (response.data?.status == "0") {
           // Handle error when status is "0"
@@ -125,6 +112,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
     } 
   } else {
     setIsResendDisabled(false);
+    localStorage.setItem("redirectPath", pathname); 
     router.push("/login"); // Redirect to login if not logged in
   }
 };
@@ -189,14 +177,15 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
 
         {/* Save & Continue Button */}
         <div className="mt-6">
-      <button
-        className={`w-full bg-green-600 text-white font-semibold p-2 px- rounded-lg transition 
-          ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"}`}
-        onClick={handleSubmit}
-        disabled={isResendDisabled}
-      >
-        {isResendDisabled ? "Saving..." : isLoggedIn ? "Save & Continue" : "Login to Continue"}
-      </button>
+        <button
+  className={`w-full bg-green-600 text-white font-semibold p-2 rounded-lg transition 
+    ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"}`}
+  onClick={handleSubmit}
+  disabled={isResendDisabled}
+>
+  {isResendDisabled ? "Saving..." : "Save & Continue"}
+</button>
+
     </div>
       </div>
     </div>

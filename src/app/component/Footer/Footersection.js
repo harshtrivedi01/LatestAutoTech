@@ -28,13 +28,7 @@ export default function Footersection() {
 		formData.append("type", "footer");
 	
   
-		const response = await axios.post(
-		  "https://dakshhousing.com/satsambhav/websiteapi/footer",
-		  formData,
-		  {
-			headers: header
-		  }
-		);
+		  const response = await api.post("/cart", footer);
   
 		console.log("Puja API Response:", response.data);
 		setPujaData(response.data.data);

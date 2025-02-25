@@ -3,6 +3,7 @@ import { EditIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Sankalp from "./Sankalp";
+import api from "../lib/axiosInstance";
 
 export default function Address({handleNextStep}) {
   const [pujaData, setPujaData] = useState(null);
@@ -98,19 +99,15 @@ const handlePhoneChange = (e) => {
     }
   
     try {
-      let formDataToSend = new FormData();
+      let formData = new FormData();
   
       Object.keys(formData).forEach((key) => {
-        formDataToSend.append(key, formData[key]);
+        formData.append(key, formData[key]);
       });
   
-      formDataToSend.set("type", "update_address"); // Set update type
+      formData.set("type", "update_address"); // Set update type
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/address",
-        formDataToSend,
-        { headers: header }
-      );
+       const response = await api.post("/address", formData); // Use the new axios instance
   
       // Check API response
       if (response.data.status === 0) {
@@ -161,10 +158,7 @@ const handlePhoneChange = (e) => {
     try {
       let formData = new FormData();
       formData.append("type", "address_list");
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/address",
-        formData,  {  headers: header, }
-      );
+      const response = await api.post("/address", formData);
       setPujaData(response.data.data);
     } catch (error) {
       console.error("Error fetching puja data:", error);
@@ -176,11 +170,7 @@ const handlePhoneChange = (e) => {
       let formData = new FormData();
       formData.append("type", "country_list");
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/address",
-        formData,
-        { headers: header }
-      );
+      const response = await api.post("/address", formData);
       const countryList = response.data.data?.country_list || [];
     const indiaOnly = countryList.filter(country => country.id === 101);
     
@@ -197,9 +187,7 @@ const handlePhoneChange = (e) => {
       let formData = new FormData();
       formData.append("type", "state_list");
       formData.append("country_id", country_id);
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/address",
-        formData, { headers: header } );
+      const response = await api.post("/address", formData);
       setStates(response.data.data?.states || []);
     } catch (error) {
       console.error("Error fetching states:", error);
@@ -211,9 +199,7 @@ const handlePhoneChange = (e) => {
       let formData = new FormData();
       formData.append("type", "city_list");
       formData.append("state_id", stateId);
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/address",
-        formData, { headers: header });     
+      const response = await api.post("/address", formData);   
       setCities(response.data.data?.cities || []);
     } catch (error) {
       console.error("Error fetching cities:", error);
@@ -231,14 +217,10 @@ const handlePhoneChange = (e) => {
     }
   
     try {
-      let formDataToSend = new FormData();
-      Object.keys(formData).forEach((key) => formDataToSend.append(key, formData[key]));
+      let formData = new FormData();
+      Object.keys(formData).forEach((key) => formData.append(key, formData[key]));
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/address",
-        formDataToSend,
-        { headers: header }
-      );
+       const response = await api.post("/address", formData);
   
       // Check API response
       if (response.data.status === 0) {

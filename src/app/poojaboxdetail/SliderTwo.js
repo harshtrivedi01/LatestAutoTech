@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import api from "../lib/axiosInstance";
 
 const SliderTwo = () => {
   const [pujaData, setPujaData] = useState([]);
@@ -35,13 +36,7 @@ const SliderTwo = () => {
       formData.append("type", "product_list");
       formData.append("category_id", "1");
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header
-        }
-      );
+      const response = await api.post("/products", formData);
 
       console.log("Puja API Response:", response.data);
       setPujaData(response.data.data.product_list); // Set the product list data properly
@@ -66,13 +61,7 @@ const SliderTwo = () => {
         formData.append("quantity", "1");
       }
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: header
-        }
-      );
+      const response = await api.post("/products", formData);
 
       console.log("Cart Action Response:", response.data);
 

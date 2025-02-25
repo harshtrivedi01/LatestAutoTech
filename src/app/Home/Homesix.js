@@ -38,12 +38,12 @@ const Homesix = () => {
           >
             <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg text-center">
               <div className="my-3 font-display w-full rounded-2xl">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black">
+                <h1 className="text-xl text-start sm:text-2xl md:text-2xl font-bold text-black">
                   Perform Puja with <br />
                   <span className="text-[#FD1818]">Amazing Offers</span>
                 </h1>
               </div>
-              <p className="mt-1.5 text-sm sm:text-base md:text-lg leading-6 text-black">
+              <p className="mt-1.5 text-start text-sm sm:text-base md:text-base leading-6 text-black">
                 Our experienced Pandits perform each ceremony with care and
                 devotion, ensuring a meaningful experience for you and your
                 loved ones. With our dedication to Sanatan Dharma and

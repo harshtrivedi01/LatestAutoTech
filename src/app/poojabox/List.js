@@ -22,22 +22,7 @@ export default function List({ pujaData }) {
       formData.append("product_id", id);
       formData.append("quantity", "1");
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-            "web_token": localStorage.getItem("authToken"),
-          },
-        }
-      );
+      const response = await api.post("/cart", formData);
 
       if (response.data.status === 0) {
         toast.error(response.data.message || "Action failed!");

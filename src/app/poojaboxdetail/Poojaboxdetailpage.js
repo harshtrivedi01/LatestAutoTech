@@ -12,6 +12,7 @@ import SliderOne from "./SliderOne";
 import SliderTwo from "./SliderTwo";
 import { Heart, HeartIcon } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import api from "../lib/axiosInstance";
 
 export default function Poojaboxdetailpage() {
   const { id } = useParams();
@@ -20,17 +21,6 @@ export default function Poojaboxdetailpage() {
   const [cartStatus, setCartStatus] = useState(); // Track cart status
   const [wishlistStatus, setWishlistStatus] = useState();
   const router = useRouter(); // Initialize router
-
-  const header = {
-    "language": "en",
-    "userId": "2",
-    "user_type": "user",
-    "Device_id": "upen",
-    "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-    "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-    "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-    "web_token": localStorage.getItem("authToken"),
-  }
 
   useEffect(() => {
     fetchPujaData();
@@ -42,13 +32,7 @@ export default function Poojaboxdetailpage() {
       formData.append("type", "product_detail");
       formData.append("product_id", id);
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header
-        }
-      );
+      const response = await api.post("/products", formData);
 
       console.log("Puja API Response:", response.data);
       setPujaData(response.data.data);
@@ -69,13 +53,7 @@ export default function Poojaboxdetailpage() {
       formData.append("product_id", id);
       formData.append("quantity", "1");
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: header
-        }
-      );
+      const response = await api.post("/cart", formData);
 
       console.log("Cart Action Response:", response.data);
 
@@ -99,13 +77,7 @@ export default function Poojaboxdetailpage() {
       formData.append("product_id", id);
       formData.append("quantity", "1");
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: header
-        }
-      );
+      const response = await api.post("/cart", formData);
 
       console.log("Buy Now Response:", response.data);
 
@@ -135,13 +107,7 @@ export default function Poojaboxdetailpage() {
       formData.append("type", wishlistStatus ? "add_to_wishlist" : "add_to_wishlist");
       formData.append("product_id", id);
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header
-        }
-      );
+      const response = await api.post("/products", formData);
 
       console.log("Wishlist Action Response:", response.data);
 
