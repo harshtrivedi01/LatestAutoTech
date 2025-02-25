@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import api from "../lib/axiosInstance";
 
 export default function List({ pujaData }) {
   // Track pujaData in state to allow updates

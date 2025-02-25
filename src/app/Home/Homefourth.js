@@ -5,6 +5,7 @@ import Heading from "../component/Headingname/Heading";
 import Viewmore from "../component/Viewmorebutton/Viewmore";
 import toast, { Toaster } from "react-hot-toast";
 import { HeartIcon } from "lucide-react";
+import api from "../lib/axiosInstance";
 
 export default function Homefourth({ pujaData }) {
   if (!pujaData || !pujaData.data || pujaData.data.product_list.length === 0) {
@@ -37,22 +38,7 @@ export default function Homefourth({ pujaData }) {
         formData.append("quantity", "1");
       }
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: {
-            "language": "en",
-            "userId": "2",
-            "user_type": "user",
-            "Device_id": "upen",
-            "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-            "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-            "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-            "web_token": localStorage.getItem("authToken"),
-          },
-        }
-      );
+      const response = await api.post("/cart", formData);
 
       console.log("Cart Action Response:", response.data);
 

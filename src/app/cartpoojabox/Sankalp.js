@@ -1,6 +1,7 @@
 import { FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import api from "../lib/axiosInstance";
 
 
 export default function Sankalp({ handleNextStep, list, updateCartQuantity, quantities, handleCartAction }) {

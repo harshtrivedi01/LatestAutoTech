@@ -4,6 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { EditIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import api from "../lib/axiosInstance";
 
 const Form = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -96,18 +97,7 @@ const Form = () => {
         formData.append("member_gotra[]", member.gotra);
       });
 
-      const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/puja", formData, {
-        headers: {
-          "language": "en",
-          "userId": "2",
-          "user_type": "user",
-          "Device_id": "upen",
-          "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-          "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-          "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-          "web_token": localStorage.getItem("authToken"),
-        },
-      });
+      const response = await api.post("/puja", formData);
 
       if (response.data.status === "1") {
         toast.success("Data saved successfully!");

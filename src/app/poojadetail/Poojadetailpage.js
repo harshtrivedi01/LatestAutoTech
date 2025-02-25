@@ -18,6 +18,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { Calendar, CalendarIcon } from "lucide-react";
+import api from "../lib/axiosInstance";
 
 const slides = [
   { image: "img", text: "Pooja Anytime Anywhere" },
@@ -48,43 +49,13 @@ export default function Poojadetailpage() {
   }, [autoPlay , slides.length]);
 
 
-  const [userLocation, setUserLocation] = useState({ latitude: "", longitude: "" });
-  const [ipAddress, setIpAddress] = useState("");
   const [pujaData, setPujaData] = useState([]);
-
-  // Fetch user's IP address
-  useEffect(() => {
-    const fetchIpAddress = async () => {
-      try {
-        const response = await axios.get("https://api64.ipify.org?format=json");
-        setIpAddress(response.data.ip);
-      } catch (error) {
-        console.error("Error fetching IP address:", error);
-      }
-    };
-
-    fetchIpAddress();
-  }, []);
-
-  // Fetch user's location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      (error) => console.error("Error fetching location:", error)
-    );
-  }, []);
 
   // Fetch Puja Data only after location & IP are available
   useEffect(() => {
-    if (userLocation.latitude && userLocation.longitude && ipAddress) {
       fetchPujaData();
-    }
-  }, [userLocation, ipAddress]);
+    
+  }, []);
 
   const fetchPujaData = async () => {
     try {
@@ -93,7 +64,7 @@ export default function Poojadetailpage() {
       formData.append("puja_id", id);
       // formData.append("page", "1"); // Ensure it's a string
   
-      const response = await api.post("/products", formData);
+      const response = await api.post("/landingpage", formData);
   
       console.log("Puja API Response:", response.data);
       setPujaData(response.data.data)
