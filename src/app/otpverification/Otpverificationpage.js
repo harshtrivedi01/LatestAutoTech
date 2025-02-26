@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOtp } from "./../reduxrtk/slice.js";
 import Image from "next/image.js";
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,7 @@ import { Toaster } from "react-hot-toast";
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const phone = useSelector((state) => state.auth.formData.phone);
+  // const phone = useSelector((state) => state.auth.formData.phone);
   const type = useSelector((state) => state.auth.otpdata.type);
   
   const [otp, setOtpValues] = useState(["", "", "", ""]);
@@ -27,6 +27,9 @@ export default function OtpVerificationPage() {
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [phoneError, setPhoneError] = useState("");
   const inputRefs = useRef([]);
+  const searchParams = useSearchParams();
+
+  const phone = searchParams.get("phone");
 
   const redirectPath = localStorage.getItem("redirectPath") ;
 
@@ -92,9 +95,12 @@ export default function OtpVerificationPage() {
         data
       );
   
-      if (response.data.status === "1") {
+      if (response.data.status == "1") {
         toast.success(response.data.message || "OTP verified successfully! Redirecting...");
-  
+        const id = response.data.data.id; // Assuming the API returns a token
+        if (id) {
+          localStorage.setItem("idToken", id); // ✅ Save token
+        }
         const token = response.data.data.web_token; // Assuming the API returns a token
         if (token) {
           localStorage.setItem("authToken", token); // ✅ Save token
@@ -135,9 +141,26 @@ export default function OtpVerificationPage() {
 
       const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
 
-      if (response.data.status == 1) {
-        toast.success(response.data.message||"OTP Resent Successfully!");
-      } else {
+      if (response.data.status == "1") {
+        toast.success(response.data.message || "OTP verified successfully!");
+  
+        const id = response.data.data.id; // Assuming the API returns a token
+        if (id) {
+          localStorage.setItem("idToken", id); // ✅ Save token
+        }
+        const token = response.data.data.web_token; // Assuming the API returns a token
+        if (token) {
+          localStorage.setItem("authToken", token); // ✅ Save token
+        }
+  
+        // ✅ Retrieve and use the stored redirect path (or fallback to "/")
+        const redirectPath = localStorage.getItem("redirectPath") || "/";
+        localStorage.removeItem("redirectPath"); // Clear it after use
+  
+        setTimeout(() => {
+          router.push(redirectPath);
+        }, 2000);
+      }else {
         toast.error(response.data.message || "Failed to resend OTP.");
       }
     } catch (error) {

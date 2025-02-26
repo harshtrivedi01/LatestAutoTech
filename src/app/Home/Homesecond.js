@@ -60,7 +60,7 @@ export default function Homesecond({ module_category_details }) {
       >
         <div className="absolute inset-0 z-0"></div>
         <div className="relative z-10">
-          <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]" />
+          <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]"    onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")} />
           <div className="my-3 font-display">
             <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
               {modulecategory}

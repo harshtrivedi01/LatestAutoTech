@@ -59,7 +59,7 @@ const Homefirst = ({ sliderList = [] }) => {
             <p className="text-4xl sm:text-4xl xs:text-3xl leading-tight" data-translate>{sliderList[index]?.banner_content ||"Pooja Anytime Anywhere"}</p>
             <br />
             <p className="text-lg sm:text-lg xs:text-sm text-center w-3/4" data-translate>
-             {sliderList[index]?.description || " Join the divine Kumbh experience and book Pooja online seamlessly with the  Punyasetu App – your gateway to spiritual bliss!"}
+             {sliderList[index]?.description || " Joinn the divine Kumbh experience and book Pooja online seamlessly with the  Punyasetu App – your gateway to spiritual bliss!"}
             </p>
             <br />
            <Link href={"/poojabooking"}>
