@@ -37,6 +37,9 @@ const PoojaPackages = ({ detail }) => {
             >
               {/* Package Header */}
               <div className="flex gap-2 justify-between top-card rounded-t-3xl p-2 rounded-lg items-center">
+                <div className="bg-orange-100 ">
+                  {}
+                </div>
   <div className="pack-img w-40 h-24 aspect-[4/3]">
     <img
       src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "https://www.punyasetu.com/assets/images/logo.png"}
