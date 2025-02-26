@@ -106,12 +106,12 @@ export default function Footersection() {
 	 <div className="flex mt-3 justify-end lg:gap-10 md:gap-10 gap-5">
 			
 			<div className="space-y-3">
-			<Link href={"/#"}>
+			<Link href={"/privacypolicy"}>
             <div className=" text-gray-900 ">Privacy Policy</div>
 			</Link>
 			</div>
 			<div className="space-y-3">
-			<Link href={"#"}>
+			<Link href={"/terms&conditions"}>
             <div className=" text-gray-900 ">Term & condition</div>
 			</Link>
 			</div>

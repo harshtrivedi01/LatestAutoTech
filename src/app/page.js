@@ -33,7 +33,7 @@ export default function Page() {
       console.error("Error fetching puja data:", error);
     }
   };
-console.log(pujaData?.data?.slider_list)
+
   return (
  <>
    <Homefirst sliderList={pujaData?.data?.slider_list} />

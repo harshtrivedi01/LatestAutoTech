@@ -1,12 +1,37 @@
+"use client"
+import { useEffect, useState } from "react";
 import Homeeight from "../Home/Homeeight";
 import Homesecond from "../Home/Homesecond";
 import Faq from "../poojadetail/Faq";
 import Cards from "./Cards";
 
 import List from "./List";
+import api from "../lib/axiosInstance";
+import Testimonials from "../component/Testimonials";
+
 
 
 export default function Servicepage () {
+  const [pujaData, setPujaData] = useState([]);
+
+  useEffect(() => {
+      fetchPujaData();   
+  }, []);
+
+  const fetchPujaData = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "service");
+  
+      const response = await api.post("/service", formData); // Use the new axios instance
+  
+      console.log("Puja API Response:", response.data);
+      setPujaData(response.data.data)
+     
+    } catch (error) {
+      console.error("Error fetching puja data:", error);
+    }
+  };
     return (
 <>
  <div className="bg-[#FFEEE2]">
@@ -23,11 +48,11 @@ export default function Servicepage () {
       
       </div>
     </div>
-    <List/>
+    <List module_category_details={pujaData?.module_category_details}/>
     <div className="bg-gray-100">
-    <Cards />
+    <Cards onlinepoojawork={pujaData?.onlinepoojawork} />
     </div>
-    <Homeeight/>
+   <Testimonials pujaData={pujaData?.testimonials}/>
 </>
     )
 }

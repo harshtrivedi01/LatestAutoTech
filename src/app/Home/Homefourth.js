@@ -16,18 +16,18 @@ export default function Homefourth({ pujaData }) {
       let formData = new FormData();
       const isCurrentlyInCart = cartStatus[index]; // Check current cart status
       const actionType = isCurrentlyInCart ? " add_to_cart" : "remove_cart";
-  
+
       formData.append("type", actionType);
       formData.append("product_id", id);
-  
+
       if (!isCurrentlyInCart) {
         formData.append("quantity", "1");
       }
-  
+
       const response = await api.post("/cart", formData);
-  
+
       console.log("Cart Action Response:", response.data);
-  
+
       if (response.data.status === 0) {
         toast.error(response.data.message || "Action failed!");
       } else {
@@ -37,7 +37,7 @@ export default function Homefourth({ pujaData }) {
           updatedStatus[index] = !isCurrentlyInCart;
           return updatedStatus;
         });
-  
+
         toast.success(
           response.data.message || (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
         );
@@ -47,7 +47,7 @@ export default function Homefourth({ pujaData }) {
       console.error("Error handling cart action:", error);
     }
   };
-  
+
 
   if (!pujaData || !pujaData.data || pujaData.data.product_list.length === 0) {
     return (
@@ -91,8 +91,8 @@ export default function Homefourth({ pujaData }) {
                         }
                         alt={puja.name || "product image"}
                         onError={(e) =>
-                          (e.target.src =
-                            "https://www.punyasetu.com/assets/images/logo.png")
+                        (e.target.src =
+                          "https://www.punyasetu.com/assets/images/logo.png")
                         }
                       />
                     </div>
@@ -124,51 +124,51 @@ export default function Homefourth({ pujaData }) {
                       </span>
                     </div>
                     <div className="mt-2 mb-5 flex items-center justify-between">
-                    
-                        <p>
-                          <span className="text-3xl font-bold text-slate-900">
-                            ₹{puja.discounted_price}
-                          </span>
-                          <span className="text-sm ms-2 text-slate-900 line-through">
-                            M.R.P ₹{puja.discounted_price}
-                          </span>
-                          <span className="text-red-700 text-lg ms-3">
-                            ({puja.discount}% off)
-                          </span>
-                        </p>
-                    
+
+                      <p>
+                        <span className="text-3xl font-bold text-slate-900">
+                          ₹{puja.discounted_price}
+                        </span>
+                        <span className="text-sm ms-2 text-slate-900 line-through">
+                          M.R.P ₹{puja.discounted_price}
+                        </span>
+                        <span className="text-red-700 text-lg ms-3">
+                          ({puja.discount}% off)
+                        </span>
+                      </p>
+
                     </div>
                     {puja.stock ? (
-                    <div className="flex justify-end">
-                      {puja.stock && (
-                      <button
-                      className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
-      ${cartStatus[index] ? "bg-green-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
+                      <div className="flex justify-end">
+                        {puja.stock && (
+                          <button
+                            className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
+      ${cartStatus[index] ? "bg-green-600 hover:bg-red-700" : "bg-orange-700 hover:bg-green-700"}
     `}
-                      onClick={() => handleCartAction(puja.id, index)}
-                    >
-                     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="mr-2 h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-      />
-    </svg>
-                      {!cartStatus[index] ? "Remove from Cart " : "Add to Cart"}
-                    </button>
-                    
-                      )}
-                    </div>
-                      ) : (
-                        <p className="text-red-600 font-bold  items-center justify-center rounded-md px-5 border shadow-xl py-2 text-center text-sm font-medium ">Out of Stock</p>
-                      )}
+                            onClick={() => handleCartAction(puja.id, index)}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="mr-2 h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                              />
+                            </svg>
+                            {!cartStatus[index] ? "Remove from Cart " : "Add to Cart"}
+                          </button>
+
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-red-600 font-bold  items-center justify-center rounded-md px-5 border shadow-xl py-2 text-center text-sm font-medium ">Out of Stock</p>
+                    )}
                   </div>
                 </div>
               </li>
