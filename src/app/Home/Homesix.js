@@ -1,62 +1,96 @@
-"use client";
-
 import React from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/css"; // Import Splide styles
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
 
-const Homesix = () => {
+// ✅ Fallback data in case `bottomslider_list` is empty
+const fallbackData = [
+  {
+    id: 1,
+    banner_content: "Experience the Best",
+    highlight_content: "Amazing Offers",
+    description:
+      "Get the best spiritual experience with our dedicated services. We ensure authenticity and devotion in every ritual.",
+    bottomslider:
+      "https://via.placeholder.com/1200x500.png?text=Default+Slider+1",
+  },
+  {
+    id: 2,
+    banner_content: "Perform Pooja With",
+    highlight_content: "Special Benefits",
+    description:
+      "Our experienced Pandits perform each ceremony with care and devotion, ensuring a meaningful experience for you and your loved ones.",
+    bottomslider:
+      "https://via.placeholder.com/1200x500.png?text=Default+Slider+2",
+  },
+  {
+    id: 3,
+    banner_content: "Sanatan Dharma Services",
+    highlight_content: "Exclusive Rituals",
+    description:
+      "Each ritual is done with dedication and purpose, making every ceremony special and impactful.",
+    bottomslider:
+      "https://via.placeholder.com/1200x500.png?text=Default+Slider+3",
+  },
+];
+
+const CustomSlider = ({ bottomslider_list = fallbackData }) => {
   return (
-    <Splide
-      options={{
-        type: "loop",
-        perPage: 3, // Default: 3 slides
-        focus: "center",
-        padding: { left: "2rem", right: "2rem" },
-        gap: "2rem",
-        height: "40rem",
-        arrows: false, // Disable default arrows (we use custom below)
-        pagination: false,
-        autoplay: true, // Auto slide for better UX
-        interval: 3000, // Slide every 3 seconds
-        breakpoints: {
-          1280: { perPage: 2, padding: { left: "1.5rem", right: "1.5rem" } }, // Laptops & Tablets
-          1024: { perPage: 1, padding: { left: "1rem", right: "1rem" } }, // Tablets
-          768: { perPage: 1, padding: { left: "0.5rem", right: "0.5rem" }, height: "30rem" }, // Mobile
-          480: { perPage: 1, padding: { left: "0rem", right: "0rem" }, height: "25rem" }, // Small Mobile
-        },
-      }}
-    >
-      {[...Array(4)].map((_, index) => (
-        <SplideSlide key={index}>
-          <div
-            className="slide-item rounded-[190px] p-4 flex flex-col justify-center items-center"
-            style={{
-              backgroundImage: `url('/Assests/Service/image.png')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+    <div className="w-full mx-auto py-10">
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true} // ✅ Centered slide
+        slidesPerView={"auto"} // ✅ Allows dynamic slide size
+        loop={true}
+        autoplay={{ delay: 5000 }}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 150,
+          modifier: 1.2,
+          slideShadows: false,
+        }}
+      
+        modules={[EffectCoverflow, Pagination, Autoplay]}
+        className="mySwiper"
+      >
+        {bottomslider_list.map((item, index) => (
+          <SwiperSlide
+            key={index}
+            className="flex items-center justify-center"
+            style={{ width: "60%", maxWidth: "900px" }} // ✅ Make center slide bigger
           >
-            <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg text-center">
-              <div className="my-3 font-display w-full rounded-2xl">
-                <h1 className="text-xl text-start sm:text-2xl md:text-2xl font-bold text-black">
-                  Perform Puja with <br />
-                  <span className="text-[#FD1818]">Amazing Offers</span>
-                </h1>
+            <div
+              className="relative flex flex-col items-center justify-center 
+                         h-[250px] sm:h-[300px] md:h-[350px] 
+                         rounded-[30px] sm:rounded-[40px] md:rounded-[50px] 
+                         w-full bg-white shadow-lg overflow-hidden"
+              style={{
+                backgroundImage: `url(${item.bottomslider})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl xl:max-w-3xl text-center p-4 sm:p-6 md:p-5 rounded-lg  bg-opacity-80">
+                <div className="my-2 font-display w-full rounded-2xl">
+                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-black text-start">
+                    {item.banner_content} <br />
+                    <span className="text-[#FD1818]">{item.highlight_content}</span>
+                  </h1>
+                </div>
+                <p className="mt-1.5 lg:w-2/3 text-start text-xs sm:text-sm md:text-base  lg:text-lg leading-6 text-black">
+                {item.description.split(" ").slice(0, 50).join(" ") + (item.description.split(" ").length > 50 ? "..." : "")}
+                </p>
               </div>
-              <p className="mt-1.5 text-start text-sm sm:text-base md:text-base leading-6 text-black">
-                Our experienced Pandits perform each ceremony with care and
-                devotion, ensuring a meaningful experience for you and your
-                loved ones. With our dedication to Sanatan Dharma and
-                authenticity, we believe that each ritual should be done with
-                devotion and purpose, making every ceremony special and
-                impactful.
-              </p>
             </div>
-          </div>
-        </SplideSlide>
-      ))}
-    </Splide>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 
-export default Homesix;
+export default CustomSlider;

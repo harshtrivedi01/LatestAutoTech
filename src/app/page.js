@@ -41,7 +41,7 @@ console.log(pujaData?.data?.slider_list)
    <Homethird  pujaData={pujaData}/>
    <Homefourth  pujaData={pujaData}/>
    <Homefive  pujaData={pujaData}/>
-   <Homesix  pujaData={pujaData}/>
+   <Homesix  pujaData={pujaData} bottomslider_list={pujaData?.data?.bottomslider_list} />
    <Homeeight  pujaData={pujaData}/>
    <Homeseven  pujaData={pujaData}/>
   

@@ -45,9 +45,18 @@ export default function Homefive({pujaData}) {
             {puja.name || "Puja Title"}
           </h5>
           <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
-          <p className="mb-3 font-normal text-gray-700 text-xl text-gray-400 flex-grow">
-            {puja.description || "Puja description goes here."}
-          </p>
+          <p className="mb- font-bold text-black text-lg  flex-grow">
+  {puja.description
+    ? puja.description.split(" ").slice(0, 12).join(" ") + (puja.description.split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+
+<p className="mb-3 font-normal text-gray-700 text-base flex-grow">
+  {puja.short_description
+    ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+
 
           {/* Button */}
           <Link href={`poojadetail/${puja.id}`}>

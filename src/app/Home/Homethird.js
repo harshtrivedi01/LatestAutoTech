@@ -49,20 +49,19 @@ export default function Homethird({pujaData}) {
                         >
                           <div className="absolute inset-0 " />
                           <h3 className="z-10 text-2xl font-medium  absolute top-0 left-0 p-4 xs:text-2xl md:text-2xl text-[#894112]">
-                            Festival List & Details
+                         { pujaData?.data?.aboutus_imagehed1}
                           </h3>{" "}
                           <br />
                           <h3 className="z-10 text-lg  text-black absolute top-20 left-0 p-4 xs:text-lg md:text-lg leading-10 text-light">
-                            Stay informed about upcoming spiritual and cultural
-                            festivals.
+                    {      pujaData?.data?.aboutus_imagedes1}
                           </h3>
                           <div>
                             <button className="p-3 mt-4  text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
                               <FaChevronRight className="text-[#DD531B]" />
                             </button>
                           </div>
-                          <Image
-                            src={Kalash}
+                          <img
+                            src={pujaData?.data?.aboutus_images.image1}
                             alt=""
                             className="absolute right-0 h-20 w-20 bottom-0"
                           />
@@ -75,7 +74,7 @@ export default function Homethird({pujaData}) {
                           className="group relative flex flex-col h-[226.94px] overflow-hidden rounded-2xl px-4 pb-4 pt-40"
                         >
                           <img
-                            src="/images/about (2).jpg"
+                            src={pujaData?.data?.aboutus_images.image2}
                             alt=""
                             className="absolute inset-2 h-full w-full rounded-2xl   group-hover:scale-105 transition-transform duration-500 ease-in-out"
                           />
@@ -94,30 +93,29 @@ export default function Homethird({pujaData}) {
                           className="absolute top-20 left-10 h-14 w-16 top-0"
                         />
                         <h3 className="z-10 text-xl text-black font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
-                          Mantra & Vecharan-{" "}
+                        {pujaData?.data?.aboutus_imagehed2}-{" "}
                           <span className="font-normal">
-                            Listen to devotional bhajans for a soulful
-                            experience.
+                          {pujaData?.data?.aboutus_imagedes2}
                           </span>
                         </h3>{" "}
                         <br />
                         <br />
                         <h3 className="z-10 text-xl text-black font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
-                          Granth Reading –{" "}
+                        {pujaData?.data?.aboutus_imagehed3} –{" "}
                           <span className="font-normal">
-                            Access and read sacred scriptures digitally.
+                          {pujaData?.data?.aboutus_imagedes3}
                           </span>
                         </h3>{" "}
                         <br />
                     
                         <a
-  href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan"
+  href={pujaData?.data?.aboutus_link}
   target="_blank"
   rel="noopener noreferrer"
   className="z-10"
 >
   <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
-    Download App
+  {pujaData?.data?.aboutus_bottom_name}
   </button>
 </a>
 
@@ -135,8 +133,8 @@ export default function Homethird({pujaData}) {
                         href
                         className="group relative flex flex-col overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
                       >
-                        <img
-                          src="/images/about.png"
+                         <img
+                             src={pujaData?.data?.aboutus_images.image4}
                           alt=""
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"
                         />
