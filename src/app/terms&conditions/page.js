@@ -27,15 +27,10 @@ const TermsandConditions = () => {
 
   return (
     <div>
-      <div className="bg-[#fff6eb]">
+      <div className="bg-[#FFF8F5]">
         <div className=" p-60 overflow-hidden">
           <div className="container">
-            <h3
-              className="font-[500] text-5xl text-[#6B3B03]"
-              style={{ fontFamily: '"Yellowtail", cursive' }}
-            >
-           Terms & Condition
-            </h3>
+          <h2 className="text-2xl font-bold mb-4 text-start">Terms & Conditions</h2>
 
           <div className="py-12"   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData) }}>
 

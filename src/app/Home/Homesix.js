@@ -82,7 +82,7 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
                   </h1>
                 </div>
                 <p className="mt-1.5 lg:w-2/3 text-start text-xs sm:text-sm md:text-base  lg:text-lg leading-6 text-black">
-                {item.description.split(" ").slice(0, 50).join(" ") + (item.description.split(" ").length > 50 ? "..." : "")}
+                {item.description.split(" ").slice(0, 30).join(" ") + (item.description.split(" ").length > 30 ? "..." : "")}
                 </p>
               </div>
             </div>

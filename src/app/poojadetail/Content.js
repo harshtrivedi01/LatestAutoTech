@@ -7,7 +7,7 @@ import React from 'react';
 
         <h2 className='title text-black'>About Pooja</h2>
         <p className=''>
-       {detail?.puja_detail?.puja_description}
+       {detail?.puja_description}
   
         </p>
         {/* <p>

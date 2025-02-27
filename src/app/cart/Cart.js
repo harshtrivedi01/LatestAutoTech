@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Sankalp from "./Sankalp";
 import AuthGuard from "../component/AuthGuard";
 import Homeeight from "../Home/Homeeight";
+import Testimonials from "../component/Testimonials";
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(2);
@@ -162,7 +163,8 @@ const Cart = () => {
         )}
       </div>
     </div>
-    <Homeeight/>
+    {/* <Homeeight/> */}
+   
     </AuthGuard>
   );
 };

@@ -1,15 +1,14 @@
 "use client";
 import Image from "next/image";
-import DOMPurify from 'dompurify';
+
 import Anahata from "../../../public/Assests/Service/Anahata.png";
 import Heading from "../component/Headingname/Heading";
-import Kalash from "../../../public/Assests/Service/Kalash.png";
-import music from "../../../public/Assests/Service/music.png";
+import Kalash from "./../../../public/Assests/Service/Kalash.png";
+import music from "./../../../public/Assests/Service/music.png";
 
 import { FaChevronRight } from "react-icons/fa";
-import Link from "next/link";
 
-export default function Homethird({pujaData}) {
+export default function Aboutsection() {
   return (
     <div className="relative w-full min-h-screen bg-white">
       <div
@@ -27,9 +26,16 @@ export default function Homethird({pujaData}) {
             <Heading text="About" color="white" />
           </div>
 
-          <p className="text-center text-white text-[20px] md:text-2xl px-4" 
-   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData?.data?.aboutus_description) }}>
-</p>
+          <p className=" text-center text-white text-[20px] md:text-2xl">
+            At Punyasetu, we offer a range of spiritual services designed to
+            guide you on your journey to inner peace, enlightenment, and
+            personal transformation. Whether you seek divine wisdom, emotional
+            healing, or a deeper connection with your higher self, our expert
+            practitioners provide personalized guidance to help you navigate
+            life’s challenges with clarity and purpose. Through sacred rituals,
+            meditative practices, and holistic healing, we create a space for
+            spiritual growth and self-discovery.
+          </p>
         </div>
         <br />
         <br />
@@ -44,102 +50,91 @@ export default function Homethird({pujaData}) {
                     <div className="gap-5">
                       <div className="grid ">
                         <a
-                          href={""}
+                          href
                           className="group relative flex flex-col overflow-hidden rounded-2xl p-8 pt-40 bg-white"
                         >
                           <div className="absolute inset-0 " />
                           <h3 className="z-10 text-2xl font-medium  absolute top-0 left-0 p-4 xs:text-2xl md:text-2xl text-[#894112]">
-                         { pujaData?.data?.aboutus_imagehed1}
+                            Festival List & Details
                           </h3>{" "}
                           <br />
                           <h3 className="z-10 text-lg  text-black absolute top-20 left-0 p-4 xs:text-lg md:text-lg leading-10 text-light">
-                    {      pujaData?.data?.aboutus_imagedes1}
+                            Stay informed about upcoming spiritual and cultural
+                            festivals.
                           </h3>
                           <div>
                             <button className="p-3 mt-4  text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
                               <FaChevronRight className="text-[#DD531B]" />
                             </button>
                           </div>
-                          <img
-                            src={pujaData?.data?.aboutus_images.image1}
+                          <Image
+                            src={Kalash}
                             alt=""
                             className="absolute right-0 h-20 w-20 bottom-0"
-                            onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                           />
                         </a>
                       </div>
 
                       <div className="grid mt-5">
                         <a
-                        href={""}
+                          href
                           className="group relative flex flex-col h-[226.94px] overflow-hidden rounded-2xl px-4 pb-4 pt-40"
                         >
                           <img
-                            src={pujaData?.data?.aboutus_images.image2}
+                            src="/images/about (2).jpg"
                             alt=""
                             className="absolute inset-2 h-full w-full rounded-2xl   group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                            onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                           />
                         </a>
                       </div>
                     </div>
                     <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">
-                      <div
-                       
-                        className=" relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
+                      <a
+                        href
+                        className="group relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
                       >
                         <div className="absolute inset-0 " />
                         <Image
                           src={music}
                           alt=""
                           className="absolute top-20 left-10 h-14 w-16 top-0"
-                          onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                         />
-                        <h3 className="z-10 text-xl text-black font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
-                        {pujaData?.data?.aboutus_imagehed2}-{" "}
+                        <h3 className="z-10 text-2xl font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
+                          Mantra & Vecharan-{" "}
                           <span className="font-normal">
-                          {pujaData?.data?.aboutus_imagedes2}
+                            Listen to devotional bhajans for a soulful
+                            experience.
                           </span>
                         </h3>{" "}
                         <br />
                         <br />
-                        <h3 className="z-10 text-xl text-black font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
-                        {pujaData?.data?.aboutus_imagehed3} –{" "}
+                        <h3 className="z-10 text-2xl font-semibold absolute top-72 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
+                          Granth Reading –{" "}
                           <span className="font-normal">
-                          {pujaData?.data?.aboutus_imagedes3}
+                            Access and read sacred scriptures digitally.
                           </span>
                         </h3>{" "}
                         <br />
-                    
-                        <a
-  href={pujaData?.data?.aboutus_link}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="z-10"
->
-  <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
-  {pujaData?.data?.aboutus_bottom_name}
-  </button>
-</a>
-
-                     
+                        <div>
+                          <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
+                            Download App
+                          </button>
+                        </div>
                         <Image
                           src={Anahata}
                           alt=""
                           className="absolute right-10 h-44 w-44 top-0"
-                          onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
                         />
-                      </div>
+                      </a>
                     </div>
 
                     <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">
                       <a
-href={""}
+                        href
                         className="group relative flex flex-col overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
                       >
-                         <img
-                             src={pujaData?.data?.aboutus_images.image4}
-                             onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                        <img
+                          src="/images/about.png"
                           alt=""
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"
                         />

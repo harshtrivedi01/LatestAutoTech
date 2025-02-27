@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Heading from "../component/Headingname/Heading";
 import Viewmore from "../component/Viewmorebutton/Viewmore";
@@ -10,6 +10,11 @@ export default function Homefourth({ pujaData }) {
   const [cartStatus, setCartStatus] = useState(
     pujaData?.data?.product_list.map((puja) => puja.cart_status) || []
   );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("authToken"));
+  }, []);
 
   const handleCartAction = async (id, index) => {
     try {
@@ -140,7 +145,7 @@ export default function Homefourth({ pujaData }) {
                     </div>
                     {puja.stock ? (
                       <div className="flex justify-end">
-                        {puja.stock && (
+                        {isLoggedIn ? (
                           <button
                             className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
       ${cartStatus[index] ? "bg-green-600 hover:bg-red-700" : "bg-orange-700 hover:bg-green-700"}
@@ -164,6 +169,24 @@ export default function Homefourth({ pujaData }) {
                             {!cartStatus[index] ? "Remove from Cart " : "Add to Cart"}
                           </button>
 
+                        )
+                        : (
+                         <a href="/login">
+                           <button className="px-10 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white flex gap-2 shadow-lg"> <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="mr-2 h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                              />
+                            </svg>Add to Cart</button>
+                         </a>
                         )}
                       </div>
                     ) : (

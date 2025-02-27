@@ -4,6 +4,7 @@
 import { MdArrowOutward } from "react-icons/md";
 import Homethird from "../Home/Homethird";
 import Homeeight from "../Home/Homeeight";
+import Aboutsection from "./Aboutsection";
 export default function Aboutpage() {
   return (
     <>
@@ -56,8 +57,8 @@ export default function Aboutpage() {
 
         </div>
       </section>
-      <Homethird />
-      <Homeeight />
+  
+     
     </>
   )
 }

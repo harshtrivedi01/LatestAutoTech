@@ -1,10 +1,12 @@
 import React from 'react';
 import Cart from './Cart';
+import Testimonials from '../component/Testimonials';
 
 const Page = () => {
   return (
-    <div className="p-6 md:px-20">
+    <div className="py-6 ">
       <Cart />
+       <Testimonials/>
     </div>
   );
 };

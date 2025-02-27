@@ -229,7 +229,7 @@ export default function Language() {
 
   return (
     <div className="flex items-center gap- bg-white px-2 py-2">
-      <TbWorld className="text-xl text-gray-700" />
+      <TbWorld className="text-2xl text-gray-800" />
       <select
         value={selectedLanguage?.code || "en"} // Prevent undefined error
         onChange={handleLanguageChange}
@@ -238,7 +238,7 @@ export default function Language() {
       >
         {languages.map((lang) => (
           <option key={lang.id} value={lang.code} className="text-black p-4 h-40">
-            {lang.language}
+            {lang.language || "en"}
           </option>
         ))}
       </select>

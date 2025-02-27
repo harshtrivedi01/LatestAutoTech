@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import api from "../lib/axiosInstance";
 import DOMPurify from 'dompurify';
 
-export default function Faq() {
+export default function FaqPage() {
   const [pujaData, setPujaData] = useState([]);
 
   useEffect(() => {
@@ -33,9 +33,9 @@ export default function Faq() {
   };
 
   return (
-    <div className="faq p-10 bg-[#FFF8F5] ">
+    <div className="faq p-10 bg-[#FFF8F5] h-screen">
       <div className="container">
-      <div className=" mb-4 overflow-hidden">
+      <div className=" p-60 overflow-hidden">
         <div className="container">
           <div className="items-center gap-10">
             <div>

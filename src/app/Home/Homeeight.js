@@ -27,7 +27,7 @@ const Homeeight = ({ pujaData, detail }) => {
 
 
   return (
-    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA] " : "bg-white"} p-6 transition-all  duration-300`}>
+    <div className={`py-10 ${isSpecialPage ? "bg-[#FFDCC0] " : "bg-white"} p-6 transition-all  duration-300`}>
   
       <div className="mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">

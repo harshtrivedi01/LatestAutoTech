@@ -12,6 +12,8 @@ import { LanguageProvider } from "../context/LanguageContext.js";
 import "./lib/i18n";
 import I18nProvider from "./providers";
 import { FaArrowUp } from "react-icons/fa"; // Import back-to-top icon
+import LoadingScreen from "./component/LoadingScreen";
+import { setLoadingFunction } from "./utils/loadingState";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +33,11 @@ const roboto = Roboto({
 
 export default function RootLayout({ children }) {
   const [showButton, setShowButton] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoadingFunction(setLoading);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +74,10 @@ export default function RootLayout({ children }) {
             <ToastContainer position="top-right" autoClose={5000} />
             <NavbarWrapper data-translate />
 
-            <I18nProvider>{children}</I18nProvider>
+            <I18nProvider>
+            {loading && <LoadingScreen />}
+              {children}
+              </I18nProvider>
             <FooterWrapper />
 
             {/* 🔹 Back to Top Button */}

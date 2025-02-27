@@ -56,13 +56,13 @@ const Homefirst = ({ sliderList = [] }) => {
 
           
           <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-[596px] sm:h-[450px] xs:h-[350px] flex flex-col items-center justify-center">
-            <p className="text-4xl sm:text-4xl xs:text-3xl leading-tight" data-translate>{sliderList[index]?.banner_content ||"Pooja Anytime Anywhere"}</p>
+            <p className="text-4xl sm:text-4xl xs:text-3xl leading-tight px-3" data-translate>{sliderList[index]?.banner_content ||"Pooja Anytime Anywhere"}</p>
             <br />
             <p className="text-lg sm:text-lg xs:text-sm text-center w-3/4" data-translate>
              {sliderList[index]?.description || " Joinn the divine Kumbh experience and book Pooja online seamlessly with the  Punyasetu App – your gateway to spiritual bliss!"}
             </p>
             <br />
-           <Link href={"/poojabooking"}>
+           <a href={"/poojabooking"}>
            <button
               type="button"
               data-translate
@@ -71,7 +71,7 @@ const Homefirst = ({ sliderList = [] }) => {
             >
               {sliderList[index]?.button_name || 'Book Now'}
             </button>
-           </Link>
+           </a>
           </div>
         </motion.div>
       </AnimatePresence>

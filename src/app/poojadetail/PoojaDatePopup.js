@@ -29,7 +29,7 @@ const PoojaDatePopup = ({ onClose, pujaData ,date}) => {
   console.log(pujaData,"te")
 
   // Extract available dates
-  const availableDates = date?.puja_detail?.dates || [];
+  const availableDates = date?.dates || [];
   const sortedDates = [...availableDates]
     .map(date => new Date(date))
     .sort((a, b) => a - b);

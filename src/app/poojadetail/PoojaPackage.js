@@ -7,8 +7,8 @@ const PoojaPackages = ({ detail }) => {
 
   // Set the first package as default selected when component mounts
   useEffect(() => {
-    if (detail?.puja_detail?.packages?.length > 0) {
-      setSelectedPackage(detail.puja_detail.packages[0]);
+    if (detail?.packages?.length > 0) {
+      setSelectedPackage(detail?.packages[0]);
     }
   }, [detail]);
 
@@ -22,7 +22,7 @@ const PoojaPackages = ({ detail }) => {
      <div className="container px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 mx-auto">
         <h1 className="title text-black my-5">Select Pooja Package</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
-          {detail?.puja_detail?.packages?.map((pkg) => {
+          {detail.packages?.map((pkg) => {
             const isHighlighted = selectedPackage?.id === pkg.id;
 
             return (

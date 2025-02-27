@@ -150,7 +150,7 @@ export default function LoginPage() {
           </div>
           <p className="font-bold text-4xl">Sign in</p>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <p className="font-semibold text-[15px] text-center py-4">
+            <p className="font-semibol text-[15px] text-center py-4">
               Access all Punyasetu services, explore 1000+ devotional <br />
               songs, and discover a variety of spiritual offerings.
             </p>
@@ -165,6 +165,30 @@ export default function LoginPage() {
               maxLength={10}
             />
             {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
+            <div className="flex space-x-1  text-sm">
+              <p className="text-center mt-4 text-sm text-gray-700">
+                By proceeding you agree  to the<br />
+                <a
+                  href="terms&conditions"
+                  className="text-[#FA8128] hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}  Terms & Conditions {" "}
+                </a>
+                {" "}and{" "}
+
+                <a
+                  href="privacypolicy"
+                  className="text-[#FA8128] hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}Privacy Policy{" "}
+                </a>
+                and  of PUNYASETU {" "}
+              </p>
+            </div>
             <div className="flex flex-col space-y-5 p-5 w-full">
               <button
                 className={`w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 
@@ -177,6 +201,7 @@ export default function LoginPage() {
             </div>
           </form>
           <div className="flex space-x-1 text-sm">
+            
             <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">
               <IoArrowBackOutline className="text-lg item-end" />
               Back To{" "}

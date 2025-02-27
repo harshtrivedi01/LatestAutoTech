@@ -33,22 +33,22 @@ export default function List({ pujaData }) {
                     {puja.name || "Puja Title"}
                   </h5>
                   <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
-                  <p className="mb-3 font-bold text-xl text-gray-400 flex-grow">
+                  <p className="mb-1 font-bold text-xl text-black flex-grow">
                     {puja.sub_title || "Puja description goes here."}
                   </p>
-                  <p className="mb-3 text-gray-400 text-lg flex-grow">
+                  <p className="mb-1 text-gray-700 text-base flex-grow">
                     {puja.short_description || "Puja description goes here."}
                   </p>
 
                   {/* Date Section */}
-                  <p className="my-2 w-1/2 text-lg flex gap-2 items-center">
-                    <CalendarIcon className="text-yellow-600" /> {puja.date}
+                  <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">
+                    <CalendarIcon className="text-yellow-600" /> {puja.date || "Comming Soon"}
                   </p>
 
                   {/* Button at Bottom */}
                   <div className="mt-auto">
                     <Link href={`poojadetail/${puja.id}`}>
-                      <button className="text-center block w-full uppercase p-3 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
+                      <button className="text-center block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
                         Participate
                       </button>
                     </Link>
