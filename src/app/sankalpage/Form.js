@@ -4,6 +4,8 @@ import { Toaster, toast } from "react-hot-toast";
 import { FaChevronDown, FaChevronUp, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import api from "../lib/axiosInstance";
+import { useRouter } from "next/navigation";
+
 
 const Form = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -20,7 +22,11 @@ const Form = () => {
   const memberLimit = parseInt(localStorage.getItem("membernumber") || "1", 10);
   const [members, setMembers] = useState([]);
   const [dontKnowMemberGotra, setDontKnowMemberGotra] = useState([]);
+const router = useRouter();
+const packagedetail = JSON.parse(localStorage.getItem("pujaBookingData") || "{}");
 
+
+console.log(packagedetail.amount)
   useEffect(() => {
     if (memberLimit > 0) {
       setMembers([]);
@@ -56,65 +62,93 @@ const Form = () => {
   const validateForm = () => {
     let newErrors = {};
     let isValid = true;
-
+  
+    // Validate default fields
     Object.keys(defaultFields).forEach((key) => {
       if (!defaultFields[key]) {
         newErrors[key] = "This field is required";
         isValid = false;
       }
     });
-
+  
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (defaultFields.email && !emailRegex.test(defaultFields.email)) {
+      newErrors.email = "Invalid email format";
+      isValid = false;
+    }
+  
+    // Validate members
     let memberErrors = members.map((member) => {
       let errorObj = {};
       if (!member.name) errorObj.name = "Required";
-      if (!member.gotra) errorObj.gotra = "Required";
+      if (!member.gotra && !dontKnowMemberGotra[members.indexOf(member)]) {
+        errorObj.gotra = "Required";
+      }
       return errorObj;
     });
-
+  
     if (memberErrors.some((err) => Object.keys(err).length > 0)) {
       newErrors.members = memberErrors;
       isValid = false;
     }
-
+  
     setErrors(newErrors);
     return isValid;
   };
+  
 
   const submitForm = async () => {
     if (!validateForm()) {
       toast.error("Please fill in all required fields!");
       return;
     }
-
+  
     try {
-      let formData = new FormData();
-      formData.append("type", "store_pooja_member");
-      formData.append("booking_id", localStorage.getItem("bookingID"));
-      formData.append("name", defaultFields.name);
-      formData.append("father_name", defaultFields.father_name);
-      formData.append("gotra", defaultFields.gotra);
-      formData.append("email", defaultFields.email);
-      formData.append("address", defaultFields.address);
-
-      members.forEach((member) => {
-        formData.append("member_name[]", member.name);
-        formData.append("member_father_name[]", member.fatherName || "");
-        formData.append("member_gotra[]", member.gotra);
-      });
-
-      const response = await api.post("/puja", formData);
+      // Save form data locally
+      const formData = {
+        type: "store_pooja_member",
+        booking_id: localStorage.getItem("bookingID"),
+        name: defaultFields.name,
+        father_name: defaultFields.father_name,
+        gotra: defaultFields.gotra,
+        email: defaultFields.email,
+        address: defaultFields.address,
+        members: members.map((member) => ({
+          member_name: member.name,
+          member_father_name: member.fatherName || "",
+          member_gotra: member.gotra,
+        })),
+      };
+  
+      localStorage.setItem("poojaFormData", JSON.stringify(formData));
+      console.log("Form data saved locally:", formData);
+  
+      // Create FormData object for the orders API
+      let orderFormData = new FormData();
+      orderFormData.append("type", "cashfree_payment_order");
+      orderFormData.append("order_type", "pooja");
+      orderFormData.append("amount", Math.floor(packagedetail.amount)); // Ensure the amount is filled before API call
+      orderFormData.append("currency", "INR");
+  
+      // Call the orders API
+      const response = await api.post("/orders", orderFormData);
+const orderId = response.data.data.order_id; // Extract order_id
+localStorage.setItem("order_id", orderId); // Store only the order_id
+console.log("Order ID:", orderId); // Log it properly
 
       if (response.data.status === "1") {
-        toast.success("Data saved successfully!");
-        handleNextStep();
+        toast.success("Order placed successfully!");
+      
       } else {
         toast.error(response.data.message || "Something went wrong!");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Failed to submit data!");
+      console.error("Error submitting order:", error);
+      toast.error("Failed to place order!");
     }
   };
+  
 
   const fieldPlaceholders = {
     name: "First Member Name",
@@ -124,6 +158,13 @@ const Form = () => {
     address: "Enter your Full Address",
   };
 
+  const handleArrowClick = () => {
+    if (window.history.length > 2) {
+      router.back(); // Correct way to go back
+    } else {
+      router.push("/"); // Correct way to navigate
+    }
+  };
   return (
     <div className="p-6 min-h-screen">
       <Toaster position="top-right" reverseOrder={false} />
@@ -157,10 +198,13 @@ const Form = () => {
           }} className="mr-2" />
           <label className="text-sm">I don’t know my Gotra</label>
         </div>
-
-        <h2 className="text-lg font-semibold text-gray-800 mt-6">Add Member</h2>
+      {members > "2" && (
+          <h2 className="text-lg font-semibold text-gray-800 mt-6">Add Member</h2>
+      )}
+      
         {members.map((member, index) => (
           <div key={index} className=" border-b pb-2 grid grid-cols-1 md:grid-cols-3 items-center gap-4 mt-4">
+             
             <input
               type="text"
               placeholder="Member Name"
@@ -188,8 +232,7 @@ const Form = () => {
                 </div>
           </div>
 
-
-        
+       
             <button onClick={() => removeMember(index)} className="text-red-400">
               <FaTrash />
             </button>
@@ -211,6 +254,7 @@ const Form = () => {
   </button>
   <button
     className="mt-6 sm:mt-6 sm:ms-4 px-4 py-2 bg-[#BA1A1A] w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-red-500 transition"
+    onClick={handleArrowClick}
   >
     Cancel
   </button>

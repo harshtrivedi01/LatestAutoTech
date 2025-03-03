@@ -14,7 +14,7 @@ api.interceptors.request.use(
     const formData = JSON.parse(localStorage.getItem("formData") || "{}");
 
     config.headers["language"] = selectedLanguage;
-    config.headers["userId"] = userId;
+    config.headers["user_id"] = userId;
     config.headers["user_type"] = userId ? "user" : "guest"; // Set user_type dynamically
     config.headers["Device_id"] = "upen";
     config.headers["Longitude"] = formData.Longitude;

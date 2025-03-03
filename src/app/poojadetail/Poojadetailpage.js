@@ -65,13 +65,15 @@ export default function Poojadetailpage() {
   
       const response = await api.post("/puja", formData);
   
-      console.log("Puja API Response:", response.data);
+      localStorage.setItem("productdeatil", JSON.stringify(response.data.data));
+
       setPujaData(response.data.data)
      
     } catch (error) {
       console.error("Error fetching puja data:", error);
     }
   };
+
 
 
   const [showButton, setShowButton] = useState(true);
@@ -238,7 +240,7 @@ export default function Poojadetailpage() {
              <div>
      
         <p className="my-2 w-1/2 text-lg text-gray-400 flex gap-2 items-center">
-         <CalendarIcon className="text-yellow-600"/> {pujaData?.dates}
+         <CalendarIcon className="text-yellow-600"/> {pujaData?.dates || "Comming Soon"}
         </p>
      
     </div>

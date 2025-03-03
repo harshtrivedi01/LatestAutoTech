@@ -36,6 +36,18 @@ export default function RootLayout({ children }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+
+  useEffect(() => {
     setLoadingFunction(setLoading);
   }, []);
 
