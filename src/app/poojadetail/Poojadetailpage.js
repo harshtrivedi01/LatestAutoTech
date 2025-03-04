@@ -240,7 +240,7 @@ export default function Poojadetailpage() {
              <div>
      
         <p className="my-2 w-1/2 text-lg text-gray-400 flex gap-2 items-center">
-         <CalendarIcon className="text-yellow-600"/> {pujaData?.dates || "Comming Soon"}
+         <CalendarIcon className="text-yellow-600"/> {pujaData?.dates || "Comming Soon"} Comming Soon
         </p>
      
     </div>

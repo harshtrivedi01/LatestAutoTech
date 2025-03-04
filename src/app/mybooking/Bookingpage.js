@@ -231,9 +231,9 @@ const Bookingpage = () => {
               <p className="text-red-600 font-bold text-md">
                 {booking.package_name || "N/A"}
               </p>
-              <p className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
+              {/* <p className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
                 Book Again
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="flex justify-between items-center mt-3 gap-3">

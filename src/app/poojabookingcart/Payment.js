@@ -42,7 +42,10 @@ const Payment = () => {
       const cashfree = await initializeSDK();
       await cashfree.checkout({
         paymentSessionId: localStorage.getItem("payment_session_id"),
-        redirectTarget: "_self",
+        redirectTarget: "_modal",
+        // redirectUrl: "https://punyasetu.live/generic/api/payment"
+      }).then((pgResponse) => {
+console.log("pgResponse")
       });
     } catch (error) {
       console.error("Cashfree Payment Error:", error);

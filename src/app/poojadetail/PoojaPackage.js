@@ -87,7 +87,7 @@ const PoojaPackages = ({ detail }) => {
                           {displayedText}
                           {shouldTruncate && (
                             <button
-                              className="text-black underline "
+                              className="text-black text-sm underline "
                               onClick={(e) => {
                                 e.stopPropagation(); // Prevent accidental package selection
                                 toggleReadMore(pkg.id);

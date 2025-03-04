@@ -63,11 +63,19 @@ console.log(packagedetail.amount)
     let newErrors = {};
     let isValid = true;
   
+    // Name validation (Only letters, no numbers or special characters)
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    
     // Validate default fields
     Object.keys(defaultFields).forEach((key) => {
       if (!defaultFields[key]) {
         newErrors[key] = "This field is required";
         isValid = false;
+      } else if (key === "name" || key === "father_name") {
+        if (!nameRegex.test(defaultFields[key])) {
+          newErrors[key] = "Only alphabets are allowed";
+          isValid = false;
+        }
       }
     });
   
@@ -78,16 +86,35 @@ console.log(packagedetail.amount)
       isValid = false;
     }
   
+    // Address validation (Minimum 5 characters)
+    if (defaultFields.address && defaultFields.address.length < 5) {
+      newErrors.address = "Address must be at least 5 characters long";
+      isValid = false;
+    }
+  
+    // Gotra validation (Must be alphabetic)
+    const gotraRegex = /^[a-zA-Z\s]+$/;
+  
     // Validate members
-    let memberErrors = members.map((member) => {
+    let memberErrors = members.map((member, index) => {
       let errorObj = {};
-      if (!member.name) errorObj.name = "Required";
-      if (!member.gotra && !dontKnowMemberGotra[members.indexOf(member)]) {
-        errorObj.gotra = "Required";
+      
+      if (!member.name) {
+        errorObj.name = "Required";
+      } else if (!nameRegex.test(member.name)) {
+        errorObj.name = "Only alphabets are allowed";
       }
+  
+      if (!member.gotra && !dontKnowMemberGotra[index]) {
+        errorObj.gotra = "Required";
+      } else if (member.gotra && !gotraRegex.test(member.gotra)) {
+        errorObj.gotra = "Only alphabets are allowed";
+      }
+  
       return errorObj;
     });
   
+    // Check if any member has errors
     if (memberErrors.some((err) => Object.keys(err).length > 0)) {
       newErrors.members = memberErrors;
       isValid = false;
@@ -96,6 +123,7 @@ console.log(packagedetail.amount)
     setErrors(newErrors);
     return isValid;
   };
+  
   
 
   const submitForm = async () => {
@@ -199,7 +227,7 @@ console.log("Order ID:", payment_session_id); // Log it properly
           <label className="text-sm">I don’t know my Gotra</label>
         </div>
       {members > "2" && (
-          <h2 className="text-lg font-semibold text-gray-800 mt-6">Add Member</h2>
+          <h2 className="text-lg font-semibold text-gray-800 mt-6">Added Member</h2>
       )}
       
         {members.map((member, index) => (

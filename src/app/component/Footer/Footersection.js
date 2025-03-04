@@ -161,7 +161,7 @@ export default function Footersection() {
 	 </div>
     </div>
 	</div>
-	<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">© 2025 Punyasetu , Inc. All rights reserved.</div>
+	<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">© 2025 Punyasetu, Inc. All rights reserved.</div>
 </footer> 
       </>
     )

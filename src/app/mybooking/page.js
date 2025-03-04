@@ -9,6 +9,7 @@ import Link from "next/link";
 const Page = () => {
   const [activeStep, setActiveStep] = useState("Pooja Booking");
   const [Poojabookings, setPoojabookings] = useState([]);
+  const [Panditbookings, setPanditbookings] = useState([]);
 
   const steps = [
     { id: 1, title: "Pooja Booking" },
@@ -46,37 +47,34 @@ const Page = () => {
     fetchBookings();
   }, []);
   
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        let formData = new FormData();
+        formData.append("type", "booking_history");
+  
+        const response = await api.post("/panditji", formData);
+  
+        console.log("Full Response:", response);
+        console.log("Response Data:", response?.data);
   
 
-  const Panditbookings = [
-    {
-      bookingId: "#2029383825237598",
-      name: "Pandit Ajit Ram",
-      status: "Booked Successfully",
-      amount: 2000,
-      orderTime: "2:00pm , 20 Nov 2024",
-      status: "Pending",
-      image: "/images/panditji.png",
-    },
-    {
-      bookingId: "#2029383825237599",
-      name: "Pandit Ramesh Sharma",
-      status: "Booked Successfully",
-      amount: 2500,
-      orderTime: "4:00pm , 22 Nov 2024",
-      status: "Failed",
-      image: "/images/panditji.png",
-    },
-    {
-      bookingId: "#2029383825237600",
-      name: "Pandit Vijay Kumar",
-      status: "Booked Successfully",
-      amount: 1800,
-      orderTime: "11:00am , 25 Nov 2024",
-      status: "Success",
-      image: "/images/panditji.png",
-    },
-  ];
+        const bookingList = response.data.data.booking_list ?? []; // Default to []
+        if (!Array.isArray(bookingList)) {
+          console.error("Invalid booking_list format:", response.data);
+          setPanditbookings([]);
+        } else {
+          setPanditbookings(bookingList);
+        }
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+  
+    fetchBookings();
+  }, []);
+  
+
 
   const poojaBox = [
     {
@@ -118,7 +116,7 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-100">
       <div className="bg-[#FFEEE2]">
         <div className="p-60 overflow-hidden">
           <div className="container">
@@ -133,7 +131,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl flex justify-betweeni tems-center mx-auto pt-14 px-5">
+      <div className="max-w-7xl flex justify-betweeni tems-center mx-auto pt-14 px-5 ">
   <div className="flex-grow max-w-5xl mr-4">
     <form
       // onSubmit={handleSearch}
@@ -252,11 +250,28 @@ const Page = () => {
               <p className="text-red-600 font-bold text-md">
                 {booking.package_name || "N/A"}
               </p>
-              <p className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
+              {/* <p className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
                 Book Again
-              </p>
+              </p> */}
             </div>
           </div>
+          <div className="flex justify-between items-center mt-3 gap-3">
+             <p className="text-gray-600 text-sm">
+               <span className="font-semibold">Order time & date:</span>{" "}
+               {booking.create_date}
+             </p>
+             <div
+               className={`${
+                 booking.booking_status === "success"
+                   ? "bg-green-500"
+                   : booking.booking_status === "failed"
+                   ? "bg-red-500"
+                   : "bg-yellow-500"
+               } rounded-full px-4 py-1`}
+             >
+               <p className="text-white text-sm">{booking.booking_status}</p>
+             </div>
+           </div>
         </Link>
       ))}
     </div>
@@ -283,37 +298,41 @@ const Page = () => {
                 >
                   <div className="flex justify-center items-center gap-4">
                     <img
-                      src={booking.image}
+                      src={booking.pandit_image}
                       alt="Pooja Image"
-                      className="w-5/12 h-[140px] border-2 border-white object-cover shadow-md shadow-gray-400 rounded-lg"
+                      onError={(e) =>
+                        (e.target.src =
+                          "https://www.punyasetu.com/assets/images/logo.png")
+                      }
+                      className="w-5/12 h-[140px] border-2 border-white object-fit shadow-md shadow-gray-400 rounded-lg"
                     />
 
                     <div className="items-center w-7/12">
                       <p className="text-gray-500 text-sm">
-                        {booking.bookingId}
+                        #{booking.booking_code}
                       </p>
                       <h2 className="text-lg font-bold text-black">
-                        {booking.name}
+                        Pt.{booking.pandit_name}
                       </h2>
                       <p className="text-green-700 font-semibold text-md">
-                        {booking.status}
+                        {booking.booking_status}
                       </p>
                       <p className="text-red-600 font-bold text-md">
-                        Amount Rs.{booking.amount}/-
+                        Paid Rs.{booking.net_amount}/-
                       </p>
                     </div>
                   </div>
                   <div className="flex justify-between items-center mt-3 gap-3">
                     <p className="text-gray-600 text-sm">
                       <span className="font-semibold">Order time & date:</span>{" "}
-                      {booking.orderTime}
+                      {booking.booking_date}
                     </p>
                     <div
                       className={`${
-                        statusColors[booking.status]
+                        statusColors[booking.booking_status]
                       } rounded-full px-4 py-1`}
                     >
-                      <p className="text-white text-sm">{booking.status}</p>
+                      <p className="text-white text-sm">{booking.booking_status}</p>
                     </div>
                   </div>
                 </div>
