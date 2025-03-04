@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 import success from "../../../public/failed.png"
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+
 export default function page(){
 return(
 

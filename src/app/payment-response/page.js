@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function PaymentResponse() {
   const router = useRouter();

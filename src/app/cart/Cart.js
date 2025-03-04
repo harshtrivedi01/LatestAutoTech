@@ -4,6 +4,7 @@ import Sankalp from "./Sankalp";
 import AuthGuard from "../component/AuthGuard";
 import Homeeight from "../Home/Homeeight";
 import Testimonials from "../component/Testimonials";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(2);

@@ -1,5 +1,7 @@
 import { CalendarIcon } from "lucide-react";
 import Link from "next/link";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+
 
 export default function List({ pujaData }) {
   console.log("Puja Data in List Component:", pujaData);

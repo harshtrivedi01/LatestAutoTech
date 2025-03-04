@@ -2,6 +2,7 @@
 import React from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { PiKeyReturnLight } from "react-icons/pi";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function Page() {
   return (
