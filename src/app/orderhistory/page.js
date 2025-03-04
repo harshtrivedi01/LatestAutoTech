@@ -3,7 +3,7 @@ import React from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { PiKeyReturnLight } from "react-icons/pi";
 
-const OrderHistoryPage = () => {
+const Page = () => {
   return (
     <div>
       <div className="bg-[#FFEEE2]">
@@ -129,4 +129,4 @@ const OrderHistoryPage = () => {
   );
 };
 
-export default OrderHistoryPage;
+export default Page;
