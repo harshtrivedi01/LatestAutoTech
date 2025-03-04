@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 import Anahata from "../../../public/Assests/Service/Anahata.png";
 import Heading from "../component/Headingname/Heading";
 import Kalash from "../../../public/Assests/Service/Kalash.png";

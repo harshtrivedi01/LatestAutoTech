@@ -7,7 +7,7 @@ import service4 from "../../../public/Assests/Service/service (4).jpg";
 import service5 from "../../../public/Assests/Service/service (5).jpg";
 import service6 from "../../../public/Assests/Service/service (6).jpg";
 import Heading from "../component/Headingname/Heading";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 import { useState } from "react";
 
 const MAX_WORDS = 10;

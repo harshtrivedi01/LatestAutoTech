@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import api from "../lib/axiosInstance";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 export default function Faq() {
   const [pujaData, setPujaData] = useState([]);
