@@ -6,7 +6,7 @@ import AuthGuard from "../component/AuthGuard";
 import Payment from "./Payment";
 
 
-const page = () => {
+export default function page() {
   const [currentStep, setCurrentStep] = useState(2);
 
   const datastorage = localStorage.getItem("productdeatil");
@@ -66,4 +66,4 @@ console.log((datapackage))
   );
 };
 
-export default page;
+
