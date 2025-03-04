@@ -3,7 +3,7 @@ import React from "react";
 import { TiTick } from "react-icons/ti";
 import { SlCalender } from "react-icons/sl";
 import { MdEmail } from "react-icons/md";
-export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const page = () => {
   return (

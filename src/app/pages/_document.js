@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function Document() {
   return (

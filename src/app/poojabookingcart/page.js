@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 import AuthGuard from "../component/AuthGuard";
 import Payment from "./Payment";

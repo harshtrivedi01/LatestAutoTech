@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function NotFoundPage() {
   const [redirectPath, setRedirectPath] = useState(null);

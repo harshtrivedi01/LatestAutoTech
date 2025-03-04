@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import api from "../lib/axiosInstance";
+import Link from "next/link";
 
 
 
@@ -30,7 +31,7 @@ const Page = () => {
     
   
         // Ensure booking_list exists; if missing, set an empty array
-        const bookingList = response.data.booking_list ?? []; // Default to []
+        const bookingList = response.data.data.booking_list ?? []; // Default to []
         if (!Array.isArray(bookingList)) {
           console.error("Invalid booking_list format:", response.data);
           setPoojabookings([]);
@@ -205,19 +206,29 @@ const Page = () => {
 
    {/* For pooja booking div */}
 {activeStep === "Pooja Booking" && (
-  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
+
+
+<div className="bg-gray-100 p-6 mt-12 rounded-lg">
   {Poojabookings.length > 0 ? (
     <div className="grid grid-cols-3 gap-5">
       {Poojabookings.map((booking) => (
-        <div
+        <Link
           key={booking.booking_id}
-          className="border-[#87521B] bg-white border-[2px] rounded-lg p-5"
+          href={{
+            pathname: "/booking-details",
+            query: { data: JSON.stringify(booking) },
+          }}
+          className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer"
         >
           <div className="flex justify-center items-center gap-4">
             <img
               src={booking.puja_image || "/images/poojabox.png"}
               alt="Pooja Image"
-              className="w-5/12 h-[150px] border-2 border-white object-cover shadow-lg shadow-gray-400 rounded-lg"
+              onError={(e) =>
+                (e.target.src =
+                  "https://www.punyasetu.com/assets/images/logo.png")
+              }
+              className="w-5/12 h-[150px] border-2 border-white object-fit shadow-lg shadow-gray-400 rounded-lg"
             />
             <div className="w-7/12">
               <p className="text-gray-500 text-sm">#{booking.booking_id}</p>
@@ -246,24 +257,7 @@ const Page = () => {
               </p>
             </div>
           </div>
-          <div className="flex justify-between items-center mt-3 gap-3">
-            <p className="text-gray-600 text-sm">
-              <span className="font-semibold">Order time & date:</span>{" "}
-              {booking.create_date}
-            </p>
-            <div
-              className={`${
-                booking.booking_status === "success"
-                  ? "bg-green-500"
-                  : booking.booking_status === "failed"
-                  ? "bg-red-500"
-                  : "bg-yellow-500"
-              } rounded-full px-4 py-1`}
-            >
-              <p className="text-white text-sm">{booking.booking_status}</p>
-            </div>
-          </div>
-        </div>
+        </Link>
       ))}
     </div>
   ) : (
@@ -272,6 +266,8 @@ const Page = () => {
     </div>
   )}
 </div>
+
+ 
 
 )}
 
