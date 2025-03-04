@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import api from "../lib/axiosInstance";
 import DOMPurify from 'dompurify';
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+
 const PrivacyPolicy = () => {
 
   const [pujaData, setPujaData] = useState([]);

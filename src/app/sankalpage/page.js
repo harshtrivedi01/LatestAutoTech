@@ -1,5 +1,6 @@
 import AuthGuard from "../component/AuthGuard";
 import Form from "./Form";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 
 

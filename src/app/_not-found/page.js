@@ -1,9 +1,15 @@
-export default function NotFound() {
-    return (
-      <div style={{ textAlign: "center", padding: "50px" }}>
-        <h1>404 - Page Not Found</h1>
-        <p>Oops! The page you're looking for doesn't exist.</p>
-      </div>
-    );
-  }
-  
+"use client";
+import { useEffect, useState } from "react";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+
+export default function NotFoundPage() {
+  const [redirectPath, setRedirectPath] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setRedirectPath(localStorage.getItem("redirectPath"));
+    }
+  }, []);
+
+  return <div>404 Page Not Found</div>;
+}
