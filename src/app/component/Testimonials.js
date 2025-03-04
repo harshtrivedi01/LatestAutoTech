@@ -51,7 +51,7 @@ const Testimonials = ({ pujaData, detail }) => {
   }, []);
 
   return (
-    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA]" : "bg-[#FFEEE2]"} p-6 transition-all duration-300`}>
+    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA]" : "bg-[#FFDCC0]"} p-6 transition-all duration-300`}>
       <div className="mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
       </div>

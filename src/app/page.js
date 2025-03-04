@@ -11,7 +11,7 @@ import { Homeseven } from "./Home/Homeseven";
 import Homeeight from "./Home/Homeeight";
 import { useEffect, useState } from "react";
 import api from "./lib/axiosInstance";
-export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+// export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function Page() {
   const [pujaData, setPujaData] = useState([]);

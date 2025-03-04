@@ -96,7 +96,7 @@ const PoojaDatePopup = ({ onClose, pujaData, date }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 p-4">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-white text-black rounded-lg shadow-lg p-6 max-w-xl w-full relative">
         <button
@@ -138,8 +138,8 @@ const PoojaDatePopup = ({ onClose, pujaData, date }) => {
               src="../images/poojaPackage/date.png"
               alt="Pooja"
               className="rounded-lg w-full object-cover"
-              height="100%"
-              width="100%"
+              height="50%"
+              width="50%"
             />
           </div>
         </div>

@@ -133,13 +133,13 @@ console.log(packagedetail.amount)
   
       // Call the orders API
       const response = await api.post("/orders", orderFormData);
-const orderId = response.data.data.order_id; // Extract order_id
-localStorage.setItem("order_id", orderId); // Store only the order_id
-console.log("Order ID:", orderId); // Log it properly
+const payment_session_id = response.data.data.payment_session_id; // Extract order_id
+localStorage.setItem("payment_session_id", payment_session_id); // Store only the order_id
+console.log("Order ID:", payment_session_id); // Log it properly
 
       if (response.data.status === "1") {
         toast.success("Order placed successfully!");
-      
+        router.push("/poojabookingcart")
       } else {
         toast.error(response.data.message || "Something went wrong!");
       }
