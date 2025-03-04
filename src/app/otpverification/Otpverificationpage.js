@@ -31,9 +31,9 @@ export default function OtpVerificationPage() {
 
   const phone = searchParams.get("phone");
 
-  const redirectPath = localStorage.getItem("redirectPath") ;
+  const redirectPath = typeof window !== "undefined" ? localStorage.getItem("redirectPath") : null;
 
-  console.log(redirectPath,"ter")
+  console.log(redirectPath, "ter");
 
   const [token, setToken] = useState(null);
 
