@@ -35,8 +35,12 @@ export default function OtpVerificationPage() {
 
   console.log(redirectPath,"ter")
 
+  const [token, setToken] = useState(null);
+
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    if (typeof window !== "undefined") {
+      setToken(localStorage.getItem("token"));
+    }
 
     if (token) {
       // ✅ Redirect logged-in users away from OTP screen
