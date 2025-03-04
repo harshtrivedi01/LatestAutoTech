@@ -3,7 +3,7 @@ import React from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { PiKeyReturnLight } from "react-icons/pi";
 
-const Page = () => {
+export default function Page() {
   return (
     <div>
       <div className="bg-[#FFEEE2]">
@@ -129,4 +129,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+
