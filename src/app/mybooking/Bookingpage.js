@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+
 const Bookingpage = () => {
   const [activeStep, setActiveStep] = useState("Pooja Booking");
 
