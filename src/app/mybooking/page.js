@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
-const Page = () => {
+export default function Page() {
   const [activeStep, setActiveStep] = useState("Pooja Booking");
 
   const steps = [
@@ -356,4 +356,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+
