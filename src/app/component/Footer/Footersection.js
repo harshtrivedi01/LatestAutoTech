@@ -8,17 +8,28 @@ import { useEffect, useState } from "react";
 export default function Footersection() {
 
 	const [pujaData, setPujaData] = useState(null);
+	const [header, setHeader] = useState(null); // Initialize header state
 
-	const header = {
-	  "language": "en",
-	  "userId": "2",
-	  "user_type": "user",
-	  "Device_id": "upen",
-	  "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-	  "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-	  "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-	  "web_token": localStorage.getItem("authToken"),
-	}
+	useEffect(() => {
+	  if (typeof window !== "undefined") {
+		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+		const authToken = localStorage.getItem("authToken");
+  
+		const newHeader = {
+		  language: "en",
+		  userId: "2",
+		  user_type: "user",
+		  Device_id: "upen",
+		  Longitude: formData.Longitude || "",
+		  Latitude: formData.Latitude || "",
+		  Ip_address: formData.Ip_address || "",
+		  web_token: authToken || "",
+		};
+  
+		setHeader(newHeader);
+		fetchPujaData(newHeader);
+	  }
+	}, []);
   
 	useEffect(() => {
 	  fetchPujaData();
