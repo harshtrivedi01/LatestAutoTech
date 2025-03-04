@@ -26,17 +26,17 @@ const initializeSDK = async () => {
     setDatapackage(datastoragepackge ? JSON.parse(datastoragepackge) : {});
   }, []);
 
- 
-
 
 // Initiate Cashfree payment process
 const initiatePayment = async (sessionId) => {
   const cashfree = await initializeSDK();
 
   const checkoutOptions = {
-    paymentSessionId: "session_2c-6eGafG2KHbn0oNv7qt4vsB8mPZdDAKqU7FNYc_XWFJm0vS49r9b1Gy4Eq4dS7bnlojgHDSLCw-HOSh_xMTt9lYzDBtLebBCJOIuNLzhSSQr6OLFmW1sTjEgpaymentpayment",
-    redirectTarget: "_self",  // Redirects to the target URL after payment
+    paymentSessionId: "session_jiyjTDbnqEbalG64ZPqHDOgZ818mtFOP8Uaa7tFV8MmM6USS0CntRs3xy8eWq_Th_nQJz3AcXIzcRp5r_vw2XGrSTmY6Rf-anpW5ocKsO06W3M0wgdMgoJi0Qwpaymentpayment",
+    redirectTarget: "_self", // Ensures the redirect happens in the same tab
+    redirectUrl: `https://yourwebsite.com/payment-response`, // Redirect to a custom success/failure page
   };
+  
   console.log("Starting checkout with options:", checkoutOptions);
   cashfree.checkout(checkoutOptions);
 };

@@ -18,25 +18,21 @@ export default function Language() {
 
   useEffect(() => {
     const savedLangCode = localStorage.getItem("selectedLanguage") || "en";
-
     if (languages.length > 0) {
       const savedLang = languages.find((lang) => lang.code === savedLangCode) || languages[0];
       setSelectedLanguage(savedLang);
       i18n.changeLanguage(savedLangCode);
     }
-  }, [languages]); // Runs again when languages are updated
+  }, [languages]);
 
-useEffect (()=>{
-  setLanguages([ 
-    {
-     language: "English",
-     code: "en"
-   },{
-     language: "हिंदी",
-     code: "hi"
-   }
-   ])
-},[setLanguages])
+   // Runs again when languages are updated
+  useEffect(() => {
+    setLanguages([
+      { language: "English", code: "en" },
+      { language: "हिंदी", code: "hi" },
+    ]);
+  }, []);
+  
 
   const handleLanguageChange = (event) => {
     const code = event.target.value;
@@ -58,11 +54,12 @@ useEffect (()=>{
         className="bg-transparent text-lg font-semibold text-gray-800 focus:outline-none cursor-pointer"
         aria-label="Select Language"
       >
-        {languages.map((lang) => (
-          <option key={lang.id} value={lang.code} className="text-black p-4 h-40">
-            {lang.language || "en"}
-          </option>
-        ))}
+      {languages.map((lang) => (
+  <option key={lang.code} value={lang.code} className="text-black p-4 h-40">
+    {lang.language || "en"}
+  </option>
+))}
+
       </select>
     </div>
   );
