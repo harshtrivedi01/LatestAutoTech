@@ -1,8 +1,10 @@
+"use client"
+
 import axios from "axios";
-import { EditIcon } from "lucide-react";
+import { CheckIcon, EditIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import Sankalp from "./Sankalp";
+
 import api from "../lib/axiosInstance";
 import { useRouter } from "next/navigation";
 
@@ -48,17 +50,6 @@ const handlePhoneChange = (e) => {
   }
 };
 
-
-  const header = {
-    language: "en",
-    userId: "2",
-    user_type: "user",
-    Device_id: "upen",
-    Longitude: JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-    Latitude: JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-    Ip_address: JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-    web_token: localStorage.getItem("authToken"),
-  };
   useEffect(() => {
     fetchPujaData();
     fetchCountries();
@@ -89,7 +80,8 @@ const handlePhoneChange = (e) => {
   // Redirect to next step
   const handleNextStep = () => {
     if (selectedAddress) {
-      router.push(`/next-step?addressId=${selectedAddress}`); // Update with actual next page route
+    //   router.push(`/next-step?addressId=${selectedAddress}`); // Update with actual next page route
+    router.push(`/cartpaymentpoojabox`); 
     }
   };
 
@@ -143,7 +135,6 @@ const handlePhoneChange = (e) => {
     }
   };
   
-
   const handleEditClick = (address) => {
     setShowForm(true); // Show the form
     setFormData({
@@ -189,8 +180,7 @@ const handlePhoneChange = (e) => {
       setCountries([]); // Set empty array to prevent map error
     }
   };
-  
-  
+   
   const fetchStates = async (country_id) => {
     try {
       let formData = new FormData();
@@ -215,7 +205,6 @@ const handlePhoneChange = (e) => {
     }
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -269,7 +258,6 @@ const handlePhoneChange = (e) => {
     }
   };
   
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -286,7 +274,51 @@ const handlePhoneChange = (e) => {
   
   return (
     <>
-      <section className="mb-4  max-w-full">
+     <h1 className="f-34 mb-2 font-semibold text-lg mx-40 my-10">Shopping Cart</h1>
+<div className="flex mx-40 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+  <div className="flex items-center mb-4 md:mb-0">
+  <div
+              className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
+            >
+      <span className="font-bold"><CheckIcon/></span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+      Booking 
+      <br />
+      <span className="text-sm font-semibold text-gray-700">Review booking </span>
+    </p>
+  </div>
+  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+
+  <div className="flex items-center">
+    <div
+      className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
+    >
+      <span className="font-bold">{2}</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+     Add Address
+      <br />
+      <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
+    </p>
+  </div>
+  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+  <div className="flex items-center">
+    <div
+      className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
+    >
+      <span className="font-bold">{3}</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+      Pay info
+      <br />
+      <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
+    </p>
+  </div>
+</div>
+
+
+      <section className="mb-4 mx-40 max-w-full">
         <div className="mx-auto">
           {/* Dropdown to Toggle Form */}
           
@@ -473,16 +505,18 @@ Choose Shipping Address
             </form>
           )}
         </div>
-      </section>
-      <button
+
+        <button
           onClick={handleNextStep}
           disabled={isButtonDisabled}
-          className={`mt-4 px-6 py-2 rounded-lg text-white font-medium ${
+          className={`mt-7 px-20 py-2  rounded-lg text-white font-medium ${
             isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
           }`}
         >
           Proceed to Next Step
         </button>
+      </section>
+     
     </>
   );
 }

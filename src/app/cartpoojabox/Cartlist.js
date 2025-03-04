@@ -99,12 +99,14 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
             <span className="text-gray-600 text-lg">Total</span>
             <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
           </div>
+          <a href="/cartaddresspoojabox">
           <button
             className="w-full common-btn text-white font-semibold py-2 rounded-lg"
-            onClick={handleNextStep}
+            // onClick={handleNextStep}
           >
             Checkout
           </button>
+          </a>
         </div>
       </div>
     </div>

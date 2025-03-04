@@ -58,10 +58,10 @@ console.log("pgResponse")
         
          <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p><br/>
         <button
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/mybooking")}
           className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg"
         >
-          Home
+          Your Orders
         </button>
       </div>
     );

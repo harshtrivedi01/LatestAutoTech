@@ -98,8 +98,8 @@ const Cart = () => {
   
   
   return (
-    <AuthGuard>
-      <div className="cart bg-gray-50 min-h-screen p-60">
+    <AuthGuard className="bg-gray-50">
+      <div className="cart  min-h-screen mx-20 p-60">
        <Toaster position="top-right" reverseOrder={false} /> 
       <div className="container">
         <h1 className="f-34 mb-2 font-semibold text-lg">Shopping Cart</h1>
@@ -108,26 +108,46 @@ const Cart = () => {
         </h1>
 
         {/* Progress Steps */}
-        <div className="flex flex-col sm:flex-row items-center bg-orange-100 rounded-2xl sm:justify-center  p-4 sm:p-6 lg:p-30 mb-4">
-  {["Booking", "Add Address", "Payment info"].map((label, index) => (
-    <React.Fragment key={index}>
-      <div className="flex items-center">
-        <div
-          className={`w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full ${
-            currentStep > index ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"
-          }`}
-        >
-          <span className="font-bold text-xs sm:text-sm">
-            {currentStep > index + 1 ? "✔" : `0${index + 1}`}
-          </span>
-        </div>
-        <p className="ml-2 text-xs sm:text-sm font-semibold text-gray-700">{label}</p>
-      </div>
-      {index < 2 && (
-        <div className="w-10 border-t-2 border-gray-300 mx-2 sm:mx-4 my-2 sm:my-0"></div>
-      )}
-    </React.Fragment>
-  ))}
+        <div className="flex  flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+  <div className="flex items-center mb-4 md:mb-0">
+  <div
+              className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
+            >
+      <span className="font-bold">{1}</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+      Booking 
+      <br />
+      <span className="text-sm font-semibold text-gray-700">Review booking </span>
+    </p>
+  </div>
+  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+
+  <div className="flex items-center">
+    <div
+      className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
+    >
+      <span className="font-bold">{2}</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+     Add Address
+      <br />
+      <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
+    </p>
+  </div>
+  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+  <div className="flex items-center">
+    <div
+      className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
+    >
+      <span className="font-bold">{3}</span>
+    </div>
+    <p className="ml-2 text-sm font-semibold text-gray-700">
+      Pay info
+      <br />
+      <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
+    </p>
+  </div>
 </div>
 
         {currentStep === 1 && (
