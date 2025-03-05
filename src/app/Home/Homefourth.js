@@ -92,12 +92,12 @@ export default function Homefourth({ pujaData }) {
                         className="object-cover"
                         src={
                           puja.image ||
-                          "https://www.punyasetu.com/assets/images/logo.png"
+                          "/images/logo.png"
                         }
                         alt={puja.name || "product image"}
                         onError={(e) =>
                         (e.target.src =
-                          "https://www.punyasetu.com/assets/images/logo.png")
+                          "/images/logo.png")
                         }
                       />
                     </div>

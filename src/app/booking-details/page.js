@@ -36,7 +36,7 @@ export default function BookingDetails() {
           src={booking.puja_image || "/images/poojabox.png"}
           alt="Pooja Image"
           onError={(e) =>
-            (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")
+            (e.target.src = "/images/logo.png")
           }
           className=" h-[250px] border-2 border-white object-cov   rounded-lg"
         />

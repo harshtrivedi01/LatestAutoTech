@@ -52,11 +52,11 @@ const PoojaPackages = ({ detail }) => {
                 <div className="flex gap-2 justify-between top-card rounded-t-3xl p-2 rounded-lg items-center">
                   <div className="pack-img w-40 h-24 aspect-[4/3]">
                     <img
-                      src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "https://www.punyasetu.com/assets/images/logo.png"}
+                      src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
                       alt={pkg.name}
                       width={160}
                       height={96}
-                      onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                      onError={(e) => (e.target.src = "/images/logo.png")}
                       className="object-contain w-full h-full"
                     />
                   </div>

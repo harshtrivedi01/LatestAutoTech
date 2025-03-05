@@ -65,7 +65,7 @@ export default function Footersection() {
 		<div className="lg:w-1/3">
 			<a rel="noopener noreferrer" href="/" className="flex justify-center space-x-3 lg:justify-start">
 				<div className="flex items-center justify-center w-12 h-12 rounded-full ">
-                <img src="https://www.punyasetu.com/assets/images/logo.png" alt="logo" className="" />
+                <img src="/images/logo.png" alt="logo" className="" />
 				</div>
 				<span className="self-center text-3xl pt-7 font-semibold">PunyaSetu</span>
 			</a>

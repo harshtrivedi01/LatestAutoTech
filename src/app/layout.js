@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <link
         rel="icon"
-        href="https://www.punyasetu.com/assets/images/logo.png"
+        href="/images/logo.png"
         sizes="any"
       />
       <body

@@ -5,7 +5,7 @@ const LoadingScreen = () => {
   return (
     <div className="preloader">
     <div className="loader-container">
-      <img src={"https://www.punyasetu.com/assets/images/logo.png"} alt="Logo" className="loader-logo" />
+      <img src={"/images/logo.png"} alt="Logo" className="loader-logo" />
     </div>
   </div>
   );

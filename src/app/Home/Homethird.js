@@ -64,7 +64,7 @@ export default function Homethird({pujaData}) {
                             src={pujaData?.data?.aboutus_images.image1}
                             alt=""
                             className="absolute right-0 h-20 w-20 bottom-0"
-                            onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                            onError={(e) => (e.target.src = "/images/logo.png")}
                           />
                         </a>
                       </div>
@@ -78,7 +78,7 @@ export default function Homethird({pujaData}) {
                             src={pujaData?.data?.aboutus_images.image2}
                             alt=""
                             className="absolute inset-2 h-full w-full rounded-2xl   group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                            onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                            onError={(e) => (e.target.src = "/images/logo.png")}
                           />
                         </a>
                       </div>
@@ -93,7 +93,7 @@ export default function Homethird({pujaData}) {
                           src={music}
                           alt=""
                           className="absolute top-20 left-10 h-14 w-16 top-0"
-                          onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                          onError={(e) => (e.target.src = "/images/logo.png")}
                         />
                         <h3 className="z-10 text-xl text-black font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
                         {pujaData?.data?.aboutus_imagehed2}-{" "}
@@ -127,7 +127,7 @@ export default function Homethird({pujaData}) {
                           src={Anahata}
                           alt=""
                           className="absolute right-10 h-44 w-44 top-0"
-                          onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                          onError={(e) => (e.target.src = "/images/logo.png")}
                         />
                       </div>
                     </div>
@@ -139,7 +139,7 @@ href={""}
                       >
                          <img
                              src={pujaData?.data?.aboutus_images.image4}
-                             onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                             onError={(e) => (e.target.src = "/images/logo.png")}
                           alt=""
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"
                         />

@@ -23,9 +23,9 @@ export default function List({ pujaData }) {
                 <a href={`poojadetail/${puja.id}`} className="flex justify-center">
                   <img
                     className="h-60  object-cove rounded-t-lg"
-                    src={puja.image || "https://www.punyasetu.com/assets/images/logo.png" }
+                    src={puja.image || "/images/logo.png" }
                     alt={puja.title}
-                    onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                    onError={(e) => (e.target.src = "/images/logo.png")}
                   />
                 </a>
 

@@ -110,7 +110,7 @@ export default function Poojadetailpage() {
   
   const [showModal, setShowModal] = useState(false);
 
-  const imageUrl = pujaData?.image || "https://www.punyasetu.com/assets/images/logo.png";
+  const imageUrl = pujaData?.image || "/images/logo.png";
   const name = pujaData?.name || "Special Pooja";
   const description = pujaData?.short_description || "Join us for this sacred occasion!";
   const pageUrl = window.location.href; // Get current page URL
@@ -189,11 +189,11 @@ export default function Poojadetailpage() {
                   <div className="h-[200px] w-full flex justify-center img-ratio">
                     <img
                       className="w-full  object-contain h-full"
-                      src={ pujaData?.image || "https://www.punyasetu.com/assets/images/logo.png"}
+                      src={ pujaData?.image || "/images/logo.png"}
                       alt="Pooja Banner"
                       height="100%"
                       width="100%"
-                      onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")}
+                      onError={(e) => (e.target.src = "/images/logo.png")}
                     />
                   </div>
                 </motion.div>

@@ -144,7 +144,7 @@ export default function LoginPage() {
             <img
               width={45}
               className=""
-              src="https://www.punyasetu.com/assets/images/logo.png"
+              src="/images/logo.png"
               alt="logo"
             />
           </div>

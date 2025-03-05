@@ -69,7 +69,7 @@ export default function Homesecond({ module_category_details }) {
                   style={{ backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`, backgroundSize: "cover", backgroundPosition: "center", minHeight: "400px" }} // Ensures cards have equal height
                 >
                   <div>
-                    <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]" onError={(e) => (e.target.src = "https://www.punyasetu.com/assets/images/logo.png")} />
+                    <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]" onError={(e) => (e.target.src = "/images/logo.png")} />
                     <div className="my-3 font-display">
                       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
                         {modulecategory}

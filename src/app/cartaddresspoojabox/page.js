@@ -365,7 +365,7 @@ Choose Shipping Address
           </div>
         ))
       ) : (
-        <p className="text-center text-gray-600">No address found.</p>
+        <p className="text-center text-gray-600">Address not available, Please addd your address to continue.</p>
       )}
     </div>
   </div>

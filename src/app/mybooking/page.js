@@ -216,7 +216,7 @@ const Page = () => {
                 alt="Pooja Image"
                 onError={(e) =>
                   (e.target.src =
-                    "https://www.punyasetu.com/assets/images/logo.png")
+                    "/images/logo.png")
                 }
                 className="w-full sm:w-5/12 h-[150px] border-2 border-white object-cover shadow-lg shadow-gray-400 rounded-lg"
               />
@@ -289,7 +289,7 @@ const Page = () => {
                 alt="Pooja Image"
                 onError={(e) =>
                   (e.target.src =
-                    "https://www.punyasetu.com/assets/images/logo.png")
+                    "/images/logo.png")
                 }
                 className="w-full sm:w-5/12 h-[140px] border-2 border-white object-cover shadow-md shadow-gray-400 rounded-lg"
               />

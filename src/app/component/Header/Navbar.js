@@ -47,7 +47,7 @@ export default function Navbar() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
-              src="https://www.punyasetu.com/assets/images/logo.png"
+              src="/images/logo.png"
               className="h-16 mb-2"
               alt="PunyaSetu Logo"
             />

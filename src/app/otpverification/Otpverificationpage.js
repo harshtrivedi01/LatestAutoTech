@@ -230,7 +230,7 @@ export default function OtpVerificationPage() {
       <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
         <div className=" p-4 lg:p-10 rounded-3xl bg-white flex flex-col items-center">
           <div className="">
-            <img width={45} className="" src="https://www.punyasetu.com/assets/images/logo.png" />
+            <img width={45} className="" src="/images/logo.png" />
           </div>
 
           <p className="font-bold text-4xl">OTP Verification</p>
