@@ -35,7 +35,7 @@ export default function Poojadetailpage() {
   const { id } = useParams();  
   const [index, setIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [activeTab, setActiveTab] = useState("About-section"); // "content" or "benifit"
+  const [activeTab, setActiveTab] = useState("About-pooja"); // "content" or "benifit"
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -81,8 +81,8 @@ export default function Poojadetailpage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const benefitSection = document.getElementById("About-section");
-      const packageSection = document.getElementById("Package-section");
+      const benefitSection = document.getElementById("About-pooja");
+      const packageSection = document.getElementById("Pooja-Package");
       const downloadAppSection = document.getElementById("Downloadapp-section");
       const homeEightSection = document.getElementById("Homeeight-section");
       const faqSection = document.getElementById("Faq-section");
@@ -245,7 +245,7 @@ export default function Poojadetailpage() {
      
     </div>
               <a
-                 onClick={() => scrollToSection('Package-section')}
+                 onClick={() => scrollToSection('Pooja-Package')}
                 id="package"
                 className="w-full block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
               >
@@ -260,7 +260,7 @@ export default function Poojadetailpage() {
 
       <div className="sticky top-0 z-50 bg-white   flex justify-center gap-4">
         <div className="container flex justify-center space-x-4 border-b">
-          {["About-section", "Benefit-section", "Package-section"].map((id, index) => (
+          {["About-pooja", "Pooja-Benefit", "Pooja-Package"].map((id, index) => (
             <button
               key={index}
               className={`px-6 py-3 w-full font-medium ${
@@ -275,18 +275,21 @@ export default function Poojadetailpage() {
       </div>
     
       {showButton && (
-        <a
-          onClick={() => document.getElementById("Package-section")?.scrollIntoView({ behavior: "smooth" })}
-          className="fixed bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-4 text-white bg-green-600 rounded-lg shadow-lg hover:bg-green-700"
-        >
-          Select Pooja Package
-        </a>
+       <a
+       onClick={() => document.getElementById("Pooja-Package")?.scrollIntoView({ behavior: "smooth" })}
+       className="fixed bottom-10 left-1/2 transform -translate-x-1/2 px-20 py-4 font-semibold text-white bg-green-600 rounded-lg shadow-lg 
+                  hover:bg-green-700 hover:scale-105 transition-transform duration-300 
+                  animate-pulse "
+     >
+       Select Pooja Package 
+     </a>
+     
       )}
 
       {/* Sections */}
-      <section id="About-section"> <Content detail={pujaData}  /> </section>
-      <section id="Benefit-section"> <Benifit detail={pujaData} /> </section>
-      <section id="Package-section" className="">
+      <section id="About-pooja"> <Content detail={pujaData}  /> </section>
+      <section id="Pooja-Benefit"> <Benifit detail={pujaData} /> </section>
+      <section id="Pooja-Package" className="">
         <PoojaPackage detail={pujaData} />
       </section>
     

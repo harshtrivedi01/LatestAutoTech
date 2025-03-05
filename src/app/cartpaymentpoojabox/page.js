@@ -5,6 +5,7 @@ import AuthGuard from "../component/AuthGuard";
 import SliderTwo from "../poojaboxdetail/SliderTwo";
 import api from "../lib/axiosInstance";
 import { FaTrash } from "react-icons/fa";
+import { CheckIcon } from "lucide-react";
 //export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 const Cart = () => {
   const [pujaData, setPujaData] = useState(null);
@@ -216,7 +217,7 @@ const processPayment = async (paymentId, paymentType) => {
  <div
              className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
            >
-     <span className="font-bold">{1}</span>
+     <span className="font-bold"><CheckIcon/></span>
    </div>
    <p className="ml-2 text-sm font-semibold text-gray-700">
      Booking 
@@ -228,9 +229,9 @@ const processPayment = async (paymentId, paymentType) => {
 
  <div className="flex items-center">
    <div
-     className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
+     className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white`}
    >
-     <span className="font-bold">{2}</span>
+     <span className="font-bold"><CheckIcon/></span>
    </div>
    <p className="ml-2 text-sm font-semibold text-gray-700">
     Add Address

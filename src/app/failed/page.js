@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import success from "../../../public/failed.png"
+
 //export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function page(){
@@ -11,7 +11,7 @@ return(
 <div className="bg-white content-center border-y h-screen">
   <div className="bg-white p-6  md:mx-auto">
    <div className="flex justify-center mb-4">
-   <Image src={success} width={50} height={50}/>
+   <Image src="/images/failed.png" width={50} height={50}/>
    </div>
     <div className="text-center">
       <h3 className="md:text-2xl text-base text-[#F21E1EED] font-semibold text-center ">FAILED!</h3>

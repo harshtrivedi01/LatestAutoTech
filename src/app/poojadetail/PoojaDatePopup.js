@@ -29,29 +29,31 @@ const PoojaDatePopup = ({ onClose, pujaData, date }) => {
   // Extract available dates
   const availableDates = date?.dates || [];
   const sortedDates = availableDates.map((d) => new Date(d)).sort((a, b) => a - b);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time to avoid issues
 
-  // Set initial date (first available date or default to tomorrow)
-  useEffect(() => {
-    if (sortedDates.length > 0) {
-      setSelectedDate(sortedDates[0]); // Use first available date
-    } else {
-      const tomorrow = new Date();
-      tomorrow.setDate(today.getDate() + 1);
-      setSelectedDate(tomorrow); // Allow any future date selection
-    }
-  }, [pujaData]);
 
-  // Handle date selection
-  const handleDateSelect = (date) => {
-    if (date <= today) {
-      alert("Please select a future date.");
-      return;
-    }
-    setSelectedDate(date);
-    setShowCalendar(false);
-  };
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+
+// Set initial date (first available date or tomorrow)
+useEffect(() => {
+  if (sortedDates.length > 0) {
+    setSelectedDate(sortedDates[0]); // Use first available date
+  } else {
+    setSelectedDate(tomorrow); // Default to tomorrow
+  }
+}, [pujaData]);
+
+// Handle date selection
+const handleDateSelect = (date) => {
+  if (date < tomorrow) { // Prevent selecting today or past dates
+    alert("Please select a future date.");
+    return;
+  }
+  setSelectedDate(date);
+  setShowCalendar(false);
+};
 
   // Handle form submission
   const handleSubmit = () => {
@@ -123,12 +125,12 @@ const PoojaDatePopup = ({ onClose, pujaData, date }) => {
 
             {showCalendar && (
               <div className="absolute bg-white border rounded-lg mt-2 shadow-lg">
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={handleDateSelect}
-                  inline
-                  minDate={today} // Ensures past dates aren't selectable
-                />
+               <DatePicker
+  selected={selectedDate}
+  onChange={handleDateSelect}
+  inline
+  minDate={tomorrow} // Ensures today is not selectable
+/>
               </div>
             )}
           </div>

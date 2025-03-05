@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import api from "../lib/axiosInstance";
 import { useRouter } from "next/navigation";
 
-
 const Form = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [errors, setErrors] = useState({});
@@ -124,7 +123,6 @@ console.log(packagedetail.amount)
     return isValid;
   };
   
-  
 
   const submitForm = async () => {
     if (!validateForm()) {
@@ -144,7 +142,7 @@ console.log(packagedetail.amount)
         address: defaultFields.address,
         members: members.map((member) => ({
           member_name: member.name,
-          member_father_name: member.fatherName || "",
+          // member_father_name: member.fatherName || "",
           member_gotra: member.gotra,
         })),
       };
@@ -230,16 +228,19 @@ console.log("Order ID:", payment_session_id); // Log it properly
           <h2 className="text-lg font-semibold text-gray-800 mt-6">Added Member</h2>
       )}
       
-        {members.map((member, index) => (
+        {members.map((member, index,field) => (
           <div key={index} className=" border-b pb-2 grid grid-cols-1 md:grid-cols-3 items-center gap-4 mt-4">
              
-            <input
+          <div className="">
+          <input
               type="text"
               placeholder="Member Name"
               value={member.name}
               onChange={(e) => handleMemberChange(index, "name", e.target.value)}
               className="border text-sm p-3  rounded-xl shadow-xl w-full"
             />
+              {errors.members && errors.members[index]?.name && <p className="text-red-500 text-xs mt-1">{errors.members[index].name}</p>}
+          </div>
           <div className="fel">
           <input
               type="text"
@@ -248,6 +249,7 @@ console.log("Order ID:", payment_session_id); // Log it properly
               onChange={(e) => handleMemberChange(index, "gotra", e.target.value)}
               className="border text-sm p-3 mt-8 rounded-xl shadow-xl w-full"
             />
+              {errors.members && errors.members[index]?.gotra && <p className="text-red-500 text-xs mt-1">{errors.members[index].gotra}</p>}
                 <div className="flex gap-2 mt-3">
               
             <input type="checkbox" className="" checked={dontKnowMemberGotra[index]} onChange={() => {
@@ -256,15 +258,18 @@ console.log("Order ID:", payment_session_id); // Log it properly
               setDontKnowMemberGotra(updatedCheck);
               handleMemberChange(index, "gotra", updatedCheck[index] ? "Kashyap" : "");
             }} />
+         
               <label className="text-sm">I don’t know my Gotra</label>
                 </div>
-          </div>
-
-       
+          </div>      
             <button onClick={() => removeMember(index)} className="text-red-400">
               <FaTrash />
             </button>
+           
+
+
           </div>
+          
         ))}
 
         {members.length < memberLimit - 1 && (
@@ -276,12 +281,12 @@ console.log("Order ID:", payment_session_id); // Log it properly
 <div className="flex flex-col sm:flex-row sm:items-center">
   <button
     onClick={submitForm}
-    className="mt-6 px-4 py-2 bg-[#E5644E] w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-green-700 transition"
+    className="mt-6 px-4 py-2 bg-green-700 w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-green-800 transition"
   >
     Save
   </button>
   <button
-    className="mt-6 sm:mt-6 sm:ms-4 px-4 py-2 bg-[#BA1A1A] w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-red-500 transition"
+    className="mt-6 sm:mt-6 sm:ms-4 px-4 py-2 bg-[#BA1A1A] w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-red-900 transition"
     onClick={handleArrowClick}
   >
     Cancel
