@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import api from "../lib/axiosInstance";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
@@ -11,7 +12,7 @@ const Page = () => {
   const [Poojabookings, setPoojabookings] = useState([]);
   const [Panditbookings, setPanditbookings] = useState([]);
   const [poojaBox, setpoojaBox] = useState([]);
-
+  const router = useRouter();
   const steps = [
     { id: 1, title: "Pooja Booking" },
     { id: 2, title: "Pandit Booking" },
@@ -341,51 +342,57 @@ const Page = () => {
 
         {/* pooja box div */}
         {activeStep === "Pooja Box" && (
-  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
-    <div className="grid grid-cols-3 gap-5">
-      {poojaBox.map((order) => (
-        <div
-          key={order.order_id}
-          className="border-[#87521B] bg-white border-[2px] rounded-lg p-4"
-        >
-          <div className="flex items-center gap-4">
-            <img
-              src={order.image}
-              alt={order.product_name}
-              className="w-4/12 h-[180px] object-cover shadow-md shadow-gray-400 rounded-lg"
-            />
-            <div className="w-8/12">
-              <h2 className="text-[15px] font-[500] text-[#855318]">
-                {order.product_name}
-              </h2>
-              <p className="text-gray-500 text-sm">
-                Order ID: {order.order_code}
-              </p>
-              <p className="text-[#7E570F] font-[400] text-[14px]">
-                Delivery Date: {order.date}
-              </p>
-              <p className="text-gray-800 font-[500] text-[14px]">
-                Amount Rs. {order.grand_total}
-              </p>
-              <p className="text-gray-600 text-sm">
-                <span className="font-semibold">Order Date:</span> {order.order_date}
-              </p>
-              <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
-                Order Again
-              </p>
-              <div
-                className={`${
-                  statusColors[order.delivery_status] || "bg-gray-500"
-                } rounded-full w-20 px-4 py-1 mt-3`}
-              >
-                <p className="text-white text-sm">{order.delivery_status}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
+   <div className="bg-gray-100 p-6 mt-6 rounded-lg">
+   {poojaBox.length === 0 ? ( // Show message if no orders are available
+     <p className="text-center text-gray-600 text-lg font-semibold">
+       No orders available.
+     </p>
+   ) : (
+     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+       {poojaBox.map((order) => (
+         <div
+           key={order.order_id}
+           className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all"
+           onClick={() => router.push(`/orderhistory/${order.order_id}`)}
+         >
+           <div className="flex flex-col sm:flex-row items-center gap-4">
+             <img
+               src={order.image || "/images/logo.png"}
+               alt={order.product_name}
+               className="w-full sm:w-4/12 h-[180px] object-fill shadow-md rounded-lg"
+               onError={(e) => (e.target.src = "/images/logo.png")}
+             />
+             <div className="w-full sm:w-8/12 text-center sm:text-left">
+               <h2 className="text-[15px] font-[500] text-[#855318]">
+                 {order.product_name}
+               </h2>
+               <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p>
+               <p className="text-[#7E570F] font-[400] text-[14px]">
+                 Delivery Date: {order.date}
+               </p>
+               <p className="text-gray-800 font-[500] text-[14px]">
+                 Amount Rs. {order.grand_total}
+               </p>
+               <p className="text-gray-600 text-sm">
+                 <span className="font-semibold">Order Date:</span> {order.order_date}
+               </p>
+               {/* <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
+                 Order Again
+               </p> */}
+               <div
+                 className={`${
+                   statusColors[order.delivery_status] || "bg-gray-500"
+                 } rounded-full w-24 px-4 py-1 mt-3 mx-auto sm:mx-0`}
+               >
+                 <p className="text-white text-sm">{order.delivery_status}</p>
+               </div>
+             </div>
+           </div>
+         </div>
+       ))}
+     </div>
+   )}
+ </div>
 )}
 
       </div>

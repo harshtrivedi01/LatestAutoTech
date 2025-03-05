@@ -1,10 +1,12 @@
 "use client"
 
 import axios from "axios";
-import { CheckIcon, EditIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { CheckIcon, ChevronLeft, ChevronRight, EditIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css"
 import api from "../lib/axiosInstance";
 import { useRouter } from "next/navigation";
 
@@ -17,6 +19,7 @@ export default function Address() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+  const sliderRef = useRef(null);
   const [formData, setFormData] = useState({
     type: "add_address",
     address_id: "", // For update
@@ -81,7 +84,7 @@ const handlePhoneChange = (e) => {
   const handleNextStep = () => {
     if (selectedAddress) {
     //   router.push(`/next-step?addressId=${selectedAddress}`); // Update with actual next page route
-    router.push(`/cartpaymentpoojabox`); 
+    router.push(`/cartpaymentpoojabox?addressId=${selectedAddress}`); 
     }
   };
 
@@ -93,24 +96,20 @@ const handlePhoneChange = (e) => {
   const handleUpdateAddress = async (e) => {
     e.preventDefault();
   
-    // Validation: Ensure required fields are filled
     if (!formData.name || !formData.phone_no || !formData.address || !formData.city_id || !formData.state_id || !formData.country_id || !formData.pincode) {
       toast.error("Please fill in all required fields.");
       return;
     }
   
     try {
-      let formData = new FormData();
+      let formPayload = new FormData();
+      Object.keys(formData).forEach((key) => formPayload.append(key, formData[key]));
   
-      Object.keys(formData).forEach((key) => {
-        formData.append(key, formData[key]);
-      });
+      formPayload.set("type", "update_address"); // Ensure update type is correct
+      formPayload.set("address_id", formData.address_id); // Ensure address ID is included
   
-      formData.set("type", "update_address"); // Set update type
+      const response = await api.post("/address", formPayload);
   
-       const response = await api.post("/address", formData); // Use the new axios instance
-  
-      // Check API response
       if (response.data.status === 0) {
         toast.error(response.data.message || "Failed to update address.");
         return;
@@ -119,21 +118,15 @@ const handlePhoneChange = (e) => {
       toast.success("Address updated successfully!");
       console.log("Address Update Response:", response.data);
   
-      fetchPujaData(); // Refresh the address list
-      setShowForm(false); // Hide form after updating
+      await fetchPujaData(); // Ensure data refresh before hiding form
+      setShowForm(false); 
+  
     } catch (error) {
       console.error("Error updating address:", error);
-  
-      // Handle different error scenarios
-      if (error.response) {
-        toast.error(error.response.data.message || "Server error. Please try again later.");
-      } else if (error.request) {
-        toast.error("Network error. Please check your connection.");
-      } else {
-        toast.error("An unexpected error occurred.");
-      }
+      toast.error(error.response?.data?.message || "An error occurred.");
     }
   };
+  
   
   const handleEditClick = (address) => {
     setShowForm(true); // Show the form
@@ -208,19 +201,18 @@ const handlePhoneChange = (e) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Validation: Ensure required fields are filled
     if (!formData.name || !formData.phone_no || !formData.address || !formData.city_id || !formData.state_id || !formData.country_id || !formData.pincode) {
       toast.error("Please fill in all required fields.");
       return;
     }
   
     try {
-      let formData = new FormData();
-      Object.keys(formData).forEach((key) => formData.append(key, formData[key]));
+      let formPayload = new FormData();
+      Object.keys(formData).forEach((key) => formPayload.append(key, formData[key]));
+      formPayload.set("type", "add_address"); // Ensure type is set correctly
   
-       const response = await api.post("/address", formData);
+      const response = await api.post("/address", formPayload);
   
-      // Check API response
       if (response.data.status === 0) {
         toast.error(response.data.message || "Failed to add address.");
         return;
@@ -229,10 +221,10 @@ const handlePhoneChange = (e) => {
       toast.success("Address added successfully!");
       console.log("Address Added Response:", response.data);
   
-      fetchPujaData(); // Refresh the list after adding
-      setShowForm(false); // Hide form after submission
+      await fetchPujaData(); // Ensure the latest data is fetched before hiding the form
+      setShowForm(false); 
   
-      // Clear form after successful submission
+      // Reset form
       setFormData({
         type: "add_address",
         phone_no: "",
@@ -244,19 +236,13 @@ const handlePhoneChange = (e) => {
         pincode: "",
         address: "",
       });
+  
     } catch (error) {
       console.error("Error adding address:", error);
-  
-      // Handle different error scenarios
-      if (error.response) {
-        toast.error(error.response.data.message || "Server error. Please try again later.");
-      } else if (error.request) {
-        toast.error("Network error. Please check your connection.");
-      } else {
-        toast.error("An unexpected error occurred.");
-      }
+      toast.error(error.response?.data?.message || "An error occurred.");
     }
   };
+  
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -272,6 +258,45 @@ const handlePhoneChange = (e) => {
     }
   };
   
+  const sliderSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4, // Default for large screens
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1280, // Large screens (Desktops & Laptops)
+        settings: {
+          slidesToShow: 2, // Show 2 cards at a time
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024, // Medium screens (Tablets)
+        settings: {
+          slidesToShow: 2, // Show 2 cards at a time
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768, // Small screens (Mobile Landscape)
+        settings: {
+          slidesToShow: 1.5, // Show 1.5 cards to give a preview of the next card
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480, // Extra small screens (Mobile Portrait)
+        settings: {
+          slidesToShow: 1, // Show only 1 card at a time
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  
+
   return (
     <>
      <h1 className="f-34 mb-2 font-semibold text-lg mx-40 my-10">Shopping Cart</h1>
@@ -317,7 +342,6 @@ const handlePhoneChange = (e) => {
   </div>
 </div>
 
-
       <section className="mb-4 mx-40 max-w-full">
         <div className="mx-auto">
           {/* Dropdown to Toggle Form */}
@@ -327,48 +351,65 @@ Choose Shipping Address
 </h1>
 <br/>
 
-<div className="overflow-x-auto overflow-hidden">
-    <div className="flex space-x-4 p-4">
+<div className="w-full px-4 relative">
       {pujaData?.address_list?.length > 0 ? (
-        pujaData.address_list.map((address) => (
-          <div
-            key={address.id}
-            className="flex gap-2 items-start"
+        <div className="relative">
+          {/* Slider */}
+          <Slider ref={sliderRef} {...sliderSettings} className="p-4">
+            {pujaData.address_list.map((address) => (
+              <div key={address.id} className="px-2">
+                <div className="flex gap-2 items-start">
+                  {/* Radio Button */}
+                  <label className="flex items-center space-x-2 mt-2">
+                    <input
+                      type="radio"
+                      name="default_address"
+                      checked={selectedAddress === address.id}
+                      onChange={() => handleAddressSelect(address.id)}
+                      className="form-radio w-6 h-6 border bg-orange-500"
+                    />
+                  </label>
+
+                  {/* Address Card */}
+                  <div className="w-[300px] md:min-w-[200px] flex justify-between rounded-lg border  shadow shadow-xl bg-white p-4 flex-shrink-0">
+                    <div>
+                      <h3 className="font-medium">{address.name}</h3>
+                      <p className="font-medium">
+                        {address.address}, {address.city} <br/>{address.state}<br/> {address.pincode}
+                      </p>
+                      <p className="font-medium">{address.phone_no}</p>
+                      <p className="font-medium">{address.email}</p>
+                    </div>
+
+                    {/* Edit Icon */}
+                    <EditIcon className="text-orange-400 cursor-pointer" onClick={() => handleEditClick(address)} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+
+          {/* Navigation Buttons */}
+          <button
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 disabled:opacity-50"
+            onClick={() => sliderRef.current?.slickPrev()}
+            disabled={!pujaData || pujaData.address_list.length <= 1}
           >
-              <label className="flex items-center space-x-2 mt-2">
-              <input
-                type="radio"
-                name="default_address"
-                checked={selectedAddress === address.id} // Default selected
-                onChange={() => handleAddressSelect(address.id)}
-                className="form-radio w-6 h-6 border  bg-orange-500"
-              />
-              {/* <span className="text-xs text-green-600 font-semibold">
-                {address.set_default === "1" ? "Default Address" : "Select Address"}
-              </span> */}
-            </label>
-       <div className="w-[300px] md:min-w-[200px] flex justify-between   rounded-lg border bg-white p-4 flex-shrink-0">
-      <div>
-      <h3 className=" font-medium text">{address.name}</h3>
-            <p className="font-medium">
-               {address.address}, {address.city}, {address.state} - {address.pincode}
-            </p>
-            <p className="font-medium"> {address.phone_no}</p>
-            <p className="font-medium"> {address.email}</p>
+            <ChevronLeft className="w-6 h-6 text-gray-700" />
+          </button>
 
-      </div>
-          
-             <EditIcon className="text-orange-400"  onClick={() => handleEditClick(address)}/>
-        
-
-       </div>
-          </div>
-        ))
+          <button
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 disabled:opacity-50"
+            onClick={() => sliderRef.current?.slickNext()}
+            disabled={!pujaData || pujaData.address_list.length <= 1}
+          >
+            <ChevronRight className="w-6 h-6 text-gray-700" />
+          </button>
+        </div>
       ) : (
-        <p className="text-center text-gray-600">Address not available, Please addd your address to continue.</p>
+        <p className="text-center text-gray-600">Address not available, Please add your address to continue.</p>
       )}
     </div>
-  </div>
 <br/> <br/> 
   <div className="mt-4 border rounded-lg shadow-2xl">
           <button
