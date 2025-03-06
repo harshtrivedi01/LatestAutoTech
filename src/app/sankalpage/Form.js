@@ -131,47 +131,42 @@ console.log(packagedetail.amount)
     }
   
     try {
-      // Save form data locally
-      const formData = {
-        type: "store_pooja_member",
-        booking_id: localStorage.getItem("bookingID"),
-        name: defaultFields.name,
-        father_name: defaultFields.father_name,
-        gotra: defaultFields.gotra,
-        email: defaultFields.email,
-        address: defaultFields.address,
-        members: members.map((member) => ({
-          member_name: member.name,
-          // member_father_name: member.fatherName || "",
-          member_gotra: member.gotra,
-        })),
-      };
+      // Retrieve stored form data from localStorage
+      const storedData = JSON.parse(localStorage.getItem("pujaBookingData") || "{}");
   
-      localStorage.setItem("poojaFormData", JSON.stringify(formData));
-      console.log("Form data saved locally:", formData);
+      // Create FormData object for API request
+      let formData = new FormData();
+      formData.append("type", "new_pooja_booking");
+      formData.append("puja_id", storedData.puja_id || "");
+      formData.append("package_id", storedData.package_id || "");
+      formData.append("amount", storedData.amount || "");
+      formData.append("date", storedData.date || "");
+      formData.append("currency", storedData.currency || "INR");
+      formData.append("name", defaultFields.name);
+      formData.append("father_name", defaultFields.father_name);
+      formData.append("gotra", defaultFields.gotra);
+      formData.append("email", defaultFields.email);
+      formData.append("address", defaultFields.address);
   
-      // Create FormData object for the orders API
-      let orderFormData = new FormData();
-      orderFormData.append("type", "cashfree_payment_order");
-      orderFormData.append("order_type", "pooja");
-      orderFormData.append("amount", Math.floor(packagedetail.amount)); // Ensure the amount is filled before API call
-      orderFormData.append("currency", "INR");
+      // Append dynamic members
+      members.forEach((member) => {
+        formData.append("member_name[]", member.name || "");
+        // formData.append("member_father_name[]", member.father_name || "");
+        formData.append("member_gotra[]", member.gotra || "");
+      });
   
-      // Call the orders API
-      const response = await api.post("/orders", orderFormData);
-const payment_session_id = response.data.data.payment_session_id; // Extract order_id
-localStorage.setItem("payment_session_id", payment_session_id); // Store only the order_id
-console.log("Order ID:", payment_session_id); // Log it properly
-
+      // Call the API
+      const response = await api.post("/puja", formData);
+  
       if (response.data.status === "1") {
-        toast.success("Order placed successfully!");
-        router.push("/poojabookingcart")
+        toast.success("Pooja booked successfully!");
+        router.push("/poojabookingcart");
       } else {
         toast.error(response.data.message || "Something went wrong!");
       }
     } catch (error) {
-      console.error("Error submitting order:", error);
-      toast.error("Failed to place order!");
+      console.error("Error submitting form:", error);
+      toast.error("Failed to book pooja!");
     }
   };
   
