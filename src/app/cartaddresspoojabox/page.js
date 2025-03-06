@@ -14,7 +14,7 @@ import SliderTwo from "../poojaboxdetail/SliderTwo";
 export default function Address() {
   const router = useRouter();
   const [pujaData, setPujaData] = useState(null);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const [countries, setCountries] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -69,17 +69,24 @@ const handlePhoneChange = (e) => {
   
   useEffect(() => {
     if (pujaData?.address_list?.length > 0) {
-      const defaultAddress = pujaData.address_list.find((address) => address.set_default === "1");
+      const defaultAddress = pujaData.address_list.find(
+        (address) => address.set_default === "1"
+      );
       if (defaultAddress) {
         setSelectedAddress(defaultAddress.id);
+        setIsButtonDisabled(true); // Keep button disabled if a default address is set
       }
     }
-  }, [pujaData]); // Runs when `pujaData` is loaded
+  }, [pujaData]);
+  
   
   const handleAddressSelect = (addressId) => {
-    setSelectedAddress(addressId);
-    setIsButtonDisabled(false); // Enable button when address is selected
+    if (selectedAddress !== addressId) {
+      setSelectedAddress(addressId);
+      setIsButtonDisabled(false); // Enable button only when user selects a new address
+    }
   };
+  
 
   // Redirect to next step
   const handleNextStep = () => {
@@ -263,7 +270,7 @@ const handlePhoneChange = (e) => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 4, // Default for large screens
+    slidesToShow: 3, // Default for large screens
     slidesToScroll: 1,
     responsive: [
       {
@@ -548,15 +555,15 @@ Choose Shipping Address
           )}
         </div>
 
-        <button
-          onClick={handleNextStep}
-          disabled={isButtonDisabled}
-          className={`mt-7 px-20 py-2  rounded-lg text-white font-medium ${
-            isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
-          }`}
-        >
-          Proceed to Next Step
-        </button>
+          <button
+            onClick={handleNextStep}
+            disabled={isButtonDisabled}
+            className={`mt-7 px-20 py-2  rounded-lg text-white font-medium ${
+              isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
+            }`}
+          >
+            Proceed to Next Step
+          </button>
       </section>
       <br/>   <br/>  <br/>
      <SliderTwo/>

@@ -44,17 +44,17 @@ const SliderTwo = () => {
       let formData = new FormData();
       const isCurrentlyInCart = cartStatus[index];
       const actionType = isCurrentlyInCart ? "remove_cart" : "add_to_cart";
-
+  
       formData.append("type", actionType);
       formData.append("product_id", id);
-
+  
       if (!isCurrentlyInCart) {
         formData.append("quantity", "1");
       }
-
+  
       const response = await api.post("/cart", formData);
       console.log("Cart Action Response:", response.data);
-
+  
       if (response.data.status === 0) {
         toast.error(response.data.message || "Action failed!");
       } else {
@@ -64,17 +64,23 @@ const SliderTwo = () => {
           updatedStatus[index] = !isCurrentlyInCart;
           return updatedStatus;
         });
-
+  
         toast.success(
           response.data.message ||
             (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
         );
+  
+        // ✅ Reload the page after success
+        setTimeout(() => {
+          window.location.reload();
+        }, 10); // Adding a small delay to allow toast to display
       }
     } catch (error) {
       toast.error("Something went wrong! Please try again.");
       console.error("Error handling cart action:", error);
     }
   };
+  
 
   useEffect(() => {
     if (splideRef.current) {

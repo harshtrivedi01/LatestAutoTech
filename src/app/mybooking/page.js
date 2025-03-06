@@ -226,17 +226,17 @@ const Page = () => {
                 <h2 className="text-lg font-bold text-black">
                   {booking.puja_name }
                 </h2>
-                <p
-                  className={`${
-                    booking.booking_status === "success"
-                      ? "text-green-700"
-                      : "text-red-600"
-                  } font-semibold text-md`}
-                >
-                  {booking.booking_status === "success"
-                    ? "Booked Successfully"
-                    : "Booking Failed"}
-                </p>
+                <div
+                className={`${
+                  booking.booking_status === "success"
+                    ? "text-green-500"
+                    : booking.booking_status === "failed"
+                    ? "text-red-500"
+                    : "text-yellow-500"
+                } rounded-full `}
+              >
+                <p className=" text-xl">{booking.booking_status}</p>
+              </div>
                 <p className="text-gray-800 font-semibold text-lg">
                   Amount Rs.{booking.amount}/-
                 </p>

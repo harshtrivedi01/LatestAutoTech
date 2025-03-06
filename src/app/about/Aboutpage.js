@@ -28,7 +28,7 @@ export default function Aboutpage({heading,description,image}) {
             <img src={image||"/images/aboutimage.png"}
                onError={(e) => (e.target.src ="/images/aboutimage.png") }
             /></div>
-          <div className="flex absolute w-80 hidden lg:flex lg:right-60 lg:top-80 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
+          <div className="flex absolute w-80 hidden lg:flex lg:right-20 lg:top-80 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
             <div className="w-full text-left">
 
               <div className="flex gap-5 border-b-2 border-gray-300">

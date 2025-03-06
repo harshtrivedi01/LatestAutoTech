@@ -178,7 +178,7 @@ console.log(packagedetail.amount)
   
       if (response.data.status === "1") {
         toast.success("Pooja booked successfully!");
-        router.push("/poojabookingcart");
+        router.push(`/poojabookingcart?bookingId=${response.data.data.booking_id}`);
       } else {
         toast.error(response.data.message || "Something went wrong!");
       }

@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import AuthGuard from "../component/AuthGuard";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import api from "../lib/axiosInstance";
 
 const Payment = () => {
   const [data, setData] = useState(null);
@@ -10,7 +11,9 @@ const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [redirected, setRedirected] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams(); // Hook to access query parameters
 
+  const bookingId = searchParams.get("bookingId");
   useEffect(() => {
     const redirectedFlag = localStorage.getItem("redirected");
     const sessionId = localStorage.getItem("payment_session_id");
@@ -37,20 +40,99 @@ const Payment = () => {
   };
 
   const initiatePayment = async () => {
+    setLoading(true);
+  
     try {
-      localStorage.setItem("redirected", "true");
-      const cashfree = await initializeSDK();
-      await cashfree.checkout({
-        paymentSessionId: localStorage.getItem("payment_session_id"),
-        redirectTarget: "_modal",
-        
-      }).then((pgResponse) => {
-console.log("pgResponse")
-      });
+      let formData = new FormData();
+      formData.append("type", "cashfree_payment_order");
+      formData.append("order_type", "pooja");
+      formData.append("amount", datapackage?.price || "1");
+      formData.append("currency", "INR");
+  
+      const response = await api.post("/orders", formData);
+      const result = await response.data;
+  
+      if (result.status === "1" && result.data.payment_session_id) {
+        localStorage.setItem("payment_session_id", result.data.payment_session_id);
+        localStorage.setItem("redirected", "true");
+  
+        const cashfree = await initializeSDK();
+        await cashfree
+          .checkout({
+            paymentSessionId: result.data.payment_session_id,
+            redirectTarget: "_modal",
+          })
+          .then(async (pgResponse) => {
+            console.log("Cashfree Response:", pgResponse);
+  
+            // Extract payment status
+            let paymentStatus =
+              pgResponse.paymentDetails?.paymentMessage === "Payment finished. Check status."
+                ? "success"
+                : "failed";
+  
+            // Extract reference ID if available
+            let paymentId = pgResponse.paymentDetails?.referenceId || "N/A";
+  
+            if (paymentStatus === "success") {
+              // Call puja booking API
+              const bookingResponse = await completePujaBooking(
+                result.data.order_id, // Correct order ID
+                paymentId,
+                paymentStatus
+              );
+  
+              // If puja booking is successful, remove tokens & redirect
+              if (bookingResponse?.status === "1" && bookingResponse?.data?.booking_id) {
+                localStorage.removeItem("redirected");
+                localStorage.removeItem("payment_session_id");
+                localStorage.removeItem("productdeatil");
+                localStorage.removeItem("productdeatil2");
+  
+                router.push("/successpage");
+              } else {
+                router.push("/failed");
+              }
+            } else {
+              router.push("/failed");
+            }
+          });
+      } else {
+        console.error("Payment API Error:", result.message);
+        alert("Failed to initiate payment. Please try again.");
+      }
     } catch (error) {
-      console.error("Cashfree Payment Error:", error);
+      console.error("Payment Request Error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
+  
+  // Function to call puja booking API
+  const completePujaBooking = async (orderId, paymentId, paymentStatus) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "pooja_booking_payment");
+      formData.append("booking_id", bookingId); // Correct order ID
+      formData.append("amount", datapackage?.price);
+      formData.append("payment_id", orderId);
+      formData.append("payment_detail", "");
+      formData.append("payment_status", paymentStatus); // Dynamic payment status
+      formData.append("payment_type", "cashfree");
+  
+      const response = await api.post("/puja", formData);
+      return response.data; // Return response for handling in `initiatePayment`
+    } catch (error) {
+      console.error("Puja Booking API Error:", error);
+      return { status: "0" }; // Return failed status to handle redirection
+    }
+  };
+  
+  
+  
+  
+  
 
   if (redirected) {
     return (

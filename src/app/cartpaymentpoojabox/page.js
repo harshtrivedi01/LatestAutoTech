@@ -139,24 +139,19 @@ const Cart = () => {
       }).then(async (pgResponse) => {
         console.log("Payment Response:", pgResponse);
   
-        if (pgResponse.error) {
-          console.error("Payment Error:", pgResponse.error);
-          toast.error(pgResponse.error.message || "Payment failed!");
-          router.push(`/failed`); // Redirect to failed page with order ID
-          return;
-        }
+        let payment_status =
+          pgResponse.paymentStatus === "Payment finished. Check status."
+            ? "success"
+            : "failed";
   
-        // Extract Payment Details
-        const payment_id = pgResponse.transactionId || "12345"; // Use real transaction ID
-        const payment_status = pgResponse.paymentStatus == "SUCCESS" ? "success" : "failed";
+        let payment_id = pgResponse.transactionId || "12345"; // Use actual transaction ID if available
   
-        // Send Order Details to Your API
         let orderFormData = new FormData();
         orderFormData.append("type", "order");
         orderFormData.append("address_id", addressId);
         orderFormData.append("shipping_cost", "0");
         orderFormData.append("payment_type", "cashfree");
-        orderFormData.append("payment_status", "success");
+        orderFormData.append("payment_status", payment_status);
         orderFormData.append("coin_discount", "0");
         orderFormData.append("use_coin_status", "0");
         orderFormData.append("coin_discount_amount", "0");
@@ -166,29 +161,58 @@ const Cart = () => {
         orderFormData.append("country", "IN");
         orderFormData.append("payment_id", order_id);
   
-        const orderResponse = await api.post("/cart", orderFormData);
-        
-        const orderData = orderResponse.data;
-        console.log("Order Submission Response:", orderData);
+        try {
+          const orderResponse = await api.post("/cart", orderFormData);
+          const orderData = orderResponse.data;
+          console.log("Order Submission Response:", orderData);
   
-        if (orderData.status == "1") {
-          toast.success("Order placed successfully!");
-          router.push("/successpage"); // Redirect to success page
-        } else {
-          toast.error(orderData.message || "Order placement failed");
-          router.push(`/failed?order_id=${orderData.order_id}`); // Redirect to failed page with order ID
+          if (orderData.status == "1") {
+            toast.success("Order placed successfully!");
+            router.push("/successpage");
+          } else {
+            toast.error(orderData.message || "Order placement failed");
+            router.push(`/failed?order_id=${order_id}`);
+          }
+        } catch (orderError) {
+          console.error("Error submitting order:", orderError);
+          toast.error("Order processing failed!");
+          router.push(`/failed?order_id=${order_id}`);
         }
+      }).catch((paymentError) => {
+        console.error("Payment SDK Error:", paymentError);
+        toast.error("Payment failed! Please try again.");
+  
+        // Ensure order API is still called even if payment fails
+        let failedOrderFormData = new FormData();
+        failedOrderFormData.append("type", "order");
+        failedOrderFormData.append("address_id", addressId);
+        failedOrderFormData.append("shipping_cost", "0");
+        failedOrderFormData.append("payment_type", "cashfree");
+        failedOrderFormData.append("payment_status", "failed");
+        failedOrderFormData.append("coin_discount", "0");
+        failedOrderFormData.append("use_coin_status", "0");
+        failedOrderFormData.append("coin_discount_amount", "0");
+        failedOrderFormData.append("payment_detail", JSON.stringify(paymentError));
+        failedOrderFormData.append("grand_total", Math.floor(subtotal));
+        failedOrderFormData.append("sub_total", Math.floor(subtotal));
+        failedOrderFormData.append("country", "IN");
+        failedOrderFormData.append("payment_id", order_id);
+  
+        api.post("/cart", failedOrderFormData)
+          .then(() => router.push(`/failed?order_id=${order_id}`))
+          .catch(() => router.push(`/failed?order_id=${order_id}`));
       });
     } catch (error) {
       console.error("Error processing payment:", error);
       toast.error("Payment failed! Please try again.");
+      router.push(`/failed`);
     }
   };
   
 
   if (subtotal === 0 || cartItems.length === 0) {
     return (
-      <div className="text-center py-10">
+      <div className="text-center py-10 min-h-screen items-center mt-20">
         <h2 className="text-2xl font-semibold text-gray-700">Your Cart is Empty</h2>
         <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p>
         <button

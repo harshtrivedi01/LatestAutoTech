@@ -174,7 +174,7 @@ const Cart = () => {
       </div>
     </div>
 
-    <SliderTwo/>
+    <SliderTwo />
       </AuthGuard>
 
   );

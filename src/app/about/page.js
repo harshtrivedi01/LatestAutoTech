@@ -45,8 +45,16 @@ export default function Page() {
         bottomName={pujaData.aboutus_bottom_name} 
         link={pujaData.aboutus_link} 
         images={pujaData.aboutus_images} 
-        imageHeaders={[pujaData.aboutus_imagehed1, pujaData.aboutus_imagehed2, pujaData.aboutus_imagehed3]} 
-        imageDescriptions={[pujaData.aboutus_imagedes1, pujaData.aboutus_imagedes2, pujaData.aboutus_imagedes3]} 
+        aboutus_imagehed1={pujaData.aboutus_imagehed1}
+        aboutus_imagehed2={pujaData.aboutus_imagehed2}
+        aboutus_imagehed3={ pujaData.aboutus_imagehed3} 
+        aboutus_imagedes1={pujaData.aboutus_imagedes1}
+        aboutus_imagedes2={pujaData.aboutus_imagedes2}
+        aboutus_imagedes3={pujaData.aboutus_imagedes3} 
+        image1={pujaData.aboutus_images.image1}
+        image2={pujaData.aboutus_images.image2}
+        image3={pujaData.aboutus_images.image3}
+        image4={pujaData.aboutus_images.image4}
       />
       <Testimonials testimonials={pujaData.testimonials} />
     </>

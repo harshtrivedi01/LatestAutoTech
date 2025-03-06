@@ -42,7 +42,6 @@
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.3",
     "rsuite": "^5.78.0",
-    "sass": "^1.85.1",
     "sass-loader": "^16.0.5",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.2.4",
@@ -54,6 +53,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
+    "sass": "^1.85.1",
     "tailwindcss": "^3.4.1"
   }
 }

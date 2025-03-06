@@ -10,7 +10,7 @@ return(
 <div className="bg-white content-center border-y h-screen">
   <div className="bg-white p-6  md:mx-auto">
    <div className="flex justify-center mb-4">
-   <Image src={success} width={50} height={50}/>
+   <Image src={success} alt="ttt" width={50} height={50}/>
    </div>
     <div className="text-center">
       <h3 className="md:text-2xl text-base text-[#27AE60] font-semibold text-center ">SUCCESS!</h3>
