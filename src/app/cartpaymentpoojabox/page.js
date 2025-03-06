@@ -142,6 +142,7 @@ const Cart = () => {
         if (pgResponse.error) {
           console.error("Payment Error:", pgResponse.error);
           toast.error(pgResponse.error.message || "Payment failed!");
+          router.push(`/failed`); // Redirect to failed page with order ID
           return;
         }
   
@@ -155,7 +156,7 @@ const Cart = () => {
         orderFormData.append("address_id", addressId);
         orderFormData.append("shipping_cost", "0");
         orderFormData.append("payment_type", "cashfree");
-        orderFormData.append("payment_status", payment_status);
+        orderFormData.append("payment_status", "success");
         orderFormData.append("coin_discount", "0");
         orderFormData.append("use_coin_status", "0");
         orderFormData.append("coin_discount_amount", "0");
@@ -271,7 +272,7 @@ const Cart = () => {
                         </p>
                         
                         <div className="mt-3 flex items-center">
-                          <div className="flex items-center rounded-lg shadow-lg border border-orange-400">
+                          <div className="flex items-center rounded-lg shadow-lg border border-[#E5644E]">
                             <button
                               className="text-orange-600 text-lg px-3 py-1"
                               onClick={() => updateCartQuantity(item.product_id, -1)}
@@ -308,9 +309,9 @@ const Cart = () => {
             </div>
             <div className="w-full md:w-1/3">
               <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
-                <h3 className="font-semibold text-gray-800 text-xl mb-3">SubTotal</h3>
+                <h3 className="font-semibold text-gray-800 text-xl mb-3">Checkout</h3>
                 <div className="flex justify-between mb-4">
-                  <span className="text-gray-600 text-lg">Total</span>
+                  <span className="text-gray-600 text-lg font-semibold">Total</span>
                   <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
                 </div>
                 <button

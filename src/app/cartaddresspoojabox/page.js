@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 import api from "../lib/axiosInstance";
 import { useRouter } from "next/navigation";
+import SliderTwo from "../poojaboxdetail/SliderTwo";
 
 export default function Address() {
   const router = useRouter();
@@ -557,7 +558,8 @@ Choose Shipping Address
           Proceed to Next Step
         </button>
       </section>
-     
+      <br/>   <br/>  <br/>
+     <SliderTwo/>
     </>
   );
 }

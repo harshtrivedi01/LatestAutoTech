@@ -1,43 +1,43 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import api from "../lib/axiosInstance";
 
-// Fallback testimonials in case API data is missing
-const fallbackTestimonials = [
-  {
-    id: 1,
-    name: "John Doe",
-    image: "https://readymadeui.com/team-2.webp",
-    testimonials_description:
-      "Amazing service and highly recommended!\r\nThe staff was extremely professional and made everything seamless.",
-  },
-  {
-    id: 2,
-    name: "Sarah Smith",
-    image: "https://readymadeui.com/team-2.webp",
-    testimonials_description:
-      "I had a fantastic experience with this service!\r\nEverything was handled perfectly, and I will definitely come back.",
-  },
-  {
-    id: 3,
-    name: "Michael Brown",
-    image: "https://readymadeui.com/team-2.webp",
-    testimonials_description:
-      "Very satisfied with the results!\r\nHighly professional team and excellent service quality.",
-  },
-];
 
-const Testimonials = ({ pujaData, detail }) => {
+
+const Testimonials = () => {
   const splideRef = useRef(null);
   const pathname = usePathname();
-  const testimonials = pujaData || detail?.testimonials || fallbackTestimonials; // Use API data or fallback
+ 
 
   const isSpecialPage = pathname.includes("/cart","/poojadetail/");
 
+  const [pujaData, setPujaData] = useState([]);
+  
+    useEffect(() => {
+      fetchPujaData();
+    }, []);
+  
+    const fetchPujaData = async () => {
+      try {
+        let formData = new FormData();
+        formData.append("type", "testimonials");
+  
+        const response = await api.post("/testimonials", formData);
+        setPujaData(response.data.data.testimonials);
+
+      } catch (error) {
+        console.error("Error fetching puja data:", error);
+      }
+    };
+
+    const testimonials =
+    pujaData?.length > 0 ? pujaData : null;
+  
   useEffect(() => {
     if (splideRef.current) {
       setTimeout(() => {
@@ -50,12 +50,13 @@ const Testimonials = ({ pujaData, detail }) => {
     }
   }, []);
 
-  return (
-    <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7AA]" : "bg-[#FFDCC0]"} p-6 transition-all duration-300`}>
-      <div className="mb-8 text-center">
-        <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
-      </div>
-
+ return (
+  <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7]" : "bg-[#FFDCC0]"} p-6 transition-all duration-300`}>
+    <div className="mb-8 text-center">
+      <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
+    </div>
+<br/>
+    {testimonials ? (
       <div className="relative w-full mx-auto">
         <Splide
           ref={splideRef}
@@ -93,10 +94,7 @@ const Testimonials = ({ pujaData, detail }) => {
                 </div>
 
                 <p className="font-semibold text-black mt-4">
-                  {testimonial?.testimonials_description
-                    ? testimonial.testimonials_description.split("\r\n")[0].slice(0, 50) +
-                      (testimonial.testimonials_description.split("\r\n")[0].length > 50 ? "..." : "")
-                    : "It was a very good experience"}
+                  {testimonial?.heading || "It was a very good experience"}
                 </p>
 
                 <div className="mt-4">
@@ -109,7 +107,6 @@ const Testimonials = ({ pujaData, detail }) => {
             </SplideSlide>
           ))}
         </Splide>
-
         <div className="flex justify-center items-center absolute -bottom-2 inset-x-0 gap-8">
           <button className="text-2xl text-gray-700 p-2 rounded-full" onClick={() => splideRef.current.splide.go("-1")}>
             <IoIosArrowBack className="text-3xl" />
@@ -122,8 +119,14 @@ const Testimonials = ({ pujaData, detail }) => {
           </button>
         </div>
       </div>
-    </div>
-  );
+    ) : (
+      <div className="text-center py-6">
+        <p className="text-xl font-semibold text-gray-700">Data not available</p>
+      </div>
+    )}
+  </div>
+);
+
 };
 
 export default Testimonials;

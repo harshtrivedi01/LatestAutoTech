@@ -7,7 +7,7 @@ import Cards from "./Cards";
 
 import List from "./List";
 import api from "../lib/axiosInstance";
-import Testimonials from "../component/Testimonials";
+import Testimonials from "../poojadetail/Testimonials";
 
 
 

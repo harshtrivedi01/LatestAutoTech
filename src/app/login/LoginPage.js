@@ -10,7 +10,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import topimage from "./../../../public/Assests/circle-vector.svg";
 import belowimage from "./../../../public/Assests/bird.svg";
-
+import Language from "../../app/component/Language/Language";
+import i18n from "../lib/i18n";
 export default function LoginPage() {
   const router = useRouter();
   const [isResendDisabled, setIsResendDisabled] = useState(false);
@@ -22,6 +23,39 @@ export default function LoginPage() {
       return JSON.parse(localStorage.getItem(key));
     }
     return null;
+  };
+  const [languages, setLanguages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState(null); // Avoid undefined errors
+
+
+  useEffect(() => {
+    const savedLangCode = localStorage.getItem("selectedLanguage") || "en";
+    if (languages.length > 0) {
+      const savedLang = languages.find((lang) => lang.code === savedLangCode) || languages[0];
+      setSelectedLanguage(savedLang);
+      i18n.changeLanguage(savedLangCode);
+    }
+  }, [languages]);
+
+   // Runs again when languages are updated
+  useEffect(() => {
+    setLanguages([
+      { language: "English", code: "en" },
+      { language: "हिंदी", code: "hi" },
+    ]);
+  }, []);
+  
+
+  const handleLanguageChange = (event) => {
+    const code = event.target.value;
+    const selectedLang = languages.find((lang) => lang.code === code);
+    if (selectedLang) {
+      setSelectedLanguage(selectedLang);
+      localStorage.setItem("selectedLanguage", code);
+      i18n.changeLanguage(code);
+      window.location.reload();
+    }
   };
   const [formData, setFormData] = useState({
     type: "login",
@@ -83,34 +117,41 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (phoneError) return toast.error("Invalid phone number");
-  
-    setIsResendDisabled(true);
-  
+
+    if (phoneError) {
+      toast.error("Invalid phone number");
+      setIsResendDisabled(false); // Enable button if there's an error
+      return;
+    }
+
+    setIsResendDisabled(true); // Disable button when submitting
+
     try {
       const data = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         data.append(key, value);
       });
-  
+
       const response = await axios.post(
         "https://dakshhousing.com/satsambhav/websiteapi/authentication",
         data
       );
-  
+
       if (response.status === 200 && response.data.status === "1") {
         toast.success("OTP Sent! Redirecting...");
-        setTimeout(() => router.push(`/otpverification?phone=${formData.phone}`), 2000);
+        setTimeout(() => {
+          router.push(`/otpverification?phone=${formData.phone}`);
+          setIsResendDisabled(true); // Keep button disabled after success
+        }, 2000);
       } else {
         toast.error(response.data.message || "Something went wrong!");
+        setIsResendDisabled(false); // Enable button if error occurs
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong!");
+      setIsResendDisabled(false); // Enable button if error occurs
     }
-  
-    setIsResendDisabled(false);
   };
-  
   
   return (
     <>
@@ -124,14 +165,25 @@ export default function LoginPage() {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="">
               <div className="group relative cursor-pointer py-2">
-                <div className="flex items-center justify-between bg-black px-4 p-1 rounded-xl">
-                  <a className="menu-hover flex gap-1 items-center text-[12px] text-white">
-                    <TbWorld className="text-white" />
-                    Choose language
-                  </a>
-                  <span className="font-bold">
-                    <RiArrowDropDownLine className="text-2xl text-white" />
-                  </span>
+                <div className="flex items-center justify-between bg-black p-2 px-10 rounded-xl">
+               
+                <div className="menu-hover flex gap-1 items-center text-sm text-white">
+                  <img src="/images/language.png" />
+     
+      <select
+        value={selectedLanguage?.code || "en"} // Prevent undefined error
+        onChange={handleLanguageChange}
+        className="bg-transparent text-b text-white focus:outline-none cursor-pointer"
+        aria-label="Select Language"
+      >
+      {languages.map((lang) => (
+  <option key={lang.code} value={lang.code} className="text-black text-sm p-4 h-40">
+    {lang.language || "en"}
+  </option>
+))}
+
+      </select>
+    </div>
                 </div>
               </div>
             </div>
@@ -155,15 +207,18 @@ export default function LoginPage() {
               songs, and discover a variety of spiritual offerings.
             </p>
             <input
-              className="p-2 border-[1px] text-sm rounded-lg w-full"
-              placeholder="Enter Phone No"
-              type="number"
-              name="phone"
-              onChange={handleChange}
-              value={formData.phone}
-              required
-              maxLength={10}
-            />
+  className="p-2 border-[1px] text-sm rounded-lg w-full"
+  placeholder="Enter Phone No"
+  type="text"
+  name="phone"
+  onChange={handleChange}
+  value={formData.phone}
+  required
+  maxLength={10} // Prevents entering more than 10 digits
+  pattern="[0-9]*" // Ensures only numeric input
+  inputMode="numeric" // Shows numeric keyboard on mobile devices
+/>
+
             {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
             <div className="flex space-x-1  text-sm">
               <p className="text-center mt-4 text-sm text-gray-700">

@@ -59,21 +59,18 @@ export default function Footersection() {
   
     return (
       <>
-     <footer className="px-4 divide-y  text-gray-800">
-        
-	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
-		<div className="lg:w-1/3">
-			<a rel="noopener noreferrer" href="/" className="flex justify-center space-x-3 lg:justify-start">
-				<div className="flex items-center justify-center w-12 h-12 rounded-full ">
-                <img src="/images/logo.png" alt="logo" className="" />
-				</div>
-				<span className="self-center text-3xl pt-7 font-semibold">PunyaSetu</span>
-			</a>
-
-            <div className="mt-10">
-                <h1 className=" font-bold mb-2">{pujaData?.name||"M/S Satsambhav Technologies Private Limited"}</h1>
-                <div className="space-y-2">
-                <p className="flex items-center">
+    <footer className="px-4 divide-y text-gray-800 bg-gray-100">
+  <div className="container mx-auto py-10 flex flex-col lg:flex-row justify-between space-y-8 lg:space-y-0">
+    {/* Logo and Contact Info */}
+    <div className="lg:w-1/3 space-y-5">
+      <a href="/" className="flex items-center space-x-3">
+        <img src="/images/logo.png" alt="logo" className="w-9 h-16" />
+        <span className="text-3xl font-semibold">PunyaSetu</span>
+      </a>
+      <div>
+        <h1 className="font-bold text-lg">{pujaData?.name || "M/S Satsambhav Technologies Private Limited"}</h1>
+        <div className="mt-3 space-y-2">
+		<p className="flex items-center">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 mr-2 bg-orange-600 p-2 rounded-full text-white text-xl sm:mr-2">
 						<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
 						<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
@@ -87,56 +84,33 @@ export default function Footersection() {
 					<span>+91 {pujaData?.contact_no}</span>
 				</p>
 				
-			</div>
-            </div>
-		</div>
-	<div>
-    <div className="flex justify-end lg:gap-14 md:gap-10 gap-5">
-			<div className="space-y-3">
-				<Link href={"/"}>
-				<h3 className="  text-gray-900">Home</h3>
-				</Link>
-			</div>
-			<div className="space-y-3">
-			<Link href={"/about"}>
-				<h3 className="  text-gray-900">About</h3>
-				</Link>
-			</div>
-			<div className="space-y-3">
-			<Link href={"/service"}>
-				<h3 className=" text-gray-900">Service</h3>
-				</Link>
-			</div>
-			<div className="space-y-3">
-			<Link href={"/contact"}>
-            <div className=" text-gray-900 ">Contact US</div>
-			</Link>
-			</div>
-			
-		</div>
-		
-     <div >
-	 <div className="flex mt-3 justify-end lg:gap-10 md:gap-10 gap-5">
+        </div>
+      </div>
+    </div>
 
-	 <div className="space-y-3">
-			<Link href={"/faq"}>
-            <div className=" text-gray-900 ">Faq</div>
-			</Link>
-			</div>
-			<div className="space-y-3">
-			<Link href={"/privacypolicy"}>
-            <div className=" text-gray-900 ">Privacy Policy</div>
-			</Link>
-			</div>
-			<div className="space-y-3">
-			<Link href={"/terms&conditions"}>
-            <div className=" text-gray-900 ">Term & condition</div>
-			</Link>
-			</div>
-		</div>
-	 <div className="flex justify-end mt-10 space-x-2">
-			
-			<a 
+    {/* Footer Links */}
+    <div className="grid grid-cols-2 gap-10 lg:w-2/3 lg:grid-cols-3">
+      <nav>
+        <h6 className="footer-title font-semibold text-lg mb-3">Services</h6>
+        <ul className="space-y-2">
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
+          <li><Link href="/service">Service</Link></li>
+          <li><Link href="/contact">Contact Us</Link></li>
+        </ul>
+      </nav>
+      <nav>
+        <h6 className="footer-title font-semibold text-lg mb-3">Company</h6>
+        <ul className="space-y-2">
+          <li><Link href="/faq">FAQ</Link></li>
+          <li><Link href="/privacypolicy">Privacy Policy</Link></li>
+          <li><Link href="/terms&conditions">Terms & Conditions</Link></li>
+        </ul>
+      </nav>
+      <nav>
+        <h6 className="footer-title font-semibold text-lg mb-3">Social Media</h6>
+        <div className="flex space-x-3">
+		<a 
 			 rel="noopener noreferrer" href={pujaData?.social_links.facebook} title="Facebook" className="flex items-center p-1">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-8 h-8 fill-current text-blue-600">
 					<path d="M32 16c0-8.839-7.167-16-16-16-8.839 0-16 7.161-16 16 0 7.984 5.849 14.604 13.5 15.803v-11.177h-4.063v-4.625h4.063v-3.527c0-4.009 2.385-6.223 6.041-6.223 1.751 0 3.584 0.312 3.584 0.312v3.937h-2.021c-1.984 0-2.604 1.235-2.604 2.5v3h4.437l-0.713 4.625h-3.724v11.177c7.645-1.199 13.5-7.819 13.5-15.803z"></path>
@@ -157,12 +131,20 @@ export default function Footersection() {
 					<path d="M16 0c-4.349 0-4.891 0.021-6.593 0.093-1.709 0.084-2.865 0.349-3.885 0.745-1.052 0.412-1.948 0.959-2.833 1.849-0.891 0.885-1.443 1.781-1.849 2.833-0.396 1.020-0.661 2.176-0.745 3.885-0.077 1.703-0.093 2.244-0.093 6.593s0.021 4.891 0.093 6.593c0.084 1.704 0.349 2.865 0.745 3.885 0.412 1.052 0.959 1.948 1.849 2.833 0.885 0.891 1.781 1.443 2.833 1.849 1.020 0.391 2.181 0.661 3.885 0.745 1.703 0.077 2.244 0.093 6.593 0.093s4.891-0.021 6.593-0.093c1.704-0.084 2.865-0.355 3.885-0.745 1.052-0.412 1.948-0.959 2.833-1.849 0.891-0.885 1.443-1.776 1.849-2.833 0.391-1.020 0.661-2.181 0.745-3.885 0.077-1.703 0.093-2.244 0.093-6.593s-0.021-4.891-0.093-6.593c-0.084-1.704-0.355-2.871-0.745-3.885-0.412-1.052-0.959-1.948-1.849-2.833-0.885-0.891-1.776-1.443-2.833-1.849-1.020-0.396-2.181-0.661-3.885-0.745-1.703-0.077-2.244-0.093-6.593-0.093zM16 2.88c4.271 0 4.781 0.021 6.469 0.093 1.557 0.073 2.405 0.333 2.968 0.553 0.751 0.291 1.276 0.635 1.844 1.197 0.557 0.557 0.901 1.088 1.192 1.839 0.22 0.563 0.48 1.411 0.553 2.968 0.072 1.688 0.093 2.199 0.093 6.469s-0.021 4.781-0.099 6.469c-0.084 1.557-0.344 2.405-0.563 2.968-0.303 0.751-0.641 1.276-1.199 1.844-0.563 0.557-1.099 0.901-1.844 1.192-0.556 0.22-1.416 0.48-2.979 0.553-1.697 0.072-2.197 0.093-6.479 0.093s-4.781-0.021-6.48-0.099c-1.557-0.084-2.416-0.344-2.979-0.563-0.76-0.303-1.281-0.641-1.839-1.199-0.563-0.563-0.921-1.099-1.197-1.844-0.224-0.556-0.48-1.416-0.563-2.979-0.057-1.677-0.084-2.197-0.084-6.459 0-4.26 0.027-4.781 0.084-6.479 0.083-1.563 0.339-2.421 0.563-2.979 0.276-0.761 0.635-1.281 1.197-1.844 0.557-0.557 1.079-0.917 1.839-1.199 0.563-0.219 1.401-0.479 2.964-0.557 1.697-0.061 2.197-0.083 6.473-0.083zM16 7.787c-4.541 0-8.213 3.677-8.213 8.213 0 4.541 3.677 8.213 8.213 8.213 4.541 0 8.213-3.677 8.213-8.213 0-4.541-3.677-8.213-8.213-8.213zM16 21.333c-2.948 0-5.333-2.385-5.333-5.333s2.385-5.333 5.333-5.333c2.948 0 5.333 2.385 5.333 5.333s-2.385 5.333-5.333 5.333zM26.464 7.459c0 1.063-0.865 1.921-1.923 1.921-1.063 0-1.921-0.859-1.921-1.921 0-1.057 0.864-1.917 1.921-1.917s1.923 0.86 1.923 1.917z"></path>
 				</svg>
 			</a>
-		</div>
-	 </div>
+			<a rel="noopener noreferrer" href={pujaData?.social_links.youtube} title="youtube" className="flex items-center p-1">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  className="w-10 h-10 fill-current text-red-600" viewBox="0 0 16 16">
+  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+</svg>
+			</a>
+        </div>
+      </nav>
     </div>
-	</div>
-	<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">© 2025 Punyasetu, Inc. All rights reserved.</div>
-</footer> 
+  </div>
+  <div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">© 2025 Punyasetu, Inc. All rights reserved.</div>
+</footer>
+
+
+
       </>
     )
 }

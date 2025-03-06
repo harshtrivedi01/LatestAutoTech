@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Sankalp from "./Sankalp";
 import AuthGuard from "../component/AuthGuard";
 import Homeeight from "../Home/Homeeight";
-import Testimonials from "../component/Testimonials";
+import Testimonials from "../poojadetail/Testimonials";
 //export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Cart = () => {

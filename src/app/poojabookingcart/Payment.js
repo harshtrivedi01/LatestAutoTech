@@ -69,7 +69,7 @@ console.log("pgResponse")
 
   return (
     <AuthGuard>
-      <div className="cart b50 min-h-screen p-60">
+      <div className="cart b50  p-60">
         <div className="container">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Left Section */}

@@ -7,9 +7,14 @@ import toast, { Toaster } from "react-hot-toast";
 import api from "../lib/axiosInstance";
 
 export default function Homefourth({ pujaData }) {
-  const [cartStatus, setCartStatus] = useState(
-    pujaData?.data?.product_list.map((puja) => puja.cart_status) || []
-  );
+  const [cartStatus, setCartStatus] = useState([]);
+
+  useEffect(() => {
+    if (pujaData?.data?.product_list) {
+      setCartStatus(pujaData.data.product_list.map((puja) => puja.cart_status));
+    }
+  }, [pujaData]); // Update cartStatus when pujaData changes
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -19,32 +24,30 @@ export default function Homefourth({ pujaData }) {
   const handleCartAction = async (id, index) => {
     try {
       let formData = new FormData();
-      const isCurrentlyInCart = cartStatus[index]; // Check current cart status
-      const actionType = isCurrentlyInCart ? " add_to_cart" : "remove_cart";
-
+      const isCurrentlyInCart = cartStatus[index]; 
+      const actionType = isCurrentlyInCart ? "remove_cart" : "add_to_cart";
+  
       formData.append("type", actionType);
       formData.append("product_id", id);
-
       if (!isCurrentlyInCart) {
         formData.append("quantity", "1");
       }
-
+  
       const response = await api.post("/cart", formData);
-
-      console.log("Cart Action Response:", response.data);
-
+  
       if (response.data.status === 0) {
         toast.error(response.data.message || "Action failed!");
       } else {
-        // Toggle cart status for the specific product
+        // ✅ Update cartStatus in state
         setCartStatus((prevStatus) => {
           const updatedStatus = [...prevStatus];
           updatedStatus[index] = !isCurrentlyInCart;
           return updatedStatus;
         });
-
+  
         toast.success(
-          response.data.message || (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
+          response.data.message ||
+            (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
         );
       }
     } catch (error) {
@@ -52,6 +55,7 @@ export default function Homefourth({ pujaData }) {
       console.error("Error handling cart action:", error);
     }
   };
+  
 
 
   if (!pujaData || !pujaData.data || pujaData.data.product_list.length === 0) {
@@ -146,28 +150,35 @@ export default function Homefourth({ pujaData }) {
                     {puja.stock ? (
                       <div className="flex justify-end">
                         {isLoggedIn ? (
-                          <button
-                            className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
-      ${cartStatus[index] ? "bg-green-600 hover:bg-red-700" : "bg-orange-700 hover:bg-green-700"}
-    `}
-                            onClick={() => handleCartAction(puja.id, index)}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="mr-2 h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                              />
-                            </svg>
-                            {!cartStatus[index] ? "Remove from Cart " : "Add to Cart"}
-                          </button>
+                      <button
+                      className={`flex items-center justify-center rounded-md px-10 shadow-xl py-2 text-center text-sm font-medium text-white
+                        ${
+                          cartStatus[index] 
+                            ? "bg-red-600 hover:bg-red-700"  // Remove from Cart style
+                            : "bg-green-600 hover:bg-green-700"
+                        }
+                      `}
+                      onClick={() => handleCartAction(puja.id, index)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="mr-2 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                      </svg>
+                      {cartStatus[index] ? "Remove from Cart" : "Add to Cart"}
+                    </button>
+                    
+                      
+                       
 
                         )
                         : (

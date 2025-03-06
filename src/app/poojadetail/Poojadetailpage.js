@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { Calendar, CalendarIcon } from "lucide-react";
 import api from "../lib/axiosInstance";
-import Testimonials from "../component/Testimonials";
+import Testimonials from "./Testimonials";
 
 const slides = [
   { image: "img", text: "Pooja Anytime Anywhere" },

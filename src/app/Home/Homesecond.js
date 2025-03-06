@@ -29,12 +29,12 @@ export default function Homesecond({ module_category_details }) {
   };
 
   const bookingUrls = {
-    "Guru Ji": "https://example.com/book-guruji",
-    "Pandit Ji": "/pandit",
+    "Guru Ji": "#",
+    "Pandit Ji": "#",
     "Pooja": "/poojabooking",
-    "Granth": "https://example.com/book-granth",
-    "Online Classes": "https://example.com/book-classes",
-    "Live Darshan": "https://example.com/book-darshan",
+    "Granth": "#",
+    "Online Classes": "#",
+    "Live Darshan": "#",
   };
 
   const toggleReadMore = (id) => {
@@ -49,7 +49,7 @@ export default function Homesecond({ module_category_details }) {
       <div className="bg-[#FFFFFF] px- pb-10">
         <div id="features" className="mx-auto max-w-6xl">
           <div className="flex justify-center">
-            <Heading text="Our Services" />
+            <Heading text="Our Service" />
           </div>
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {

@@ -192,7 +192,7 @@ console.log("Order ID:", payment_session_id); // Log it properly
     }
   };
   return (
-    <div className="p-6 min-h-screen">
+    <div className="p-6 min-h-scree">
       <Toaster position="top-right" reverseOrder={false} />
       <h1 className="font-medium my-4 text-2xl">Choose Previous Sankalp Detail</h1>
 

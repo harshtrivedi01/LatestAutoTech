@@ -1,19 +1,18 @@
-
+"use client"
 
 
 import { MdArrowOutward } from "react-icons/md";
-import Homethird from "../Home/Homethird";
-import Homeeight from "../Home/Homeeight";
-import Aboutsection from "./Aboutsection";
-export default function Aboutpage() {
+
+import DOMPurify from "dompurify";
+export default function Aboutpage({heading,description,image}) {
+ 
   return (
     <>
       <section className="pt-20 md:pt-20 bg-[#FFF8F5]">
         <div className="container mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">Spiritual Services for Inner Peace and Transformation</h1>
-            <p className="text-lg lg:text-2xl mt-6 t">At Punyasetu, we offer a range of spiritual services <br />
-              designed to guide you on your journey to inner peace,<br /> enlightenment, and personal transformation. </p>
+            <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold leading-none">{heading}</h1>
+            <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>
             <p className="mt-8 md:mt-12">
               <button
                 type="button"
@@ -26,7 +25,9 @@ export default function Aboutpage() {
 
           </div>
           <div className="lg:w-1/2">
-            <img src="/images/aboutimage.png" /></div>
+            <img src={image||"/images/aboutimage.png"}
+               onError={(e) => (e.target.src ="/images/aboutimage.png") }
+            /></div>
           <div className="flex absolute w-80 hidden lg:flex lg:right-60 lg:top-80 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
             <div className="w-full text-left">
 

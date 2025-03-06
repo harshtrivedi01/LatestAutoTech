@@ -38,7 +38,7 @@ const fallbackData = [
 
 const CustomSlider = ({ bottomslider_list = fallbackData }) => {
   return (
-    <div className="w-full mx-auto py-10">
+    <div className="w-full mx-auto py-10 bg-[#FFEEE2]">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

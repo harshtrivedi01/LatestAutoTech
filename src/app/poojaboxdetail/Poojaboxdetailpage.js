@@ -13,6 +13,7 @@ import SliderTwo from "./SliderTwo";
 import { Heart, HeartIcon } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../lib/axiosInstance";
+import Testimonials from "../poojadetail/Testimonials";
 
 export default function Poojaboxdetailpage() {
   const { id } = useParams();
@@ -213,7 +214,8 @@ export default function Poojaboxdetailpage() {
 
       {/* Other Components */}
       <Content description={pujaData.description} />
-      <SliderOne testimonials={pujaData.testimonials}/>
+      {/* <SliderOne testimonials={pujaData.testimonials}/> */}
+      <Testimonials/>
       <SliderTwo pujaData={pujaData.related_products}/>
       <Faq faqs={pujaData.faqs} />
     </>

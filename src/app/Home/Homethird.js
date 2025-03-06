@@ -32,8 +32,8 @@ export default function Homethird({pujaData}) {
 </p>
         </div>
         <br />
-        <br />
-        <br /> <br />
+       
+       
         <br />
         <div>
           <div className=" ">
@@ -56,7 +56,9 @@ export default function Homethird({pujaData}) {
                     {      pujaData?.data?.aboutus_imagedes1}
                           </h3>
                           <div>
-                            <button className="p-3 mt-4  text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
+                            <button
+                             href={pujaData?.data?.aboutus_link}
+                             className="p-3 mt-4  text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
                               <FaChevronRight className="text-[#DD531B]" />
                             </button>
                           </div>

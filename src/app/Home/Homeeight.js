@@ -58,44 +58,47 @@ const Homeeight = ({ pujaData, detail }) => {
           }}
           className="w-full"
         >
-          {testimonials.map((testimonial, index) => (
-            <SplideSlide key={testimonial.id || index}>
-              <div className="p-6 mx-auto  relative max-w-md mb-10 bg-white rounded-lg ">
-                <div className="flex items-center  gap-4">
-                  {/* Client image */}
-                  <img
-                    src={testimonial?.image || "https://readymadeui.com/team-2.webp"}
-                    className="w-14 h-14 rounded-full border-2 shadow shadow-2xl"
-                    alt={testimonial?.name || "Client"}
-                  />
-                  <div>
-                    {/* Client name */}
-                    <h4 className="text-gray-800 text-lg font-semibold">
-                      {testimonial?.name || "Client Name"}
-                    </h4>
-                  </div>
-                </div>
+          {testimonials && testimonials.length > 0 ? (
+  testimonials.map((testimonial, index) => (
+    <SplideSlide key={testimonial.id || index}>
+      <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg shadow-lg">
+        <div className="flex items-center gap-4">
+          {/* Client image */}
+          <img
+            src={testimonial?.image || "https://readymadeui.com/team-2.webp"}
+            className="w-14 h-14 rounded-full border-2 shadow shadow-2xl"
+            alt={testimonial?.name || "Client"}
+          />
+          <div>
+            {/* Client name */}
+            <h4 className="text-gray-800 text-lg font-semibold">
+              {testimonial?.name || "Client Name"}
+            </h4>
+          </div>
+        </div>
 
-                {/* Testimonial short description */}
-                <p className="font-semibold text-black mt-4">
-                  {testimonial?.testimonials_description
-                    ? testimonial.testimonials_description.split("\r\n")[0].slice(0, 50) +
-                      (testimonial.testimonials_description.split("\r\n")[0].length > 50
-                        ? "..."
-                        : "")
-                    : "It was a very good experience"}
-                </p>
+        {/* Testimonial short description */}
+        <p className="font-semibold text-black mt-4">
+          {testimonial?.testimonials_description
+            ? testimonial.testimonials_description.split("\r\n")[0].slice(0, 50) +
+              (testimonial.testimonials_description.split("\r\n")[0].length > 50 ? "..." : "")
+            : "It was a very good experience"}
+        </p>
 
-                {/* Full testimonial description */}
-                <div className="mt-4">
-                  <p className="text-sm text-black">
-                    {testimonial?.testimonials_description?.split("\r\n")[1] ||
-                      "The service was amazing. I never had to wait that long for my food."}
-                  </p>
-                </div>
-              </div>
-            </SplideSlide>
-          ))}
+        {/* Full testimonial description */}
+        <div className="mt-4">
+          <p className="text-sm text-black">
+            {testimonial?.testimonials_description?.split("\r\n")[1] ||
+              "The service was amazing. I never had to wait that long for my food."}
+          </p>
+        </div>
+      </div>
+    </SplideSlide>
+  ))
+) : (
+  <div className="text-center text-gray-500 text-lg font-semibold py-10">No data available</div>
+)}
+
         </Splide>
 
         {/* Custom Navigation Below */}

@@ -13,6 +13,7 @@ import belowimage from '../../../public/Assests/bird.svg';
 import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
+import i18n from "../lib/i18n.js";
 
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
@@ -37,6 +38,39 @@ export default function OtpVerificationPage() {
 
   const [token, setToken] = useState(null);
 
+  const [languages, setLanguages] = useState([]);
+  
+  const [selectedLanguage, setSelectedLanguage] = useState(null); // Avoid undefined errors
+
+
+  useEffect(() => {
+    const savedLangCode = localStorage.getItem("selectedLanguage") || "en";
+    if (languages.length > 0) {
+      const savedLang = languages.find((lang) => lang.code === savedLangCode) || languages[0];
+      setSelectedLanguage(savedLang);
+      i18n.changeLanguage(savedLangCode);
+    }
+  }, [languages]);
+
+   // Runs again when languages are updated
+  useEffect(() => {
+    setLanguages([
+      { language: "English", code: "en" },
+      { language: "हिंदी", code: "hi" },
+    ]);
+  }, []);
+  
+
+  const handleLanguageChange = (event) => {
+    const code = event.target.value;
+    const selectedLang = languages.find((lang) => lang.code === code);
+    if (selectedLang) {
+      setSelectedLanguage(selectedLang);
+      localStorage.setItem("selectedLanguage", code);
+      i18n.changeLanguage(code);
+      window.location.reload();
+    }
+  };
   useEffect(() => {
     if (typeof window !== "undefined") {
       setToken(localStorage.getItem("token"));
@@ -141,7 +175,7 @@ export default function OtpVerificationPage() {
     try {
       setTimer(60);
       setResendVisible(false);
-      toast.info("Resending OTP...");
+      // toast.info("Resending OTP...");
 
       const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
 
@@ -165,10 +199,10 @@ export default function OtpVerificationPage() {
           router.push(redirectPath);
         }, 2000);
       }else {
-        toast.error(response.data.message || "Failed to resend OTP.");
+        // toast.error(response.data.message || "Failed to resend OTP.");
       }
     } catch (error) {
-      toast.error("Error resending OTP. Try again later.");
+      // toast.error("Error resending OTP. Try again later.");
     }
   };
 
@@ -201,25 +235,26 @@ export default function OtpVerificationPage() {
                <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                  <div className="">
                    <div className="group relative cursor-pointer py-2">
-                     <div className="flex items-center justify-between bg-black px-4 p-1 rounded-xl">
-                       <a className="menu-hover flex gap-1 items-center  text-[12px]   text-white " >
-                         <TbWorld className="text-white" />
-                         Choose language
-                       </a>
-                       <span className="font-bold">
-                         <RiArrowDropDownLine className="text-2xl text-white" />
-     
-                       </span>
-                     </div>
-                     <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible">
-                       <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                         English
-                       </a>
-                       <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                         Hindi
-                       </a>
-     
-                     </div>
+                   <div className="flex items-center justify-between bg-black p-2 px-10 rounded-xl">
+               
+               <div className="menu-hover flex gap-1 items-center text-sm text-white">
+     <img src="/images/language.png" />
+     <select
+       value={selectedLanguage?.code || "en"} // Prevent undefined error
+       onChange={handleLanguageChange}
+       className="bg-transparent text-b text-white focus:outline-none cursor-pointer"
+       aria-label="Select Language"
+     >
+     {languages.map((lang) => (
+ <option key={lang.code} value={lang.code} className="text-black text-sm p-4 h-40">
+   {lang.language || "en"}
+ </option>
+))}
+
+     </select>
+   </div>
+               </div>
+                     
                    </div>
                  </div>
      

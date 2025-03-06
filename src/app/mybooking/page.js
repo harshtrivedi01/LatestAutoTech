@@ -224,7 +224,7 @@ const Page = () => {
               <div className="w-full sm:w-7/12 text-center sm:text-left">
                 <p className="text-gray-500 text-sm">#{booking.booking_id}</p>
                 <h2 className="text-lg font-bold text-black">
-                  {booking.puja_name}
+                  {booking.puja_name }
                 </h2>
                 <p
                   className={`${
@@ -243,6 +243,9 @@ const Page = () => {
                 <p className="text-red-600 font-bold text-md">
                   {booking.package_name || "N/A"}
                 </p>
+                <button className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
+                        <Link href="/">Book Again</Link>
+                      </button>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
@@ -363,12 +366,13 @@ const Page = () => {
                onError={(e) => (e.target.src = "/images/logo.png")}
              />
              <div className="w-full sm:w-8/12 text-center sm:text-left">
-               <h2 className="text-[15px] font-[500] text-[#855318]">
+               <h2 className="text-[15px] font-[500] text-[#855318] font-semibold">
                  {order.product_name}
                </h2>
-               <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p>
+               {/* <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p> */}
+               <p className="text-gray-500 text-sm"> {order.description || "description"}</p>
                <p className="text-[#7E570F] font-[400] text-[14px]">
-                 Delivery Date: {order.date}
+                 Expected Delivery by: {order.date}
                </p>
                <p className="text-gray-800 font-[500] text-[14px]">
                  Amount Rs. {order.grand_total}
@@ -376,9 +380,9 @@ const Page = () => {
                <p className="text-gray-600 text-sm">
                  <span className="font-semibold">Order Date:</span> {order.order_date}
                </p>
-               {/* <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
+               <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
                  Order Again
-               </p> */}
+               </p>
                <div
                  className={`${
                    statusColors[order.delivery_status] || "bg-gray-500"

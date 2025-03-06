@@ -1,4 +1,5 @@
 import AuthGuard from "../component/AuthGuard";
+import Testimonials from "../poojadetail/Testimonials";
 import Form from "./Form";
 //export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
@@ -38,6 +39,7 @@ const Page = () => {
 </div>
     <Form/>
       </div>
+      <Testimonials/>
     </AuthGuard>
     );
   };

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import AuthGuard from "../component/AuthGuard";
 import Payment from "./Payment";
+import Testimonials from "../poojadetail/Testimonials";
 
 
 export default function page() {
@@ -19,7 +20,7 @@ const datapackage = JSON.parse(datastoragepackge)
 console.log((datapackage))
   return (
     <AuthGuard>
-    <div className="cart b50 min-h-screen p-60">
+    <div className="cart b50 min- p-60">
       <div className="container">
         <h1 className="f-34 mb-2 font-semibold text-lg text-black">Cart</h1>
 
@@ -58,7 +59,9 @@ console.log((datapackage))
 </div>
 
 <Payment/>
+
       </div>
+      <Testimonials/>
     </div>
     {/* <Homeeight/> */}
    
