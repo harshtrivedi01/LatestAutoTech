@@ -131,17 +131,17 @@ console.log(packagedetail.amount)
     }
   
     try {
-      // Retrieve stored form data from localStorage
-      const storedData = JSON.parse(localStorage.getItem("pujaBookingData") || "{}");
+      // Retrieve stored data from localStorage
+      const bookingData = JSON.parse(localStorage.getItem("pujaBookingData") || "{}");
   
-      // Create FormData object for API request
+      // Create form data object
       let formData = new FormData();
       formData.append("type", "new_pooja_booking");
-      formData.append("puja_id", storedData.puja_id || "");
-      formData.append("package_id", storedData.package_id || "");
-      formData.append("amount", storedData.amount || "");
-      formData.append("date", storedData.date || "");
-      formData.append("currency", storedData.currency || "INR");
+      formData.append("puja_id", bookingData.puja_id || "");
+      formData.append("package_id", bookingData.package_id || "");
+      formData.append("amount", bookingData.amount || "");
+      formData.append("date", bookingData.date || "");
+      formData.append("currency", bookingData.currency || "INR");
       formData.append("name", defaultFields.name);
       formData.append("father_name", defaultFields.father_name);
       formData.append("gotra", defaultFields.gotra);
@@ -149,13 +149,31 @@ console.log(packagedetail.amount)
       formData.append("address", defaultFields.address);
   
       // Append dynamic members
+      const membersData = members.map((member) => ({
+        member_name: member.name,
+        member_gotra: member.gotra,
+      }));
+  
       members.forEach((member) => {
         formData.append("member_name[]", member.name || "");
-        // formData.append("member_father_name[]", member.father_name || "");
+        formData.append("member_father_name[]", member.father_name || "");
         formData.append("member_gotra[]", member.gotra || "");
       });
   
-      // Call the API
+      // Save data to localStorage
+      const poojaFormData = {
+        ...bookingData,
+        name: defaultFields.name,
+        father_name: defaultFields.father_name,
+        gotra: defaultFields.gotra,
+        email: defaultFields.email,
+        address: defaultFields.address,
+        members: membersData,
+      };
+      localStorage.setItem("poojaFormData", JSON.stringify(poojaFormData));
+  
+      console.log("Form data saved locally:", poojaFormData);
+  
       const response = await api.post("/puja", formData);
   
       if (response.data.status === "1") {
