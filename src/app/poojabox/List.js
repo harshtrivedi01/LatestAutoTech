@@ -54,6 +54,7 @@ export default function List({ pujaData }) {
   };
 
   return (
+    
     <div className="container leading-relaxed">
       <Toaster position="top-right" reverseOrder={false} />
       <ul className="grid gap-6 sm:grid-cols-2 justify-center lg:grid-cols-3 p-60">

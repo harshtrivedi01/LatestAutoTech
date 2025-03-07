@@ -7,6 +7,11 @@ import Aboutsection from "./Aboutsection";
 import api from "../lib/axiosInstance";
 
 export default function Page() {
+   const [isClient, setIsClient] = useState(false);
+  
+    useEffect(() => {
+      setIsClient(true);
+    }, []);
   const [pujaData, setPujaData] = useState(null);
 
   useEffect(() => {

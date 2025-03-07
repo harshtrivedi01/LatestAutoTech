@@ -109,7 +109,7 @@ export default function Footersection() {
       </nav>
       <nav>
         <h6 className="footer-title font-semibold text-lg mb-3">Social Media</h6>
-        <div className="flex space-x-3">
+        <div className="flex space-x-2">
 		<a 
 			 rel="noopener noreferrer" href={pujaData?.social_links.facebook} title="Facebook" className="flex items-center p-1">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-8 h-8 fill-current text-blue-600">

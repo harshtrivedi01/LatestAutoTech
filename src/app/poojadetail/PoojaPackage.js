@@ -28,9 +28,9 @@ const PoojaPackages = ({ detail }) => {
 
   return (
     <div className="package p-60 bg-grey" id="Package-section">
-      <div className="container px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 mx-auto">
+      <div className="container px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 mx-auto">
         <h1 className="title text-black my-5">Select Pooja Package</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 xl:space-y-4 mb-5">
           {detail.packages?.map((pkg) => {
             const isHighlighted = selectedPackage?.id === pkg.id;
             const isExpanded = expandedPackages[pkg.id] || false;
@@ -41,16 +41,16 @@ const PoojaPackages = ({ detail }) => {
             return (
               <div
                 key={pkg.id}
-                className={`border text-black rounded-lg cursor-pointer flex flex-col h-full ${
+                className={`border  text-black rounded-lg cursor-pointer flex flex-col h-full ${
                   isHighlighted
-                    ? "border-1 p-1 bg-orange-100 border-orange-500 active-package"
+                    ? "border-1 p-1 bg-orange-100 border-orange-500 active-package  mb-5"
                     : "bg-white border-2 border-orange-600"
                 }`}
                 onClick={() => setSelectedPackage(pkg)}
               >
                 {/* Package Header */}
                 <div className="flex gap-2 justify-between top-card rounded-t-3xl p-2 rounded-lg items-center">
-                  <div className="pack-img w-40 h-24 aspect-[4/3]">
+                <div className="pack-img w-32 h-20 sm:w-40 sm:h-24 md:w-48 md:h-28 lg:w-56 lg:h-32 aspect-[4/3]">
                     <img
                       src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
                       alt={pkg.name}
@@ -60,15 +60,22 @@ const PoojaPackages = ({ detail }) => {
                       className="object-contain w-full h-full"
                     />
                   </div>
-                  <div className="text-left">
+                  <div className="text-left ">
                     {pkg.tag && (
-                      <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] ms-4 p-0.5 ps-3 flex text-white uppercase text-[10px] items-center gap-2 rounded-full">
-                        {pkg.tag} <img src="/images/dimond.png" className="h-5" />
+                      <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] me-4  -4 p-0.5 ps-3 md:flex text-white uppercase text-[10px] items-center gap-1 rounded-full">
+                        {pkg.tag} <img src="/images/dimond.png" className="lg:h-5 " />
                       </div>
                     )}
-                    <h2 className="text-lg font-bold mb-1 f-25">{pkg.name}</h2>
-                    <h2 className="text-lg font-bold mb-1">Package for {pkg.no_of_member} Person</h2>
-                    <p className="font-bold text-red-600 text-xl f-34">₹{Math.floor(pkg.price)}</p>
+<h2 className="text-base sm:text-lg md:text-xl lg:text-xl font-bold mb-1">
+  {pkg.name}
+</h2>
+<h2 className="text-sm sm:text-lg md:text-xl lg:text-xl font-bold mb-1">
+  Package for {pkg.no_of_member} Person
+</h2>
+<p className="font-bold text-red-600 text-lg sm:text-xl md:text-xl lg:text-2xl">
+  ₹{Math.floor(pkg.price)}
+</p>
+
                   </div>
                 </div>
 

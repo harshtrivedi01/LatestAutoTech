@@ -2,11 +2,12 @@ import Image from "next/image";
 //export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 import success from "../../../public/success.png"
+import AuthGuard from "../component/AuthGuard";
 export default function page(){
 return(
 
     <>
-        {/* component */}
+      <AuthGuard>
 <div className="bg-white content-center border-y h-screen">
   <div className="bg-white p-6  md:mx-auto">
    <div className="flex justify-center mb-4">
@@ -17,13 +18,13 @@ return(
       <p className="text-[#4A4A4A] my-5 font-semibold">Your payment has been successfully processed, and your <br/> booking is confirmed</p>
       
       <div className="py-10 text-center">
-        <a href="/" className="px-20 rounded-lg bg-[#27AE60] hover:bg-indigo-500 text-white font-semibold py-3">
+        <a href="/" className="px-20 rounded-lg bg-[#27AE60] hover:bg-green-500 text-white font-semibold py-3">
        Back To Home
         </a>
       </div>
     </div>
   </div>
-</div>
+</div></AuthGuard>
     </>
 )
 

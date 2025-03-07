@@ -27,9 +27,11 @@ export default function Homethird({pujaData}) {
             <Heading text="About" color="white" />
           </div>
 
-          <p className="text-center text-white text-[20px] md:text-2xl px-4" 
-   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData?.data?.aboutus_description) }}>
-</p>
+          <p 
+  className="text-center text-white text-base sm:text-lg md:text-xl lg:text-2xl px-4 md:px-8 lg:px-12"
+  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData?.data?.aboutus_description) }}
+></p>
+
         </div>
         <br />
        
@@ -48,11 +50,11 @@ export default function Homethird({pujaData}) {
                           className="group relative flex flex-col overflow-hidden rounded-2xl p-8 pt-40 bg-white"
                         >
                           <div className="absolute inset-0 " />
-                          <h3 className="z-10 text-2xl font-medium  absolute top-0 left-0 p-4 xs:text-2xl md:text-2xl text-[#894112]">
+                          <h3 className="z-10 text-2xl font-medium  absolute top-0 left-0 p-4 xs:text-2xl md:text-1xl text-[#894112]">
                          { pujaData?.data?.aboutus_imagehed1}
                           </h3>{" "}
                           <br />
-                          <h3 className="z-10 text-lg  text-black absolute top-20 left-0 p-4 xs:text-lg md:text-lg leading-10 text-light">
+                          <h3 className="z-10 text-lg  text-black absolute top-20 left-0 p-4 md:my-3 xs:text-lg md:text-sm  lg:text-[17px] leading-10 text-light">
                     {      pujaData?.data?.aboutus_imagedes1}
                           </h3>
                           <div>
@@ -70,7 +72,7 @@ export default function Homethird({pujaData}) {
                           />
                         </a>
                       </div>
-
+<br/>
                       <div className="grid mt-5">
                         <a
                         href={""}
@@ -97,14 +99,14 @@ export default function Homethird({pujaData}) {
                           className="absolute top-20 left-10 h-14 w-16 top-0"
                           onError={(e) => (e.target.src = "/images/logo.png")}
                         />
-                        <h3 className="z-10 text-xl text-black font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
+                        <h3 className="z-10 text-xl text-black font-semibold absolute top-40 left-0 p-4 xs:text-xl md:text-2xl mx-4 ">
                         {pujaData?.data?.aboutus_imagehed2}-{" "}
                           <span className="font-normal">
                           {pujaData?.data?.aboutus_imagedes2}
                           </span>
                         </h3>{" "}
                         <br />
-                        <br />
+                        <br /><br/>
                         <h3 className="z-10 text-xl text-black font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
                         {pujaData?.data?.aboutus_imagehed3} –{" "}
                           <span className="font-normal">

@@ -346,9 +346,9 @@ const Bookingpage = () => {
                         </span>{" "}
                         {booking.orderTime}
                       </p>
-                      <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
+                      {/* <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
                         Order Again
-                      </p>
+                      </p> */}
                       <div
                         className={`${
                           statusColors[booking.status]

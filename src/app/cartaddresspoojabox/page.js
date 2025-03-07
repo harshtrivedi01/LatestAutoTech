@@ -12,6 +12,11 @@ import { useRouter } from "next/navigation";
 import SliderTwo from "../poojaboxdetail/SliderTwo";
 
 export default function Address() {
+    const [isClient, setIsClient] = useState(false);
+    
+      useEffect(() => {
+        setIsClient(true);
+      }, []);
   const router = useRouter();
   const [pujaData, setPujaData] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -74,18 +79,18 @@ const handlePhoneChange = (e) => {
       );
       if (defaultAddress) {
         setSelectedAddress(defaultAddress.id);
-        setIsButtonDisabled(true); // Keep button disabled if a default address is set
+        setIsButtonDisabled(false); // Enable the button if a default address exists
       }
     }
   }, [pujaData]);
   
   
+  
   const handleAddressSelect = (addressId) => {
-    if (selectedAddress !== addressId) {
-      setSelectedAddress(addressId);
-      setIsButtonDisabled(false); // Enable button only when user selects a new address
-    }
+    setSelectedAddress(addressId);
+    setIsButtonDisabled(false); // Enable the button when any address is selected
   };
+  
   
 
   // Redirect to next step
@@ -307,8 +312,8 @@ const handlePhoneChange = (e) => {
 
   return (
     <>
-     <h1 className="f-34 mb-2 font-semibold text-lg mx-40 my-10">Shopping Cart</h1>
-<div className="flex mx-40 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+     <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">Shopping Cart</h1>
+<div className="flex m-5 md:mx-10 lg:mx-20 xl:mx-40 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
   <div className="flex items-center mb-4 md:mb-0">
   <div
               className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
@@ -350,7 +355,8 @@ const handlePhoneChange = (e) => {
   </div>
 </div>
 
-      <section className="mb-4 mx-40 max-w-full">
+<section className="mb-4 mx-4 md:mx-10 lg:mx-20 xl:mx-40 max-w-full">
+
         <div className="mx-auto">
           {/* Dropdown to Toggle Form */}
           
@@ -365,35 +371,41 @@ Choose Shipping Address
           {/* Slider */}
           <Slider ref={sliderRef} {...sliderSettings} className="p-4">
             {pujaData.address_list.map((address) => (
-              <div key={address.id} className="px-2">
-                <div className="flex gap-2 items-start">
-                  {/* Radio Button */}
-                  <label className="flex items-center space-x-2 mt-2">
-                    <input
-                      type="radio"
-                      name="default_address"
-                      checked={selectedAddress === address.id}
-                      onChange={() => handleAddressSelect(address.id)}
-                      className="form-radio w-6 h-6 border bg-orange-500"
-                    />
-                  </label>
-
-                  {/* Address Card */}
-                  <div className="w-[300px] md:min-w-[200px] flex justify-between rounded-lg border  shadow shadow-xl bg-white p-4 flex-shrink-0">
-                    <div>
-                      <h3 className="font-medium">{address.name}</h3>
-                      <p className="font-medium">
-                        {address.address}, {address.city} <br/>{address.state}<br/> {address.pincode}
-                      </p>
-                      <p className="font-medium">{address.phone_no}</p>
-                      <p className="font-medium">{address.email}</p>
-                    </div>
-
-                    {/* Edit Icon */}
-                    <EditIcon className="text-orange-400 cursor-pointer" onClick={() => handleEditClick(address)} />
-                  </div>
-                </div>
-              </div>
+             <div key={address.id} className="px-8 w-full">
+             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+               {/* Radio Button */}
+               <label className="flex items-center space-x-2">
+                 <input
+                   type="radio"
+                   name="default_address"
+                   checked={selectedAddress === address.id}
+                   onChange={() => handleAddressSelect(address.id)}
+                   className="form-radio w-5 h-5 sm:w-6 sm:h-6 border bg-orange-500"
+                 />
+               </label>
+           
+               {/* Address Card */}
+               <div className="w-full sm:max-w-[350px] md:max-w-[400px] lg:max-w-[500px] flex justify-between rounded-lg border shadow-lg bg-white p-4">
+                 <div className="flex-1">
+                   <h3 className="font-medium text-base sm:text-lg lg:text-xl">{address.name}</h3>
+                   <p className="font-medium text-sm sm:text-base lg:text-lg">
+                     {address.address}, {address.city} <br />
+                     {address.state}
+                     <br /> {address.pincode}
+                   </p>
+                   <p className="font-medium text-sm sm:text-base lg:text-lg">{address.phone_no}</p>
+                   <p className="font-medium text-sm sm:text-base lg:text-lg">{address.email}</p>
+                 </div>
+           
+                 {/* Edit Icon */}
+                 <EditIcon
+                   className="text-orange-400 cursor-pointer text-lg sm:text-xl lg:text-2xl"
+                   onClick={() => handleEditClick(address)}
+                 />
+               </div>
+             </div>
+           </div>
+           
             ))}
           </Slider>
 
@@ -418,6 +430,7 @@ Choose Shipping Address
         <p className="text-center text-gray-600">Address not available, Please add your address to continue.</p>
       )}
     </div>
+    
 <br/> <br/> 
   <div className="mt-4 border rounded-lg shadow-2xl">
           <button
@@ -555,7 +568,7 @@ Choose Shipping Address
           )}
         </div>
 
-          <button
+        <button
             onClick={handleNextStep}
             disabled={isButtonDisabled}
             className={`mt-7 px-20 py-2  rounded-lg text-white font-medium ${

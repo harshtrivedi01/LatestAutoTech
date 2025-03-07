@@ -129,7 +129,9 @@ const Cart = () => {
   
       const payment_session_id = response.data.data.payment_session_id;
       const order_id = response.data.data.order_id; // Extract order_id
-      localStorage.setItem("payment_session_id", payment_session_id);
+
+      if(order_id) {
+        localStorage.setItem("payment_session_id", payment_session_id);
   
       const cashfree = await initializeSDK();
   
@@ -139,23 +141,16 @@ const Cart = () => {
       }).then(async (pgResponse) => {
         console.log("Payment Response:", pgResponse);
   
-        let payment_status =
-          pgResponse.paymentStatus === "Payment finished. Check status."
-            ? "success"
-            : "failed";
-  
-        let payment_id = pgResponse.transactionId || "12345"; // Use actual transaction ID if available
-  
         let orderFormData = new FormData();
         orderFormData.append("type", "order");
         orderFormData.append("address_id", addressId);
         orderFormData.append("shipping_cost", "0");
         orderFormData.append("payment_type", "cashfree");
-        orderFormData.append("payment_status", payment_status);
+        orderFormData.append("payment_status", 'NA');
         orderFormData.append("coin_discount", "0");
         orderFormData.append("use_coin_status", "0");
         orderFormData.append("coin_discount_amount", "0");
-        orderFormData.append("payment_detail", JSON.stringify(pgResponse));
+        orderFormData.append("payment_detail", 'NA');
         orderFormData.append("grand_total", Math.floor(subtotal));
         orderFormData.append("sub_total", Math.floor(subtotal));
         orderFormData.append("country", "IN");
@@ -163,20 +158,19 @@ const Cart = () => {
   
         try {
           const orderResponse = await api.post("/cart", orderFormData);
-          const orderData = orderResponse.data;
-          console.log("Order Submission Response:", orderData);
+          console.log("Order Submission Response:", orderResponse);
   
-          if (orderData.status == "1") {
+          if (orderResponse.status == "1") {
             toast.success("Order placed successfully!");
             router.push("/successpage");
           } else {
-            toast.error(orderData.message || "Order placement failed");
-            router.push(`/failed?order_id=${order_id}`);
+            toast.error(orderResponse.message || "Order placement failed");
+            router.push(`/failedcartpage`);
           }
         } catch (orderError) {
           console.error("Error submitting order:", orderError);
           toast.error("Order processing failed!");
-          router.push(`/failed?order_id=${order_id}`);
+          router.push(`/failedcartpage`);
         }
       }).catch((paymentError) => {
         console.error("Payment SDK Error:", paymentError);
@@ -199,13 +193,17 @@ const Cart = () => {
         failedOrderFormData.append("payment_id", order_id);
   
         api.post("/cart", failedOrderFormData)
-          .then(() => router.push(`/failed?order_id=${order_id}`))
-          .catch(() => router.push(`/failed?order_id=${order_id}`));
+          .then(() => router.push(`/failedcartpage`))
+          .catch(() => router.push(`/failedcartpage`));
       });
+      } else {
+        toast.error("Something went wrong! Please try again.");
+      }
+      
     } catch (error) {
       console.error("Error processing payment:", error);
       toast.error("Payment failed! Please try again.");
-      router.push(`/failed`);
+      router.push(`/failedcartpage`);
     }
   };
   
@@ -227,9 +225,9 @@ const Cart = () => {
 
   return (
     <AuthGuard className="bg-gray-50 ">
-            <h1 className="f-34 mb-2 font-semibold text-lg mx-40 mt-5">Shopping Cart</h1>
+            <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">Shopping Cart</h1>
        {/* Progress Steps */}
-       <div className="flex mx-40 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+       <div className="flex md:mx-10 lg:mx-20 xl:mx-40 m-5 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
  <div className="flex items-center mb-4 md:mb-0">
  <div
              className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
@@ -272,7 +270,7 @@ const Cart = () => {
  </div>
 </div>
       
-       <div className="flex flex-col mx-40 mb-40 md:flex-row gap-6">
+       <div className="flex flex-col md:mx-10 lg:mx-20 xl:mx-40 m-5 mb-40 md:flex-row gap-6">
             <div className="md:w-2/3">
               {cartItems.map((item) => (
                 <div key={item.id} className="w-full my-5">

@@ -1,213 +1,305 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+
+import React, { useEffect, useRef, useState } from "react";
 import { LuPhoneCall } from "react-icons/lu";
 import { TbBuildingEstate, TbMail } from "react-icons/tb";
 import { LiaCitySolid, LiaEditSolid } from "react-icons/lia";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
-import { IoIosArrowDown, IoIosArrowDropdown } from "react-icons/io";
+import { IoIosArrowDown, IoMdTime } from "react-icons/io";
 import { MdOutlinePlace, MdTransgender } from "react-icons/md";
-import { MdArrowDropUp } from "react-icons/md";
-import { MdArrowDropDown } from "react-icons/md";
 import { BsPeopleFill } from "react-icons/bs";
-import "rsuite/DatePicker/styles/index.css";
-import { TimePicker } from "rsuite";
+import api from "../lib/axiosInstance";
+import toast, { Toaster } from "react-hot-toast";
 
-const page = () => {
-  const [maritalStatus, setMaritalStatus] = useState("");
+const Profilepage = () => {
+  const [imagePreview, setImagePreview] = useState("https://i.pravatar.cc/300"); // Default image
+  const [imageFile, setImageFile] = useState(null);
 
-  const [count, setCount] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    dob: "",
+    birth_time: "",
+    marital_status: "",
+    country_id: "101",
+    state_id: "",
+    city_id: "",
+    address: "",
+    gender: "",
+    dobplace: "",
+    pincode: "",
+  });
 
-  const increment = () => {
-    if (count < 100) setCount(count + 1);
-  };
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
 
-  const decrement = () => {
-    if (count > 1) setCount(count - 1);
-  };
+  const fileInputRef = useRef(null);
 
-  const handleNoChild = (e) => {
-    if (e.target.value === "no") {
-      setCount(0);
-    } else {
-      setCount(1);
+  useEffect(() => {
+    fetchProfile(); // Auto-fill profile data
+    fetchStates();  // Load states
+  }, []);
+
+  // Fetch user profile data
+  const fetchProfile = async () => {
+    try {
+      const response = await api.post("/profile", new FormData().append("type", "profile"));
+
+      if (response.data?.status === "1") {
+        const userData = response.data.data;
+        setFormData({
+          name: userData.name || "",
+          last_name: userData.last_name || "",
+          email: userData.email || "",
+          phone: userData.phone || "",
+          dob: userData.dob || "",
+          birth_time: userData.birth_time || "",
+          marital_status: userData.marital_status || "",
+          country_id: userData.country_id || "101",
+          state_id: userData.state_id || "",
+          city_id: userData.city_id || "",
+          address: userData.address || "",
+          gender: userData.gender || "",
+          dobplace: userData.dobplace || "",
+          pincode: userData.pincode || "",
+        });
+
+        if (userData.image) {
+          setImagePreview(userData.image);
+        }
+
+        if (userData.state_id) {
+          fetchCities(userData.state_id); // Fetch cities if state exists
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
     }
   };
 
+  const fetchStates = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "state_list");
+      formData.append("country_id", "101"); // India
+
+      const response = await api.post("/address", formData);
+      setStates(response.data.data?.states || []);
+    } catch (error) {
+      console.error("Error fetching states:", error);
+    }
+  };
+
+  const fetchCities = async (stateId) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "city_list");
+      formData.append("state_id", stateId);
+
+      const response = await api.post("/address", formData);
+      setCities(response.data.data?.cities || []);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
+  };
+
+  const handleTimeChange = (e) => {
+    let timeValue = e.target.value; // Example: "17:29"
+    
+    if (timeValue) {
+      timeValue += ":00"; // Append seconds, making it "17:29:00"
+    }
+  
+    setFormData((prev) => ({
+      ...prev,
+      birth_time: timeValue,
+    }));
+  };
+ 
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "state_id") {
+      setFormData((prev) => ({ ...prev, [name]: value, city_id: "" }));
+      fetchCities(value);
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("type", "profile_update");
+    Object.keys(formData).forEach((key) => {
+      form.append(key, formData[key]);
+    });
+  
+    if (imageFile) {
+      form.append("image", imageFile);
+    }
+  
+    try {
+      const response = await api.post("/profile", form);
+      toast.success("Profile updated successfully!");
+      console.log("Profile updated successfully!", response);
+    } catch (error) {
+      toast.error("Error updating profile!");
+      console.log("Error updating profile!", error);
+    }
+  };
+  
+  
+
   return (
     <div className="overflow-hidden">
-      <div className="bg-white w-full overflow-hidden ">
-        <div className="relative xl:h-32 lg:h-32 md:h-28 sm:h-24 h-20 bg-[#FFEEE2]">
-          <div className=" ">
-            <div className="absolute border-[#E5644E] border-4 bottom-0 left-1/2 transform items-center -translate-x-1/2 translate-y-1/2 xl:w-44 lg:w-44 md:w-36 sm:w-36 w-28 xl:h-44 lg:h-44 md:h-36 sm:h-36 h-28  rounded-full transition-transform duration-300 hover:scale-105">
+        <div className="bg-[#FFEEE2] p-10">
+        <h2 className="text-3xl font-bold">My Profile</h2>
+      </div>
+      <Toaster position="top-center" reverseOrder={false} />
+       <form onSubmit={handleSubmit} className="bg-white w-full overflow-hidden ">
+       <div className=" h-40 bg-[#FEEE2] flex mt-10 justify-center">
+          <div className="relative">
+            <div className="w-44 h-44 border-4 border-[#E5644E] rounded-full overflow-hidden transition-transform duration-300 hover:scale-110">
               <img
-                src="https://i.pravatar.cc/300"
-                alt="John Doe"
-                className=" rounded-full border-8 border-white "
-              ></img>
+                src={imagePreview}
+                alt="Profile"
+                className="w-full h-full object-cover border-8 border-white rounded-full"
+              />
             </div>
-            <div className="absolute xl:top-52 lg:top-52 md:top-44 sm:top-40 top-28 right-1/2 translate-x-12 -translate-y-4 bg-white xl:h-10 xl:w-10 lg:h-10 lg:w-10 md:h-8 md:w-8 h-8 w-8 rounded-full flex items-center justify-center shadow-gray-400 shadow-lg cursor-pointer ">
+
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleFileChange}
+              ref={fileInputRef}
+              className="hidden"
+            />
+
+            <div
+              className="absolute bottom-2 right-2 bg-white h-10 w-10 rounded-full flex items-center justify-center shadow-md cursor-pointer hover:bg-gray-200 transition"
+              onClick={() => fileInputRef.current.click()}
+            >
               <LiaEditSolid className="text-xl text-gray-600" />
             </div>
           </div>
         </div>
 
-        <div className="xl:pt-28 lg:pt-28 md:pt-24 sm:pt-24 pt-20 pb-6 text-center xl:px-20 lg:px-20 md:px-20 sm:px-5 py-20">
-          <h1 className="xl:text-2xl lg:text-2xl md:text-2xl sm:text-xl text-xl font-semibold text-gray-800">
-            Sejal Khandelwal 💕
-          </h1>
 
-          <div className="border-[#FA8128] border-2 xl:my-14 lg:my-14 md:my-12 sm:my-8 my-8 xl:py-10 lg:py-10 md:py-8 sm:py-5 py-5 mx-3 rounded-xl px-5">
-            <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-6 pt-5">
-              <div className="flex justify-start items-center w-full gap-2 ">
-                <IoPersonCircleOutline className="text-2xl text-gray-800" />
+        <div className=" pb-6 text-center xl:px-40 lg:px-40 md:px-20 sm:px-5 ">
 
-                <div className="w-full">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    First Name <span className=" text-[#FA8128]">*</span>
+           <div className="border-[#FA8128] border-2 my-14 py-10 mx-3 rounded-xl px-5">
+            <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6">
+              <div className="flex justify-start items-center w-full gap-4 border-r-2">
+                <IoPersonCircleOutline className="text-4xl text-gray-800" />
+
+                <div className="w-full pr-4">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    Name
                   </h2>
                   <input
-                    type="text"
-                    name="fname"
                     id="fname"
-                    placeholder="Sejal "
-                    required
-                    className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
+                    type="text" name="name" placeholder="First Name" onChange={handleChange} required
+                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
+              <div className="flex justify-start items-center w-full gap-4 border-r-2">
+                <IoPersonCircleOutline className="text-4xl text-gray-800" />
 
-              <div className="flex justify-start items-center w-full gap-2 ">
-                <IoPersonCircleOutline className="text-2xl text-gray-800" />
-
-                <div className="w-full">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    Last Name <span className=" text-[#FA8128]">*</span>
+                <div className="w-full pr-4">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    Name
                   </h2>
                   <input
-                    type="text"
-                    name="lname"
-                    id="lname"
-                    placeholder="Khendelwal"
-                    required
-                    className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
+                    id="flastname"
+                    type="text" name="last_name" placeholder="Last Name" onChange={handleChange} required
+                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-start items-center w-full gap-2 ">
-                <LuPhoneCall className="text-2xl text-gray-800" />
+              <div className="flex justify-start items-center w-full gap-4">
+                <HiOutlineCalendarDateRange className="text-4xl text-gray-800" />
 
                 <div className="w-full">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    Phone Number <span className=" text-[#FA8128]">*</span>
-                  </h2>
-
-                  <input
-                    type="text"
-                    name="mobile"
-                    id="mobile"
-                    placeholder="6205326564"
-                    required
-                    className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-start items-center w-full gap-2">
-                <TbMail className="text-2xl text-gray-800" />
-
-                <div className="w-full">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    Email <span className=" text-[#FA8128]">*</span>
-                  </h2>
-
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    required
-                    placeholder="punyasetu1210@gmail.com"
-                    className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-start items-center w-full gap-2">
-                <HiOutlineCalendarDateRange className="text-2xl text-gray-800" />
-
-                <div className="w-full">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    DOB <span className=" text-[#FA8128]">*</span>
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    DOB
                   </h2>
 
                   <div className="">
                     <input
-                      type="date"
-                      name="dob"
                       id="dob"
-                      required
                       placeholder="25/08/2003"
-                      className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] text-gray-400 outline-none"
+                      type="date" name="dob" onChange={handleChange} required
+                      className="px-5 py-[12px] rounded-lg border w-full shadow-md text-md text-gray-400 outline-none"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="flex justify-start items-center w-full gap-2">
-                <HiOutlineCalendarDateRange className="text-2xl text-gray-800" />
+              <div className="flex justify-start items-center w-full gap-4 border-r-2">
+                <LuPhoneCall className="text-4xl text-gray-800" />
 
-                <div className="w-full">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    Birth Time
+                <div className="w-full pr-4">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    Phone Number
                   </h2>
 
-                  <div className="">
-                    <TimePicker
-                      format="hh:mm aa"
-                      showMeridiem
-                      className="rounded-lg border w-full shadow-md text-[14px] text-gray-400 outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-start items-center w-full gap-2 relative ">
-                <MdOutlinePlace className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 flex-shrink-0" />
-
-                <div className="flex-1 relative">
-                  <h2 className="text-[16px] text-gray-800 font-semibold text-start ">
-                    Place of Birth
-                  </h2>
                   <input
-                    type="text"
-                    name="place_of_birth"
-                    id="place_of_birth"
-                    placeholder="Jaipur"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] outline-none"
+                    id="mobile"
+                    type="text" name="phone" placeholder="Phone" onChange={handleChange} required
+                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-start items-center w-full gap-2 relative">
-                <MdTransgender className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 flex-shrink-0" />
+              <div className="flex justify-start items-center w-full gap-4">
+                <TbMail className="text-4xl text-gray-800" />
+
+                <div className="w-full">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    Email
+                  </h2>
+
+                  <input
+                    id="email"
+                    placeholder="punyasetu1210@gmail.com"
+                    type="email" name="email" onChange={handleChange} required
+                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-start items-center w-full border-r-2 gap-4 relative pr-4">
+                <MdTransgender className="text-4xl text-gray-800 flex-shrink-0" />
 
                 <div className="flex-1 relative">
-                  <h2 className="text-[16px] text-gray-800 font-semibold text-start">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
                     Gender
                   </h2>
 
                   <select
-                    name="gender"
+                   name="gender" onChange={handleChange} required
                     id="gender"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] appearance-none outline-none pr-10"
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
-                    <option value="" disabled selected>
-                      Female
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                 <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
                   </select>
 
                   <div className="absolute right-4 top-2/3 transform -translate-y-1/2 pointer-events-none">
@@ -216,26 +308,23 @@ const page = () => {
                 </div>
               </div>
 
-              <div className="flex justify-start items-center w-full gap-2 relative">
-                <BsPeopleFill className="text-2xl text-gray-800 flex-shrink-0" />
+              <div className="flex justify-start items-center w-full gap-4 relative">
+                <BsPeopleFill className="text-4xl text-gray-800 flex-shrink-0" />
 
                 <div className="flex-1 relative">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
                     Marital Status
                   </h2>
 
                   <select
-                    name="marital_status"
+                 
                     id="marital_status"
-                    value={maritalStatus}
-                    onChange={(e) => setMaritalStatus(e.target.value)}
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] appearance-none outline-none pr-10"
+                    name="marital_status" onChange={handleChange} required
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
-                    <option value="" disabled selected>
-                      Single
-                    </option>
-                    <option value="single">Single</option>
-                    <option value="married">Married</option>
+                    <option value="">Select Marital Status</option>
+        <option value="single">Single</option>
+        <option value="married">Married</option>
                   </select>
 
                   <div className="absolute right-4 top-2/3 transform -translate-y-1/2 pointer-events-none">
@@ -244,127 +333,77 @@ const page = () => {
                 </div>
               </div>
 
-              {maritalStatus === "married" && (
-                <div className="flex justify-start items-center w-full gap-2 relative ">
-                  <HiOutlineCalendarDateRange className="text-2xl text-gray-800 flex-shrink-0" />
-
-                  <div className="flex-1 relative">
-                    <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                      Anniversary Date (if Married)
-                    </h2>
-                    <input
-                      type="date"
-                      name="anniversary_date"
-                      id="anniversary_date"
-                      className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] outline-none"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {maritalStatus === "married" && (
-                <div className="flex justify-start items-center w-full gap-2 relative">
-                  <BsPeopleFill className="text-2xl text-gray-800 flex-shrink-0" />
-                  <div className="relative flex-1">
-                    <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                      No of Child
-                    </h2>
-
-                    <select
-                      onChange={handleNoChild}
-                      className="px-6 py-[9px] bg-white rounded-lg border w-full shadow-md text-[14px] outline-none"
-                    >
-                      <option value="no">No Child</option>
-                      <option value="yes">Select No of Children</option>
-                    </select>
-
-                    {count > 0 && (
-                      <div className="relative mt-2">
-                        <input
-                          type="text"
-                          name="no-of-child"
-                          id="no-of-child"
-                          value={count}
-                          placeholder="Number of Child"
-                          className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                        />
-                        <button
-                          onClick={decrement}
-                          className="absolute right-2 top-4 px-1 text-gray-400"
-                          disabled={count === 1}
-                        >
-                          <MdArrowDropDown />
-                        </button>
-
-                        <button
-                          onClick={increment}
-                          className="absolute right-2  bottom-4 px-1 text-gray-400"
-                          disabled={count === 100}
-                        >
-                          <MdArrowDropUp />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              <div className="flex justify-start items-center w-full gap-2">
-                <MdOutlinePlace className="text-2xl text-gray-800 flex-shrink-0" />
+              <div className="flex justify-start items-center w-full gap-4 relative pr-4 border-r-2">
+                <HiOutlineCalendarDateRange className="text-4xl text-gray-800 flex-shrink-0" />
 
                 <div className="flex-1 relative">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    Anniversary Date (if Married)
+                  </h2>
+                  <input
+                    type="date"
+                    name="anniversary_date"
+                    id="anniversary_date"
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-start items-center w-full gap-4 relative">
+                <IoMdTime className="text-4xl text-gray-800 flex-shrink-0" />
+
+                <div className="flex-1 relative">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    Birth Time (24 Hrs format)
+                  </h2>
+                  <input
+  type="time"
+  name="birth_time"
+  value={formData.birth_time || ""}
+  onChange={handleTimeChange}
+
+
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-start items-center w-full gap-4 relative border-r-2 pr-4">
+                <MdOutlinePlace className="text-4xl text-gray-800 flex-shrink-0" />
+
+                <div className="flex-1 relative">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start ">
+                    Place of Birth
+                  </h2>
+                  <input
+                    id="dobplace"
+                    type="text" name="dobplace" placeholder="Place of Birth" onChange={handleChange}
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-md outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-start items-center w-full gap-4 relative">
+                <MdOutlinePlace className="text-4xl text-gray-800 flex-shrink-0" />
+
+                <div className="flex-1 relative">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
                     Current Address
                   </h2>
                   <input
                     type="text"
-                    name="current_address"
                     id="current_address"
-                    placeholder="Jaipur, Rajasthan"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] outline-none"
+                    name="address" placeholder="Address" onChange={handleChange}
+
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-md outline-none"
                   />
                 </div>
               </div>
-
-              <div className="flex justify-start items-center w-full gap-2 relative ">
-                <LiaCitySolid className="text-2xl text-gray-800 flex-shrink-0" />
-
-                <div className="flex-1 relative">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    City
-                  </h2>
-                  <input
-                    type="text"
-                    name="city"
-                    id="city"
-                    placeholder="Jaipur"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-start items-center w-full gap-2 relative">
-                <TbBuildingEstate className="text-2xl text-gray-800 flex-shrink-0" />
+              <div className="flex justify-start items-center w-full gap-4 relative border-r-2 pr-4">
+                <MdOutlinePlace className="text-4xl text-gray-800 flex-shrink-0" />
 
                 <div className="flex-1 relative">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                    State
-                  </h2>
-                  <input
-                    type="text"
-                    name="state"
-                    id="state"
-                    placeholder="Rajasthan"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-start items-center w-full gap-2 relative ">
-                <MdOutlinePlace className="text-2xl text-gray-800 flex-shrink-0" />
-
-                <div className="flex-1 relative">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
                     Country
                   </h2>
                   <input
@@ -372,260 +411,105 @@ const page = () => {
                     name="country"
                     id="country"
                     placeholder="India"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[16px] outline-none"
+                    readOnly
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-start items-center w-full gap-2 relative">
-                <MdOutlinePlace className="text-2xl text-gray-800 flex-shrink-0" />
+              <div className="flex justify-start items-center w-full gap-4 relative">
+                <TbBuildingEstate className="text-4xl text-gray-800 flex-shrink-0" />
 
                 <div className="flex-1 relative">
-                  <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    State
+                  </h2>
+                  <select
+  name="state_id"
+  value={formData.state_id}
+  onChange={handleChange}
+  className="w-full p-2 border rounded"
+>
+  <option value="">Select State</option>
+  {states.map((state) => (
+    <option key={state.state_id} value={state.state_id}>
+      {state.state_title}
+    </option>
+  ))}
+</select>
+
+                </div>
+              </div>
+
+             
+
+              <div className="flex justify-start items-center w-full gap-4 relative border-r-2 pr-4">
+                <LiaCitySolid className="text-4xl text-gray-800 flex-shrink-0" />
+
+                <div className="flex-1 relative">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
+                    City
+                  </h2>
+                  <select
+  name="city_id"
+  value={formData.city_id}
+  onChange={handleChange}
+  className="w-full p-2 border rounded"
+  disabled={!formData.state_id}
+>
+  <option value="">Select City</option>
+  {cities.map((city) => (
+    <option key={city.city_id} value={city.city_id}>
+      {city.city_title}
+    </option>
+  ))}
+</select>
+
+                </div>
+              </div>
+
+             
+
+              <div className="flex justify-start items-center w-full gap-4 relative">
+                <MdOutlinePlace className="text-4xl text-gray-800 flex-shrink-0" />
+
+                <div className="flex-1 relative">
+                  <h2 className="text-[20px] text-gray-800 font-semibold text-start">
                     Pin Code
                   </h2>
                   <input
                     type="text"
-                    name="pin_code"
-                    id="pin_code"
+                    name="pincode"
+                    id="pincode"
                     placeholder="302025"
-                    className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] outline-none"
+                    onChange={handleChange} required
+                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
             </div>
-
-            {maritalStatus === "married" && (
-              <div>
-                <div className="w-full gap-10 py-8 ">
-                  <h1 className="text-2xl font-bold py-3 text-start">
-                    Partner details:
-                  </h1>
-
-                  <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 pt-5">
-                    <div className="flex justify-start items-center w-full gap-2 ">
-                      <IoPersonCircleOutline className="text-2xl text-gray-800" />
-
-                      <div className="w-full">
-                        <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                          First Name <span className=" text-[#FA8128]">*</span>
-                        </h2>
-                        <input
-                          type="text"
-                          name="fname"
-                          id="fname"
-                          required
-                          placeholder="Sejal "
-                          className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full gap-2 ">
-                      <IoPersonCircleOutline className="text-2xl text-gray-800" />
-
-                      <div className="w-full">
-                        <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                          Last Name<span className=" text-[#FA8128]">*</span>
-                        </h2>
-                        <input
-                          type="text"
-                          name="lname"
-                          id="lname"
-                          required
-                          placeholder="Khendelwal"
-                          className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full gap-2">
-                      <TbMail className="text-2xl text-gray-800" />
-
-                      <div className="w-full">
-                        <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                          Email<span className=" text-[#FA8128]">*</span>
-                        </h2>
-
-                        <input
-                          type="email"
-                          name="email"
-                          id="email"
-                          required
-                          placeholder="punyasetu1210@gmail.com"
-                          className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full gap-2 ">
-                      <LuPhoneCall className="text-2xl text-gray-800" />
-
-                      <div className="w-full">
-                        <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                          Phone Number
-                        </h2>
-
-                        <input
-                          type="text"
-                          name="mobile"
-                          id="mobile"
-                          placeholder="6205326564"
-                          className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full gap-2">
-                      <HiOutlineCalendarDateRange className="text-2xl text-gray-800" />
-
-                      <div className="w-full">
-                        <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                          DOB<span className=" text-[#FA8128]">*</span>
-                        </h2>
-
-                        <div className="">
-                          <input
-                            type="date"
-                            name="dob"
-                            id="dob"
-                            required
-                            placeholder="25/08/2003"
-                            className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] text-gray-400 outline-none"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-start items-center w-full gap-2 relative">
-                      <MdTransgender className="text-2xl text-gray-800 flex-shrink-0" />
-
-                      <div className="flex-1 relative">
-                        <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                          Gender
-                        </h2>
-
-                        <select
-                          name="gender"
-                          id="gender"
-                          className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] appearance-none outline-none pr-10"
-                        >
-                          <option value="" disabled selected>
-                            Female
-                          </option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                        </select>
-
-                        <div className="absolute right-4 top-2/3 transform -translate-y-1/2 pointer-events-none">
-                          <IoIosArrowDown className="text-gray-800" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {count > 0 && (
-              <div className="w-full py-8">
-                <h1 className="text-2xl font-bold py-3 text-start">
-                  Child Details:
-                </h1>
-                {Array.from({ length: count }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="border bg-[#FFEEE2] px-4 py-10 rounded-lg shadow-lg mb-6"
-                  >
-                    <h2 className="text-lg font-semibold">
-                      Child {index + 1} Details
-                    </h2>
-
-                    <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 pt-5">
-                      <div className="flex items-center w-full gap-2">
-                        <IoPersonCircleOutline className="text-2xl text-gray-800" />
-                        <div className="w-full">
-                          <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                            First Name{" "}
-                            <span className=" text-[#FA8128]">*</span>
-                          </h2>
-                          <input
-                            type="text"
-                            placeholder="Sejal"
-                            required
-                            className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex items-center w-full gap-2">
-                        <IoPersonCircleOutline className="text-2xl text-gray-800" />
-                        <div className="w-full">
-                          <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                            Last Name <span className=" text-[#FA8128]">*</span>
-                          </h2>
-                          <input
-                            type="text"
-                            required
-                            placeholder="Khendelwal"
-                            className="px-6 py-[9px] rounded-lg border w-full shadow-md text-[14px] outline-none"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex items-center w-full gap-2">
-                        <HiOutlineCalendarDateRange className="text-2xl text-gray-800" />
-                        <div className="w-full">
-                          <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                            DOB<span className=" text-[#FA8128]">*</span>
-                          </h2>
-                          <input
-                            type="date"
-                            required
-                            className="px-5 py-[9px] rounded-lg border w-full shadow-md text-[14px] text-gray-400 outline-none"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex items-center w-full gap-2 relative">
-                        <MdTransgender className="text-2xl text-gray-800 flex-shrink-0" />
-                        <div className="flex-1 relative">
-                          <h2 className="xl:text-[16px] lg:text-[16px] text-[13px] text-gray-800 font-semibold text-start">
-                            Gender
-                          </h2>
-                          <select className="px-5 py-[9px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-[14px] appearance-none outline-none pr-10">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                          </select>
-                          <div className="absolute right-4 top-2/3 transform -translate-y-1/2 pointer-events-none">
-                            <IoIosArrowDown className="text-gray-800" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <div className="pt-8 flex justify-start">
-              <button className="register text-white bg-[#E5644E] w-40 rounded-lg shadow-lg shadow-gray-400 py-[11px] px-5 hover:scale-100 font-semibold duration-300">
-                Save
-              </button>
-            </div>
           </div>
 
-          <div className="mt-6 text-sm flex justify-center items-center">
-            <button className=" register text-white bg-[#E5644E] w-40 rounded-lg shadow-lg shadow-gray-400 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
-              Log Out
+        <div className="">
+        <div className=" text-lg flex justify-center items-center">
+            <button
+            type="submit"
+             className="hover:border register text-white bg-[#E5644E]  rounded-lg shadow-lg shadow-gray-400 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
+            Update Profile
             </button>
           </div>
+        {/* <div className=" text-sm flex justify-center items-center">
+            <button className="hover:border register text-white bg-[#E5644E] w-40 rounded-lg shadow-lg shadow-gray-400 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
+              Log Out
+            </button>
+          </div> */}
+        
         </div>
-      </div>
+        </div>
+       
+      </form>
     </div>
   );
 };
 
-export default page;
+export default Profilepage;

@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { IoReload } from "react-icons/io5";
 import { RiErrorWarningLine } from "react-icons/ri";
+import AuthGuard from "../component/AuthGuard";
 
 export default function BookingDetails() {
   const searchParams = useSearchParams();
@@ -13,14 +14,15 @@ export default function BookingDetails() {
   }
 
   return (
+    <AuthGuard>
     <div className="min-h-screen bg-white ">
       <div className="py-10 text-start px-5 bg-[#FFEEE2]">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Pooja Booking Details</h2>
       </div>
 
       <div className="px-4 sm:px-8 md:px-16 lg:px-40">
-        <h1 className="text-xl sm:text-2xl font-bold mt-4">Order #{booking.booking_id}</h1>
-        <p className="text-gray-600 text-sm mt-1">
+        {/* <h1 className="text-xl sm:text-2xl font-bold mt-4">Order #{booking.booking_id}</h1> */}
+        <p className="text-gray-600 text-sm mt-4">
           <span className="font-semibold">Order time & date:</span> {booking.create_date}
         </p>
 
@@ -43,14 +45,14 @@ export default function BookingDetails() {
               src={booking.puja_image || "/images/poojabox.png"}
               alt="Pooja Image"
               onError={(e) => (e.target.src = "/images/logo.png")}
-              className="w-full max-w-sm h-[250px] border-2 border-white object-cover rounded-lg"
+              className="w-full max-w-sm h-[250px] border-2 border-white object-fill rounded-lg"
             />
           </div>
 
           {/* Booking Info Section */}
           <div className="w-full md:w-7/12">
-            <p className={`text-xl font-semibold ${booking.booking_status === "success" ? "text-green-500" : booking.booking_status === "failed" ? "text-red-500" : "text-yellow-500"}`}>
-              {booking.booking_status}
+            <p className={`text-xl font-semibold ${booking.payment_status === "success" ? "text-green-500" : booking.payment_status === "failed" ? "text-red-500" : "text-yellow-500"}`}>
+              {booking.payment_status}
             </p>
             <p className="text-green-600 text-sm mt-1">
               <span className="font-semibold">Order time & date:</span> {booking.create_date}
@@ -61,8 +63,8 @@ export default function BookingDetails() {
           </div>
           <div className="flex justify-center mt-3">
           <div>
-          <div className={`px-4 py-1 rounded-full text-white ${booking.booking_status === "success" ? "bg-green-500" : booking.booking_status === "failed" ? "bg-red-500" : "bg-yellow-500"}`}>
-            <p className="text-sm">{booking.booking_status}</p>
+          <div className={`px-4 py-1 rounded-full text-white ${booking.payment_status === "success" ? "bg-green-500" : booking.payment_status === "failed" ? "bg-red-500" : "bg-yellow-500"}`}>
+            <p className="text-sm">{booking.payment_status}</p>
           </div>
           </div>
         </div>
@@ -71,6 +73,6 @@ export default function BookingDetails() {
         {/* Status Section */}
        
       </div>
-    </div>
+    </div></AuthGuard>
   );
 }

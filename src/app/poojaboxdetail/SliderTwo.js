@@ -159,7 +159,11 @@ const SliderTwo = () => {
                       <span className="text-red-700 text-lg ms-3">({Math.floor(product.discount)}% off)</span>
                     </p>
                   </div>
-                  <button
+                  {product.stock == false ? (
+    <span className="text-red-600 text-lg font-bold shadow-xl p-2 w-full border rounded-xl">Out of Stock</span>
+  ) : (
+    <>
+      <button
                     onClick={() => handleCartAction(product.id, index)}
                     className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
                       ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
@@ -167,6 +171,9 @@ const SliderTwo = () => {
                   >
                     {cartStatus[index] ? "Remove from cart" : "Add to cart"}
                   </button>
+    </>
+  )}
+                  
                 </div>
               </div>
             </SplideSlide>

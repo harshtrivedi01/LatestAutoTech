@@ -174,8 +174,12 @@ export default function Poojaboxdetailpage() {
       </span>
     </p>
 
-    {/* Action Buttons */}
-    <div className="flex gap-7 mt-4">
+  {/* Action Buttons */}
+<div className="flex gap-7 mt-4">
+  {pujaData.stock == false ? (
+    <span className="text-red-600 text-lg font-bold shadow-xl p-2 px-4 border rounded-xl">Out of Stock</span>
+  ) : (
+    <>
       <button
         onClick={() => handleBuyNow(pujaData.id)}
         className="p-2 px-5 shadow-black shadow-2xl w-full text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]"
@@ -186,7 +190,7 @@ export default function Poojaboxdetailpage() {
       <button
         onClick={() => handleCartAction(pujaData.id)}
         className={`flex items-center justify-center shadow-lg w-full rounded-md p-3 px-4 text-[#E5644E] font-medium 
-          ${cartStatus ? "border-2 border-[#E5644E] hover:bg-red-700" : "border-2 border-[#E5644E] "}`}
+          ${cartStatus ? "border-2 border-[#E5644E] hover:bg-red-700" : "border-2 border-[#E5644E]"}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +208,10 @@ export default function Poojaboxdetailpage() {
         </svg>
         {cartStatus ? "Remove from Cart" : "Add to Cart"}
       </button>
-    </div>
+    </>
+  )}
+</div>
+
   </div>
 </div>
 
