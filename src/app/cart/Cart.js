@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Sankalp from "./Sankalp";
 import AuthGuard from "../component/AuthGuard";
 import Homeeight from "../Home/Homeeight";
+import Testimonials from "../poojadetail/Testimonials";
+//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(2);
@@ -17,9 +19,9 @@ const Cart = () => {
 
   return (
     <AuthGuard>
-    <div className="cart bg-gray-50 min-h-screen p-60">
+    <div className="cart b50 min-h-screen p-60">
       <div className="container">
-        <h1 className="f-34 mb-2 font-semibold text-lg">Cart</h1>
+        <h1 className="f-34 mb-2 font-semibold text-lg text-black">Cart</h1>
 
         {/* Progress Steps */}
         <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
@@ -105,12 +107,12 @@ const Cart = () => {
   <div className="bg-white rounded-2xl shadow-lg border border-orange-500 p-6">
     <h2 className="text-lg font-medium mb-6">Card Type</h2>
     <div className="my-6 flex items-center justify-start gap-8">
-  <img className="h-8 w-auto dark:hidden " src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal.svg" alt="" />
-  <img className="hidden h-8 w-auto dark:flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal-dark.svg" alt="" />
-  <img className="h-8 w-auto dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa.svg" alt="" />
-  <img className="hidden h-8 w-auto dark:flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa-dark.svg" alt="" />
-  <img className="h-8 w-auto dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard.svg" alt="" />
-  <img className="hidden h-8 w-auto dark:flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard-dark.svg" alt="" />
+  <img className="h-8 w-auto hidden " src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal.svg" alt="" />
+  <img className="hidden h-8 w-auto flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal-dark.svg" alt="" />
+  <img className="h-8 w-auto hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa.svg" alt="" />
+  <img className="hidden h-8 w-auto flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa-dark.svg" alt="" />
+  <img className="h-8 w-auto hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard.svg" alt="" />
+  <img className="hidden h-8 w-auto flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard-dark.svg" alt="" />
 </div>
 
     <form>
@@ -135,19 +137,19 @@ const Cart = () => {
       </div>
       <div>
   <dl className="flex items-center justify-between gap-4 my-5">
-    <dt className="text-xl font-normal text-gray-500 dark:text-gray-400">SubTotal</dt>
-    <dd className="text-xl font-medium text-gray-900 dark:text-white">$799</dd>
+    <dt className="text-xl font-normal text-gray-500 text-gray-400">SubTotal</dt>
+    <dd className="text-xl font-medium text-gray-900 text-white">$799</dd>
   </dl>
-  <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-    <dt className="text-2xl font-bold text-gray-900 dark:text-white">Total</dt>
-    <dd className="text-xl font-bold text-gray-900 dark:text-white">$7,191.00</dd>
+  <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 border-gray-700">
+    <dt className="text-2xl font-bold text-gray-900 text-white">Total</dt>
+    <dd className="text-xl font-bold text-gray-900 text-white">$7,191.00</dd>
   </dl>
 </div>
 
       
       <button
                   className="w-full common-btn text-white font-semibold py-2 mt-5 rounded-lg"
-                  onClick={handleNextStep}
+                  // onClick={handleNextStep}
                 >
                   Pay Now
                 </button>
@@ -162,7 +164,8 @@ const Cart = () => {
         )}
       </div>
     </div>
-    <Homeeight/>
+    {/* <Homeeight/> */}
+   
     </AuthGuard>
   );
 };

@@ -3,46 +3,17 @@ import { VscSettings } from "react-icons/vsc";
 import List from "./List";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../lib/axiosInstance";
 
 export default function Poojabookingpage() {
-  const [userLocation, setUserLocation] = useState({ latitude: "", longitude: "" });
-  const [ipAddress, setIpAddress] = useState("");
   const [pujaData, setPujaData] = useState([]);
   const [pujaDatalist, setPujaDatalist] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
   useEffect(() => {
-    const fetchIpAddress = async () => {
-      try {
-        const response = await axios.get("https://api64.ipify.org?format=json");
-        setIpAddress(response.data.ip);
-      } catch (error) {
-        console.error("Error fetching IP address:", error);
-      }
-    };
-
-    fetchIpAddress();
-  }, []);
-
-  // Fetch user's location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      (error) => console.error("Error fetching location:", error)
-    );
-  }, []);
-
-  useEffect(() => {
-    if (userLocation.latitude && userLocation.longitude && ipAddress) {
       fetchPujaData("");
       fetchPujaDatalist();
-    }
-  }, [userLocation, ipAddress]);
+  }, []);
 
   const fetchPujaData = async (search) => {
     try {
@@ -51,20 +22,7 @@ export default function Poojabookingpage() {
       formData.append("page", "1");
       formData.append("search", search);
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/puja",
-        formData,
-        {
-          headers: {
-            // Convert header keys to lowercase manually
-            "language": "en",
-            "user_type": "guest",
-            "longitude": String(userLocation.longitude).toLowerCase(),
-            "latitude": String(userLocation.latitude).toLowerCase(),
-            "ip_address": String(ipAddress).toLowerCase(),
-          },
-        }
-      );
+      const response = await api.post("/puja", formData);
 
       setPujaData(response.data?.data || []); 
     } catch (error) {
@@ -79,20 +37,7 @@ export default function Poojabookingpage() {
       formData.append("page", "1");
       // formData.append("page", "1"); // Ensure it's a string
   
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/puja",
-        formData,
-        {
-          headers: {
-            // Convert header keys to lowercase manually
-            "language": "en",
-            "user_type": "guest",
-            "longitude": String(userLocation.longitude).toLowerCase(),
-            "latitude": String(userLocation.latitude).toLowerCase(),
-            "ip_address": String(ipAddress).toLowerCase(),
-          },
-        }
-      );
+      const response = await api.post("/puja", formData);
   
       console.log("Puja API Response:", response.data);
       setPujaDatalist(response.data)
@@ -107,14 +52,13 @@ export default function Poojabookingpage() {
   };
 
 
-
   return (
     <div className="bg-[#FFEEE2]">
       <div className="font-sans p-60 overflow-hidden">
         <div className="container">
           <div className="items-center gap-12">
             <div>
-              <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
+              <h2 className="lg:text-3xl text-black md:text-2xl text-3xl font-bold mb-4">
                 Upcoming Poojas on Punyasetu
               </h2>
               <p className="leading-relaxed text-lg text-gray-600">

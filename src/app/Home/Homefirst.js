@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const Homefirst = ({ sliderList = [] }) => {
   const [index, setIndex] = useState(0);
@@ -45,28 +46,32 @@ const Homefirst = ({ sliderList = [] }) => {
           className="absolute flex justify-center items-center text-white text-center font-bold w-full bg-cover bg-center"
           style={{ backgroundImage: `url(${sliderList[index].slider})` }}
         >
-          <img
-            src={sliderList[index].slider}
-            alt={`Slide ${index + 1}`}
-            layout="fill"
+        <img
+  src={sliderList[index]?.slider || "/images/sliderbackground.jpg"}
+  alt={`Slide ${index + 1}`}
+  className="absolute inset-0 -z-10 w-full h-full object-cover"
+  onError={(e) => (e.target.src = "/images/sliderbackground.jpg")}
+/>
+
+
           
-            className="absolute inset-0 -z-10"
-          />
           <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-[596px] sm:h-[450px] xs:h-[350px] flex flex-col items-center justify-center">
-            <p className="text-6xl sm:text-4xl xs:text-3xl leading-tight">Pooja Anytime<br /> Anywhere</p>
+            <p className="text-4xl sm:text-4xl xs:text-3xl leading-tight px-3" data-translate>{sliderList[index]?.banner_content ||"Pooja Anytime Anywhere"}</p>
             <br />
-            <p className="text-xl sm:text-lg xs:text-sm text-center w-3/4">
-              Join the divine Kumbh experience and book Pooja online seamlessly with the <br className="hidden sm:block" />
-              Punyasetu App – your gateway to spiritual bliss!
+            <p className="text-lg sm:text-lg xs:text-sm text-center w-3/4" data-translate>
+             {sliderList[index]?.description || " Joinn the divine Kumbh experience and book Pooja online seamlessly with the  Punyasetu App – your gateway to spiritual bliss!"}
             </p>
             <br />
-            <button
+           <a href={"/poojabooking"}>
+           <button
               type="button"
-              className="text-white font-bold rounded-full text-lg sm:text-base xs:text-sm px-12 py-3 sm:px-8 sm:py-2 xs:px-6 xs:py-1"
+              data-translate
+              className="text-white font-bold rounded-full text-lg sm:text-base xs:text-sm px-10 py-3 sm:px-8 sm:py-2 xs:px-6 xs:py-1"
               style={{ backgroundColor: '#FA8128' }}
             >
               {sliderList[index]?.button_name || 'Book Now'}
             </button>
+           </a>
           </div>
         </motion.div>
       </AnimatePresence>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Faq from "../poojadetail/Faq";
 
-const Joinpage = () => {
+const JoinUs = () => {
   const [count, setCount] = useState(1);
 
   const increment = () => {
@@ -17,28 +17,33 @@ const Joinpage = () => {
   return (
     <div>
       <div className="bg-[#FFEEE2]">
-        <div className=" p-60 overflow-hidden">
+        <div className=" 2xl:px-32 2xl:py-16 xl:p-16 lg:p-16 md:p-16 sm:p-10 p-10 overflow-hidden ">
           <div className="container">
             <div className="items-center gap-12">
               <div>
-                <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
+                <h2 className="lg:text-3xl xl:text-3xl md:text-2xl text-2xl font-bold mb-4">
                   Pandit Registration
                 </h2>
               </div>
             </div>
           </div>
         </div>
+
+        
       </div>
 
-      <section className="bg-gray-100 py-16">
-        <div className="rounded-2xl m-auto bg-white max-w-7xl px-10 py-14">
-          <div className="  flex max-w-full gap-10  box-border justify-center items-center">
-            <div className="md:w-2/3">
-              <h2 className="font-bold text-3xl text-[#E5644E] pb-10">
+      <section className="bg-gray-100 xl:py-16 lg:py-14 md:py-12 sm:py-10 py-8 px-4">
+        <div className="rounded-2xl m-auto bg-white max-w-7xl xl:py-14 lg:py-12 md:py-10 sm:py-5 py-5">
+          <div className="lg:flex xl:flex md:flex sm:flex-none lg:flex-row md:flex-col xl:flex-row max-w-full gap-10 justify-center items-center xl:px-10 lg:px-10 md:px-10 sm:px-5 px-3">
+            <div className="">
+              <h2 className="font-bold xl:text-3xl lg:text-3xl  md:text-3xl sm:text-2xl text-2xl  text-[#E5644E] xl:pb-10 lg:pb-10 md:pb-8 sm:pb-5 pb-5">
                 Register Now !
               </h2>
 
-              <form action="#" className="grid grid-cols-2 gap-5">
+              <form
+                action="#"
+                className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-full gap-5"
+              >
                 <div className="relative">
                   <label
                     htmlFor="name"
@@ -276,209 +281,21 @@ const Joinpage = () => {
                     className="px-5 py-[12px] rounded-lg border w-full shadow-md text-sm text-gray-400 outline-none"
                   />
                 </div>
+                <div className="mt-6 text-sm flex justify-between items-center">
+                  <button className="hover:border register text-white bg-[#E5644E] w-80 rounded-lg shadow-md shadow-gray-500 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
+                    Submit Details
+                  </button>
+                </div>
               </form>
             </div>
 
-            <div className="md:block hidden w-1/3">
+            <div className="md:block hidden">
               <img
                 className="rounded-2xl max-h-[1600px]"
                 src="/images/about.png"
                 alt="Login form image"
               />
             </div>
-          </div>
-
-          <div className="py-8">
-            <h1 className=" text-xl font-bold py-3">Partner details:</h1>
-            <form action="#" className="grid grid-cols-3 gap-5">
-              <div className="relative">
-                <label
-                  htmlFor="Fname"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  First Name *
-                </label>
-                <input
-                  type="text"
-                  name="fname"
-                  id="fname"
-                  placeholder="Enter Your First name"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-              <div className="relative">
-                <label
-                  htmlFor="Lname"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Last Name *
-                </label>
-                <input
-                  type="text"
-                  name="lname"
-                  id="lname"
-                  placeholder="Enter Your Last name"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="email"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Enter Your Email ID*"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="mobile"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Mobile Number *
-                </label>
-                <input
-                  type="text"
-                  name="mobile"
-                  id="mobile"
-                  placeholder="Enter Your Mobile Number*"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="gender"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Gender *
-                </label>
-                <select
-                  name="gender"
-                  id="gender"
-                  className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-sm appearance-none outline-none"
-                >
-                  <option value="" disabled selected>
-                    Select your Gender*
-                  </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <IoIosArrowDown className=" text-gray-400" />
-                </div>
-              </div>
-
-              <div className="">
-                <label
-                  htmlFor="dob"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Date of Birth *
-                </label>
-                <input
-                  type="date"
-                  name="dob"
-                  id="dob"
-                  placeholder="Choose DOB"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-md text-sm text-gray-400 outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="text"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Place Of Birth *
-                </label>
-                <input
-                  type="text"
-                  name="placeofbirth"
-                  id="placeofbirth"
-                  placeholder="Place Of Birth"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="text"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Current Address *
-                </label>
-                <input
-                  type="text"
-                  name="currentaddress"
-                  id="currentaddress"
-                  placeholder="Current Address"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="state"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  State *
-                </label>
-                <input
-                  type="text"
-                  name="state"
-                  id="state"
-                  placeholder="State"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="country"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  Country *
-                </label>
-                <input
-                  type="text"
-                  name="country"
-                  id="country"
-                  placeholder="Country"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-
-              <div className="relative">
-                <label
-                  htmlFor="city"
-                  className="block text-sm text-[#E5644E] pb-1"
-                >
-                  City *
-                </label>
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  placeholder="City"
-                  className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                />
-              </div>
-            </form>
-          </div>
-          <div className="mt-6 text-sm flex justify-between items-center">
-            <button className="hover:border register text-white bg-[#E5644E] w-80 rounded-lg shadow-md shadow-gray-500 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
-              Submit Details
-            </button>
           </div>
         </div>
       </section>
@@ -488,4 +305,4 @@ const Joinpage = () => {
   );
 };
 
-export default Joinpage;
+export default JoinUs;

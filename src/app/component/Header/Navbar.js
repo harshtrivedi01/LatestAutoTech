@@ -4,6 +4,8 @@ import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Link from "next/link";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import Language from "../Language/Language";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,6 +13,8 @@ export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -39,39 +43,23 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white relative dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <nav className="bg-white relative  w-full z-20 top-0 start-0 border-b border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
-              src="https://www.punyasetu.com/assets/images/logo.png"
+              src="/images/logo.png"
               className="h-16 mb-2"
               alt="PunyaSetu Logo"
             />
-            <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
-              PunyaSetu
+            <span className="self-center text-3xl font-semibold whitespace-nowrap text-black">
+            {t("PunyaSetu")}
             </span>
           </a>
 
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <div className="group relative hidden md:flex cursor-pointer py-2">
-              <div className="flex items-center justify-between bg-white px-4">
-                <a className="menu-hover flex gap-1 items-center text-lg font-bold text-black">
-                  <TbWorld className="text-xl" />
-                  English
-                </a>
-                <span className="font-bold">
-                  <RiArrowDropDownLine className="text-3xl" />
-                </span>
-              </div>
-              <div className="invisible absolute top-10 z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
-                <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                  Hindi
-                </a>
-                <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                  English
-                </a>
-              </div>
-            </div>
+        <div className="md:flex hidden">
+        <Language/>
+        </div>
 
             {isLoggedIn ? (
               <div className="flex items-center lg:gap-2">
@@ -87,31 +75,33 @@ export default function Navbar() {
                   />
                   {showDropdown && (
                     <div className="absolute left-0 z-50 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <a className="my-1 block border-b border-gray-100 px-4 py-2 font-semibold text-gray-500 hover:text-black">
-                        <Link href="/profile">Profile</Link>
+                      <a href="/profile"
+                       className="my-1 block border-b border-gray-100 px-4 py-2 font-semibold text-gray-500 hover:text-black">
+                        {t("Profile")}
                       </a>
-                      <a className="my-1 block border-b border-gray-100 px-4 py-2 font-semibold text-gray-500 hover:text-black">
-                        <Link href="/mybooking">My Booking</Link>
+                      <a  href="/mybooking"
+                      className="my-1 block border-b border-gray-100 px-4 py-2 font-semibold text-gray-500 hover:text-black">
+                        {t("booking")}
                       </a>
 
-                      <div
+                      <div data-translate
                         className="px-4 py-2 cursor-pointer text-red-600 hover:bg-gray-100 hover:rounded-lg"
                         onClick={handleLogout}
                       >
-                        Logout
+                          {t("Logout")}
                       </div>
                     </div>
                   )}
                 </div>
-                <Link href="/Cart">
-                  <HiOutlineShoppingCart className="w-8 h-8" />
+                <Link href="/cartpoojabox">
+                  <HiOutlineShoppingCart className="w-8 h-8 text-black" />
                 </Link>
               </div>
             ) : (
               <Link href="/login">
-                <button
+                <button data-translate
                   type="button"
-                  className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-4 lg:px-12 lg:py-3 py-2 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                  className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-4 lg:px-12 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                   style={{ backgroundColor: "#E5644E" }}
                 >
                   Login
@@ -123,7 +113,7 @@ export default function Navbar() {
 
             <button
               type="button"
-              className="inline-flex items-center p-2 w-8 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-8 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
               <span className="sr-only">Open main menu</span>
@@ -153,64 +143,46 @@ export default function Navbar() {
           >
             <ul className="flex flex-col text-lg p-4 font-semibold border-t border-gray-200 bg-gray-50">
               <li>
-                <div className="group relative cursor-pointer py-2">
-                  <div className="flex items-center justify-between bg-white px-4">
-                    <a className="menu-hover flex gap-1 items-center  text-lg font-bold text-black ">
-                      <TbWorld className="text-xl" />
-                      English
-                    </a>
-                    <span className="font-bold">
-                      <RiArrowDropDownLine className="text-3xl" />
-                    </span>
-                  </div>
-                  <div className="invisible absolute  z-50 flex w-full flex-col bg-gray-100 py-1 rounded-b-xl px-4 text-gray-800 shadow-xl group-hover:visible">
-                    <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                      Hindi
-                    </a>
-                    <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                      English
-                    </a>
-                  </div>
-                </div>
+              <Language/>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  Home
+                 {t("Home")}
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/about"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  About Us
+                 {t("About")} 
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/service"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  Service
+                   {t("Service")} 
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/contact"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  Contact Us
+              {t("Contact")} 
                 </a>
               </li>
               <li>
-                <a
+                <a data-translate
                   href="/join"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  Join Us
+                 {t("Join")} 
                 </a>
               </li>
             </ul>
@@ -220,28 +192,28 @@ export default function Navbar() {
           <div className="hidden md:flex md:items-center md:w-auto md:order-1">
             <ul className="flex flex-row space-x-8 text-lg font-semibold">
               <li>
-                <a href="/" className="text-black hover:text-orange-700">
-                  Home
+                <a data-translate href="/" className="text-black hover:text-orange-700">
+                {t("Home")}
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-black hover:text-orange-700">
-                  About Us
+                <a data-translate href="/about" className="text-black hover:text-orange-700">
+                {t("About")} 
                 </a>
               </li>
               <li>
-                <a href="/service" className="text-black hover:text-orange-700">
-                  Service
+                <a data-translate href="/service" className="text-black hover:text-orange-700">
+                {t("Service")} 
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-black hover:text-orange-700">
-                  Contact Us
+                <a data-translate href="/contact" className="text-black hover:text-orange-700">
+                {t("Contact")} 
                 </a>
               </li>
               <li>
-                <a href="/join" className="text-black hover:text-orange-700">
-                  Join Us
+                <a data-translate href="/join" className="text-black hover:text-orange-700">
+                {t("Join")} 
                 </a>
               </li>
               <li></li>

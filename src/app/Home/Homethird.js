@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 import Anahata from "../../../public/Assests/Service/Anahata.png";
 import Heading from "../component/Headingname/Heading";
 import Kalash from "../../../public/Assests/Service/Kalash.png";
 import music from "../../../public/Assests/Service/music.png";
 
 import { FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Homethird({pujaData}) {
   return (
@@ -26,13 +27,13 @@ export default function Homethird({pujaData}) {
             <Heading text="About" color="white" />
           </div>
 
-          <p className="text-center text-white text-[20px] md:text-2xl" 
+          <p className="text-center text-white text-[20px] md:text-2xl px-4" 
    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData?.data?.aboutus_description) }}>
 </p>
         </div>
         <br />
-        <br />
-        <br /> <br />
+       
+       
         <br />
         <div>
           <div className=" ">
@@ -43,91 +44,104 @@ export default function Homethird({pujaData}) {
                     <div className="gap-5">
                       <div className="grid ">
                         <a
-                          href
+                          href={""}
                           className="group relative flex flex-col overflow-hidden rounded-2xl p-8 pt-40 bg-white"
                         >
                           <div className="absolute inset-0 " />
                           <h3 className="z-10 text-2xl font-medium  absolute top-0 left-0 p-4 xs:text-2xl md:text-2xl text-[#894112]">
-                            Festival List & Details
+                         { pujaData?.data?.aboutus_imagehed1}
                           </h3>{" "}
                           <br />
                           <h3 className="z-10 text-lg  text-black absolute top-20 left-0 p-4 xs:text-lg md:text-lg leading-10 text-light">
-                            Stay informed about upcoming spiritual and cultural
-                            festivals.
+                    {      pujaData?.data?.aboutus_imagedes1}
                           </h3>
                           <div>
-                            <button className="p-3 mt-4  text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
+                            <button
+                             href={pujaData?.data?.aboutus_link}
+                             className="p-3 mt-4  text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
                               <FaChevronRight className="text-[#DD531B]" />
                             </button>
                           </div>
-                          <Image
-                            src={Kalash}
+                          <img
+                            src={pujaData?.data?.aboutus_images.image1}
                             alt=""
                             className="absolute right-0 h-20 w-20 bottom-0"
+                            onError={(e) => (e.target.src = "/images/logo.png")}
                           />
                         </a>
                       </div>
 
                       <div className="grid mt-5">
                         <a
-                          href
+                        href={""}
                           className="group relative flex flex-col h-[226.94px] overflow-hidden rounded-2xl px-4 pb-4 pt-40"
                         >
                           <img
-                            src="/images/about (2).jpg"
+                            src={pujaData?.data?.aboutus_images.image2}
                             alt=""
                             className="absolute inset-2 h-full w-full rounded-2xl   group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                            onError={(e) => (e.target.src = "/images/logo.png")}
                           />
                         </a>
                       </div>
                     </div>
                     <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">
-                      <a
-                        href
-                        className="group relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
+                      <div
+                       
+                        className=" relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
                       >
                         <div className="absolute inset-0 " />
                         <Image
                           src={music}
                           alt=""
                           className="absolute top-20 left-10 h-14 w-16 top-0"
+                          onError={(e) => (e.target.src = "/images/logo.png")}
                         />
-                        <h3 className="z-10 text-xl font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
-                          Mantra & Vecharan-{" "}
+                        <h3 className="z-10 text-xl text-black font-semibold absolute top-40 left-0 p-4 xs:text-2xl md:text-2xl mx-4 ">
+                        {pujaData?.data?.aboutus_imagehed2}-{" "}
                           <span className="font-normal">
-                            Listen to devotional bhajans for a soulful
-                            experience.
+                          {pujaData?.data?.aboutus_imagedes2}
                           </span>
                         </h3>{" "}
                         <br />
                         <br />
-                        <h3 className="z-10 text-xl font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
-                          Granth Reading –{" "}
+                        <h3 className="z-10 text-xl text-black font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
+                        {pujaData?.data?.aboutus_imagehed3} –{" "}
                           <span className="font-normal">
-                            Access and read sacred scriptures digitally.
+                          {pujaData?.data?.aboutus_imagedes3}
                           </span>
                         </h3>{" "}
                         <br />
-                        <div>
-                          <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
-                            Download App
-                          </button>
-                        </div>
+                    
+                        <a
+  href={pujaData?.data?.aboutus_link}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="z-10"
+>
+  <button className="p-2 px-8 shadow-black shadow-2xl ms-4 mt-44 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
+  {pujaData?.data?.aboutus_bottom_name}
+  </button>
+</a>
+
+                     
                         <Image
                           src={Anahata}
                           alt=""
                           className="absolute right-10 h-44 w-44 top-0"
+                          onError={(e) => (e.target.src = "/images/logo.png")}
                         />
-                      </a>
+                      </div>
                     </div>
 
                     <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">
                       <a
-                        href
+href={""}
                         className="group relative flex flex-col overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow"
                       >
-                        <img
-                          src="/images/about.png"
+                         <img
+                             src={pujaData?.data?.aboutus_images.image4}
+                             onError={(e) => (e.target.src = "/images/logo.png")}
                           alt=""
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"
                         />

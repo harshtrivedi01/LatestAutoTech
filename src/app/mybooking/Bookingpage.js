@@ -1,9 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import api from "../lib/axiosInstance";
+
+//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Bookingpage = () => {
   const [activeStep, setActiveStep] = useState("Pooja Booking");
+  const [Poojabookings, setPoojabookings] = useState([]);
 
   const steps = [
     { id: 1, title: "Pooja Booking" },
@@ -11,32 +15,27 @@ const Bookingpage = () => {
     { id: 3, title: "Pooja Box" },
   ];
 
-  const Poojabookings = [
-    {
-      id: "2029383825237598",
-      title: "Pooja Vastu Shanti Pooja",
-      status: "Pending",
-      amount: "Rs.4000/-",
-      package: "Package of 4 members",
-      orderTime: "2:00pm, 20 Nov 2024",
-    },
-    {
-      id: "2029383825237598",
-      title: "Pooja Vastu Shanti Pooja",
-      status: "Failed",
-      amount: "Rs.4000/-",
-      package: "Package of 4 members",
-      orderTime: "2:00pm, 20 Nov 2024",
-    },
-    {
-      id: "2029383825237598",
-      title: "Pooja Vastu Shanti Pooja",
-      status: "Success",
-      amount: "Rs.4000/-",
-      package: "Package of 4 members",
-      orderTime: "2:00pm, 20 Nov 2024",
-    },
-  ];
+  useEffect(() => {
+    // Fetch data from API
+    const fetchBookings = async () => {
+      try {
+        let formData = new FormData();
+        formData.append("type", "puja_booking_history");
+     
+  
+        const response = await api.post("/puja", formData); // Replace with actual API endpoint
+        const data = await response.json();
+
+        if (data?.data?.booking_list) {
+          setPoojabookings(data.data.booking_list);
+        }
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchBookings();
+  }, []);
 
   const Panditbookings = [
     {
@@ -194,59 +193,72 @@ const Bookingpage = () => {
           </div>
         </div>
 
-        {/* for pooja booking div */}
-        {activeStep === "Pooja Booking" && (
-          <div className="bg-gray-100 p-6 mt-12 rounded-lg">
-            <div className="grid grid-cols-3 gap-5">
-              {Poojabookings.map((booking, index) => (
-                <div
-                  key={index}
-                  className="border-[#87521B] bg-white border-[2px] rounded-lg p-5"
-                >
-                  <div className="flex justify-center items-center gap-4">
-                    <img
-                      src="/images/poojabox.png"
-                      alt="Pooja Image"
-                      className="w-5/12 h-[150px] border-2 border-white object-cover shadow-lg shadow-gray-400 rounded-lg"
-                    />
+   {/* For pooja booking div */}
+{activeStep === "Pooja Booking" && (
+  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
+    <div className="grid grid-cols-3 gap-5">
+      {Poojabookings.map((booking) => (
+        <div
+          key={booking.booking_id}
+          className="border-[#87521B] bg-white border-[2px] rounded-lg p-5"
+        >
+          <div className="flex justify-center items-center gap-4">
+            <img
+              src={booking.puja_image || "/images/poojabox.png"}
+              alt="Pooja Image"
+              className="w-5/12 h-[150px] border-2 border-white object-cover shadow-lg shadow-gray-400 rounded-lg"
+            />
 
-                    <div className="w-7/12">
-                      <p className="text-gray-500 text-sm">#{booking.id}</p>
-                      <h2 className="text-lg font-bold text-black">
-                        {booking.title}
-                      </h2>
-                      <p className="text-green-700 font-semibold text-md">
-                        Booked Successfully
-                      </p>
-                      <p className="text-gray-800 font-semibold text-lg">
-                        Amount {booking.amount}
-                      </p>
-                      <p className="text-red-600 font-bold text-md">
-                        {booking.package}
-                      </p>
-                      <p className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
-                        Book Again
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center mt-3 gap-3">
-                    <p className="text-gray-600 text-sm ">
-                      <span className="font-semibold">Order time & date:</span>{" "}
-                      {booking.orderTime}
-                    </p>
-                    <div
-                      className={`${
-                        statusColors[booking.status]
-                      } rounded-full px-4 py-1`}
-                    >
-                      <p className="text-white text-sm">{booking.status}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="w-7/12">
+              <p className="text-gray-500 text-sm">#{booking.booking_id}</p>
+              <h2 className="text-lg font-bold text-black">
+                {booking.puja_name}
+              </h2>
+              <p
+                className={`${
+                  booking.booking_status === "success"
+                    ? "text-green-700"
+                    : "text-red-600"
+                } font-semibold text-md`}
+              >
+                {booking.booking_status === "success"
+                  ? "Booked Successfully"
+                  : "Booking Failed"}
+              </p>
+              <p className="text-gray-800 font-semibold text-lg">
+                Amount Rs.{booking.amount}/-
+              </p>
+              <p className="text-red-600 font-bold text-md">
+                {booking.package_name || "N/A"}
+              </p>
+              {/* <p className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
+                Book Again
+              </p> */}
             </div>
           </div>
-        )}
+          <div className="flex justify-between items-center mt-3 gap-3">
+            <p className="text-gray-600 text-sm">
+              <span className="font-semibold">Order time & date:</span>{" "}
+              {booking.create_date}
+            </p>
+            <div
+              className={`${
+                booking.booking_status === "success"
+                  ? "bg-green-500"
+                  : booking.booking_status === "failed"
+                  ? "bg-red-500"
+                  : "bg-yellow-500"
+              } rounded-full px-4 py-1`}
+            >
+              <p className="text-white text-sm">{booking.booking_status}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
 
         {/* pandit booking div */}
         {activeStep === "Pandit Booking" && (

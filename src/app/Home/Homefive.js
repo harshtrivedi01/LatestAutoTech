@@ -26,36 +26,50 @@ export default function Homefive({pujaData}) {
 
         {/* Puja Cards Section */}
         <div className="max-w-7xl mx-auto my-8 px-2">
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
-            {pujaData?.data?.puja_list.map((puja, index) => (
-              <li key={index}>
-                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                  <a href={`poojadetail/${puja.id}`}>
-                    <img className="w-full rounded-xl" src={puja.image || "/images/default.jpg"} alt={puja.title} />
-                  </a>
-                  <div className="p-5">
-                    <a href="#">
-                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center dark:text-white">
-                        {puja.name || "Puja Title"}
-                      </h5>
-                    </a>
-                    <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
-                    <p className="mb-3 font-normal text-gray-700 text-xl dark:text-gray-400">
-                      {puja.description || "Puja description goes here."}
-                    </p>
-                    <Link  href={`poojadetail/${puja.id}`}>
-                    <button
-                     
-                      className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    >
-                      Participate
-                    </button>
-                    </Link>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
+  {pujaData?.data?.puja_list.map((puja, index) => (
+    <li key={index}>
+      <div className="h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm bg-gray-800 border-gray-700">
+        {/* Image Section */}
+        <a href={`poojadetail/${puja.id}`} className="flex justify-center">
+          <img className="h-60  rounded-t-lg" 
+               src={puja.image||"/images/logo.png"} 
+               alt={puja.title} 
+               onError={(e) => (e.target.src = "/images/logo.png")}
+               />
+        </a>
+
+        {/* Content Section */}
+        <div className="flex flex-col flex-grow p-5">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center text-red-600">
+            {puja.name || "Puja Title"}
+          </h5>
+          <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
+          <p className="mb- font-bold text-black text-lg  flex-grow">
+  {puja.description
+    ? puja.description.split(" ").slice(0, 12).join(" ") + (puja.description.split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+
+<p className="mb-3 font-normal text-gray-700 text-base flex-grow">
+  {puja.short_description
+    ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+
+
+          {/* Button */}
+          <Link href={`poojadetail/${puja.id}`}>
+            <button className="w-full uppercase text-sm font-medium p-3 text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800">
+              Participate
+            </button>
+          </Link>
+        </div>
+      </div>
+    </li>
+  ))}
+</ul>
+
         </div>
 
         {/* View More Button */}
@@ -94,21 +108,21 @@ export default function Homefive({pujaData}) {
  
 //   <ul className="grid gap-8 sm:grid-cols-2 justify-center lg:grid-cols-3 p-2 xl:p-5">
 //     <li >
-//     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+//     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm bg-gray-800 border-gray-700">
 //   <a href="#">
 //     <img className="w-full rounded-xl" src="/images/BANNER.jpg 1.png" alt="" />
 //   </a>
 //   <div className="p-5">
 //   <a href="#">
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center  dark:text-white">Saturday ‘City of Mahakaal’ Special</h5>
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center  text-white">Saturday ‘City of Mahakaal’ Special</h5>
 //     </a>
 //     <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
 //     <a href="#">
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path</h5>
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path</h5>
 //     </a>
-//     <p className="mb-3 font-normal text-gray-700 text-xl dark:text-gray-400">for Mental and Physical Strength to Destroy Negativity in Life</p>
+//     <p className="mb-3 font-normal text-gray-700 text-xl text-gray-400">for Mental and Physical Strength to Destroy Negativity in Life</p>
 //     <a href="#" 
-//     className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+//     className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800">
 //     Participate
     
 //     </a>
@@ -117,21 +131,21 @@ export default function Homefive({pujaData}) {
 
 //     </li>
 //     <li >
-//     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+//     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm bg-gray-800 border-gray-700">
 //   <a href="#">
 //     <img className="w-full rounded-xl" src="/images/BANNER.jpg 1.png" alt="" />
 //   </a>
 //   <div className="p-5">
 //   <a href="#">
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center  dark:text-white">Saturday ‘City of Mahakaal’ Special</h5>
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center  text-white">Saturday ‘City of Mahakaal’ Special</h5>
 //     </a>
 //     <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
 //     <a href="#">
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path</h5>
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path</h5>
 //     </a>
-//     <p className="mb-3 font-normal text-gray-700 text-xl dark:text-gray-400">for Mental and Physical Strength to Destroy Negativity in Life</p>
+//     <p className="mb-3 font-normal text-gray-700 text-xl text-gray-400">for Mental and Physical Strength to Destroy Negativity in Life</p>
 //     <a href="#" 
-//     className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+//     className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800">
 //     Participate
     
 //     </a>
@@ -140,21 +154,21 @@ export default function Homefive({pujaData}) {
 
 //     </li>
 //     <li >
-//     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+//     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm bg-gray-800 border-gray-700">
 //   <a href="#">
 //     <img className="w-full rounded-xl" src="/images/BANNER.jpg 1.png" alt="" />
 //   </a>
 //   <div className="p-5">
 //   <a href="#">
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center  dark:text-white">Saturday ‘City of Mahakaal’ Special</h5>
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#BA1A1A] text-center  text-white">Saturday ‘City of Mahakaal’ Special</h5>
 //     </a>
 //     <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
 //     <a href="#">
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path</h5>
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path</h5>
 //     </a>
-//     <p className="mb-3 font-normal text-gray-700 text-xl dark:text-gray-400">for Mental and Physical Strength to Destroy Negativity in Life</p>
+//     <p className="mb-3 font-normal text-gray-700 text-xl text-gray-400">for Mental and Physical Strength to Destroy Negativity in Life</p>
 //     <a href="#" 
-//     className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+//     className="inline-flex items-center w-full uppercase text-center p-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800">
 //     Participate
     
 //     </a>

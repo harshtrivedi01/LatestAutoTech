@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import List from "./List";
+import api from "../lib/axiosInstance";
 
 export default function Poojaboxpage() {
   const [pujaData, setPujaData] = useState([]);
@@ -33,13 +34,7 @@ const header = {
       formData.append("page", "1");
       formData.append("search", search);
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header,
-        }
-      );
+      const response = await api.post("/products", formData);
 
       setPujaData(response.data?.data || []);
     } catch (error) {
@@ -53,13 +48,7 @@ const header = {
       formData.append("type", "product_list");
       formData.append("category_id", "1");
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header,
-        }
-      );
+      const response = await api.post("/products", formData);
 
       setPujaDatalist(response.data?.data || []);
     } catch (error) {
@@ -75,13 +64,7 @@ const header = {
       formData.append("page", "1");
       formData.append("category_id", "1");
 
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header,
-        }
-      );
+      const response = await api.post("/products", formData);
 
       setsortlist(response.data?.data || []);
     } catch (error) {

@@ -32,7 +32,9 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
           <div key={item.id} className="w-full my-5">
             <div className="bg-white p-4 rounded-lg border shadow-xl">
               <div className="flex items-start gap-4">
-                <img src={item.image} alt={item.product_name} className="rounded-lg object-cover h-40 w-40" />
+                <img src={item.image || "/images/logo.png"} alt={item.product_name} 
+                className="rounded-lg object-contain h-40 w-40" 
+                onError={(e) => (e.target.src = "/images/logo.png")}/>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 text-lg">{item.product_name}</h3>
                   <p className="text-gray-500 text-lg mt-1">Special discounted price for you!</p>
@@ -97,12 +99,14 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
             <span className="text-gray-600 text-lg">Total</span>
             <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
           </div>
+          <a href="/cartaddresspoojabox">
           <button
             className="w-full common-btn text-white font-semibold py-2 rounded-lg"
-            onClick={handleNextStep}
+            // onClick={handleNextStep}
           >
             Checkout
           </button>
+          </a>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOtp } from "./../reduxrtk/slice.js";
 import Image from "next/image.js";
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,20 +13,74 @@ import belowimage from '../../../public/Assests/bird.svg';
 import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
+import i18n from "../lib/i18n.js";
 
 export default function OtpVerificationPage() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const phone = useSelector((state) => state.auth.formData.phone);
+  // const phone = useSelector((state) => state.auth.formData.phone);
   const type = useSelector((state) => state.auth.otpdata.type);
   
   const [otp, setOtpValues] = useState(["", "", "", ""]);
   const [attempts, setAttempts] = useState(0);
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(60);
   const [resendVisible, setResendVisible] = useState(false);
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [phoneError, setPhoneError] = useState("");
   const inputRefs = useRef([]);
+  const searchParams = useSearchParams();
+
+  const phone = searchParams.get("phone");
+
+  const redirectPath = typeof window !== "undefined" ? localStorage.getItem("redirectPath") : null;
+
+  console.log(redirectPath, "ter");
+
+  const [token, setToken] = useState(null);
+
+  const [languages, setLanguages] = useState([]);
+  
+  const [selectedLanguage, setSelectedLanguage] = useState(null); // Avoid undefined errors
+
+
+  useEffect(() => {
+    const savedLangCode = localStorage.getItem("selectedLanguage") || "en";
+    if (languages.length > 0) {
+      const savedLang = languages.find((lang) => lang.code === savedLangCode) || languages[0];
+      setSelectedLanguage(savedLang);
+      i18n.changeLanguage(savedLangCode);
+    }
+  }, [languages]);
+
+   // Runs again when languages are updated
+  useEffect(() => {
+    setLanguages([
+      { language: "English", code: "en" },
+      { language: "हिंदी", code: "hi" },
+    ]);
+  }, []);
+  
+
+  const handleLanguageChange = (event) => {
+    const code = event.target.value;
+    const selectedLang = languages.find((lang) => lang.code === code);
+    if (selectedLang) {
+      setSelectedLanguage(selectedLang);
+      localStorage.setItem("selectedLanguage", code);
+      i18n.changeLanguage(code);
+      window.location.reload();
+    }
+  };
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(localStorage.getItem("token"));
+    }
+
+    if (token) {
+      // ✅ Redirect logged-in users away from OTP screen
+      router.replace("/");
+    }
+  }, []);
 
   useEffect(() => {
     if (timer > 0) {
@@ -70,23 +124,38 @@ export default function OtpVerificationPage() {
     data.append("otp", otp.join(""));
     data.append("phone", phone);
     data.append("type", type);
-    setIsResendDisabled(true); 
+  
+    setIsResendDisabled(true);
+  
     try {
-      const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
-
-      if (response.data.status === "1") {
+      const response = await axios.post(
+        "https://dakshhousing.com/satsambhav/websiteapi/authentication",
+        data
+      );
+  
+      if (response.data.status == "1") {
         toast.success(response.data.message || "OTP verified successfully! Redirecting...");
-        const token = response.data.data.web_token; // Assuming the API returns a token       
+        const id = response.data.data.id; // Assuming the API returns a token
+        if (id) {
+          localStorage.setItem("idToken", id); // ✅ Save token
+        }
+        const token = response.data.data.web_token; // Assuming the API returns a token
         if (token) {
           localStorage.setItem("authToken", token); // ✅ Save token
         }
+  
+        // ✅ Retrieve and use the stored redirect path (or fallback to "/")
+        const redirectPath = localStorage.getItem("redirectPath") || "/";
+        localStorage.removeItem("redirectPath"); // Clear it after use
+  
         setTimeout(() => {
-          router.push("/");
+          router.push(redirectPath);
         }, 2000);
       } else {
         setAttempts((prev) => prev + 1);
         toast.error(response.data.message || "Invalid OTP! Please try again.");
         setIsResendDisabled(false);
+  
         if (attempts + 1 >= 3) {
           toast.error("Too many wrong attempts! Please try again later.");
         }
@@ -97,25 +166,43 @@ export default function OtpVerificationPage() {
       setIsResendDisabled(false);
     }
   };
+  
 
   const handleResendOtp = async () => {
      const data = new FormData();
     data.append("phone", phone);
     data.append("type", "resend otp");
     try {
-      setTimer(30);
+      setTimer(60);
       setResendVisible(false);
-      toast.info("Resending OTP...");
+      // toast.info("Resending OTP...");
 
       const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
 
-      if (response.data.status == 1) {
-        toast.success(response.data.message||"OTP Resent Successfully!");
-      } else {
-        toast.error(response.data.message || "Failed to resend OTP.");
+      if (response.data.status == "1") {
+        toast.success(response.data.message || "OTP verified successfully!");
+  
+        const id = response.data.data.id; // Assuming the API returns a token
+        if (id) {
+          localStorage.setItem("idToken", id); // ✅ Save token
+        }
+        const token = response.data.data.web_token; // Assuming the API returns a token
+        if (token) {
+          localStorage.setItem("authToken", token); // ✅ Save token
+        }
+  
+        // ✅ Retrieve and use the stored redirect path (or fallback to "/")
+        const redirectPath = localStorage.getItem("redirectPath") || "/";
+        localStorage.removeItem("redirectPath"); // Clear it after use
+  
+        setTimeout(() => {
+          router.push(redirectPath);
+        }, 2000);
+      }else {
+        // toast.error(response.data.message || "Failed to resend OTP.");
       }
     } catch (error) {
-      toast.error("Error resending OTP. Try again later.");
+      // toast.error("Error resending OTP. Try again later.");
     }
   };
 
@@ -134,39 +221,40 @@ export default function OtpVerificationPage() {
     <>
         <Toaster position="top-right" reverseOrder={false} />  
       <Image src={topimage} alt="test" className="absolute" />
-           <nav className=" w-full z-20 top-0 start-0  dark:border-gray-600   bg-[#FFEEE2]">
+           <nav className=" w-full z-20 top-0 start-0  border-gray-600   bg-[#FFEEE2]">
              <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                <a
                  href="/"
                  className="flex items-center space-x-5 rtl:space-x-reverse"
                >
      
-                 <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
+                 <span className="self-center text-3xl font-semibold whitespace-nowrap text-white">
      
                  </span>
                </a>
                <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                  <div className="">
                    <div className="group relative cursor-pointer py-2">
-                     <div className="flex items-center justify-between bg-black px-4 p-1 rounded-xl">
-                       <a className="menu-hover flex gap-1 items-center  text-[12px]   text-white " >
-                         <TbWorld className="text-white" />
-                         Choose language
-                       </a>
-                       <span className="font-bold">
-                         <RiArrowDropDownLine className="text-2xl text-white" />
-     
-                       </span>
-                     </div>
-                     <div className="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible">
-                       <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                         English
-                       </a>
-                       <a className="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-black md:mx-2">
-                         Hindi
-                       </a>
-     
-                     </div>
+                   <div className="flex items-center justify-between bg-black p-2 px-10 rounded-xl">
+               
+               <div className="menu-hover flex gap-1 items-center text-sm text-white">
+     <img src="/images/language.png" />
+     <select
+       value={selectedLanguage?.code || "en"} // Prevent undefined error
+       onChange={handleLanguageChange}
+       className="bg-transparent text-b text-white focus:outline-none cursor-pointer"
+       aria-label="Select Language"
+     >
+     {languages.map((lang) => (
+ <option key={lang.code} value={lang.code} className="text-black text-sm p-4 h-40">
+   {lang.language || "en"}
+ </option>
+))}
+
+     </select>
+   </div>
+               </div>
+                     
                    </div>
                  </div>
      
@@ -177,7 +265,7 @@ export default function OtpVerificationPage() {
       <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
         <div className=" p-4 lg:p-10 rounded-3xl bg-white flex flex-col items-center">
           <div className="">
-            <img width={45} className="" src="https://www.punyasetu.com/assets/images/logo.png" />
+            <img width={45} className="" src="/images/logo.png" />
           </div>
 
           <p className="font-bold text-4xl">OTP Verification</p>

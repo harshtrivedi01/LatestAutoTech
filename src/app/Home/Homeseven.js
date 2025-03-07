@@ -12,18 +12,21 @@ export const Homeseven = () => {
             <h2 className="text-3xl sm:text-6xl font-bold text-gray-900">
               Get <span className="text-[#9E200B]">Punyasetu</span> App
             </h2>
-            <i className='qr'>
+            
+            <p className="text-gray-700 mt-6 text-base sm:text-lg md:text-2xl">
+              Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance— all in one app.
+            </p>
+            <i className='qr flex justify-center md:justify-start'>
 
 <img src="/images/qr.png" className="object-cover object-toph-40 w-40 " alt="" height="100%" width="" />
 </i>
-            <p className="text-gray-700 mt-6 text-base sm:text-lg md:text-xl">
-              Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app.
-            </p>
+<h1 className="text-black text-2xl">Download App from</h1>
             <div className="flex justify-center lg:justify-start items-center gap-3 mt-8">
-              <a href="/" className="w-32 transition duration-300 hover:shadow-lg">
+              
+              <a href="https://apps.apple.com/us/app/punyasetu/id6683311967" className="w-32 transition duration-300 hover:shadow-lg">
                 <img src="https://kitwind.io/assets/kometa/app-store.png" className="object-cover w-full h-auto" alt="App Store" />
               </a>
-              <a href="/" className="w-32 transition duration-300 hover:shadow-lg">
+              <a href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" className="w-32 transition duration-300 hover:shadow-lg">
                 <img src="https://kitwind.io/assets/kometa/google-play.png" className="object-cover w-full h-auto" alt="Google Play" />
               </a>
             </div>

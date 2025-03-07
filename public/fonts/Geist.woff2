@@ -1,0 +1,7 @@
+import { Geist } from "next/font/google";
+
+const geist = Geist({ subsets: ["latin"], weight: "400" });
+
+export default function Page() {
+  return <div className={geist.className}>Hello, world!</div>;
+}
