@@ -20,15 +20,15 @@ const Payment = () => {
     const productDetail = localStorage.getItem("productdeatil");
     const productDetail2 = localStorage.getItem("productdeatil2");
 
-    // If redirected or no payment data, show Home button
-    if (redirectedFlag || (!sessionId && !productDetail && !productDetail2)) {
-      localStorage.removeItem("redirected");
-      localStorage.removeItem("payment_session_id");
-      localStorage.removeItem("productdeatil");
-      localStorage.removeItem("productdeatil2");
-      setRedirected(true);
-      return;
-    }
+          // If redirected or no payment data, show Home button
+          if  (!sessionId && !productDetail && !productDetail2) {
+            // localStorage.removeItem("redirected");
+            localStorage.removeItem("payment_session_id");
+            localStorage.removeItem("productdeatil");
+            localStorage.removeItem("productdeatil2");
+            setRedirected(true);
+            return;
+          }
 
     // Load product details if available
     setData(productDetail ? JSON.parse(productDetail) : {});
@@ -189,7 +189,7 @@ const Payment = () => {
                     <img
                       src={data?.image || ""}
                       alt="Pooja"
-                      className="rounded-lg object-cover"
+                      className="rounded-lg object-cover h-40"
                       height="100%"
                       width="100%"
                       onError={(e) =>(e.target.src = "/images/logo.png")}

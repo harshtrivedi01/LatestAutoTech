@@ -55,7 +55,7 @@ export default function Homesecond({ module_category_details }) {
             {module_category_details.slice(0, 6).map((category) => {
               const { modulecategory, short_description, id } = category;
               const imageSrc = serviceImages[modulecategory] || service1;
-              const bookingUrl = bookingUrls[modulecategory] || "#"; // Default to "#" if no URL is found
+              const bookingUrl = bookingUrls[modulecategory]; // Default to "#" if no URL is found
 
               const words = short_description.split(" ");
               const shortText = words.slice(0, MAX_WORDS).join(" ");
@@ -71,7 +71,7 @@ export default function Homesecond({ module_category_details }) {
                   <div>
                     <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]" onError={(e) => (e.target.src = "/images/logo.png")} />
                     <div className="my-3 font-display">
-                      <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
+                      <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
                         {modulecategory}
                       </h1>
                     </div>

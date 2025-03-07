@@ -261,7 +261,7 @@ export default function Poojadetailpage() {
     <a
                  onClick={() => scrollToSection('Pooja-Package')}
                 id="package"
-                className="w-full block uppercase text-center lg:px-6 lg:py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
+                className="w-full block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
               >
                 Select Pooja package
               </a>
