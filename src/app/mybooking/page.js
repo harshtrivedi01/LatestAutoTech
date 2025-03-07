@@ -120,17 +120,18 @@ const Page = () => {
     setLoading(true);
     try {
       let formData = new FormData();
-      formData.append("type", "puja_bookings_history");
-      formData.append("search", searchQuery);
-      const response = await api.post("/search", formData);
-  
-      console.log("Search Response:", response?.data);
-  
-      // Ensure response contains valid data
-      if (response?.data?.data?.booking_list) {
-        setSearchResults(response.data.data.booking_list);
-      } else {
-        setSearchResults([]); // Reset if no data found
+      if (activeStep === "Pooja Booking") {
+        formData.append("type", "puja_bookings_history");
+        formData.append("search", searchQuery);
+        const response = await api.post("/search", formData);
+        console.log("Pooja Booking Search Response:", response?.data);
+        setSearchResults(response?.data?.data?.booking_list || []);
+      } else if (activeStep === "Pooja Box") {
+        formData.append("type", "order_history");
+        formData.append("search", searchQuery);
+        const response = await api.post("/order_search", formData);
+        console.log("Pooja Box Search Response:", response?.data);
+        setSearchResults(response?.data?.data?.order_list || []);
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
@@ -139,6 +140,7 @@ const Page = () => {
       setLoading(false);
     }
   };
+  
   
   const statusColors = {
     Pending: "bg-[#87521B]",
@@ -212,23 +214,26 @@ const Page = () => {
 
       <div className="max-w-7xl mx-auto py-10 pb-14 px-5">
         <div className="flex pb-8">
-          <div className="flex border-y-[1px] py-2 gap-4 w-full ">
-            {steps.map((step) => (
-              <button
-                key={step.title}
-                className={`font-semibold text-[16px] py-[9px] px-4 transition duration-300 ${
-                  activeStep === step.title
-                    ? "bg-[#F37A32] rounded-xl text-white shadow-md shadow-gray-400"
-                    : "text-gray-600"
-                }`}
-                onClick={() => {
-                  setActiveStep(step.title);
-                }}
-              >
-                {step.title}
-              </button>
-            ))}
-          </div>
+        <div className="flex border-y-[1px] py-2 gap-4 w-full">
+  {steps.map((step) => (
+    <button
+      key={step.title}
+      className={`font-semibold text-[16px] py-[9px] px-4 transition duration-300 ${
+        activeStep === step.title
+          ? "bg-[#F37A32] rounded-xl text-white shadow-md shadow-gray-400"
+          : "text-gray-600"
+      }`}
+      onClick={() => {
+        setActiveStep(step.title);
+        setSearchQuery(""); // Clear search query
+        setSearchResults([]); // Clear search results
+      }}
+    >
+      {step.title}
+    </button>
+  ))}
+</div>
+
         </div>
 
 {/* For pooja booking div */}
@@ -313,6 +318,61 @@ const Page = () => {
   </div>
 )}
 
+{activeStep === "Pooja Box" && (
+  <div className="bg-gray-100 p-6 mt-6 rounded-lg">
+    {loading ? (
+      <p className="text-center text-lg font-semibold">Searching...</p>
+    ) : searchQuery && (!searchResults?.order_list || searchResults?.order_list.length === 0) ? (
+      <p className="text-center text-lg text-red-500 font-semibold">
+        No results found for "{searchQuery}"
+      </p>
+    ) : (!poojaBox || poojaBox.length === 0) ? (
+      <p className="text-center text-gray-600 text-lg font-semibold">
+        No orders available.
+      </p>
+    ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {(searchQuery ? searchResults?.order_list ?? [] : poojaBox ?? []).map((order) => (
+          <div
+            key={order.order_id}
+            className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all"
+            onClick={() => router.push(`/orderhistory/${order.order_id}`)}
+          >
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <img
+                src={order.image || "/images/logo.png"}
+                alt={order.product_names}
+                className="w-full sm:w-4/12 h-[180px] object-fill shadow-md rounded-lg"
+                onError={(e) => (e.target.src = "/images/logo.png")}
+              />
+              <div className="w-full sm:w-8/12 text-center sm:text-left">
+                <h2 className="text-[15px] font-[500] text-[#855318] font-semibold">
+                  {order.product_names}
+                </h2>
+                <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p>
+                <p className="text-gray-500 text-sm">Delivery Date: {order.delivery_date}</p>
+                <p className="text-gray-800 font-[500] text-[14px]">
+                  Amount Rs. {order.grand_total}
+                </p>
+                <p className="text-gray-500 text-sm">Discount: Rs. {order.discount}</p>
+                <p className="text-gray-500 text-sm">Payment Status: {order.payment_status}</p>
+                <div
+                  className={`${
+                    statusColors[order.delivery_status] || "bg-gray-500"
+                  } rounded-full w-24 px-4 py-1 mt-3 mx-auto sm:mx-0`}
+                >
+                  <p className="text-white text-sm">{order.delivery_status}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
+
+
 
 
         {/* pandit booking div */}
@@ -382,60 +442,7 @@ const Page = () => {
 
 
         {/* pooja box div */}
-        {activeStep === "Pooja Box" && (
-   <div className="bg-gray-100 p-6 mt-6 rounded-lg">
-   {poojaBox.length === 0 ? ( // Show message if no orders are available
-     <p className="text-center text-gray-600 text-lg font-semibold">
-       No orders available.
-     </p>
-   ) : (
-     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-       {poojaBox.map((order) => (
-         <div
-           key={order.order_id}
-           className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all"
-           onClick={() => router.push(`/orderhistory/${order.order_id}`)}
-         >
-           <div className="flex flex-col sm:flex-row items-center gap-4">
-             <img
-               src={order.image || "/images/logo.png"}
-               alt={order.product_name}
-               className="w-full sm:w-4/12 h-[180px] object-fill shadow-md rounded-lg"
-               onError={(e) => (e.target.src = "/images/logo.png")}
-             />
-             <div className="w-full sm:w-8/12 text-center sm:text-left">
-               <h2 className="text-[15px] font-[500] text-[#855318] font-semibold">
-                 {order.product_name}
-               </h2>
-               {/* <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p> */}
-               <p className="text-gray-500 text-sm"> {order.description || "description"}</p>
-               <p className="text-[#7E570F] font-[400] text-[14px]">
-                 Expected Delivery by: {order.date}
-               </p>
-               <p className="text-gray-800 font-[500] text-[14px]">
-                 Amount Rs. {order.grand_total}
-               </p>
-               <p className="text-gray-600 text-sm">
-                 <span className="font-semibold">Order Date:</span> {order.order_date}
-               </p>
-               {/* <p className="text-[#FA8128] font-[400] mt-1 cursor-pointer underline">
-                 Order Again
-               </p> */}
-               <div
-                 className={`${
-                   statusColors[order.delivery_status] || "bg-gray-500"
-                 } rounded-full w-24 px-4 py-1 mt-3 mx-auto sm:mx-0`}
-               >
-                 <p className="text-white text-sm">{order.delivery_status}</p>
-               </div>
-             </div>
-           </div>
-         </div>
-       ))}
-     </div>
-   )}
- </div>
-)}
+      
 
       </div>
     </div>
