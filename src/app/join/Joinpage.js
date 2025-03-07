@@ -1,304 +1,276 @@
 "use client";
-import React, { useState } from "react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import React, { useState, useEffect } from "react";
+
+import "react-toastify/dist/ReactToastify.css";
 import Faq from "../poojadetail/Faq";
+import api from "../lib/axiosInstance";
+import toast, { Toaster } from "react-hot-toast";
 
 const JoinUs = () => {
-  const [count, setCount] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    country: "101",
+    state: "",
+    city: "",
+    speciality: "",
+    address: "",
+    description: "",
+    reference: "",
+    remark: "",
+    image: null,
+  });
 
-  const increment = () => {
-    if (count < 100) setCount(count + 1);
+  const [errors, setErrors] = useState({});
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    fetchStates();
+  }, []);
+
+  useEffect(() => {
+    if (formData.state) fetchCities(formData.state);
+  }, [formData.state]);
+
+  const fetchStates = async () => {
+    try {
+      let data = new FormData();
+      data.append("type", "state_list");
+      data.append("country_id", "101"); // India
+      const response = await api.post("/address", data);
+      setStates(response.data.data?.states || []);
+    } catch (error) {
+      console.error("Error fetching states:", error);
+    }
   };
 
-  const decrement = () => {
-    if (count > 1) setCount(count - 1);
+  const fetchCities = async (stateId) => {
+    try {
+      let data = new FormData();
+      data.append("type", "city_list");
+      data.append("state_id", stateId);
+      const response = await api.post("/address", data);
+      setCities(response.data.data?.cities || []);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
   };
+
+  const validate = () => {
+    let newErrors = {};
+  
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+      newErrors.name = "Only alphabets are allowed in the name";
+    }
+    
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Enter a valid email address";
+    }
+  
+    if (!formData.mobile.trim()) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(formData.mobile)) {
+      newErrors.mobile = "Enter a valid 10-digit mobile number";
+    }
+  
+    if (!formData.state) newErrors.state = "State is required";
+    if (!formData.city) newErrors.city = "City is required";
+    if (!formData.speciality.trim()) newErrors.speciality = "Speciality is required";
+    if (!formData.address.trim()) newErrors.address = "Address is required";
+    if (!formData.description.trim()) newErrors.description = "Description is required";
+    if (!formData.reference.trim()) newErrors.reference = "Reference is required";
+    if (!formData.remark.trim()) newErrors.remark = "Remark is required";
+  
+    // Image validation (optional)
+    if (!formData.image) {
+      newErrors.image = "Image is required";
+    } else if (!(formData.image.type.startsWith("image/"))) {
+      newErrors.image = "Only image files are allowed";
+    }
+  
+    return newErrors;
+  };
+  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, image: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+  
+    const form = new FormData();
+    form.append("type", "submit_joinus_form");
+    form.append("pandit_name", formData.name);
+    form.append("pandit_email", formData.email);
+    form.append("pandit_phone_no", formData.mobile);
+    form.append("pandit_country", formData.country);
+    form.append("pandit_state", formData.state);
+    form.append("pandit_city", formData.city);
+    form.append("speciality", formData.speciality);
+    form.append("pandit_address", formData.address);
+    form.append("pandit_description", formData.description);
+    form.append("reference", formData.reference);
+    form.append("remark", formData.remark);
+    
+    if (formData.image) {
+      form.append("pandit_image", formData.image);
+    }
+  
+    try {
+      const response = await api.post("/joinus", form);
+      console.log("Response:", response.data);
+  
+      if (response.data.status === "1") {
+        toast.success(response.data.message || "Form submitted successfully!");
+        setErrors("")
+        setFormData({
+          name: "",
+          email: "",
+          mobile: "",
+          country: "101",
+          state: "",
+          city: "",
+          speciality: "",
+          address: "",
+          description: "",
+          reference: "",
+          remark: "",
+          image: null,
+        });
+        document.getElementById("file-input").value = ""; // Reset file input field
+      } else {
+        toast.error(response.data.message || "Form submission failed.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Error submitting form. Please try again.");
+    }
+  };
+  
 
   return (
     <div>
-      <div className="bg-[#FFEEE2]">
-        <div className=" 2xl:px-32 2xl:py-16 xl:p-16 lg:p-16 md:p-16 sm:p-10 p-10 overflow-hidden ">
-          <div className="container">
-            <div className="items-center gap-12">
-              <div>
-                <h2 className="lg:text-3xl xl:text-3xl md:text-2xl text-2xl font-bold mb-4">
-                  Pandit Registration
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
+       <Toaster position="top-center" reverseOrder={false} />
+      <div className="bg-[#FFEEE2] p-10">
+        <h2 className="text-3xl font-bold">Pandit Registration</h2>
       </div>
 
-      <section className="bg-gray-100 xl:py-16 lg:py-14 md:py-12 sm:py-10 py-8 px-4">
-        <div className="rounded-2xl m-auto bg-white max-w-7xl xl:py-14 lg:py-12 md:py-10 sm:py-5 py-5">
-          <div className="lg:flex xl:flex md:flex sm:flex-none lg:flex-row md:flex-col xl:flex-row max-w-full gap-10 justify-center items-center xl:px-10 lg:px-10 md:px-10 sm:px-5 px-3">
-            <div className="">
-              <h2 className="font-bold xl:text-3xl lg:text-3xl  md:text-3xl sm:text-2xl text-2xl  text-[#E5644E] xl:pb-10 lg:pb-10 md:pb-8 sm:pb-5 pb-5">
-                Register Now !
-              </h2>
-
-              <form
-                action="#"
-                className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-full gap-5"
-              >
-                <div className="relative">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Enter Your name"
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                  />
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Enter Your Email ID*"
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                  />
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="mobile"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Mobile Number *
-                  </label>
-                  <input
-                    type="text"
-                    name="mobile"
-                    id="mobile"
-                    placeholder="Enter Your Mobile Number*"
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-sm outline-none"
-                  />
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="gender"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Select Language
-                  </label>
-                  <select
-                    name="gender"
-                    id="gender"
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-sm appearance-none outline-none"
-                  >
-                    <option value="" disabled selected>
-                      Select your Language*
-                    </option>
-                    <option value="male">Hindi</option>
-                    <option value="female">english</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <IoIosArrowDown className=" text-gray-400" />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="gender"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Gender *
-                  </label>
-                  <select
-                    name="gender"
-                    id="gender"
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-sm appearance-none outline-none"
-                  >
-                    <option value="" disabled selected>
-                      Select your Gender*
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <IoIosArrowDown className=" text-gray-400" />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="register-as"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Register As *
-                  </label>
-                  <select
-                    name="register-as"
-                    id="register-as"
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-sm appearance-none outline-none"
-                  >
-                    <option value="" disabled selected>
-                      Select Register As* (Can Choose Upto 2)
-                    </option>
-                    <option value="pandit">Pandit ji</option>
-                    <option value="astrologer">Astrologers</option>
-                    <option value="motivational-guide">
-                      Motivational Guide
-                    </option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <IoIosArrowDown className=" text-gray-400" />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="primary-skill"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Primary Skill *
-                  </label>
-                  <select
-                    name="primary-skill"
-                    id="primary-skill"
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-sm appearance-none outline-none"
-                  >
-                    <option value="" disabled selected>
-                      Select Primary Skill* (Can Choose Upto 4)
-                    </option>
-                    <option value="vedic-puja">Vedic Puja</option>
-                    <option value="karamkand">Karamkand</option>
-                    <option value="kathavachak">Kathavachak</option>
-                    <option value="vastu">Vastu</option>
-                    <option value="vedic-astrology">Vedic Astrology</option>
-                    <option value="tarot">Tarot</option>
-                    <option value="lal-kitab">Lal Kitab</option>
-                    <option value="nadi-astrology">Nadi Astrology</option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <IoIosArrowDown className=" text-gray-400" />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="secondary-skills"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Secondary Skills *
-                  </label>
-                  <select
-                    name="secondary-skills"
-                    id="secondary-skills"
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-sm appearance-none outline-none"
-                  >
-                    <option value="" disabled selected>
-                      Select Secondary Skills (Can Choose Upto 6)
-                    </option>
-                    <option value="birth-chart-analysis">
-                      Birth Chart Analysis
-                    </option>
-                    <option value="gemstone-consultation">
-                      Gemstone Consultation
-                    </option>
-                    <option value="kundali-matching">Kundali Matching</option>
-                    <option value="marriage-consultation">
-                      Marriage Consultation
-                    </option>
-                    <option value="love-relationship-advice">
-                      Love and Relationship Advice
-                    </option>
-                    <option value="spiritual-healing">
-                      Spiritual/Reiki Healing
-                    </option>
-                    <option value="puja-path-consultation">
-                      Puja-path Consultation
-                    </option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <IoIosArrowDown className=" text-gray-400" />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="experience"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Experience (In Years) *
-                  </label>
-                  <input
-                    type="text"
-                    name="experience"
-                    id="experience"
-                    value={count}
-                    placeholder="Experience* (In Year)"
-                    className="px-5 py-[12px] rounded-lg text-gray-500 border w-full shadow-lg text-sm outline-none"
-                  />
-                  <button
-                    onClick={increment}
-                    className="absolute right-2 top-8 px-1 text-gray-400"
-                    disabled={count === 100}
-                  >
-                    <IoIosArrowUp />
-                  </button>
-                  <button
-                    onClick={decrement}
-                    className="absolute right-2 bottom-2 px-1 text-gray-400"
-                    disabled={count === 1}
-                  >
-                    <IoIosArrowDown />
-                  </button>
-                </div>
-
-                <div className="">
-                  <label
-                    htmlFor="dob"
-                    className="block text-sm text-[#E5644E] pb-1"
-                  >
-                    Date of Birth *
-                  </label>
-                  <input
-                    type="date"
-                    name="dob"
-                    id="dob"
-                    placeholder="Choose DOB"
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-md text-sm text-gray-400 outline-none"
-                  />
-                </div>
-                <div className="mt-6 text-sm flex justify-between items-center">
-                  <button className="hover:border register text-white bg-[#E5644E] w-80 rounded-lg shadow-md shadow-gray-500 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
-                    Submit Details
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <div className="md:block hidden">
-              <img
-                className="rounded-2xl max-h-[1600px]"
-                src="/images/about.png"
-                alt="Login form image"
-              />
-            </div>
-          </div>
+      <section className="bg-gray-100 py-8 px-4">
+  <div className="max-w-7xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg">
+    <h2 className="text-2xl sm:text-3xl font-bold text-[#E5644E] pb-5 text-start">
+      Register Now!
+    </h2>
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {[
+        { label: "Name", name: "name", type: "text" },
+        { label: "Email", name: "email", type: "email" },
+        { label: "Mobile Number", name: "mobile", type: "text" },
+        { label: "Speciality", name: "speciality", type: "text" },
+        { label: "Address", name: "address", type: "text" },
+        { label: "Description", name: "description", type: "text" },
+        { label: "Reference", name: "reference", type: "text" },
+        { label: "Remark", name: "remark", type: "text" },
+      ].map(({ label, name, type }) => (
+        <div key={name}>
+          <label className="block text-sm text-[#E5644E] pb-1">{label} *</label>
+          <input
+            type={type}
+            name={name}
+            value={formData[name]}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
+          />
+          {errors[name] && <p className="text-red-700 text-xs">{errors[name]}</p>}
         </div>
-      </section>
+      ))}
+
+      <div>
+        <label className="block text-sm text-[#E5644E] pb-1">Country *</label>
+        <input
+          type="text"
+          value="India"
+          disabled
+          className="w-full px-4 py-2 border rounded-lg bg-gray-100"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm text-[#E5644E] pb-1">State *</label>
+        <select
+          name="state"
+          value={formData.state}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
+        >
+          <option value="">Select State</option>
+          {states.map((state) => (
+            <option key={state.state_id} value={state.state_id}>
+              {state.state_title}
+            </option>
+          ))}
+        </select>
+        {errors.state && <p className="text-red-700 text-xs">{errors.state}</p>}
+      </div>
+
+      <div>
+        <label className="block text-sm text-[#E5644E] pb-1">City *</label>
+        <select
+          name="city"
+          value={formData.city}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
+        >
+          <option value="">Select City</option>
+          {cities.map((city) => (
+            <option key={city.city_id} value={city.city_id}>
+              {city.city_title}
+            </option>
+          ))}
+        </select>
+        {errors.city && <p className="text-red-700 text-xs">{errors.city}</p>}
+      </div>
+
+      <div>
+        <label className="block text-sm text-[#E5644E] pb-1">Upload Image *</label>
+        <input
+          id="file-input"
+          type="file"
+          name="image"
+          onChange={handleFileChange}
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
+        />
+        {errors.image && <p className="text-red-700 text-xs">{errors.image}</p>}
+      </div>
+
+      <div className="col-span-1 md:col-span-2 flex justify-center">
+        <button
+          type="submit"
+          className="w-full sm:w-auto bg-[#E5644E] text-white px-6 py-2 rounded-lg hover:bg-[#d14f3b] transition"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
 
       <Faq />
     </div>

@@ -22,20 +22,6 @@ export default function Poojaboxdetailpage() {
   const [cartStatus, setCartStatus] = useState(); // Track cart status
   const [wishlistStatus, setWishlistStatus] = useState();
   const router = useRouter(); // Initialize router
-<<<<<<< HEAD
-
-  const header = {
-    "language": "en",
-    "userId": "2",
-    "user_type": "user",
-    "Device_id": "upen",
-    "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-    "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-    "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-    "web_token": localStorage.getItem("authToken"),
-  }
-=======
->>>>>>> 1eb8fe0f267a9b75adbd26efd87ffe6370b5a9f8
 
   useEffect(() => {
     fetchPujaData();
@@ -47,17 +33,7 @@ export default function Poojaboxdetailpage() {
       formData.append("type", "product_detail");
       formData.append("product_id", id);
 
-<<<<<<< HEAD
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header
-        }
-      );
-=======
       const response = await api.post("/products", formData);
->>>>>>> 1eb8fe0f267a9b75adbd26efd87ffe6370b5a9f8
 
       console.log("Puja API Response:", response.data);
       setPujaData(response.data.data);
@@ -78,17 +54,7 @@ export default function Poojaboxdetailpage() {
       formData.append("product_id", id);
       formData.append("quantity", "1");
 
-<<<<<<< HEAD
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: header
-        }
-      );
-=======
       const response = await api.post("/cart", formData);
->>>>>>> 1eb8fe0f267a9b75adbd26efd87ffe6370b5a9f8
 
       console.log("Cart Action Response:", response.data);
 
@@ -112,17 +78,7 @@ export default function Poojaboxdetailpage() {
       formData.append("product_id", id);
       formData.append("quantity", "1");
 
-<<<<<<< HEAD
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/cart",
-        formData,
-        {
-          headers: header
-        }
-      );
-=======
       const response = await api.post("/cart", formData);
->>>>>>> 1eb8fe0f267a9b75adbd26efd87ffe6370b5a9f8
 
       console.log("Buy Now Response:", response.data);
 
@@ -152,17 +108,7 @@ export default function Poojaboxdetailpage() {
       formData.append("type", wishlistStatus ? "add_to_wishlist" : "add_to_wishlist");
       formData.append("product_id", id);
 
-<<<<<<< HEAD
-      const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/products",
-        formData,
-        {
-          headers: header
-        }
-      );
-=======
       const response = await api.post("/products", formData);
->>>>>>> 1eb8fe0f267a9b75adbd26efd87ffe6370b5a9f8
 
       console.log("Wishlist Action Response:", response.data);
 
@@ -183,79 +129,6 @@ export default function Poojaboxdetailpage() {
       <section className="poojadetail p-60">
         <div className="container">
           <div className="flex flex-col justify-center">
-<<<<<<< HEAD
-            <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-4xl mx-auto border border-white bg-white">
-              {/* Product Image */}
-              <div className=" bg-white grid place-items-center">
-                <img src={pujaData.image} alt="product image" className="h-80" />
-              </div>
-
-              {/* Product Details */}
-              <div className="w-full md:w-2/2 bg-white flex flex-col space-y-2 p-3">
-                <h3 className="font-black flex justify-between text-[#BA1A1A] border-b border-b-[#BA1A1A] md:text-3xl text-xl">
-                  {pujaData.name || "Product Name"}
-                  <button onClick={() => handleWishlistAction(pujaData.id)} className=" focus:outline-none">
-        <HeartIcon className={`h-6 w-6 ${wishlistStatus ? "fill-red-600" : "fill-white"}`} />
-      </button>
-                </h3>
-
-                {/* Rating Section */}
-                <div className="flex justify-between item-center">
-                  <div className="flex items-center my-5">
-                    <p className="text-gray-600 font-bold text-sm ml-1">
-                      {pujaData.rating}
-                      <span className="text-gray-500 font-normal"> ({pujaData.rating_user} reviews)</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Description */}
-               
-
-                {/* Pricing */}
-                <p>
-                  <span className="text-3xl font-bold text-orange-600">₹{Math.floor(pujaData.discounted_price)}</span>
-                  <span className="text-sm text-slate-900 line-through ms-2">M.R.P ₹{Math.floor(pujaData.price)}</span>
-                  <span className="text-red-700 text-lg ms-3">({Math.floor(pujaData.discount)}% off)</span>
-                </p>
-
-                
-                <p className="text-gray-600 text-sm"> 🛒 Ships by: {pujaData.shipping_date}</p>
-
-                {/* Action Buttons */}
-             <div className="flex gap-2">
-             <button
-   onClick={() => handleBuyNow(pujaData.id)}
-      className="p-2 px-5 shadow-black shadow-2xl w-full text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]"
-    >
-    
-     Buy Now
-    </button>
-                <button
-   onClick={() => handleCartAction(pujaData.id)}
-      className={`flex g items-center justify-center w-full rounded-md px-5 py-2.5 text-center text- font-medium text-white
-        ${cartStatus ? "bg-[#E5644E] hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
-      `}
-    >
-    
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className=" h-9 w-9"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
-      {cartStatus ? "Remove from Cart" : "Add to Cart"}
-    </button>
-             </div>
-=======
           <div className="relative flex flex-col md:flex-row md:flex-row md:space-x-5 lg:mx-[40px] space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-white bg-white">
   {/* Product Image */}
   <div className="w-full md:w-1/2 bg-white grid place-items-center">
@@ -301,8 +174,12 @@ export default function Poojaboxdetailpage() {
       </span>
     </p>
 
-    {/* Action Buttons */}
-    <div className="flex gap-7 mt-4">
+  {/* Action Buttons */}
+<div className="flex gap-7 mt-4">
+  {pujaData.stock == false ? (
+    <span className="text-red-600 text-lg font-bold shadow-xl p-2 px-4 border rounded-xl">Out of Stock</span>
+  ) : (
+    <>
       <button
         onClick={() => handleBuyNow(pujaData.id)}
         className="p-2 px-5 shadow-black shadow-2xl w-full text-lg text-white bg-[#E5644E] rounded-lg hover:bg-[#7B2502]"
@@ -313,7 +190,7 @@ export default function Poojaboxdetailpage() {
       <button
         onClick={() => handleCartAction(pujaData.id)}
         className={`flex items-center justify-center shadow-lg w-full rounded-md p-3 px-4 text-[#E5644E] font-medium 
-          ${cartStatus ? "border-2 border-[#E5644E] hover:bg-red-700" : "border-2 border-[#E5644E] "}`}
+          ${cartStatus ? "border-2 border-[#E5644E] hover:bg-red-700" : "border-2 border-[#E5644E]"}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -331,10 +208,12 @@ export default function Poojaboxdetailpage() {
         </svg>
         {cartStatus ? "Remove from Cart" : "Add to Cart"}
       </button>
-    </div>
+    </>
+  )}
+</div>
+
   </div>
 </div>
->>>>>>> 1eb8fe0f267a9b75adbd26efd87ffe6370b5a9f8
 
           </div>
         </div>
