@@ -7,6 +7,11 @@ import api from "../lib/axiosInstance";
 import toast, { Toaster } from "react-hot-toast";
 
 const JoinUs = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",

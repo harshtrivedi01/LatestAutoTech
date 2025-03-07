@@ -12,7 +12,7 @@ const Payment = () => {
   const [redirected, setRedirected] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams(); // Hook to access query parameters
-
+  const [currentStep, setCurrentStep] = useState(2);
   const bookingId = searchParams.get("bookingId");
   useEffect(() => {
     const redirectedFlag = localStorage.getItem("redirected");
@@ -41,21 +41,21 @@ const Payment = () => {
 
   const initiatePayment = async () => {
     setLoading(true);
-  
+
     try {
       let formData = new FormData();
       formData.append("type", "cashfree_payment_order");
       formData.append("order_type", "pooja");
       formData.append("amount", datapackage?.price || "1");
       formData.append("currency", "INR");
-  
+
       const response = await api.post("/orders", formData);
       const result = await response.data;
-  
+
       if (result.status === "1" && result.data.payment_session_id) {
         localStorage.setItem("payment_session_id", result.data.payment_session_id);
         localStorage.setItem("redirected", "true");
-  
+
         const cashfree = await initializeSDK();
         await cashfree
           .checkout({
@@ -64,35 +64,31 @@ const Payment = () => {
           })
           .then(async (pgResponse) => {
             console.log("Cashfree Response:", pgResponse);
-  
+
             // Extract payment status
             let paymentStatus =
               pgResponse.paymentDetails?.paymentMessage === "Payment finished. Check status."
                 ? "success"
                 : "failed";
-  
+
             // Extract reference ID if available
             let paymentId = pgResponse.paymentDetails?.referenceId || "N/A";
-  
-            if (paymentStatus === "success") {
-              // Call puja booking API
-              const bookingResponse = await completePujaBooking(
-                result.data.order_id, // Correct order ID
-                paymentId,
-                paymentStatus
-              );
-  
+
+            // Call puja booking API
+            const bookingResponse = await completePujaBooking(
+              result.data.order_id, // Correct order ID
+              paymentId,
+              paymentStatus
+            );
+
+            if (bookingResponse.status === "1") {
               // If puja booking is successful, remove tokens & redirect
-              if (bookingResponse?.status === "1" && bookingResponse?.data?.booking_id) {
-                localStorage.removeItem("redirected");
-                localStorage.removeItem("payment_session_id");
-                localStorage.removeItem("productdeatil");
-                localStorage.removeItem("productdeatil2");
-  
-                router.push("/successpage");
-              } else {
-                router.push("/failed");
-              }
+              localStorage.removeItem("redirected");
+              localStorage.removeItem("payment_session_id");
+              localStorage.removeItem("productdeatil");
+              localStorage.removeItem("productdeatil2");
+
+              router.push("/successpage");
             } else {
               router.push("/failed");
             }
@@ -108,7 +104,7 @@ const Payment = () => {
       setLoading(false);
     }
   };
-  
+
   // Function to call puja booking API
   const completePujaBooking = async (orderId, paymentId, paymentStatus) => {
     try {
@@ -120,7 +116,7 @@ const Payment = () => {
       formData.append("payment_detail", "");
       formData.append("payment_status", paymentStatus); // Dynamic payment status
       formData.append("payment_type", "cashfree");
-  
+
       const response = await api.post("/puja", formData);
       return response.data; // Return response for handling in `initiatePayment`
     } catch (error) {
@@ -128,17 +124,17 @@ const Payment = () => {
       return { status: "0" }; // Return failed status to handle redirection
     }
   };
-  
-  
-  
-  
-  
+
+
+
+
+
 
   if (redirected) {
     return (
-      <div className="text-center items-center py-10">
-        
-         <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p><br/>
+      <div className="text-center items-center py-60">
+
+        <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p><br />
         <button
           onClick={() => router.push("/mybooking")}
           className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg"
@@ -151,6 +147,37 @@ const Payment = () => {
 
   return (
     <AuthGuard>
+      <h1 className="f-34 mb-2 font-semibold text-lg text-black">Cart</h1>
+      <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+        <div className="flex items-center mb-4 md:mb-0">
+          <div
+            className={`w-10 h-10 flex items-center justify-center rounded-full ${currentStep === 2 ? "bg-gray-200 text-gray-500" : " bg-green-500 text-white"
+              }`}
+          >
+            <span className="font-bold">01</span>
+          </div>
+          <p className="ml-2 text-sm font-semibold text-gray-700">
+            Sankalp Form
+            <br />
+            <span className="text-sm font-semibold text-gray-700">Fill Name, Gotra & Address</span>
+          </p>
+        </div>
+        <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+
+        <div className="flex items-center">
+          <div
+            className={`w-10 h-10 flex items-center justify-center rounded-full ${currentStep >= 3 ? " bg-gray-200 text-gray-500" : "bg-green-500 text-white"
+              }`}
+          >
+            <span className="font-bold">{currentStep > 3 ? "✔" : "02"}</span>
+          </div>
+          <p className="ml-2 text-sm font-semibold text-gray-700">
+            Pay
+            <br />
+            <span className="text-sm font-semibold text-gray-700">Select a payment method</span>
+          </p>
+        </div>
+      </div>
       <div className="cart b50  p-60">
         <div className="container">
           <div className="flex flex-col md:flex-row gap-6">
@@ -165,6 +192,7 @@ const Payment = () => {
                       className="rounded-lg object-cover"
                       height="100%"
                       width="100%"
+                      onError={(e) =>(e.target.src = "/images/logo.png")}
                     />
                   </div>
                   <div className="flex-1">
@@ -174,7 +202,7 @@ const Payment = () => {
                     <p className="text-gray-500 text-lg mt-1">
                       {data?.puja_description
                         ? data.puja_description.split(" ").slice(0, 18).join(" ") +
-                          (data.puja_description.split(" ").length > 18 ? "..." : "")
+                        (data.puja_description.split(" ").length > 18 ? "..." : "")
                         : "Puja description goes here."}
                     </p>
                     <hr className="my-1" />

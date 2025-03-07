@@ -56,23 +56,31 @@ export default function Poojadetailpage() {
     
   }, []);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  
   const fetchPujaData = async () => {
     try {
       let formData = new FormData();
       formData.append("type", "new_puja_detail");
       formData.append("puja_id", id);
-      // formData.append("page", "1"); // Ensure it's a string
   
       const response = await api.post("/puja", formData);
   
-      localStorage.setItem("productdeatil", JSON.stringify(response.data.data));
-
-      setPujaData(response.data.data)
-     
+      if (response.data?.data) {
+        localStorage.setItem("productdeatil", JSON.stringify(response.data.data));
+        setPujaData(response.data.data);
+        setIsError(false); // Reset error state
+      } else {
+        throw new Error("Invalid response data");
+      }
     } catch (error) {
       console.error("Error fetching puja data:", error);
+      setErrorMessage("Something went wrong. Please try again later.");
+      setIsError(true); // Hide the page
     }
   };
+  
 
 
 
@@ -171,7 +179,13 @@ export default function Poojadetailpage() {
   };
   return (
     <>
-      <section className="poojadetail p-60" id="home1">
+    {isError ? (
+  <div className="text-red-600 font-semibold text-center mt-10 min-h-screen">
+    {errorMessage}
+  </div>
+) : (
+  <div>
+     <section className="poojadetail p-60" id="home1">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5" >
             {/* Left Side - Image Slider */}
@@ -226,15 +240,15 @@ export default function Poojadetailpage() {
         </div>
       )}
 
-              <h5 className="mb-2 text-2xl font-bold  tracking-tight text-[#BA1A1A] ">
+              <h5 className="mb-2 text-2xl font-bold text-start  tracking-tight text-[#BA1A1A] ">
               { pujaData?.name||" Saturday ‘City of Mahakaal’ Special"}
               <div className="w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
               </h5>
 
-              <h5 className="mb-2 text-2xl mt-4 font-bold tracking-tight text-gray-900 text-black">
+              <h5 className="mb-2 text-2xl mt-4 text-start font-bold tracking-tight text-gray-900 text-black">
               {pujaData?.sub_title || " 11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path"}
               </h5>
-              <p className="mb-3 font-normal text-gray-700 text-xl text-gray-400">
+              <p className="mb-3 font-normal text-start text-gray-700 text-xl text-gray-400">
                 {pujaData?.short_description ||" For honor this sacred occasion, "} 
              </p>
              <div>
@@ -244,13 +258,14 @@ export default function Poojadetailpage() {
         </p>
      
     </div>
-              <a
+    <a
                  onClick={() => scrollToSection('Pooja-Package')}
                 id="package"
-                className="w-full block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
+                className="w-full block uppercase text-center lg:px-6 lg:py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
               >
                 Select Pooja package
               </a>
+
             </div>
           </div>
         </div>
@@ -275,14 +290,15 @@ export default function Poojadetailpage() {
       </div>
     
       {showButton && (
-       <a
-       onClick={() => document.getElementById("Pooja-Package")?.scrollIntoView({ behavior: "smooth" })}
-       className="fixed bottom-10 left-1/2 transform -translate-x-1/2 px-20 py-4 font-semibold text-white bg-green-600 rounded-lg shadow-lg 
-                  hover:bg-green-700 hover:scale-105 transition-transform duration-300 
-                  animate-pulse "
-     >
-       Select Pooja Package 
-     </a>
+      <a
+      onClick={() => document.getElementById("Pooja-Package")?.scrollIntoView({ behavior: "smooth" })}
+      className="fixed bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-6 
+                 font-semibold text-sm sm:text-base md:text-lg text-white bg-green-600 rounded-lg shadow-lg 
+                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse"
+    >
+      Select Pooja Package
+    </a>
+    
      
       )}
 
@@ -296,6 +312,10 @@ export default function Poojadetailpage() {
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
       <section id="Homeeight-section" className="text-black relative "> <Testimonials/></section>
       <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
+  </div>
+)}
+
+    
     </>
   );
 }

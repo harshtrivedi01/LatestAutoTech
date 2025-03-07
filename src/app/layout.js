@@ -77,6 +77,8 @@ export default function RootLayout({ children }) {
         rel="icon"
         href="/images/logo.png"
         sizes="any"
+        type="image/x-icon"
+        className="object-fit"
       />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} font-roboto antialiased bg-white text-black`}

@@ -13,12 +13,14 @@ export const Homeseven = () => {
               Get <span className="text-[#9E200B]">Punyasetu</span> App
             </h2>
             
-            <p className="text-gray-700 mt-6 text-base sm:text-lg md:text-2xl">
-              Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance— all in one app.
-            </p>
-            <i className='qr flex justify-center md:justify-start'>
+            <p className="text-gray-700 mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center sm:text-left leading-relaxed">
+  Experience divine blessings at your fingertips! Access online Pooja services,  
+  book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app.
+</p>
 
-<img src="/images/qr.png" className="object-cover object-toph-40 w-40 " alt="" height="100%" width="" />
+            <i className=' flex justify-center lg:justify-start items-center'>
+
+<img src="/images/qr.png" className="object-cover object-toph-40 w-40  " alt="" height="100%" width="" />
 </i>
 <h1 className="text-black text-2xl">Download App from</h1>
             <div className="flex justify-center lg:justify-start items-center gap-3 mt-8">
@@ -33,7 +35,7 @@ export const Homeseven = () => {
           </div>
 
           {/* Image Section */}
-          <div className="flex justify-center sm:justify-end">
+          <div className="flex justify-center lg:justify-end ">
             <Image className="max-w-full h-auto" src={app} alt="Download App" />
           </div>
         </div>

@@ -2,11 +2,12 @@ import Image from "next/image";
 //export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 import success from "../../../public/success.png"
+import AuthGuard from "../component/AuthGuard";
 export default function page(){
 return(
 
     <>
-        {/* component */}
+      <AuthGuard>
 <div className="bg-white content-center border-y h-screen">
   <div className="bg-white p-6  md:mx-auto">
    <div className="flex justify-center mb-4">
@@ -23,7 +24,7 @@ return(
       </div>
     </div>
   </div>
-</div>
+</div></AuthGuard>
     </>
 )
 
