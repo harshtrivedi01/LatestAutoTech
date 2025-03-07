@@ -72,7 +72,7 @@ export default function Homethird({pujaData}) {
                           />
                         </a>
                       </div>
-
+<br/>
                       <div className="grid mt-5">
                         <a
                         href={""}
@@ -106,7 +106,7 @@ export default function Homethird({pujaData}) {
                           </span>
                         </h3>{" "}
                         <br />
-                        <br />
+                        <br /><br/>
                         <h3 className="z-10 text-xl text-black font-semibold absolute top-72 left-0 p-4 xs:text-xl md:text-xl mx-4 ">
                         {pujaData?.data?.aboutus_imagehed3} –{" "}
                           <span className="font-normal">
