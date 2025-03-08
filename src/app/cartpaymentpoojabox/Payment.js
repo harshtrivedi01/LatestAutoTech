@@ -41,36 +41,56 @@ const Payment = () => {
     }
   };
 
-  const updateCartQuantity = async (productId, change) => {
-    const product = pujaData?.cart_list.find((item) => item.product_id === productId);
-    if (!product) return;
-  
-    const newQuantity = (quantities[productId] || product.quantity) + change;
-  
-    // Prevent quantity from going below 1 or above current stock
-    if (newQuantity < 1 || newQuantity > product.current_stock) return;
-  
-    setQuantities((prev) => ({
-      ...prev,
-      [productId]: newQuantity,
-    }));
-  
-    try {
-      let formData = new FormData();
-      formData.append("type", "update_cart_quantity");
-      formData.append(
-        "update_detail",
-        JSON.stringify([{ product_id: productId, quantity: newQuantity }])
-      );
-  
-      const response = await api.post("/cart", formData);
-  
-      console.log("Quantity Update Response:", response.data);
-      fetchPujaData(); // Refresh cart
-    } catch (error) {
-      console.error("Error updating quantity:", error);
+
+
+const updateCartQuantity = async (productId, change) => {
+  const product = pujaData?.cart_list.find((item) => item.product_id === productId);
+  if (!product) return;
+
+  const newQuantity = (quantities[productId] || product.quantity) + change;
+
+  // Prevent quantity from going below 1
+  if (newQuantity < 1) {
+    toast.error("Quantity cannot be less than 1");
+    return;
+  }
+
+  // Prevent exceeding stock
+  if (newQuantity > product.current_stock) {
+    toast.error("Cannot exceed available stock");
+    return;
+  }
+
+  setQuantities((prev) => ({
+    ...prev,
+    [productId]: newQuantity,
+  }));
+
+  try {
+    let formData = new FormData();
+    formData.append("type", "update_cart_quantity");
+    formData.append(
+      "update_detail",
+      JSON.stringify([{ product_id: productId, quantity: newQuantity }])
+    );
+
+    const response = await api.post("/cart", formData);
+
+    console.log("Quantity Update Response:", response.data);
+
+    if (response.status === 200) {
+      toast.success(`Quantity updated to ${newQuantity}`);
+    } else {
+      toast.error(response.data?.message || "Failed to update quantity");
     }
-  };
+
+    fetchPujaData(); // Refresh cart
+  } catch (error) {
+    console.error("Error updating quantity:", error);
+    toast.error("Error updating cart. Please try again.");
+  }
+};
+
   
   const handleCartAction = async (id) => {
     try {
@@ -100,7 +120,14 @@ const Payment = () => {
     (acc, item) => acc + Number(item.discounted_price) * (item.quantity || 1),  
     0
   );
-  
+  const totalShippingCost = cartItems.reduce(
+    (acc, item) => acc + parseFloat(item.shipping_cost || 0), 
+    0
+  );
+
+  // Calculate final total
+  const finalTotal = subtotal + totalShippingCost;
+
 
   const initializeSDK = async () => {
     return await load({ mode: "sandbox" }); // Change to "production" for live
@@ -279,7 +306,9 @@ const Payment = () => {
                       <img src={"/images/logo.png"||item.image} alt={item.product_name} className="rounded-lg object-cove h-40 w40" />
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-800 text-lg">{item.product_name}</h3>
-                        <p className="text-gray-500 text-lg mt-1">Special discounted price for you!</p>
+                        <p className="text-gray-500 text-sm my-2" dangerouslySetInnerHTML={{ 
+                      __html: (item.description ? item.description.split(" ").slice(0, 20).join(" ") + "..." : "Special discounted price for you!") 
+                    }}></p>
       
                         <p>
                           <span className="text-3xl font-bold text-slate-900">
@@ -294,25 +323,40 @@ const Payment = () => {
                         </p>
                         
                         <div className="mt-3 flex items-center">
-                          <div className="flex items-center rounded-lg shadow-lg border border-[#E5644E]">
-                            <button
-                              className="text-orange-600 text-lg px-3 py-1"
-                              onClick={() => updateCartQuantity(item.product_id, -1)}
-                              disabled={(quantities[item.product_id] || item.quantity) <= 1}
-                            >
-                              -
-                            </button>
-      
-                            <span className="mx-2 text-gray-600">{quantities[item.product_id] || item.quantity}</span>
-      
-                            <button
-                              className="text-orange-600 text-lg px-3 py-1"
-                              onClick={() => updateCartQuantity(item.product_id, 1)}
-                              disabled={(quantities[item.product_id] || item.quantity) >= item.current_stock}
-                            >
-                              +
-                            </button>
-                          </div>
+                       
+
+<div className="flex items-center rounded-lg shadow-lg border border-[#E5644E]">
+  <button
+    className="text-orange-600 text-lg px-3 py-1"
+    onClick={() => {
+      if ((quantities[item.product_id] || item.quantity) <= 1) {
+        toast.error("Quantity cannot be less than 1");
+        return;
+      }
+      updateCartQuantity(item.product_id, -1);
+    }}
+    // disabled={(quantities[item.product_id] || item.quantity) <= 1}
+  >
+    -
+  </button>
+
+  <span className="mx-2 text-gray-600">{quantities[item.product_id] || item.quantity}</span>
+
+  <button
+    className="text-orange-600 text-lg px-3 py-1"
+    onClick={() => {
+      if ((quantities[item.product_id] || item.quantity) >= item.current_stock) {
+        toast.error("Cannot exceed available stock");
+        return;
+      }
+      updateCartQuantity(item.product_id, 1);
+    }}
+    disabled={(quantities[item.product_id] || item.quantity) >= item.current_stock}
+  >
+    +
+  </button>
+</div>
+
       
                           <FaTrash
                             className="ms-5 text-gray-700 cursor-pointer hover:text-red-600"
@@ -347,11 +391,15 @@ const Payment = () => {
         </div>
       );
     })}
+    <div className="flex justify-between mt-3">
+              <span className="text-gray-600">Shipping Charges</span>
+              <span className="text-gray-800 font-semibold">₹{Math.floor(totalShippingCost)}</span>
+            </div>
 
     {/* Total Calculation */}
     <div className="flex justify-between border-t py-2 mt-3">
       <span className="text-gray-600 text-lg font-semibold">Total</span>
-      <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
+      <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(finalTotal)}</span>
     </div>
 
     <button

@@ -10,7 +10,7 @@ export default function page() {
     <Suspense fallback={<div>Loading...</div>}>
     <AuthGuard>
     <div className="cart b50 min- p-60">
-      <div className="container p-0">
+      <div className=" p-0">
        
 
 <Payment/>

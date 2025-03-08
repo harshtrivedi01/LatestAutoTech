@@ -5,6 +5,7 @@ import { load } from "@cashfreepayments/cashfree-js";
 import { useRouter, useSearchParams } from "next/navigation";
 import api from "../lib/axiosInstance";
 import Testimonials from "../poojadetail/Testimonials";
+import { CheckIcon } from "lucide-react";
 
 const Payment = () => {
   const [data, setData] = useState(null);
@@ -148,14 +149,14 @@ const Payment = () => {
 
   return (
     <AuthGuard>
-      <h1 className="f-34 mb-2 font-semibold text-lg text-black">Cart</h1>
-      <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+      <h1 className="f-34 mb-2 font-semibold text-lg text-black lg:mx-40  mx-5">Cart</h1>
+      <div className="flex lg:mx-40  mx-5 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center mb-4 md:mb-0">
           <div
-            className={`w-10 h-10 flex items-center justify-center rounded-full ${currentStep === 2 ? "bg-gray-200 text-gray-500" : " bg-green-500 text-white"
+            className={`w-10 h-10 flex items-center justify-center rounded-full ${currentStep === 2 ? "bg-green-500 text-white" : " bg-green-500 text-white"
               }`}
           >
-            <span className="font-bold">01</span>
+            <span className="font-bold "><CheckIcon className="" /></span>
           </div>
           <p className="ml-2 text-sm font-semibold text-gray-700">
             Sankalp Form
@@ -179,7 +180,7 @@ const Payment = () => {
           </p>
         </div>
       </div>
-      <div className="cart b50  p-60">
+      <div className=" lg:mx-40  mx-5  p-60">
         <div className="container">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Left Section */}
@@ -190,7 +191,7 @@ const Payment = () => {
                     <img
                       src={data?.image || ""}
                       alt="Pooja"
-                      className="rounded-lg object-cover h-40"
+                      className="rounded-lg object-contain h-40"
                       height="100%"
                       width="100%"
                       onError={(e) =>(e.target.src = "/images/logo.png")}

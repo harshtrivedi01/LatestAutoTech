@@ -23,8 +23,6 @@ i18n
           booking:"My Booking",
           Logout:"Logout",
 
-
-
         },
       },
       hi: {

@@ -35,6 +35,14 @@ export default function Homesecond({ module_category_details }) {
     "Granth": "#",
     "Online Classes": "#",
     "Live Darshan": "#",
+    "गुरु जी": "#",
+   
+"पंडित जी": "#",
+    "पूजा": "/poojabooking",
+    "ग्रंथ": "#",
+    "ऑनलाइन कक्षाएं": "#",
+    
+"लाइव दर्शन": "#",
   };
 
   const toggleReadMore = (id) => {

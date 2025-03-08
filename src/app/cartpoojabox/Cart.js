@@ -41,14 +41,24 @@ const Cart = () => {
     }
   };
 
+
   const updateCartQuantity = async (productId, change) => {
     const product = pujaData?.cart_list.find((item) => item.product_id === productId);
     if (!product) return;
   
     const newQuantity = (quantities[productId] || product.quantity) + change;
   
-    // Prevent quantity from going below 1 or above current stock
-    if (newQuantity < 1 || newQuantity > product.current_stock) return;
+    // Prevent decreasing below 1
+    if (newQuantity < 1) {
+      toast.error("Quantity cannot be less than 1");
+      return;
+    }
+  
+    // Prevent exceeding available stock
+    if (newQuantity > product.current_stock) {
+      toast.error(`Only ${product.current_stock} items available in stock`);
+      return;
+    }
   
     setQuantities((prev) => ({
       ...prev,
@@ -69,8 +79,10 @@ const Cart = () => {
       fetchPujaData(); // Refresh cart
     } catch (error) {
       console.error("Error updating quantity:", error);
+      toast.error("Failed to update cart quantity");
     }
   };
+  
   
   const handleCartAction = async (id) => {
     try {
@@ -102,7 +114,7 @@ const Cart = () => {
   <div className="">
 
        <Toaster position="top-right" reverseOrder={false} /> 
-      <div className="container p-0">
+      <div className=" ">
       {cartItems > 0 && (
   <>
     <h1 className="f-34 mb-2 font-semibold text-lg cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">Shopping Cart</h1>
