@@ -249,8 +249,11 @@ export default function Poojadetailpage() {
               {pujaData?.sub_title || " 11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path"}
               </h5>
               <p className="mb-3 font-normal text-start text-gray-700 text-xl text-gray-400">
-                {pujaData?.short_description ||" For honor this sacred occasion, "} 
-             </p>
+  {pujaData?.short_description
+    ? pujaData?.short_description .split(" ").slice(0, 30).join(" ") + (pujaData?.short_description .split(" ").length > 30 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+              
              <div>
      
         <p className="my-2 w-1/2 text-lg text-gray-400 flex gap-2 items-center">

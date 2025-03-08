@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import app from "../../../public/Assests/Service/downloadapp.png";
+import { useTranslation } from "react-i18next";
 
 export const Homeseven = () => {
+  const { t } = useTranslation();
   return (
     <div className="bg-[#FFEEE2] px-5 py-10 sm:py-20">
       <div className="max-w-screen-xl mx-auto bg-[#FFD7AA] rounded-[40px] sm:rounded-[70px]  py-10  sm:py-16">
@@ -10,7 +12,7 @@ export const Homeseven = () => {
           {/* Text Section */}
           <div className="text-center lg:text-left px-6 sm:px-12">
             <h2 className="text-3xl sm:text-6xl font-bold text-gray-900">
-              Get <span className="text-[#9E200B]">Punyasetu</span> App
+              Get <span className="text-[#9E200B]">{t("PunyaSetu")}</span> App
             </h2>
             
             <p className="text-gray-700 mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center sm:text-left leading-relaxed">

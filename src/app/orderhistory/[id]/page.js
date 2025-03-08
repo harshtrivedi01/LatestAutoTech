@@ -117,10 +117,10 @@ export default function Page() {
               <span className="text-lg font-[500]">Shipping Charges</span>
               <span className="text-lg font-[500]">₹ {order.shipping_cost} /-</span>
             </div>
-            <div className="flex justify-between text-gray-700">
+            {/* <div className="flex justify-between text-gray-700">
               <span className="text-lg font-[500]">Coin Discount</span>
               <span className="text-lg font-[500]">₹ {order.coin_discount_amount} /-</span>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex justify-between font-semibold text-xl mb-4">
