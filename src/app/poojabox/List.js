@@ -69,7 +69,11 @@ export default function List({ pujaData }) {
                    alt="product image" />
                   <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed">
                     {product.name}
-                    <div className="mt-5 text-base font-medium text-sm leading-relaxed">{product.description}</div>
+                    <p className="mt-5 text-base font-medium text-sm leading-relaxed">
+  {product.description
+    ?product.description .split(" ").slice(0, 12).join(" ") + (product.description .split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
                   </span>
                 </a>
                 <div className="mt-4 px-5 pb-5">

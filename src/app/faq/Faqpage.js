@@ -75,7 +75,7 @@ export default function FaqPage() {
                   faq.isOpen ? "max-h-40" : "max-h-0"
                 }`}
               >
-                <div className="pb-5 text-base text-slate-500"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( faq?.description || "No description available.") }}>
+                <div className="pb-5 text-base text-slate-500"  dangerouslySetInnerHTML={{ __html:( faq?.description || "No description available.") }}>
                  
                 </div>
               </div>

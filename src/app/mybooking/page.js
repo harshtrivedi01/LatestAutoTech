@@ -130,8 +130,8 @@ const Page = () => {
         formData.append("type", "order_history");
         formData.append("search", searchQuery);
         const response = await api.post("/order_search", formData);
-        console.log("Pooja Box Search Response:", response?.data);
-        setSearchResults(response?.data?.data?.order_list || []);
+        console.log("Pooja Box Search Response:", response?.data?.data?.order_list);
+        setSearchResults(response?.data?.data || []);
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
@@ -146,6 +146,11 @@ const Page = () => {
     Pending: "bg-[#87521B]",
     Failed: "bg-red-700",
     Success: "bg-green-700",
+  };
+  const statusColorspoojabox = {
+    Pending: "bg-[#87521B]",
+    cancelled: "bg-red-700",
+    confirmed: "bg-green-700",
   };
 
   return (
@@ -243,7 +248,7 @@ const Page = () => {
     {loading ? (
       <p className="text-center text-lg font-semibold">Searching...</p>
     ) : searchQuery && searchResults.length === 0 ? (
-      <p className="text-center text-lg text-red-500 font-semibold">
+      <p className="text-center text-lg min-h-screen text-red-500 font-semibold">
         No results found for "{searchQuery}"
       </p>
     ) : (
@@ -323,11 +328,11 @@ const Page = () => {
     {loading ? (
       <p className="text-center text-lg font-semibold">Searching...</p>
     ) : searchQuery && (!searchResults?.order_list || searchResults?.order_list.length === 0) ? (
-      <p className="text-center text-lg text-red-500 font-semibold">
+      <p className="text-center text-lg text-red-500 min-h-screen font-semibold">
         No results found for "{searchQuery}"
       </p>
     ) : (!poojaBox || poojaBox.length === 0) ? (
-      <p className="text-center text-gray-600 text-lg font-semibold">
+      <p className="text-center text-gray-600 min-h-screen text-lg font-semibold">
         No orders available.
       </p>
     ) : (
@@ -352,13 +357,13 @@ const Page = () => {
                 <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p>
                 <p className="text-gray-500 text-sm">Delivery Date: {order.delivery_date || order.order_date}</p>
                 <p className="text-gray-800 font-[500] text-[14px]">
-                  Amount Rs. {order.grand_total}
+                  Amount Rs. {order.grand_total}/-
                 </p>
-                <p className="text-gray-500 text-sm">Discount: Rs. {order.discount}</p>
+                <p className="text-gray-500 text-sm">Discount: Rs. {Math.floor(order.discount) || Math.floor(order.total_discount)||"NA"}/-</p>
                 {/* <p className="text-gray-500 text-sm">Payment Status: {order.payment_status}</p> */}
                 <div
                   className={`${
-                    statusColors[order.delivery_status] || "bg-gray-500"
+                    statusColorspoojabox[order.delivery_status] || "bg-gray-500"
                   } rounded-full w-24 px-4 py-1 mt-3 mx-auto sm:mx-0`}
                 >
                   <p className="text-white text-sm">{order.delivery_status}</p>

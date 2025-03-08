@@ -35,12 +35,18 @@ export default function List({ pujaData }) {
                     {puja.name || "Puja Title"}
                   </h5>
                   <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
+                 
                   <p className="mb-1 font-bold text-xl text-black flex-grow">
-                    {puja.sub_title || "Puja description goes here."}
-                  </p>
-                  <p className="mb-1 text-gray-700 text-base flex-grow">
-                    {puja.short_description || "Puja description goes here."}
-                  </p>
+  {puja.sub_title
+    ? puja.sub_title.split(" ").slice(0, 12).join(" ") + (puja.sub_title.split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+
+<p className="mb-1 text-gray-700 text-base flex-grow">
+  {puja.short_description
+    ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
 
                   {/* Date Section */}
                   <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">

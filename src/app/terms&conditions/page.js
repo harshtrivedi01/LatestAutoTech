@@ -32,7 +32,7 @@ const TermsandConditions = () => {
           <div className="container">
           <h2 className="text-2xl font-bold mb-4 text-start">Terms & Conditions</h2>
 
-          <div className="py-12"   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData) }}>
+          <div className="py-12"   dangerouslySetInnerHTML={{ __html:(pujaData) }}>
 
           </div>
           </div>

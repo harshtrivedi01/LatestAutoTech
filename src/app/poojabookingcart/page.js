@@ -21,7 +21,7 @@ console.log((datapackage))
   return (
     <AuthGuard>
     <div className="cart b50 min- p-60">
-      <div className="container">
+      <div className="container p-0">
       
 
         {/* Progress Steps */}
@@ -30,7 +30,7 @@ console.log((datapackage))
 <Payment/>
 
       </div>
-      <Testimonials/>
+      
     </div>
     {/* <Homeeight/> */}
    

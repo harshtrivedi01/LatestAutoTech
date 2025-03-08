@@ -99,19 +99,19 @@ const Cart = () => {
   
   return (
     <AuthGuard className="bg-gray-50">
-  <div className="cart min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6">
+  <div className="">
 
        <Toaster position="top-right" reverseOrder={false} /> 
-      <div className="container">
+      <div className="container p-0">
       {cartItems > 0 && (
   <>
-    <h1 className="f-34 mb-2 font-semibold text-lg">Shopping Cart</h1>
-    <h1 className="mb-2 text-xl">
+    <h1 className="f-34 mb-2 font-semibold text-lg cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">Shopping Cart</h1>
+    <h1 className="mb-2 text-xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">
       You have <span className="text-orange-600">{cartItems} item(s)</span> in your cart
     </h1>
 
     {/* Progress Steps */}
-    <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+    <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
       <div className="flex items-center mb-4 md:mb-0">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
           <span className="font-bold">1</span>
@@ -175,7 +175,7 @@ const Cart = () => {
       </div>
     </div>
 
-    <SliderTwo />
+   
       </AuthGuard>
 
   );

@@ -107,9 +107,12 @@ export default function Homefourth({ pujaData }) {
                     </div>
                     <span className="m-2 rounded-full px-2 lg:text-xl text-yellow-700 text-black leading-relaxed">
                       {puja.name || "Puja Title"}
-                      <div className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
-                        {puja.description || "Puja description goes here."}
-                      </div>
+                      <p className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
+  {puja.description 
+    ? puja.description .split(" ").slice(0, 12).join(" ") + (puja.description .split(" ").length > 12 ? "..." : "")
+    : "Puja description goes here."}
+</p>
+                      
                     </span>
                   </Link>
                   <div className="mt-4 px-5 pb-5">

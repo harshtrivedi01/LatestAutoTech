@@ -4,6 +4,7 @@ import AuthGuard from "../component/AuthGuard";
 import { load } from "@cashfreepayments/cashfree-js";
 import { useRouter, useSearchParams } from "next/navigation";
 import api from "../lib/axiosInstance";
+import Testimonials from "../poojadetail/Testimonials";
 
 const Payment = () => {
   const [data, setData] = useState(null);
@@ -239,6 +240,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
+      <Testimonials/>
     </AuthGuard>
   );
 };

@@ -160,3 +160,15 @@ background-image: linear-gradient(147deg, #ffffff 0%, #FFE2D7 74%);
 }
 
 
+.custom-pagination .swiper-pagination-bullet {
+  background-color: #FF6600 !important; /* Change to your desired orange */
+  width: 14px; /* Adjust size */
+  height: 14px;
+  margin: 0 6px !important; /* Adjust gap between dots */
+  opacity: 1; /* Ensure visible dots */
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background-color: #D14300 !important; /* Darker orange for active dot */
+  transform: scale(1.3); /* Slightly larger active dot */
+}

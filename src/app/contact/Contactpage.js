@@ -116,7 +116,7 @@ export default function ContactPage() {
             </div>
             <div className="flex items-center mt-5">
               <FaLocationDot className="text-xl" />
-              <span className="text-sm text-light m-4" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pujaData?.address) }}></span>
+              <span className="text-sm text-light m-4" dangerouslySetInnerHTML={{ __html:(pujaData?.address) }}></span>
             </div>
             <br /><br /><br /><br />
         <div className="grid grid-cols-6 g">

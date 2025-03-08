@@ -83,14 +83,14 @@ export default function Poojaboxdetailpage() {
       console.log("Buy Now Response:", response.data);
 
       if (response.data.status == 0 && response.data.message.trim() === "product is already in the cart") {
-        toast.error("Product is already in the cart. Redirecting...");
+        // toast.error("Product is already in the cart");
         setTimeout(() => {
           router.push("/cartpoojabox");
         }, 50); // Short delay before redirecting
       } else if (response.data.status == 0) {
         toast.error(response.data.message || "Action failed!");
       } else {
-        toast.success("Added to cart! Redirecting...");
+        toast.success("Addeding to cart! ");
         setTimeout(() => {
           router.push("/cartpoojabox");
         }, 1000);

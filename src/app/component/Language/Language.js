@@ -46,7 +46,7 @@ export default function Language() {
   };
 
   return (
-    <div className="flex items-center gap- bg-white px-2 py-2">
+    <div className="flex items-center gap- bg- px-2 py-2">
       <TbWorld className="text-2xl text-gray-800" />
       <select
         value={selectedLanguage?.code || "en"} // Prevent undefined error

@@ -12,7 +12,7 @@ export default function Aboutpage({heading,description,image}) {
         <div className="container mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold leading-none">{heading}</h1>
-            <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>
+            <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html:(description) }}></p>
             <p className="mt-8 md:mt-12">
               <button
                 type="button"
@@ -24,7 +24,7 @@ export default function Aboutpage({heading,description,image}) {
             </p>
 
           </div>
-          <div className="lg:w-1/2">
+          <div className="lg:w-1/2 items-center flex justify-center">
             <img src={image||"/images/aboutimage.png"}
                onError={(e) => (e.target.src ="/images/aboutimage.png") }
             /></div>

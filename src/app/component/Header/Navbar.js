@@ -51,7 +51,7 @@ export default function Navbar() {
               className="h-16 mb-2"
               alt="PunyaSetu Logo"
             />
-            <span className="self-center text-3xl font-semibold whitespace-nowrap text-black">
+            <span className="self-center text-2xl lg:text-3xl font-semibold whitespace-nowrap text-black">
             {t("PunyaSetu")}
             </span>
           </a>

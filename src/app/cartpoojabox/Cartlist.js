@@ -1,18 +1,20 @@
 import { FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation"; // Use Next.js router for navigation
+import SliderTwo from "../poojaboxdetail/SliderTwo";
 
 export default function Cartlist({ handleNextStep, list, updateCartQuantity, quantities, handleCartAction }) {
   const router = useRouter();
   const cartItems = list?.cart_list || [];
   const subtotal = cartItems.reduce(
-    (acc, item) => acc + Number(item.discounted_price) * item.quantity,
+    (acc, item) => acc + (quantities[item.product_id] || item.quantity) * item.discounted_price,
     0
   );
+  
 
   // If cart is empty
   if (subtotal === 0 || cartItems.length === 0) {
     return (
-      <div className="text-center py-10">
+      <div className="text-center min-h-screen py-10">
         <h2 className="text-2xl font-semibold text-gray-700">Your Cart is Empty</h2>
         <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p>
         <button
@@ -26,7 +28,8 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-6">
+   <>
+    <div className="flex flex-col min-h-screen md:flex-row gap-6 cart  sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6">
       <div className="md:w-2/3">
         {cartItems.map((item) => (
           <div key={item.id} className="w-full my-5">
@@ -91,24 +94,34 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
         ))}
       </div>
 
-      {/* Right Section */}
-      <div className="w-full md:w-1/3">
-        <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
-          <h3 className="font-semibold text-gray-800 text-xl mb-3">SubTotal</h3>
-          <div className="flex justify-between mb-4">
-            <span className="text-gray-600 text-lg">Total</span>
-            <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
-          </div>
-          <a href="/cartaddresspoojabox">
-          <button
-            className="w-full common-btn text-white font-semibold py-2 rounded-lg"
-            // onClick={handleNextStep}
-          >
-            Checkout
-          </button>
-          </a>
-        </div>
+  {/* Right Section */}
+<div className="w-full md:w-1/3">
+  <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
+    <h3 className="font-semibold text-gray-800 text-xl mb-3 border-b border-orange-500 pb-1">SubTotal</h3>
+    
+    {cartItems.map((item) => (
+      <div key={item.id} className="flex justify-between mb-2">
+        <span className="text-gray-600">{item.product_name} (x{quantities[item.product_id] || item.quantity})</span>
+        <span className="text-gray-800 font-semibold">₹{Math.floor((quantities[item.product_id] || item.quantity) * item.discounted_price)}</span>
       </div>
+    ))}
+
+    <div className="flex justify-between border-t py-2  mt-3">
+      <span className="text-gray-600 text-lg fontsemibold">Total</span>
+      <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
     </div>
+
+    <a href="/cartaddresspoojabox">
+      <button className="w-full common-btn text-white font-semibold py-2 rounded-lg">
+        Checkout
+      </button>
+    </a>
+  </div>
+</div>
+
+      
+    </div>
+     <SliderTwo />
+   </>
   );
 }

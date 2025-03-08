@@ -330,21 +330,39 @@ const Cart = () => {
               ))}
             </div>
             <div className="w-full md:w-1/3">
-              <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
-                <h3 className="font-semibold text-gray-800 text-xl mb-3">Checkout</h3>
-                <div className="flex justify-between mb-4">
-                  <span className="text-gray-600 text-lg font-semibold">Total</span>
-                  <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
-                </div>
-                <button
-                  className="w-full common-btn text-white font-semibold py-2 rounded-lg mb-2"
-                  onClick={handlePayment}
-                >
-                  Pay Now
-                </button>
-               
-              </div>
-            </div>
+  <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
+    <h3 className="font-semibold text-gray-800 text-xl mb-3">Checkout</h3>
+
+    {/* Subtotal Breakdown */}
+    {cartItems.map((item) => {
+      const quantity = quantities[item.product_id] || item.quantity;
+      const itemTotal = Math.floor(quantity * item.discounted_price);
+
+      return (
+        <div key={item.id} className="flex justify-between mb-2">
+          <span className="text-gray-600">
+            {item.product_name} (x{quantity})
+          </span>
+          <span className="text-gray-800 font-semibold">₹{itemTotal}</span>
+        </div>
+      );
+    })}
+
+    {/* Total Calculation */}
+    <div className="flex justify-between border-t py-2 mt-3">
+      <span className="text-gray-600 text-lg font-semibold">Total</span>
+      <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
+    </div>
+
+    <button
+      className="w-full common-btn text-white font-semibold py-2 rounded-lg mb-2"
+      onClick={handlePayment}
+    >
+      Pay Now
+    </button>
+  </div>
+</div>
+
           </div>
 
     <SliderTwo/>
