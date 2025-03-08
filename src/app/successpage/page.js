@@ -1,5 +1,5 @@
 import Image from "next/image";
-//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 import success from "../../../public/success.png"
 import AuthGuard from "../component/AuthGuard";

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import api from "../lib/axiosInstance";
 
-//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Bookingpage = () => {
   const [activeStep, setActiveStep] = useState("Pooja Booking");

@@ -8,7 +8,7 @@ import Address from "./Address";
 import AuthGuard from "../component/AuthGuard";
 import SliderTwo from "../poojaboxdetail/SliderTwo";
 import api from "../lib/axiosInstance";
-//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Cart = () => {
   const [currentStep, setCurrentStep] = useState(1);

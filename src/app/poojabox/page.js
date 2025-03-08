@@ -1,11 +1,14 @@
+import { Suspense } from "react";
 import Poojaboxpage from "./Poojaboxpage";
-//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 
 export default function Page() {
   return (
  <>
+  <Suspense fallback={<div>Loading...</div>}>
 <Poojaboxpage/>
+</Suspense>
  </>
   );
 }

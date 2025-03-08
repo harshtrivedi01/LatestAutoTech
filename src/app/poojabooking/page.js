@@ -1,5 +1,5 @@
 import Poojabookingpage from "./Poojabookingpage";
-//export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 
 

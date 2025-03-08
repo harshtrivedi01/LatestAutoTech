@@ -16,16 +16,6 @@ export default function Poojaboxpage() {
     fetchPujaDatalist();
   }, []);
 
-const header = {
-  "language": "en",
-  "userId": "2",
-  "user_type": "user",
-  "Device_id": "upen",
-  "Longitude": JSON.parse(localStorage.getItem("formData") || "{}").Longitude,
-  "Latitude": JSON.parse(localStorage.getItem("formData") || "{}").Latitude,
-  "Ip_address": JSON.parse(localStorage.getItem("formData") || "{}").Ip_address,
-  "web_token": localStorage.getItem("authToken"),
-}
 
   const fetchPujaData = async (search) => {
     try {
