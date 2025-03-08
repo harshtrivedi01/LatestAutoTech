@@ -208,7 +208,7 @@ const Profilepage = () => {
 
                 <div className="w-full pr-4">
                   <h2 className="text-[20px] text-gray-800 font-semibold text-start">
-                    Name
+                    First Name
                   </h2>
                   <input
                     id="fname"
@@ -222,7 +222,7 @@ const Profilepage = () => {
 
                 <div className="w-full pr-4">
                   <h2 className="text-[20px] text-gray-800 font-semibold text-start">
-                    Name
+                  Last  Name
                   </h2>
                   <input
                     id="flastname"

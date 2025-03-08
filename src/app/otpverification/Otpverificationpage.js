@@ -134,7 +134,7 @@ export default function OtpVerificationPage() {
       );
   
       if (response.data.status == "1") {
-        toast.success(response.data.message || "OTP verified successfully! Redirecting...");
+        // toast.success(response.data.message || "OTP verified successfully! Redirecting...");
         const id = response.data.data.id; // Assuming the API returns a token
         if (id) {
           localStorage.setItem("idToken", id); // ✅ Save token

@@ -14,7 +14,7 @@ i18n
         translation: {
           Home: "Home",
           language: "Language",
-          About:"About Us",
+          About:"About",
           PunyaSetu:"PunyaSetu",
           Service:"Service",
           Contact:"Contact Us",

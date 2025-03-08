@@ -8,8 +8,10 @@ import music from "../../../public/Assests/Service/music.png";
 
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function Homethird({pujaData}) {
+  const { t } = useTranslation();
   return (
     <div className="relative w-full min-h-screen bg-white">
       <div
@@ -24,7 +26,7 @@ export default function Homethird({pujaData}) {
       ><br/> <br/><br/><br/><br/><br/><br/>
         <div className="mx-auto max-w-6xl relative">
           <div className="flex justify-center">
-            <Heading text="About" color="white" />
+            <Heading text={t("About")} color="white" />
           </div>
 
           <p 
@@ -54,9 +56,9 @@ export default function Homethird({pujaData}) {
             <h3 className="text-lg text-black leading-7 md:text-sm lg:text-[17px]">
               {pujaData?.data?.aboutus_imagedes1}
             </h3>
-            <button className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
+            <a  href={"/contact"}className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
               <FaChevronRight className="text-[#DD531B]" />
-            </button>
+            </a>
           </div>
           <img
             src={pujaData?.data?.aboutus_images.image1}
