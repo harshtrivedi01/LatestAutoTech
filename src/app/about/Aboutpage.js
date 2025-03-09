@@ -4,8 +4,9 @@
 import { MdArrowOutward } from "react-icons/md";
 
 import DOMPurify from "dompurify";
+import { useTranslation } from "react-i18next";
 export default function Aboutpage({heading,description,image}) {
- 
+  const { t } = useTranslation();
   return (
     <>
       <section className="pt-20 md:pt-20 bg-[#FFF8F5]">
@@ -19,7 +20,7 @@ export default function Aboutpage({heading,description,image}) {
                 className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-2xl px-2 lg:px-10 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                 style={{ backgroundColor: "#E5644E" }}
               >
-                Learn More
+               {t("LearnMore")}
               </button>
             </p>
 
@@ -33,7 +34,7 @@ export default function Aboutpage({heading,description,image}) {
 
               <div className="flex gap-5 border-b-2 border-gray-300">
                 <p className="text-lg text-orange-600 text-left leading-normal mb-2 font-lf-normal">
-                  More than 725 users are <br />with us on WellSpring.
+                {t("moreUser")}
                 </p>
                 <MdArrowOutward className="border border-2 border-orange-400 text-red-700 rounded-full p-2 text-5xl" />
               </div>

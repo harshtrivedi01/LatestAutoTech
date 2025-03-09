@@ -115,7 +115,7 @@ export default function Footersection() {
 							</ul>
 						</nav>
 						<nav>
-							<h6 className="footer-title font-semibold text-lg mb-3">Social Media</h6>
+							<h6 className="footer-title font-semibold text-lg mb-3">{t("SocialMedia")}</h6>
 							<div className="flex  space-x-1">
 								<a
 									rel="noopener noreferrer" href={pujaData?.social_links.facebook} title="Facebook" className="flex items-center p-1">
