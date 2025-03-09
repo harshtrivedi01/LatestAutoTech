@@ -39,6 +39,15 @@ Country:"Country",
 State:"State",
 City:"City",
 
+SUCCESS:"SUCCESS!",
+SUCCESSdis:"Your payment has been successfully processed, and your  booking is confirmed",
+BackToHome:" Back To Home",
+
+failed:"FAILED",
+faileddis:"We were unable to process your payment. Please check your              payment details and try again. If the issue persists, contact your bank or try a different payment method.",
+tryagain:"Try Again",
+
+
 
      
           contactdis:"Say something to start a live chat!",
@@ -82,6 +91,7 @@ City:"City",
           Person:"Person",
           mostpopular:"mostpopular",
           AboutPooja:"About Pooja",
+          
           PoojaPackage:"Pooja Package",
           GetPunyaSetuApp:"Get PunyaSetu App",
           DownloadontheAppStore:"Download on the App Store",
@@ -112,6 +122,7 @@ City:"City",
           PayNow:"Pay Now",
           SaveContinue:"Save & Continue",
           Saveing:"Saveing...",
+          BuyNow:"Buy Now",
 
           //   /profile
           FirstName:"First Name",
@@ -147,6 +158,12 @@ City:"City",
           IdontknowmyGotra:"I don’t know my Gotra",
           save:"save",
           Cancle:"Cancle",
+          AddedMember:"Added Member",
+          Kashyap:"Kashyap",
+          Gotra:"Gotra",
+          MemberName:"Member Name",
+          AddNewMember:"Add New Member",
+
 
 
 
@@ -162,8 +179,9 @@ City:"City",
           //    /cartpoojabox 
 
           ShoppingCart:"Shopping Cart",
-          YouhaveTwoiteminyourcart:"You have 2 item(s) in your cart",
-          YouhaveOneiteminyourcart:"You have 1 item(s) in your cart",
+          YouhaveTwoiteminyourcart:"You have ",
+          items:" item(s) ",
+          YouhaveOneiteminyourcart:" in your cart",
           BookingReviewbooking:"Booking Review booking",
           AddAddressSelectadeliveryaddress:"Add Address Select a delivery address",
           PayinfoSelectapaymentmethod:"Pay info Select a payment method",
@@ -181,11 +199,12 @@ City:"City",
           PoojaBox:"Pooja Box",
           LaxmiPoojaBoxDailyPoojaBox:"Laxmi Pooja Box, Daily Pooja Box",
           LaxmiPoojaBox:"Laxmi Pooja Box",
-          OrderID:"Order ID",
-          DeliveryDate:"Delivery Date",
-          AmountRs:"Amount Rs",
-          DiscountRS:"Discount RS",
+          OrderID:"Order ID:",
+          DeliveryDate:"Delivery Date:",
+          AmountRs:"Amount Rs.",
+          DiscountRS:"Discount Rs",
           
+          Ordertimedate:"Order time & date:",
 
 
           //    /orderhistory/87
@@ -198,10 +217,44 @@ City:"City",
           ShippingCharges:"Shipping Charges",
           GrandTotal:"Grand Total",
 
+
+          Signin:"Sign in",
+          signdis:"Access all Punyasetu services, explore 1000+ devotional <br/> songs, and discover a variety of spiritual offerings.",
+
+          by:"By proceeding you agree to the",
+          andof:"and of PUNYASETU",
+          and:"and",
+          sendotp:"Send OTP",
+          backto:"Back To",
+
+
+          OTPVerification:"OTP Verification",
+          WesentyouaonetimeOTPonthis:" We sent you a one-time OTP on this",
+          MobileNumber:" Mobile Number",
+          ResendOTPin:" Resend OTP in",
+          ResendOTP:"Resend OTP",
+
+
+     
         },
       },
       hi: {
         translation: {
+          Signin:"साइन इन ",
+          signdis: `सभी पुण्यसेतु सेवाओं तक पहुँचें, 1000+ भक्ति गीतों का अन्वेषण करें,<br/> और विभिन्न आध्यात्मिक पेशकशों की खोज करें।`,
+
+          by:"आगे बढ़ने से आप सहमत हैं",
+          andof:"और पुण्यसेतु",
+          and:"और",
+          sendotp:"ओटीपी भेजें",
+          backto:"वापस जाएं",
+
+          OTPVerification:"OTP सत्यापन",
+          WesentyouaonetimeOTPonthis:" हमने आपको इस पर एक बार का OTP भेजा है",
+          MobileNumber:" मोबाइल नंबर",
+          ResendOTPin:" OTP को फिर से भेजें",
+          ResendOTP:" OTP को फिर से भेजें",
+          
           Home: "घर",
           language: "भाषा",
            About:"बारे में",
@@ -233,6 +286,16 @@ City:"City",
            City:"शहर",
            SaveContinue:"सहेजें जारी रखें",
            Saveing:"Saveing...",
+
+           SUCCESS:"सफलता!",
+SUCCESSdis:"आपका भुगतान सफलतापूर्वक संसाधित हो गया है, और आपकी बुकिंग की पुष्टि हो गई है",
+
+failed:"असफल",
+faileddis:"हम आपका भुगतान संसाधित करने में असमर्थ रहे। कृपया अपने भुगतान विवरण की जाँच करें और पुनः प्रयास करें। यदि समस्या बनी रहती है, तो अपने बैंक से संपर्क करें या कोई अन्य भुगतान विधि आज़माएँ।",
+tryagain:"पुनः प्रयास करें",
+
+BackToHome:"घर वापिस",
+
          
 SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए तिथि चुनें",
            BookNow:"अभी बुक करें",
@@ -257,7 +320,8 @@ SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए त
           SocialMedia:"सोशल मीडिया",
           LearnMore:"और अधिक जानें",
           moreUser:"725 से अधिक उपयोगकर्ता वेलस्प्रिंग पर हमारे साथ हैं",
-         
+          BuyNow:"अभी खरीदें",
+
           Reviews:"हमारे ग्राहक हमारे बारे में क्या कहते हैं",
           OurService:"हमारी सेवा",
           Working:"पुण्यसेतु ऑनलाइन पूजा कैसे काम करती है?",
@@ -336,6 +400,11 @@ SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए त
           IdontknowmyGotra:"मुझे अपना गोत्र नहीं मालूम",
           save:"बचाना",
           Cancle:"कैंसिल",
+          AddedMember:"जोड़ा गया सदस्य",
+          Kashyap:"कश्यप",
+          Gotra:"गोत्र",
+          MemberName:"सदस्य का नाम",
+          AddNewMember:"नया सदस्य जोड़ें",
 
 
 
@@ -351,15 +420,16 @@ SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए त
           //    /cartpoojabox 
 
           ShoppingCart:"शॉपिंग कार्ट",
-          YouhaveTwoiteminyourcart:"आपके कार्ट में 2 आइटम हैं",
-          YouhaveOneiteminyourcart:"आपके कार्ट में 1 आइटम है",
+          YouhaveTwoiteminyourcart:"आपके कार्ट में  ",
+          items:" आइटम ",
+          YouhaveOneiteminyourcart:"  है",
           BookingReviewbooking:"बुकिंग समीक्षा बुकिंग",
           AddAddressSelectadeliveryaddress:"पता जोड़ें डिलीवरी पता चुनें",
           PayinfoSelectapaymentmethod:"भुगतान जानकारी भुगतान विधि चुनें",
           SubTotal:"उप-योग",
           Checkout:"चेक आउट",
           Total:"कुल",
-
+          Ordertimedate:"ऑर्डर का समय और दिनांक:",
 
 
           //    /mybooking

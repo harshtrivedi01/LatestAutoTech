@@ -1,3 +1,5 @@
+"use client"
+import { useTranslation } from "react-i18next";
 import AuthGuard from "../component/AuthGuard";
 import Testimonials from "../poojadetail/Testimonials";
 import Form from "./Form";
@@ -6,6 +8,7 @@ export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 
 const Page = () => {
+    const { t } = useTranslation();
     return (
     <AuthGuard>
         <div className="p-6 md:px-20">
@@ -17,9 +20,7 @@ const Page = () => {
       <span className="font-bold">01</span>
     </div>
     <p className="ml-2 text-sm font-semibold text-gray-700">
-      Sankalp Form
-      <br />
-      <span className="text-sm font-semibold text-gray-700">Fill Name, Gotra & Address</span>
+    {t("SankalpFormFillNameGotraAddress")}
     </p>
   </div>
   <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
@@ -31,9 +32,7 @@ const Page = () => {
       <span className="font-bold">{2}</span>
     </div>
     <p className="ml-2 text-sm font-semibold text-gray-700">
-      Pay
-      <br />
-      <span className="text-sm font-semibold text-gray-700">Select a payment method</span>
+    {t("PaySelectapaymentmethod")}
     </p>
   </div>
 </div>

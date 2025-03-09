@@ -2,7 +2,9 @@ import { FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation"; // Use Next.js router for navigation
 import SliderTwo from "../poojaboxdetail/SliderTwo";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 export default function Cartlist({ handleNextStep, list, updateCartQuantity, quantities, handleCartAction }) {
+  const { t } = useTranslation();
   const router = useRouter();
   const cartItems = list?.cart_list || [];
   
@@ -107,7 +109,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
         {/* Right Section */}
         <div className="w-full md:w-1/3">
           <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
-            <h3 className="font-semibold text-gray-800 text-xl mb-3 border-b border-orange-500 pb-1">Order Summary</h3>
+            <h3 className="font-semibold text-gray-800 text-xl mb-3 border-b border-orange-500 pb-1">{t("OrderSummary")}</h3>
             
             {cartItems.map((item) => (
               <div key={item.id} className="flex justify-between mb-2">
@@ -118,25 +120,25 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
 
             {/* Shipping Cost */}
             <div className="flex justify-between mt-3">
-              <span className="text-gray-600">Shipping Charges</span>
+              <span className="text-gray-600">{t("ShippingCharges")} </span>
               <span className="text-gray-800 font-semibold">₹{Math.floor(totalShippingCost)}</span>
             </div>
 
             {/* Subtotal */}
             <div className="flex justify-between border-t py-2 mt-3">
-              <span className="text-gray-600 text-lg font-semibold">Subtotal</span>
+              <span className="text-gray-600 text-lg font-semibold">{t("Subtotal")}</span>
               <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(subtotal)}</span>
             </div>
 
             {/* Total Amount */}
             <div className="flex justify-between border-t py-2 mt-3">
-              <span className="text-gray-600 text-lg font-semibold">Total Amount</span>
+              <span className="text-gray-600 text-lg font-semibold">{t("Total")}</span>
               <span className="text-gray-800 font-bold text-lg">₹{Math.floor(finalTotal)}</span>
             </div>
 
             <a href="/cartaddresspoojabox">
               <button className="w-full common-btn text-white font-semibold py-2 rounded-lg">
-                Checkout
+              {t("Checkout")}
               </button>
             </a>
           </div>

@@ -8,8 +8,10 @@ import { FaTrash } from "react-icons/fa";
 import { CheckIcon } from "lucide-react";
 import { load } from "@cashfreepayments/cashfree-js";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 const Payment = () => {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState(null);
   const [quantities, setQuantities] = useState({}); // Store product quantities
   const router = useRouter(); 
@@ -252,50 +254,45 @@ const updateCartQuantity = async (productId, change) => {
 
   return (
     <AuthGuard className="bg-gray-50 ">
-            <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">Shopping Cart</h1>
+        <Toaster position="top-right" reverseOrder={false} />
+            <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">  {t("ShoppingCart")} </h1>
        {/* Progress Steps */}
-       <div className="flex md:mx-10 lg:mx-20 xl:mx-40 m-5 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
- <div className="flex items-center mb-4 md:mb-0">
- <div
-             className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
-           >
-             <Toaster position="top-right" reverseOrder={false} />
-     <span className="font-bold"><CheckIcon/></span>
-   </div>
-   <p className="ml-2 text-sm font-semibold text-gray-700">
-     Booking 
-     <br />
-     <span className="text-sm font-semibold text-gray-700">Review booking </span>
-   </p>
- </div>
- <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+       <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
+      <div className="flex items-center mb-4 md:mb-0">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
+      <span className="font-bold"><CheckIcon/></span>
+        </div>
+        <p className="ml-2 text-sm font-semibold text-gray-700">
+        {t("BookingReviewbooking")} 
+          <br />
+          <span className="text-sm font-semibold text-gray-700">Review booking</span>
+        </p>
+      </div>
+      <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
 
- <div className="flex items-center">
-   <div
-     className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white`}
-   >
-     <span className="font-bold"><CheckIcon/></span>
-   </div>
-   <p className="ml-2 text-sm font-semibold text-gray-700">
-    Add Address
-     <br />
-     <span className="text-sm font-semibold text-gray-700">Select a delivery address</span>
-   </p>
- </div>
- <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
- <div className="flex items-center">
-   <div
-     className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
-   >
-     <span className="font-bold">{3}</span>
-   </div>
-   <p className="ml-2 text-sm font-semibold text-gray-700">
-     Pay info
-     <br />
-     <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
-   </p>
- </div>
-</div>
+      <div className="flex items-center">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
+      <span className="font-bold"><CheckIcon/></span>
+        </div>
+        <p className="ml-2 text-sm font-semibold text-gray-700">
+        {t("AddAddressSelectadeliveryaddress")} 
+          <br />
+          <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
+        </p>
+      </div>
+      <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+
+      <div className="flex items-center">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500">
+          <span className="font-bold">3</span>
+        </div>
+        <p className="ml-2 text-sm font-semibold text-gray-700">
+        {t("PayinfoSelectapaymentmethod")} 
+          <br />
+          <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
+        </p>
+      </div>
+    </div>
       
        <div className="flex flex-col md:mx-10 lg:mx-20 xl:mx-40 m-5 mb-40 md:flex-row gap-6">
             <div className="md:w-2/3">
@@ -375,7 +372,7 @@ const updateCartQuantity = async (productId, change) => {
             </div>
             <div className="w-full md:w-1/3">
   <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
-    <h3 className="font-semibold text-gray-800 text-xl mb-3">Checkout</h3>
+    <h3 className="font-semibold text-gray-800 text-xl mb-3">  {t("Checkout")} </h3>
 
     {/* Subtotal Breakdown */}
     {cartItems.map((item) => {
@@ -392,13 +389,13 @@ const updateCartQuantity = async (productId, change) => {
       );
     })}
     <div className="flex justify-between mt-3">
-              <span className="text-gray-600">Shipping Charges</span>
+              <span className="text-gray-600">{t("ShippingCharges")}</span>
               <span className="text-gray-800 font-semibold">₹{Math.floor(totalShippingCost)}</span>
             </div>
 
     {/* Total Calculation */}
     <div className="flex justify-between border-t py-2 mt-3">
-      <span className="text-gray-600 text-lg font-semibold">Total</span>
+      <span className="text-gray-600 text-lg font-semibold">{t("Total")}</span>
       <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(finalTotal)}</span>
     </div>
 
@@ -406,7 +403,7 @@ const updateCartQuantity = async (productId, change) => {
       className="w-full common-btn text-white font-semibold py-2 rounded-lg mb-2"
       onClick={handlePayment}
     >
-      Pay Now
+     {t("PayNow")}
     </button>
   </div>
 </div>

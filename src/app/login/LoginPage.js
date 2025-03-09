@@ -12,7 +12,9 @@ import topimage from "./../../../public/Assests/circle-vector.svg";
 import belowimage from "./../../../public/Assests/bird.svg";
 import Language from "../../app/component/Language/Language";
 import i18n from "../lib/i18n";
+import { useTranslation } from "react-i18next";
 export default function LoginPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [phoneError, setPhoneError] = useState("");
@@ -200,15 +202,14 @@ export default function LoginPage() {
               alt="logo"
             />
           </div>
-          <p className="font-bold text-4xl">Sign in</p>
+          <p className="font-bold text-4xl">      {t("Signin")}</p>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <p className="font-semibol text-[15px] text-center py-4">
-              Access all Punyasetu services, explore 1000+ devotional <br />
-              songs, and discover a variety of spiritual offerings.
+            <p className="font-semibol text-[15px] text-center py-4" dangerouslySetInnerHTML={{ __html:`${t("signdis")}` }}>
+
             </p>
             <input
   className="p-2 border-[1px] text-sm rounded-lg w-full"
-  placeholder="Enter Phone No"
+  placeholder={t("Phonenumber")}
   type="text"
   name="phone"
   onChange={handleChange}
@@ -220,30 +221,30 @@ export default function LoginPage() {
 />
 
             {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
-            <div className="flex space-x-1  text-sm">
-              <p className="text-center mt-4 text-sm text-gray-700">
-                By proceeding you agree  to the<br />
-                <a
-                  href="terms&conditions"
-                  className="text-[#FA8128] hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {" "}  Terms & Conditions {" "}
-                </a>
-                {" "}and{" "}
+            <div className="flex justify-center text-sm">
+  <p className="text-center mt-4 text-sm text-gray-700">
+    {t("by")}<br />
+    <a
+      href="terms&conditions"
+      className="text-[#FA8128] hover:underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t("TermsANDConditions")}
+    </a>
+    {" "}{t("and")}{" "}
+    <a
+      href="privacypolicy"
+      className="text-[#FA8128] hover:underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t("PrivacyPolicy")}
+    </a>
+    {" "}{t("andof")}
+  </p>
+</div>
 
-                <a
-                  href="privacypolicy"
-                  className="text-[#FA8128] hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {" "}Privacy Policy{" "}
-                </a>
-                and  of PUNYASETU {" "}
-              </p>
-            </div>
             <div className="flex flex-col space-y-5 p-5 w-full">
               <button
                 className={`w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 
@@ -251,7 +252,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={isResendDisabled}
               >
-                {isResendDisabled ? "Sending..." : "Send OTP"}
+                {isResendDisabled ?  `${t("Saveing")}` : `${t("sendotp")}`}
               </button>
             </div>
           </form>
@@ -259,10 +260,10 @@ export default function LoginPage() {
             
             <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">
               <IoArrowBackOutline className="text-lg item-end" />
-              Back To{" "}
+              {t("backto")}{" "}
               <a href="/" className="text-[#FA8128] hover:underline">
                 {" "}
-                Home{" "}
+                {t("Home")}{" "}
               </a>
             </p>
           </div>

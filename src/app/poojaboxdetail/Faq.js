@@ -4,8 +4,10 @@
 import { useState, useEffect } from "react";
 import api from "../lib/axiosInstance";
 import DOMPurify from "dompurify";
+import { useTranslation } from "react-i18next";
 
 export default function Faq() {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState([]);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function Faq() {
           <div className="items-center gap-10">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-">
-             Faq
+              {t("FAQ")}
               </h2>
             </div>
           </div>

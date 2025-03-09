@@ -3,8 +3,10 @@ import { useSearchParams } from "next/navigation";
 import { IoReload } from "react-icons/io5";
 import { RiErrorWarningLine } from "react-icons/ri";
 import AuthGuard from "../component/AuthGuard";
+import { useTranslation } from "react-i18next";
 
 export default function BookingDetailspage() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const bookingData = searchParams.get("data");
   const booking = bookingData ? JSON.parse(bookingData) : null;
@@ -17,13 +19,13 @@ export default function BookingDetailspage() {
     <AuthGuard>
     <div className="min-h-screen bg-white ">
       <div className="py-10 text-start px-5 bg-[#FFEEE2]">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Pooja Booking Details</h2>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">{t("PoojaBooking")}</h2>
       </div>
 
       <div className="px-4 sm:px-8 md:px-16 lg:px-40">
         {/* <h1 className="text-xl sm:text-2xl font-bold mt-4">Order #{booking.booking_id}</h1> */}
         <p className="text-gray-600 text-sm mt-4">
-          <span className="font-semibold">Order time & date:</span> {booking.create_date}
+          <span className="font-semibold">{t("Ordertimedate")}</span> {booking.create_date}
         </p>
 
         {/* Book Again Section */}
@@ -55,11 +57,11 @@ export default function BookingDetailspage() {
               {booking.payment_status}
             </p>
             <p className="text-green-600 text-sm mt-1">
-              <span className="font-semibold">Order time & date:</span> {booking.create_date}
+              <span className="font-semibold">{t("Ordertimedate")}</span> {booking.create_date}
             </p>
             <h2 className="text-xl font-bold text-black my-2">{booking.puja_name}</h2>
             <p className="text-red-600 font-bold text-lg">{booking.package_name || "N/A"}</p>
-            <p className="text-red-600 my-2 font-semibold text-xl">Amount Rs.{booking.amount}/-</p>
+            <p className="text-red-600 my-2 font-semibold text-xl">{t("AmountRs")}{booking.amount}/-</p>
           </div>
           <div className="flex justify-center mt-3">
           <div>

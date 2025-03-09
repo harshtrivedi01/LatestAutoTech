@@ -14,8 +14,10 @@ import { TbWorld } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
 import i18n from "../lib/i18n.js";
+import { useTranslation } from "react-i18next";
 
 export default function OtpVerificationPage() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
   // const phone = useSelector((state) => state.auth.formData.phone);
@@ -268,10 +270,10 @@ export default function OtpVerificationPage() {
             <img width={45} className="" src="/images/logo.png" />
           </div>
 
-          <p className="font-bold text-4xl">OTP Verification</p>
+          <p className="font-bold text-4xl"> {t("OTPVerification")}</p>
           <p className="text-center mt-4 text-xl font-semibold text-gray-700">
-            We sent you a one-time OTP on this <br />
-            Mobile Number +91 <span className="text-[#FA8128] hover:underline">{phone}</span>
+          {t("WesentyouaonetimeOTPonthis")} <br />
+          {t("MobileNumber")} +91 <span className="text-[#FA8128] hover:underline">{phone}</span>
           </p>
 
           <form onSubmit={handleOtpSubmit} className="flex flex-col mt-5 space-y-5">
@@ -292,14 +294,14 @@ export default function OtpVerificationPage() {
 
             {!resendVisible ? (
               <p className="text-sm text-gray-700 text-center mt-3">
-                Resend OTP in <span className="text-[#FA8128]">{`00:${timer < 10 ? `0${timer}` : timer}`}</span>
+                {t("ResendOTPin")} <span className="text-[#FA8128]">{`00:${timer < 10 ? `0${timer}` : timer}`}</span>
               </p>
             ) : (
               <button
                 onClick={handleResendOtp}
                 className="text-[#FA8128] font-semibold hover:underline text-center mt-3"
               >
-                Resend OTP
+                {t("ResendOTP")}
               </button>
             )}
 
@@ -309,16 +311,16 @@ export default function OtpVerificationPage() {
                 type="submit"
                 disabled={isResendDisabled}
               >
-                {isResendDisabled ? "Wait..." : "Submit"}
+                {isResendDisabled ? "Wait..." : `${t("submit")}`}
               </button>
           </form>
 
           <div className="flex space-x-1 mt-5 text-sm">
             <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">
               <IoArrowBackOutline className="text-lg item-end" />
-              Back To{" "}
+              {t("backto")}{" "}
               <a href="/login" className="text-[#FA8128] hover:underline " rel="noopener noreferrer">
-                Login
+              {t("Login")}
               </a>
             </p>
           </div>

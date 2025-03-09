@@ -16,15 +16,15 @@ const Page = () => {
     useEffect(() => {
       setIsClient(true);
     }, []);
-  const [activeStep, setActiveStep] = useState("Pooja Booking");
+  const [activeStep, setActiveStep] = useState(`${t("PoojaBooking")}`);
   const [Poojabookings, setPoojabookings] = useState([]);
   const [Panditbookings, setPanditbookings] = useState([]);
   const [poojaBox, setpoojaBox] = useState([]);
   const router = useRouter();
   const steps = [
-    { id: 1, title: "Pooja Booking" },
+    { id: 1, title: `${t("PoojaBooking")}`  },
     // { id: 2, title: "Pandit Booking" },
-    { id: 3, title: "Pooja Box" },
+    { id: 3, title: `${t("PoojaBox")}` },
   ];
 
   useEffect(() => {
@@ -122,13 +122,13 @@ const Page = () => {
     setLoading(true);
     try {
       let formData = new FormData();
-      if (activeStep === "Pooja Booking") {
+      if (activeStep === `${t("PoojaBooking")}`) {
         formData.append("type", "puja_bookings_history");
         formData.append("search", searchQuery);
         const response = await api.post("/search", formData);
         console.log("Pooja Booking Search Response:", response?.data);
         setSearchResults(response?.data?.data?.booking_list || []);
-      } else if (activeStep === "Pooja Box") {
+      } else if (activeStep === `${t("PoojaBox")}`) {
         formData.append("type", "order_history");
         formData.append("search", searchQuery);
         const response = await api.post("/order_search", formData);
@@ -177,7 +177,7 @@ const Page = () => {
   <form onSubmit={handleSearch} className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden">
             <input
               type="text"
-              placeholder="Search Something..."
+              placeholder={t("SearchSomething")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full outline-none bg-transparent text-gray-600 text-lg"
@@ -245,10 +245,10 @@ const Page = () => {
 
 {/* For pooja booking div */}
 {/* Pooja Booking Section */}
-{activeStep === "Pooja Booking" && (
+{activeStep === `${t("PoojaBooking")}` && (
   <div className="bg-gray-100 p-6 mt-12 rounded-lg">
     {loading ? (
-      <p className="text-center text-lg font-semibold">Searching...</p>
+      <p className="text-center text-lg font-semibold">  {t("SearchSomething")} </p>
     ) : searchQuery && searchResults.length === 0 ? (
       <p className="text-center text-lg min-h-screen text-red-500 font-semibold">
         No results found for "{searchQuery}"
@@ -291,7 +291,7 @@ const Page = () => {
               <p className=" text-xl">{booking.payment_status}</p>
             </div>
               <p className="text-gray-800 font-semibold text-lg">
-                Amount Rs.{booking.amount}/-
+              {t("AmountRs")} {booking.amount}/-
               </p>
               <p className="text-red-600 font-bold text-md">
                 {booking.package_name || "N/A"}
@@ -303,7 +303,7 @@ const Page = () => {
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
             <p className="text-gray-600 text-sm text-center sm:text-left">
-              <span className="font-semibold">Order time & date:</span>{" "}
+              <span className="font-semibold">{t("Ordertimedate")} </span>{" "}
               {booking.create_date}
             </p>
             <div
@@ -325,7 +325,7 @@ const Page = () => {
   </div>
 )}
 
-{activeStep === "Pooja Box" && (
+{activeStep === `${t("PoojaBox")}` && (
   <div className="bg-gray-100 p-6 mt-6 rounded-lg">
     {loading ? (
       <p className="text-center text-lg font-semibold">Searching...</p>
@@ -356,12 +356,12 @@ const Page = () => {
                 <h2 className="text-[15px] font-[500] text-[#855318] font-semibold">
                 {order.product_names || order.product_name}
                 </h2>
-                <p className="text-gray-500 text-sm">Order ID: {order.order_code}</p>
-                <p className="text-gray-500 text-sm">Delivery Date: {order.delivery_date || order.order_date}</p>
+                <p className="text-gray-500 text-sm"> {t("OrderID")} {order.order_code}</p>
+                <p className="text-gray-500 text-sm">{t("DeliveryDate")} {order.delivery_date || order.order_date}</p>
                 <p className="text-gray-800 font-[500] text-[14px]">
-                  Amount Rs. {order.grand_total}/-
+                {t("AmountRs")} {order.grand_total}/-
                 </p>
-                <p className="text-gray-500 text-sm">Discount: Rs. {Math.floor(order.discount) || Math.floor(order.total_discount)||"NA"}/-</p>
+                <p className="text-gray-500 text-sm">  {t("DiscountRS")} {Math.floor(order.discount) || Math.floor(order.total_discount)||"NA"}/-</p>
                 {/* <p className="text-gray-500 text-sm">Payment Status: {order.payment_status}</p> */}
                 <div
                   className={`${

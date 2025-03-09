@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import AuthGuard from "../component/AuthGuard";
+import { useTranslation } from "react-i18next";
 
 export default function Page() {
+    const { t } = useTranslation();
   const router = useRouter(); // Initialize the router
 
   const handleTryAgain = () => {
@@ -20,12 +22,10 @@ export default function Page() {
           </div>
           <div className="text-center">
             <h3 className="md:text-2xl text-base text-[#F21E1EED] font-semibold text-center">
-              FAILED!
+            {t("failed")}
             </h3>
             <p className="text-[#4A4A4A] my-5 font-semibold">
-              We were unable to process your payment. Please check your <br />
-              payment details and try again. If the issue persists, contact <br />
-              your bank or try a different payment method.
+            {t("faileddis")}
             </p>
 
             <div className="py-10 text-center">
@@ -33,7 +33,7 @@ export default function Page() {
                 onClick={handleTryAgain}
                 className="px-20 rounded-lg bg-[#F21E1EED] hover:bg-red-500 text-white font-semibold py-3"
               >
-                Try Again
+                  {t("tryagain")}
               </button>
             </div>
           </div>

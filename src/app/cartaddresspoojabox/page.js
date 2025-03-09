@@ -10,8 +10,10 @@ import "slick-carousel/slick/slick-theme.css"
 import api from "../lib/axiosInstance";
 import { useRouter } from "next/navigation";
 import SliderTwo from "../poojaboxdetail/SliderTwo";
+import { useTranslation } from "react-i18next";
 
 export default function Address() {
+  const { t } = useTranslation();
     const [isClient, setIsClient] = useState(false);
     
       useEffect(() => {
@@ -312,48 +314,43 @@ const handlePhoneChange = (e) => {
 
   return (
     <>
-     <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">Shopping Cart</h1>
-<div className="flex m-5 md:mx-10 lg:mx-20 xl:mx-40 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
-  <div className="flex items-center mb-4 md:mb-0">
-  <div
-              className={`w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white `}
-            >
-      <span className="font-bold"><CheckIcon/></span>
-    </div>
-    <p className="ml-2 text-sm font-semibold text-gray-700">
-      Booking 
-      <br />
-      <span className="text-sm font-semibold text-gray-700">Review booking </span>
-    </p>
-  </div>
-  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+     <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">{t("ShoppingCart")} </h1>
+     <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
+      <div className="flex items-center mb-4 md:mb-0">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
+          <span className="font-bold">1</span>
+        </div>
+        <p className="ml-2 text-sm font-semibold text-gray-700">
+        {t("BookingReviewbooking")} 
+          <br />
+          <span className="text-sm font-semibold text-gray-700">Review booking</span>
+        </p>
+      </div>
+      <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
 
-  <div className="flex items-center">
-    <div
-      className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
-    >
-      <span className="font-bold">{2}</span>
+      <div className="flex items-center">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500">
+          <span className="font-bold">2</span>
+        </div>
+        <p className="ml-2 text-sm font-semibold text-gray-700">
+        {t("AddAddressSelectadeliveryaddress")} 
+          <br />
+          <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
+        </p>
+      </div>
+      <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
+
+      <div className="flex items-center">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500">
+          <span className="font-bold">3</span>
+        </div>
+        <p className="ml-2 text-sm font-semibold text-gray-700">
+        {t("PayinfoSelectapaymentmethod")} 
+          <br />
+          <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
+        </p>
+      </div>
     </div>
-    <p className="ml-2 text-sm font-semibold text-gray-700">
-     Add Address
-      <br />
-      <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
-    </p>
-  </div>
-  <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
-  <div className="flex items-center">
-    <div
-      className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500`}
-    >
-      <span className="font-bold">{3}</span>
-    </div>
-    <p className="ml-2 text-sm font-semibold text-gray-700">
-      Pay info
-      <br />
-      <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
-    </p>
-  </div>
-</div>
 
 <section className="mb-4 mx-4 md:mx-10 lg:mx-20 xl:mx-40 max-w-full">
 
@@ -361,7 +358,7 @@ const handlePhoneChange = (e) => {
           {/* Dropdown to Toggle Form */}
           
 <h1 className="font-medium my-4 text-3xl">
-Choose Shipping Address
+{t("ChooseShippingAddress")} 
 </h1>
 <br/>
 
@@ -454,7 +451,7 @@ Choose Shipping Address
   }}
   className="px-4 py-2  font-bold  "
 >
-  {showForm ? "- Address Detail" : "+ Add New Address"}
+  {showForm ?  `+${t("AddressDetails")}`  : `+${t("AddnewAddress")}`}
 </button>
 
           </div>
@@ -562,7 +559,7 @@ Choose Shipping Address
           </div>
 
             <button type="submit" className="bg-[#E5644E] text-white px-8 py-3 rounded-2xl">
-    {formData.address_id ? "Update Address" : "Save Address"}
+    {formData.address_id ?  `${t("UpdateAddress")}`  : `${t("SaveAddress")}`}
   </button>
             </form>
           )}
@@ -575,7 +572,7 @@ Choose Shipping Address
               isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
             }`}
           >
-            Proceed to Next Step
+          {t("Proceedtonextstep")} 
           </button>
       </section>
       <br/>   <br/>  <br/>

@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 export default function List({ pujaData }) {
   // Track pujaData in state to allow updates
+   const { t } = useTranslation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -111,7 +113,7 @@ export default function List({ pujaData }) {
                            <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                              <path strokeLinecap="round" strokeLinejoin="round" d={product.cart_status ? "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" : "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"} />
                            </svg>
-                           {product.cart_status ? "Remove from cart" : "Add to cart"}
+                           {product.cart_status ? `${t("Removefromcart")}` : `${t("Addtocart")}`}
                          </a>
 
                         )
@@ -133,12 +135,12 @@ export default function List({ pujaData }) {
                               />
                             </svg>
                             
-                            Add to Cart</button>
+                            {t("Addtocart")}</button>
                          </a>
                         )}
                       </div>
                     ) : (
-                      <p className="text-red-600 font-bold  items-center justify-center rounded-md px-5 border shadow-xl py-2 text-center text-sm font-medium ">Out of Stock</p>
+                      <p className="text-red-600 font-bold  items-center justify-center rounded-md px-5 border shadow-xl py-2 text-center text-sm font-medium ">{t("OutofStock")}</p>
                     )}
                      {/* {product.stock ? (
                       <div className="">

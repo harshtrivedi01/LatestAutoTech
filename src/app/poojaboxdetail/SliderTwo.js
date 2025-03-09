@@ -7,8 +7,10 @@ import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 const SliderTwo = () => {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState([]);
   const [cartStatus, setCartStatus] = useState([]);
   const pathname = usePathname();
@@ -97,7 +99,7 @@ const SliderTwo = () => {
   return (
     <div className={`py-10 ${isSpecialPage ? "bg-[#FFDCC0]" : "bg-white"} p-6 transition-all duration-300`}>
       <div className="md:mb-12 mb-8 text-center">
-        <h2 className="text-gray-800 text-[42px] font-bold">Related Pooja Box</h2>
+        <h2 className="text-gray-800 text-[42px] font-bold">   {t("RelatedPoojaBox")}</h2>
       </div>
       <div className="relative w-full mx-auto container">
         <Splide
@@ -160,7 +162,7 @@ const SliderTwo = () => {
                     </p>
                   </div>
                   {product.stock == false ? (
-    <span className="text-red-600 text-lg font-bold shadow-xl p-2 w-full border rounded-xl">Out of Stock</span>
+    <span className="text-red-600 text-lg font-bold shadow-xl p-2 px-4 w-full border rounded-xl">{t("outOfStock")}</span>
   ) : (
     <>
       <button
@@ -169,7 +171,7 @@ const SliderTwo = () => {
                       ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
                     `}
                   >
-                    {cartStatus[index] ? "Remove from cart" : "Add to cart"}
+                    {cartStatus[index]  ? `${t("Removefromcart")}` : `${t("Addtocart")}`}
                   </button>
     </>
   )}

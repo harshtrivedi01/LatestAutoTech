@@ -5,8 +5,10 @@ import { FaChevronDown, FaChevronUp, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import api from "../lib/axiosInstance";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const Form = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
   const [errors, setErrors] = useState({});
   const [defaultFields, setDefaultFields] = useState({
@@ -190,11 +192,11 @@ console.log(packagedetail.amount)
   
 
   const fieldPlaceholders = {
-    name: "First Member Name",
-    father_name: "Enter your Father's Name",
-    gotra: "Enter your Gotra",
-    email: "Enter your Email",
-    address: "Enter your Full Address",
+    name: `${t("firstmembername")}`,
+    father_name: `${t("Enteryourfathersname")}`,
+    gotra: `${t("EnteryourGotra")}`,
+    email: `${t("Enteryouremail")}`,
+    address: `${t("Enteryourfulladdress")}`,
   };
 
   const handleArrowClick = () => {
@@ -207,15 +209,15 @@ console.log(packagedetail.amount)
   return (
     <div className="p-6 min-h-scree">
       <Toaster position="top-right" reverseOrder={false} />
-      <h1 className="font-medium my-4 text-2xl">Choose Previous Sankalp Detail</h1>
+      <h1 className="font-medium my-4 text-2xl">{t("ChoosePreviousSankalpDetail")}</h1>
 
       <div className="flex justify-between items-center bg-white p-2 px-4 shadow-md rounded-lg cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <h2 className="text-lg font-semibold text-gray-800">+ Add Sankalp Form Detail</h2>
+        <h2 className="text-lg font-semibold text-gray-800">+ {t("AddSankalpFormDetail")}</h2>
         {isOpen ? <FaChevronUp className="text-gray-600" /> : <FaChevronDown className="text-gray-600" />}
       </div>
 
       <div className={`transition-all bg-white p-10 border-2 shadow-lg rounded-lg mt-5 ${isOpen ? "opacity-100" : "max-h-0 opacity-0"}`}>
-        <h2 className="text-lg font-semibold text-gray-800">Name of Members Participating In Pooja</h2>
+        <h2 className="text-lg font-semibold text-gray-800">{t("NameofMembersParticipatingInPooja")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
           {Object.keys(defaultFields).map((field, idx) => (
             <div key={idx}>
@@ -235,10 +237,10 @@ console.log(packagedetail.amount)
             setDontKnowGotra(!dontKnowGotra);
             handleDefaultChange("gotra", dontKnowGotra ? "" : "Kashyap");
           }} className="mr-2" />
-          <label className="text-sm">I don’t know my Gotra</label>
+          <label className="text-sm">{t("IdontknowmyGotra")}</label>
         </div>
       {members > "2" && (
-          <h2 className="text-lg font-semibold text-gray-800 mt-6">Added Member</h2>
+          <h2 className="text-lg font-semibold text-gray-800 mt-6">{t("AddedMember")}</h2>
       )}
       
         {members.map((member, index,field) => (
@@ -247,7 +249,7 @@ console.log(packagedetail.amount)
           <div className="">
           <input
               type="text"
-              placeholder="Member Name"
+              placeholder={t("MemberName")}
               value={member.name}
               onChange={(e) => handleMemberChange(index, "name", e.target.value)}
               className="border text-sm p-3  rounded-xl shadow-xl w-full"
@@ -257,7 +259,7 @@ console.log(packagedetail.amount)
           <div className="fel">
           <input
               type="text"
-              placeholder="Gotra"
+              placeholder={t("Gotra")}
               value={member.gotra}
               onChange={(e) => handleMemberChange(index, "gotra", e.target.value)}
               className="border text-sm p-3 mt-8 rounded-xl shadow-xl w-full"
@@ -269,10 +271,10 @@ console.log(packagedetail.amount)
               const updatedCheck = [...dontKnowMemberGotra];
               updatedCheck[index] = !updatedCheck[index];
               setDontKnowMemberGotra(updatedCheck);
-              handleMemberChange(index, "gotra", updatedCheck[index] ? "Kashyap" : "");
+              handleMemberChange(index, "gotra", updatedCheck[index] ? `${t("Kashyap")}` : "");
             }} />
          
-              <label className="text-sm">I don’t know my Gotra</label>
+              <label className="text-sm">{t("IdontknowmyGotra")}</label>
                 </div>
           </div>      
             <button onClick={() => removeMember(index)} className="text-red-400">
@@ -287,7 +289,7 @@ console.log(packagedetail.amount)
 
         {members.length < memberLimit - 1 && (
           <button onClick={addMember} className="mt-2 underline text-orange-500 rounded-lg shadow-2xl">
-            + Add New Member
+            + {t("AddNewMember")}
           </button>
         )}
 <br/>
@@ -296,13 +298,13 @@ console.log(packagedetail.amount)
     onClick={submitForm}
     className="mt-6 px-4 py-2 bg-green-700 w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-green-800 transition"
   >
-    Save
+   {t("save")}
   </button>
   <button
     className="mt-6 sm:mt-6 sm:ms-4 px-4 py-2 bg-[#BA1A1A] w-full sm:w-80 text-white rounded-xl shadow-2xl hover:bg-red-900 transition"
     onClick={handleArrowClick}
   >
-    Cancel
+   {t("Cancle")}
   </button>
 </div>
       </div>

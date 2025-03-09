@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation"; // Use useParams to get id
 import api from "../../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 export default function Page() {
+  const { t } = useTranslation();
   const { id } = useParams(); // Extract id from the URL
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,7 +60,7 @@ export default function Page() {
         <div className="p-60 overflow-hidden">
           <div className="container">
             <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-              Order History
+            {t("OrderHistory")}
             </h2>
           </div>
         </div>
@@ -67,10 +69,10 @@ export default function Page() {
       <div className="max-w-7xl flex flex-col lg:flex-row mx-auto py-14 px-5 gap-6">
         <div className="lg:w-7/12 w-full px-4">
           <h2 className="text-blue-800 font-semibold text-xl mb-2">
-            Order ID: #{order.order_id}
+          {t("OrderID")} #{order.order_id}
           </h2>
           <p className="text-gray-700 text-lg">
-            Order Date: <span className="text-blue-700">{order.order_date}</span>
+          {t("OrderDate")} <span className="text-blue-700">{order.order_date}</span>
           </p>
 
           <div className="flex justify-between items-center my-8">
@@ -110,11 +112,11 @@ export default function Page() {
 
           <div className="border-b pb-2 mb-2 pt-10">
             <div className="flex justify-between text-gray-700 mb-2">
-              <span className="text-lg font-[500]">Subtotal</span>
+              <span className="text-lg font-[500]"> {t("Subtotal")} </span>
               <span className="text-lg font-[500]">₹ {Math.floor(order.sub_total)} /-</span>
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
-              <span className="text-lg font-[500]">Shipping Charges</span>
+              <span className="text-lg font-[500]">{t("ShippingCharges")}</span>
               <span className="text-lg font-[500]">₹ {order.shipping_cost} /-</span>
             </div>
             {/* <div className="flex justify-between text-gray-700">
@@ -124,14 +126,14 @@ export default function Page() {
           </div>
 
           <div className="flex justify-between font-semibold text-xl mb-4">
-            <span>Grand Total</span>
+            <span>{t("GrandTotal")}</span>
             <span>₹ {Math.floor(order.grand_total)} /-</span>
           </div>
         </div>
 
         <div className="lg:w-4/12 w-full pt-10 lg:pt-24">
           <div className="border-b-2 border-gray-200 ">
-            <h3 className="text-gray-800 text-xl font-semibold mb-2">Shipping</h3>
+            <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("ShippingCharges")}</h3>
             <p className="font-semibold text-lg">{order.address.name}</p>
             <p className="text-gray-600 text-lg">{order.address.email}</p>
             <p className="text-gray-600 text-lg">{order.address.phone}</p>

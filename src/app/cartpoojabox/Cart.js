@@ -8,9 +8,11 @@ import Address from "./Address";
 import AuthGuard from "../component/AuthGuard";
 import SliderTwo from "../poojaboxdetail/SliderTwo";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const Cart = () => {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [pujaData, setPujaData] = useState(null);
   const [quantities, setQuantities] = useState({}); // Store product quantities
@@ -117,9 +119,9 @@ const Cart = () => {
       <div className=" ">
       {cartItems > 0 && (
   <>
-    <h1 className="f-34 mb-2 font-semibold text-lg m-5 lg:mx-40  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">Shopping Cart</h1>
+    <h1 className="f-34 mb-2 font-semibold text-lg m-5 lg:mx-40  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 "> {t("ShoppingCart")}</h1>
     <h1 className="mb-2 text-xl cart  px-4 sm:px-6 m-5 lg:mx-40 md:px-10 lg:px-20 xl:px-40 ">
-      You have <span className="text-orange-600">{cartItems} item(s)</span> in your cart
+    {t("YouhaveTwoiteminyourcart")} <span className="text-orange-600">{cartItems} {t("items")}</span>  {t("YouhaveOneiteminyourcart")}
     </h1>
 
     {/* Progress Steps */}
@@ -129,7 +131,7 @@ const Cart = () => {
           <span className="font-bold">1</span>
         </div>
         <p className="ml-2 text-sm font-semibold text-gray-700">
-          Booking
+        {t("BookingReviewbooking")} 
           <br />
           <span className="text-sm font-semibold text-gray-700">Review booking</span>
         </p>
@@ -141,7 +143,7 @@ const Cart = () => {
           <span className="font-bold">2</span>
         </div>
         <p className="ml-2 text-sm font-semibold text-gray-700">
-          Add Address
+        {t("AddAddressSelectadeliveryaddress")} 
           <br />
           <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
         </p>
@@ -153,7 +155,7 @@ const Cart = () => {
           <span className="font-bold">3</span>
         </div>
         <p className="ml-2 text-sm font-semibold text-gray-700">
-          Pay info
+        {t("PayinfoSelectapaymentmethod")} 
           <br />
           <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
         </p>

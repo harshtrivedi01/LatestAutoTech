@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import List from "./List";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 export default function Poojaboxpage() {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [pujaDatalist, setPujaDatalist] = useState([]);
@@ -80,12 +82,9 @@ export default function Poojaboxpage() {
           <div className="items-center gap-12">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-                Pooja Box on Punyasetu
+              {t("PoojaBoxonPunyasetu")}
               </h2>
-              <p className="leading-relaxed text-lg text-gray-600">
-                Perform sacred rituals from the comfort of your home. Book a pooja in your name and gotra, receive a recorded video of the ceremony,
-                and get the divine Aashirwad Box delivered to you. Experience spiritual fulfillment and divine blessings with Punyasetu.
-              </p>
+              <p className="leading-relaxed text-lg text-gray-600"> {t("PerformRetuals")} </p>
 
               <div className="mt-5 flex gap-4">
                 {/* Search Form */}
@@ -95,7 +94,7 @@ export default function Poojaboxpage() {
                 >
                   <input
                     type="text"
-                    placeholder="Search Here..."
+                    placeholder={t("SearchSomething")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full outline-none bg-transparent text-gray-600 text-lg"
