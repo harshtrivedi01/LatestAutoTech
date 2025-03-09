@@ -111,7 +111,7 @@ export default function Footersection() {
 							<ul className="space-y-2">
 								<li><Link href="/faq">{t("FAQ")}</Link></li>
 								<li><Link href="/privacypolicy">{t("PrivacyPolicy")}</Link></li>
-								<li><Link href="/terms&conditions">{t("CompTermsANDConditionsany")}</Link></li>
+								<li><Link href="/terms&conditions">{t("TermsANDConditions")}</Link></li>
 							</ul>
 						</nav>
 						<nav>
