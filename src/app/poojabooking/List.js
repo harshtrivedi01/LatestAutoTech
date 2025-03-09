@@ -1,9 +1,11 @@
 import { CalendarIcon } from "lucide-react";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 
 export default function List({ pujaData }) {
+  const { t } = useTranslation();
   console.log("Puja Data in List Component:", pujaData);
 
   const dataToDisplay = pujaData?.puja_list || pujaData?.data?.puja_list || [];
@@ -50,14 +52,14 @@ export default function List({ pujaData }) {
 
                   {/* Date Section */}
                   <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">
-                    <CalendarIcon className="text-yellow-600" /> {puja.date || "Comming Soon"}
+                    <CalendarIcon className="text-yellow-600" /> {puja.date ||  `${t("CommingSoon")}`}
                   </p>
 
                   {/* Button at Bottom */}
                   <div className="mt-auto">
                     <Link href={`poojadetail/${puja.id}`}>
                       <button className="text-center block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
-                        Participate
+                      {t("PARTICIPATE")}
                       </button>
                     </Link>
                   </div>

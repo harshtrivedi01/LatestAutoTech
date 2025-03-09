@@ -6,10 +6,12 @@ import "@splidejs/splide/css";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 
 
 const Testimonials = () => {
+  const { t } = useTranslation();
   const splideRef = useRef(null);
   const pathname = usePathname();
  
@@ -53,7 +55,7 @@ const Testimonials = () => {
  return (
   <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7]" : "bg-[#FFDCC0]"} p-6 transition-all duration-300`}>
     <div className="mb-8 text-center">
-      <h2 className="text-gray-800 text-[42px] font-bold">What Our Clients Say About Us</h2>
+      <h2 className="text-gray-800 text-[42px] font-bold">{t("WhatOurClientsSayAboutUs")}</h2>
     </div>
 <br/>
     {testimonials ? (

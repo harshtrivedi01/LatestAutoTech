@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import api from "../lib/axiosInstance";
 import DOMPurify from "dompurify";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export default function ContactPage() {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState({});
   const [formData, setFormData] = useState({
     name: "",
@@ -94,17 +96,17 @@ export default function ContactPage() {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-screen-lg mx-auto p-5 lg:py-20 w-full">
         <div className="text-center mb-5">
-          <h1 className="text-3xl font-extrabold mb-5">Contact Us</h1>
+          <h1 className="text-3xl font-extrabold mb-5"> {t("Contact")}</h1>
           <p className="font-semibold text-gray-400">
-            Any question or remarks? Just write us a message!
+          {t("Contactinfo")}
           </p>
         </div>
         <br />
         <div className="grid grid-cols-1 md:grid-cols-10 rounded-xl shadow bg-white">
           {/* Contact Information Section */}
           <div className="bg-[#E5644E] md:col-span-4 p-10 m-2 rounded-xl text-white">
-            <p className="text-xl font-semibold tracking-tight mt-5">Contact Information</p>
-            <h3 className="text-sm mt-1 text-gray-300 font-light">Say something to start a live chat!</h3>
+            <p className="text-xl font-semibold tracking-tight mt-5">{t("ContactInformation")}</p>
+            <h3 className="text-sm mt-1 text-gray-300 font-light">{t("contactdis")}</h3>
             <br />
             <div className="flex items-center mt-5">
               <BiSolidPhoneCall className="text-xl" />
@@ -141,7 +143,7 @@ export default function ContactPage() {
           {/* Contact Form Section */}
           <form className="md:col-span-6 p-10" onSubmit={handleSubmit}>
             <div className="mb-6">
-              <label className="block text-gray-500 text-xs mb-2">Name</label>
+              <label className="block text-gray-500 text-xs mb-2">{t("Name")}</label>
               <input
                 className="appearance-none block w-full border-b-2 py-3 px-4"
                 type="text"
@@ -154,7 +156,7 @@ export default function ContactPage() {
 
             <div className="flex flex-wrap mb-6">
               <div className="w-full md:w-1/2 px-3">
-                <label className="block text-gray-500 text-xs mb-2">Email</label>
+                <label className="block text-gray-500 text-xs mb-2">{t("Email")}</label>
                 <input
                   className="appearance-none block w-full border-b-2 py-3 px-4"
                   type="email"
@@ -166,7 +168,7 @@ export default function ContactPage() {
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label className="block text-gray-500 text-xs mb-2">
-                  Phone number
+                {t("Phonenumber")}
                 </label>
                 <input
                   className="appearance-none block w-full border-b-2 py-3 px-4"
@@ -180,7 +182,7 @@ export default function ContactPage() {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-500 text-xs mb-2">Message</label>
+              <label className="block text-gray-500 text-xs mb-2">{t("Message")}</label>
               <textarea
                 className="appearance-none block w-full border-b-2 py-3 px-4"
                 name="message"
@@ -195,7 +197,7 @@ export default function ContactPage() {
               type="submit"
               className="bg-[#E5644E] text-white px-10 py-2 rounded-2xl shadow-lg"
             >
-              Submit
+             {t("submit")}
             </button>
           </form>
         </div>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PoojaDatePopup from "./PoojaDatePopup";
+import { useTranslation } from "react-i18next";
 
 const PoojaPackages = ({ detail }) => {
+  const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [expandedPackages, setExpandedPackages] = useState({}); // Track expanded state per package
@@ -29,7 +31,7 @@ const PoojaPackages = ({ detail }) => {
   return (
     <div className="package p-60 bg-grey" id="Package-section">
       <div className="container px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 mx-auto">
-        <h1 className="title text-black my-5">Select Pooja Package</h1>
+        <h1 className="title text-black my-5">  {t("SelectPoojapackage")}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 xl:space-y-4 mb-5">
           {detail.packages?.map((pkg) => {
             const isHighlighted = selectedPackage?.id === pkg.id;
@@ -70,7 +72,7 @@ const PoojaPackages = ({ detail }) => {
   {pkg.name}
 </h2>
 <h2 className="text-sm sm:text-lg md:text-xl lg:text-xl font-bold mb-1">
-  Package for {pkg.no_of_member} Person
+{t("Packagefor1Person")} {pkg.no_of_member} {t("Person")} 
 </h2>
 <p className="font-bold text-red-600 text-lg sm:text-xl md:text-xl lg:text-2xl">
   ₹{Math.floor(pkg.price)}
@@ -100,7 +102,7 @@ const PoojaPackages = ({ detail }) => {
                                 toggleReadMore(pkg.id);
                               }}
                             >
-                              {isExpanded ? "Read Less" : "Read More"}
+                                {isExpanded ? `${t("ReadLess")}`:  `${t("ReadMore")}` }
                             </button>
                           )}
                         </li>
@@ -117,7 +119,7 @@ const PoojaPackages = ({ detail }) => {
                       isHighlighted ? "package-dark-btn" : "package-light-btn"
                     }`}
                   >
-                    Participate
+                  {t("PARTICIPATE")}
                   </button>
                 </div>
               </div>

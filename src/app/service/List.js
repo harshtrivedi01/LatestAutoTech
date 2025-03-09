@@ -9,10 +9,12 @@ import service6 from "../../../public/Assests/Service/service (6).jpg";
 import Heading from "../component/Headingname/Heading";
 import DOMPurify from "dompurify";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const MAX_WORDS = 10;
 
 export default function List({ module_category_details }) {
+  const { t } = useTranslation();
   const [expandedItems, setExpandedItems] = useState({}); // Track expanded state for each category
 
   if (!module_category_details) {
@@ -69,7 +71,7 @@ export default function List({ module_category_details }) {
                   <div>
                     <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]" onError={(e) => (e.target.src = "/images/logo.png")} />
                     <div className="my-3 font-display">
-                      <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
+                      <h1 className="text-4xl py-1 font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] bg-clip-text text-transparent">
                         {modulecategory}
                       </h1>
                     </div>
@@ -85,7 +87,7 @@ export default function List({ module_category_details }) {
                           className="text-[#E5644E] underline mb-2 text-sm cursor-pointer"
                           onClick={() => toggleReadMore(id)}
                         >
-                          {isExpanded ? "Read Less" : "Read More"}
+                      {isExpanded ? `${t("ReadLess")}`:  `${t("ReadMore")}` }
                         </p>
                       )}
                     </div>
@@ -97,7 +99,7 @@ export default function List({ module_category_details }) {
                       rel="noopener noreferrer"
                      className="px-8 py-2 mt-4 shadow-gray-400 shadow-xl text-white bg-[#E5644E] rounded-xl hover:bg-[#7B2502]"
                     >
-                      Book Now
+                  {t("BookNow")}
                     </a>
                   </div>
                 </li>

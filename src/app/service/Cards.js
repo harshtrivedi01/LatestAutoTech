@@ -1,12 +1,14 @@
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import { FaChevronRight } from "react-icons/fa";
 
 export default function Cards({ onlinepoojawork }) {
+  const { t } = useTranslation();
   return (
     <>
       <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
         <h1 className="text-center font-bold lg:text-4xl text-2xl my-14">
-          How does PUNYASETU Online Pooja Work?
+        {t("Working")}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {onlinepoojawork?.map((item) => (

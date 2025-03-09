@@ -7,6 +7,7 @@ import Kalash from "./../../../public/Assests/Service/Kalash.png";
 import music from "./../../../public/Assests/Service/music.png";
 import DOMPurify from "dompurify";
 import { FaChevronRight } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function Aboutsection({description,bottomName,link,images, aboutus_imagehed1,
   aboutus_imagehed2,
@@ -15,7 +16,8 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
   aboutus_imagedes2,
   aboutus_imagedes3,
   image1,image2,image3,image4}) {
- 
+
+ const { t } = useTranslation();
   return (
     <div className="relative w-full min-h-screen bg-white">
       <div
@@ -30,7 +32,7 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
       ><br/> <br/><br/><br/><br/><br/><br/>
         <div className="mx-auto max-w-6xl relative">
           <div className="flex justify-center">
-            <Heading text="About" color="white" />
+            <Heading text={t("About")} color="white" />
           </div>
 
           <p className=" text-center text-white text-[20px] md:text-2xl"

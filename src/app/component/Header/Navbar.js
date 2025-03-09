@@ -104,7 +104,7 @@ export default function Navbar() {
                   className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-xl px-4 lg:px-12 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                   style={{ backgroundColor: "#E5644E" }}
                 >
-                  Login
+                   {t("Login")}
                 </button>
               </Link>
             )}

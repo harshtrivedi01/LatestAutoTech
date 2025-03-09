@@ -8,10 +8,12 @@ import Cards from "./Cards";
 import List from "./List";
 import api from "../lib/axiosInstance";
 import Testimonials from "../poojadetail/Testimonials";
+import { useTranslation } from "react-i18next";
 
 
 
 export default function Servicepage () {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState([]);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function Servicepage () {
           <div className="items-center gap-12">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-              Our Service
+              {t("OurService")}
               </h2>
             </div>
           </div>

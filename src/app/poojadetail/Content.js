@@ -1,25 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
   
   const Content = ({detail}) =>  {
+    const { t } = useTranslation();
 	return (
 	  <div className='p-60 bg- content container mx-'  id="about-section" >
         <div className='container'>
 
-        <h2 className='title text-black'>About Pooja</h2>
+        <h2 className='title text-black'>{t("AboutPooja")}</h2>
         <p className=''>
        {detail?.puja_description}
   
         </p>
-        {/* <p>
-        Pandit ji is known for his expertise in performing Ganesh Pooja
-         and Vastu Shanti Pooja. He is highly regarded for his knowledge of
-          Vedic rituals and mantras and has over 20 years of experience conducting
-           ceremonies that invoke the blessings of Lord Ganesha for prosperity, success,
-            and the removal of obstacles.Pandit ji is known for his expertise in performing 
-            Ganesh Pooja and Vastu Shanti Pooja. He is highly regarded for his knowledge of 
-            Vedic rituals and mantras and has over 20 years of experience conducting ceremonies
-             that invoke the blessings of Lord Ganesha for prosperity, success, and the removal of obstacles.
-        </p> */}
+      
         </div>
 
 	  </div>

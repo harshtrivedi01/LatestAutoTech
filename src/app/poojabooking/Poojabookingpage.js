@@ -4,8 +4,10 @@ import List from "./List";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 export default function Poojabookingpage() {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState([]);
   const [pujaDatalist, setPujaDatalist] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
@@ -59,12 +61,10 @@ export default function Poojabookingpage() {
           <div className="items-center gap-12">
             <div>
               <h2 className="lg:text-3xl text-black md:text-2xl text-3xl font-bold mb-4">
-                Upcoming Poojas on Punyasetu
+              {t("UpComming")}
               </h2>
               <p className="leading-relaxed text-lg text-gray-600">
-                Perform sacred rituals from the comfort of your home. Book a pooja in your name and gotra, 
-                receive a recorded video of the ceremony, and get the divine Aashirwad Box delivered to you. 
-                Experience spiritual fulfillment and divine blessings with Punyasetu.
+              {t("PerformRetuals")}
               </p>
 
           

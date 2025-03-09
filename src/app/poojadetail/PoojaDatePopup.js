@@ -5,8 +5,10 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const PoojaDatePopup = ({ onClose, pujaData, date }) => {
+  const { t } = useTranslation();
   const pathname = usePathname();
   const router = useRouter();
   const { id } = useParams();
@@ -83,7 +85,7 @@ const handleDateSelect = (date) => {
         amount: selectedPackage.price.toString(),
         payment_id: "1232",
         payment_detail: "123",
-        payment_status: "failed",
+        payment_status: "NA",
         date: selectedDate.toISOString().split("T")[0],
         currency: "INR",
         payment_type: "cashfree",
@@ -110,8 +112,8 @@ const handleDateSelect = (date) => {
 
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
           <div className="w-full">
-            <h3 className="text-lg font-semibold mb-1">Select a Date for Pooja Booking</h3>
-            <p className="mb-3">You've chosen Individual Package – now pick an auspicious date.</p>
+            <h3 className="text-lg font-semibold mb-1">{t("SelectaDateforPoojaBooking")}</h3>
+           
             <p className="mb-3 bg-orange-500 py-2 text-lg text-center rounded-lg text-white font-bold">
               {pujaData.name}
             </p>
@@ -153,7 +155,7 @@ const handleDateSelect = (date) => {
             onClick={handleSubmit}
             disabled={isResendDisabled}
           >
-            {isResendDisabled ? "Saving..." : "Save & Continue"}
+            {isResendDisabled ? `${t("Saving")}...` : `${t("SaveContinue")}`}
           </button>
         </div>
       </div>

@@ -5,10 +5,12 @@ import api from "../lib/axiosInstance";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AuthGuard from "../component/AuthGuard";
+import { useTranslation } from "react-i18next";
 
 
 
 const Page = () => {
+  const { t } = useTranslation();
    const [isClient, setIsClient] = useState(false);
   
     useEffect(() => {
@@ -155,14 +157,14 @@ const Page = () => {
 
   return (
     <AuthGuard>
-    <div className="bg-gray-100">
+    <div className="bg-gray-200">
       <div className="bg-[#FFEEE2]">
         <div className="p-60 overflow-hidden">
           <div className="container">
             <div className="items-center gap-12">
               <div>
                 <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-                  My Booking
+                {t("booking")}
                 </h2>
               </div>
             </div>

@@ -5,8 +5,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Faq from "../poojadetail/Faq";
 import api from "../lib/axiosInstance";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const JoinUs = () => {
+  const { t } = useTranslation();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -175,24 +177,24 @@ const JoinUs = () => {
     <div>
        <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-[#FFEEE2] p-10">
-        <h2 className="text-3xl font-bold">Pandit Registration</h2>
+        <h2 className="text-3xl font-bold">{t("PanditRegistration")}</h2>
       </div>
 
       <section className="bg-gray-100 py-8 px-4">
   <div className="max-w-7xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg">
     <h2 className="text-2xl sm:text-3xl font-bold text-[#E5644E] pb-5 text-start">
-      Register Now!
+     {t("Register")}
     </h2>
     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
       {[
-        { label: "Name", name: "name", type: "text" },
-        { label: "Email", name: "email", type: "email" },
-        { label: "Mobile Number", name: "mobile", type: "text" },
-        { label: "Speciality", name: "speciality", type: "text" },
-        { label: "Address", name: "address", type: "text" },
-        { label: "Description", name: "description", type: "text" },
-        { label: "Reference", name: "reference", type: "text" },
-        { label: "Remark", name: "remark", type: "text" },
+        { label: `${t("Name")}`, name: "name", type: "text" },
+        { label: `${t("Email")}`, name: "email", type: "email" },
+        { label: `${t("Phonenumber")}`, name: "mobile", type: "text" },
+        { label: `${t("Speciality")}`, name: "speciality", type: "text" },
+        { label: `${t("Address")}`, name: "address", type: "text" },
+        { label: `${t("Description")}`, name: "description", type: "text" },
+        { label: `${t("Reference")}`, name: "reference", type: "text" },
+        { label: `${t("Remark")}`, name: "remark", type: "text" },
       ].map(({ label, name, type }) => (
         <div key={name}>
           <label className="block text-sm text-[#E5644E] pb-1">{label} *</label>
@@ -208,7 +210,7 @@ const JoinUs = () => {
       ))}
 
       <div>
-        <label className="block text-sm text-[#E5644E] pb-1">Country *</label>
+        <label className="block text-sm text-[#E5644E] pb-1">{t("Country")} *</label>
         <input
           type="text"
           value="India"
@@ -218,7 +220,7 @@ const JoinUs = () => {
       </div>
 
       <div>
-        <label className="block text-sm text-[#E5644E] pb-1">State *</label>
+        <label className="block text-sm text-[#E5644E] pb-1">{t("State")} *</label>
         <select
           name="state"
           value={formData.state}
@@ -236,7 +238,7 @@ const JoinUs = () => {
       </div>
 
       <div>
-        <label className="block text-sm text-[#E5644E] pb-1">City *</label>
+        <label className="block text-sm text-[#E5644E] pb-1">{t("City")} *</label>
         <select
           name="city"
           value={formData.city}
@@ -270,7 +272,7 @@ const JoinUs = () => {
           type="submit"
           className="w-full sm:w-auto bg-[#E5644E] text-white px-6 py-2 rounded-lg hover:bg-[#d14f3b] transition"
         >
-          Submit
+        {t("submit")}
         </button>
       </div>
     </form>
