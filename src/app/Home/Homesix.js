@@ -4,6 +4,7 @@ import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useTranslation } from "react-i18next";
 
 // ✅ Fallback data in case `bottomslider_list` is empty
 const fallbackData = [
@@ -37,6 +38,7 @@ const fallbackData = [
 ];
 
 const CustomSlider = ({ bottomslider_list = fallbackData }) => {
+
   return (
     <div className="w-full mx-auto py-10 bg-[#FFEEE2]">
       <Swiper

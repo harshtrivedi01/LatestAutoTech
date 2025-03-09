@@ -117,13 +117,13 @@ const Cart = () => {
       <div className=" ">
       {cartItems > 0 && (
   <>
-    <h1 className="f-34 mb-2 font-semibold text-lg cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">Shopping Cart</h1>
-    <h1 className="mb-2 text-xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">
+    <h1 className="f-34 mb-2 font-semibold text-lg m-5 lg:mx-40  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 ">Shopping Cart</h1>
+    <h1 className="mb-2 text-xl cart  px-4 sm:px-6 m-5 lg:mx-40 md:px-10 lg:px-20 xl:px-40 ">
       You have <span className="text-orange-600">{cartItems} item(s)</span> in your cart
     </h1>
 
     {/* Progress Steps */}
-    <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
+    <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
       <div className="flex items-center mb-4 md:mb-0">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
           <span className="font-bold">1</span>

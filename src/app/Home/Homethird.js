@@ -44,11 +44,11 @@ export default function Homethird({pujaData}) {
             <div className="    px-4 py-8">
               <section className="">
               <div className="py-4 px-4 mx-auto max-w-screen-xl sm:py-6 lg:px-8">
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 h-full">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 h-full">
     
     <div className="h-full flex flex-col">
       <div className="grid h-full">
-        <a href={""} className="group relative flex flex-col h-full overflow-hidden rounded-2xl p-4 bg-white">
+        <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl p-4 bg-white">
           <div className="relative z-10 flex flex-col gap-4">
             <h3 className="text-2xl font-medium text-[#894112]">
               {pujaData?.data?.aboutus_imagehed1}
@@ -56,7 +56,7 @@ export default function Homethird({pujaData}) {
             <h3 className="text-lg text-black leading-7 md:text-sm lg:text-[17px]">
               {pujaData?.data?.aboutus_imagedes1}
             </h3>
-            <a  href={"/contact"}className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
+            <a  href={"/contact"} className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
               <FaChevronRight className="text-[#DD531B]" />
             </a>
           </div>
@@ -66,7 +66,7 @@ export default function Homethird({pujaData}) {
             className="absolute right-0 bottom-0 h-20 w-20 object-cover"
             onError={(e) => (e.target.src = "/images/logo.png")}
           />
-        </a>
+        </div>
       </div>
       
       <br />

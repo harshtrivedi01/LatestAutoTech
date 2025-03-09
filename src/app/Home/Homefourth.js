@@ -5,8 +5,10 @@ import Heading from "../component/Headingname/Heading";
 import Viewmore from "../component/Viewmorebutton/Viewmore";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 export default function Homefourth({ pujaData }) {
+    const { t } = useTranslation();
   const [cartStatus, setCartStatus] = useState([]);
 
   useEffect(() => {
@@ -63,7 +65,7 @@ export default function Homefourth({ pujaData }) {
       <div className="bg-[#FFFFFF] px-2">
         <div className="mx-auto max-w-6xl relative">
           <div className="flex justify-center">
-            <Heading text="Pooja Box" color="black" />
+            <Heading text={t("PoojaBox")} color="black" />
           </div>
         </div>
         <div className="max-w-7xl mx-auto my-8 px-2">
@@ -78,7 +80,7 @@ export default function Homefourth({ pujaData }) {
       <div className="bg-[#FFFFFF] px-2">
         <div className="mx-auto max-w-6xl relative">
           <div className="flex justify-center">
-            <Heading text="Pooja Box" color="black" />
+            <Heading text={t("PoojaBox")} color="black" />
           </div>
         </div>
         <Toaster position="top-right" reverseOrder={false} />
@@ -177,7 +179,7 @@ export default function Homefourth({ pujaData }) {
                           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                       </svg>
-                      {cartStatus[index] ? "Remove from Cart" : "Add to Cart"}
+                      {cartStatus[index] ? `${t("removefromcart")}` : `${t("addtocart")}` }
                     </button>
                     
                       
@@ -199,12 +201,13 @@ export default function Homefourth({ pujaData }) {
                                 strokeLinejoin="round"
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                               />
-                            </svg>Add to Cart</button>
+                            </svg>{t("addtocart")}</button>
                          </a>
                         )}
                       </div>
                     ) : (
-                      <p className="text-red-600 font-bold  items-center justify-center rounded-md px-5 border shadow-xl py-2 text-center text-sm font-medium ">Out of Stock</p>
+                      <p className="text-red-600 font-bold  items-center justify-center rounded-md px-5 border shadow-xl py-2 text-center text-sm font-medium ">
+                       {t("outOfStock")}</p>
                     )}
                   </div>
                 </div>

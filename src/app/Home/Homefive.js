@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import Heading from "../component/Headingname/Heading";
 import Link from "next/link";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export default function Homefive({pujaData}) {
+  const { t } = useTranslation();
  console.log(pujaData?.data?.puja_list)
   return (
     <div className="relative w-full min-h-screen bg-white">
@@ -19,7 +21,7 @@ export default function Homefive({pujaData}) {
         <br /><br /><br /><br /><br /><br />
         <div className="mx-auto max-w-6xl relative">
           <div className="flex justify-center">
-            <Heading text="Pooja " color="white" />
+            <Heading text={t("Pooja")} color="white" />
           </div>
           <br />
         </div>
@@ -61,7 +63,7 @@ export default function Homefive({pujaData}) {
           {/* Button */}
           <Link href={`poojadetail/${puja.id}`}>
             <button className="w-full uppercase text-sm font-medium p-3 text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800">
-              Participate
+            {t("PARTICIPATE")}
             </button>
           </Link>
         </div>
@@ -76,7 +78,7 @@ export default function Homefive({pujaData}) {
         <div className="flex justify-center">
           <Link href={"/poojabooking"}>
             <button className="p-2 px-8 shadow-black shadow-2xl text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
-              View More
+            {t("ViewMore")}
             </button>
           </Link>
         </div>

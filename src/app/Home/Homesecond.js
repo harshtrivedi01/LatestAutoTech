@@ -9,15 +9,19 @@ import service6 from "../../../public/Assests/Service/service (6).jpg";
 import Heading from "../component/Headingname/Heading";
 import DOMPurify from "dompurify";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const MAX_WORDS = 10;
 
 export default function Homesecond({ module_category_details }) {
+  const { t } = useTranslation();
   const [expandedItems, setExpandedItems] = useState({}); // Track expanded state for each category
 
   if (!module_category_details) {
     return <div>Loading...</div>;
   }
+
+  
 
   const serviceImages = {
     "Guru Ji": service1,
@@ -57,7 +61,7 @@ export default function Homesecond({ module_category_details }) {
       <div className="bg-[#FFFFFF] px- pb-10">
         <div id="features" className="mx-auto max-w-6xl">
           <div className="flex justify-center">
-            <Heading text="Our Service" />
+            <Heading text={t("Services")} />
           </div>
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {
@@ -95,7 +99,7 @@ export default function Homesecond({ module_category_details }) {
                           className="text-[#E5644E] underline mb-2 text-sm cursor-pointer"
                           onClick={() => toggleReadMore(id)}
                         >
-                          {isExpanded ? "Read Less" : "Read More"}
+                          {isExpanded ? `${t("ReadLess")}`:  `${t("ReadMore")}` }
                         </p>
                       )}
                     </div>
@@ -107,7 +111,7 @@ export default function Homesecond({ module_category_details }) {
                       rel="noopener noreferrer"
                      className="px-8 py-2 mt-4 shadow-gray-400 shadow-xl text-white bg-[#E5644E] rounded-xl hover:bg-[#7B2502]"
                     >
-                      Book Now
+                                      {t("BookNow")} 
                     </a>
                   </div>
                 </li>

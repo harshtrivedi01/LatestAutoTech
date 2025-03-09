@@ -5,8 +5,10 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 
 const Homeeight = ({ pujaData, detail }) => {
+  const { t } = useTranslation();
   const splideRef = useRef(null); // Reference for Splide instance
   const pathname = usePathname(); 
   const testimonials = pujaData?.data?.testimonials || detail?.testimonials || [];
@@ -31,7 +33,7 @@ const Homeeight = ({ pujaData, detail }) => {
   
       <div className="mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">
-          What Our Clients Say About Us
+        {t("WhatOurClientsSayAboutUs")}
         </h2>
       </div>
 

@@ -98,7 +98,7 @@ export default function Footersection() {
 					{/* Footer Links */}
 					<div className="grid grid-cols-2 ga lg:w-2/3 lg:grid-cols-3">
 						<nav>
-							<h6 className="footer-title font-semibold text-lg mb-3">Services</h6>
+							<h6 className="footer-title font-semibold text-lg mb-3">{t("Services")}</h6>
 							<ul className="space-y-2">
 								<li><Link href="/"> {t("Home")}</Link></li>
 								<li><Link href="/about">{t("About")} </Link></li>
@@ -107,11 +107,11 @@ export default function Footersection() {
 							</ul>
 						</nav>
 						<nav>
-							<h6 className="footer-title font-semibold text-lg mb-3">Company</h6>
+							<h6 className="footer-title font-semibold text-lg mb-3">{t("Company")}</h6>
 							<ul className="space-y-2">
-								<li><Link href="/faq">FAQ</Link></li>
-								<li><Link href="/privacypolicy">Privacy Policy</Link></li>
-								<li><Link href="/terms&conditions">Terms & Conditions</Link></li>
+								<li><Link href="/faq">{t("FAQ")}</Link></li>
+								<li><Link href="/privacypolicy">{t("PrivacyPolicy")}</Link></li>
+								<li><Link href="/terms&conditions">{t("CompTermsANDConditionsany")}</Link></li>
 							</ul>
 						</nav>
 						<nav>
