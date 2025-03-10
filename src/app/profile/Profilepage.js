@@ -186,7 +186,7 @@ const Profilepage = () => {
               <img
                 src={imagePreview}
                 alt="Profile"
-                className="w-full h-full object-cover border-8 border-white rounded-full"
+                className="w-full h-full object-contain border-8 border-white rounded-full"
               />
             </div>
 
@@ -260,6 +260,7 @@ const Profilepage = () => {
                       id="dob"
                       placeholder="25/08/2003"
                       value={formData.dob}
+                      max={new Date().toISOString().split("T")[0]} // today's date
                       type="date" name="dob" onChange={handleChange} required
                       className="px-5 py-[12px] rounded-lg border w-full shadow-md text-md text-gray-400 outline-none"
                     />
@@ -361,12 +362,14 @@ const Profilepage = () => {
                   {t("AnniversaryDateifMarried")}
                   </h2>
                   <input
-                    type="date"
-                    name="anniversary_date"
-                    value={formData.anniversary}
-                    id="anniversary_date"
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
-                  />
+  type="date"
+  name="anniversary"
+  value={formData.anniversary || ""}
+  onChange={handleChange}
+  max={new Date().toISOString().split("T")[0]} // today's date
+  className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+/>
+
                 </div>
               </div>
 
