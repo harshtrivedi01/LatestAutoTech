@@ -227,7 +227,7 @@ const Profilepage = () => {
                      placeholder= {t("FirstName")}
                      value={formData.name}
                       onChange={handleChange} required
-                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-400 outline-none"
                   />
                 </div>
               </div>
@@ -242,7 +242,7 @@ const Profilepage = () => {
                     id="flastname"
                     value={formData.last_name}
                     type="text" name="last_name" placeholder=  {t("LastName")} onChange={handleChange} required
-                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-400 outline-none"
                   />
                 </div>
               </div>
@@ -280,7 +280,7 @@ const Profilepage = () => {
                     id="mobile"
                     value={formData.phone}
                     type="text" name="phone" placeholder={t("PhoneNumber")} onChange={handleChange} readOnly
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md text-gray-400 outline-none"
                   />
                 </div>
               </div>
@@ -298,7 +298,7 @@ const Profilepage = () => {
                     value={formData.email}
                     placeholder="punyasetu1210@gmail.com"
                     type="email" name="email" onChange={handleChange} required
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-gray-400 text-md outline-none"
                   />
                 </div>
               </div>
