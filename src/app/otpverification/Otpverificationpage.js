@@ -311,7 +311,7 @@ export default function OtpVerificationPage() {
                 type="submit"
                 disabled={isResendDisabled}
               >
-                {isResendDisabled ? "Wait..." : `${t("submit")}`}
+                {isResendDisabled ?`${t("wait")}...` : `${t("submit")}`}
               </button>
           </form>
 

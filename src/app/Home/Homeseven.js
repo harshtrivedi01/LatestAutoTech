@@ -12,7 +12,7 @@ export const Homeseven = () => {
           {/* Text Section */}
           <div className="text-center lg:text-left px-6 sm:px-12">
             <h2 className="text-3xl sm:text-6xl font-bold text-gray-900">
-              Get <span className="text-[#9E200B]">{t("PunyaSetu")}</span> App
+            {t("Get")} <span className="text-[#9E200B]">{t("PunyaSetu")}</span>  {t("app")}
             </h2>
             
             <p className="text-gray-700 mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center sm:text-left leading-relaxed">

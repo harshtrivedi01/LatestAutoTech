@@ -147,7 +147,7 @@ export default function Footersection() {
 						</nav>
 					</div>
 				</div>
-				<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">© 2025 {t("PunyaSetu")}, Inc. All rights reserved.</div>
+				<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">{t("PunyaSetuIncAllrightsreserved")}</div>
 			</footer>
 
 

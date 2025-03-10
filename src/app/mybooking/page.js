@@ -251,9 +251,13 @@ const Page = () => {
       <p className="text-center text-lg font-semibold">  {t("SearchSomething")} </p>
     ) : searchQuery && searchResults.length === 0 ? (
       <p className="text-center text-lg min-h-screen text-red-500 font-semibold">
-        No results found for "{searchQuery}"
+       {t("Noresultsfoundfor")}  "{searchQuery}"
       </p>
-    ) : (
+    )  : !searchQuery && Poojabookings.length === 0 ? (
+      <p className="text-center text-lg  text-gray-500 font-semibold">
+       {t("Nobookinghistoryavailable")}
+      </p>
+    ) :(
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {(searchQuery ? searchResults : Poojabookings).map((booking) => (
           <Link

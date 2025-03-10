@@ -6,6 +6,7 @@ import Link from "next/link";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import Language from "../Language/Language";
 import { useTranslation } from "react-i18next";
+import api from "../../lib/axiosInstance";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,6 +17,27 @@ export default function Navbar() {
 
   const { t } = useTranslation();
 
+  const [pujaData, setPujaData] = useState([]);
+
+  useEffect(() => {
+      fetchPujaData();   
+  }, []);
+
+  const fetchPujaData = async () => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "cartcount");
+  
+      const response = await api.post("/cart_count", formData); // Use the new axios instance
+  
+      console.log("Puja API Response:",response.data?.data?.cart_count);
+      setPujaData(response.data?.data?.cart_count);
+
+     
+    } catch (error) {
+      console.error("Error fetching puja data:", error);
+    }
+  };
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -93,9 +115,16 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
-                <Link href="/cartpoojabox">
-                  <HiOutlineShoppingCart className="w-8 h-8 text-black" />
-                </Link>
+                <div className="relative">
+  <Link href="/cartpoojabox">
+    <HiOutlineShoppingCart className="w-8 h-8 text-black" />
+    {pujaData > 0 && (
+      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+        {pujaData}
+      </span>
+    )}
+  </Link>
+</div>
               </div>
             ) : (
               <Link href="/login">

@@ -47,6 +47,8 @@ failed:"FAILED",
 faileddis:"We were unable to process your payment. Please check your              payment details and try again. If the issue persists, contact your bank or try a different payment method.",
 tryagain:"Try Again",
 
+UploadImage:"Upload Image",
+
 
 
      
@@ -163,9 +165,10 @@ tryagain:"Try Again",
           Gotra:"Gotra",
           MemberName:"Member Name",
           AddNewMember:"Add New Member",
-
-
-
+          Get:"Get",
+          app:"app",
+          PunyaSetuIncAllrightsreserved:"© 2025 PunyaSetu, Inc. All rights reserved.",
+          
 
           //     /poojabookingcart?bookingId=277
 
@@ -234,28 +237,76 @@ tryagain:"Try Again",
           ResendOTPin:" Resend OTP in",
           ResendOTP:"Resend OTP",
 
+          SelectCity:"Select City",
+          SelectState:"Select State",
 
-     
+          Nameisrequired:"Name is required",
+          Emailisrequired:"Email is required",
+          Mobilenumberisrequired:"Mobile number is required",
+
+          Stateisrequired:"State is required",
+          Cityisrequired:"City is required",
+          Specialityisrequired:"Speciality is required",
+          Addressisrequired:"Address is required",
+          Descriptionisrequired:"Description is required",
+          Referenceisrequired:"Reference is required",
+          Remarkisrequired:"Remark is required",
+          Imageisrequired:"Image is required",
+          Onlyimagefilesareallowed:"Only image files are allowed",
+          india:"India",
+          Invalidphonenumber:"Invalid phone number",
+          wait:"Wait",
+          Pleaseenteravaliddigitphonenumber:"Please enter a valid 10-digit phone number.",
+          SelectGender:"Select Gender",
+          Male:"Male",
+          Female:"Female",
+          SelectMaritalStatus:"Select Marital Status",
+          Single:"Single",
+          Married:"Married",
+          address:"address",
+
+          Noresultsfoundfor:"No results found for",
+          Nobookinghistoryavailable:"  No booking history available."
         },
       },
       hi: {
         translation: {
+
+
+          Pleaseenteravaliddigitphonenumber:"कृपया एक मान्य 10 अंकों वाला फ़ोन नंबर दर्ज करें।",
+          india:"भारत",
+          wait:"रुको",
+          Invalidphonenumber:"अमान्य फ़ोन नंबर",
           Signin:"साइन इन ",
           signdis: `सभी पुण्यसेतु सेवाओं तक पहुँचें, 1000+ भक्ति गीतों का अन्वेषण करें,<br/> और विभिन्न आध्यात्मिक पेशकशों की खोज करें।`,
+Imageisrequired:"छवि आवश्यक है",
+Onlyimagefilesareallowed:"केवल छवि फ़ाइलें अनुमत हैं",
+          Nameisrequired:"नाम आवश्यक है",
+          Emailisrequired:"ईमेल आवश्यक है",
+          Mobilenumberisrequired:"मोबाइल नंबर आवश्यक है",
+          SelectCity:"शहर चुनें",
+          SelectState:"राज्य चुनें",
+          Stateisrequired: "राज्य आवश्यक है",
+          Cityisrequired: "शहर आवश्यक है",
+          Specialityisrequired: "विशेषता आवश्यक है",
+          Addressisrequired: "पता आवश्यक है",
+          Descriptionisrequired: "विवरण आवश्यक है",
+          संReferenceisrequired: "संदर्भ आवश्यक है",
+          Remarkisrequired: "टिप्पणी आवश्यक है",
 
           by:"आगे बढ़ने से आप सहमत हैं",
           andof:"और पुण्यसेतु",
           and:"और",
           sendotp:"ओटीपी भेजें",
           backto:"वापस जाएं",
-
+          UploadImage:"इमेज अपलोड करें",
           OTPVerification:"OTP सत्यापन",
           WesentyouaonetimeOTPonthis:" हमने आपको इस पर एक बार का OTP भेजा है",
           MobileNumber:" मोबाइल नंबर",
           ResendOTPin:" OTP को फिर से भेजें",
           ResendOTP:" OTP को फिर से भेजें",
           
-          Home: "घर",
+          Home: "होम",
           language: "भाषा",
            About:"बारे में",
            PunyaSetu:"पुण्यसेतु",
@@ -285,7 +336,7 @@ tryagain:"Try Again",
            State:"राज्य",
            City:"शहर",
            SaveContinue:"सहेजें जारी रखें",
-           Saveing:"Saveing...",
+           Saveing:"अपवाद...",
 
            SUCCESS:"सफलता!",
 SUCCESSdis:"आपका भुगतान सफलतापूर्वक संसाधित हो गया है, और आपकी बुकिंग की पुष्टि हो गई है",
@@ -295,7 +346,7 @@ faileddis:"हम आपका भुगतान संसाधित कर�
 tryagain:"पुनः प्रयास करें",
 
 BackToHome:"घर वापिस",
-
+PunyaSetuIncAllrightsreserved:"© 2025 पुण्यसेतु, इंक. सभी अधिकार सुरक्षित।",
          
 SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए तिथि चुनें",
            BookNow:"अभी बुक करें",
@@ -337,7 +388,8 @@ SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए त
           mostpopular:"सबसे लोकप्रिय",
           AboutPooja:"पूजा के बारे में",
           PoojaPackage:"पूजा पैकेज",
-          GetPunyaSetuApp:"पुण्यसेतु ऐप प्राप्त करें",
+          Get:"पाएँ",
+          app:"ऐप",
           DownloadontheAppStore:"ऐप स्टोर से डाउनलोड करें",
           getitonPlayStore:"इसे प्ले स्टोर पर प्राप्त करें",
           PoojaBoxonPunyasetu:"पूजा बॉक्स ही पुण्यसेतु है",
@@ -383,6 +435,16 @@ SelectaDateforPoojaBooking:"पूजा बुकिंग के लिए त
           City:"शहर",
           PinCode:"पिन कोड",
           UpdateProfile:"प्रोफ़ाइल अपडेट करें",
+        
+          
+          SelectGender:"लिंग चुनें",
+          Male:"पुरुष",
+          Female:"महिला",
+          SelectMaritalStatus:"वैवाहिक स्थिति चुनें",
+          Single:"अविवाहित",
+          Married:"विवाहित",
+          address:"पता",
+
 
 
           //    /sankalpage

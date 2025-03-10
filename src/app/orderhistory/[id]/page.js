@@ -53,7 +53,28 @@ export default function Page() {
 
   if (loading) return <p>Loading...</p>;
   if (!order) return <p>No order details found.</p>;
-
+  const steps = ["pending", "confirmed", "picked_up", "delivered"];
+  const currentStatus = order.delivery_status;
+  
+  const getActiveStep = (status) => {
+    switch (status) {
+      case "pending":
+        return 0;
+      case "confirmed":
+        return 1;
+      case "picked_up":
+        return 2;
+      case "delivered":
+        return 3;
+      case "cancelled":
+        return -1;
+      default:
+        return 0;
+    }
+  };
+  
+  const activeStep = getActiveStep(currentStatus);
+  
   return (
     <div>
       <div className="bg-[#FFEEE2]">
@@ -75,23 +96,75 @@ export default function Page() {
           {t("OrderDate")} <span className="text-blue-700">{order.order_date}</span>
           </p>
 
-          <div className="flex justify-between items-center my-8">
-            <div className="flex flex-col">
+          <div className="my-8">
+  {/* Status Title */}
+  <div className="flex justify-between items-center mb-4">
+    <div
+      className={`flex items-center text-lg font-semibold ${
+        currentStatus === "cancelled" ? "text-red-600" : "text-green-600"
+      }`}
+    >
+      <span
+        className={`w-3 h-3 mr-2 rounded-full ${
+          currentStatus === "cancelled" ? "bg-red-600" : "bg-green-600"
+        }`}
+      ></span>
+      {currentStatus.charAt(0).toUpperCase() + currentStatus.slice(1)}
+    </div>
+    <div className="text-gray-600 text-base">
+      {order.confirmed_date || order.order_date}
+    </div>
+  </div>
+
+  {/* Progress Dots */}
+  {currentStatus !== "cancelled" ? (
+    <>
+      <div className="flex items-center justify-between relative mb-2">
+        {steps.map((step, index) => (
+          <React.Fragment key={index}>
+            <div className="flex flex-col items-center w-full">
+              {/* Dot */}
               <div
-                className={`flex items-center ${
-                  order.delivery_status === "cancelled" ? "text-red-600" : "text-green-600"
-                } xl:text-lg lg:text-lg sm:text-sm md:text-lg`}
+                className={`w-5 h-5 rounded-full border-2 z-10 ${
+                  index <= activeStep ? "bg-green-600 border-green-600" : "bg-white border-gray-400"
+                }`}
+              ></div>
+              {/* Label */}
+              <span
+                className={`text-sm mt-2 ${
+                  index <= activeStep ? "text-green-600" : "text-gray-400"
+                }`}
               >
-                <span
-                  className={`w-3 h-3 ${
-                    order.delivery_status === "cancelled" ? "bg-red-600" : "bg-green-600"
-                  } rounded-full mr-1`}
-                ></span>
-                {order.delivery_status.charAt(0).toUpperCase() + order.delivery_status.slice(1)}
-              </div>
-              <div className="text-gray-700 text-lg text-center">{order.confirmed_date}</div>
+                {step.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
+              </span>
             </div>
-          </div>
+
+            {/* Line between dots */}
+            {index < steps.length - 1 && (
+              <div
+                className={`absolute top-2 left-0 right-0 h-0.5 z-0 ${
+                  index < activeStep ? "bg-green-600" : "bg-gray-300"
+                }`}
+                style={{
+                  left: `${(100 / (steps.length - 1)) * index}%`,
+                  width: `${100 / (steps.length - 1)}%`,
+                }}
+              ></div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </>
+  ) : (
+    <div className="w-full flex items-center justify-center mt-4">
+      {/* <div className="flex flex-col items-center">
+        <div className="w-5 h-5 bg-red-600 rounded-full"></div>
+        <div className="text-red-600 text-sm mt-2">Order Cancelled</div>
+      </div> */}
+    </div>
+  )}
+</div>
+
 
           <div className="space-y-3">
             {order.products.map((item, index) => (

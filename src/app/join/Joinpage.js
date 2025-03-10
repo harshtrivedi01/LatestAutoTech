@@ -69,37 +69,37 @@ const JoinUs = () => {
     let newErrors = {};
   
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = ` ${t("Nameisrequired")}`;
     } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
       newErrors.name = "Only alphabets are allowed in the name";
     }
     
     
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = ` ${t("Emailisrequired")}`;
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       newErrors.email = "Enter a valid email address";
     }
   
     if (!formData.mobile.trim()) {
-      newErrors.mobile = "Mobile number is required";
+      newErrors.mobile =  ` ${t("Mobilenumberisrequired")}`;
     } else if (!/^\d{10}$/.test(formData.mobile)) {
       newErrors.mobile = "Enter a valid 10-digit mobile number";
     }
   
-    if (!formData.state) newErrors.state = "State is required";
-    if (!formData.city) newErrors.city = "City is required";
-    if (!formData.speciality.trim()) newErrors.speciality = "Speciality is required";
-    if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.description.trim()) newErrors.description = "Description is required";
-    if (!formData.reference.trim()) newErrors.reference = "Reference is required";
-    if (!formData.remark.trim()) newErrors.remark = "Remark is required";
+    if (!formData.state) newErrors.state =` ${t("Stateisrequired")}`;
+    if (!formData.city) newErrors.city = ` ${t("Mobilenumberisrequired")}`;
+    if (!formData.speciality.trim()) newErrors.speciality = ` ${t("Specialityisrequired")}`;
+    if (!formData.address.trim()) newErrors.address = ` ${t("Addressisrequired")}`;
+    if (!formData.description.trim()) newErrors.description = ` ${t("Descriptionisrequired")}`;
+    if (!formData.reference.trim()) newErrors.reference = ` ${t("Referenceisrequired")}`;
+    if (!formData.remark.trim()) newErrors.remark = ` ${t("Remarkisrequired")}`;
   
     // Image validation (optional)
     if (!formData.image) {
-      newErrors.image = "Image is required";
+      newErrors.image = ` ${t("Imageisrequired")}`;
     } else if (!(formData.image.type.startsWith("image/"))) {
-      newErrors.image = "Only image files are allowed";
+      newErrors.image = ` ${t("Onlyimagefilesareallowed")}`;
     }
   
     return newErrors;
@@ -213,7 +213,7 @@ const JoinUs = () => {
         <label className="block text-sm text-[#E5644E] pb-1">{t("Country")} *</label>
         <input
           type="text"
-          value="India"
+          value={t("india")}
           disabled
           className="w-full px-4 py-2 border rounded-lg bg-gray-100"
         />
@@ -227,7 +227,7 @@ const JoinUs = () => {
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
         >
-          <option value="">Select State</option>
+          <option value="">{t("SelectState")}</option>
           {states.map((state) => (
             <option key={state.state_id} value={state.state_id}>
               {state.state_title}
@@ -245,7 +245,7 @@ const JoinUs = () => {
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
         >
-          <option value="">Select City</option>
+          <option value="">{t("SelectCity")}</option>
           {cities.map((city) => (
             <option key={city.city_id} value={city.city_id}>
               {city.city_title}
@@ -256,7 +256,7 @@ const JoinUs = () => {
       </div>
 
       <div>
-        <label className="block text-sm text-[#E5644E] pb-1">Upload Image *</label>
+        <label className="block text-sm text-[#E5644E] pb-1">{t("UploadImage")} *</label>
         <input
           id="file-input"
           type="file"

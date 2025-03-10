@@ -186,7 +186,7 @@ export default function ContactPage() {
               <textarea
                 className="appearance-none block w-full border-b-2 py-3 px-4"
                 name="message"
-                placeholder="Type a Message..."
+                placeholder=""
                 value={formData.message}
                 onChange={handleChange}
               ></textarea>

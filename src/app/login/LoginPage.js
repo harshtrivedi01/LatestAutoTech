@@ -105,7 +105,7 @@ export default function LoginPage() {
     // Validate phone number (only numbers, exactly 10 digits)
     if (name === "phone") {
       if (!/^\d{10}$/.test(value)) {
-        setPhoneError("Please enter a valid 10-digit phone number.");
+        setPhoneError(`${t("Pleaseenteravaliddigitphonenumber")}`);
       } else {
         setPhoneError("");
       }
@@ -121,7 +121,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     if (phoneError) {
-      toast.error("Invalid phone number");
+      toast.error(`${t("Invalidphonenumber")}`);
       setIsResendDisabled(false); // Enable button if there's an error
       return;
     }
