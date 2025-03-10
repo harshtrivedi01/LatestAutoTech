@@ -33,7 +33,9 @@ const Profilepage = () => {
     gender: "",
     dobplace: "",
     pincode: "",
+    anniversary:"",
   });
+  
 
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -48,10 +50,14 @@ const Profilepage = () => {
   // Fetch user profile data
   const fetchProfile = async () => {
     try {
-      const response = await api.post("/profile", new FormData().append("type", "profile"));
-
-      if (response.data?.status === "1") {
+      let formData = new FormData();
+      formData.append("type", "profile");
+  
+      const response = await api.post("/profile", formData);
+  
+      if (response.data.status == "1") {
         const userData = response.data.data;
+  
         setFormData({
           name: userData.name || "",
           last_name: userData.last_name || "",
@@ -67,20 +73,22 @@ const Profilepage = () => {
           gender: userData.gender || "",
           dobplace: userData.dobplace || "",
           pincode: userData.pincode || "",
+          anniversary:userData.anniversary||"",
         });
-
+  
         if (userData.image) {
           setImagePreview(userData.image);
         }
-
+  
         if (userData.state_id) {
-          fetchCities(userData.state_id); // Fetch cities if state exists
+          fetchCities(userData.state_id);
         }
       }
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
   };
+  
 
   const fetchStates = async () => {
     try {
@@ -215,7 +223,10 @@ const Profilepage = () => {
                   </h2>
                   <input
                     id="fname"
-                    type="text" name="name" placeholder= {t("FirstName")} onChange={handleChange} required
+                    type="text" name="name"
+                     placeholder= {t("FirstName")}
+                     value={formData.name}
+                      onChange={handleChange} required
                     className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
@@ -229,6 +240,7 @@ const Profilepage = () => {
                   </h2>
                   <input
                     id="flastname"
+                    value={formData.last_name}
                     type="text" name="last_name" placeholder=  {t("LastName")} onChange={handleChange} required
                     className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md outline-none"
                   />
@@ -247,6 +259,7 @@ const Profilepage = () => {
                     <input
                       id="dob"
                       placeholder="25/08/2003"
+                      value={formData.dob}
                       type="date" name="dob" onChange={handleChange} required
                       className="px-5 py-[12px] rounded-lg border w-full shadow-md text-md text-gray-400 outline-none"
                     />
@@ -264,7 +277,8 @@ const Profilepage = () => {
 
                   <input
                     id="mobile"
-                    type="text" name="phone" placeholder={t("PhoneNumber")} onChange={handleChange} required
+                    value={formData.phone}
+                    type="text" name="phone" placeholder={t("PhoneNumber")} onChange={handleChange} readOnly
                     className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
@@ -280,6 +294,7 @@ const Profilepage = () => {
 
                   <input
                     id="email"
+                    value={formData.email}
                     placeholder="punyasetu1210@gmail.com"
                     type="email" name="email" onChange={handleChange} required
                     className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md outline-none"
@@ -298,6 +313,7 @@ const Profilepage = () => {
                   <select
                    name="gender" onChange={handleChange} required
                     id="gender"
+                    value={formData.gender}
                     className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
                  <option value=""> {t("SelectGender")}</option>
@@ -322,6 +338,7 @@ const Profilepage = () => {
                   <select
                  
                     id="marital_status"
+                    value={formData.marital_status}
                     name="marital_status" onChange={handleChange} required
                     className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
@@ -346,6 +363,7 @@ const Profilepage = () => {
                   <input
                     type="date"
                     name="anniversary_date"
+                    value={formData.anniversary}
                     id="anniversary_date"
                     className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
@@ -380,6 +398,7 @@ const Profilepage = () => {
                   </h2>
                   <input
                     id="dobplace"
+                    value={formData.dobplace}
                     type="text" name="dobplace" placeholder= {t("PlaceofBirth")} onChange={handleChange}
                     className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-md outline-none"
                   />
@@ -395,6 +414,7 @@ const Profilepage = () => {
                   </h2>
                   <input
                     type="text"
+                    value={formData.address}
                     id="current_address"
                     name="address" placeholder={t("address")} onChange={handleChange}
 
@@ -486,6 +506,7 @@ const Profilepage = () => {
                     type="text"
                     name="pincode"
                     id="pincode"
+                    value={formData.pincode}
                     placeholder="302025"
                     onChange={handleChange} required
                     className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"

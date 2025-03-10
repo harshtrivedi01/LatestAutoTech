@@ -52,19 +52,19 @@ export default function Page() {
   }, [id]);
 
   if (loading) return <p>Loading...</p>;
-  if (!order) return <p>No order details found.</p>;
-  const steps = ["pending", "confirmed", "picked_up", "delivered"];
+  if (!order) return <p>    {t("Nobookinghistoryavailable")}</p>;
+  const steps = [`${t("pending")}`, `${t("confirmed")}`, `${t("picked_up")}`, `${t("delivered")}`];
   const currentStatus = order.delivery_status;
   
   const getActiveStep = (status) => {
     switch (status) {
-      case "pending":
+      case `${t("pending")}`:
         return 0;
-      case "confirmed":
+      case `${t("confirmed")}`:
         return 1;
-      case "picked_up":
+      case `${t("picked_up")}`:
         return 2;
-      case "delivered":
+      case `${t("delivered")}`:
         return 3;
       case "cancelled":
         return -1;

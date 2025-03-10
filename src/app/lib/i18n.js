@@ -266,12 +266,24 @@ UploadImage:"Upload Image",
           address:"address",
 
           Noresultsfoundfor:"No results found for",
-          Nobookinghistoryavailable:"  No booking history available."
+          Nobookinghistoryavailable:"  No booking history available.",
+          pending:"pending",
+          confirmed:"confirmed",
+          picked_up:"picked_up",
+          delivered:"delivered",
+          Qty:"Qty"
+      
         },
       },
       hi: {
         translation: {
-
+  Qty:"मात्रा",
+          pending:"लंबित",
+          confirmed:"पुष्टि",
+          picked_up:"उठाया गया",
+          delivered:"वितरित",
+Noresultsfoundfor:"इसके लिए कोई परिणाम नहीं मिला",
+Nobookinghistoryavailable:"कोई बुकिंग इतिहास उपलब्ध नहीं है।",
 
           Pleaseenteravaliddigitphonenumber:"कृपया एक मान्य 10 अंकों वाला फ़ोन नंबर दर्ज करें।",
           india:"भारत",

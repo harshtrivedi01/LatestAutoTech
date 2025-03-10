@@ -335,11 +335,11 @@ const Page = () => {
       <p className="text-center text-lg font-semibold">Searching...</p>
     ) : searchQuery && (!searchResults?.order_list || searchResults?.order_list.length === 0) ? (
       <p className="text-center text-lg text-red-500 min-h-screen font-semibold">
-        No results found for "{searchQuery}"
+         {t("Noresultsfoundfor")} "{searchQuery}"
       </p>
     ) : (!poojaBox || poojaBox.length === 0) ? (
       <p className="text-center text-gray-600 min-h-screen text-lg font-semibold">
-        No orders available.
+        {t("Nobookinghistoryavailable")}
       </p>
     ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
