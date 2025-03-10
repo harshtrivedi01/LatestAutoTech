@@ -17,6 +17,7 @@ const Profilepage = () => {
     const { t } = useTranslation();
   const [imagePreview, setImagePreview] = useState("https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"); // Default image
   const [imageFile, setImageFile] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
 
   const [formData, setFormData] = useState({
     name: "",
@@ -149,8 +150,54 @@ const Profilepage = () => {
     }
   };
 
+  const validateForm = () => {
+    const errors = {};
+  
+    if (!formData.name.trim()) errors.name = "Name is required";
+    if (!formData.last_name.trim()) errors.last_name = "Last name is required";
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Enter a valid email";
+    }
+    if (!formData.phone.trim()) {
+      errors.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      errors.phone = "Enter a valid 10-digit phone number";
+    }
+  
+    if (!formData.dob) errors.dob = "Date of birth is required";
+    if (!formData.birth_time) errors.birth_time = "Birth time is required";
+    if (!formData.gender) errors.gender = "Gender is required";
+    if (!formData.marital_status) errors.marital_status = "Marital status is required";
+  
+    if (!formData.dobplace.trim()) errors.dobplace = "Place of birth is required";
+    if (!formData.country_id) errors.country_id = "Country is required";
+    if (!formData.state_id) errors.state_id = "State is required";
+    if (!formData.city_id) errors.city_id = "City is required";
+    if (!formData.address.trim()) errors.address = "Address is required";
+  
+    if (!formData.pincode) {
+      errors.pincode = "Pincode is required";
+    } else if (!/^\d{6}$/.test(formData.pincode)) {
+      errors.pincode = "Enter a valid 6-digit pincode";
+    }
+  
+    setValidationErrors(errors);
+    console.log("Validation Errors:", errors); 
+  
+    return Object.keys(errors).length === 0;
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (!validateForm()) {
+      toast.error("Please fix the errors before submitting.");
+      return;
+    }
+  
     const form = new FormData();
     form.append("type", "profile_update");
     Object.keys(formData).forEach((key) => {
@@ -227,9 +274,11 @@ const Profilepage = () => {
                      placeholder= {t("FirstName")}
                      value={formData.name}
                       onChange={handleChange} required
-                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-400 outline-none"
+                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-600 outline-none"
                   />
+                  
                 </div>
+                {validationErrors.name && <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>}
               </div>
               <div className="flex justify-start items-center w-full gap-4 border-r-2">
                 <IoPersonCircleOutline className="text-4xl text-gray-800" />
@@ -242,7 +291,7 @@ const Profilepage = () => {
                     id="flastname"
                     value={formData.last_name}
                     type="text" name="last_name" placeholder=  {t("LastName")} onChange={handleChange} required
-                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-400 outline-none"
+                    className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-600 outline-none"
                   />
                 </div>
               </div>
@@ -262,7 +311,7 @@ const Profilepage = () => {
                       value={formData.dob}
                       max={new Date().toISOString().split("T")[0]} // today's date
                       type="date" name="dob" onChange={handleChange} required
-                      className="px-5 py-[12px] rounded-lg border w-full shadow-md text-md text-gray-400 outline-none"
+                      className="px-5 py-[12px] rounded-lg border w-full shadow-md text-md text-gray-600 outline-none"
                     />
                   </div>
                 </div>
@@ -280,7 +329,7 @@ const Profilepage = () => {
                     id="mobile"
                     value={formData.phone}
                     type="text" name="phone" placeholder={t("PhoneNumber")} onChange={handleChange} readOnly
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md text-gray-400 outline-none"
+                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md text-gray-600 outline-none"
                   />
                 </div>
               </div>
@@ -298,7 +347,7 @@ const Profilepage = () => {
                     value={formData.email}
                     placeholder="punyasetu1210@gmail.com"
                     type="email" name="email" onChange={handleChange} required
-                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-gray-400 text-md outline-none"
+                    className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-gray-600 text-md outline-none"
                   />
                 </div>
               </div>
@@ -315,7 +364,7 @@ const Profilepage = () => {
                    name="gender" onChange={handleChange} required
                     id="gender"
                     value={formData.gender}
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
                  <option value=""> {t("SelectGender")}</option>
         <option value="male"> {t("Male")}</option>
@@ -341,7 +390,7 @@ const Profilepage = () => {
                     id="marital_status"
                     value={formData.marital_status}
                     name="marital_status" onChange={handleChange} required
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
                     <option value=""> {t("SelectMaritalStatus")}</option>
         <option value="single">{t("Single")}</option>
@@ -367,7 +416,7 @@ const Profilepage = () => {
   value={formData.anniversary || ""}
   onChange={handleChange}
   max={new Date().toISOString().split("T")[0]} // today's date
-  className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+  className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
 />
 
                 </div>
@@ -387,7 +436,7 @@ const Profilepage = () => {
   onChange={handleTimeChange}
 
 
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
@@ -403,7 +452,7 @@ const Profilepage = () => {
                     id="dobplace"
                     value={formData.dobplace}
                     type="text" name="dobplace" placeholder= {t("PlaceofBirth")} onChange={handleChange}
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-md outline-none"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-md text-md outline-none"
                   />
                 </div>
               </div>
@@ -421,7 +470,7 @@ const Profilepage = () => {
                     id="current_address"
                     name="address" placeholder={t("address")} onChange={handleChange}
 
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-md text-md outline-none"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-md text-md outline-none"
                   />
                 </div>
               </div>
@@ -438,7 +487,7 @@ const Profilepage = () => {
                     id="country"
                     placeholder={t("india")}
                     readOnly
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
@@ -454,7 +503,7 @@ const Profilepage = () => {
   name="state_id"
   value={formData.state_id}
   onChange={handleChange}
-  className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+  className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
 
 >
   <option value="">{t("SelectState")}</option>
@@ -481,7 +530,7 @@ const Profilepage = () => {
   name="city_id"
   value={formData.city_id}
   onChange={handleChange}
-  className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+  className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
 
   disabled={!formData.state_id}
 >
@@ -512,7 +561,7 @@ const Profilepage = () => {
                     value={formData.pincode}
                     placeholder="302025"
                     onChange={handleChange} required
-                    className="px-5 py-[12px] bg-white text-gray-400 rounded-lg border w-full shadow-lg text-md outline-none"
+                    className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
                 </div>
               </div>
