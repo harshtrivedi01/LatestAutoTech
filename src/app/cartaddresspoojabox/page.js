@@ -28,6 +28,8 @@ export default function Address() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const sliderRef = useRef(null);
+  const [formErrors, setFormErrors] = useState({});
+
   const [formData, setFormData] = useState({
     type: "add_address",
     address_id: "", // For update
@@ -60,6 +62,52 @@ const handlePhoneChange = (e) => {
     setPhoneError("");
   }
 };
+
+const validateForm = () => {
+  let errors = {};
+
+  // Name validation
+  if (!formData.name.trim()) {
+    errors.name =`${t("Nameisrequired")}`;
+  } else if (!/^[A-Za-z ]+$/.test(formData.name)) {
+    errors.name = `${t("Enteravalidname")}`;
+  }
+
+  // Phone number validation
+  if (!formData.phone_no) {
+    errors.phone_no = "Phone number is required.";
+  } else if (!/^[0-9]{10}$/.test(formData.phone_no)) {
+    errors.phone_no = `${t("Pleaseenteravaliddigitphonenumber")}`;
+  }
+
+  // Email validation
+  if (!formData.email) {
+    errors.email =`${t("Emailisrequired")}`;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    errors.email = `${t("Enteravalidemail")}`;
+  }
+
+  // Country, state, city validation
+  if (!formData.country_id) errors.country_id = `${t("Countryisrequired")}`;
+  if (!formData.state_id) errors.state_id = `${t("Stateisrequired")}`;
+  if (!formData.city_id) errors.city_id = `${t("Cityisrequired")}`;
+
+  // Pincode validation
+  if (!formData.pincode) {
+    errors.pincode =`${t("Pincodeisrequired")}`;
+  } else if (!/^[0-9]{6}$/.test(formData.pincode)) {
+    errors.pincode = `${t("Enteravalid6digitpincode")}`;
+  }
+
+  // Address validation
+  if (!formData.address.trim()) {
+    errors.address = `${t("Addressisrequired")}`;
+  }
+
+  setFormErrors(errors);
+  return Object.keys(errors).length === 0;
+};
+
 
   useEffect(() => {
     fetchPujaData();
@@ -111,8 +159,8 @@ const handlePhoneChange = (e) => {
   const handleUpdateAddress = async (e) => {
     e.preventDefault();
   
-    if (!formData.name || !formData.phone_no || !formData.address || !formData.city_id || !formData.state_id || !formData.country_id || !formData.pincode) {
-      toast.error("Please fill in all required fields.");
+    if (!validateForm()) {
+      toast.error("Please correct the errors before submitting.");
       return;
     }
   
@@ -216,8 +264,8 @@ const handlePhoneChange = (e) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!formData.name || !formData.phone_no || !formData.address || !formData.city_id || !formData.state_id || !formData.country_id || !formData.pincode) {
-      toast.error("Please fill in all required fields.");
+    if (!validateForm()) {
+      toast.error("Please correct the errors before submitting.");
       return;
     }
   
@@ -316,14 +364,14 @@ const handlePhoneChange = (e) => {
     <>
      <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">{t("ShoppingCart")} </h1>
      <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
-      <div className="flex items-center mb-4 md:mb-0">
+      <div className="flex items-center  md:mb-0">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
           <span className="font-bold">1</span>
         </div>
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("BookingReviewbooking")} 
           <br />
-          <span className="text-sm font-semibold text-gray-700">Review booking</span>
+          {/* <span className="text-sm font-semibold text-gray-700">Review booking</span> */}
         </p>
       </div>
       <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
@@ -335,7 +383,7 @@ const handlePhoneChange = (e) => {
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("AddAddressSelectadeliveryaddress")} 
           <br />
-          <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
+          {/* <span className="text-sm font-semibold text-gray-400">Select a delivery address</span> */}
         </p>
       </div>
       <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
@@ -347,7 +395,7 @@ const handlePhoneChange = (e) => {
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("PayinfoSelectapaymentmethod")} 
           <br />
-          <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
+          {/* <span className="text-sm font-semibold text-gray-400">Select a payment method</span> */}
         </p>
       </div>
     </div>
@@ -471,6 +519,7 @@ const handlePhoneChange = (e) => {
                  }
                  className="w-full p-2  rounded-lg border "
                />
+                {formErrors.name && <p className="error text-red-500 text-sm">{formErrors.name}</p>}
              </label>
 
              <label className="block mb-2">
@@ -483,7 +532,8 @@ const handlePhoneChange = (e) => {
   maxLength={10}
   className="w-full p-2 rounded-lg border"
 />
-{phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
+{/* {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>} */}
+{formErrors.phone_no && <p className="error text-red-500 text-sm">{formErrors.phone_no}</p>}
 
              </label>
 
@@ -498,6 +548,7 @@ const handlePhoneChange = (e) => {
                  }
                    className="w-full p-2  rounded-lg border "
                />
+                 {formErrors.email && <p className="error text-red-500 text-sm">{formErrors.email}</p>}
              </label>
 
              <label className="block mb-2">
@@ -512,6 +563,8 @@ const handlePhoneChange = (e) => {
                  }
                    className="w-full p-2  rounded-lg border "
                />
+                  {formErrors.address && <p className="error text-red-500 text-sm">{formErrors.address}</p>}
+               
              </label>
              <label className="block mb-2">
              <select name="country_id" value={formData.country_id} onChange={handleChange}   className="w-full p-2  rounded-lg border ">
@@ -522,6 +575,7 @@ const handlePhoneChange = (e) => {
    </option>
  ))}
 </select>
+{formErrors.country_id && <p className="error text-red-500 text-sm">{formErrors.country_id}</p>}
 </label>
 
              <label className="block mb-2">
@@ -531,6 +585,7 @@ const handlePhoneChange = (e) => {
  <option key={state.state_id} value={state.state_id}>{state.state_title}</option> 
  ))}
 </select>
+{formErrors.state_id && <p className="error text-red-500 text-sm">{formErrors.state_id}</p>}
 
              </label>
 
@@ -541,6 +596,7 @@ const handlePhoneChange = (e) => {
                    <option key={city.city_id} value={city.city_id}>{city.city_title}</option>
                  ))}
                </select>
+               {formErrors.city_id && <p className="error text-red-500 text-sm">{formErrors.city_id}</p>}
              </label>
 
              <label className="block mb-2">
@@ -555,6 +611,7 @@ const handlePhoneChange = (e) => {
                  }
                    className="w-full p-2  rounded-lg border "
                />
+               {formErrors.pincode && <p className="error text-red-500 text-sm">{formErrors.pincode}</p>}
              </label>
           </div>
 

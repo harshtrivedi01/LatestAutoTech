@@ -64,9 +64,11 @@ const PoojaPackages = ({ detail }) => {
                   </div>
                   <div className="text-left ">
                     {pkg.tag && (
-                      <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] me-4  -4 p-0.5 ps-3 md:flex text-white uppercase text-[10px] items-center gap-1 rounded-full">
-                        {pkg.tag} <img src="/images/dimond.png" className="lg:h-5 " />
-                      </div>
+                     <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] me-4 p-0.5 ps-3 flex flex-wrap items-center gap-1 rounded-full text-white uppercase text-[10px] sm:text-[12px] md:text-[14px]">
+                     {pkg.tag} 
+                     <img src="/images/dimond.png" className="h-4 sm:h-5 lg:h-6" alt="Diamond" />
+                   </div>
+                   
                     )}
 <h2 className="text-base sm:text-lg md:text-xl lg:text-xl font-bold mb-1">
   {pkg.name}

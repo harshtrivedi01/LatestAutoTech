@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import api from "../lib/axiosInstance";
 import DOMPurify from "dompurify";
+import { useTranslation } from "react-i18next";
 
 export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
   const [pujaData, setPujaData] = useState("");
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const PrivacyPolicy = () => {
     <div className="bg-[#FFF8F5]">
       <div className="p-60 overflow-hidden">
         <div className="container">
-          <h2 className="text-3xl font-bold mb-4 text-start">Privacy Policy</h2>
+          <h2 className="text-3xl font-bold mb-4 text-start"> {t("PrivacyPolicy")}</h2>
 
           <div className="py-12" dangerouslySetInnerHTML={{ __html: pujaData }}></div>
         </div>

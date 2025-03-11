@@ -70,11 +70,11 @@ console.log(packagedetail.amount)
     // Validate default fields
     Object.keys(defaultFields).forEach((key) => {
       if (!defaultFields[key]) {
-        newErrors[key] = "This field is required";
+        newErrors[key] =  `${t("Thisfieldisrequired")}`
         isValid = false;
       } else if (key === "name" || key === "father_name") {
         if (!nameRegex.test(defaultFields[key])) {
-          newErrors[key] = "Only alphabets are allowed";
+          newErrors[key] =  `${t("Onlyalphabetsareallowed")}`
           isValid = false;
         }
       }
@@ -83,13 +83,13 @@ console.log(packagedetail.amount)
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (defaultFields.email && !emailRegex.test(defaultFields.email)) {
-      newErrors.email = "Invalid email format";
+      newErrors.email =  `${t("Enteravalidemail")}`
       isValid = false;
     }
   
     // Address validation (Minimum 5 characters)
     if (defaultFields.address && defaultFields.address.length < 5) {
-      newErrors.address = "Address must be at least 5 characters long";
+      newErrors.address =  `${t("Addressmustbebetween5and100characters")}`
       isValid = false;
     }
   
@@ -101,15 +101,15 @@ console.log(packagedetail.amount)
       let errorObj = {};
       
       if (!member.name) {
-        errorObj.name = "Required";
+        errorObj.name = `${t("Thisfieldisrequired")}`
       } else if (!nameRegex.test(member.name)) {
-        errorObj.name = "Only alphabets are allowed";
+        errorObj.name = `${t("Onlyalphabetsareallowed")}`
       }
   
       if (!member.gotra && !dontKnowMemberGotra[index]) {
-        errorObj.gotra = "Required";
+        errorObj.gotra =`${t("Thisfieldisrequired")}`
       } else if (member.gotra && !gotraRegex.test(member.gotra)) {
-        errorObj.gotra = "Only alphabets are allowed";
+        errorObj.gotra = `${t("Onlyalphabetsareallowed")}`
       }
   
       return errorObj;

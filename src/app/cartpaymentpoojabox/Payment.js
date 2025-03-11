@@ -246,7 +246,7 @@ const updateCartQuantity = async (productId, change) => {
           className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
           onClick={() => router.push("/")}
         >
-          Go to Home
+           {t("home")} 
         </button>
       </div>
     );
@@ -258,14 +258,14 @@ const updateCartQuantity = async (productId, change) => {
             <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">  {t("ShoppingCart")} </h1>
        {/* Progress Steps */}
        <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
-      <div className="flex items-center mb-4 md:mb-0">
+      <div className="flex items-center  md:mb-0">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
       <span className="font-bold"><CheckIcon/></span>
         </div>
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("BookingReviewbooking")} 
           <br />
-          <span className="text-sm font-semibold text-gray-700">Review booking</span>
+          {/* <span className="text-sm font-semibold text-gray-700">Review booking</span> */}
         </p>
       </div>
       <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
@@ -277,7 +277,7 @@ const updateCartQuantity = async (productId, change) => {
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("AddAddressSelectadeliveryaddress")} 
           <br />
-          <span className="text-sm font-semibold text-gray-400">Select a delivery address</span>
+          {/* <span className="text-sm font-semibold text-gray-400">Select a delivery address</span> */}
         </p>
       </div>
       <div className="w-10 border-t-2 md:border-t-0 md:border-l-2 border-gray-300 mx-4 my-4 md:my-0"></div>
@@ -289,7 +289,7 @@ const updateCartQuantity = async (productId, change) => {
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("PayinfoSelectapaymentmethod")} 
           <br />
-          <span className="text-sm font-semibold text-gray-400">Select a payment method</span>
+          {/* <span className="text-sm font-semibold text-gray-400">Select a payment method</span> */}
         </p>
       </div>
     </div>

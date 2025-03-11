@@ -7,6 +7,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import Language from "../Language/Language";
 import { useTranslation } from "react-i18next";
 import api from "../../lib/axiosInstance";
+import axios from "axios";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,26 +19,61 @@ export default function Navbar() {
   const { t } = useTranslation();
 
   const [pujaData, setPujaData] = useState([]);
-
+  const [header, setHeader] = useState(null); // Initialize header state
   useEffect(() => {
       fetchPujaData();   
   }, []);
+	
 
-  const fetchPujaData = async () => {
-    try {
-      let formData = new FormData();
-      formData.append("type", "cartcount");
-  
-      const response = await api.post("/cart_count", formData); // Use the new axios instance
-  
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+			const authToken = localStorage.getItem("authToken");
+
+			const newHeader = {
+				language: "en",
+				userId: "2",
+				user_type: "user",
+				Device_id: "upen",
+				Longitude: formData.Longitude || "",
+				Latitude: formData.Latitude || "",
+				Ip_address: formData.Ip_address || "",
+				web_token: authToken || "",
+        "Content-Type": "application/json",
+
+			};
+
+			setHeader(newHeader);
+			fetchPujaData(newHeader);
+		}
+	}, []);
+
+	useEffect(() => {
+		fetchPujaData();
+	}, []);
+
+	const fetchPujaData = async () => {
+		try {
+			let formData = new FormData();
+			formData.append("type", "cart_count");
+
+
+			const response = await axios.post(
+			"https://dakshhousing.com/satsambhav/websiteapi/cartcount",
+				formData,
+				{
+					headers: header
+
+				}
+			);
       console.log("Puja API Response:",response.data?.data?.cart_count);
       setPujaData(response.data?.data?.cart_count);
 
-     
-    } catch (error) {
-      console.error("Error fetching puja data:", error);
-    }
-  };
+		} catch (error) {
+			console.error("Error fetching puja data:", error);
+		}
+	};
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {

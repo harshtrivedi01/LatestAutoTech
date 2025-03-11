@@ -153,48 +153,93 @@ const Profilepage = () => {
   const validateForm = () => {
     const errors = {};
   
-    if (!formData.name.trim()) errors.name = "Name is required";
-    if (!formData.last_name.trim()) errors.last_name = "Last name is required";
-    if (!formData.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Enter a valid email";
+    // Name validation (Required, no numbers/special characters, min 2 characters)
+    if (!formData.name.trim()) {
+      errors.name = `${t("Nameisrequired")}`;
+    } else if (!/^[A-Za-z\s]{2,}$/.test(formData.name)) {
+      errors.name = `${t("Enteravalidname")}`;
     }
+  
+    // Last Name validation (Same as Name)
+    if (!formData.last_name.trim()) {
+      errors.last_name = `${t("Lastnameisrequired")}`;
+    } else if (!/^[A-Za-z\s]{2,}$/.test(formData.last_name)) {
+      errors.last_name = `${t("Enteravalidlastname")}`;
+    }
+  
+    // Email validation (Required + Proper format)
+    if (!formData.email.trim()) {
+      errors.email = `${t("Emailisrequired")}`;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = `${t("Enteravalidemail")}`;
+    }
+  
+    // Phone validation (Required + 10 digits)
     if (!formData.phone.trim()) {
       errors.phone = "Phone number is required";
     } else if (!/^\d{10}$/.test(formData.phone)) {
       errors.phone = "Enter a valid 10-digit phone number";
     }
   
-    if (!formData.dob) errors.dob = "Date of birth is required";
-    if (!formData.birth_time) errors.birth_time = "Birth time is required";
-    if (!formData.gender) errors.gender = "Gender is required";
-    if (!formData.marital_status) errors.marital_status = "Marital status is required";
+    // Date of Birth validation
+    if (!formData.dob) errors.dob =  `${t("Dateofbirthisrequired")}`;
   
-    if (!formData.dobplace.trim()) errors.dobplace = "Place of birth is required";
-    if (!formData.country_id) errors.country_id = "Country is required";
-    if (!formData.state_id) errors.state_id = "State is required";
-    if (!formData.city_id) errors.city_id = "City is required";
-    if (!formData.address.trim()) errors.address = "Address is required";
+    // Birth Time validation
+    if (!formData.birth_time) errors.birth_time = `${t("Birthtimeisrequired")}`;
   
+    // Gender validation (Ensure a valid selection)
+    if (!formData.gender || formData.gender === "Select") {
+      errors.gender =  `${t("Genderisrequired")}`;
+    }
+  
+    // Marital Status validation
+    if (!formData.marital_status || formData.marital_status === "Select") {
+      errors.marital_status =  `${t("Maritalstatusisrequired")}`;
+    }
+  
+    // Place of Birth validation (No numbers or special characters, min 2 characters)
+    if (!formData.dobplace.trim()) {
+      errors.dobplace = `${t("Placeofbirthisrequired")}`;
+    } else if (!/^[A-Za-z\s]{2,}$/.test(formData.dobplace)) {
+      errors.dobplace = `${t("Enteravalidplaceofbirth")}`;
+    }
+  
+    // Country validation
+    if (!formData.country_id) errors.country_id = `${t("Countryisrequired")}`;
+  
+    // State validation
+    if (!formData.state_id) errors.state_id = `${t("Stateisrequired")}`;
+  
+    // City validation
+    if (!formData.city_id) errors.city_id = `${t("Cityisrequired")}`;
+  
+    // Address validation (Min 5, Max 100 characters)
+    if (!formData.address.trim()) {
+      errors.address =  `${t("Addressisrequired")}`;
+    } else if (formData.address.length < 5 || formData.address.length > 50) {
+      errors.address =  `${t("Addressmustbebetween5and100characters")}`;
+    }
+  
+    // Pincode validation (6 digits only)
     if (!formData.pincode) {
-      errors.pincode = "Pincode is required";
+      errors.pincode =  `${t("Pincodeisrequired")}`;
     } else if (!/^\d{6}$/.test(formData.pincode)) {
-      errors.pincode = "Enter a valid 6-digit pincode";
+      errors.pincode =  `${t("Enteravalid6digitpincode")}`;
     }
   
     setValidationErrors(errors);
-    console.log("Validation Errors:", errors); 
+    console.log("Validation Errors:", errors);
   
     return Object.keys(errors).length === 0;
   };
+  
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (!validateForm()) {
-      toast.error("Please fix the errors before submitting.");
+      toast.error("Please check all fields before submitting.");
       return;
     }
   
@@ -269,16 +314,17 @@ const Profilepage = () => {
                     {t("FirstName")}
                   </h2>
                   <input
-                    id="fname"
-                    type="text" name="name"
+                    id="name"
+                    type="text"
+                     name="name"
                      placeholder= {t("FirstName")}
                      value={formData.name}
-                      onChange={handleChange} required
+                      onChange={handleChange} 
                     className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-600 outline-none"
                   />
-                  
+                   {validationErrors.name && <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>}
                 </div>
-                {validationErrors.name && <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>}
+               
               </div>
               <div className="flex justify-start items-center w-full gap-4 border-r-2">
                 <IoPersonCircleOutline className="text-4xl text-gray-800" />
@@ -288,12 +334,15 @@ const Profilepage = () => {
                   {t("LastName")}
                   </h2>
                   <input
-                    id="flastname"
+                    id="last_name"
                     value={formData.last_name}
-                    type="text" name="last_name" placeholder=  {t("LastName")} onChange={handleChange} required
+                    type="text" name="last_name" 
+                    placeholder={t("LastName")} onChange={handleChange} 
                     className="px-6 py-[9px] rounded-lg border w-full shadow-lg text-md text-gray-600 outline-none"
                   />
+                   {validationErrors.last_name && <p className="text-red-500 text-sm mt-1">{validationErrors.last_name}</p>}
                 </div>
+               
               </div>
 
               <div className="flex justify-start items-center w-full gap-4">
@@ -310,10 +359,12 @@ const Profilepage = () => {
                       placeholder="25/08/2003"
                       value={formData.dob}
                       max={new Date().toISOString().split("T")[0]} // today's date
-                      type="date" name="dob" onChange={handleChange} required
+                      type="date" name="dob" onChange={handleChange} 
                       className="px-5 py-[12px] rounded-lg border w-full shadow-md text-md text-gray-600 outline-none"
                     />
+                      {validationErrors.dob && <p className="text-red-500 text-sm mt-1">{validationErrors.dob}</p>}
                   </div>
+                
                 </div>
               </div>
 
@@ -332,6 +383,7 @@ const Profilepage = () => {
                     className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-md text-gray-600 outline-none"
                   />
                 </div>
+                
               </div>
 
               <div className="flex justify-start items-center w-full gap-4">
@@ -346,10 +398,12 @@ const Profilepage = () => {
                     id="email"
                     value={formData.email}
                     placeholder="punyasetu1210@gmail.com"
-                    type="email" name="email" onChange={handleChange} required
+                    type="email" name="email" onChange={handleChange} 
                     className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-gray-600 text-md outline-none"
                   />
+                    {validationErrors.email && <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>}
                 </div>
+              
               </div>
 
               <div className="flex justify-start items-center w-full border-r-2 gap-4 relative pr-4">
@@ -361,16 +415,17 @@ const Profilepage = () => {
                   </h2>
 
                   <select
-                   name="gender" onChange={handleChange} required
+                   name="gender" onChange={handleChange} 
                     id="gender"
                     value={formData.gender}
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
+                  
                  <option value=""> {t("SelectGender")}</option>
         <option value="male"> {t("Male")}</option>
         <option value="female"> {t("Female")}</option>
                   </select>
-
+                  {validationErrors.gender && <p className="text-red-500 text-sm mt-1">{validationErrors.gender}</p>}
                   <div className="absolute right-4 top-2/3 transform -translate-y-1/2 pointer-events-none">
                     <IoIosArrowDown className="text-gray-800" />
                   </div>
@@ -389,14 +444,15 @@ const Profilepage = () => {
                  
                     id="marital_status"
                     value={formData.marital_status}
-                    name="marital_status" onChange={handleChange} required
+                    name="marital_status" onChange={handleChange} 
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md appearance-none outline-none pr-10"
                   >
+                    
                     <option value=""> {t("SelectMaritalStatus")}</option>
         <option value="single">{t("Single")}</option>
         <option value="married">{t("Married")}</option>
                   </select>
-
+                  {validationErrors.marital_status && <p className="text-red-500 text-sm mt-1">{validationErrors.marital_status}</p>}
                   <div className="absolute right-4 top-2/3 transform -translate-y-1/2 pointer-events-none">
                     <IoIosArrowDown className="text-gray-800" />
                   </div>
@@ -434,10 +490,9 @@ const Profilepage = () => {
   name="birth_time"
   value={formData.birth_time || ""}
   onChange={handleTimeChange}
-
-
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
+                  {validationErrors.birth_time && <p className="text-red-500 text-sm mt-1">{validationErrors.birth_time}</p>}
                 </div>
               </div>
 
@@ -454,6 +509,7 @@ const Profilepage = () => {
                     type="text" name="dobplace" placeholder= {t("PlaceofBirth")} onChange={handleChange}
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-md text-md outline-none"
                   />
+                    {validationErrors.dobplace && <p className="text-red-500 text-sm mt-1">{validationErrors.dobplace}</p>}
                 </div>
               </div>
 
@@ -469,9 +525,9 @@ const Profilepage = () => {
                     value={formData.address}
                     id="current_address"
                     name="address" placeholder={t("address")} onChange={handleChange}
-
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-md text-md outline-none"
                   />
+                   {validationErrors.address && <p className="text-red-500 text-sm mt-1">{validationErrors.address}</p>}
                 </div>
               </div>
               <div className="flex justify-start items-center w-full gap-4 relative border-r-2 pr-4">
@@ -489,6 +545,7 @@ const Profilepage = () => {
                     readOnly
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
+                    {validationErrors.country && <p className="text-red-500 text-sm mt-1">{validationErrors.country}</p>}
                 </div>
               </div>
 
@@ -505,7 +562,7 @@ const Profilepage = () => {
   onChange={handleChange}
   className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
 
->
+>  
   <option value="">{t("SelectState")}</option>
   {states.map((state) => (
     <option key={state.state_id} value={state.state_id}>
@@ -513,6 +570,7 @@ const Profilepage = () => {
     </option>
   ))}
 </select>
+{validationErrors.state_id && <p className="text-red-500 text-sm mt-1">{validationErrors.state_id}</p>}
 
                 </div>
               </div>
@@ -533,7 +591,7 @@ const Profilepage = () => {
   className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
 
   disabled={!formData.state_id}
->
+>  
   <option value=""> {t("SelectCity")}</option>
   {cities.map((city) => (
     <option key={city.city_id} value={city.city_id}>
@@ -541,7 +599,7 @@ const Profilepage = () => {
     </option>
   ))}
 </select>
-
+{validationErrors.city_id && <p className="text-red-500 text-sm mt-1">{validationErrors.city_id}</p>}
                 </div>
               </div>
 
@@ -560,9 +618,10 @@ const Profilepage = () => {
                     id="pincode"
                     value={formData.pincode}
                     placeholder="302025"
-                    onChange={handleChange} required
+                    onChange={handleChange} 
                     className="px-5 py-[12px] bg-white text-gray-600 rounded-lg border w-full shadow-lg text-md outline-none"
                   />
+                    {validationErrors.pincode && <p className="text-red-500 text-sm mt-1">{validationErrors.pincode}</p>}
                 </div>
               </div>
             </div>

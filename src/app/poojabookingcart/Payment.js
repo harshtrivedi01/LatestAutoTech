@@ -181,37 +181,39 @@ const Payment = () => {
           <div className="flex flex-col md:flex-row gap-6">
             {/* Left Section */}
             <div className="w-full md:w-2/3">
-              <div className="bg-white p-4 rounded-lg shadow">
-                <div className="flex items-start gap-4">
-                  <div className="w-1/2">
-                    <img
-                      src={data?.image || ""}
-                      alt="Pooja"
-                      className="rounded-lg object-contain h-40"
-                      height="100%"
-                      width="100%"
-                      onError={(e) =>(e.target.src = "/images/logo.png")}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800 text-lg">
-                      {data?.name || "Pooja Name"}
-                    </h3>
-                    <p className="text-gray-500 text-lg mt-1">
-                      {data?.puja_description
-                        ? data.puja_description.split(" ").slice(0, 18).join(" ") +
-                        (data.puja_description.split(" ").length > 18 ? "..." : "")
-                        : "Puja description goes here."}
-                    </p>
-                    <hr className="my-1" />
-                    <p className="text-gray-800 text-sm font-semibold mt-2">
-                    {t("PackageforPackage")}  {datapackage?.name || "Package"}
-                    </p>
-                    <p className="text-gray-700 text-lg">₹{datapackage?.price || "0"}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div className="bg-white p-4 rounded-lg shadow">
+    <div className="flex flex-wrap md:flex-nowrap items-start gap-4">
+      {/* Image Section */}
+      <div className="w-full sm:w-1/2">
+        <img
+          src={data?.image || ""}
+          alt="Pooja"
+          className="rounded-lg object-contain w-full h-40"
+          onError={(e) => (e.target.src = "/images/logo.png")}
+        />
+      </div>
+      
+      {/* Content Section */}
+      <div className="flex-1">
+        <h3 className="font-semibold text-gray-800 text-lg">
+          {data?.name || "Pooja Name"}
+        </h3>
+        <p className="text-gray-500 text-sm sm:text-lg mt-1">
+          {data?.puja_description
+            ? data.puja_description.split(" ").slice(0, 18).join(" ") +
+              (data.puja_description.split(" ").length > 18 ? "..." : "")
+            : "Puja description goes here."}
+        </p>
+        <hr className="my-1" />
+        <p className="text-gray-800 text-sm font-semibold mt-2">
+          {t("PackageforPackage")} {datapackage?.name || "Package"}
+        </p>
+        <p className="text-gray-700 text-lg">₹{datapackage?.price || "0"}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
             {/* Right Section */}
             <div className="w-full max-w-lg mx-auto p-8">
@@ -230,7 +232,7 @@ const Payment = () => {
                   disabled={loading}
                   className="w-full common-btn text-white font-semibold py-2 mt-5 rounded-lg bg-orange-500"
                 >
-                  {loading ? "Checking..." : "Pay Now"}
+                  {loading ? `${t("Checkout")}`   : `${t("PayNow")}`}
                 </button>
               </div>
             </div>
