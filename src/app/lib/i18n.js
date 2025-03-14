@@ -204,8 +204,8 @@ i18n
           LaxmiPoojaBox: "Laxmi Pooja Box",
           OrderID: "Order ID:",
           DeliveryDate: "Delivery Date:",
-          AmountRs: "Amount Rs.",
-          DiscountRS: "Discount Rs",
+          AmountRs: "Amount ₹",
+          DiscountRS: "Discount ₹",
 
           Ordertimedate: "Order time & date:",
 
@@ -303,10 +303,14 @@ i18n
             "Looks like you haven't added anything yet.,",
           GotoHome: " Go to Home",
           SomethingwentwrongPleasetryagainlater:"Something went wrong. Please try again later.",
+          Enteryourname:"Enter your Name",
+          Enteryourphone:"Enter your Phone",
         },
       },
       hi: {
         translation: {
+          Enteryourphone:"अपना फ़ोन दर्ज करें",
+          Enteryourname:"अपना नाम दर्ज करें",
           SomethingwentwrongPleasetryagainlater:"कुछ गलत हो गया है कृपया बाद में पुनः प्रयास करें।",
           YourCartisEmpty: "आपका कार्ट खाली है",
           Lookslikeyouhaventaddedanythingyetहै:
@@ -574,10 +578,10 @@ i18n
           PoojaBox: "पूजा बॉक्स",
           LaxmiPoojaBoxDailyPoojaBox: "लक्ष्मी पूजा बॉक्स, दैनिक पूजा बॉक्स",
           LaxmiPoojaBox: "लक्ष्मी पूजा बॉक्स",
-          OrderID: "ऑर्डर आईडी",
-          DeliveryDate: "डिलीवरी तिथि",
-          AmountRs: "राशि रु.",
-          DiscountRS: "छूट रुपये",
+          OrderID: "ऑर्डर आईडी:",
+          DeliveryDate: "डिलीवरी तिथि:",
+          AmountRs: "राशि ₹",
+          DiscountRS: "छूट ₹",
 
           //    /orderhistory/87
 

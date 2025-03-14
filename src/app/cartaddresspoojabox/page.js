@@ -75,7 +75,7 @@ const validateForm = () => {
 
   // Phone number validation
   if (!formData.phone_no) {
-    errors.phone_no = "Phone number is required.";
+    errors.phone_no = `${t("Mobilenumberisrequired")}`;
   } else if (!/^[0-9]{10}$/.test(formData.phone_no)) {
     errors.phone_no = `${t("Pleaseenteravaliddigitphonenumber")}`;
   }
@@ -160,7 +160,7 @@ const validateForm = () => {
     e.preventDefault();
   
     if (!validateForm()) {
-      toast.error("Please correct the errors before submitting.");
+      toast.error("Please fill the correct data before submitting.");
       return;
     }
   
@@ -265,7 +265,7 @@ const validateForm = () => {
     e.preventDefault();
   
     if (!validateForm()) {
-      toast.error("Please correct the errors before submitting.");
+      toast.error("Please fill the correct data before submitting.");
       return;
     }
   
@@ -512,7 +512,7 @@ const validateForm = () => {
                
                <input
                  type="text"
-                 placeholder="Enter your Name"
+                 placeholder={t("Enteryourname")}
                  value={formData.name}
                  onChange={(e) =>
                    setFormData({ ...formData, name: e.target.value })
@@ -526,7 +526,7 @@ const validateForm = () => {
              
              <input
   type="text"
-  placeholder="Enter your phone"
+  placeholder={t("Enteryourphone")}
   value={formData.phone_no}
   onChange={(e) => handlePhoneChange(e)}
   maxLength={10}
@@ -542,7 +542,7 @@ const validateForm = () => {
                <input
                  type="email"
                  value={formData.email}
-                   placeholder="Enter your email"
+                   placeholder=  {t("Enteryouremail")} 
                  onChange={(e) =>
                    setFormData({ ...formData, email: e.target.value })
                  }
@@ -555,7 +555,7 @@ const validateForm = () => {
               
                <input
                  type="text"
-                   placeholder="Enter your address"
+                   placeholder= {t("Enteryourfulladdress")} 
                  value={formData.address}
                  maxLength={50}
                  onChange={(e) =>
@@ -568,7 +568,7 @@ const validateForm = () => {
              </label>
              <label className="block mb-2">
              <select name="country_id" value={formData.country_id} onChange={handleChange}   className="w-full p-2  rounded-lg border ">
- <option value="">Select Country</option>
+ <option value="">{t("Country")} </option>
  {countries.map((country) => (
    <option key={country.id} value={country.id}>
      {country.country_name}
@@ -580,7 +580,7 @@ const validateForm = () => {
 
              <label className="block mb-2">
             <select name="state_id" value={formData.state_id} onChange={handleChange}   className="w-full p-2  rounded-lg border ">
- <option value="">Select State</option>
+ <option value="">{t("State")} </option>
  {states.map((state) => (
  <option key={state.state_id} value={state.state_id}>{state.state_title}</option> 
  ))}
@@ -591,7 +591,7 @@ const validateForm = () => {
 
              <label className="block mb-2">
                <select name="city_id" value={formData.city_id} onChange={handleChange}   className="w-full p-2  rounded-lg border ">
-                 <option value="">Select City</option>
+                 <option value="">{t("City")} </option>
                  {cities.map((city) => (
                    <option key={city.city_id} value={city.city_id}>{city.city_title}</option>
                  ))}
@@ -603,7 +603,7 @@ const validateForm = () => {
                
                <input
                  type="text"
-                   placeholder="Enter pincode"
+                   placeholder={t("PinCode")} 
                  value={formData.pincode}
                  maxLength={6}
                  onChange={(e) =>

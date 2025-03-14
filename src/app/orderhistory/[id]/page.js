@@ -206,7 +206,7 @@ export default function Page() {
 
         <div className="lg:w-4/12 w-full pt-10 lg:pt-24">
           <div className="border-b-2 border-gray-200 ">
-            <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("ShippingCharges")}</h3>
+            <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("AddressDetails")}</h3>
             <p className="font-semibold text-lg">{order.address.name}</p>
             <p className="text-gray-600 text-lg">{order.address.email}</p>
             <p className="text-gray-600 text-lg">{order.address.phone}</p>

@@ -33,7 +33,7 @@ const TermsandConditions = () => {
           <div className="container">
           <h2 className="text-2xl font-bold mb-4 text-start"> {t("TermsANDConditions")}</h2>
 
-          <div className="py-12"   dangerouslySetInnerHTML={{ __html:(pujaData) }}>
+          <div className="py-12 x-4 space-y-4 text-lg leading-relaxed"   dangerouslySetInnerHTML={{ __html:(pujaData) }}>
 
           </div>
           </div>

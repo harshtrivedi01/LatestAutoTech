@@ -363,7 +363,7 @@ const Page = () => {
                 <p className="text-gray-500 text-sm"> {t("OrderID")} {order.order_code}</p>
                 <p className="text-gray-500 text-sm">{t("DeliveryDate")} {order.delivery_date || order.order_date}</p>
                 <p className="text-gray-800 font-[500] text-[14px]">
-                {t("AmountRs")} {order.grand_total}/-
+                {t("AmountRs")} {Math.floor(order.grand_total)}/-
                 </p>
                 <p className="text-gray-500 text-sm">  {t("DiscountRS")} {Math.floor(order.discount) || Math.floor(order.total_discount)||"NA"}/-</p>
                 {/* <p className="text-gray-500 text-sm">Payment Status: {order.payment_status}</p> */}

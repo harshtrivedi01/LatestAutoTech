@@ -39,7 +39,8 @@ const PrivacyPolicy = () => {
         <div className="container">
           <h2 className="text-3xl font-bold mb-4 text-start"> {t("PrivacyPolicy")}</h2>
 
-          <div className="py-12" dangerouslySetInnerHTML={{ __html: pujaData }}></div>
+          <div className="py-12 px-4 space-y-4 text-lg leading-relaxed" dangerouslySetInnerHTML={{ __html: pujaData }}></div>
+
         </div>
         <br />
       </div>
