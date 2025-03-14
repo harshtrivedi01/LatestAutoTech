@@ -276,7 +276,7 @@ const Page = () => {
                 (e.target.src =
                   "/images/logo.png")
               }
-              className="w-full sm:w-5/12 h-[150px] border-2 border-white object-fill shadow-lg shadow-gray-400 rounded-lg"
+              className="w-full sm:w-5/12 h-[150px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
             />
             <div className="w-full sm:w-7/12 text-center sm:text-left">
               {/* <p className="text-gray-500 text-sm">#{booking.booking_id}</p> */}
@@ -332,7 +332,7 @@ const Page = () => {
 {activeStep === `${t("PoojaBox")}` && (
   <div className="bg-gray-100 p-6 mt-6 rounded-lg">
     {loading ? (
-      <p className="text-center text-lg font-semibold">Searching...</p>
+      <p className="text-center text-lg font-semibold"> {t("wait")}...</p>
     ) : searchQuery && (!searchResults?.order_list || searchResults?.order_list.length === 0) ? (
       <p className="text-center text-lg text-red-500 min-h-screen font-semibold">
          {t("Noresultsfoundfor")} "{searchQuery}"
@@ -353,7 +353,7 @@ const Page = () => {
               <img
                 src={order.image || "/images/logo.png"}
                 alt={order.product_names}
-                className="w-full sm:w-4/12 h-[180px] object-fill shadow-md rounded-lg"
+                className="w-full sm:w-4/12 h-[180px] object-contain shadow-md rounded-lg"
                 onError={(e) => (e.target.src = "/images/logo.png")}
               />
               <div className="w-full sm:w-8/12 text-center sm:text-left">

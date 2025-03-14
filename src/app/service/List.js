@@ -21,6 +21,8 @@ export default function List({ module_category_details }) {
     return <div>Loading...</div>;
   }
 
+
+
   const serviceImages = {
     "Guru Ji": service1,
     "Pandit Ji": service2,
@@ -37,7 +39,16 @@ export default function List({ module_category_details }) {
     "Granth": "#",
     "Online Classes": "#",
     "Live Darshan": "#",
+    "गुरु जी": "#",
+   
+"पंडित जी": "#",
+    "पूजा": "/poojabooking",
+    "ग्रंथ": "#",
+    "ऑनलाइन कक्षाएं": "#",
+    
+"लाइव दर्शन": "#",
   };
+
 
   const toggleReadMore = (id) => {
     setExpandedItems((prev) => ({

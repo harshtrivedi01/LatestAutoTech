@@ -265,7 +265,7 @@ export default function OtpVerificationPage() {
              </div>
            </nav>
       <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
-        <div className=" p-4 lg:p-10 rounded-3xl bg-white flex flex-col items-center">
+        <div className=" max-w-screen-xl mx-3 p-4 lg:p-10 rounded-3xl bg-white flex flex-col items-center">
           <div className="">
             <img width={45} className="" src="/images/logo.png" />
           </div>
@@ -277,43 +277,47 @@ export default function OtpVerificationPage() {
           </p>
 
           <form onSubmit={handleOtpSubmit} className="flex flex-col mt-5 space-y-5">
-            <div className="flex justify-center gap-7">
-              {otp.map((val, index) => (
-                <input
-                  key={index}
-                  ref={(el) => (inputRefs.current[index] = el)}
-                  className="w-16 h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
-                  type="text"
-                  maxLength="1"
-                  value={val}
-                  onChange={(e) => handleChange(index, e)}
-                  onKeyDown={(e) => handleBackspace(index, e)}
-                />
-              ))}
-            </div>
+  {/* OTP Inputs */}
+  <div className="flex justify-center gap-3 sm:gap-7 flex-wrap">
+    {otp.map((val, index) => (
+      <input
+        key={index}
+        ref={(el) => (inputRefs.current[index] = el)}
+        className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
+        type="text"
+        maxLength="1"
+        value={val}
+        onChange={(e) => handleChange(index, e)}
+        onKeyDown={(e) => handleBackspace(index, e)}
+      />
+    ))}
+  </div>
 
-            {!resendVisible ? (
-              <p className="text-sm text-gray-700 text-center mt-3">
-                {t("ResendOTPin")} <span className="text-[#FA8128]">{`00:${timer < 10 ? `0${timer}` : timer}`}</span>
-              </p>
-            ) : (
-              <button
-                onClick={handleResendOtp}
-                className="text-[#FA8128] font-semibold hover:underline text-center mt-3"
-              >
-                {t("ResendOTP")}
-              </button>
-            )}
+  {/* Timer / Resend OTP */}
+  {!resendVisible ? (
+    <p className="text-sm text-gray-700 text-center mt-3">
+      {t("ResendOTPin")} <span className="text-[#FA8128]">{`00:${timer < 10 ? `0${timer}` : timer}`}</span>
+    </p>
+  ) : (
+    <button
+      onClick={handleResendOtp}
+      className="text-[#FA8128] font-semibold hover:underline text-center mt-3"
+    >
+      {t("ResendOTP")}
+    </button>
+  )}
 
-<button
-                className={`w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 
-                  ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-[#E5644E]"}`}
-                type="submit"
-                disabled={isResendDisabled}
-              >
-                {isResendDisabled ?`${t("wait")}...` : `${t("submit")}`}
-              </button>
-          </form>
+  {/* Submit Button */}
+  <button
+    className={`w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 
+      ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D4533D]"}`}
+    type="submit"
+    disabled={isResendDisabled}
+  >
+    {isResendDisabled ? `${t("wait")}...` : `${t("submit")}`}
+  </button>
+</form>
+
 
           <div className="flex space-x-1 mt-5 text-sm">
             <p className="text-center gap-1 font-semibold flex text-sm text-gray-700">

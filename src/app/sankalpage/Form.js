@@ -271,7 +271,7 @@ console.log(packagedetail.amount)
               const updatedCheck = [...dontKnowMemberGotra];
               updatedCheck[index] = !updatedCheck[index];
               setDontKnowMemberGotra(updatedCheck);
-              handleMemberChange(index, "gotra", updatedCheck[index] ? `${t("Kashyap")}` : "");
+              handleMemberChange(index, "gotra", updatedCheck[index] ? `Kashyap` : "");
             }} />
          
               <label className="text-sm">{t("IdontknowmyGotra")}</label>

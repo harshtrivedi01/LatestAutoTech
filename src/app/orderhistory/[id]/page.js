@@ -176,8 +176,8 @@ export default function Page() {
                  className="w-32 h-32 rounded-lg mr-3" />
                 <div>
                   <p className="font-semibold text-[#87521B] mb-2">{item.product_name}</p>
-                  <p className="text-gray-700 font-bold mb-2">₹ {Math.floor(item.price.toFixed(1))}</p>
-                  <p className="text-gray-600 text-sm">Qty - {item.quantity}</p>
+                  <p className="text-gray-700 font-bold mb-2">₹ {Math.floor(item.price.toFixed(1))}/-</p>
+                  <p className="text-gray-600 text-sm">{t("Qty")} - {item.quantity}</p>
                 </div>
               </div>
             ))}

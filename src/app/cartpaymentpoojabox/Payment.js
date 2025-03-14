@@ -239,16 +239,16 @@ const updateCartQuantity = async (productId, change) => {
 
   if (subtotal === 0 || cartItems.length === 0) {
     return (
-      <div className="text-center py-10 min-h-screen items-center mt-20">
-        <h2 className="text-2xl font-semibold text-gray-700">Your Cart is Empty</h2>
-        <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p>
-        <button
-          className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
-          onClick={() => router.push("/")}
-        >
-           {t("home")} 
-        </button>
-      </div>
+      <div className="text-center min-h-screen py-10">
+      <h2 className="text-2xl font-semibold text-gray-700">{t("YourCartisEmpty")}</h2>
+      <p className="text-gray-500 mt-2">{t("Lookslikeyouhaventaddedanythingyetहै")}</p>
+      <button
+        className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
+        onClick={() => router.push("/")}
+      >
+      {t("GotoHome")}
+      </button>
+    </div>
     );
   }
 

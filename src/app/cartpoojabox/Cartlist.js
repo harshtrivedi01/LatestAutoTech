@@ -26,13 +26,13 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
   if (subtotal === 0 || cartItems.length === 0) {
     return (
       <div className="text-center min-h-screen py-10">
-        <h2 className="text-2xl font-semibold text-gray-700">Your Cart is Empty</h2>
-        <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p>
+        <h2 className="text-2xl font-semibold text-gray-700">{t("YourCartisEmpty")}</h2>
+        <p className="text-gray-500 mt-2">{t("Lookslikeyouhaventaddedanythingyetहै")}</p>
         <button
           className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
           onClick={() => router.push("/")}
         >
-          Go to Home
+        {t("GotoHome")}
         </button>
       </div>
     );
@@ -91,7 +91,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
                       </div>
 
                       <FaTrash
-                        className="ms-5 text-gray-700 cursor-pointer hover:text-red-600"
+                        className="mx-3 text-gray-700 cursor-pointer hover:text-red-600"
                         onClick={() => handleCartAction(item.product_id)}
                       />
 

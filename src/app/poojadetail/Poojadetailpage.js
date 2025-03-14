@@ -77,7 +77,7 @@ export default function Poojadetailpage() {
       }
     } catch (error) {
       console.error("Error fetching puja data:", error);
-      setErrorMessage("Something went wrong. Please try again later.");
+      setErrorMessage(`${t("SomethingwentwrongPleasetryagainlater")}`);
       setIsError(true); // Hide the page
     }
   };
