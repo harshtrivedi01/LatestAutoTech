@@ -59,8 +59,7 @@ i18n
           Pooja: "Pooja",
           PARTICIPATE: "PARTICIPATE",
           WhatOurClientsSayAboutUs: "What Our Clients Say About Us",
-          banner:
-            "Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app",
+          banner: "Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app",
           ReadMore: "Read More",
           ReadLess: "Read Less",
           DownloadAPP: "Download APP",
@@ -234,14 +233,11 @@ i18n
           MobileNumber: " Mobile Number",
           ResendOTPin: " Resend OTP in",
           ResendOTP: "Resend OTP",
-
           SelectCity: "Select City",
           SelectState: "Select State",
-
           Nameisrequired: "Name is required",
           Emailisrequired: "Email is required",
           Mobilenumberisrequired: "Mobile number is required",
-
           Stateisrequired: "State is required",
           Cityisrequired: "City is required",
           Specialityisrequired: "Speciality is required",
@@ -254,8 +250,7 @@ i18n
           india: "India",
           Invalidphonenumber: "Invalid phone number",
           wait: "Wait",
-          Pleaseenteravaliddigitphonenumber:
-            "Please enter a valid 10-digit phone number.",
+          Pleaseenteravaliddigitphonenumber: "Please enter a valid 10-digit phone number.",
           SelectGender: "Select Gender",
           Male: "Male",
           Female: "Female",
@@ -263,7 +258,6 @@ i18n
           Single: "Single",
           Married: "Married",
           address: "address",
-
           Noresultsfoundfor: "No results found for",
           Nobookinghistoryavailable: "  No booking history available.",
           pending: "pending",
@@ -271,13 +265,10 @@ i18n
           picked_up: "picked_up",
           delivered: "delivered",
           Qty: "Qty",
-
           Nameisrequired: "Name is required",
-          Enteravalidname:
-            "Enter a valid name (only letters, min 2 characters)",
+          Enteravalidname: "Enter a valid name (only letters, min 2 characters)",
           Lastnameisrequired: "Last name is required",
-          Enteravalidlastname:
-            "Enter a valid last name (only letters, min 2 characters)",
+          Enteravalidlastname: "Enter a valid last name (only letters, min 2 characters)",
           Emailisrequired: "Email is required",
           Enteravalidemail: "Enter a valid email",
           Dateofbirthisrequired: "Date of birth is required",
@@ -290,40 +281,35 @@ i18n
           Stateisrequired: "State is required",
           Cityisrequired: "City is required",
           Addressisrequired: "Address is required",
-          Addressmustbebetween5and100characters:
-            "Address must be between 5 and 100 characters",
+          Addressmustbebetween5and100characters: "Address must be between 5 and 100 characters",
           Pincodeisrequired: "Pincode is required",
           Enteravalid6digitpincode: "Enter a valid 6-digit pincode",
-
           Thisfieldisrequired: "This field is required",
           Onlyalphabetsareallowed: "Only alphabets are allowed",
-
           YourCartisEmpty: "Your Cart is Empty",
-          Lookslikeyouhaventaddedanythingyet:
-            "Looks like you haven't added anything yet.,",
+          Lookslikeyouhaventaddedanythingyet: "Looks like you haven't added anything yet.",
           GotoHome: " Go to Home",
           SomethingwentwrongPleasetryagainlater:"Something went wrong. Please try again later.",
           Enteryourname:"Enter your Name",
           Enteryourphone:"Enter your Phone",
+          AddressnotavailablePleaseaddyouraddresstocontinue:"Address not available, Please add your address to continue.",
         },
       },
       hi: {
         translation: {
+          AddressnotavailablePleaseaddyouraddresstocontinue:"पता उपलब्ध नहीं है, कृपया जारी रखने के लिए अपना पता जोड़ें।",
           Enteryourphone:"अपना फ़ोन दर्ज करें",
           Enteryourname:"अपना नाम दर्ज करें",
           SomethingwentwrongPleasetryagainlater:"कुछ गलत हो गया है कृपया बाद में पुनः प्रयास करें।",
           YourCartisEmpty: "आपका कार्ट खाली है",
-          Lookslikeyouhaventaddedanythingyetहै:
-            "लगता है आपने अभी तक कुछ नहीं जोड़ा है.,",
+          Lookslikeyouhaventaddedanythingyet: "लगता है आपने अभी तक कुछ नहीं जोड़ा है.",
           GotoHome: "होम पर जाएँ",
-
           Thisfieldisrequired: "यह फ़ील्ड आवश्यक है",
           Onlyalphabetsareallowed: "केवल अक्षर अनुमत हैं",
           Nameisrequired: "नाम आवश्यक है",
           Enteravalidname: "एक वैध नाम दर्ज करें (केवल अक्षर, न्यूनतम 2 अक्षर)",
           Lastnameisrequired: "अंतिम नाम आवश्यक है",
-          Enteravalidlastname:
-            "एक वैध अंतिम नाम दर्ज करें (केवल अक्षर, न्यूनतम 2 अक्षर)",
+          Enteravalidlastname:  "एक वैध अंतिम नाम दर्ज करें (केवल अक्षर, न्यूनतम 2 अक्षर)",
           Emailisrequired: "ईमेल आवश्यक है",
           Enteravalidemail: "एक वैध ईमेल दर्ज करें",
           Dateofbirthisrequired: "जन्म तिथि आवश्यक है",
@@ -336,8 +322,7 @@ i18n
           Stateisrequired: "राज्य आवश्यक है",
           Cityisrequired: "शहर आवश्यक है",
           Addressisrequired: "पता आवश्यक है",
-          Addressmustbebetween5and100characters:
-            "पता 5 से 100 अक्षरों के बीच होना चाहिए",
+          Addressmustbebetween5and100characters: "पता 5 से 100 अक्षरों के बीच होना चाहिए",
           Pincodeisrequired: "पिनकोड आवश्यक है",
           Enteravalid6digitpincode: "एक वैध 6-अंकीय पिनकोड दर्ज करें",
           Qty: "मात्रा",
@@ -347,9 +332,7 @@ i18n
           delivered: "वितरित",
           Noresultsfoundfor: "इसके लिए कोई परिणाम नहीं मिला",
           Nobookinghistoryavailable: "कोई बुकिंग इतिहास उपलब्ध नहीं है।",
-
-          Pleaseenteravaliddigitphonenumber:
-            "कृपया एक मान्य 10 अंकों वाला फ़ोन नंबर दर्ज करें।",
+          Pleaseenteravaliddigitphonenumber: "कृपया एक मान्य 10 अंकों वाला फ़ोन नंबर दर्ज करें।",
           india: "भारत",
           wait: "रुको",
           Invalidphonenumber: "अमान्य फ़ोन नंबर",

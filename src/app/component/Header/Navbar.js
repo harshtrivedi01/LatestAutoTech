@@ -29,11 +29,13 @@ export default function Navbar() {
 		if (typeof window !== "undefined") {
 			const formData = JSON.parse(localStorage.getItem("formData") || "{}");
 			const authToken = localStorage.getItem("authToken");
+      const selectedLanguage = localStorage.getItem("selectedLanguage") || "en";
+      const userId = localStorage.getItem("idToken");
 
 			const newHeader = {
-				language: "en",
-				userId: "2",
-				user_type: "user",
+				language: selectedLanguage,
+				userId:userId,
+				user_type:  userId ? "user" : "guest",
 				Device_id: "upen",
 				Longitude: formData.Longitude || "",
 				Latitude: formData.Latitude || "",
