@@ -27,7 +27,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
     return (
       <div className="text-center min-h-screen py-10">
         <h2 className="text-2xl font-semibold text-gray-700">{t("YourCartisEmpty")}</h2>
-        <p className="text-gray-500 mt-2">{t("Lookslikeyouhaventaddedanythingyetहै")}</p>
+        <p className="text-gray-500 mt-2">{t("Lookslikeyouhaventaddedanythingyet")}</p>
         <button
           className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
           onClick={() => router.push("/")}
