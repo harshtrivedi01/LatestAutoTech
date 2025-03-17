@@ -32,102 +32,99 @@ const PoojaPackages = ({ detail }) => {
     <div className="package p-60 bg-grey" id="Package-section">
       <div className="container px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 mx-auto">
         <h1 className="title text-black my-5">  {t("SelectPoojapackage")}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 xl:space-y-4 mb-5">
-          {detail.packages?.map((pkg) => {
-            const isHighlighted = selectedPackage?.id === pkg.id;
-            const isExpanded = expandedPackages[pkg.id] || false;
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 mb-5">
+  {detail.packages?.map((pkg) => {
+    const isHighlighted = selectedPackage?.id === pkg.id;
+    const isExpanded = expandedPackages[pkg.id] || false;
+    const descriptions = Array.isArray(pkg.description) ? pkg.description : [pkg.description];
 
-            // Ensure description is treated as an array
-            const descriptions = Array.isArray(pkg.description) ? pkg.description : [pkg.description];
-
-            return (
-              <div
-                key={pkg.id}
-                className={`border  text-black rounded-lg cursor-pointer flex flex-col h-full ${
-                  isHighlighted
-                    ? "border-1 p-1 bg-orange-100 border-orange-500 active-package  mb-5"
+    return (
+      <div
+  key={pkg.id}
+  className={`border text-black rounded-lg cursor-pointer flex flex-col h-full transition-all duration-300 ease-in-out transform ${
+    isHighlighted
+      ? "border-1 p-1 bg-orange-100 border-orange-500 active-package  mb-5"
                     : "bg-white border-2 border-orange-600"
-                }`}
-                onClick={() => setSelectedPackage(pkg)}
-              >
-                {/* Package Header */}
-                <div className="flex gap-2 justify-between top-card rounded-t-3xl p-2 rounded-lg items-center">
-                <div className="pack-img w-32 h-20 sm:w-40 sm:h-24 md:w-48 md:h-28 lg:w-56 lg:h-32 aspect-[4/3]">
-                    <img
-                      src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
-                      alt={pkg.name}
-                      width={160}
-                      height={96}
-                      onError={(e) => (e.target.src = "/images/logo.png")}
-                      className="object-contain w-full h-full"
-                    />
-                  </div>
-                  <div className="text-left ">
-                    {pkg.tag && (
-                     <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] me-4 p-0.5 ps-3 flex flex-wrap items-center gap-1 rounded-full text-white uppercase text-[10px] sm:text-[12px] md:text-[14px]">
-                     {pkg.tag} 
-                     <img src="/images/dimond.png" className="h-4 sm:h-5 lg:h-6" alt="Diamond" />
-                   </div>
-                   
-                    )}
-<h2 className="text-base sm:text-lg md:text-xl lg:text-xl font-bold mb-1">
-  {pkg.name}
-</h2>
-<h2 className="text-sm sm:text-lg md:text-xl lg:text-xl font-bold mb-1">
-{t("Packagefor1Person")} {pkg.no_of_member} {t("Person")} 
-</h2>
-<p className="font-bold text-red-600 text-lg sm:text-xl md:text-xl lg:text-2xl">
-  ₹{Math.floor(pkg.price)}
-</p>
+  }`}
+  onClick={() => setSelectedPackage(pkg)}
+>
 
-                  </div>
-                </div>
-
-                {/* Description with Read More / Read Less */}
-                <div className="p-3 flex-grow">
-                  <ul className="text-sm text-start pl-2">
-                    {descriptions.map((desc, i) => {
-                      const words = desc?.split(" ") || [];
-                      const shouldTruncate = words.length > wordLimit;
-                      const displayedText = shouldTruncate && !isExpanded
-                        ? words.slice(0, wordLimit).join(" ") + "..."
-                        : desc;
-
-                      return (
-                        <li key={i} className="mb-2">
-                          {displayedText}
-                          {shouldTruncate && (
-                            <button
-                              className="text-black text-sm underline "
-                              onClick={(e) => {
-                                e.stopPropagation(); // Prevent accidental package selection
-                                toggleReadMore(pkg.id);
-                              }}
-                            >
-                                {isExpanded ? `${t("ReadLess")}`:  `${t("ReadMore")}` }
-                            </button>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-
-                {/* Participate Button Always at Bottom */}
-                <div className="p-4 mt-auto">
-                  <button
-                    onClick={() => handleParticipate(pkg)}
-                    className={`py-4 px-5 rounded-3xl text-white w-full uppercase font-bold tracking-normal ${
-                      isHighlighted ? "package-dark-btn" : "package-light-btn"
-                    }`}
-                  >
-                  {t("PARTICIPATE")}
-                  </button>
-                </div>
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 bg-linear-to-t from-[#FFFFFF] to-[#FFE1CE] bg-[#FFE1CE] rounded-t-2xl items-start sm:items-center justify-between p-3">
+          <div className="pack-img w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 lg:w-52 lg:h-32">
+            <img
+              src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
+              alt={pkg.name}
+              width={160}
+              height={96}
+              onError={(e) => (e.target.src = "/images/logo.png")}
+              className="object-contain w-full h-full rounded-lg"
+            />
+          </div>
+          <div className="text-left flex-1">
+            {pkg.tag && (
+              <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] inline-flex items-center gap-1 px-2 py-1 rounded-full text-white uppercase text-[10px] sm:text-[10px] md:text-[10px] mb-1">
+                {pkg.tag}
+                <img src="/images/dimond.png" className="h-4 sm:h-5 lg:h-6" alt="Diamond" />
               </div>
-            );
-          })}
+            )}
+            <h2 className="text-base sm:text-lg md:text-xl font-bold mb-1 text-black">{pkg.name}</h2>
+            <h2 className="text-sm sm:text-base md:text-lg font-medium mb-1 text-black">
+              {t("Packagefor1Person")} {pkg.no_of_member} {t("Person")}
+            </h2>
+            <p className="text-red-600 text-lg text-black sm:text-xl md:text-2xl font-bold">
+              ₹{Math.floor(pkg.price)}
+            </p>
+          </div>
         </div>
+
+        {/* Description */}
+        <div className="px-4 pt-2 pb-2">
+          <ul className="text-sm pl-3 list-discc space-y-1">
+            {descriptions.map((desc, i) => {
+              const words = desc?.split(" ") || [];
+              const shouldTruncate = words.length > wordLimit;
+              const displayedText =
+                shouldTruncate && !isExpanded
+                  ? words.slice(0, wordLimit).join(" ") + "..."
+                  : desc;
+
+              return (
+                <li key={i}>
+                  {displayedText}
+                  {shouldTruncate && (
+                    <button
+                      className="text-black text-xs underline ml-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleReadMore(pkg.id);
+                      }}
+                    >
+                      {isExpanded ? t("ReadLess") : t("ReadMore")}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Participate Button */}
+        <div className="p-4 mt-auto">
+          <button
+            onClick={() => handleParticipate(pkg)}
+            className={`w-full py-3 px-4 text-sm sm:text-base rounded-2xl text-white font-semibold uppercase tracking-wide ${
+              isHighlighted ? "package-dark-btn" : "package-light-btn"
+            }`}
+          >
+            {t("PARTICIPATE")}
+          </button>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
       </div>
 
       {/* Show Popup with selected package data */}
