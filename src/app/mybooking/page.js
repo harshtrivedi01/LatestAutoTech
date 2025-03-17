@@ -251,7 +251,7 @@ const Page = () => {
       <p className="text-center text-lg font-semibold">  {t("SearchSomething")} </p>
     ) : searchQuery && searchResults.length === 0 ? (
       <p className="text-center text-lg min-h-screen text-red-500 font-semibold">
-       {t("Noresultsfoundfor")}  "{searchQuery}"
+        {t("Noresultsfoundfor")}  "{searchQuery}"
       </p>
     )  : !searchQuery && Poojabookings.length === 0 ? (
       <p className="text-center text-lg  text-gray-500 font-semibold">
