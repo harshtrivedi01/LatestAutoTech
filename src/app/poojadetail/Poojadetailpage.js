@@ -90,30 +90,18 @@ export default function Poojadetailpage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const benefitSection = document.getElementById(`${t("AboutPooja")}`);
       const packageSection = document.getElementById(`${t("PoojaPackage")}`);
-      const downloadAppSection = document.getElementById("Downloadapp-section");
-      const homeEightSection = document.getElementById("Homeeight-section");
-      const faqSection = document.getElementById("Faq-section");
   
-      if (benefitSection && packageSection && downloadAppSection && homeEightSection && faqSection) {
-        const benefitTop = benefitSection.getBoundingClientRect().top;
-        const packageTop = packageSection.getBoundingClientRect().top;
-        const downloadAppTop = downloadAppSection.getBoundingClientRect().top;
-        const homeEightTop = homeEightSection.getBoundingClientRect().top;
-        const faqTop = faqSection.getBoundingClientRect().top;
-  
-        // Show button when any of these sections are visible and hide it when hovering over the Package section
-        setShowButton(
-          (benefitTop < window.innerHeight / 2 && packageTop > 100) ||
-          (downloadAppTop < window.innerHeight && downloadAppTop > 0) ||
-          (homeEightTop < window.innerHeight && homeEightTop > 0) ||
-          (faqTop < window.innerHeight && faqTop > 0)
-        );
+      if (packageSection) {
+        const rect = packageSection.getBoundingClientRect();
+        const isPackageVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        setShowButton(!isPackageVisible); // Hide button when PoojaPackage is in view
       }
     };
   
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initial check on mount
+  
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
@@ -263,7 +251,7 @@ export default function Poojadetailpage() {
      
     </div>
     <a
-                 onClick={() => scrollToSection('Pooja-Package')}
+                 onClick={() => scrollToSection(`${t("PoojaPackage")}`)}
                 id="package"
                 className="w-full block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
               >
@@ -296,7 +284,7 @@ export default function Poojadetailpage() {
       {showButton && (
       <a
       onClick={() => document.getElementById(`${t("PoojaPackage")}`)?.scrollIntoView({ behavior: "smooth" })}
-      className="fixed bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
+      className="fixed bottom-6 sm:bottom-10 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
                  font-semibold text-sm sm:text-base md:text-lg text-white bg-green-600 rounded-lg shadow-lg 
                  hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse"
     >
