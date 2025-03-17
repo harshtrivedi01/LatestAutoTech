@@ -91,12 +91,19 @@ export default function Poojadetailpage() {
   useEffect(() => {
     const handleScroll = () => {
       const packageSection = document.getElementById(`${t("PoojaPackage")}`);
+      const homeSection = document.getElementById("home1");
   
-      if (packageSection) {
-        const rect = packageSection.getBoundingClientRect();
-        const isPackageVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        setShowButton(!isPackageVisible); // Hide button when PoojaPackage is in view
-      }
+      const isElementInView = (element) => {
+        if (!element) return false;
+        const rect = element.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      };
+  
+      const isPackageVisible = isElementInView(packageSection);
+      const isHomeVisible = isElementInView(homeSection);
+  
+      // Hide button if either section is in view
+      setShowButton(!(isPackageVisible || isHomeVisible));
     };
   
     window.addEventListener("scroll", handleScroll);
@@ -104,6 +111,7 @@ export default function Poojadetailpage() {
   
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
   
   const [showModal, setShowModal] = useState(false);
 

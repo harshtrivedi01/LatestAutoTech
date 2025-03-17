@@ -50,7 +50,7 @@ const PoojaPackages = ({ detail }) => {
 >
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 bg-linear-to-t from-[#FFFFFF] to-[#FFE1CE] bg-[#FFE1CE] rounded-t-2xl items-start sm:items-center justify-between p-3">
+        <div className="flex flex-co sm:flex-ro gap-3 sm:gap-4 bg-linear-to-t from-[#FFFFFF] to-[#FFE1CE] bg-[#FFE1CE] rounded-t-2xl items-start sm:items-center justify-between p-3">
           <div className="pack-img w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 lg:w-52 lg:h-32">
             <img
               src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
