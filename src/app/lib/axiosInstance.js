@@ -41,20 +41,27 @@ api.interceptors.request.use(
 // Response Interceptor
 api.interceptors.response.use(
   (response) => {
-    hideLoading(); // Hide loader on response success
-    if (response.data.status === "0" && response.data.message === "Invalid token") {
-      handleLogout();
+    if (response.data.status === "0") {
+      if (response.data.message === "Invalid token") {
+        hideLoading();
+        handleLogout();
+      }
+      // 👇 Don't hide loader for other status === "0"
+      return response;
     }
+
+    // ✅ For normal success (status !== "0"), hide loader
+    hideLoading();
     return response;
   },
   (error) => {
-    // Do not log network errors; keep loading screen active
+    // ❌ Network error or no response
     if (!error.response) {
-      showLoading(); // Keep showing the loader in case of a network issue
-      return new Promise(() => {}); // Prevent further execution
+      showLoading(); // Keep loader active
+      return new Promise(() => {}); // Freeze further execution
     }
 
-    hideLoading(); // Hide loader if there is a valid response
+    hideLoading(); // Hide loader if error has response
     const { status, message } = error.response.data || {};
     if (status === "0" && message === "Invalid token") {
       handleLogout();
@@ -63,5 +70,6 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 
 export default api;
