@@ -294,10 +294,12 @@ i18n
           MRP:"M.R.P",
           off:"off",
           Noproductsavailable:"No products available",
+          reviews:"reviews"
         },
       },
       hi: {
         translation: {
+          reviews:"समीक्षाएँ",
           Noproductsavailable:"कोई उत्पाद उपलब्ध नहीं है",
           MRP:"एम.आर.पी",
           off:"छूट",

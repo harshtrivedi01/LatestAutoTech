@@ -158,7 +158,7 @@ export default function Poojaboxdetailpage() {
       <div className="flex items-center mb-5">
         <p className="text-gray-600 font-bold text-sm ml-1">
           {pujaData.rating}
-          <span className="text-gray-500 font-normal"> ({pujaData.rating_user} reviews)</span>
+          <span className="text-gray-500 font-normal"> ({pujaData.rating_user}  {t("reviews")})</span>
         </p>
       </div>
     </div>

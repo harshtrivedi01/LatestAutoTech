@@ -125,7 +125,7 @@ const Cart = () => {
     </h1>
 
     {/* Progress Steps */}
-    <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-start p-8 md:p-30 mb-4">
+    <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
       <div className="flex items-center justify-start  md:mb-0">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
           <span className="font-bold">1</span>
