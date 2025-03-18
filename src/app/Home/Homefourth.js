@@ -144,10 +144,10 @@ export default function Homefourth({ pujaData }) {
                           ₹{puja.discounted_price}
                         </span>
                         <span className="text-sm ms-2 text-slate-900 line-through">
-                          M.R.P ₹{puja.discounted_price}
+                        {t("MRP")} ₹{puja.discounted_price}
                         </span>
                         <span className="text-red-700 text-lg ms-3">
-                          ({puja.discount}% off)
+                          ({puja.discount}%  {t("off")})
                         </span>
                       </p>
 

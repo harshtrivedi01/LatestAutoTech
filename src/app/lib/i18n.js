@@ -291,10 +291,14 @@ i18n
           Enteryourname:"Enter your Name",
           Enteryourphone:"Enter your Phone",
           AddressnotavailablePleaseaddyouraddresstocontinue:"Address not available, Please add your address to continue.",
+          MRP:"M.R.P",
+          off:"off"
         },
       },
       hi: {
         translation: {
+          MRP:"एम.आर.पी",
+          off:"छूट",
           AddressnotavailablePleaseaddyouraddresstocontinue:"पता उपलब्ध नहीं है, कृपया जारी रखने के लिए अपना पता जोड़ें।",
           Enteryourphone:"अपना फ़ोन दर्ज करें",
           Enteryourname:"अपना नाम दर्ज करें",

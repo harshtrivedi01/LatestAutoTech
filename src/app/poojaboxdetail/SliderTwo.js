@@ -157,8 +157,8 @@ const SliderTwo = () => {
                   <div className="mt-2 mb-5 flex items-center justify-between">
                     <p>
                       <span className="text-3xl font-bold text-slate-900">₹{Math.floor(product.discounted_price)}</span>
-                      <span className="text-sm ms-2 text-slate-400 line-through">M.R.P ₹{product.price}</span>
-                      <span className="text-red-700 text-lg ms-3">({Math.floor(product.discount)}% off)</span>
+                      <span className="text-sm ms-2 text-slate-400 line-through"> {t("MRP")} ₹{product.price}</span>
+                      <span className="text-red-700 text-lg ms-3">({Math.floor(product.discount)}% {t("off")})</span>
                     </p>
                   </div>
                   {product.stock == false ? (

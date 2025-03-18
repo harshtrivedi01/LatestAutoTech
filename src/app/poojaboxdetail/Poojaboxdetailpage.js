@@ -169,10 +169,10 @@ export default function Poojaboxdetailpage() {
         ₹{Math.floor(pujaData.discounted_price)}
       </span>
       <span className="text-sm text-slate-900 line-through ms-2">
-        M.R.P ₹{Math.floor(pujaData.price)}
+      {t("MRP")} ₹{Math.floor(pujaData.price)}
       </span>
       <span className="text-red-700 text-lg ms-3">
-        ({Math.floor(pujaData.discount)}% off)
+        ({Math.floor(pujaData.discount)}% {t("off")})
       </span>
     </p>
 

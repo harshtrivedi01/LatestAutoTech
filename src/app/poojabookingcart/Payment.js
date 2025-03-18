@@ -138,12 +138,12 @@ const Payment = () => {
     return (
       <div className="text-center items-center py-60">
 
-        <p className="text-gray-500 mt-2">Looks like you haven't added anything yet.</p><br />
+        <p className="text-gray-500 mt-2">{t("Lookslikeyouhaventaddedanythingyet")}</p><br />
         <button
-          onClick={() => router.push("/mybooking")}
+          onClick={() => router.push("/")}
           className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg"
         >
-          Your Orders
+        {t("GotoHome")}
         </button>
       </div>
     );

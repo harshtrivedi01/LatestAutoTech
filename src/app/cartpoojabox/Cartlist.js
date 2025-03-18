@@ -60,8 +60,8 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
 
                     <p>
                       <span className="text-3xl font-bold text-slate-900">₹{Math.floor(item.discounted_price)}</span>
-                      <span className="text-sm ms-2 text-slate-400 line-through">M.R.P ₹{Math.floor(item.price)}</span>
-                      <span className="text-red-700 text-lg ms-3">({Math.floor(item.discount)}% off)</span>
+                      <span className="text-sm ms-2 text-slate-400 line-through">   {t("MRP")} ₹{Math.floor(item.price)}</span>
+                      <span className="text-red-700 text-lg ms-3">({Math.floor(item.discount)}%  {t("off")})</span>
                     </p>
 
                     <div className="mt-3 flex items-center">

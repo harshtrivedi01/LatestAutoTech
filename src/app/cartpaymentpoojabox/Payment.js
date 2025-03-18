@@ -312,10 +312,10 @@ const updateCartQuantity = async (productId, change) => {
                             ₹{Math.floor(item.discounted_price)}
                           </span>
                           <span className="text-sm ms-2 text-slate-400 line-through">
-                            M.R.P ₹{Math.floor(item.price)}
+                          {t("MRP")} ₹{Math.floor(item.price)}
                           </span>
                           <span className="text-red-700 text-lg ms-3">
-                            ({Math.floor(item.discount)}% off)
+                            ({Math.floor(item.discount)}% {t("off")})
                           </span>
                         </p>
                         
