@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
+    "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.7.9",
     "cashfree-pg": "^4.3.10",
     "cashfree-pg-sdk-nodejs": "^2.0.2",

@@ -1,5 +1,5 @@
 "use client";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Roboto } from "next/font/google";
@@ -91,6 +91,7 @@ export default function RootLayout({ children }) {
             <I18nProvider>
             {loading && <LoadingScreen />}
               {children}
+              <SpeedInsights />
               </I18nProvider>
             <FooterWrapper />
 
