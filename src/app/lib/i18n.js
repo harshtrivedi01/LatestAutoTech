@@ -292,11 +292,13 @@ i18n
           Enteryourphone:"Enter your Phone",
           AddressnotavailablePleaseaddyouraddresstocontinue:"Address not available, Please add your address to continue.",
           MRP:"M.R.P",
-          off:"off"
+          off:"off",
+          Noproductsavailable:"No products available",
         },
       },
       hi: {
         translation: {
+          Noproductsavailable:"कोई उत्पाद उपलब्ध नहीं है",
           MRP:"एम.आर.पी",
           off:"छूट",
           AddressnotavailablePleaseaddyouraddresstocontinue:"पता उपलब्ध नहीं है, कृपया जारी रखने के लिए अपना पता जोड़ें।",
