@@ -110,8 +110,7 @@ i18n
           Checkout: "Checkout",
           Total: "Total",
           BookingReviewbooking: "Booking Review booking",
-          AddAddressSelectadeliveryaddress:
-            "Add Address Select a delivery address",
+          AddAddressSelectadeliveryaddress:"Add Address Select a delivery address",
           PayinfoSelectapaymentmethod: "Pay info Select a payment method",
           ChooseShippingAddress: "Choose Shipping Address",
           Proceedtonextstep: "Proceed to next step",
@@ -219,8 +218,7 @@ i18n
           GrandTotal: "Grand Total",
 
           Signin: "Sign in",
-          signdis:
-            "Access all Punyasetu services, explore 1000+ devotional <br/> songs, and discover a variety of spiritual offerings.",
+          signdis: "Access all Punyasetu services, explore 1000+ devotional <br/> songs, and discover a variety of spiritual offerings.",
 
           by: "By proceeding you agree to the",
           andof: "and of PUNYASETU",
