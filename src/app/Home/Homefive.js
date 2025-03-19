@@ -86,7 +86,7 @@ function decodeHtml(html) {
     />
   ) : (
     // Fallback text if no short description is available
-    "Puja description goes here."
+    ""
   )}
 </p>
 

@@ -248,7 +248,7 @@ export default function Poojadetailpage() {
               <p className="mb-3 font-normal text-start text-gray-700 text-xl text-gray-400">
   {pujaData?.short_description
     ? pujaData?.short_description .split(" ").slice(0, 30).join(" ") + (pujaData?.short_description .split(" ").length > 30 ? "..." : "")
-    : "NA"}
+    : ""}
 </p>
               
              <div>
