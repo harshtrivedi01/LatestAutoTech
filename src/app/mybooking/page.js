@@ -260,69 +260,65 @@ const Page = () => {
     ) :(
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {(searchQuery ? searchResults : Poojabookings).map((booking) => (
-          <Link
-          key={booking.booking_id}
-          href={{
-            pathname: "/booking-details",
-            query: { data: JSON.stringify(booking) },
-          }}
-          className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer"
-        >
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-start">
-            <img
-              src={booking.puja_image || "/images/poojabox.png"}
-              alt="Pooja Image"
-              onError={(e) =>
-                (e.target.src =
-                  "/images/logo.png")
-              }
-              className="w-full sm:w-5/12 h-[150px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
-            />
-            <div className="w-full sm:w-7/12 text-center sm:text-left">
-              {/* <p className="text-gray-500 text-sm">#{booking.booking_id}</p> */}
-              <h2 className="text-lg font-bold text-black">
-                {booking.puja_name }
-              </h2>
-              <div
-              className={`${
-                booking.payment_status === "success"
-                  ? "text-green-500"
-                  : booking.payment_status === "failed"
-                  ? "text-red-500"
-                  : "text-yellow-500"
-              } rounded-full `}
-            >
-              <p className=" text-xl">{booking.payment_status}</p>
-            </div>
-              <p className="text-gray-800 font-semibold text-lg">
-              {t("AmountRs")} {booking.amount}/-
-              </p>
-              <p className="text-red-600 font-bold text-md">
-                {booking.package_name || "N/A"}
-              </p>
-              {/* <button className="text-orange-600 font-semibold mt-1 cursor-pointer underline">
-                      <Link href="/">Book Again</Link>
-                    </button> */}
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
-            <p className="text-gray-600 text-sm text-center sm:text-left">
-              <span className="font-semibold">{t("Ordertimedate")} </span>{" "}
-              {booking.create_date}
-            </p>
-            <div
-              className={`${
-                booking.payment_status === "success"
-                  ? "bg-green-500"
-                  : booking.payment_status === "failed"
-                  ? "bg-red-500"
-                  : "bg-yellow-500"
-              } rounded-full px-4 py-1`}
-            >
-              <p className="text-white text-sm">{booking.payment_status}</p>
-            </div>
-          </div>
-        </Link>
+         <Link
+         key={booking.booking_id}
+         href={{
+           pathname: "/booking-details",
+           query: { data: JSON.stringify(booking) },
+         }}
+         className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
+       >
+         {/* Top Content Section */}
+         <div className="flex flex-col sm:flex-row items-center gap-4 text-start flex-grow">
+           <img
+             src={booking.puja_image || "/images/poojabox.png"}
+             alt="Pooja Image"
+             onError={(e) => (e.target.src = "/images/logo.png")}
+             className="w-full sm:w-5/12 h-[150px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
+           />
+           <div className="w-full sm:w-7/12 text-center sm:text-left">
+             <h2 className="text-lg font-bold text-black">
+               {booking.puja_name}
+             </h2>
+             <div
+               className={`${
+                 booking.payment_status === "success"
+                   ? "text-green-500"
+                   : booking.payment_status === "failed"
+                   ? "text-red-500"
+                   : "text-yellow-500"
+               } rounded-full`}
+             >
+               <p className="text-xl">{booking.payment_status}</p>
+             </div>
+             <p className="text-gray-800 font-semibold text-lg">
+               {t("AmountRs")} {booking.amount}/-
+             </p>
+             <p className="text-red-600 font-bold text-md">
+               {booking.package_name || "N/A"}
+             </p>
+           </div>
+         </div>
+       
+         {/* Footer Section - Always at Bottom */}
+         <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
+           <p className="text-gray-600 text-sm text-center sm:text-left">
+             <span className="font-semibold">{t("Ordertimedate")} </span>{booking.create_date}
+           </p>
+           <div
+             className={`${
+               booking.payment_status === "success"
+                 ? "bg-green-500"
+                 : booking.payment_status === "failed"
+                 ? "bg-red-500"
+                 : "bg-yellow-500"
+             } rounded-full px-4 py-1`}
+           >
+             <p className="text-white text-sm">{booking.payment_status}</p>
+           </div>
+         </div>
+       </Link>
+       
         ))}
       </div>
     )}

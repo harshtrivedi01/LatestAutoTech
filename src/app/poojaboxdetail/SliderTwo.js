@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css"; // Import Splide styles
 import { toast } from "react-toastify";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import api from "../lib/axiosInstance";
 import { useTranslation } from "react-i18next";
@@ -16,7 +16,7 @@ const SliderTwo = () => {
   const pathname = usePathname();
   const isSpecialPage = pathname.includes("/cart");
   const splideRef = useRef(null);
-
+  const router = useRouter();
   useEffect(() => {
     fetchPujaData();
   }, []);
@@ -42,6 +42,13 @@ const SliderTwo = () => {
   };
 
   const handleCartAction = async (id, index) => {
+    const isLoggedIn = localStorage.getItem("authToken"); // or "user_data"
+  
+    if (!isLoggedIn) {
+      toast.error("Please login to continue");
+      router.push("/login");
+      return;
+    }
     try {
       let formData = new FormData();
       const isCurrentlyInCart = cartStatus[index];
@@ -124,7 +131,7 @@ const SliderTwo = () => {
               <div className="bg-white shadow-xl m-2 my-10 rounded-lg">
                 <a className="mx-3 mt-3 flex rounded-xl" href={`/poojaboxdetail/${product.id}`}>
                   <img
-                    className="object-cover h-[140px] max-w-full"
+                    className="object-cover h-[140px] w-40 max-w-full rounded-xl"
                     src={product.image || "/images/logo.png"}
                     onError={(e) => (e.target.src = "/images/logo.png")}
                     alt={product.name}
@@ -165,12 +172,26 @@ const SliderTwo = () => {
     <span className="text-red-600 text-lg font-bold shadow-xl p-2 px-4 w-full border rounded-xl">{t("outOfStock")}</span>
   ) : (
     <>
+    
       <button
                     onClick={() => handleCartAction(product.id, index)}
                     className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
                       ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
                     `}
-                  >
+                  >   <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
                     {cartStatus[index]  ? `${t("Removefromcart")}` : `${t("Addtocart")}`}
                   </button>
     </>

@@ -81,7 +81,7 @@ i18n
           PerformRetuals:
             "Perform sacred rituals from the comfort of your home. Book a pooja in your name and gotra, receive a recorded video of the ceremony, and get the divine Aashirwad Box delivered to you. Experience spiritual fulfillment and divine blessings with Punyasetu",
           CommingSoon: "Comming Soon",
-          Address: "M/S Satsambhav Technologies Private Limited",
+          // Address: "M/S Satsambhav Technologies Private Limited",
           SelectPoojapackage: "Select Pooja package",
           PanditRegistration: "Pandit Registration",
           SelectaDateforPoojaBooking: "Select a Date for Pooja Booking",
@@ -256,7 +256,7 @@ i18n
           Single: "Single",
           Married: "Married",
           address: "address",
-          Noresultsfoundfor: "No results found for",
+          Noresultsfoundfor: "No results found ",
           Nobookinghistoryavailable: "  No booking history available.",
           pending: "pending",
           confirmed: "confirmed",
@@ -295,11 +295,23 @@ i18n
           off:"off",
           Noproductsavailable:"No products available",
           reviews:"reviews",
-          Pujadescriptiongoeshere:"Puja description goes here."
+          Pujadescriptiongoeshere:"Puja description goes here.",
+
+         SortByAll:" Sort By All",
+         LowtoHigh:"Low to High",
+          HightoLow:"High to Low",
+         Newest:"Newest",
+        Popularity:"Popularity"
         },
       },
       hi: {
         translation: {
+          SortByAll:" सभी द्वारा क्रमबद्ध करें",
+LowtoHigh:"निम्न से उच्च",
+HightoLow:"उच्च से निम्न",
+Newest:"नवीनतम",
+Popularity:"लोकप्रियता",
+
           Pujadescriptiongoeshere:"पूजा विवरण यहाँ जाएँ।",
           reviews:"समीक्षाएँ",
           Noproductsavailable:"कोई उत्पाद उपलब्ध नहीं है",
@@ -338,7 +350,7 @@ i18n
           confirmed: "पुष्टि",
           picked_up: "उठाया गया",
           delivered: "वितरित",
-          Noresultsfoundfor: "इसके लिए कोई परिणाम नहीं मिला",
+          Noresultsfoundfor: " कोई परिणाम नहीं मिला",
           Nobookinghistoryavailable: "कोई बुकिंग इतिहास उपलब्ध नहीं है।",
           Pleaseenteravaliddigitphonenumber: "कृपया एक मान्य 10 अंकों वाला फ़ोन नंबर दर्ज करें।",
           india: "भारत",
@@ -451,7 +463,7 @@ i18n
           PerformRetuals:
             "अपने घर पर आराम से पवित्र अनुष्ठान करें। अपने नाम और गोत्र में पूजा बुक करें, समारोह का रिकॉर्ड किया गया वीडियो प्राप्त करें और दिव्य आशीर्वाद बॉक्स प्राप्त करें। पुण्यसेतु के साथ आध्यात्मिक पूर्णता और दिव्य आशीर्वाद का अनुभव करें",
           CommingSoon: "जल्द आ रहा है",
-          Address: "मेसर्स सत्सम्भव टेक्नोलॉजीज प्राइवेट लिमिटेड",
+          // Address: "मेसर्स सत्सम्भव टेक्नोलॉजीज प्राइवेट लिमिटेड",
           SelectPoojapackage: "पूजा पैकेज चुनें",
 
           PoojaBenefits: "पूजा के लाभ",

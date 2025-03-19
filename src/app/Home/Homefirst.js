@@ -24,7 +24,18 @@ const Homefirst = ({ sliderList = [] }) => {
     setAutoPlay(false); // Stop autoplay on manual navigation
   };
 
-  // Check if sliderList has data
+  const handleDragEnd = (event, info) => {
+    if (info.offset.x < -100) {
+      // Swiped left (Next)
+      setIndex((prev) => (prev + 1) % sliderList.length);
+      setAutoPlay(false);
+    } else if (info.offset.x > 100) {
+      // Swiped right (Prev)
+      setIndex((prev) => (prev - 1 + sliderList.length) % sliderList.length);
+      setAutoPlay(false);
+    }
+  };
+
   if (sliderList.length === 0) {
     return (
       <div className="text-center py-8">
@@ -34,59 +45,61 @@ const Homefirst = ({ sliderList = [] }) => {
   }
 
   return (
-    <div className="relative w-full h-[596px] sm:h-[450px] xs:h-[350px] overflow-hidden rounded-lg">
-      {/* Slide Animation */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={index}
-          initial={{ x: "100%" }}
-          animate={{ x: "0%" }}
-          exit={{ x: "-100%" }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute flex justify-center items-center text-white text-center font-bold w-full bg-cover bg-center"
-          style={{ backgroundImage: `url(${sliderList[index].slider})` }}
-        >
-        <img
-  src={sliderList[index]?.slider || "/images/sliderbackground.jpg"}
-  alt={`Slide ${index + 1}`}
-  className="absolute inset-0 -z-10 w-full h-full object-cover"
-  onError={(e) => (e.target.src = "/images/sliderbackground.jpg")}
-/>
-
-
-          
-          <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-[596px] sm:h-[450px] xs:h-[350px] flex flex-col items-center justify-center">
-            <p className="text-4xl sm:text-4xl xs:text-3xl leading-tight px-3" data-translate>{sliderList[index]?.banner_content ||"Pooja Anytime Anywhere"}</p>
-            <br />
-            <p className="text-lg sm:text-lg xs:text-sm text-center w-3/4" data-translate>
-             {sliderList[index]?.description || " Joinn the divine Kumbh experience and book Pooja online seamlessly with the  Punyasetu App – your gateway to spiritual bliss!"}
-            </p>
-            <br />
-           <a href={"/poojabooking"}>
-           <button
+    <div className="relative w-full h-[596px] sm:min-h-[750px] xs:min-h-[500px] overflow-hidden rounded-lg">
+    {/* Slide Animation */}
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={index}
+        initial={{ x: "100%" }}
+        animate={{ x: "0%" }}
+        exit={{ x: "-100%" }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        onDragEnd={handleDragEnd}
+        className="absolute flex justify-center items-center text-white text-center font-bold w-full h-full bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${sliderList[index]?.slider || '/images/sliderbackground.jpg'})`
+        }}
+      >
+        <div className="bg-black/40 py-16 sm:py-10 xs:py-6 rounded-lg w-full h-full flex flex-col items-center justify-center">
+          <p className="text-4xl sm:text-3xl xs:text-2xl leading-tight px-3" data-translate>
+            {sliderList[index]?.banner_content || "Pooja Anytime Anywhere"}
+          </p>
+          <br />
+          <p className="text-lg sm:text-base xs:text-sm text-center w-11/12 sm:w-3/4" data-translate>
+            {sliderList[index]?.description ||
+              "Join the divine Kumbh experience and book Pooja online seamlessly with the Punyasetu App – your gateway to spiritual bliss!"}
+          </p>
+          <br />
+          <Link href="/poojabooking">
+            <button
               type="button"
               data-translate
               className="text-white font-bold rounded-full text-lg sm:text-base xs:text-sm px-10 py-3 sm:px-8 sm:py-2 xs:px-6 xs:py-1"
-              style={{ backgroundColor: '#FA8128' }}
+              style={{ backgroundColor: "#FA8128" }}
             >
-              {sliderList[index]?.button_name || 'Book Now'}
+              {sliderList[index]?.button_name || "Book Now"}
             </button>
-           </a>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Dots Indicator (Clickable) */}
-      <div className="absolute bottom-8 xs:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {sliderList.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => handleDotClick(i)}
-            className={`w-3 h-3 xs:w-2 xs:h-2 rounded-full transition-all ${index === i ? "bg-orange-400 scale-125" : "bg-gray-400"}`}
-          />
-        ))}
-      </div>
+          </Link>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  
+    {/* Dots Indicator */}
+    <div className="absolute bottom-8 xs:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      {sliderList.map((_, i) => (
+        <button
+          key={i}
+          onClick={() => handleDotClick(i)}
+          className={`w-3 h-3 xs:w-2 xs:h-2 rounded-full transition-all ${
+            index === i ? "bg-orange-400 scale-125" : "bg-gray-400"
+          }`}
+        />
+      ))}
     </div>
+  </div>
+  
   );
 };
 

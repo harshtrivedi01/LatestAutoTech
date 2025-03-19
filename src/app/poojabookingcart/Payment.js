@@ -195,15 +195,21 @@ const Payment = () => {
       
       {/* Content Section */}
       <div className="flex-1">
-        <h3 className="font-semibold text-gray-800 text-lg">
+        <h3 className="font-semibold text-gray-800 text-lg" >
           {data?.name || "Pooja Name"}
         </h3>
-        <p className="text-gray-500 text-sm sm:text-lg mt-1">
-          {data?.puja_description
-            ? data.puja_description.split(" ").slice(0, 18).join(" ") +
-              (data.puja_description.split(" ").length > 18 ? "..." : "")
-            :  ` ${t("Pujadescriptiongoeshere")}`}
-        </p>
+        <p
+  className="text-gray-500 text-sm sm:text-lg mt-1"
+  dangerouslySetInnerHTML={{
+    __html: data?.puja_description
+      ? data.puja_description
+          .split(" ")
+          .slice(0, 18)
+          .join(" ") + (data.puja_description.split(" ").length > 18 ? "..." : "")
+      : t("Pujadescriptiongoeshere"),
+  }}
+></p>
+
         <hr className="my-1" />
         <p className="text-gray-800 text-sm font-semibold mt-2">
           {t("PackageforPackage")} {datapackage?.name || "Package"}

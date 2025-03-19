@@ -50,6 +50,15 @@ export default function Poojaboxdetailpage() {
   if (!pujaData) return <div>Loading...</div>;
   
   const handleCartAction = async (id) => {
+
+    // Check if user is logged in (example using localStorage)
+    const isLoggedIn = localStorage.getItem("authToken"); // or "user_data"
+  
+    if (!isLoggedIn) {
+      toast.error("Please login to continue");
+      router.push("/login");
+      return;
+    }
     try {
       let formData = new FormData();
       formData.append("type", cartStatus ? "remove_cart" : "add_to_cart");
@@ -125,6 +134,8 @@ export default function Poojaboxdetailpage() {
       console.error("Error handling wishlist action:", error);
     }
   };
+
+  const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("user_token");
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} /> 

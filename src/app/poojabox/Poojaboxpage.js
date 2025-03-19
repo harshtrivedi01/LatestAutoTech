@@ -117,11 +117,12 @@ export default function Poojaboxpage() {
                   onChange={handleSortChange}
                   className="px-4 py-2 border-2 border-orange-400 rounded-md bg-white text-gray-600"
                 >
-                  <option value="">Sort By All</option>
-                  <option value="low_to_high"> Low to High</option>
-                  <option value="high_to_low"> High to Low</option>
-                  <option value="newest">Newest</option>
-                  <option value="popularity">Popularity</option>
+                  <option value="">{t("SortByAll")}</option>
+                  <option value="low_to_high"> {t("LowtoHigh")}</option>
+                  <option value="high_to_low"> {t("HightoLow")}</option>
+                  <option value="newest">{t("Newest")}</option>
+                  <option value="popularity">{t("Popularity")}</option>
+                 
                 </select>
               </div>
             </div>

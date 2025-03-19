@@ -243,7 +243,8 @@ export default function Poojadetailpage() {
 
               <h5 className="mb-2 text-2xl font-bold text-start  tracking-tight text-[#BA1A1A] ">
               { pujaData?.name||" Saturday ‘City of Mahakaal’ Special"}
-              <div className="w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
+              <div className="w-40 sm:w-60 md:w-72 lg:w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
+
               </h5>
 
               <h5 className="mb-2 text-2xl mt-4 text-start font-bold tracking-tight text-gray-900 text-black">

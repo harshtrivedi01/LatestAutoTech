@@ -55,7 +55,10 @@ const Testimonials = () => {
  return (
   <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7]" : "bg-[#FFDCC0]"} p-6 transition-all duration-300`}>
     <div className="mb-8 text-center">
-      <h2 className="text-gray-800 text-[42px] font-bold">{t("WhatOurClientsSayAboutUs")}</h2>
+    <h2 className="text-gray-800 text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold">
+  {t("WhatOurClientsSayAboutUs")}
+</h2>
+
     </div>
 <br/>
     {testimonials ? (
@@ -86,9 +89,10 @@ const Testimonials = () => {
               <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg">
                 <div className="flex items-center gap-4">
                   <img
-                    src={testimonial?.image || "https://readymadeui.com/team-2.webp"}
-                    className="w-14 h-14 rounded-full border-2 shadow"
+                    src={testimonial?.image || "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
+                    className="w-14 h-14 rounded-full border-2 shadow object-contain"
                     alt={testimonial?.name || "Client"}
+                    onError={(e) => (e.target.src = "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")}
                   />
                   <div>
                     <h4 className="text-gray-800 text-lg font-semibold">{testimonial?.name || "Client Name"}</h4>

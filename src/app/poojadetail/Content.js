@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
         <div className='container'>
 
         <h2 className='title text-black'>{t("AboutPooja")}</h2>
-        <p className=''>
-       {detail?.puja_description}
+        <p className='' dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
+    
   
         </p>
       

@@ -72,7 +72,7 @@ export default function Poojabookingpage() {
                 <form onSubmit={handleSearch} className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden font-[sans-serif]">
                   <input 
                     type="text"
-                    placeholder="Search Something..."
+                   placeholder={t("SearchSomething")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full outline-none bg-transparent text-gray-600 text-lg"

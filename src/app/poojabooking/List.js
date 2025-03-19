@@ -14,7 +14,7 @@ export default function List({ pujaData }) {
     <div className="max-w-7xl mx-auto my-8 px-2">
       {dataToDisplay.length === 0 ? (
         <div className="text-center text-xl font-semibold text-gray-600">
-          No results found
+        {t("Noresultsfoundfor")}
         </div>
       ) : (
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">

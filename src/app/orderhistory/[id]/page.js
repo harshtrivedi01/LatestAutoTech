@@ -173,7 +173,7 @@ export default function Page() {
                 onError={(e) =>(e.target.src ="/images/logo.png")}
                  alt={item.product_name}
                 
-                 className="w-32 h-32 rounded-lg mr-3" />
+                 className="w-32 h-32 rounded-lg mr-3 object-contain" />
                 <div>
                   <p className="font-semibold text-[#87521B] mb-2">{item.product_name}</p>
                   <p className="text-gray-700 font-bold mb-2">₹ {Math.floor(item.price.toFixed(1))}/-</p>

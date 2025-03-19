@@ -50,18 +50,18 @@ const PoojaPackages = ({ detail }) => {
 >
 
         {/* Header */}
-        <div className="flex flex-co sm:flex-ro gap-3 sm:gap-4 bg-linear-to-t from-[#FFFFFF] to-[#FFE1CE] bg-[#FFE1CE] rounded-t-2xl items-start sm:items-center justify-between p-3">
-          <div className="pack-img w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 lg:w-52 lg:h-32">
+        <div className="flex flex-col sm:flex-rol gap-3 sm:gap-4 bg-linear-to-t from-[#FFFFFF] to-[#FFE1CE] bg-[#FFE1CE] rounded-t-2xl items-center sm:items-center justify-center p-3">
+          <div className="flex justify-center w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 lg:w-52 lg:h-32">
             <img
               src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
               alt={pkg.name}
               width={160}
               height={96}
               onError={(e) => (e.target.src = "/images/logo.png")}
-              className="object-contain w-full h-full rounded-lg"
+              className="object-contain  rounded-lg"
             />
           </div>
-          <div className="text-left flex-1">
+          <div className="text-center flex-1">
             {pkg.tag && (
               <div className="bg-gradient-to-r from-[#E89528] via-[#F1C644] to-[#FFFFFF] inline-flex items-center gap-1 px-2 py-1 rounded-full text-white uppercase text-[8px] sm:text-[8px] md:text-[8px] mb-1">
                 {pkg.tag}

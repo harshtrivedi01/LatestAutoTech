@@ -359,7 +359,12 @@ export default function Address() {
     ],
   };
 
-
+  const limitWords = (text, wordLimit = 3) => {
+    if (!text) return "";
+    const words = text.split(" ");
+    return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
+  };
+  
   return (
     <>
       <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">{t("ShoppingCart")} </h1>
@@ -432,14 +437,16 @@ export default function Address() {
                         {/* Address Card */}
                         <div className="w-full sm:max-w-[350px] md:max-w-[400px] lg:max-w-[500px] flex justify-between rounded-lg border shadow-lg bg-white p-4">
                           <div className="flex-1">
-                            <h3 className="font-medium text-base sm:text-lg lg:text-xl">{address.name}</h3>
-                            <p className="font-medium text-sm sm:text-base lg:text-lg">
+                          <h3 className="font-medium text-base sm:text-lg lg:text-lg">
+  {limitWords(address.name, 8)}
+</h3>
+                            <p className="font-medium text-sm sm:text-base lg:text-sm">
                               {address.address}, {address.city} <br />
                               {address.state}
                               <br /> {address.pincode}
                             </p>
-                            <p className="font-medium text-sm sm:text-base lg:text-lg">{address.phone_no}</p>
-                            <p className="font-medium text-sm sm:text-base lg:text-lg">{address.email}</p>
+                            <p className="font-medium text-sm sm:text-base lg:text-sm">{address.phone_no}</p>
+                            <p className="font-medium text-sm sm:text-base lg:text-sm">{limitWords(address.email, 8)}</p>
                           </div>
 
                           {/* Edit Icon */}

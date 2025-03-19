@@ -93,9 +93,9 @@ export default function Homefourth({ pujaData }) {
                     className="mx-3 mt-3 flex rounded-xl"
                     href={`poojaboxdetail/${puja.id}`}
                   >
-                    <div className="w-40 flex justify-center">
+                    <div className="w-40 h-[120px] rounded-lg flex justify-center">
                       <img
-                        className="object-cover"
+                        className="object-cover rounded-lg"
                         src={
                           puja.image ||
                           "/images/logo.png"
