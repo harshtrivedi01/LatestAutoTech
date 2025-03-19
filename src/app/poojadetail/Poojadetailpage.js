@@ -258,9 +258,12 @@ export default function Poojadetailpage() {
               
              <div>
      
-        <p className="my-2 w-1/2 text-lg text-gray-400 flex gap-2 items-center">
-         <CalendarIcon className="text-yellow-600"/> {pujaData?.dates || `${t("CommingSoon")}`} {t("CommingSoon")}
-        </p>
+             {pujaData?.dates === "" ||null && (
+  <p className="my-2 w-1/2 text-lg text-gray-400 flex gap-2 items-center">
+    <CalendarIcon className="text-yellow-600" /> {pujaData.dates}
+  </p>
+)}
+
      
     </div>
     <a
