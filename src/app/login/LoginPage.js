@@ -208,17 +208,18 @@ export default function LoginPage() {
 
             </p>
             <input
-  className="p-2 border-[1px] text-sm rounded-lg w-full"
+  className="p-2 border-[1px] text-sm rounded-lg w-full appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
   placeholder={t("Phonenumber")}
-  type="text"
+  type="number"
   name="phone"
   onChange={handleChange}
   value={formData.phone}
   required
-  maxLength={10} // Prevents entering more than 10 digits
-  pattern="[0-9]*" // Ensures only numeric input
-  inputMode="numeric" // Shows numeric keyboard on mobile devices
+  maxLength={10}
+  pattern="[0-9]*"
+  inputMode="numeric"
 />
+
 
             {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
             <div className="flex justify-center text-sm">

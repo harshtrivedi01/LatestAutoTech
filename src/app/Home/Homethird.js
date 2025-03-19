@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export default function Homethird({pujaData}) {
   const { t } = useTranslation();
   return (
-    <div className="relative w-full min-h-screen bg-white">
+    <div className="relative w-full min-h-scree bg-white">
       <div
         className="bg-[#FFFFFF] px-2 "
         style={{

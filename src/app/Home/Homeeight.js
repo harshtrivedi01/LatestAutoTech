@@ -29,7 +29,7 @@ const Homeeight = ({ pujaData, detail }) => {
 
 
   return (
-    <div className={`py-10 ${isSpecialPage ? "bg-[#FFDCC0] " : "bg-white"} p-6 transition-all  duration-300`}>
+    <div className={`py-10 ${isSpecialPage ? "bg-[#FFDCC0] " : "bg-white"}  p-6 transition-all  duration-300`}>
   
       <div className="mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">
@@ -37,7 +37,7 @@ const Homeeight = ({ pujaData, detail }) => {
         </h2>
       </div>
 
-      <div className="relative w-full mx-auto ">
+      <div className=" container relative w-full mx-auto ">
         {/* Slider */}
         <Splide
           ref={splideRef}
@@ -63,7 +63,7 @@ const Homeeight = ({ pujaData, detail }) => {
           {testimonials && testimonials.length > 0 ? (
   testimonials.map((testimonial, index) => (
     <SplideSlide key={testimonial.id || index}>
-      <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg shadow-lg">
+      <div className=" p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg shadow-lg">
         <div className="flex items-center gap-4">
           {/* Client image */}
           <img

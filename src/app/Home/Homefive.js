@@ -16,7 +16,7 @@ function decodeHtml(html) {
 }
 
   return (
-    <div className="relative w-full min-h-screen bg-white">
+    <div className="relative w-full  bg-white">
       <div
         className="bg-[#FFFFFF] px-2"
         style={{

@@ -45,7 +45,9 @@ const Homefirst = ({ sliderList = [] }) => {
   }
 
   return (
-    <div className="relative w-full h-[596px] sm:min-h-[750px] xs:min-h-[500px] overflow-hidden rounded-lg">
+<div className="container mx-auto flex justify-center">
+  <div className="relative w-full max-w-7xl h-[596px] sm:min-h-[550px] xs:min-h-[500px] overflow-hidden rounded-lg">
+  
     {/* Slide Animation */}
     <AnimatePresence mode="wait">
       <motion.div
@@ -98,6 +100,7 @@ const Homefirst = ({ sliderList = [] }) => {
         />
       ))}
     </div>
+  </div>
   </div>
   
   );

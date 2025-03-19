@@ -82,7 +82,7 @@ const Testimonials = () => {
             arrows: false,
             pagination: true,
           }}
-          className="w-full"
+          className="container w-full "
         >
           {testimonials.map((testimonial, index) => (
             <SplideSlide key={testimonial.id || index}>

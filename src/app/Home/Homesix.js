@@ -40,7 +40,8 @@ const fallbackData = [
 const CustomSlider = ({ bottomslider_list = fallbackData }) => {
 
   return (
-    <div className="w-full mx-auto py-10 bg-[#FFEEE2]">
+   <div className="bg-[#FFEEE2]">
+     <div className="container  w-full mx-auto py-10 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -62,11 +63,10 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
         {bottomslider_list.map((item, index) => (
           <SwiperSlide
             key={index}
-            className="flex items-center justify-center"
             style={{ width: "60%", maxWidth: "900px" }} // ✅ Make center slide bigger
           >
             <div
-              className="relative flex flex-col items-center justify-center 
+              className="relative flex flex-col items-center justify-center  shadow shadow-5xl
                          h-[250px] sm:h-[300px] md:h-[350px] 
                          rounded-[30px] sm:rounded-[40px] md:rounded-[50px] 
                          w-full bg-white shadow-lg overflow-hidden"
@@ -92,6 +92,7 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
         ))}
       </Swiper>
     </div>
+   </div>
   );
 };
 
