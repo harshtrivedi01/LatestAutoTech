@@ -8,6 +8,13 @@ import { useTranslation } from "react-i18next";
 export default function Homefive({pujaData}) {
   const { t } = useTranslation();
  console.log(pujaData?.data?.puja_list)
+ // Function to decode HTML entities
+function decodeHtml(html) {
+  var txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+}
+
   return (
     <div className="relative w-full min-h-screen bg-white">
       <div
@@ -47,17 +54,42 @@ export default function Homefive({pujaData}) {
             {puja.name || "Puja Title"}
           </h5>
           <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
-          <p className="mb- font-bold text-black text-lg  flex-grow">
-  {puja.description
-    ? puja.description.split(" ").slice(0, 12).join(" ") + (puja.description.split(" ").length > 12 ? "..." : "")
-    : "Puja description goes here."}
+          <p className="mb- font-bold text-black text-lg flex-grow">
+  {puja.description ? (
+    <span
+      dangerouslySetInnerHTML={{
+        __html:
+          // If the description contains encoded HTML entities, decode it first
+          // We decode it manually to ensure HTML tags are rendered correctly
+          decodeHtml(puja.description).length > 75
+            ? decodeHtml(puja.description).substring(0, 75) + "..."
+            : decodeHtml(puja.description),
+      }}
+    />
+  ) : (
+    // Fallback text if no description is available
+    "Puja description goes here."
+  )}
 </p>
 
+
 <p className="mb-3 font-normal text-gray-700 text-base flex-grow">
-  {puja.short_description
-    ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
-    : "Puja description goes here."}
+  {puja.short_description ? (
+    // Check if the description has HTML entities, decode it first, then truncate it
+    <span
+      dangerouslySetInnerHTML={{
+        __html:
+          decodeHtml(puja.short_description).split(" ").length > 12
+            ? decodeHtml(puja.short_description).split(" ").slice(0, 12).join(" ") + "..."
+            : decodeHtml(puja.short_description),
+      }}
+    />
+  ) : (
+    // Fallback text if no short description is available
+    "Puja description goes here."
+  )}
 </p>
+
 
 
           {/* Button */}
