@@ -39,7 +39,7 @@ i18n
           State: "State",
           City: "City",
 
-          SUCCESS: "SUCCESS!",
+          SUCCESSS: "SUCCESS!",
           SUCCESSdis:"Your payment has been successfully processed, and your  booking is confirmed",
           BackToHome: " Back To Home",
 
@@ -153,14 +153,14 @@ i18n
           AddSankalpFormDetail: "Add Sankalp Form Detail",
           NameofMembersParticipatingInPooja:
             "Name of Members Participating In Pooja",
-          firstmembername: "first member name",
+          firstmembername: "First member name",
           Enteryourfathersname: "Enter your fathers name",
           EnteryourGotra: "Enter your Gotra",
           Enteryouremail: "Enter your email",
           Enteryourfulladdress: "Enter your full address",
           IdontknowmyGotra: "I don’t know my Gotra",
-          save: "save",
-          Cancle: "Cancle",
+          save: "Save",
+          Cancle: "Cancel",
           AddedMember: "Added Member",
           Kashyap: "Kashyap",
           Gotra: "Gotra",
@@ -301,11 +301,28 @@ i18n
          LowtoHigh:"Low to High",
           HightoLow:"High to Low",
          Newest:"Newest",
-        Popularity:"Popularity"
+        Popularity:"Popularity",
+
+        Paymentstatus:"Payment status",
+        poojadate:"Pooja Date",
+        Bookingstatus:"Booking status",
+        UserDetail:"User Detail",
+        MembersParticipatinginPooja:"Members Participating in Pooja",
+
+        FatherName:"Father Name",
+        success:"success",
         },
       },
       hi: {
         translation: {
+          success:"सफलता",
+          FatherName:"पिता का नाम",
+          Paymentstatus:"भुगतान स्थिति", 
+          poojadate:"पूजा तिथि",
+          Bookingstatus:"बुकिंग स्थिति", 
+          UserDetail:"उपयोगकर्ता विवरण",
+          MembersParticipatinginPooja:"पूजा में भाग लेने वाले सदस्य",
+
           SortByAll:" सभी द्वारा क्रमबद्ध करें",
 LowtoHigh:"निम्न से उच्च",
 HightoLow:"उच्च से निम्न",
@@ -417,7 +434,7 @@ Popularity:"लोकप्रियता",
           SaveContinue: "सहेजें जारी रखें",
           Saveing: "अपवाद...",
 
-          SUCCESS: "सफलता!",
+          SUCCESSS: "सफलता!",
           SUCCESSdis:
             "आपका भुगतान सफलतापूर्वक संसाधित हो गया है, और आपकी बुकिंग की पुष्टि हो गई है",
 

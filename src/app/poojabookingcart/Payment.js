@@ -182,43 +182,46 @@ const Payment = () => {
             {/* Left Section */}
             <div className="w-full md:w-2/3">
   <div className="bg-white p-4 rounded-lg shadow">
-    <div className="flex flex-wrap md:flex-nowrap items-start gap-4">
+    <div className="flex flex-col xl:flex-row items-start gap-4">
       {/* Image Section */}
-      <div className="w-full sm:w-1/2">
+      <div className="w-full xl:w-1/2">
         <img
           src={data?.image || ""}
           alt="Pooja"
-          className="rounded-lg object-contain w-full h-40"
+          className="rounded-lg object-contain w-full h-40 sm:h-48 md:h-56"
           onError={(e) => (e.target.src = "/images/logo.png")}
         />
       </div>
-      
+
       {/* Content Section */}
       <div className="flex-1">
-        <h3 className="font-semibold text-gray-800 text-lg" >
+        <h3 className="font-semibold text-gray-800 text-lg sm:text-xl">
           {data?.name || "Pooja Name"}
         </h3>
         <p
-  className="text-gray-500 text-sm sm:text-lg mt-1"
-  dangerouslySetInnerHTML={{
-    __html: data?.puja_description
-      ? data.puja_description
-          .split(" ")
-          .slice(0, 18)
-          .join(" ") + (data.puja_description.split(" ").length > 18 ? "..." : "")
-      : t("Pujadescriptiongoeshere"),
-  }}
-></p>
+          className="text-gray-500 text-sm sm:text-base md:text-lg mt-1"
+          dangerouslySetInnerHTML={{
+            __html: data?.puja_description
+              ? data.puja_description
+                  .split(" ")
+                  .slice(0, 18)
+                  .join(" ") + (data.puja_description.split(" ").length > 18 ? "..." : "")
+              : t("Pujadescriptiongoeshere"),
+          }}
+        ></p>
 
-        <hr className="my-1" />
-        <p className="text-gray-800 text-sm font-semibold mt-2">
+        <hr className="my-2" />
+        <p className="text-gray-800 text-sm sm:text-base font-semibold mt-2">
           {t("PackageforPackage")} {datapackage?.name || "Package"}
         </p>
-        <p className="text-gray-700 text-lg">₹{datapackage?.price || "0"}</p>
+        <p className="text-gray-700 text-lg sm:text-xl font-bold">
+          ₹{datapackage?.price || "0"}
+        </p>
       </div>
     </div>
   </div>
 </div>
+
 
 
             {/* Right Section */}

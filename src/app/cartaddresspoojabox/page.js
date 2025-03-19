@@ -366,8 +366,9 @@ export default function Address() {
   };
   
   return (
-    <>
-      <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">{t("ShoppingCart")} </h1>
+  <>
+    <div className="container">
+      <h1 className=" f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">{t("ShoppingCart")} </h1>
       <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center  md:mb-0">
           <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
@@ -438,12 +439,12 @@ export default function Address() {
                         <div className="w-full sm:max-w-[350px] md:max-w-[400px] lg:max-w-[500px] flex justify-between rounded-lg border shadow-lg bg-white p-4">
                           <div className="flex-1">
                           <h3 className="font-medium text-base sm:text-lg lg:text-lg">
-  {limitWords(address.name, 8)}
+  {limitWords(address.name, 5)}
 </h3>
                             <p className="font-medium text-sm sm:text-base lg:text-sm">
                               {address.address}, {address.city} <br />
-                              {address.state}
-                              <br /> {address.pincode}
+                              {address.state}, {address.pincode}
+                              <br />
                             </p>
                             <p className="font-medium text-sm sm:text-base lg:text-sm">{address.phone_no}</p>
                             <p className="font-medium text-sm sm:text-base lg:text-sm">{limitWords(address.email, 8)}</p>
@@ -515,19 +516,22 @@ export default function Address() {
           {showForm && (
             <form onSubmit={formData.address_id ? handleUpdateAddress : handleSubmit} className="mt-5 border-2 rounded-xl bg-white p-4 gap-3">
               <div className="mt-5 lg:grid grid-cols-3   gap-3">
-                <label className="block mb-2 col-1">
+              <label className="block mb-2 col-1">
+  <input
+    type="text"
+    placeholder={t("Enteryourname")}
+    value={formData.name}
+    onChange={(e) => {
+      const value = e.target.value;
+      if (/^[A-Za-z\s]*$/.test(value)) { // Allows only alphabets and spaces
+        setFormData({ ...formData, name: value });
+      }
+    }}
+    className="w-full p-2 rounded-lg border"
+  />
+  {formErrors.name && <p className="error text-red-500 text-sm">{formErrors.name}</p>}
+</label>
 
-                  <input
-                    type="text"
-                    placeholder={t("Enteryourname")}
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full p-2  rounded-lg border "
-                  />
-                  {formErrors.name && <p className="error text-red-500 text-sm">{formErrors.name}</p>}
-                </label>
 
                 <label className="block mb-2" >
 
@@ -545,34 +549,46 @@ export default function Address() {
                 </label>
 
                 <label className="block mb-2">
+  <input
+    type="email"
+    value={formData.email}
+    placeholder={t("Enteryouremail")}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData({ ...formData, email: value });
 
-                  <input
-                    type="email"
-                    value={formData.email}
-                    placeholder={t("Enteryouremail")}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full p-2  rounded-lg border "
-                  />
-                  {formErrors.email && <p className="error text-red-500 text-sm">{formErrors.email}</p>}
-                </label>
+      // Live validation
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        setFormErrors({ ...formErrors, email: "Invalid email format" });
+      } else {
+        setFormErrors({ ...formErrors, email: "" });
+      }
+    }}
+    className="w-full p-2 rounded-lg border"
+  />
+  {formErrors.email && <p className="error text-red-500 text-sm">{formErrors.email}</p>}
+</label>
 
-                <label className="block mb-2">
 
-                  <input
-                    type="text"
-                    placeholder={t("Enteryourfulladdress")}
-                    value={formData.address}
-                    maxLength={50}
-                    onChange={(e) =>
-                      setFormData({ ...formData, address: e.target.value })
-                    }
-                    className="w-full p-2  rounded-lg border "
-                  />
-                  {formErrors.address && <p className="error text-red-500 text-sm">{formErrors.address}</p>}
 
-                </label>
+<label className="block mb-2">
+  <input
+    type="text"
+    placeholder={t("Enteryourfulladdress")}
+    value={formData.address}
+    maxLength={50}
+    onChange={(e) => {
+      const value = e.target.value;
+      // Address validation: allow letters, numbers, spaces, commas, and periods only
+      if (/^[A-Za-z0-9\s,.'-]*$/.test(value)) {
+        setFormData({ ...formData, address: value });
+      }
+    }}
+    className="w-full p-2 rounded-lg border"
+  />
+  {formErrors.address && <p className="error text-red-500 text-sm">{formErrors.address}</p>}
+</label>
+
                 <label className="block mb-2">
                   <select name="country_id" value={formData.country_id} onChange={handleChange} className="w-full p-2  rounded-lg border ">
                     <option value="">{t("Country")} </option>
@@ -607,19 +623,31 @@ export default function Address() {
                 </label>
 
                 <label className="block mb-2">
+  <input
+    type="text"
+    placeholder={t("PinCode")}
+    value={formData.pincode}
+    maxLength={6}
+    onChange={(e) => {
+      const value = e.target.value;
 
-                  <input
-                    type="text"
-                    placeholder={t("PinCode")}
-                    value={formData.pincode}
-                    maxLength={6}
-                    onChange={(e) =>
-                      setFormData({ ...formData, pincode: e.target.value })
-                    }
-                    className="w-full p-2  rounded-lg border "
-                  />
-                  {formErrors.pincode && <p className="error text-red-500 text-sm">{formErrors.pincode}</p>}
-                </label>
+      // Allow only numeric values
+      if (/^\d{0,6}$/.test(value)) {
+        setFormData({ ...formData, pincode: value });
+
+        // Validate length
+        if (value.length < 6) {
+          setFormErrors({ ...formErrors, pincode: "Pincode must be 6 digits" });
+        } else {
+          setFormErrors({ ...formErrors, pincode: "" });
+        }
+      }
+    }}
+    className="w-full p-2 rounded-lg border"
+  />
+  {formErrors.pincode && <p className="error text-red-500 text-sm">{formErrors.pincode}</p>}
+</label>
+
               </div>
 
               <button type="submit" className="bg-[#E5644E] text-white px-8 py-3 rounded-2xl">
@@ -639,7 +667,9 @@ export default function Address() {
         </button>
       </section>
       <br />   <br />  <br />
+    
+    </div>
       <SliderTwo />
-    </>
+      </>
   );
 }

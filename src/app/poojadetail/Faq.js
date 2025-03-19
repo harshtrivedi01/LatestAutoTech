@@ -41,7 +41,7 @@ export default function Faq() {
         <div className="container">
           <div className="items-center gap-10">
             <div>
-              <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-">
+              <h2 className="lg:text-2xl md:text-xl text-2xl font-bold mb-">
               {t("FAQ")}
               </h2>
             </div>

@@ -34,7 +34,7 @@ export default function List({ module_category_details }) {
 
   const bookingUrls = {
     "Guru Ji": "#",
-    "Pandit Ji": "#",
+    "Pooja Box": "/poojabox",
     "Pooja": "/poojabooking",
     "Granth": "#",
     "Online Classes": "#",

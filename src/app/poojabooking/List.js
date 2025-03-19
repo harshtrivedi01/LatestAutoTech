@@ -41,19 +41,24 @@ export default function List({ pujaData }) {
                   <p className="mb-1 font-bold text-xl text-black flex-grow">
   {puja.sub_title
     ? puja.sub_title.split(" ").slice(0, 12).join(" ") + (puja.sub_title.split(" ").length > 12 ? "..." : "")
-    :  ` ${t("Pujadescriptiongoeshere")}`}
+    :  " "}
 </p>
 
-<p className="mb-1 text-gray-700 text-base flex-grow">
-  {puja.short_description
-    ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
-    :  ` ${t("Pujadescriptiongoeshere")}`}
+{puja.short_description && (
+ <p className="mb-1 text-gray-700 text-base flex-grow">
+ {puja.short_description
+   ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
+   :  " "}
 </p>
+)}
+
 
                   {/* Date Section */}
-                  <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">
-                    <CalendarIcon className="text-yellow-600" /> {puja.date ||  `${t("CommingSoon")}`}
-                  </p>
+                  {puja.date && (
+  <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">
+    <CalendarIcon className="text-yellow-600" /> {puja.date}
+  </p>
+)}
 
                   {/* Button at Bottom */}
                   <div className="mt-auto">

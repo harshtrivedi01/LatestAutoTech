@@ -45,8 +45,8 @@ const Homefirst = ({ sliderList = [] }) => {
   }
 
   return (
-<div className="container mx-auto flex justify-center">
-  <div className="relative w-full max-w-7xl h-[596px] sm:min-h-[550px] xs:min-h-[500px] overflow-hidden rounded-lg">
+<div className=" mx-auto flex justify-center">
+  <div className="container p-0 relative w-full  h-[496px] sm:min-h-[450px] xs:min-h-[400px] overflow-hidden rounded-lg">
   
     {/* Slide Animation */}
     <AnimatePresence mode="wait">
@@ -59,7 +59,7 @@ const Homefirst = ({ sliderList = [] }) => {
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         onDragEnd={handleDragEnd}
-        className="absolute flex justify-center items-center text-white text-center font-bold w-full h-full bg-cover bg-center"
+        className="absolute flex justify-center items-center text-white text-center font-bold w-full h-full bg-contain bg-no-repeat bg-center"
         style={{
           backgroundImage: `url(${sliderList[index]?.slider || '/images/sliderbackground.jpg'})`
         }}

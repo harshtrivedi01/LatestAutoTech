@@ -277,9 +277,14 @@ const Page = () => {
              className="w-full sm:w-5/12 h-[150px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
            />
            <div className="w-full sm:w-7/12 text-center sm:text-left">
+           <h2 className="text-sm font-lighter text-gray-400">
+               #{booking.booking_code}
+             </h2>
              <h2 className="text-lg font-bold text-black">
                {booking.puja_name}
              </h2>
+             <div className="flex items-center gap-1">
+             <h1 className="text-sm font-semibold"> {t("Paymentstatus")} :{" "} </h1>
              <div
                className={`${
                  booking.payment_status === "success"
@@ -289,7 +294,8 @@ const Page = () => {
                    : "text-yellow-500"
                } rounded-full`}
              >
-               <p className="text-xl">{booking.payment_status}</p>
+               <p className="text-sm p"> {" "}{booking.payment_status}</p>
+             </div>
              </div>
              <p className="text-gray-800 font-semibold text-lg">
                {t("AmountRs")} {booking.amount}/-
@@ -303,18 +309,20 @@ const Page = () => {
          {/* Footer Section - Always at Bottom */}
          <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
            <p className="text-gray-600 text-sm text-center sm:text-left">
+           <span className="font-semibold">{t("poojadate")}: </span>{booking.booking_date}<br/>
              <span className="font-semibold">{t("Ordertimedate")} </span>{booking.create_date}
            </p>
+         
            <div
              className={`${
-               booking.payment_status === "success"
+               booking.booking_status === "success"
                  ? "bg-green-500"
-                 : booking.payment_status === "failed"
+                 : booking.booking_status === "cancelled"
                  ? "bg-red-500"
                  : "bg-yellow-500"
              } rounded-full px-4 py-1`}
            >
-             <p className="text-white text-sm">{booking.payment_status}</p>
+             <p className="text-white text-sm">{booking.booking_status}</p>
            </div>
          </div>
        </Link>

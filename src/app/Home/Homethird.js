@@ -15,7 +15,7 @@ export default function Homethird({pujaData}) {
   return (
     <div className="relative w-full min-h-scree bg-white">
       <div
-        className="bg-[#FFFFFF] px-2 "
+        className="container bg-[#FFFFFF] px-2 "
         style={{
           backgroundImage: `url('/images/about.jpg')`,
           backgroundSize: "cover",

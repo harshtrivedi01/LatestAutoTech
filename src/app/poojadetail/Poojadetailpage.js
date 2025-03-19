@@ -258,15 +258,19 @@ export default function Poojadetailpage() {
               
              <div>
      
-        <p className="my-2 w-1/2 text-lg text-gray-400 flex gap-2 items-center">
-         <CalendarIcon className="text-yellow-600"/> {pujaData?.dates || `${t("CommingSoon")}`} {t("CommingSoon")}
-        </p>
+             {(pujaData?.date || (Array.isArray(pujaData?.dates) && pujaData.dates.length > 0)) && (
+  <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">
+    <CalendarIcon className="text-yellow-600" /> {pujaData.date}
+  </p>
+)}
+
+
      
     </div>
-    <a
+    <a  
                  onClick={() => scrollToSection(`${t("PoojaPackage")}`)}
                 id="package"
-                className="w-full block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
+                className="w-full cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
               >
             {t("SelectPoojapackage")}
               </a>
@@ -308,8 +312,8 @@ export default function Poojadetailpage() {
       )}
 
       {/* Sections */}
-      <section id={t("AboutPooja")}> <Content detail={pujaData}  /> </section>
-      <section id={t("PoojaBenefits")}> <Benifit detail={pujaData} /> </section>
+      <section id={t("AboutPooja")} className="container"> <Content detail={pujaData}  /> </section>
+      <section id={t("PoojaBenefits")} className="container"> <Benifit detail={pujaData} /> </section>
       <section id={t("PoojaPackage")} className="relative">
         <PoojaPackage detail={pujaData} />
       </section>
