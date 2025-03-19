@@ -68,7 +68,7 @@ function decodeHtml(html) {
     />
   ) : (
     // Fallback text if no description is available
-    "Puja description goes here."
+   ` ${t("Pujadescriptiongoeshere")}`
   )}
 </p>
 
@@ -86,7 +86,7 @@ function decodeHtml(html) {
     />
   ) : (
     // Fallback text if no short description is available
-    ""
+    ` ${t("Pujadescriptiongoeshere")}`
   )}
 </p>
 

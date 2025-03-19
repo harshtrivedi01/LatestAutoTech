@@ -202,7 +202,7 @@ const Payment = () => {
           {data?.puja_description
             ? data.puja_description.split(" ").slice(0, 18).join(" ") +
               (data.puja_description.split(" ").length > 18 ? "..." : "")
-            : "Puja description goes here."}
+            :  ` ${t("Pujadescriptiongoeshere")}`}
         </p>
         <hr className="my-1" />
         <p className="text-gray-800 text-sm font-semibold mt-2">

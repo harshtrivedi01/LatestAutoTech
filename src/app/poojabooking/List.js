@@ -41,13 +41,13 @@ export default function List({ pujaData }) {
                   <p className="mb-1 font-bold text-xl text-black flex-grow">
   {puja.sub_title
     ? puja.sub_title.split(" ").slice(0, 12).join(" ") + (puja.sub_title.split(" ").length > 12 ? "..." : "")
-    : "Puja description goes here."}
+    :  ` ${t("Pujadescriptiongoeshere")}`}
 </p>
 
 <p className="mb-1 text-gray-700 text-base flex-grow">
   {puja.short_description
     ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
-    : "Puja description goes here."}
+    :  ` ${t("Pujadescriptiongoeshere")}`}
 </p>
 
                   {/* Date Section */}

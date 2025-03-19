@@ -294,11 +294,13 @@ i18n
           MRP:"M.R.P",
           off:"off",
           Noproductsavailable:"No products available",
-          reviews:"reviews"
+          reviews:"reviews",
+          Pujadescriptiongoeshere:"Puja description goes here."
         },
       },
       hi: {
         translation: {
+          Pujadescriptiongoeshere:"पूजा विवरण यहाँ जाएँ।",
           reviews:"समीक्षाएँ",
           Noproductsavailable:"कोई उत्पाद उपलब्ध नहीं है",
           MRP:"एम.आर.पी",

@@ -112,7 +112,7 @@ export default function Homefourth({ pujaData }) {
                       <p className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
   {puja.description 
     ? puja.description .split(" ").slice(0, 12).join(" ") + (puja.description .split(" ").length > 12 ? "..." : "")
-    : "Puja description goes here."}
+    :  ` ${t("Pujadescriptiongoeshere")}`}
 </p>
                       
                     </span>
