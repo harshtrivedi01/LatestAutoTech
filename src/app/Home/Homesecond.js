@@ -1,11 +1,11 @@
 "use client"; 
 import Image from "next/image";
-import service1 from "../../../public/Assests/Service/service (1).jpg";
-import service2 from "../../../public/Assests/Service/service (2).jpg";
-import service3 from "../../../public/Assests/Service/service (3).jpg";
-import service4 from "../../../public/Assests/Service/service (4).jpg";
-import service5 from "../../../public/Assests/Service/service (5).jpg";
-import service6 from "../../../public/Assests/Service/service (6).jpg";
+import service1 from "../../../public/images/logo.png";
+import service2 from "../../../public/images/logo.png";
+import service3 from "../../../public/images/logo.png";
+import service4 from "../../../public/images/logo.png";
+import service5 from "../../../public/images/logo.png";
+import service6 from "../../../public/images/logo.png";
 import Heading from "../component/Headingname/Heading";
 import DOMPurify from "dompurify";
 import { useState } from "react";
@@ -81,7 +81,7 @@ export default function Homesecond({ module_category_details }) {
                   style={{ backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`, backgroundSize: "cover", backgroundPosition: "center", minHeight: "400px" }} // Ensures cards have equal height
                 >
                   <div>
-                    <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px]" onError={(e) => (e.target.src = "/images/logo.png")} />
+                    <Image src={imageSrc} alt={modulecategory} className="mx-auto h-[136px] w-[119px] object-contain" onError={(e) => (e.target.src = "/images/logo.png")} />
                     <div className="my-3 font-display">
                       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
                         {modulecategory}
