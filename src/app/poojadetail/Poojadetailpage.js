@@ -87,28 +87,32 @@ export default function Poojadetailpage() {
 
   const [showButton, setShowButton] = useState(true);
   
-
   useEffect(() => {
     const handleScroll = () => {
+      const benefitSection = document.getElementById(`${t("AboutPooja")}`);
       const packageSection = document.getElementById(`${t("PoojaPackage")}`);
-      const homeSection = document.getElementById("home1");
+      const downloadAppSection = document.getElementById("Downloadapp-section");
+      const homeEightSection = document.getElementById("Homeeight-section");
+      const faqSection = document.getElementById("Faq-section");
   
-      const isElementInView = (element) => {
-        if (!element) return false;
-        const rect = element.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-      };
+      if (benefitSection && packageSection && downloadAppSection && homeEightSection && faqSection) {
+        const benefitTop = benefitSection.getBoundingClientRect().top;
+        const packageTop = packageSection.getBoundingClientRect().top;
+        const downloadAppTop = downloadAppSection.getBoundingClientRect().top;
+        const homeEightTop = homeEightSection.getBoundingClientRect().top;
+        const faqTop = faqSection.getBoundingClientRect().top;
   
-      const isPackageVisible = isElementInView(packageSection);
-      const isHomeVisible = isElementInView(homeSection);
-  
-      // Hide button if either section is in view
-      setShowButton(!(isPackageVisible || isHomeVisible));
+        // Show button when any of these sections are visible and hide it when hovering over the Package section
+        setShowButton(
+          (benefitTop < window.innerHeight / 2 && packageTop > 100) ||
+          (downloadAppTop < window.innerHeight && downloadAppTop > 0) ||
+          (homeEightTop < window.innerHeight && homeEightTop > 0) ||
+          (faqTop < window.innerHeight && faqTop > 0)
+        );
+      }
     };
   
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // initial check on mount
-  
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
@@ -305,12 +309,12 @@ export default function Poojadetailpage() {
       {/* Sections */}
       <section id={t("AboutPooja")}> <Content detail={pujaData}  /> </section>
       <section id={t("PoojaBenefits")}> <Benifit detail={pujaData} /> </section>
-      <section id={t("PoojaPackage")} className="">
+      <section id={t("PoojaPackage")} className="relative">
         <PoojaPackage detail={pujaData} />
       </section>
     
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black relative "> <Testimonials/></section>
+      <section id="Homeeight-section" className="text-black  relative"> <Testimonials/></section>
       <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
   </div>
 )}
