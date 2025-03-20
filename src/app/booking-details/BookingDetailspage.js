@@ -17,8 +17,8 @@ export default function BookingDetailspage() {
   return (
     <AuthGuard>
       <div className="  bg-white">
-        <div className="container py-10 text-start px-5 bg-[#FFEEE2]">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">{t("PoojaBooking")}</h2>
+        <div className=" py-10 text-start px-5 bg-[#FFEEE2]">
+          <h2 className="container text-xl sm:text-2xl md:text-3xl font-bold">{t("PoojaBooking")}</h2>
         </div>
 
         <div className="container px-4 sm:px-8 md:px-16 lg:px-40 mb-5">
@@ -89,6 +89,51 @@ export default function BookingDetailspage() {
             </div>
           </div>
 
+        {/* Progress Bar (Always Visible, Shows "Cancelled" if Needed) */}
+        <p className="p-4 mt-2">
+  <span className="font-semibold text-xl">Pooja Updates</span>
+</p>
+<div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
+ 
+  <p className="text-gray-600 text-sm">
+    <span className="font-semibold">{t("poojadate")}:</span> {booking.booking_date}
+  </p>
+ 
+
+  {/* If booking is cancelled, show a clear message */}
+  {booking.booking_status === "cancelled" ? (
+    <div className="flex justify- mt-4">
+      <p className="bg-red-500 text-white text-lg font-semibold px-4 py-2 rounded-full">
+        {t("Cancelled")}
+      </p>
+    </div>
+  ) : (
+    <div className="mt-6 flex items-center justify-between relative">
+      {["pending", "confirmed", "success"].map((status, index, arr) => (
+        <div key={status} className="flex items-center w-full">
+          {/* Progress Ball */}
+          <div className="relative flex flex-col items-center">
+            <div className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${
+              booking.booking_status === status || 
+              (status === "confirmed" && booking.booking_status === "success") 
+                ? "bg-green-500 border-green-500 text-white"
+                : "bg-gray-200 border-gray-400 text-gray-500"
+            }`}>
+              {index + 1}
+            </div>
+            <span className="text-xs mt-2 text-gray-600">{t(status)}</span>
+          </div>
+
+          {/* Connecting Line (Except for last step) */}
+          {index < arr.length - 1 && (
+            <div className={`flex-1 h-1 items-center mb-4 ${booking.booking_status === arr[index + 1] || booking.booking_status === "success" ? "bg-green-500" : "bg-gray-300"} transition-all duration-300`} />
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
           {/* User Details */}
           {booking.user_info && (
             <>
@@ -145,51 +190,7 @@ export default function BookingDetailspage() {
           )}
 
           {/* Progress Bar (Hidden if Cancelled) */}
-         {/* Progress Bar (Always Visible, Shows "Cancelled" if Needed) */}
-<p className="p-4 mt-2">
-  <span className="font-semibold text-xl">Pooja Updates</span>
-</p>
-<div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
  
-  <p className="text-gray-600 text-sm">
-    <span className="font-semibold">{t("poojadate")}:</span> {booking.booking_date}
-  </p>
- 
-
-  {/* If booking is cancelled, show a clear message */}
-  {booking.booking_status === "cancelled" ? (
-    <div className="flex justify- mt-4">
-      <p className="bg-red-500 text-white text-lg font-semibold px-4 py-2 rounded-full">
-        {t("Cancelled")}
-      </p>
-    </div>
-  ) : (
-    <div className="mt-6 flex items-center justify-between relative">
-      {["pending", "confirmed", "success"].map((status, index, arr) => (
-        <div key={status} className="flex items-center w-full">
-          {/* Progress Ball */}
-          <div className="relative flex flex-col items-center">
-            <div className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${
-              booking.booking_status === status || 
-              (status === "confirmed" && booking.booking_status === "success") 
-                ? "bg-green-500 border-green-500 text-white"
-                : "bg-gray-200 border-gray-400 text-gray-500"
-            }`}>
-              {index + 1}
-            </div>
-            <span className="text-xs mt-2 text-gray-600">{t(status)}</span>
-          </div>
-
-          {/* Connecting Line (Except for last step) */}
-          {index < arr.length - 1 && (
-            <div className={`flex-1 h-1 items-center mb-4 ${booking.booking_status === arr[index + 1] || booking.booking_status === "success" ? "bg-green-500" : "bg-gray-300"} transition-all duration-300`} />
-          )}
-        </div>
-      ))}
-    </div>
-  )}
-</div>
-
         </div>
       </div>
       <Faq/>

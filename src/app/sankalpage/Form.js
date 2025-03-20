@@ -13,10 +13,10 @@ const Form = () => {
   const [errors, setErrors] = useState({});
   const [defaultFields, setDefaultFields] = useState({
     name: "",
-    father_name: "",
+    // father_name: "",
     gotra: "",
-    email: "",
-    address: "",
+    // email: "",
+    // address: "",
   });
   const [dontKnowGotra, setDontKnowGotra] = useState(false);
 
@@ -36,26 +36,28 @@ console.log(packagedetail.amount)
   }, [memberLimit]);
 
   const nameRegex = /^[a-zA-Z\s]*$/;
-  const emailAllowedRegex = /^[a-zA-Z0-9@._-]*$/; // Allows partial email input
-  const addressRegex = /^[a-zA-Z0-9\s\-.,/()]*$/;
+  // const emailAllowedRegex = /^[a-zA-Z0-9@._-]*$/; // Allows partial email input
+  // const addressRegex = /^[a-zA-Z0-9\s\-.,/()]*$/;
   const gotraRegex = /^[a-zA-Z\s]*$/;
   
   const handleDefaultChange = (field, value) => {
     let isValidInput = true;
   
-    if (field === "name" || field === "father_name") {
+    if (field === "name" ) {
       if (!nameRegex.test(value)) {
         isValidInput = false;
       }
-    } else if (field === "email") {
-      if (!emailAllowedRegex.test(value)) {
-        isValidInput = false;
-      }
-    } else if (field === "address") {
-      if (!addressRegex.test(value)) {
-        isValidInput = false;
-      }
-    } else if (field === "gotra") {
+    } 
+    // else if (field === "email") {
+    //   if (!emailAllowedRegex.test(value)) {
+    //     isValidInput = false;
+    //   }
+    // } else if (field === "address") {
+    //   if (!addressRegex.test(value)) {
+    //     isValidInput = false;
+    //   }
+    // } 
+    else if (field === "gotra") {
       if (!gotraRegex.test(value)) {
         isValidInput = false;
       }
@@ -118,7 +120,7 @@ console.log(packagedetail.amount)
       if (!defaultFields[key]) {
         newErrors[key] =  `${t("Thisfieldisrequired")}`
         isValid = false;
-      } else if (key === "name" || key === "father_name") {
+      } else if (key === "name" ) {
         if (!nameRegex.test(defaultFields[key])) {
           newErrors[key] =  `${t("Onlyalphabetsareallowed")}`
           isValid = false;
@@ -127,22 +129,22 @@ console.log(packagedetail.amount)
     });
   
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (defaultFields.email && !emailRegex.test(defaultFields.email)) {
-      newErrors.email =  `${t("Enteravalidemail")}`
-      isValid = false;
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (defaultFields.email && !emailRegex.test(defaultFields.email)) {
+    //   newErrors.email =  `${t("Enteravalidemail")}`
+    //   isValid = false;
+    // }
   
-    const addressRegex = /^[a-zA-Z0-9\s\-.,/()]+$/;
+    // const addressRegex = /^[a-zA-Z0-9\s\-.,/()]+$/;
 
-    // Address validation (Minimum 5 characters)
-    if (!addressRegex.test(defaultFields.address)) {
-      newErrors.address = `${t("Invalidaddressformat")}`;
-      isValid = false;
-    } else if (defaultFields.address.length < 5 || defaultFields.address.length > 100) {
-      newErrors.address = `${t("Addressmustbebetween5and100characters")}`;
-      isValid = false;
-    }
+    // // Address validation (Minimum 5 characters)
+    // if (!addressRegex.test(defaultFields.address)) {
+    //   newErrors.address = `${t("Invalidaddressformat")}`;
+    //   isValid = false;
+    // } else if (defaultFields.address.length < 5 || defaultFields.address.length > 100) {
+    //   newErrors.address = `${t("Addressmustbebetween5and100characters")}`;
+    //   isValid = false;
+    // }
     
   
     // Gotra validation (Must be alphabetic)
@@ -218,10 +220,10 @@ console.log(packagedetail.amount)
       const poojaFormData = {
         ...bookingData,
         name: defaultFields.name,
-        father_name: defaultFields.father_name,
+        // father_name: defaultFields.father_name,
         gotra: defaultFields.gotra,
-        email: defaultFields.email,
-        address: defaultFields.address,
+        // email: defaultFields.email,
+        // address: defaultFields.address,
         members: membersData,
       };
       localStorage.setItem("poojaFormData", JSON.stringify(poojaFormData));
@@ -231,7 +233,7 @@ console.log(packagedetail.amount)
       const response = await api.post("/puja", formData);
   
       if (response.data.status === "1") {
-        toast.success("Pooja booked successfully!");
+        toast.success(" successfully!");
         router.push(`/poojabookingcart?bookingId=${response.data.data.booking_id}`);
       } else {
         toast.error(response.data.message || "Something went wrong!");

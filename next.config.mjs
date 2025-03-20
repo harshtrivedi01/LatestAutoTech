@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   async headers() {
+  async headers() {
     return [
       {
         source: "/(.*)",
@@ -25,11 +25,12 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    domains: ['punyasetu-bucket.s3.ap-south-1.amazonaws.com'],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "dakshhousing.com",
-        pathname: "/satsambhav/uploads/puja/**", // Allow all images in this directory
+        pathname: "/satsambhav/uploads/puja/**",
       },
     ],
   },

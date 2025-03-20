@@ -4,16 +4,16 @@ export default function Heading({
 }) { 
   return (
     <div 
-      className="text-center font-display font-bold tracking-tight flex justify-center items-center mx-auto bg-no-repeat bg-center bg-contain"
+      className="text-center font-display font-bold mt-4 tracking-tight flex justify-center items-center mx-auto bg-no-repeat bg-center bg-contain"
       style={{ 
         backgroundImage: `url('/Assests/Service/service-frame.svg')`, 
-        height: "254px",
+        height: "150px",
         width: "100%",
         maxWidth: "554px"
       }} 
     >
       <p 
-        className="text-[40px] md:text-[50px] sm:text-[40px] xs:text-[30px]" 
+        className="text-[40px] md:text-[40px] sm:text-[30px] xs:text-[20px]" 
         style={{ color: color }}
       >
         {text}

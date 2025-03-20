@@ -33,7 +33,7 @@ export default function List({ module_category_details }) {
   };
 
   const bookingUrls = {
-    "Guru Ji": "#",
+    "चढावा": "#",
     "Pooja Box": "/poojabox",
     "Pooja": "/poojabooking",
     "Granth": "#",
@@ -41,9 +41,9 @@ export default function List({ module_category_details }) {
     "Live Darshan": "#",
     "गुरु जी": "#",
    
-"पंडित जी": "#",
+"चढावा": "#",
     "पूजा": "/poojabooking",
-    "ग्रंथ": "#",
+    "पूजा बॉक्स": "/poojabox",
     "ऑनलाइन कक्षाएं": "#",
     
 "लाइव दर्शन": "#",

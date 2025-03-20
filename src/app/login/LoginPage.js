@@ -158,8 +158,9 @@ export default function LoginPage() {
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
-      <Image src={topimage} alt="test" className="absolute" />
-      <nav className="w-full z-20 top-0 start-0 border-gray-600 bg-[#FFEEE2]">
+     <div className=" bg-[#FFEEE2]">
+     <Image src={topimage} alt="test" className="absolute" />
+      <nav className="container w-full z-20 top-0 start-0 border-gray-600 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <span className="self-center text-3xl font-semibold whitespace-nowrap text-white"></span>
@@ -192,7 +193,7 @@ export default function LoginPage() {
           </div>
         </div>
       </nav>
-      <div className="min-h-screen flex justify-center items-center bg-[#FFEEE2]">
+      <div className="container min-h-screen flex justify-center items-center bg-[#FFEEE2]">
         <div className="p-10 m-4 -mt-10 border-slate-200 rounded-3xl flex flex-col items-center space-y-3 bg-white">
           <div className="">
             <img
@@ -276,6 +277,7 @@ export default function LoginPage() {
           className="absolute right-0 bottom-0 w-[300px] sm:w-[200px] md:w-[300px] lg:w-[400px] max-w-full hidden sm:block"
         />
       </div>
+     </div>
     </>
   );
 }

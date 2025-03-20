@@ -36,12 +36,12 @@ export default function Servicepage () {
   };
     return (
 <>
- <div className="container bg-[#FFEEE2]">
+ <div className=" bg-[#FFEEE2]">
       <div className=" p-60 overflow-hidden">
         <div className="">
           <div className="items-center gap-12">
             <div>
-              <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
+              <h2 className="container lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
               {t("OurService")}
               </h2>
             </div>

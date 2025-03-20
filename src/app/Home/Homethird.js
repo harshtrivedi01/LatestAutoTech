@@ -12,10 +12,26 @@ import { useTranslation } from "react-i18next";
 
 export default function Homethird({pujaData}) {
   const { t } = useTranslation();
+  const limitWords = (htmlString, wordLimit = 40) => {
+    if (!htmlString) return "";
+  
+    // Strip HTML tags to count words properly
+    const plainText = htmlString.replace(/<[^>]+>/g, "");
+    const words = plainText.split(" ");
+  
+    // If within limit, return original HTML
+    if (words.length <= wordLimit) return htmlString;
+  
+    // Trim to word limit and append ellipsis
+    const trimmedText = words.slice(0, wordLimit).join(" ") + "";
+  
+    return trimmedText;
+  };
+  
   return (
     <div className="relative w-full min-h-scree bg-white">
       <div
-        className="container bg-[#FFFFFF] px-2 "
+        className=" bg-[#FFFFFF] px-2 "
         style={{
           backgroundImage: `url('/images/about.jpg')`,
           backgroundSize: "cover",
@@ -29,9 +45,11 @@ export default function Homethird({pujaData}) {
             <Heading text={t("About")} color="white" />
           </div>
 
-          <p 
+          <p
   className="text-center text-white text-base sm:text-lg md:text-xl lg:text-2xl px-4 md:px-8 lg:px-12"
-  dangerouslySetInnerHTML={{ __html:(pujaData?.data?.aboutus_description) }}
+  dangerouslySetInnerHTML={{
+    __html: limitWords(pujaData?.data?.aboutus_description, 40),
+  }}
 ></p>
 
         </div>
@@ -40,7 +58,7 @@ export default function Homethird({pujaData}) {
        
         <br />
         <div>
-          <div className=" ">
+          <div className="container ">
             <div className="    px-4 py-8">
               <section className="">
               <div className="py-4 px-4 mx-auto max-w-screen-xl sm:py-6 lg:px-8">

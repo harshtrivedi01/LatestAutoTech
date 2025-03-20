@@ -41,7 +41,8 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
 
   return (
    <div className="bg-[#FFEEE2]">
-     <div className="  w-full mx-auto py-10 ">
+    <div className="container">
+    <div className="  w-full mx-auto py-10 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -58,7 +59,7 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
         }}
       
         modules={[EffectCoverflow, Pagination, Autoplay]}
-        className="mySwiper container"
+        className="mySwiper "
       >
         {bottomslider_list.map((item, index) => (
           <SwiperSlide
@@ -91,6 +92,7 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+    </div>
     </div>
    </div>
   );

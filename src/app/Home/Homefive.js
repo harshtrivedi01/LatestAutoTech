@@ -18,7 +18,7 @@ function decodeHtml(html) {
   return (
     <div className=" relative w-full  bg-white">
       <div
-        className="container bg-[#FFFFFF] px-2"
+        className=" bg-[#FFFFFF] px-2"
         style={{
           backgroundImage: `url('/images/about.jpg')`,
           backgroundSize: "100% 100%",
@@ -34,7 +34,7 @@ function decodeHtml(html) {
         </div>
 
         {/* Puja Cards Section */}
-        <div className="max-w-7xl mx-auto my-8 px-2">
+        <div className="container max-w-7xl mx-auto my-8 px-2">
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
   {pujaData?.data?.puja_list.map((puja, index) => (
     <li key={index}>
