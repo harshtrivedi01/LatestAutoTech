@@ -113,14 +113,14 @@ const Cart = () => {
   
   return (
     <AuthGuard className="bg-gray-50">
-  <div className="">
+  <div className="container">
 
        <Toaster position="top-right" reverseOrder={false} /> 
       <div className=" ">
       {cartItems > 0 && (
   <>
-    <h1 className="f-34 mb-2 font-semibold text-lg m-5 lg:mx-40  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 "> {t("ShoppingCart")}</h1>
-    <h1 className="mb-2 text-xl cart  px-4 sm:px-6 m-5 lg:mx-40 md:px-10 lg:px-20 xl:px-40 ">
+    <h1 className="f-34 mb-2 font-semibold text-lg m-5 lg:mx-40   "> {t("ShoppingCart")}</h1>
+    <h1 className="mb-2 text-xl cart  m-5 lg:mx-40  ">
     {t("YouhaveTwoiteminyourcart")} <span className="text-orange-600">{cartItems} {t("items")}</span>  {t("YouhaveOneiteminyourcart")}
     </h1>
 
@@ -189,7 +189,7 @@ const Cart = () => {
       </div>
     </div>
 
-   
+    <SliderTwo />
       </AuthGuard>
 
   );

@@ -133,14 +133,29 @@ const Profilepage = () => {
   
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+    let newValue = value;
+  
+    // Validation rules
+    if (["name", "last_name", "speciality", "dobplace", "remark"].includes(name)) {
+      if (!/^[A-Za-z\s]*$/.test(value)) return; // Only letters and spaces
+    }
+  
+    if (name === "address") {
+      if (!/^[A-Za-z0-9\s\-\.,()/]*$/.test(value)) return; // Only allowed chars
+    }
+  
+    if (name === "pincode") {
+      if (!/^\d*$/.test(value)) return; // Only numbers
+    }
+  
     if (name === "state_id") {
-      setFormData((prev) => ({ ...prev, [name]: value, city_id: "" }));
-      fetchCities(value);
+      setFormData((prev) => ({ ...prev, [name]: newValue, city_id: "" }));
+      fetchCities(newValue);
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: newValue }));
     }
   };
+  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -267,11 +282,11 @@ const Profilepage = () => {
 
   return (
     <div className="overflow-hidden">
-        <div className="bg-[#FFEEE2] p-10">
-        <h2 className="text-3xl font-bold">{t("Profile")}</h2>
+        <div className=" bg-[#FFEEE2] p-10 ">
+        <h2 className="container text-3xl font-bold">{t("Profile")}</h2>
       </div>
       <Toaster position="top-center" reverseOrder={false} />
-       <form onSubmit={handleSubmit} className="bg-white w-full overflow-hidden ">
+       <form onSubmit={handleSubmit} className="container bg-white w-full overflow-hidden ">
        <div className=" h-40 bg-[#FEEE2] flex mt-10 justify-center">
           <div className="relative">
             <div className="w-44 h-44 border-4 border-[#E5644E] rounded-full overflow-hidden transition-transform duration-300 hover:scale-110">
@@ -616,6 +631,7 @@ const Profilepage = () => {
                     type="text"
                     name="pincode"
                     id="pincode"
+                    max={6}
                     value={formData.pincode}
                     placeholder="302025"
                     onChange={handleChange} 
@@ -635,11 +651,6 @@ const Profilepage = () => {
             {t("UpdateProfile")}
             </button>
           </div>
-        {/* <div className=" text-sm flex justify-center items-center">
-            <button className="hover:border register text-white bg-[#E5644E] w-40 rounded-lg shadow-lg shadow-gray-400 py-[12px] px-5 hover:scale-100 font-semibold duration-300">
-              Log Out
-            </button>
-          </div> */}
         
         </div>
         </div>

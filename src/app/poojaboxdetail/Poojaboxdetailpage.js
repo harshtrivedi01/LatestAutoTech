@@ -139,8 +139,8 @@ export default function Poojaboxdetailpage() {
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} /> 
-      <section className="poojadetail p-60">
-        <div className="container">
+      <section className="container poojadetail p-60">
+        <div className="">
           <div className="flex flex-col justify-center">
           <div className="relative flex flex-col md:flex-row md:flex-row md:space-x-5 lg:mx-[40px] space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-white bg-white">
   {/* Product Image */}

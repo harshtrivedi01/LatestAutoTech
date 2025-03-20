@@ -253,11 +253,13 @@ const updateCartQuantity = async (productId, change) => {
   }
 
   return (
-    <AuthGuard className="bg-gray-50 ">
+    <AuthGuard className=" bg-gray-50 ">
         <Toaster position="top-right" reverseOrder={false} />
-            <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">  {t("ShoppingCart")} </h1>
-       {/* Progress Steps */}
-       <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
+           
+     <div className="container">
+     <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">  {t("ShoppingCart")} </h1>
+  {/* Progress Steps */}
+  <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
       <div className="flex items-center  md:mb-0">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
       <span className="font-bold"><CheckIcon/></span>
@@ -284,7 +286,7 @@ const updateCartQuantity = async (productId, change) => {
 
       <div className="flex items-center">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-500">
-          <span className="font-bold">3</span>
+          <span className="font-bold ">3</span>
         </div>
         <p className="ml-2 text-sm font-semibold text-gray-700">
         {t("PayinfoSelectapaymentmethod")} 
@@ -295,31 +297,40 @@ const updateCartQuantity = async (productId, change) => {
     </div>
       
        <div className="flex flex-col md:mx-10 lg:mx-20 xl:mx-40 m-5 mb-40 md:flex-row gap-6">
-            <div className="md:w-2/3">
-              {cartItems.map((item) => (
-                <div key={item.id} className="w-full my-5">
-                  <div className="bg-white p-4 rounded-lg border shadow-xl">
-                    <div className="flex items-start gap-4">
-                      <img src={"/images/logo.png"||item.image} alt={item.product_name} className="rounded-lg object-cove h-40 w40" />
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800 text-lg">{item.product_name}</h3>
-                        <p className="text-gray-500 text-sm my-2" dangerouslySetInnerHTML={{ 
-                      __html: (item.description ? item.description.split(" ").slice(0, 20).join(" ") + "..." : "Special discounted price for you!") 
-                    }}></p>
-      
-                        <p>
-                          <span className="text-3xl font-bold text-slate-900">
-                            ₹{Math.floor(item.discounted_price)}
-                          </span>
-                          <span className="text-sm ms-2 text-slate-400 line-through">
-                          {t("MRP")} ₹{Math.floor(item.price)}
-                          </span>
-                          <span className="text-red-700 text-lg ms-3">
-                            ({Math.floor(item.discount)}% {t("off")})
-                          </span>
-                        </p>
-                        
-                        <div className="mt-3 flex items-center">
+       <div className="w-full md:w-2/3">
+  {cartItems.map((item) => (
+    <div key={item.id} className="w-full my-5">
+      <div className="bg-white p-4 rounded-lg border shadow-xl">
+        <div className="flex flex-col md:flex-row items-start gap-4">
+          {/* Image */}
+          <img 
+            src={"/images/logo.png" || item.image} 
+            alt={item.product_name} 
+            className="rounded-lg object-contain h-32 w-32 sm:h-40 sm:w-40"
+          />
+          
+          {/* Product Details */}
+          <div className="flex-1 w-full">
+            <h3 className="font-semibold text-gray-800 text-lg">{item.product_name}</h3>
+            <p className="text-gray-500 text-sm my-2 line-clamp-2" dangerouslySetInnerHTML={{ 
+              __html: (item.description ? item.description.split(" ").slice(0, 20).join(" ") + "..." : " ") 
+            }}></p>
+
+            {/* Price Section */}
+            <p>
+              <span className="text-2xl sm:text-3xl font-bold text-slate-900">
+                ₹{Math.floor(item.discounted_price)}
+              </span>
+              <span className="text-sm ms-2 text-slate-400 line-through">
+                {t("MRP")} ₹{Math.floor(item.price)}
+              </span>
+              <span className="text-red-700 text-lg ms-3">
+                ({Math.floor(item.discount)}% {t("off")})
+              </span>
+            </p>
+            
+            {/* Quantity & Remove Button */}
+            <div className="mt-3 flex items-center">
                        
 
 <div className="flex items-center rounded-lg shadow-lg border border-[#E5644E]">
@@ -360,16 +371,14 @@ const updateCartQuantity = async (productId, change) => {
                             onClick={() => handleCartAction(item.product_id)}
                           />
       
-                          <span className="ml-auto font-bold p-1 lg:p-3 rounded-lg text-white bg-orange-400">
-                            ₹{Math.floor((quantities[item.product_id] || item.quantity) * item.discounted_price)}
-                          </span>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
             <div className="w-full md:w-1/3">
   <div className="bg-white p-6 rounded-lg shadow border border-orange-600">
     <h3 className="font-semibold text-gray-800 text-xl mb-3">  {t("Checkout")} </h3>
@@ -409,6 +418,7 @@ const updateCartQuantity = async (productId, change) => {
 </div>
 
           </div>
+     </div>
 
     <SliderTwo/>
       </AuthGuard>

@@ -40,31 +40,37 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
 
   return (
     <>
-      <div className="flex flex-col min-h-screen md:flex-row gap-6 container sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6">
-        <div className="md:w-2/3">
-          {cartItems.map((item) => (
-            <div key={item.id} className="w-full my-5">
-              <div className="bg-white p-4 rounded-lg border shadow-xl">
-                <div className="flex items-start gap-4">
-                  <img 
-                    src={item.image || "/images/logo.png"} 
-                    alt={item.product_name} 
-                    className="rounded-lg object-contain h-40 w-40" 
-                    onError={(e) => (e.target.src = "/images/logo.png")}
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800 text-lg">{item.product_name}</h3>
-                    <p className="text-gray-500 text-sm my-1" dangerouslySetInnerHTML={{ 
-                      __html: (item.description ? item.description.split(" ").slice(0, 20).join(" ") + "..." : "Special discounted price for you!") 
-                    }}></p>
+      <div className="flex flex-col  md:flex-row gap-6  sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6">
+      <div className="w-full md:w-2/3">
+  {cartItems.map((item) => (
+    <div key={item.id} className="w-full my-5">
+      <div className="bg-white p-4 rounded-lg border shadow-xl">
+        <div className="flex flex-col sm:flex-row items-start gap-4">
+          {/* Image Section */}
+          <div className="w-full sm:w-1/3 flex justify-center">
+            <img 
+              src={item.image || "/images/logo.png"} 
+              alt={item.product_name} 
+              className="rounded-lg object-contain w-full sm:w-40 h-auto sm:h-40"
+              onError={(e) => (e.target.src = "/images/logo.png")}
+            />
+          </div>
 
-                    <p>
-                      <span className="text-3xl font-bold text-slate-900">₹{Math.floor(item.discounted_price)}</span>
-                      <span className="text-sm ms-2 text-slate-400 line-through">   {t("MRP")} ₹{Math.floor(item.price)}</span>
-                      <span className="text-red-700 text-lg ms-3">({Math.floor(item.discount)}%  {t("off")})</span>
-                    </p>
+          {/* Content Section */}
+          <div className="flex-1">
+            <h3 className="font-semibold text-gray-800 text-base sm:text-lg">{item.product_name}</h3>
+            <p className="text-gray-500 text-sm sm:text-base my-1" dangerouslySetInnerHTML={{ 
+              __html: (item.description ? item.description.split(" ").slice(0, 20).join(" ") + "..." : "Special discounted price for you!") 
+            }}></p>
 
-                    <div className="mt-3 flex items-center">
+            <p>
+              <span className="text-2xl sm:text-3xl font-bold text-slate-900">₹{Math.floor(item.discounted_price)}</span>
+              <span className="text-xs sm:text-sm ms-2 text-slate-400 line-through">{t("MRP")} ₹{Math.floor(item.price)}</span>
+              <span className="text-red-700 text-sm sm:text-lg ms-3">({Math.floor(item.discount)}% {t("off")})</span>
+            </p>
+
+            {/* Quantity & Actions Section */}
+            <div className="mt-3 flex items-center">
                       <div className="flex items-center rounded-lg shadow-lg border border-orange-400">
                         <button
                           className="text-orange-600 text-lg px-3 py-1"
@@ -95,16 +101,17 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
                         onClick={() => handleCartAction(item.product_id)}
                       />
 
-                      <span className="ml-auto font-bold p-1 lg:p-3 rounded-lg text-white bg-orange-400">
+                      {/* <span className="ml-auto font-bold p-1 lg:p-3 rounded-lg text-white bg-orange-400">
                         ₹{Math.floor((quantities[item.product_id] || item.quantity) * item.discounted_price)}
-                      </span>
+                      </span> */}
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          </div>
         </div>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         {/* Right Section */}
         <div className="w-full md:w-1/3">
@@ -144,7 +151,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
           </div>
         </div>
       </div>
-      <SliderTwo />
+     
     </>
   );
 }

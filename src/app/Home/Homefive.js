@@ -16,9 +16,9 @@ function decodeHtml(html) {
 }
 
   return (
-    <div className="relative w-full  bg-white">
+    <div className=" relative w-full  bg-white">
       <div
-        className="bg-[#FFFFFF] px-2"
+        className="container bg-[#FFFFFF] px-2"
         style={{
           backgroundImage: `url('/images/about.jpg')`,
           backgroundSize: "100% 100%",
@@ -68,7 +68,7 @@ function decodeHtml(html) {
     />
   ) : (
     // Fallback text if no description is available
-   ` ${t("Pujadescriptiongoeshere")}`
+ " "
   )}
 </p>
 
@@ -86,7 +86,7 @@ function decodeHtml(html) {
     />
   ) : (
     // Fallback text if no short description is available
-    ` ${t("Pujadescriptiongoeshere")}`
+   " "
   )}
 </p>
 

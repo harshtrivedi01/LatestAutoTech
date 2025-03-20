@@ -174,40 +174,58 @@ const JoinUs = () => {
   
 
   return (
-    <div>
+    <div className="">
        <Toaster position="top-center" reverseOrder={false} />
-      <div className="bg-[#FFEEE2] p-10">
+      <div className="container bg-[#FFEEE2] p-10">
         <h2 className="text-3xl font-bold">{t("PanditRegistration")}</h2>
       </div>
 
-      <section className="bg-gray-100 py-8 px-4">
+      <section className=" container bg-gray-100 py-8 px-4">
   <div className="max-w-7xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg">
     <h2 className="text-2xl sm:text-3xl font-bold text-[#E5644E] pb-5 text-start">
      {t("Register")}
     </h2>
     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      {[
-        { label: `${t("Name")}`, name: "name", type: "text" },
-        { label: `${t("Email")}`, name: "email", type: "email" },
-        { label: `${t("Phonenumber")}`, name: "mobile", type: "text" },
-        { label: `${t("Speciality")}`, name: "speciality", type: "text" },
-        { label: `${t("Address")}`, name: "address", type: "text" },
-        { label: `${t("Description")}`, name: "description", type: "text" },
-        { label: `${t("Reference")}`, name: "reference", type: "text" },
-        { label: `${t("Remark")}`, name: "remark", type: "text" },
-      ].map(({ label, name, type }) => (
-        <div key={name}>
-          <label className="block text-sm text-[#E5644E] pb-1">{label} *</label>
-          <input
-            type={type}
-            name={name}
-            value={formData[name]}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
-          />
-          {errors[name] && <p className="text-red-700 text-xs">{errors[name]}</p>}
-        </div>
-      ))}
+    {[
+  { label: `${t("Name")}`, name: "name", type: "text" },
+  { label: `${t("Email")}`, name: "email", type: "email" },
+  { label: `${t("Phonenumber")}`, name: "mobile", type: "text" },
+  { label: `${t("Speciality")}`, name: "speciality", type: "text" },
+  { label: `${t("Address")}`, name: "address", type: "text" },
+  { label: `${t("Description")}`, name: "description", type: "text" },
+  { label: `${t("Reference")}`, name: "reference", type: "text" },
+  { label: `${t("Remark")}`, name: "remark", type: "text" },
+].map(({ label, name, type }) => (
+  <div key={name}>
+    <label className="block text-sm text-[#E5644E] pb-1">{label} *</label>
+    <input
+      type={type}
+      name={name}
+      value={formData[name]}
+      onChange={(e) => {
+        let regex;
+        if (name === "name" || name === "speciality" || name === "description" || name === "remark") {
+          regex = /^[A-Za-z ]*$/; // Only letters and spaces
+        } else if (name === "mobile") {
+          regex = /^[0-9]*$/; // Only numbers
+        } else if (name === "address") {
+          regex = /^[A-Za-z0-9 \-\/\.\(\)]*$/; // Letters, numbers, spaces, and (- / . ( ))
+        } else if (name === "reference") {
+          regex = /^[A-Za-z0-9 ]*$/; // Letters, numbers, and spaces
+        }
+
+        // Skip regex filtering for email to allow typing
+        if (name !== "email" && regex && !regex.test(e.target.value)) return;
+
+        handleChange(e);
+      }}
+      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
+    />
+    {errors[name] && <p className="text-red-700 text-xs">{errors[name]}</p>}
+  </div>
+))}
+
+
 
       <div>
         <label className="block text-sm text-[#E5644E] pb-1">{t("Country")} *</label>
@@ -258,12 +276,15 @@ const JoinUs = () => {
       <div>
         <label className="block text-sm text-[#E5644E] pb-1">{t("UploadImage")} *</label>
         <input
-          id="file-input"
-          type="file"
-          name="image"
-          onChange={handleFileChange}
-          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
-        />
+  id="file-input"
+  type="file"
+  name="image"
+  accept="image/*" // Restricts file selection to images only
+  capture="environment" // Opens the camera for taking a photo (back camera)
+  onChange={handleFileChange}
+  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5644E]"
+/>
+
         {errors.image && <p className="text-red-700 text-xs">{errors.image}</p>}
       </div>
 

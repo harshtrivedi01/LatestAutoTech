@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PoojaDatePopup from "./PoojaDatePopup";
 import { useTranslation } from "react-i18next";
+import { usePathname, useRouter } from "next/navigation";
 
 const PoojaPackages = ({ detail }) => {
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [expandedPackages, setExpandedPackages] = useState({}); // Track expanded state per package
-
+  const router = useRouter(); // Initialize useRouter
+   const pathname = usePathname();
   useEffect(() => {
     if (detail?.packages?.length > 0) {
       setSelectedPackage(detail.packages[0]);
@@ -15,6 +17,14 @@ const PoojaPackages = ({ detail }) => {
   }, [detail]);
 
   const handleParticipate = (pkg) => {
+    const isLoggedIn = localStorage.getItem("authToken"); // Check if user is logged in
+
+    if (!isLoggedIn) {
+      localStorage.setItem("redirectPath", pathname);
+      router.push("/login"); // Redirect to login page
+      return;
+    }
+
     setSelectedPackage(pkg);
     setShowPopup(true);
   };
@@ -110,16 +120,18 @@ const PoojaPackages = ({ detail }) => {
         </div>
 
         {/* Participate Button */}
-        <div className="p-4 mt-auto">
-          <button
-            onClick={() => handleParticipate(pkg)}
-            className={`w-full py-3 px-4 text-sm sm:text-base rounded-2xl text-white font-semibold uppercase tracking-wide ${
-              isHighlighted ? "package-dark-btn" : "package-light-btn"
-            }`}
-          >
-            {t("PARTICIPATE")}
-          </button>
-        </div>
+        {/* Participate Button */}
+<div className="p-4 mt-auto">
+  <button
+    onClick={() => handleParticipate(pkg)}
+    className={`w-full py-3 px-4 text-sm sm:text-base rounded-2xl text-white font-semibold uppercase tracking-wide ${
+      isHighlighted ? "package-dark-btn" : "package-light-btn"
+    }`}
+  >
+    {t("PARTICIPATE")}
+  </button>
+</div>
+
       </div>
     );
   })}

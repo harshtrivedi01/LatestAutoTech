@@ -17,7 +17,7 @@ return(
    <Image src={success} alt="ttt" width={50} height={50}/>
    </div>
     <div className="text-center">
-      <h3 className="md:text-2xl text-base text-[#27AE60] font-semibold text-center ">{t("SUCCESS")}</h3>
+      <h3 className="md:text-2xl text-base text-[#27AE60] font-semibold text-center ">{t("SUCCESSS")}</h3>
       <p className="text-[#4A4A4A] my-5 font-semibold">{t("SUCCESSdis")}</p>
       
       <div className="py-10 text-center">

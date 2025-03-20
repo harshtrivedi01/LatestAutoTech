@@ -11,7 +11,7 @@ const Page = () => {
     const { t } = useTranslation();
     return (
     <AuthGuard>
-        <div className="p-6 md:px-20">
+        <div className="container p-6">
           <div className="flex flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
   <div className="flex items-center mb-4 md:mb-0">
   <div

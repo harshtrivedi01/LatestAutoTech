@@ -35,16 +35,62 @@ console.log(packagedetail.amount)
     }
   }, [memberLimit]);
 
+  const nameRegex = /^[a-zA-Z\s]*$/;
+  const emailAllowedRegex = /^[a-zA-Z0-9@._-]*$/; // Allows partial email input
+  const addressRegex = /^[a-zA-Z0-9\s\-.,/()]*$/;
+  const gotraRegex = /^[a-zA-Z\s]*$/;
+  
   const handleDefaultChange = (field, value) => {
-    setDefaultFields({ ...defaultFields, [field]: value });
+    let isValidInput = true;
+  
+    if (field === "name" || field === "father_name") {
+      if (!nameRegex.test(value)) {
+        isValidInput = false;
+      }
+    } else if (field === "email") {
+      if (!emailAllowedRegex.test(value)) {
+        isValidInput = false;
+      }
+    } else if (field === "address") {
+      if (!addressRegex.test(value)) {
+        isValidInput = false;
+      }
+    } else if (field === "gotra") {
+      if (!gotraRegex.test(value)) {
+        isValidInput = false;
+      }
+    }
+  
+    if (!isValidInput) return; // Prevent updating state if input is invalid
+  
+    setDefaultFields((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
+  
 
+  const nnameRegex = /^[a-zA-Z\s]*$/;
+  const ggotraRegex = /^[a-zA-Z\s]*$/;
+  
   const handleMemberChange = (index, field, value) => {
-    const updatedMembers = [...members];
-    updatedMembers[index][field] = value;
-    setMembers(updatedMembers);
+    let isValidInput = true;
+  
+    if (field === "name" && !nnameRegex.test(value)) {
+      isValidInput = false;
+    } else if (field === "gotra" && !ggotraRegex.test(value)) {
+      isValidInput = false;
+    }
+  
+    if (!isValidInput) return; // Prevent updating state if input is invalid
+  
+    setMembers((prev) => {
+      const updatedMembers = [...prev];
+      updatedMembers[index][field] = value;
+      return updatedMembers;
+    });
+  
+   
   };
+  
 
   const addMember = () => {
     if (members.length < memberLimit - 1) {
@@ -87,11 +133,17 @@ console.log(packagedetail.amount)
       isValid = false;
     }
   
+    const addressRegex = /^[a-zA-Z0-9\s\-.,/()]+$/;
+
     // Address validation (Minimum 5 characters)
-    if (defaultFields.address && defaultFields.address.length < 5) {
-      newErrors.address =  `${t("Addressmustbebetween5and100characters")}`
+    if (!addressRegex.test(defaultFields.address)) {
+      newErrors.address = `${t("Invalidaddressformat")}`;
+      isValid = false;
+    } else if (defaultFields.address.length < 5 || defaultFields.address.length > 100) {
+      newErrors.address = `${t("Addressmustbebetween5and100characters")}`;
       isValid = false;
     }
+    
   
     // Gotra validation (Must be alphabetic)
     const gotraRegex = /^[a-zA-Z\s]+$/;
@@ -207,9 +259,9 @@ console.log(packagedetail.amount)
     }
   };
   return (
-    <div className="p-6 min-h-scree">
+    <div className="container p-6 ">
       <Toaster position="top-right" reverseOrder={false} />
-      <h1 className="font-medium my-4 text-2xl">{t("ChoosePreviousSankalpDetail")}</h1>
+      {/* <h1 className="font-medium my-4 text-2xl">{t("ChoosePreviousSankalpDetail")}</h1> */}
 
       <div className="flex justify-between items-center bg-white p-2 px-4 shadow-md rounded-lg cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <h2 className="text-lg font-semibold text-gray-800">+ {t("AddSankalpFormDetail")}</h2>

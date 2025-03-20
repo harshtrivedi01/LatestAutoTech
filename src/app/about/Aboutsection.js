@@ -19,9 +19,9 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
 
  const { t } = useTranslation();
   return (
-    <div className="relative w-full min-h-screen bg-white">
+    <div className="relative w-full  bg-white">
       <div
-        className="bg-[#FFFFFF] px-2 "
+        className="container bg-[#FFFFFF] px-2 "
         style={{
           backgroundImage: `url('/images/about.jpg')`,
           backgroundSize: "cover",

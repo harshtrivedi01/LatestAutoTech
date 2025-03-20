@@ -60,8 +60,8 @@ export default function Footersection() {
 
 	return (
 		<>
-			<footer className="px-4 divide-y text-gray-800 bg-gray-100">
-				<div className="container mx-auto py-10 flex flex-col lg:flex-row justify-between space-y-8 lg:space-y-0">
+			<footer className="container px-4 divide-y text-gray-800 bg-gray-100">
+				<div className=" mx-auto py-10 flex flex-col lg:flex-row justify-between space-y-8 lg:space-y-0">
 					{/* Logo and Contact Info */}
 					<div className="lg:w-1/3 space-y-5">
 						<a href="/" className="flex items-center space-x-3">

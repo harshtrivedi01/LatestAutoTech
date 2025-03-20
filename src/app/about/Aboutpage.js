@@ -9,8 +9,8 @@ export default function Aboutpage({heading,description,image}) {
   const { t } = useTranslation();
   return (
     <>
-      <section className="pt-20 md:pt-20 bg-[#FFF8F5]">
-        <div className="container mx-auto px-8 lg:flex">
+      <section className="container pt-20 md:pt-20 bg-[#FFF8F5]">
+        <div className=" mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold leading-none">{heading}</h1>
             <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html:(description) }}></p>
@@ -29,7 +29,7 @@ export default function Aboutpage({heading,description,image}) {
             <img src={image||"/images/aboutimage.png"}
                onError={(e) => (e.target.src ="/images/aboutimage.png") }
             /></div>
-          <div className="flex absolute w-80 hidden lg:flex lg:right-20 lg:top-80 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
+          <div className="flex absolute w-80 hidden lg:flex lg:right-20 lg:top-96 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
             <div className="w-full text-left">
 
               <div className="flex gap-5 border-b-2 border-gray-300">

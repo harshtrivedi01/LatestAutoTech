@@ -14,7 +14,7 @@ export default function Cards({ onlinepoojawork }) {
   {onlinepoojawork?.map((item) => (
     <div
       key={item.id}
-      className="flex flex-col justify-between shadow shadow-2xl rounded-2xl p-5 h-full"
+      className="flex flex-col justify-between shadow shadow-2xl rounded-2xl p-5 h-full bg-white"
     >
       {/* Top Section */}
       <div className="flex flex-col gap-3 flex-grow">
