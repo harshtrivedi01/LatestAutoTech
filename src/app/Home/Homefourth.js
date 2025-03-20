@@ -10,7 +10,11 @@ import { useTranslation } from "react-i18next";
 export default function Homefourth({ pujaData }) {
     const { t } = useTranslation();
   const [cartStatus, setCartStatus] = useState([]);
-
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
   useEffect(() => {
     if (pujaData?.data?.product_list) {
       setCartStatus(pujaData.data.product_list.map((puja) => puja.cart_status));
@@ -93,9 +97,9 @@ export default function Homefourth({ pujaData }) {
                     className="mx-3 mt-3 flex rounded-xl"
                     href={`poojaboxdetail/${puja.id}`}
                   >
-                    <div className="w-40 h-[120px] rounded-lg flex justify-center">
+                    <div className="w-44 h-[140px] rounded-lg flex justify-center">
                       <img
-                        className="object-cover rounded-lg"
+                        className="object-fill rounded-lg"
                         src={
                           puja.image ||
                           "/images/logo.png"
@@ -108,14 +112,29 @@ export default function Homefourth({ pujaData }) {
                       />
                     </div>
                     <span className="m-2 rounded-full px-2 lg:text-xl text-yellow-700 text-black leading-relaxed">
-                      {puja.name || "Puja Title"}
-                      <p className="mt-5 text-base font-medium text-sm text-black leading-relaxed">
-  {puja.description 
-    ? puja.description .split(" ").slice(0, 12).join(" ") + (puja.description .split(" ").length > 12 ? "..." : "")
-    :  ` ${t("Pujadescriptiongoeshere")}`}
-</p>
-                      
-                    </span>
+  {/* Display puja name */}
+  <span
+    dangerouslySetInnerHTML={{ __html: puja?.name || "Puja Title" }}
+  />
+  
+  <p className="mt-3 text-base font-medium text-sm text-black leading-relaxed">
+    {puja.description ? (
+      <span
+        dangerouslySetInnerHTML={{
+          __html:
+            // Decode HTML entities, limit the length, and add ellipsis if necessary
+            decodeHtml(puja.description).length > 190
+              ? decodeHtml(puja.description).substring(0, 190) + "..."
+              : decodeHtml(puja.description),
+        }}
+      />
+    ) : (
+      // Display fallback text when description is not available
+      "No description available."
+    )}
+  </p>
+</span>
+
                   </Link>
                   <div className="mt-4 px-5 pb-5">
                     <div className="flex items-center">
@@ -140,15 +159,18 @@ export default function Homefourth({ pujaData }) {
                     <div className="mt-2 mb-5 flex items-center justify-between">
 
                       <p>
-                        <span className="text-3xl font-bold text-slate-900">
-                          ₹{puja.discounted_price}
+                        <span className="text-2xl font-bold items-top text-slate-900">
+                         <span className="text-base"> ₹ </span>{Math.floor(puja.discounted_price)}
                         </span>
-                        <span className="text-sm ms-2 text-slate-900 line-through">
-                        {t("MRP")} ₹{puja.discounted_price}
+                        <span className="text-xs ms-2 text-slate-900 line-through">
+                        {t("MRP")} ₹{Math.floor(puja.discounted_price)}
                         </span>
-                        <span className="text-red-700 text-lg ms-3">
-                          ({puja.discount}%  {t("off")})
-                        </span>
+                        {puja.discount > 0 && (
+  <span className="text-red-700 text-lg ms-3">
+    ({Math.floor(puja.discount)}% {t("off")})
+  </span>
+)}
+
                       </p>
 
                     </div>

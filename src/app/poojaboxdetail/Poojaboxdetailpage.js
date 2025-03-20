@@ -24,7 +24,11 @@ export default function Poojaboxdetailpage() {
   const [cartStatus, setCartStatus] = useState(); // Track cart status
   const [wishlistStatus, setWishlistStatus] = useState();
   const router = useRouter(); // Initialize router
-
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
   useEffect(() => {
     fetchPujaData();
   }, []);
@@ -139,7 +143,7 @@ export default function Poojaboxdetailpage() {
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} /> 
-      <section className="container poojadetail p-60">
+      <section className="container poojadetail my-5">
         <div className="">
           <div className="flex flex-col justify-center">
           <div className="relative flex flex-col md:flex-row md:flex-row md:space-x-5 lg:mx-[40px] space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-white bg-white">
@@ -147,12 +151,12 @@ export default function Poojaboxdetailpage() {
   <div className="w-full md:w-1/2 bg-white grid place-items-center">
     <img src={pujaData.image || "/images/logo.png"}
       onError={(e) => (e.target.src = "/images/logo.png")}
-    alt="product image" className="w-full h-[400px] object-contain" />
+    alt="product image" className="w-full h-[400px] object-cover rounded-xl" />
   </div>
 
   {/* Product Details */}
-  <div className="w-full md:w-1/2 bg-white flex flex-col space-y-4 p-3">
-    <h3 className="font-black flex justify-between text-[#BA1A1A] border-b border-b-[#BA1A1A] md:text-3xl text-xl">
+  <div className="w-full md:w-1/2 bg-white  py-5 flex flex-col space-y-4 p-3">
+    <h3 className="font-black pb-2 flex justify-between text-[#BA1A1A] border-b border-b-[#BA1A1A] md:text-3xl text-xl">
       {pujaData.name || "Product Name"}
       <button
         onClick={() => handleWishlistAction(pujaData.id)}
@@ -166,27 +170,43 @@ export default function Poojaboxdetailpage() {
 
     {/* Rating Section */}
     <div className="flex justify-between items-center">
-      <div className="flex items-center mb-5">
+      <div className="flex items-center mb-3">
         <p className="text-gray-600 font-bold text-sm ml-1">
           {pujaData.rating}
           <span className="text-gray-500 font-normal"> ({pujaData.rating_user}  {t("reviews")})</span>
         </p>
       </div>
     </div>
-
+    <p className="text-lg sm:text-xl md:text-lg lg:text-xl font-semibold text-black leading-relaxed">
+    {pujaData.short_description ? (
+      <span
+        dangerouslySetInnerHTML={{
+          __html:
+            // Decode HTML entities, limit the length, and add ellipsis if necessary
+            decodeHtml(pujaData.short_description).length > 150
+              ? decodeHtml(pujaData.short_description).substring(0, 150) + "..."
+              : decodeHtml(pujaData.short_description),
+        }}
+      />
+    ) : (
+      // Display fallback text when description is not available
+      " "
+    )}
+  </p>
     {/* Pricing */}
-    <p>
+    <p className="">
       <span className="text-3xl font-bold text-orange-600">
         ₹{Math.floor(pujaData.discounted_price)}
       </span>
       <span className="text-sm text-slate-900 line-through ms-2">
       {t("MRP")} ₹{Math.floor(pujaData.price)}
       </span>
+      {pujaData.discount > 0 && (
       <span className="text-red-700 text-lg ms-3">
         ({Math.floor(pujaData.discount)}% {t("off")})
-      </span>
+      </span>)}
     </p>
-
+<br/>
   {/* Action Buttons */}
 <div className="flex gap-7 mt-4">
   {pujaData.stock == false ? (

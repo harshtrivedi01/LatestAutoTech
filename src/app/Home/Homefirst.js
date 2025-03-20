@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const Homefirst = ({ sliderList = [] }) => {
+   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
   const totalSlides = sliderList.length;
@@ -38,7 +40,7 @@ const Homefirst = ({ sliderList = [] }) => {
   if (totalSlides === 0) {
     return (
       <div className="text-center py-8">
-        <p>No slides available at the moment.</p>
+        <p className="text-center">{t("Noslidesavailableatthemoment")}</p>
       </div>
     );
   }
@@ -46,7 +48,7 @@ const Homefirst = ({ sliderList = [] }) => {
   return (
     <div id="carousel" className="relative w-full">
       {/* Carousel Wrapper */}
-      <div className="container relative h-56 sm:h-72 md:h-96 overflow-hidden rounded-lg">
+      <div className="container relative h-56 sm:h-72 md:h-[380px] overflow-hidden rounded-lg">
         {sliderList.map((slide, index) => (
           <div
             key={index}
@@ -55,13 +57,15 @@ const Homefirst = ({ sliderList = [] }) => {
             }`}
           >
             <Link href={getRedirectUrl(slide.module_category_id)}>
-              <Image
-                src={slide.slider || "/images/sliderbackground.jpg"}
-                alt={`Slide ${index + 1}`}
-                layout="fill"
-                objectFit="fill"
-                className="rounded-lg cursor-pointer"
-              />
+            <Image
+  src={slide.slider || "/images/sliderbackground.jpg"}
+  alt={`Slide ${index + 1}`}
+  layout="fill"
+  objectFit="fill"
+  className="rounded-lg cursor-pointer"
+  onError={(e) => e.target.src = "/images/sliderbackground.jpg"} // Fallback to default image if error occurs
+/>
+
             </Link>
           </div>
         ))}

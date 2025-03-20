@@ -79,7 +79,7 @@ export default function Page() {
     <div>
       <div className="bg-[#FFEEE2]">
         <div className="p-60 overflow-hidden">
-          <div className="container">
+          <div className="container max-w-7xl">
             <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
             {t("OrderHistory")}
             </h2>
@@ -213,6 +213,17 @@ export default function Page() {
             <p className="text-gray-600 text-lg pb-5">
               {order.address.address}, {order.address.city}, {order.address.state} - {order.address.pincode}
             </p>
+          </div>
+          <div className="mt-5">
+          <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("Help&Support")}</h3>
+          <p className="flex items-center">
+									<a href={`tel:+91 7340099503`} className="flex border p-2 rounded-xl items-center text-gray-800 hover:text-green-600">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 mr-2 bg-green-500 p-2 rounded-full text-white text-xl sm:mr-2">
+											<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+										</svg>
+										<span>+91 7340099503</span>
+									</a>
+								</p>
           </div>
         </div>
       </div>

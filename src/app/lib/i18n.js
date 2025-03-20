@@ -27,7 +27,7 @@ i18n
           ContactInformation: "Contact Information",
           Name: "Name",
           Email: "Email",
-          Phonenumber: "Phone number",
+          Phonenumber: "Phone Number",
           Message: "Message",
           Register: " Register Now!",
           Speciality: "Speciality",
@@ -311,10 +311,13 @@ i18n
 
         FatherName:"Father Name",
         success:"success",
+
+        Noslidesavailableatthemoment:"No slides available at the moment."
         },
       },
       hi: {
         translation: {
+          Noslidesavailableatthemoment:"इस समय कोई स्लाइड उपलब्ध नहीं है।",
           success:"सफलता",
           FatherName:"पिता का नाम",
           Paymentstatus:"भुगतान स्थिति", 

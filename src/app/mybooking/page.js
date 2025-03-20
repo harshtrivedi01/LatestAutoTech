@@ -160,7 +160,7 @@ const Page = () => {
     <div className="bg-gray-200">
       <div className="bg-[#FFEEE2]">
         <div className="p-60 overflow-hidden">
-          <div className="container">
+          <div className="container max-w-7xl flex">
             <div className="items-center gap-12">
               <div>
                 <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
@@ -346,7 +346,7 @@ const Page = () => {
         {t("Nobookinghistoryavailable")}
       </p>
     ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid grid-row-1 sm:grid-row-2 md:grid-row-3 gap-5">
         {(searchQuery ? searchResults?.order_list ?? [] : poojaBox ?? []).map((order) => (
           <div
             key={order.order_id}

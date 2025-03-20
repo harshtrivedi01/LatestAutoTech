@@ -516,7 +516,7 @@ export default function Address() {
           {showForm && (
             <form onSubmit={formData.address_id ? handleUpdateAddress : handleSubmit} className="mt-5 border-2 rounded-xl bg-white p-4 gap-3">
               <div className="mt-5 lg:grid grid-cols-3   gap-3">
-              <label className="block mb-2 col-1">
+              <label className="block mb-2 col-1">{t("Name")}
   <input
     type="text"
     placeholder={t("Enteryourname")}
@@ -527,13 +527,13 @@ export default function Address() {
         setFormData({ ...formData, name: value });
       }
     }}
-    className="w-full p-2 rounded-lg border"
+    className="w-full p-2 mt-1 rounded-lg border"
   />
   {formErrors.name && <p className="error text-red-500 text-sm">{formErrors.name}</p>}
 </label>
 
 
-                <label className="block mb-2" >
+                <label className="block mb-2" >{t("Phonenumber")}
 
                   <input
                     type="text"
@@ -541,14 +541,14 @@ export default function Address() {
                     value={formData.phone_no}
                     onChange={(e) => handlePhoneChange(e)}
                     maxLength={10}
-                    className="w-full p-2 rounded-lg border"
+                    className="w-full p-2 mt-1 rounded-lg border"
                   />
                   {/* {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>} */}
                   {formErrors.phone_no && <p className="error text-red-500 text-sm">{formErrors.phone_no}</p>}
 
                 </label>
 
-                <label className="block mb-2">
+                <label className="block mb-2">{t("Email")}
   <input
     type="email"
     value={formData.email}
@@ -571,7 +571,7 @@ export default function Address() {
 
 
 
-<label className="block mb-2">
+<label className="block mb-2">{t("Address")}
   <input
     type="text"
     placeholder={t("Enteryourfulladdress")}
@@ -584,13 +584,13 @@ export default function Address() {
         setFormData({ ...formData, address: value });
       }
     }}
-    className="w-full p-2 rounded-lg border"
+    className="w-full p-2 mt-1 rounded-lg border"
   />
   {formErrors.address && <p className="error text-red-500 text-sm">{formErrors.address}</p>}
 </label>
 
-                <label className="block mb-2">
-                  <select name="country_id" value={formData.country_id} onChange={handleChange} className="w-full p-2  rounded-lg border ">
+                <label className="block mb-2">{t("Country")}
+                  <select name="country_id" value={formData.country_id} onChange={handleChange} className="w-full p-2 mt-1 rounded-lg border ">
                     <option value="">{t("Country")} </option>
                     {countries.map((country) => (
                       <option key={country.id} value={country.id}>
@@ -601,8 +601,8 @@ export default function Address() {
                   {formErrors.country_id && <p className="error text-red-500 text-sm">{formErrors.country_id}</p>}
                 </label>
 
-                <label className="block mb-2">
-                  <select name="state_id" value={formData.state_id} onChange={handleChange} className="w-full p-2  rounded-lg border ">
+                <label className="block mb-2">{t("State")}
+                  <select name="state_id" value={formData.state_id} onChange={handleChange} className="w-full p-2 mt-1 rounded-lg border ">
                     <option value="">{t("State")} </option>
                     {states.map((state) => (
                       <option key={state.state_id} value={state.state_id}>{state.state_title}</option>
@@ -612,8 +612,8 @@ export default function Address() {
 
                 </label>
 
-                <label className="block mb-2">
-                  <select name="city_id" value={formData.city_id} onChange={handleChange} className="w-full p-2  rounded-lg border ">
+                <label className="block mb-2">{t("City")}
+                  <select name="city_id" value={formData.city_id} onChange={handleChange} className="w-full p-2 mt-1 rounded-lg border ">
                     <option value="">{t("City")} </option>
                     {cities.map((city) => (
                       <option key={city.city_id} value={city.city_id}>{city.city_title}</option>
@@ -622,7 +622,7 @@ export default function Address() {
                   {formErrors.city_id && <p className="error text-red-500 text-sm">{formErrors.city_id}</p>}
                 </label>
 
-                <label className="block mb-2">
+                <label className="block mb-2">{t("PinCode")}
   <input
     type="text"
     placeholder={t("PinCode")}

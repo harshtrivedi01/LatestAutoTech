@@ -18,10 +18,10 @@ export default function BookingDetailspage() {
     <AuthGuard>
       <div className="  bg-white">
         <div className=" py-10 text-start px-5 bg-[#FFEEE2]">
-          <h2 className="container text-xl sm:text-2xl md:text-3xl font-bold">{t("PoojaBooking")}</h2>
+          <h2 className="container max-w-7xl text-xl sm:text-2xl md:text-3xl font-bold">{t("PoojaBooking")}</h2>
         </div>
 
-        <div className="container px-4 sm:px-8 md:px-16 lg:px-40 mb-5">
+        <div className="container max-w-7xl   mb-5">
           <p className="p-4 mt-2">
             <span className="font-semibold text-xl">Pooja and Participant's Details</span>
           </p>
