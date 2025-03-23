@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
     
 
      
-        <div className='container'>
+        <div className='container max-w-7xl mx-auto'>
 
         <h2 className='title text-black'>{t("PoojaBenefits")}</h2>
 

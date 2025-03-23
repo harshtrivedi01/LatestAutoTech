@@ -60,7 +60,7 @@ export default function List({ module_category_details }) {
   return (
     <div>
       <div className="bg-[#FFFFFF] px- pb-10">
-        <div id="features" className="mx-auto max-w-6xl">
+        <div id="features" className="container max-w-7xl">
         
           <ul className="grid grid-cols-1 px-5 mt-10 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {

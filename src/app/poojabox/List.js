@@ -57,7 +57,7 @@ export default function List({ pujaData }) {
 
   return (
     
-    <div className="container leading-relaxed">
+    <div className=" leading-relaxed">
       <Toaster position="top-right" reverseOrder={false} />
       <ul className="grid gap-6 sm:grid-cols-2 justify-center lg:grid-cols-3 p-60">
         {dataToDisplay && Array.isArray(pujaDataState.product_list) && pujaDataState.product_list.length > 0 ? (
@@ -69,7 +69,7 @@ export default function List({ pujaData }) {
   href={`/poojaboxdetail/${product.id}`}
 >
   <img
-    className="w-full sm:w-40 h-40 object-cover rounded-lg"
+    className="w-full sm:w-40 h-40 object-fill rounded-lg"
     src={product.image || "/images/logo.png"}
     onError={(e) => (e.target.src = "/images/logo.png")}
     alt="product image"
@@ -105,7 +105,7 @@ export default function List({ pujaData }) {
                         {isLoggedIn ? (
                            <a
                            onClick={() => handleCartAction(product.id, product.cart_status)}
-                           className="flex items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                           className="flex cursor-pointer items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
                          >
                            <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                              <path strokeLinecap="round" strokeLinejoin="round" d={product.cart_status ? "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" : "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"} />

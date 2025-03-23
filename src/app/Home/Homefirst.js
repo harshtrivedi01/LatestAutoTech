@@ -48,7 +48,7 @@ const Homefirst = ({ sliderList = [] }) => {
   return (
     <div id="carousel" className="relative w-full">
       {/* Carousel Wrapper */}
-      <div className="container relative h-56 sm:h-72 md:h-[380px] overflow-hidden rounded-lg">
+      <div className="container relative h-56 sm:h-72 md:h-[380px] overflow-hidden rounded-xl">
         {sliderList.map((slide, index) => (
           <div
             key={index}
@@ -62,7 +62,7 @@ const Homefirst = ({ sliderList = [] }) => {
   alt={`Slide ${index + 1}`}
   layout="fill"
   objectFit="fill"
-  className="rounded-lg cursor-pointer"
+  className="rounded- cursor-pointer"
   onError={(e) => e.target.src = "/images/sliderbackground.jpg"} // Fallback to default image if error occurs
 />
 

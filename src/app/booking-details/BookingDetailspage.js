@@ -146,21 +146,21 @@ export default function BookingDetailspage() {
                     <span className="font-semibold">{t("Name")}:</span> {booking.user_info.name}
                   </p>
                 )}
-                {booking.user_info.father_name && (
+                {/* {booking.user_info.father_name && (
                   <p className="border-b p-2">
                     <span className="font-semibold">{t("FatherName")}:</span> {booking.user_info.father_name}
                   </p>
-                )}
+                )} */}
                 {booking.user_info.gotra && (
-                  <p className="border-b p-2">
+                  <p className="borde p-2">
                     <span className="font-semibold">{t("Gotra")}:</span> {booking.user_info.gotra}
                   </p>
                 )}
-                {booking.user_info.email && (
+                {/* {booking.user_info.email && (
                   <p className="p-2">
                     <span className="font-semibold">{t("Email")}:</span> {booking.user_info.email}
                   </p>
-                )}
+                )} */}
               </div>
             </>
           )}
@@ -175,7 +175,7 @@ export default function BookingDetailspage() {
                 {booking.members.map((member, index) => (
                   <div key={index} className="border-b p-2 last:border-none">
                     <p className="border-b p-2">
-                      <span className="font-semibold">{t("Name")}:</span> {member.name || "N/A"}
+                      <span className="font-semibold">{t("Member")}:</span> {member.name || "N/A"}
                     </p>
                     {/* <p>
                       <span className="font-semibold">{t("FatherName")}:</span> {member.father_name || "N/A"}

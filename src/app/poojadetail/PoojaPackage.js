@@ -61,7 +61,7 @@ const PoojaPackages = ({ detail }) => {
 
         {/* Header */}
         <div className="flex flex-col sm:flex-rol gap-3 sm:gap-4 bg-linear-to-t from-[#FFFFFF] to-[#FFE1CE] bg-[#FFE1CE] rounded-t-2xl items-center sm:items-center justify-center p-3">
-          <div className="flex justify-center w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 lg:w-52 lg:h-32">
+          <div className="flex justify-center w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-40 lg:w-52 lg:h-32">
             <img
               src={pkg.image.replace(/([^:]\/)\/+/g, "$1") || "/images/logo.png"}
               alt={pkg.name}
@@ -104,7 +104,7 @@ const PoojaPackages = ({ detail }) => {
                   {displayedText}
                   {shouldTruncate && (
                     <button
-                      className="text-black text-xs underline ml-1"
+                      className="text-black font-bold text-xs underline ml-1"
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleReadMore(pkg.id);

@@ -199,10 +199,10 @@ console.log(packagedetail.amount)
       formData.append("date", bookingData.date || "");
       formData.append("currency", bookingData.currency || "INR");
       formData.append("name", defaultFields.name);
-      formData.append("father_name", defaultFields.father_name);
+      formData.append("father_name", defaultFields.father_name || "");
       formData.append("gotra", defaultFields.gotra);
-      formData.append("email", defaultFields.email);
-      formData.append("address", defaultFields.address);
+      formData.append("email", defaultFields.email || "");
+      formData.append("address", defaultFields.address || "");
   
       // Append dynamic members
       const membersData = members.map((member) => ({
@@ -261,7 +261,7 @@ console.log(packagedetail.amount)
     }
   };
   return (
-    <div className="container p-6 ">
+    <div className="'container max-w-7xl mx-auto py-6 ">
       <Toaster position="top-right" reverseOrder={false} />
       {/* <h1 className="font-medium my-4 text-2xl">{t("ChoosePreviousSankalpDetail")}</h1> */}
 
@@ -298,7 +298,7 @@ console.log(packagedetail.amount)
       )}
       
         {members.map((member, index,field) => (
-          <div key={index} className=" border-b pb-2 grid grid-cols-1 md:grid-cols-3 items-center gap-4 mt-4">
+          <div key={index} className=" border-t pb-2 grid grid-cols-1 md:grid-cols-3 items-center gap-4 mt-4">
              
           <div className="">
           <input

@@ -30,7 +30,7 @@ const TermsandConditions = () => {
     <div>
       <div className="bg-[#FFF8F5]">
         <div className=" p-60 overflow-hidden">
-          <div className="container">
+          <div className="container max-w-7xl">
           <h2 className="text-2xl font-bold mb-4 text-start"> {t("TermsANDConditions")}</h2>
 
           <div className="py-12 x-4 space-y-4 text-lg leading-relaxed"   dangerouslySetInnerHTML={{ __html:(pujaData) }}>

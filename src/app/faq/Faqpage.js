@@ -35,8 +35,8 @@ export default function FaqPage() {
   };
 
   return (
-    <div className="faq p-10 bg-[#FFF8F5] h-screen">
-      <div className="container">
+    <div className="faq p-10 bg-[#FFF8F5] h-">
+      <div className="container max-w-7xl">
       <div className=" p-60 overflow-hidden">
         <div className="container">
           <div className="items-center gap-10">

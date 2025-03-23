@@ -188,7 +188,7 @@ export default function Poojadetailpage() {
   <div>
      <section className="poojadetail p-60" id="home1">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5" >
+          <div className="'container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5" >
             {/* Left Side - Image Slider */}
             <div className="md:col-span-1 flex justify-center">
               <AnimatePresence mode="wait">

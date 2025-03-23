@@ -151,7 +151,7 @@ const Payment = () => {
 
   return (
     <AuthGuard>
-      <h1 className="f-34 mb-2 font-semibold text-lg text-black lg:mx-40  mx-5">  {t("ShoppingCart")} </h1>
+      <h1 className="max-w-7xl mx-auto f-34 mb-2 font-semibold text-lg text-black lg:mx-40  mx-5">  {t("ShoppingCart")} </h1>
       <div className="flex lg:mx-40  mx-5 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center mb-4 md:mb-0">
           <div

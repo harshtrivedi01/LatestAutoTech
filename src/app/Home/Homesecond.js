@@ -44,7 +44,7 @@ export default function Homesecond({ module_category_details }) {
 
   return (
     <div>
-      <div className="bg-[#FFFFFF] py-10">
+      <div className="bg-[#FFFFFF] py-5">
         <div id="features" className="mx-auto max-w-6xl">
           <div className="flex justify-center">
             <Heading text={t("Services")} />

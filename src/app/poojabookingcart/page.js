@@ -9,7 +9,7 @@ export default function page() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
     <AuthGuard>
-    <div className="container p-60">
+    <div className="container  ">
       <div className=" p-0">
        
 
