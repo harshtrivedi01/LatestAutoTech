@@ -4,12 +4,13 @@ export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 import AuthGuard from "../component/AuthGuard";
 import Payment from "./Payment";
+import Testimonials from "../poojadetail/Testimonials";
 export default function page() {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
     <AuthGuard>
-    <div className="container  ">
+    <div className="container p-60">
       <div className=" p-0">
        
 
@@ -17,7 +18,7 @@ export default function page() {
 
       </div>      
     </div>
-   
+     <Testimonials/>
     </AuthGuard>
     </Suspense>
   );

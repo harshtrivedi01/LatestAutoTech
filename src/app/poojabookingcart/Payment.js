@@ -215,7 +215,7 @@ const Payment = () => {
           {t("PackageforPackage")} {datapackage?.name || "Package"}
         </p>
         <p className="text-gray-700 text-lg sm:text-xl font-bold">
-          ₹{datapackage?.price || "0"}
+          ₹{Math.floor(datapackage?.price) || "0"}/-
         </p>
       </div>
     </div>
@@ -225,16 +225,16 @@ const Payment = () => {
 
 
             {/* Right Section */}
-            <div className="w-full max-w-lg mx-auto p-8">
+            <div className="w-full max-w-lg mx-auto lg:p-8 items-center">
               <div className="bg-white rounded-2xl shadow-lg border border-orange-500 p-6">
                 <h2 className="text-lg font-medium mb-6">  {t("OrderSummary")} </h2>
                 <dl className="flex items-center justify-between gap-4 my-5">
                   <dt className="text-xl font-normal text-gray-500">  {t("SubTotal")} </dt>
-                  <dd className="text-xl font-medium text-gray-900">₹{datapackage?.price || "0"}</dd>
+                  <dd className="text-xl font-medium text-gray-900">₹{Math.floor(datapackage?.price) || "0"}/-</dd>
                 </dl>
                 <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
                   <dt className="text-2xl font-bold text-gray-900">  {t("Total")} </dt>
-                  <dd className="text-xl font-bold text-gray-900">₹{datapackage?.price || "0"}</dd>
+                  <dd className="text-xl font-bold text-gray-900">₹{Math.floor(datapackage?.price) || "0"}/-</dd>
                 </dl>
                 <button
                   onClick={initiatePayment}
@@ -248,7 +248,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
-      <Testimonials/>
+    
     </AuthGuard>
   );
 };
