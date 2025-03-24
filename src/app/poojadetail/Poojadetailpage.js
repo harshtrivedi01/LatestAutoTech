@@ -82,9 +82,6 @@ export default function Poojadetailpage() {
     }
   };
   
-
-
-
   const [showButton, setShowButton] = useState(true);
   
   useEffect(() => {
@@ -248,7 +245,7 @@ export default function Poojadetailpage() {
 
               </h5>
 
-              <h5 className="mb-2 text-2xl mt-4 text-start font-bold tracking-tight text-gray-900 text-black">
+              <h5 className="mb-2 text-xl mt-4 text-start font-semibold  text-gray-900 text-black">
               {pujaData?.sub_title || " 11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path"}
               </h5>
               <p className="mb-3 font-normal text-start text-gray-700 text-xl text-gray-400">

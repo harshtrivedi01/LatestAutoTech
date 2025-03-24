@@ -289,7 +289,7 @@ const Page = () => {
              </h2>
               <h2 className="text-lg flex justifu-center font-bold text-black">
             <p className="flex  items-center gap-1">
-             <span className="text-base font-semibold"> {t("Payment")} :{" "} </span>
+             <span className="text-base font-semibold "> {t("Payment")} :{" "} </span>
              <div
                className={`${
                  booking.payment_status === "success"
@@ -299,7 +299,7 @@ const Page = () => {
                    : "text-yellow-500"
                } rounded-full`}
              >
-               <p className="text-sm p"> {" "}{booking.payment_status}</p>
+               <p className="text-sm uppercase"> {" "}{booking.payment_status}</p>
              </div>
              </p>
             </h2>
@@ -328,7 +328,7 @@ const Page = () => {
                  : "bg-yellow-500"
              } rounded-full px-4 py-1`}
            >
-             <p className="text-white text-sm">{booking.booking_status}</p>
+             <p className="text-white text-sm uppercase">{booking.booking_status}</p>
            </div>
          </div>
        </div>
@@ -380,9 +380,9 @@ const Page = () => {
                 <div
                   className={`${
                     statusColorspoojabox[order.delivery_status] || "bg-gray-500"
-                  } rounded-full w-24 px-4 py-1 mt-3 mx-auto sm:mx-0`}
+                  } rounded-full w-28 px-4 py-1 mt-3 mx-auto sm:mx-0`}
                 >
-                  <p className="text-white text-sm">{order.delivery_status}</p>
+                  <p className="text-white text-sm uppercase">{order.delivery_status}</p>
                 </div>
               </div>
             </div>

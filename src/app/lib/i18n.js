@@ -260,7 +260,7 @@ i18n
           Nobookinghistoryavailable: "  No booking history available.",
           pending: "pending",
           confirmed: "confirmed",
-          picked_up: "picked_up",
+          picked_up: "Picked ",
           delivered: "delivered",
           Qty: "Qty",
           Nameisrequired: "Name is required",

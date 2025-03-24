@@ -119,41 +119,60 @@ export default function Page() {
   {/* Progress Dots */}
   {currentStatus !== "cancelled" ? (
     <>
-      <div className="flex items-center justify-between relative mb-2">
-        {steps.map((step, index) => (
-          <React.Fragment key={index}>
-            <div className="flex flex-col items-center w-full">
-              {/* Dot */}
-              <div
-                className={`w-5 h-5 rounded-full border-2 z-10 ${
-                  index <= activeStep ? "bg-green-600 border-green-600" : "bg-white border-gray-400"
-                }`}
-              ></div>
-              {/* Label */}
-              <span
-                className={`text-sm mt-2 ${
-                  index <= activeStep ? "text-green-600 font-bold" : "text-gray-400"
-                }`}
-              >
-                {step.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
-              </span>
-            </div>
+      {/* Order Status Steps with Dates */}
+<div className="flex items-center justify-between relative mb-2">
+  {steps.map((step, index) => {
+    // Match the date fields with steps
+    let date = "";
+    if (step.toLowerCase().includes("pending")) date = order.order_date;
+    if (step.toLowerCase().includes("confirmed")) date = order.confirmed_date;
+    if (step.toLowerCase().includes("picked")) date = order.picked_up_date;
+    if (step.toLowerCase().includes("delivered")) date = order.delivered_and_cancelled_date;
 
-            {/* Line between dots */}
-            {index < steps.length - 1 && (
-              <div
-                className={`absolute top-2 left-0 right-0 h-0.5 z-0 ${
-                  index < activeStep ? "bg-green-600" : "bg-gray-300"
-                }`}
-                style={{
-                  left: `${(100 / (steps.length - 1)) * index}%`,
-                  width: `${100 / (steps.length - 1)}%`,
-                }}
-              ></div>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+    return (
+      <React.Fragment key={index}>
+        <div className="flex flex-col items-center w-full text-center">
+          {/* Status Dot */}
+          <div
+            className={`w-5 h-5 rounded-full border-2 z-10 ${
+              index <= activeStep ? "bg-green-600 border-green-600" : "bg-white border-gray-400"
+            }`}
+          ></div>
+
+          {/* Status Label */}
+          <span
+            className={`text-sm mt-1 ${
+              index <= activeStep ? "text-green-600 font-bold" : "text-gray-400"
+            }`}
+          >
+            {step.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
+          </span>
+
+          {/* Status Date */}
+          {date && (
+            <span className="text-xs text-gray-500 mt-1">
+              {date}
+            </span>
+          )}
+        </div>
+
+        {/* Connecting Lines */}
+        {index < steps.length - 1 && (
+          <div
+            className={`absolute top-2 left-0 right-0 h-0.5 z-0 ${
+              index < activeStep ? "bg-green-600" : "bg-gray-300"
+            }`}
+            style={{
+              left: `${(100 / (steps.length - 1)) * index}%`,
+              width: `${100 / (steps.length - 1)}%`,
+            }}
+          ></div>
+        )}
+      </React.Fragment>
+    );
+  })}
+</div>
+
     </>
   ) : (
     <div className="w-full flex items-center justify-center mt-4">

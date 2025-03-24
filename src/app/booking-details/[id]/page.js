@@ -9,6 +9,7 @@ export default function BookingDetailspage() {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showCertificateModal, setShowCertificateModal] = useState(false);
 
   const getSafeValue = (val) => (val && val !== "undefined" ? val : "-");
 
@@ -42,6 +43,7 @@ export default function BookingDetailspage() {
     fetchOrderDetails();
   }, [id]);
 
+ 
   const statusLabelMap = {
     pending: t("Pending"),
     confirmed: t("Confirmed"),
@@ -49,9 +51,52 @@ export default function BookingDetailspage() {
     cancelled: t("Cancelled"),
   };
 
-  const stepStatus = ["pending", "confirmed", "success"];
+
+
+  const stepStatus = [
+    {
+      label: t("Your Pooja booking has been confirmed"),
+      condition: !!order?.certificate_url,
+      content: order?.certificate_url ? (
+        <button
+          className="text-blue-600 underline"
+          onClick={() => setShowCertificateModal(true)}
+        >
+          {t("View Certificate")}
+        </button>
+      ) : (
+        <p className="text-gray-500">{t("Pending")}</p>
+      ),
+    },
+    {
+      label: t("Your Pooja has successsfully conducted by PunuyaSetu on"),
+      condition: !!order?.booking_date,
+      content: <p>{order?.booking_date}</p>,
+    },
+    {
+      label: t("Your Pooja has successsfully conducted by PunuyaSetu at"),
+      condition: !!order?.booking_time,
+      content: <p>{order?.booking_time}</p>,
+    },
+    {
+      label: t("WATCH POOJA VIDEO"),
+      condition: !!order?.video_path,
+      content: order?.video_path ? (
+        <video controls width="100%" height="50% "className="rounded-md shadow mt-2 h-80 w-80">
+          <source src={order.video_path} type="video/mp4" />
+          {t("Your browser does not support the video tag.")}
+        </video>
+      ) : (
+        <p className="text-gray-500">{t("Pending")}</p>
+      ),
+    },
+  ];
+  
+  const completedSteps = stepStatus.filter((step) => step.condition);
+  
   const currentStepIndex = stepStatus.indexOf(order?.booking_status);
 
+  if (!order) return <div className="text-center py-10 text-red-500">No booking data found.</div>;
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
   }
@@ -59,7 +104,6 @@ export default function BookingDetailspage() {
   if (!order) {
     return <div className="text-center py-10 text-red-500">No booking data found.</div>;
   }
-
   const toggleAccordion = (index) => {
     setOrder((prevData) =>
       prevData.map((faq, i) => ({
@@ -68,6 +112,9 @@ export default function BookingDetailspage() {
       }))
     );
   };
+
+  if (!order) return <p className="p-4">Loading...</p>;
+
   return (
     <div className="bg-white">
       <div className="py-10 text-start px-5 bg-[#FFEEE2]">
@@ -98,7 +145,7 @@ export default function BookingDetailspage() {
             </h2>
             {order.create_date && (
               <p className="text-gray-600 text-sm">
-                <span className="font-semibold">{t("Ordertimedate")}:</span> {order.create_date}
+                <span className="font-semibold">{t("Ordertimedate")}</span> {order.create_date}
               </p>
             )}
             {order.package_name && (
@@ -111,9 +158,9 @@ export default function BookingDetailspage() {
             )}
 
             <div className="flex items-center gap-2">
-              <h1 className="text-lg font-semibold">{t("Paymentstatus")}:</h1>
+              <h1 className="text-lg font-semibold">{t("Payment")}:</h1>
               <span
-                className={`text-lg font-medium ${
+                className={`text-lg uppercase font-medium ${
                   order.payment_status === "success"
                     ? "text-green-600"
                     : order.payment_status === "failed"
@@ -128,7 +175,7 @@ export default function BookingDetailspage() {
             <div className="flex items-center gap-2 mt-1">
               <h1 className="text-lg font-semibold">{t("Bookingstatus")}:</h1>
               <span
-                className={`text-lg font-medium ${
+                className={`text-lg uppercase font-medium ${
                   order.booking_status === "completed"
                     ? "text-green-600"
                     : order.booking_status === "cancelled"
@@ -142,51 +189,75 @@ export default function BookingDetailspage() {
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <p className="p-4 mt-4 text-xl font-semibold">{t("Pooja Updates")}</p>
-        <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
-          <p className="text-gray-600 text-sm">
-            <span className="font-semibold">{t("poojadate")}:</span>{" "}
-            {getSafeValue(order.booking_date)}
-          </p>
+   {/* Always show Booking Status at the top */}
+<div className="py-4">
+  <p className="text-xl font-semibold mb-2">{t("Pooja Updates")}</p>
 
-          {order.booking_status === "cancelled" ? (
-            <div className="flex justify-center mt-4">
-              <p className="bg-red-500 text-white text-lg font-semibold px-4 py-2 rounded-full">
-                {t("Cancelled")}
-              </p>
-            </div>
-          ) : (
-            <div className="mt-6 flex items-center justify-between relative">
-              {stepStatus.map((status, index) => {
-                const isActive = index <= currentStepIndex;
-                return (
-                  <div key={status} className="flex items-center w-full">
-                    <div className="relative flex flex-col items-center">
-                      <div
-                        className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${
-                          isActive
-                            ? "bg-green-500 border-green-500 text-white"
-                            : "bg-gray-200 border-gray-400 text-gray-500"
-                        }`}
-                      >
-                        {index + 1}
-                      </div>
-                      <span className="text-xs mt-2 text-gray-600">{t(status)}</span>
-                    </div>
-                    {index < stepStatus.length - 1 && (
-                      <div
-                        className={`flex-1 h-1 mb-4 ${
-                          currentStepIndex >= index + 1 ? "bg-green-500" : "bg-gray-300"
-                        }`}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+  <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
+    <div className="mb-4">
+      <span className="font-semibold">{t("Booking Status")}: </span>
+      <span
+        className={`font-medium uppercase ${
+          order.booking_status === "completed"
+            ? "text-green-600"
+            : order.booking_status === "cancelled"
+            ? "text-red-600"
+            : "text-yellow-600"
+        }`}
+      >
+        {statusLabelMap[order.booking_status] || order.booking_status}
+      </span>
+    </div>
+
+    {/* Only show progress steps if status is valid and steps exist */}
+    {stepStatus.some((step) => step.condition) &&
+    order.booking_status !== "cancelled" &&
+    order.booking_status !== "pending" ? (
+      <div className="flex flex-col gap-6 border-l-2 border-gray-300 pl-6 relative">
+        {stepStatus.map(
+          (step, index) =>
+            step.condition && (
+              <div key={index} className="relative pb-2">
+                {/* Progress Dot */}
+                <div
+                  className={`w-4 h-4 rounded-full absolute -left-[33px] ${
+                    step.condition ? "bg-green-500" : "bg-gray-300"
+                  }`}
+                ></div>
+
+                {/* Step Content */}
+                <p className="font-semibold">{step.label}</p>
+                <div className="text-sm text-gray-700">{step.content}</div>
+              </div>
+            )
+        )}
+      </div>
+    ) : (
+      <p className="text-sm text-gray-500">{t("Pooja updates not available for this booking status.")}</p>
+    )}
+  </div>
+
+  {/* Certificate Modal */}
+  {showCertificateModal && (
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-4 rounded-lg shadow-lg max-w-lg w-full relative">
+        <button
+          className="absolute top-2 right-2 text-red-600 font-bold text-lg"
+          onClick={() => setShowCertificateModal(false)}
+        >
+          ×
+        </button>
+        <h3 className="text-lg font-semibold mb-4">{t("Certificate")}</h3>
+        <img
+          src={order?.certificate_url}
+          alt="Certificate"
+          className="w-full max-h-[80vh] object-contain rounded"
+        />
+      </div>
+    </div>
+  )}
+</div>
+
 
         {/* User Details */}
         {order.user_info && (
