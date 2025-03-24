@@ -176,12 +176,12 @@ const JoinUs = () => {
   return (
     <div className="">
        <Toaster position="top-center" reverseOrder={false} />
-      <div className="container bg-[#FFEEE2] p-10">
-        <h2 className="text-3xl font-bold">{t("PanditRegistration")}</h2>
+      <div className=" bg-[#FFEEE2] p-10">
+        <h2 className="container max-w-7xl  mx-auto text-3xl font-bold">{t("PanditRegistration")}</h2>
       </div>
 
-      <section className=" container bg-gray-100 py-8 px-4">
-  <div className="max-w-7xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg">
+      <section className="  bg-gray-100 py-8 px-4">
+  <div className="container max-w-7xl  mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg">
     <h2 className="text-2xl sm:text-3xl font-bold text-[#E5644E] pb-5 text-start">
      {t("Register")}
     </h2>

@@ -260,12 +260,16 @@ const Page = () => {
     ) :(
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {(searchQuery ? searchResults : Poojabookings).map((booking) => (
-         <Link
-         key={booking.booking_id}
-         href={{
-           pathname: "/booking-details",
-           query: { data: JSON.stringify(booking) },
-         }}
+      //    <Link
+      //    key={booking.booking_id}
+      //    href={{
+      //      pathname: "/booking-details",
+      //      query: { data: JSON.stringify(booking) },
+      //    }}
+      //    className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
+      //  >
+          <div
+          onClick={() => router.push(`/booking-details/${booking.booking_id}`)}
          className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
        >
          {/* Top Content Section */}
@@ -283,8 +287,9 @@ const Page = () => {
              <h2 className="text-lg font-bold text-black">
                {booking.puja_name}
              </h2>
-             <div className="flex items-center gap-1">
-             <h1 className="text-sm font-semibold"> {t("Paymentstatus")} :{" "} </h1>
+              <h2 className="text-lg flex justifu-center font-bold text-black">
+            <p className="flex  items-center gap-1">
+             <span className="text-base font-semibold"> {t("Payment")} :{" "} </span>
              <div
                className={`${
                  booking.payment_status === "success"
@@ -296,7 +301,8 @@ const Page = () => {
              >
                <p className="text-sm p"> {" "}{booking.payment_status}</p>
              </div>
-             </div>
+             </p>
+            </h2>
              <p className="text-gray-800 font-semibold text-lg">
                {t("AmountRs")} {booking.amount}/-
              </p>
@@ -315,7 +321,7 @@ const Page = () => {
          
            <div
              className={`${
-               booking.booking_status === "success"
+               booking.booking_status === "completed"
                  ? "bg-green-500"
                  : booking.booking_status === "cancelled"
                  ? "bg-red-500"
@@ -325,7 +331,7 @@ const Page = () => {
              <p className="text-white text-sm">{booking.booking_status}</p>
            </div>
          </div>
-       </Link>
+       </div>
        
         ))}
       </div>

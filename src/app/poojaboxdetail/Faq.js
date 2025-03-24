@@ -37,9 +37,9 @@ export default function Faq() {
 
   return (
     <div className='faq p-60 bg-[#FFDCC0]'>
-      <div className="container">
+      <div className="container max-w-7xl  mx-auto">
       <div className=" mb-4 overflow-hidden">
-        <div className="container">
+        <div className="container max-w-7xl  mx-auto">
           <div className="items-center gap-10">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-">

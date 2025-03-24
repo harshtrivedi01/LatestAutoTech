@@ -1,0 +1,287 @@
+"use client";
+import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import api from "../../lib/axiosInstance";
+
+export default function BookingDetailspage() {
+  const { t } = useTranslation();
+  const { id } = useParams();
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const getSafeValue = (val) => (val && val !== "undefined" ? val : "-");
+
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
+    async function fetchOrderDetails() {
+      try {
+        const formData = new FormData();
+        formData.append("type", "pooja_booking_detail");
+        formData.append("booking_id", id);
+
+        const response = await api.post("/puja", formData);
+
+        if (response.data.status === "1") {
+          setOrder(response.data.data);
+        } else {
+          setOrder(null);
+        }
+      } catch (error) {
+        console.error("Error fetching order details:", error);
+        setOrder(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchOrderDetails();
+  }, [id]);
+
+  const statusLabelMap = {
+    pending: t("Pending"),
+    confirmed: t("Confirmed"),
+    success: t("Success"),
+    cancelled: t("Cancelled"),
+  };
+
+  const stepStatus = ["pending", "confirmed", "success"];
+  const currentStepIndex = stepStatus.indexOf(order?.booking_status);
+
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
+
+  if (!order) {
+    return <div className="text-center py-10 text-red-500">No booking data found.</div>;
+  }
+
+  const toggleAccordion = (index) => {
+    setOrder((prevData) =>
+      prevData.map((faq, i) => ({
+        ...faq,
+        isOpen: i === index ? !faq.isOpen : false, // Close other accordions
+      }))
+    );
+  };
+  return (
+    <div className="bg-white">
+      <div className="py-10 text-start px-5 bg-[#FFEEE2]">
+        <h2 className="container max-w-7xl text-xl sm:text-2xl md:text-3xl font-bold">
+          {t("PoojaBooking")}
+        </h2>
+      </div>
+
+      <div className="container max-w-7xl mb-5">
+        <p className="p-4 mt-2 text-xl font-semibold">Pooja and Participant's Details</p>
+
+        {/* Booking Details */}
+        <div className="flex flex-wrap md:flex-nowrap gap-4 mt-2 shadow-lg border rounded-lg p-4">
+          {/* Image */}
+          <div className="w-full md:w-5/12 flex justify-center">
+            <img
+              src={order.puja_image || "/images/poojabox.png"}
+              alt="Pooja Image"
+              onError={(e) => (e.target.src = "/images/logo.png")}
+              className="w-full max-w-sm h-[250px] border-2 border-white object-contain rounded-lg"
+            />
+          </div>
+
+          {/* Info */}
+          <div className="w-full md:w-7/12">
+            <h2 className="text-xl font-bold text-black my-2 border-b">
+              {order.puja_name} ({getSafeValue(order.booking_date)})
+            </h2>
+            {order.create_date && (
+              <p className="text-gray-600 text-sm">
+                <span className="font-semibold">{t("Ordertimedate")}:</span> {order.create_date}
+              </p>
+            )}
+            {order.package_name && (
+              <p className="text-red-600 font-bold text-lg mt-2">{order.package_name}</p>
+            )}
+            {order.amount && (
+              <p className="text-red-600 my-2 font-semibold text-xl">
+                {t("AmountRs")} {order.amount}/-
+              </p>
+            )}
+
+            <div className="flex items-center gap-2">
+              <h1 className="text-lg font-semibold">{t("Paymentstatus")}:</h1>
+              <span
+                className={`text-lg font-medium ${
+                  order.payment_status === "success"
+                    ? "text-green-600"
+                    : order.payment_status === "failed"
+                    ? "text-red-600"
+                    : "text-yellow-600"
+                }`}
+              >
+                {getSafeValue(order.payment_status)}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 mt-1">
+              <h1 className="text-lg font-semibold">{t("Bookingstatus")}:</h1>
+              <span
+                className={`text-lg font-medium ${
+                  order.booking_status === "completed"
+                    ? "text-green-600"
+                    : order.booking_status === "cancelled"
+                    ? "text-red-600"
+                    : "text-yellow-600"
+                }`}
+              >
+                {statusLabelMap[order.booking_status] || order.booking_status}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <p className="p-4 mt-4 text-xl font-semibold">{t("Pooja Updates")}</p>
+        <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
+          <p className="text-gray-600 text-sm">
+            <span className="font-semibold">{t("poojadate")}:</span>{" "}
+            {getSafeValue(order.booking_date)}
+          </p>
+
+          {order.booking_status === "cancelled" ? (
+            <div className="flex justify-center mt-4">
+              <p className="bg-red-500 text-white text-lg font-semibold px-4 py-2 rounded-full">
+                {t("Cancelled")}
+              </p>
+            </div>
+          ) : (
+            <div className="mt-6 flex items-center justify-between relative">
+              {stepStatus.map((status, index) => {
+                const isActive = index <= currentStepIndex;
+                return (
+                  <div key={status} className="flex items-center w-full">
+                    <div className="relative flex flex-col items-center">
+                      <div
+                        className={`w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${
+                          isActive
+                            ? "bg-green-500 border-green-500 text-white"
+                            : "bg-gray-200 border-gray-400 text-gray-500"
+                        }`}
+                      >
+                        {index + 1}
+                      </div>
+                      <span className="text-xs mt-2 text-gray-600">{t(status)}</span>
+                    </div>
+                    {index < stepStatus.length - 1 && (
+                      <div
+                        className={`flex-1 h-1 mb-4 ${
+                          currentStepIndex >= index + 1 ? "bg-green-500" : "bg-gray-300"
+                        }`}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* User Details */}
+        {order.user_info && (
+          <>
+            <p className="p-4 mt-4 text-xl font-semibold">{t("UserDetail")}</p>
+            <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
+              <p className="border-b p-2">
+                <span className="font-semibold">{t("Name")}:</span>{" "}
+                {getSafeValue(order.user_info.name)}
+              </p>
+              <p className="p-2">
+                <span className="font-semibold">{t("Gotra")}:</span>{" "}
+                {getSafeValue(order.user_info.gotra)}
+              </p>
+            </div>
+          </>
+        )}
+
+        {/* Participants */}
+        {order.members?.length > 0 && (
+          <>
+            <p className="p-4 mt-4 text-xl font-semibold">
+              {t("MembersParticipatinginPooja")}
+            </p>
+            <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
+              {order.members.map((member, index) => (
+                <div key={index} className="border-b p-2 last:border-none">
+                  <p className="border-b p-2">
+                    <span className="font-semibold">{t("Member")}:</span>{" "}
+                    {getSafeValue(member.name)}
+                  </p>
+                  <p className="p-2">
+                    <span className="font-semibold">{t("Gotra")}:</span>{" "}
+                    {getSafeValue(member.gotra)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+
+    
+      </div>
+      <div className="faq p-10 bg-[#FFF8F5] ">
+      <div className="'container max-w-7xl mx-auto ">
+      <div className=" mb-4 overflow-hidden">
+        <div className="container">
+          <div className="items-center gap-10">
+            <div>
+              <h2 className="lg:text-2xl md:text-xl text-2xl font-bold mb-">
+              {t("FAQ")}
+              </h2>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+        <div className="space-y-4 ">
+          {order.faq_list?.map((faq, index) => (
+            <div key={index} className="border-b border-slate-200 bg-white px-2">
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex justify-between items-center text-start py-5 text-slate-600 text-lg"
+              >
+                <span>{faq?.question || "No Title"}</span>
+                <span
+                  className={`text-slate-600 transition-transform duration-300 ${
+                    faq.isOpen ? "rotate-45" : ""
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="w-6 h-6 "
+                  >
+                    <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                  </svg>
+                </span>
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  faq.isOpen ? "" : "max-h-0"
+                }`}
+              >
+                <div className="pb-5 text-base text-slate-500"  dangerouslySetInnerHTML={{ __html:( faq?.answer || "No description available.") }}>
+                 
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    </div>
+  );
+}

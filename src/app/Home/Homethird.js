@@ -59,14 +59,14 @@ export default function Homethird({pujaData}) {
         <br />
         <div>
           <div className="container ">
-            <div className="    px-4 py-8">
+            <div className="   ">
               <section className="">
-              <div className="py-4 px-4 mx-auto max-w-screen-xl sm:py-6 lg:px-8">
+              <div className=" mx-auto max-w-screen-xl ">
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 h-full">
     
-    <div className="h-full flex flex-col">
-      <div className="grid h-full">
-        <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl p-4 bg-white">
+    <div className="h-full w-full flex flex-col">
+      <div className="grid flex-grow h-full ">
+        <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl p-4 bg-white ">
           <div className="relative z-10 flex flex-col gap-4">
             <h3 className="text-2xl font-medium text-[#894112]">
               {pujaData?.data?.aboutus_imagehed1}

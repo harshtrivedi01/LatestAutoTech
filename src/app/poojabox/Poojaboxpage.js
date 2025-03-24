@@ -77,8 +77,8 @@ export default function Poojaboxpage() {
 
   return (
     <div className=" bg-[#FFEEE2]">
-      <div className="container max-w-7xl  font-sans p-60 overflow-hidden">
-        <div className="">
+      <div className=" container max-w-7xl  mx-auto  font-sans p-60 overflow-hidden">
+        <div className="p-5">
           <div className="items-center gap-12">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">

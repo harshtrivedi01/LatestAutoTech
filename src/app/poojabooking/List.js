@@ -20,7 +20,7 @@ export default function List({ pujaData }) {
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
           {dataToDisplay.map((puja, index) => (
             <li key={index} className="h-full">
-              <div className="bg-white  rounded-lg shadow-lg bg-gray-800 border-gray-700 flex flex-col min-h-[550px] h-full">
+              <div className="bg-white  rounded-lg shadow-lg bg-gray-800 border-gray-700 flex flex-col min-h-[480px] h-full">
                 {/* Image Section */}
                 <a href={`poojadetail/${puja.id}`} className="flex justify-center">
                   <img
@@ -38,11 +38,12 @@ export default function List({ pujaData }) {
                   </h5>
                   <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
                  
-                  <p className="mb-1 font-bold text-xl text-black flex-grow">
+                  <p className="mb-1 font-semibold text-xl text-black flex-grow">
   {puja.sub_title
     ? puja.sub_title.split(" ").slice(0, 12).join(" ") + (puja.sub_title.split(" ").length > 12 ? "..." : "")
     :  " "}
 </p>
+
 
 {puja.short_description && (
  <p className="mb-1 text-gray-700 text-base flex-grow">

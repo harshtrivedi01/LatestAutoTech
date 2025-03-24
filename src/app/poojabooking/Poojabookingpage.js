@@ -57,8 +57,8 @@ export default function Poojabookingpage() {
   return (
     <div className="bg-[#FFEEE2]">
       <div className="font-sans p-60 overflow-hidden">
-        <div className="container max-w-7xl p-60 mx-auto">
-          <div className="items-center gap-12">
+        <div className="container max-w-7xl  mx-auto">
+          <div className="p-5 items-center gap-12">
             <div>
               <h2 className="lg:text-3xl text-black md:text-2xl text-3xl font-bold mb-4">
               {t("UpComming")}

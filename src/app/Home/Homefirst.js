@@ -72,7 +72,7 @@ const Homefirst = ({ sliderList = [] }) => {
       </div>
 
       {/* Dots Indicator */}
-      <div className="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-2">
+      <div className="absolute  flex -translate-x-1/2 bottom-4 left-1/2 space-x-2">
         {sliderList.map((_, i) => (
           <button
             key={i}

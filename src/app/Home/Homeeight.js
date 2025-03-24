@@ -58,7 +58,7 @@ const Homeeight = ({ pujaData, detail }) => {
             arrows: false, // Disable default arrows (we use custom below)
             pagination: true, // Keep pagination (dots)
           }}
-          className="w-full"
+          className="w-full "
         >
           {testimonials && testimonials.length > 0 ? (
   testimonials.map((testimonial, index) => (

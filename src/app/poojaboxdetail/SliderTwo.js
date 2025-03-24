@@ -21,6 +21,11 @@ const SliderTwo = () => {
     fetchPujaData();
   }, []);
 
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
   const fetchPujaData = async () => {
     try {
       let formData = new FormData();
@@ -108,7 +113,7 @@ const SliderTwo = () => {
       <div className="md:mb-12 mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">   {t("RelatedPoojaBox")}</h2>
       </div>
-      <div className="relative w-full mx-auto container">
+      <div className="relative w-full mx-auto container max-w-7xl  mx-auto">
         <Splide
           ref={splideRef}
           options={{
@@ -141,8 +146,23 @@ const SliderTwo = () => {
     {/* Product Info */}
     <div className="flex-1">
       <h3 className="text-xl font-bold text-black">{product.name}</h3>
-      <p className="text-gray-600 text-sm mt-2 line-clamp-2">{product.description}</p>
-      
+   
+      <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+    {product.description ? (
+      <span
+        dangerouslySetInnerHTML={{
+          __html:
+            // Decode HTML entities, limit the length, and add ellipsis if necessary
+            decodeHtml(product.description).length > 190
+              ? decodeHtml(product.description).substring(0, 190) + "..."
+              : decodeHtml(product.description),
+        }}
+      />
+    ) : (
+      // Display fallback text when description is not available
+      ""
+    )}
+  </p>
       {/* Rating Section */}
       <div className="mt-3 flex items-center">
         {[...Array(5)].map((_, idx) => (

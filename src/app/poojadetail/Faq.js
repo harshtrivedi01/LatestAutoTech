@@ -54,7 +54,7 @@ export default function Faq() {
             <div key={index} className="border-b border-slate-200 bg-white px-2">
               <button
                 onClick={() => toggleAccordion(index)}
-                className="w-full flex justify-between items-center py-5 text-slate-600 text-xl"
+                className="w-full flex justify-between items-center py-5 text-slate-600 text-xl text-start"
               >
                 <span>{faq?.title || "No Title"}</span>
                 <span
@@ -77,7 +77,7 @@ export default function Faq() {
                   faq.isOpen ? "" : "max-h-0"
                 }`}
               >
-                <div className="pb-5 text-base text-slate-500"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( faq?.description || "No description available.") }}>
+                <div className="pb-5 text-base text-start text-slate-500"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( faq?.description || "No description available.") }}>
                  
                 </div>
               </div>

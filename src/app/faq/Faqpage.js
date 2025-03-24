@@ -35,7 +35,7 @@ export default function FaqPage() {
   };
 
   return (
-    <div className="faq p-10 bg-[#FFF8F5] h-">
+    <div className="faq p-10 bg-[#FFF8F5] min-h-screen">
       <div className="container max-w-7xl">
       <div className=" p-60 overflow-hidden">
         <div className="container">
@@ -54,7 +54,7 @@ export default function FaqPage() {
             <div key={index} className="border-b border-slate-200 bg-white px-2">
               <button
                 onClick={() => toggleAccordion(index)}
-                className="w-full flex justify-between items-center py-5 text-slate-600 text-xl"
+                className="w-full flex justify-between items-center py-5 text-slate-600 text-xl text-start"
               >
                 <span>{faq?.title || "No Title"}</span>
                 <span
@@ -77,7 +77,7 @@ export default function FaqPage() {
                   faq.isOpen ? "" : "max-h-0"
                 }`}
               >
-                <div className="pb-5 text-base text-slate-500"  dangerouslySetInnerHTML={{ __html:( faq?.description || "No description available.") }}>
+                <div className="pb-5 text-base text-start text-slate-500"  dangerouslySetInnerHTML={{ __html:( faq?.description || "No description available.") }}>
                  
                 </div>
               </div>

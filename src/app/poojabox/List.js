@@ -14,6 +14,11 @@ export default function List({ pujaData }) {
   }, []);
   const [pujaDataState, setPujaDataState] = useState(pujaData); // For handling state based on props
 
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
   // Initialize display data
   const [dataToDisplay, setDataToDisplay] = useState(pujaData?.product_list || []);
 
@@ -57,7 +62,7 @@ export default function List({ pujaData }) {
 
   return (
     
-    <div className=" leading-relaxed">
+    <div className="container max-w-7xl  mx-auto  leading-relaxed">
       <Toaster position="top-right" reverseOrder={false} />
       <ul className="grid gap-6 sm:grid-cols-2 justify-center lg:grid-cols-3 p-60">
         {dataToDisplay && Array.isArray(pujaDataState.product_list) && pujaDataState.product_list.length > 0 ? (
@@ -76,11 +81,22 @@ export default function List({ pujaData }) {
   />
    <span className="m-2 rounded-full px-2 text-xl font-bold leading-relaxed">
                     {product.name}
-                    <p className="mt-5 text-base font-medium text-sm leading-relaxed">
-  {product.description
-    ?product.description .split(" ").slice(0, 12).join(" ") + (product.description .split(" ").length > 12 ? "..." : "")
-    :  ` ${t("Pujadescriptiongoeshere")}`}
-</p>
+                    <p className="mt-3 text-base font-medium text-sm text-black leading-relaxed">
+    {product.description ? (
+      <span
+        dangerouslySetInnerHTML={{
+          __html:
+            // Decode HTML entities, limit the length, and add ellipsis if necessary
+            decodeHtml(product.description).length > 190
+              ? decodeHtml(product.description).substring(0, 190) + "..."
+              : decodeHtml(product.description),
+        }}
+      />
+    ) : (
+      // Display fallback text when description is not available
+      ""
+    )}
+  </p>
                   </span>
 </a>
 

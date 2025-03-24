@@ -416,47 +416,51 @@ export default function Address() {
           </h1>
           <br />
 
-          <div className="w-full px-4 relative">
+          <div className="w-full px-4 relative text-wrap">
             {pujaData?.address_list?.length > 0 ? (
               <div className="relative">
                 {/* Slider */}
                 <Slider ref={sliderRef} {...sliderSettings} className="p-4">
                   {pujaData.address_list.map((address) => (
                     <div key={address.id} className="px-8 w-full">
-                      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                        {/* Radio Button */}
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="radio"
-                            name="default_address"
-                            checked={selectedAddress === address.id}
-                            onChange={() => handleAddressSelect(address.id)}
-                            className="form-radio w-5 h-5 sm:w-6 sm:h-6 border bg-orange-500"
-                          />
-                        </label>
+                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-start w-full">
+  {/* Radio Button */}
+  <label className="flex items-start sm:items-center pt-2 sm:pt-0">
+    <input
+      type="radio"
+      name="default_address"
+      checked={selectedAddress === address.id}
+      onChange={() => handleAddressSelect(address.id)}
+      className="form-radio w-5 h-5 sm:w-6 sm:h-6 border border-orange-500 accent-orange-500"
+    />
+  </label>
 
-                        {/* Address Card */}
-                        <div className="w-full sm:max-w-[350px] md:max-w-[400px] lg:max-w-[500px] flex justify-between rounded-lg border shadow-lg bg-white p-4">
-                          <div className="flex-1">
-                          <h3 className="font-medium text-base sm:text-lg lg:text-lg">
-  {limitWords(address.name, 5)}
-</h3>
-                            <p className="font-medium text-sm sm:text-base lg:text-sm">
-                              {address.address}, {address.city} <br />
-                              {address.state}, {address.pincode}
-                              <br />
-                            </p>
-                            <p className="font-medium text-sm sm:text-base lg:text-sm">{address.phone_no}</p>
-                            <p className="font-medium text-sm sm:text-base lg:text-sm">{limitWords(address.email, 8)}</p>
-                          </div>
+  {/* Address Card */}
+  <div className="w-full sm:flex-1 max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[650px] rounded-lg border shadow-md bg-white p-4 flex justify-between gap-4">
+    <div className="flex-1 min-w-0">
+      <h3 className="font-semibold text-sm sm:text-base lg:text-lg break-words">
+        {limitWords(address.name, 5)}
+      </h3>
+      <p className="text-sm sm:text-base text-gray-700 break-words">
+        {address.address}, {address.city} <br />
+        {address.state}, {address.pincode}
+      </p>
+      <p className="text-sm sm:text-base text-gray-700 break-words">{address.phone_no}</p>
+      <p className="text-sm sm:text-base text-gray-700 break-words text-wrap">
+        {limitWords(address.email, 5)}
+      </p>
+    </div>
 
-                          {/* Edit Icon */}
-                          <EditIcon
-                            className="text-orange-400 cursor-pointer text-lg sm:text-xl lg:text-2xl"
-                            onClick={() => handleEditClick(address)}
-                          />
-                        </div>
-                      </div>
+    {/* Edit Icon */}
+    <div className="shrink-0">
+      <EditIcon
+        className="text-orange-500 cursor-pointer text-lg sm:text-xl lg:text-2xl"
+        onClick={() => handleEditClick(address)}
+      />
+    </div>
+  </div>
+</div>
+
                     </div>
 
                   ))}

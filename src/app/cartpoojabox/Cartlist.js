@@ -43,7 +43,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
       <div className="flex flex-col  md:flex-row gap-6  sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6">
       <div className="w-full md:w-2/3">
   {cartItems.map((item) => (
-    <div key={item.id} className="w-full my-5">
+    <div key={item.id} className="w-full">
       <div className="bg-white p-4 rounded-lg border shadow-xl">
         <div className="flex flex-col sm:flex-row items-start gap-4">
           {/* Image Section */}

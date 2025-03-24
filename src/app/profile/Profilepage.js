@@ -283,7 +283,7 @@ const Profilepage = () => {
   return (
     <div className="overflow-hidden">
         <div className=" bg-[#FFEEE2] p-10 ">
-        <h2 className="container text-3xl font-bold">{t("Profile")}</h2>
+        <h2 className="container max-w-7xl  mx-auto text-3xl font-bold">{t("Profile")}</h2>
       </div>
       <Toaster position="top-center" reverseOrder={false} />
        <form onSubmit={handleSubmit} className="container bg-white w-full overflow-hidden ">
@@ -316,7 +316,7 @@ const Profilepage = () => {
         </div>
 
 
-        <div className=" pb-6 text-center xl:px-40 lg:px-40 md:px-20 sm:px-5 ">
+        <div className=" pb-6 text-center container max-w-7xl  mx-auto ">
 
            <div className="border-[#FA8128] border-2 my-14 py-10 mx-3 rounded-xl px-5">
             <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6">

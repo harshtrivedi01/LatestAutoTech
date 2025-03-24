@@ -104,12 +104,15 @@ export default function LoginPage() {
 
     // Validate phone number (only numbers, exactly 10 digits)
     if (name === "phone") {
-      if (!/^\d{10}$/.test(value)) {
+      if (/[^0-9]/.test(value)) {
+        setPhoneError(`${t("Phonemustcontainonlydigits")}`);
+      } else if (value.length !== 10) {
         setPhoneError(`${t("Pleaseenteravaliddigitphonenumber")}`);
       } else {
         setPhoneError("");
       }
     }
+    
 
     setFormData((prevData) => ({
       ...prevData,
@@ -209,7 +212,11 @@ export default function LoginPage() {
 
             </p>
             <input
-  className="p-2 border-[1px] text-sm rounded-lg w-full appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+  className="p-2 border-[1px] text-sm rounded-lg w-full appearance-none
+    [&::-webkit-outer-spin-button]:appearance-none 
+    [&::-webkit-inner-spin-button]:appearance-none 
+    [&::-moz-appearance]:textfield
+    focus:outline-none"
   placeholder={t("Phonenumber")}
   type="number"
   name="phone"
@@ -220,6 +227,7 @@ export default function LoginPage() {
   pattern="[0-9]*"
   inputMode="numeric"
 />
+
 
 
             {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
