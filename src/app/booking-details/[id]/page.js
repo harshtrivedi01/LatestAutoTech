@@ -233,7 +233,7 @@ export default function BookingDetailspage() {
         )}
       </div>
     ) : (
-      <p className="text-sm text-gray-500">{t("Pooja updates not available for this booking status.")}</p>
+      <p className="text-sm text-gray-500">{t("Pooja updates will available for this booking status.")}</p>
     )}
   </div>
 

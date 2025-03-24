@@ -119,8 +119,8 @@ export default function Page() {
   {/* Progress Dots */}
   {currentStatus !== "cancelled" ? (
     <>
-      {/* Order Status Steps with Dates */}
-<div className="flex items-center justify-between relative mb-2">
+ {/* Vertical Order Status Steps */}
+<div className="relative border-l-2 border-gray-300 pl-6 space-y-6 mb-4">
   {steps.map((step, index) => {
     // Match the date fields with steps
     let date = "";
@@ -130,45 +130,28 @@ export default function Page() {
     if (step.toLowerCase().includes("delivered")) date = order.delivered_and_cancelled_date;
 
     return (
-      <React.Fragment key={index}>
-        <div className="flex flex-col items-center w-full text-center">
-          {/* Status Dot */}
+      <div key={index} className="relative flex items-start gap-3">
+        {/* Dot */}
+        <div className="absolute -left-[33px] ">
           <div
-            className={`w-5 h-5 rounded-full border-2 z-10 ${
+            className={`w-4 h-4 rounded-full border-2 ${
               index <= activeStep ? "bg-green-600 border-green-600" : "bg-white border-gray-400"
             }`}
           ></div>
+        </div>
 
-          {/* Status Label */}
-          <span
-            className={`text-sm mt-1 ${
-              index <= activeStep ? "text-green-600 font-bold" : "text-gray-400"
+        {/* Label and Date */}
+        <div>
+          <p
+            className={`text-sm ${
+              index <= activeStep ? "text-green-700 font-semibold" : "text-gray-500"
             }`}
           >
             {step.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
-          </span>
-
-          {/* Status Date */}
-          {date && (
-            <span className="text-xs text-gray-500 mt-1">
-              {date}
-            </span>
-          )}
+          </p>
+          {date && <p className="text-xs text-gray-400">{date}</p>}
         </div>
-
-        {/* Connecting Lines */}
-        {index < steps.length - 1 && (
-          <div
-            className={`absolute top-2 left-0 right-0 h-0.5 z-0 ${
-              index < activeStep ? "bg-green-600" : "bg-gray-300"
-            }`}
-            style={{
-              left: `${(100 / (steps.length - 1)) * index}%`,
-              width: `${100 / (steps.length - 1)}%`,
-            }}
-          ></div>
-        )}
-      </React.Fragment>
+      </div>
     );
   })}
 </div>
