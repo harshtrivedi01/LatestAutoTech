@@ -36,7 +36,7 @@ export default function Faq() {
 
   return (
     <div className="faq p-10 bg-[#FFF8F5] ">
-      <div className="'container max-w-7xl mx-auto ">
+      <div className="container max-w-7xl mx-auto ">
       <div className=" mb-4 overflow-hidden">
         <div className="container">
           <div className="items-center gap-10">

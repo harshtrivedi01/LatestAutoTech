@@ -90,7 +90,7 @@ export default function Page() {
       <div className="max-w-7xl flex flex-col lg:flex-row mx-auto py-14 px-5 gap-6">
         <div className="lg:w-7/12 w-full px-4">
           <h2 className="text-blue-800 font-semibold text-xl mb-2">
-          {t("OrderID")} #{order.order_id}
+          {t("OrderID")} #{order.code}
           </h2>
           <p className="text-gray-700 text-lg">
           {t("OrderDate")} <span className="text-blue-700">{order.order_date}</span>

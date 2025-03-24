@@ -46,6 +46,13 @@ const SliderTwo = () => {
     }
   };
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
+  }, []);
+
   const handleCartAction = async (id, index) => {
     const isLoggedIn = localStorage.getItem("authToken"); // or "user_data"
   
@@ -145,7 +152,7 @@ const SliderTwo = () => {
 
     {/* Product Info */}
     <div className="flex-1">
-      <h3 className="text-xl font-bold text-black">{product.name}</h3>
+      <h3 className="text-xl font-bold text-black h-12 mb-2">{product.name}</h3>
    
       <p className="text-gray-600 text-sm mt-2 line-clamp-2">
     {product.description ? (
@@ -191,35 +198,58 @@ const SliderTwo = () => {
 
   {/* Cart Button */}
   <div className="mt-5">
-    {product.stock === false ? (
-      <span className="text-red-600 text-lg font-bold shadow-xl p-2 px-4 w-full border rounded-xl block text-center">
-        {t("outOfStock")}
-      </span>
-    ) : (
-      <button
-        onClick={() => handleCartAction(product.id, index)}
-        className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
-          ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
-        `}
+  {!isLoggedIn ? (
+    // Always show Add to Cart button for logged-out users
+    <button
+      onClick={() => handleCartAction(product.id, index)}
+      className="flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white bg-[#E5644E] hover:bg-orange-700"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mr-2 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="mr-2 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
-        {cartStatus[index] ? `${t("Removefromcart")}` : `${t("Addtocart")}`}
-      </button>
-    )}
-  </div>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+        />
+      </svg>
+      {t("Addtocart")}
+    </button>
+  ) : product.stock === false ? (
+    <span className="text-red-600 text-lg font-bold shadow-xl p-2 px-4 w-full border rounded-xl block text-center">
+      {t("outOfStock")}
+    </span>
+  ) : (
+    <button
+      onClick={() => handleCartAction(product.id, index)}
+      className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
+        ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
+      `}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mr-2 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+        />
+      </svg>
+      {cartStatus[index] ? t("Removefromcart") : t("Addtocart")}
+    </button>
+  )}
+</div>
+
 </div>
 
             </SplideSlide>

@@ -189,11 +189,11 @@ const updateCartQuantity = async (productId, change) => {
           const orderResponse = await api.post("/cart", orderFormData);
           console.log("Order Submission Response:", orderResponse);
   
-          if (orderResponse.status == "1") {
+          if (orderResponse.data.status == 1) {
             toast.success("Order placed successfully!");
             router.push("/successpage");
           } else {
-            toast.error(orderResponse.message || "Order placement failed");
+            toast.error(orderResponse.data.message || "Order placement failed");
             router.push(`/failedcartpage`);
           }
         } catch (orderError) {
