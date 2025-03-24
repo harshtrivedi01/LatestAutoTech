@@ -67,7 +67,8 @@ const Homeeight = ({ pujaData, detail }) => {
         <div className="flex items-center gap-4">
           {/* Client image */}
           <img
-                    src={testimonial?.image || "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
+                    // src={testimonial?.image || "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
+                    src={"https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
                     className="w-14 h-14 rounded-full border-2 shadow object-contain"
                     alt={testimonial?.name || "Client"}
                     onError={(e) => (e.target.src = "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")}
