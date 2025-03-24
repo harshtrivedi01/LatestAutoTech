@@ -87,8 +87,8 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="max-w-7xl flex flex-col lg:flex-row mx-auto py-14 px-5 gap-6">
-        <div className="lg:w-7/12 w-full px-4">
+      <div className="max-w-7xl flex flex-col lg:flex-row mx-auto py-14  gap-6">
+        <div className="w-full ">
           <h2 className="text-blue-800 font-semibold text-xl mb-2">
           {t("OrderID")} #{order.code}
           </h2>
@@ -124,10 +124,10 @@ export default function Page() {
   {steps.map((step, index) => {
     // Match the date fields with steps
     let date = "";
-    if (step.toLowerCase().includes("pending")) date = order.order_date;
-    if (step.toLowerCase().includes("confirmed")) date = order.confirmed_date;
-    if (step.toLowerCase().includes("picked")) date = order.picked_up_date;
-    if (step.toLowerCase().includes("delivered")) date = order.delivered_and_cancelled_date;
+    if (step.toLowerCase().includes(`${t("pending")}`)) date = order.order_date;
+    if (step.toLowerCase().includes(`${t("confirmed")}`)) date = order.confirmed_date;
+    if (step.toLowerCase().includes(`${t("picked")}`)) date = order.picked_up_date;
+    if (step.toLowerCase().includes(`${t("delivered")}`)) date = order.delivered_and_cancelled_date;
 
     return (
       <div key={index} className="relative flex items-start gap-3">

@@ -313,11 +313,31 @@ i18n
         success:"success",
 
         Noslidesavailableatthemoment:"No slides available at the moment.",
-        HelpSupport:"Help & Support"
+        HelpSupport:"Help & Support",
+
+
+        PoojaandParticipantsDetails:"Pooja and Participant's Details",
+        PoojaUpdates:"Pooja Updates",
+
+        Poojaupdateswillavailableforthisbookingstatus:"Pooja updates will available for this booking status.",
+        YourPoojabookinghasbeenconfirmed:"Your Pooja booking has been confirmed",
+        ViewCertificate:"View Certificate",
+        YourPoojahassuccesssfullyconductedbyPunuyaSetuon:"Your Pooja has successsfully conducted by PunuyaSetu on",
+        WATCHPOOJAVIDEO:"WATCH POOJA VIDEO"
         },
       },
       hi: {
         translation: {
+          Bookingstatus:"बुकिंग स्थिति",
+          PoojaandParticipantsDetails: "पूजा और प्रतिभागियों का विवरण",
+          PoojaUpdates: "पूजा अपडेट",
+
+          Poojaupdateswillavailableforthisbookingstatus: "इस बुकिंग स्थिति के लिए पूजा अपडेट उपलब्ध होंगे।",
+          YourPoojabookinghasbeenconfirmed: "आपकी पूजा बुकिंग की पुष्टि हो गई है",
+          ViewCertificate: "प्रमाणपत्र देखें",
+          YourPoojahassuccesssfullyconductedbyPunuyaSetuon: "पुण्य सेतु द्वारा आपकी पूजा सफलतापूर्वक आयोजित की गई है",
+          WATCHPOOJAVIDEO: "पूजा वीडियो देखें",
+
                   HelpSupport:"सहायता और समर्थन",
           Noslidesavailableatthemoment:"इस समय कोई स्लाइड उपलब्ध नहीं है।",
           success:"सफलता",

@@ -55,31 +55,31 @@ export default function BookingDetailspage() {
 
   const stepStatus = [
     {
-      label: t("Your Pooja booking has been confirmed"),
+      label: t("YourPoojabookinghasbeenconfirmed"),
       condition: !!order?.certificate_url,
       content: order?.certificate_url ? (
         <button
           className="text-blue-600 underline"
           onClick={() => setShowCertificateModal(true)}
         >
-          {t("View Certificate")}
+          {t("ViewCertificate")}
         </button>
       ) : (
         <p className="text-gray-500">{t("Pending")}</p>
       ),
     },
     {
-      label: t("Your Pooja has successsfully conducted by PunuyaSetu on"),
+      label: t("YourPoojahassuccesssfullyconductedbyPunuyaSetuon"),
       condition: !!order?.booking_date,
       content: <p>{order?.booking_date}</p>,
     },
     {
-      label: t("Your Pooja has successsfully conducted by PunuyaSetu at"),
+      label: t("YourPoojahassuccesssfullyconductedbyPunuyaSetuon"),
       condition: !!order?.booking_time,
       content: <p>{order?.booking_time}</p>,
     },
     {
-      label: t("WATCH POOJA VIDEO"),
+      label: t("WATCHPOOJAVIDEO"),
       condition: !!order?.video_path,
       content: order?.video_path ? (
         <video controls width="100%" height="50% "className="rounded-md shadow mt-2 h-80 w-80">
@@ -124,7 +124,7 @@ export default function BookingDetailspage() {
       </div>
 
       <div className="container max-w-7xl mb-5">
-        <p className="p-4 mt-2 text-xl font-semibold">Pooja and Participant's Details</p>
+        <p className="py-4 mt-2 text-xl font-semibold">{t("PoojaandParticipantsDetails")}</p>
 
         {/* Booking Details */}
         <div className="flex flex-wrap md:flex-nowrap gap-4 mt-2 shadow-lg border rounded-lg p-4">
@@ -191,11 +191,11 @@ export default function BookingDetailspage() {
 
    {/* Always show Booking Status at the top */}
 <div className="py-4">
-  <p className="text-xl font-semibold mb-2">{t("Pooja Updates")}</p>
+  <p className="text-xl font-semibold mb-2">{t("PoojaUpdates")}</p>
 
   <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
     <div className="mb-4">
-      <span className="font-semibold">{t("Booking Status")}: </span>
+      <span className="font-semibold">{t("Bookingstatus")}: </span>
       <span
         className={`font-medium uppercase ${
           order.booking_status === "completed"
@@ -233,7 +233,7 @@ export default function BookingDetailspage() {
         )}
       </div>
     ) : (
-      <p className="text-sm text-gray-500">{t("Pooja updates will available for this booking status.")}</p>
+      <p className="text-sm text-gray-500">{t("Poojaupdateswillavailableforthisbookingstatus")}</p>
     )}
   </div>
 

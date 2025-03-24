@@ -195,27 +195,7 @@ const Page = () => {
           </form>
   </div>
 
-  {/* <div className="w-48 flex-shrink-0">
-    <div className="relative">
-      <select
-        name="gender"
-        id="gender"
-        className="px-5 py-2 bg-white text-gray-400 rounded-lg border-2 border-orange-400 w-full  text-lg appearance-none outline-none"
-      >
-        
-        <option value="Filter">
-          Filter
-        </option>
-        <option value="male">Success</option>
-        <option value="female">Pending</option>
-        <option value="other">Failed</option>
-        
-      </select>
-      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-        <IoIosArrowDown className="text-gray-400" />
-      </div>
-    </div>
-  </div> */}
+
 </div>
 
 
@@ -246,7 +226,7 @@ const Page = () => {
 {/* For pooja booking div */}
 {/* Pooja Booking Section */}
 {activeStep === `${t("PoojaBooking")}` && (
-  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
+  <div className="bg-gray-100 p-6  rounded-lg">
     {loading ? (
       <p className="text-center text-lg font-semibold">  {t("SearchSomething")} </p>
     ) : searchQuery && searchResults.length === 0 ? (
@@ -287,9 +267,9 @@ const Page = () => {
              <h2 className="text-lg font-bold text-black">
                {booking.puja_name}
              </h2>
-              <h2 className="text-lg flex justifu-center font-bold text-black">
+              <h2 className="text-lg flex xs:justify-center font-bold text-black">
             <p className="flex  items-center gap-1">
-             <span className="text-base font-semibold "> {t("Payment")} :{" "} </span>
+             <span className="text-base font-semibold "> {t("Payment")}:{" "} </span>
              <div
                className={`${
                  booking.payment_status === "success"
