@@ -21,7 +21,7 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
   return (
     <div className="relative w-full  bg-white">
       <div
-        className="container bg-[#FFFFFF] px-2 "
+        className=" bg-[#FFFFFF] px-2 "
         style={{
           backgroundImage: `url('/images/about.jpg')`,
           backgroundSize: "cover",
@@ -30,7 +30,7 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
           
         }}
       ><br/> <br/><br/><br/><br/><br/><br/>
-        <div className="mx-auto max-w-6xl relative">
+        <div className="container max-w-7xl mx-auto relative">
           <div className="flex justify-center">
             <Heading text={t("About")} color="white" />
           </div>

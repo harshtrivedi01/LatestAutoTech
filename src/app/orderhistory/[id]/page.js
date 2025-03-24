@@ -93,7 +93,7 @@ export default function Page() {
           {t("OrderID")} #{order.code}
           </h2>
           <p className="text-gray-700 text-lg">
-          {t("OrderDate")} <span className="text-blue-700">{order.order_date}</span>
+          {t("OrderDate")}: <span className="text-blue-700">{order.order_date}</span>
           </p>
 
           <div className="my-8">
@@ -132,7 +132,7 @@ export default function Page() {
               {/* Label */}
               <span
                 className={`text-sm mt-2 ${
-                  index <= activeStep ? "text-green-600" : "text-gray-400"
+                  index <= activeStep ? "text-green-600 font-bold" : "text-gray-400"
                 }`}
               >
                 {step.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
@@ -215,7 +215,7 @@ export default function Page() {
             </p>
           </div>
           <div className="mt-5">
-          <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("Help&Support")}</h3>
+          <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("HelpSupport")}</h3>
           <p className="flex items-center">
 									<a href={`tel:+91 7340099503`} className="flex border p-2 rounded-xl items-center text-gray-800 hover:text-green-600">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 mr-2 bg-green-500 p-2 rounded-full text-white text-xl sm:mr-2">

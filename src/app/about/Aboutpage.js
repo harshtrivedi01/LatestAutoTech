@@ -9,8 +9,8 @@ export default function Aboutpage({heading,description,image}) {
   const { t } = useTranslation();
   return (
     <>
-      <section className="container pt-20 md:pt-20 bg-[#FFF8F5]">
-        <div className=" mx-auto px-8 lg:flex">
+      <section className=" pt-20 md:pt-20 bg-[#FFF8F5]">
+        <div className="container max-w-7xl mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold leading-none">{heading}</h1>
             <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html:(description) }}></p>

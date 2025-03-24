@@ -49,12 +49,13 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
         centeredSlides={true} // ✅ Centered slide
         slidesPerView={"auto"} // ✅ Allows dynamic slide size
         loop={true}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 10000 }}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
           depth: 150,
           modifier: 1.2,
+          perView: 3,
           slideShadows: false,
         }}
       
@@ -68,12 +69,13 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
             
           >
             <div
-              className="relative flex flex-col items-center justify-center drop-shadow-2xl 
+              className=" relative flex flex-col items-center justify-center drop-shadow-2xl 
                          h-[250px] sm:h-[300px] md:h-[350px] 
                          rounded-[30px] sm:rounded-[40px] md:rounded-[50px]  
                          w-full bg-white shadow-lg overflow-hidden"
               style={{
-                backgroundImage: `url(${item.bottomslider})`,
+                // backgroundImage: `url(${item.bottomslider})`,
+                backgroundImage: `url(/images/image.png)`  ||`url(/images/image.png)` ,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

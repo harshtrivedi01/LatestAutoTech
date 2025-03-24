@@ -82,7 +82,7 @@ i18n
             "Perform sacred rituals from the comfort of your home. Book a pooja in your name and gotra, receive a recorded video of the ceremony, and get the divine Aashirwad Box delivered to you. Experience spiritual fulfillment and divine blessings with Punyasetu",
           CommingSoon: "Comming Soon",
           // Address: "M/S Satsambhav Technologies Private Limited",
-          SelectPoojapackage: "Select Pooja package",
+          SelectPoojapackage: "Select Pooja Package",
           PanditRegistration: "Pandit Registration",
           SelectaDateforPoojaBooking: "Select a Date for Pooja Booking",
 
@@ -303,7 +303,7 @@ i18n
          Newest:"Newest",
         Popularity:"Popularity",
 
-        Paymentstatus:"Payment status",
+        Payment:"Payment",
         poojadate:"Pooja Date",
         Bookingstatus:"Booking status",
         UserDetail:"User Detail",
@@ -312,11 +312,13 @@ i18n
         FatherName:"Father Name",
         success:"success",
 
-        Noslidesavailableatthemoment:"No slides available at the moment."
+        Noslidesavailableatthemoment:"No slides available at the moment.",
+        HelpSupport:"Help & Support"
         },
       },
       hi: {
         translation: {
+                  HelpSupport:"सहायता और समर्थन",
           Noslidesavailableatthemoment:"इस समय कोई स्लाइड उपलब्ध नहीं है।",
           success:"सफलता",
           FatherName:"पिता का नाम",
@@ -325,7 +327,7 @@ i18n
           Bookingstatus:"बुकिंग स्थिति", 
           UserDetail:"उपयोगकर्ता विवरण",
           MembersParticipatinginPooja:"पूजा में भाग लेने वाले सदस्य",
-
+          Payment:"भुगतान",
           SortByAll:" सभी द्वारा क्रमबद्ध करें",
 LowtoHigh:"निम्न से उच्च",
 HightoLow:"उच्च से निम्न",
@@ -496,7 +498,7 @@ Popularity:"लोकप्रियता",
           app: "ऐप",
           DownloadontheAppStore: "ऐप स्टोर से डाउनलोड करें",
           getitonPlayStore: "इसे प्ले स्टोर पर प्राप्त करें",
-          PoojaBoxonPunyasetu: "पूजा बॉक्स ही पुण्यसेतु है",
+          PoojaBoxonPunyasetu: "पुण्यसेतु पर पूजा बॉक्स",
           Addtocart: "कार्ट में जोड़ें",
           Productremovedfromcartsuccessfully:
             "उत्पाद को कार्ट से सफलतापूर्वक हटा दिया गया",

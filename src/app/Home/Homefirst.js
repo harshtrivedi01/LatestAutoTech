@@ -48,7 +48,7 @@ const Homefirst = ({ sliderList = [] }) => {
   return (
     <div id="carousel" className="relative w-full">
       {/* Carousel Wrapper */}
-      <div className="container relative h-56 sm:h-72 md:h-[380px] overflow-hidden rounded-xl">
+      <div className="container relative h-60 sm:h-80 md:h-[400px] overflow-hidden rounded-xl">
         {sliderList.map((slide, index) => (
           <div
             key={index}
@@ -58,7 +58,8 @@ const Homefirst = ({ sliderList = [] }) => {
           >
             <Link href={getRedirectUrl(slide.module_category_id)}>
             <Image
-  src={slide.slider || "/images/sliderbackground.jpg"}
+  // src={slide.slider || "/images/sliderbackground.jpg"}
+  src={"https://astrologyexperts.in/images/product_images/small/lh.jpg-80704.jpg-41893.jpg"}
   alt={`Slide ${index + 1}`}
   layout="fill"
   objectFit="fill"

@@ -74,7 +74,7 @@ export default function Homethird({pujaData}) {
             <h3 className="text-lg text-black leading-7 md:text-sm lg:text-[17px]">
               {pujaData?.data?.aboutus_imagedes1}
             </h3>
-            <a  href={"/contact"} className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
+            <a  href={"/"} className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
               <FaChevronRight className="text-[#DD531B]" />
             </a>
           </div>

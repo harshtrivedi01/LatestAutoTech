@@ -11,7 +11,7 @@ return(
 
     <>
       <AuthGuard>
-<div className="bg-white content-center border-y container max-w-7xl m-auto ">
+<div className="bg-white content-center border-y h-screen">
   <div className="bg-white p-6  md:mx-auto">
    <div className="flex justify-center mb-4">
    <Image src={success} alt="ttt" width={50} height={50}/>
