@@ -195,7 +195,7 @@ i18n
           //    /mybooking
 
           MyBooking: "My Booking",
-          SearchSomething: "Search Something...",
+          SearchSomething: "Search pooja...",
           PoojaBooking: "Pooja Booking",
           PoojaBox: "Pooja Box",
           LaxmiPoojaBoxDailyPoojaBox: "Laxmi Pooja Box, Daily Pooja Box",

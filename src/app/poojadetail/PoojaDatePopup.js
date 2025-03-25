@@ -40,13 +40,8 @@ tomorrow.setDate(today.getDate() + 1);
 
 // Set initial date (first available date or tomorrow)
 useEffect(() => {
-  if (sortedDates.length > 0) {
-    setSelectedDate(sortedDates[0]); // Use first available date
-  } else {
-    setSelectedDate(tomorrow); // Default to tomorrow
-  }
-}, [date?.dates]); // Ensure it updates when dates change
-
+  setSelectedDate(null); // Ensure calendar starts empty
+}, [date?.dates]);
 
 // Handle date selection
 const handleDateSelect = (date) => {
@@ -54,9 +49,10 @@ const handleDateSelect = (date) => {
     toast.error("Please select a future date.");
     return;
   }
-  setSelectedDate(new Date(date)); // Ensure it's properly updated
+  setSelectedDate(date); // Store selected date
   setShowCalendar(false);
 };
+
 
   // Handle form submission
   // const handleSubmit = () => {
@@ -158,7 +154,7 @@ const handleDateSelect = (date) => {
   
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-40 p-4">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-white text-black rounded-lg shadow-lg p-6 max-w-xl w-full relative">
         <button
@@ -177,11 +173,12 @@ const handleDateSelect = (date) => {
             </p>
 
             <button
-              className="w-full p-2 border flex gap-2 rounded-lg text-left bg-gray-100"
-              onClick={() => setShowCalendar(!showCalendar)}
-            >
-              <Calendar /> {selectedDate ? selectedDate.toDateString() : "Select a Date"}
-            </button>
+  className="w-full p-2 border flex gap-2 rounded-lg text-left bg-gray-100"
+  onClick={() => setShowCalendar(!showCalendar)}
+>
+  <Calendar /> {selectedDate ? selectedDate.toDateString() : "Select a Date"}
+</button>
+
 
             {showCalendar && (
               <div className="absolute bg-white border rounded-lg mt-2 shadow-lg">

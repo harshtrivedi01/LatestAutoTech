@@ -3,9 +3,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+
 import './Poojadetail.css';
 import Content from "./Content";
+import Proccess from "./Proccess";
+import Poojavideo from "./Poojavideo";
 import Benifit from "./Benifit";
 import PoojaPackage from "./PoojaPackage";
 import Faq from "./Faq";
@@ -19,6 +21,9 @@ import { Calendar, CalendarIcon } from "lucide-react";
 import api from "../lib/axiosInstance";
 import Testimonials from "./Testimonials";
 import { useTranslation } from "react-i18next";
+import { useEffect, useRef, useState } from "react";
+import Glide from "@glidejs/glide";
+import "@glidejs/glide/dist/css/glide.core.min.css"; // Ensure styles are loaded
 
 const slides = [
   { image: "img", text: "Pooja Anytime Anywhere" },
@@ -30,14 +35,65 @@ export default function Poojadetailpage() {
   const { t } = useTranslation();
   const [inputDate, setInputDate] = useState('');
 
-  const handleDateChange = (e) => {
-    setInputDate(e.target.value);
+  const [activeTab, setActiveTab] = useState("about-pooja");
+  const tabRef = useRef(null);
+
+  const tabs = [
+    { id: "about-pooja", label: `${t("AboutPooja")}` },
+    { id: "pooja-benefits", label: `${t("PoojaBenefits")}` },
+    { id: "Process", label: `${t("PoojaProcess")}` },
+    { id: "pooja-package", label: `${t("PoojaPackage")}` },
+    { id: "Poojavideo", label: `${t("Poojavideo")}` },
+    { id: "faq", label: `${t("faq")}` },
+  ];
+
+  // Scroll to section when clicking on a tab
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setActiveTab(id);
   };
+
+  // Track section visibility and update active tab
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // Adjust for better detection
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveTab(entry.target.id);
+
+          // Auto-scroll tab container to the active tab
+          const activeTabElement = document.querySelector(`[data-tab="${entry.target.id}"]`);
+          if (activeTabElement && tabRef.current) {
+            tabRef.current.scrollTo({
+              left: activeTabElement.offsetLeft - 20, // Offset for better alignment
+              behavior: "smooth",
+            });
+          }
+        }
+      });
+    }, observerOptions);
+
+    tabs.forEach((tab) => {
+      const section = document.getElementById(tab.id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
   const { id } = useParams();  
   const [index, setIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [activeTab, setActiveTab] = useState("about-pooja"); // Default active tab
 
+
+  
   useEffect(() => {
     if (!autoPlay) return;
 
@@ -175,16 +231,35 @@ export default function Poojadetailpage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+
   
-      // Ensure active tab updates instantly on click
-      setTimeout(() => setActiveTab(id), 300); 
-    }
-  };
+    const glideRef = useRef(null);
+    const [activeIndex, setActiveIndex] = useState(0);
   
+    useEffect(() => {
+      if (glideRef.current) {
+        const glideInstance = new Glide(glideRef.current, {
+          type: "carousel",
+          perView: 1,
+          autoplay: 3000,
+          hoverpause: true,
+        });
+  
+        glideInstance.on("run.after", () => {
+          setActiveIndex(glideInstance.index);
+        });
+  
+        glideInstance.mount();
+  
+        return () => glideInstance.destroy(); // Cleanup on unmount
+      }
+    }, []);
+  
+    const images = [
+      "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
+      "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
+      "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_001.d7bef497.webp&w=1920&q=75",
+    ];
   
   return (
     <>
@@ -193,39 +268,74 @@ export default function Poojadetailpage() {
     {errorMessage}
   </div>
 ) : (
-  <div>
+  <div className="container max-w-7xl mx-auto">
    
+     <div className="flex  items-center gap-6  mt-5 my-8">
+          
+   
+          
+           <div className="w-full h-[400px]">
+             <div className="glide" ref={glideRef}>
+               <div className="glide__track" data-glide-el="track">
+                 <ul className="glide__slides">
+                   {images.map((img, idx) => (
+                     <li className="glide__slide" key={idx}>
+                       <Image
+                         src={ pujaData?.image || "/images/logo.png"}
+                         alt="Puja"
+                         width={400}
+                         height={300}
+                         className=" h-[400px] rounded-3xl shadow-lg w-full"
+                       />
+                     </li>
+                   ))}
+                 </ul>
+               </div>
+   
+               {/* Dots (Pagination) Below the Slider */}
+               <div className="glide__bullets flex justify-center mt-4" data-glide-el="controls[nav]">
+                 {images.map((_, idx) => (
+                   <button
+                     key={idx}
+                     className={`glide__bullet w-3 h-3 mx-1 rounded-full transition-all ${
+                       activeIndex === idx ? "bg-orange-500 " : "bg-gray-400"
+                     }`}
+                     data-glide-dir={`=${idx}`}
+                   ></button>
+                 ))}
+               </div>
+             </div>
+           </div>
+         </div>
+
+ {/* Tab Section */}
+ <div className="sticky top-0 z-50 bg-white ">
+      <div
+        ref={tabRef}
+         className="container flex justify-between overflow-x-auto whitespace-nowrap border-b px-4  space-x-4 scrollbar-hide"
+      >
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            data-tab={tab.id}
+            className={`px-4 py-2 md:px-6 md:py-3 flex-shrink-0 font-medium transition-all duration-300 
+              ${activeTab === tab.id ? "border-b-2 font-semibold border-[#E5644E] text-[#E5644E]" : "text-gray-600"}`}
+            onClick={() => scrollToSection(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
      <section className="poojadetail p-60" id="home1">
         <div className="container">
-          <div className="'container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5" >
+          <div className="'container max-w-7xl mx-auto " >
             {/* Left Side - Image Slider */}
-            <div className="md:col-span-1 flex justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ x: "0%" }}
-                  animate={{ x: "0%" }}
-                  exit={{ x: "0%" }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className="w-full flex justify-center items-center text-white text-center text-3xl font-bold bg-cover bg-center rounded-xl"
-                  style={{ backgroundImage: `url(${slides[index].image})` }}
-                >
-                  <div className="h-[200px] w-full flex justify-center img-ratio">
-                    <img
-                      className="w-full  object-contain h-full"
-                      src={ pujaData?.image || "/images/logo.png"}
-                      alt="Pooja Banner"
-                      height="100%"
-                      width="100%"
-                      onError={(e) => (e.target.src = "/images/logo.png")}
-                    />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+      
 
             {/* Right Side - Content */}
-            <div className="md:col-span-1 text-center md:text-left relative">
+            <div className=" text-center md:text-left relative">
             {/* whatsapp */}
             <i className="mb-2 isuccess float-right cursor-pointer" onClick={shareOnWhatsApp}>
             <svg xmlns="http://www.w3.org/2000/svg" height="30px" width="30px" viewBox="0 0 24 24" fill="currentColor">
@@ -256,9 +366,10 @@ export default function Poojadetailpage() {
   </p>
 )}
     </div>
+    <section id="about-pooja" className=""> <Content detail={pujaData}  /> </section>
     <a  onClick={() => scrollToSection(`${t("pooja-package")}`)}
         id="package"
-        className="w-full cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
+        className="w-full mt-5 cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
             {t("SelectPoojapackage")}
               </a>
             </div>
@@ -266,30 +377,11 @@ export default function Poojadetailpage() {
         </div>
       </section>
 
-      {/* Tab Section */}
-      <div className="sticky top-0 z-50 bg-white flex justify-center gap-4">
-  <div className="container flex justify-center space-x-4 border-b">
-
-    {[
-      { id: "about-pooja", label: `${t("AboutPooja")}` },
-      { id: "pooja-benefits", label: `${t("PoojaBenefits")}`},
-      { id: "pooja-package", label: `${t("PoojaPackage")}`},
-    ].map((tab) => (
-      <button
-        key={tab.id}
-        className={`px-6 py-3 w-full font-medium transition-all duration-300 
-          ${activeTab === tab.id ? "bg-[#E5644E] text-white rounded-t-lg" : "text-gray-600"}`}
-        onClick={() => scrollToSection(tab.id)}
-      >
-        {tab.label}
-      </button>
-    ))}
-  </div>
-</div>
+    
 
 
     
-      {showButton && (
+      {/* {showButton && (
       <a
       onClick={() => document.getElementById("pooja-package")?.scrollIntoView({ behavior: "smooth" })}
       className="fixed bottom-6 sm:bottom-10 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
@@ -298,19 +390,21 @@ export default function Poojadetailpage() {
     >
        {t("SelectPoojapackage")}
     </a>     
-      )}
+      )} */}
    
 
       {/* Sections */}
-      <section id="about-pooja" className=""> <Content detail={pujaData}  /> </section>
-      <section  id="pooja-benefits" className="min-h-[400px]"> <Benifit detail={pujaData} /> </section>
-      <section id="pooja-package" className="relative z-40">
-        <PoojaPackage detail={pujaData} />
-      </section>
+     
+      <section  id="pooja-benefits" className=""> <Benifit detail={pujaData} /> </section><br/>
+      <section  id="Process" className=""> <Proccess detail={pujaData} /> </section>
+      <section id="pooja-package" className="relative z-40"> <PoojaPackage detail={pujaData} />  </section>
     
-      <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black  relative z-0"> <Testimonials/></section>
-      <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
+      {/* <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
+      <section id="Homeeight-section" className="text-black  relative z-0"> <Testimonials/></section> */}
+
+<section id="Poojavideo" className="relative z-40"> <Poojavideo/>  </section>
+    
+      <section id="faq" className="text-black"> <Faq  detail={pujaData} /> </section>
   </div>
 )}
 
