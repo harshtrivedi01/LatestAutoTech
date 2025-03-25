@@ -59,7 +59,7 @@ const Homefirst = ({ sliderList = [] }) => {
             <Link href={getRedirectUrl(slide.module_category_id)}>
             <Image
   // src={slide.slider || "/images/sliderbackground.jpg"}
-  src={"https://astrologyexperts.in/images/product_images/small/lh.jpg-80704.jpg-41893.jpg"}
+  src={"https://clickpanditji.com/assets/images/new-banner-1.jpg"}
   alt={`Slide ${index + 1}`}
   layout="fill"
   objectFit="fill"

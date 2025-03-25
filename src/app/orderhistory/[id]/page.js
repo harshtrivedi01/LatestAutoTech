@@ -79,7 +79,7 @@ export default function Page() {
     <div>
       <div className="bg-[#FFEEE2]">
         <div className="p-60 overflow-hidden">
-          <div className="container max-w-7xl">
+          <div className="container max-w-7xl mx-auto">
             <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
             {t("OrderHistory")}
             </h2>
@@ -87,7 +87,7 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="max-w-7xl flex flex-col lg:flex-row mx-auto py-14  gap-6">
+      <div className="container max-w-7xl mx-auto flex flex-col lg:flex-row mx-auto py-14  gap-6">
         <div className="w-full ">
           <h2 className="text-blue-800 font-semibold text-xl mb-2">
           {t("OrderID")} #{order.code}
@@ -130,9 +130,9 @@ export default function Page() {
     if (step.toLowerCase().includes(`${t("delivered")}`)) date = order.delivered_and_cancelled_date;
 
     return (
-      <div key={index} className="relative flex items-start gap-3">
+      <div key={index} className="relative flex items-start gap-3 mx-2">
         {/* Dot */}
-        <div className="absolute -left-[33px] ">
+        <div className="absolute -left-[41px] ">
           <div
             className={`w-4 h-4 rounded-full border-2 ${
               index <= activeStep ? "bg-green-600 border-green-600" : "bg-white border-gray-400"

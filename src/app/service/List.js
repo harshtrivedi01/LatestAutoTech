@@ -50,7 +50,8 @@ export default function List({ module_category_details }) {
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {
               const { modulecategory, short_description, id, image } = category;
-              const imageSrc = image || service1;
+              // const imageSrc = image || service1;
+              const imageSrc =  service1;
               const bookingUrl = bookingUrls[modulecategory] || "#";
 
               // Show limited words

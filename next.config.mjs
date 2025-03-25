@@ -26,7 +26,7 @@ const nextConfig = {
   },
   images: {
     domains: ['punyasetu-bucket.s3.ap-south-1.amazonaws.com'],
-    domains: ['astrologyexperts.in'],
+    domains: ['clickpanditji.com'],
     remotePatterns: [
       {
         protocol: "https",

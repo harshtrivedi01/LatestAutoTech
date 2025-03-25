@@ -60,7 +60,7 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
         }}
       
         modules={[EffectCoverflow, Pagination, Autoplay]}
-        className=" mySwiper "
+        className="container mySwiper "
       >
         {bottomslider_list.map((item, index) => (
           <SwiperSlide

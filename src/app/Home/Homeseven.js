@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 export const Homeseven = () => {
   const { t } = useTranslation();
   return (
-    <div className="bg-[#FFEEE2] px-5 py-10 sm:py-20">
+    <div className="bg-[#FFEEE2] px-5 py-10 sm:py-40">
       <div className="max-w-screen-xl mx-auto bg-[#FFD7AA] rounded-[40px] sm:rounded-[70px]  py-10  sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
           {/* Text Section */}

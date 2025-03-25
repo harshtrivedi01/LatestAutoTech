@@ -323,11 +323,13 @@ i18n
         YourPoojabookinghasbeenconfirmed:"Your Pooja booking has been confirmed",
         ViewCertificate:"View Certificate",
         YourPoojahassuccesssfullyconductedbyPunuyaSetuon:"Your Pooja has successsfully conducted by PunuyaSetu on",
-        WATCHPOOJAVIDEO:"WATCH POOJA VIDEO"
+        WATCHPOOJAVIDEO:"WATCH POOJA VIDEO",
+        Member:"Member",
         },
       },
       hi: {
         translation: {
+          Member:"सदस्य",
           Bookingstatus:"बुकिंग स्थिति",
           PoojaandParticipantsDetails: "पूजा और प्रतिभागियों का विवरण",
           PoojaUpdates: "पूजा अपडेट",

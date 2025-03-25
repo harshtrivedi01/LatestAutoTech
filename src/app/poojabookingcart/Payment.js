@@ -151,7 +151,7 @@ const Payment = () => {
 
   return (
     <AuthGuard>
-      <h1 className="max-w-7xl mx-auto f-34 mb-2 font-semibold text-lg text-black lg:mx-40  mx-10">  {t("ShoppingCart")} </h1>
+      <h1 className="container max-w-7xl mx-auto f-34 mb-2 font-semibold text-lg text-black lg:mx-40  mx-10">  {t("ShoppingCart")} </h1>
       <div className="flex lg:mx-40  mx-5 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center mb-4 md:mb-0">
           <div
@@ -182,13 +182,13 @@ const Payment = () => {
             {/* Left Section */}
             <div className="w-full md:w-2/3">
   <div className="bg-white p-4 rounded-lg shadow">
-    <div className="flex flex-col xl:flex-row items-start gap-4">
+    <div className="flex flex-col xl:flex-row items-start items-center gap-4">
       {/* Image Section */}
-      <div className="w-full xl:w-1/2">
+      <div className="w-full xl:w-1/2 rounded-lg">
         <img
           src={data?.image || ""}
           alt="Pooja"
-          className="rounded-lg object-contain w-full h-40 sm:h-48 md:h-56"
+          className="rounded-2xl object-contain w-full h-40 sm:h-48 md:h-56"
           onError={(e) => (e.target.src = "/images/logo.png")}
         />
       </div>
@@ -199,7 +199,7 @@ const Payment = () => {
           {data?.name || "Pooja Name"}
         </h3>
         <p
-          className="text-gray-500 text-sm sm:text-base md:text-lg mt-1"
+          className="text-gray-500 text-sm mt-1"
           dangerouslySetInnerHTML={{
             __html: data?.puja_description
               ? data.puja_description

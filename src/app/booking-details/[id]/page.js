@@ -7,7 +7,7 @@ import api from "../../lib/axiosInstance";
 export default function BookingDetailspage() {
   const { t } = useTranslation();
   const { id } = useParams();
-  const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
 
@@ -105,13 +105,19 @@ export default function BookingDetailspage() {
     return <div className="text-center py-10 text-red-500">No booking data found.</div>;
   }
   const toggleAccordion = (index) => {
-    setOrder((prevData) =>
-      prevData.map((faq, i) => ({
-        ...faq,
-        isOpen: i === index ? !faq.isOpen : false, // Close other accordions
-      }))
-    );
+    setOrder((prevData) => {
+      if (!prevData || !Array.isArray(prevData.faq_list)) return { faq_list: [] };
+  
+      return {
+        ...prevData,
+        faq_list: prevData.faq_list.map((faq, i) => ({
+          ...faq,
+          isOpen: i === index ? !faq.isOpen : false, // Close other accordions
+        })),
+      };
+    });
   };
+  
 
   if (!order) return <p className="p-4">Loading...</p>;
 
@@ -316,41 +322,49 @@ export default function BookingDetailspage() {
         </div>
       
       </div>
-        <div className="space-y-4 ">
-          {order.faq_list?.map((faq, index) => (
-            <div key={index} className="border-b border-slate-200 bg-white px-2">
-              <button
-                onClick={() => toggleAccordion(index)}
-                className="w-full flex justify-between items-center text-start py-5 text-slate-600 text-lg"
-              >
-                <span>{faq?.question || "No Title"}</span>
-                <span
-                  className={`text-slate-600 transition-transform duration-300 ${
-                    faq.isOpen ? "rotate-45" : ""
-                  }`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    className="w-6 h-6 "
-                  >
-                    <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
-                  </svg>
-                </span>
-              </button>
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  faq.isOpen ? "" : "max-h-0"
-                }`}
-              >
-                <div className="pb-5 text-base text-slate-500"  dangerouslySetInnerHTML={{ __html:( faq?.answer || "No description available.") }}>
-                 
-                </div>
-              </div>
-            </div>
-          ))}
+      <div className="space-y-4">
+  {Array.isArray(order.faq_list) && order.faq_list.length > 0 ? (
+    order.faq_list.map((faq, index) => (
+      <div key={index} className="border-b border-slate-200 bg-white px-2">
+        <button
+          onClick={() => toggleAccordion(index)}
+          className="w-full flex justify-between items-center text-start py-5 text-slate-600 text-lg"
+        >
+          <span>{faq?.question || "No Title"}</span>
+          <span
+            className={`text-slate-600 transition-transform duration-300 ${
+              faq.isOpen ? "rotate-45" : ""
+            }`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-6 h-6"
+            >
+              <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+            </svg>
+          </span>
+        </button>
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            faq.isOpen ? "" : "max-h-0"
+          }`}
+        >
+          <div
+            className="pb-5 text-base text-slate-500"
+            dangerouslySetInnerHTML={{
+              __html: faq?.answer || "No description available.",
+            }}
+          ></div>
         </div>
+      </div>
+    ))
+  ) : (
+    <p className="text-center text-gray-500">No FAQs available.</p>
+  )}
+</div>
+
       </div>
     </div>
     </div>

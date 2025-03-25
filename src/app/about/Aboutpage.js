@@ -12,16 +12,17 @@ export default function Aboutpage({heading,description,image}) {
       <section className=" pt-20 md:pt-20 bg-[#FFF8F5]">
         <div className="container max-w-7xl mx-auto px-8 lg:flex">
           <div className="text-center lg:text-left lg:w-1/2">
-            <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold leading-none">{heading}</h1>
+            <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold leading-none ">{heading}</h1>
             <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html:(description) }}></p>
             <p className="mt-8 md:mt-12">
-              <button
+              <a
+                href="/join"
                 type="button"
                 className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-2xl px-2 lg:px-10 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                 style={{ backgroundColor: "#E5644E" }}
               >
                {t("LearnMore")}
-              </button>
+              </a>
             </p>
 
           </div>

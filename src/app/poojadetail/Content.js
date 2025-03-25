@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
     const { t } = useTranslation();
 	return (
 	  <div className='container max-w-7xl mx-auto p-60 bg- content container mx-'  id="about-section" >
-        <div className=''>
+        <div className='p-5'>
 
         <h2 className='title text-black'>{t("AboutPooja")}</h2>
-        <p className='' dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
+        <p className='text-gray-700' dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
     
   
         </p>

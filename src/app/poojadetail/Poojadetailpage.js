@@ -36,7 +36,7 @@ export default function Poojadetailpage() {
   const { id } = useParams();  
   const [index, setIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [activeTab, setActiveTab] = useState(`${t("AboutPooja")}`); // "content" or "benifit"
+  const [activeTab, setActiveTab] = useState("about-pooja"); // Default active tab
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -85,34 +85,33 @@ export default function Poojadetailpage() {
   const [showButton, setShowButton] = useState(true);
   
   useEffect(() => {
-    const handleScroll = () => {
-      const aboutSection = document.getElementById(`${t("AboutPooja")}`);
-      const benefitSection = document.getElementById(`${t("PoojaBenefits")}`);
-      const packageSection = document.getElementById(`${t("PoojaPackage")}`);
-      const downloadAppSection = document.getElementById("Downloadapp-section");
-      const homeEightSection = document.getElementById("Homeeight-section");
-      const faqSection = document.getElementById("Faq-section");
+    const sectionIds = ["about-pooja", "pooja-benefits", "pooja-package"];
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveTab(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.6 } // Adjust threshold to detect visibility better
+    );
   
-      if (benefitSection && packageSection && downloadAppSection && homeEightSection && faqSection) {
-        const benefitTop = benefitSection.getBoundingClientRect().top;
-        const packageTop = packageSection.getBoundingClientRect().top;
-        const downloadAppTop = downloadAppSection.getBoundingClientRect().top;
-        const homeEightTop = homeEightSection.getBoundingClientRect().top;
-        const faqTop = faqSection.getBoundingClientRect().top;
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
   
-        // Show button when any of these sections are visible and hide it when hovering over the Package section
-        setShowButton(
-          (benefitTop < window.innerHeight / 2 && packageTop > 100) ||
-          (downloadAppTop < window.innerHeight && downloadAppTop > 0) ||
-          (homeEightTop < window.innerHeight && homeEightTop > 0) ||
-          (faqTop < window.innerHeight && faqTop > 0)
-        );
-      }
+    return () => {
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) observer.unobserve(section);
+      });
     };
-  
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  
   
   
   const [showModal, setShowModal] = useState(false);
@@ -154,28 +153,46 @@ export default function Poojadetailpage() {
   };
   
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveTab(entry.target.getAttribute("id"));
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => sections.forEach((section) => observer.unobserve(section));
+    const handleScroll = () => {
+      const aboutSection = document.getElementById(`${t("AboutPooja")}`);
+      const benefitSection = document.getElementById(`${t("PoojaBenefits")}`);
+      const packageSection = document.getElementById(`${t("PoojaPackage")}`);
+      const downloadAppSection = document.getElementById("Downloadapp-section");
+      const homeEightSection = document.getElementById("Homeeight-section");
+      const faqSection = document.getElementById("Faq-section");
+  
+      if (benefitSection && packageSection && downloadAppSection && homeEightSection && faqSection) {
+        const benefitTop = benefitSection.getBoundingClientRect().top;
+        const packageTop = packageSection.getBoundingClientRect().top;
+        const downloadAppTop = downloadAppSection.getBoundingClientRect().top;
+        const homeEightTop = homeEightSection.getBoundingClientRect().top;
+        const faqTop = faqSection.getBoundingClientRect().top;
+  
+        // Show button when any of these sections are visible and hide it when hovering over the Package section
+        setShowButton(
+          (benefitTop < window.innerHeight / 2 && packageTop > 100) ||
+          (downloadAppTop < window.innerHeight && downloadAppTop > 0) ||
+          (homeEightTop < window.innerHeight && homeEightTop > 0) ||
+          (faqTop < window.innerHeight && faqTop > 0)
+        );
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+  
+      // Ensure active tab updates instantly on click
+      setTimeout(() => setActiveTab(id), 300); 
     }
   };
+  
+  
   return (
     <>
     {isError ? (
@@ -184,6 +201,7 @@ export default function Poojadetailpage() {
   </div>
 ) : (
   <div>
+   
      <section className="poojadetail p-60" id="home1">
         <div className="container">
           <div className="'container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5" >
@@ -252,8 +270,7 @@ export default function Poojadetailpage() {
   {pujaData?.short_description
     ? pujaData?.short_description .split(" ").slice(0, 30).join(" ") + (pujaData?.short_description .split(" ").length > 30 ? "..." : "")
     : ""}
-</p>
-              
+</p>      
              <div>
      
              {(pujaData?.date || (Array.isArray(pujaData?.dates) && pujaData.dates.length > 0)) && (
@@ -261,63 +278,61 @@ export default function Poojadetailpage() {
     <CalendarIcon className="text-yellow-600" /> {pujaData.date}
   </p>
 )}
-
-
-     
     </div>
-    <a  
-                 onClick={() => scrollToSection(`${t("PoojaPackage")}`)}
-                id="package"
-                className="w-full cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800"
-              >
+    <a  onClick={() => scrollToSection(`${t("PoojaPackage")}`)}
+        id="package"
+        className="w-full cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
             {t("SelectPoojapackage")}
               </a>
-
             </div>
           </div>
         </div>
       </section>
 
       {/* Tab Section */}
+      <div className="sticky top-0 z-50 bg-white flex justify-center gap-4">
+  <div className="container flex justify-center space-x-4 border-b">
 
-      <div className="sticky top-0 z-50 bg-white   flex justify-center gap-4">
-        <div className="container flex justify-center space-x-4 border-b">
-          {[`${t("AboutPooja")}`, `${t("PoojaBenefits")}`, `${t("PoojaPackage")}`].map((id, index) => (
-            <button
-              key={index}
-              className={`px-6 py-3 w-full font-medium ${
-                activeTab === id ? "text-white bg-[#E5644E] rounded-t-lg" : "text-gray-600"
-              }`}
-              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
-            >
-              {id.replace("-", " ")}
-            </button>
-          ))}
-        </div>
-      </div>
+    {[
+      { id: "about-pooja", label: `${t("AboutPooja")}` },
+      { id: "pooja-benefits", label: `${t("PoojaBenefits")}`},
+      { id: "pooja-package", label: `${t("PoojaPackage")}`},
+    ].map((tab) => (
+      <button
+        key={tab.id}
+        className={`px-6 py-3 w-full font-medium transition-all duration-300 
+          ${activeTab === tab.id ? "bg-[#E5644E] text-white rounded-t-lg" : "text-gray-600"}`}
+        onClick={() => scrollToSection(tab.id)}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+</div>
+
+
     
       {showButton && (
       <a
-      onClick={() => document.getElementById(`${t("PoojaPackage")}`)?.scrollIntoView({ behavior: "smooth" })}
+      onClick={() => document.getElementById("pooja-package")?.scrollIntoView({ behavior: "smooth" })}
       className="fixed bottom-6 sm:bottom-10 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
                  font-semibold text-sm sm:text-base md:text-lg text-white bg-green-600 rounded-lg shadow-lg 
-                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer z-50"
+                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer z-10"
     >
        {t("SelectPoojapackage")}
-    </a>
-    
-     
+    </a>     
       )}
+   
 
       {/* Sections */}
-      <section id={t("AboutPooja")} className=""> <Content detail={pujaData}  /> </section>
-      <section id={t("PoojaBenefits")} className=""> <Benifit detail={pujaData} /> </section>
-      <section id={t("PoojaPackage")} className="relative z-90">
+      <section id="about-pooja" className="min-h-[500px]"> <Content detail={pujaData}  /> </section>
+      <section  id="pooja-benefits" className="min-h-[400px]"> <Benifit detail={pujaData} /> </section>
+      <section id="pooja-package" className="relative z-40">
         <PoojaPackage detail={pujaData} />
       </section>
     
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black  relative"> <Testimonials/></section>
+      <section id="Homeeight-section" className="text-black  relative z-0"> <Testimonials/></section>
       <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
   </div>
 )}
