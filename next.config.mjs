@@ -25,9 +25,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['punyasetu-bucket.s3.ap-south-1.amazonaws.com'],
-    domains: ['clickpanditji.com'],
-    domains: ['www.srimandir.com'],
+    domains: ['punyasetu-bucket.s3.ap-south-1.amazonaws.com','clickpanditji.com','www.srimandir.com'],
+  
     remotePatterns: [
       {
         protocol: "https",
