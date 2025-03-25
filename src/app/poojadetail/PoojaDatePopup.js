@@ -45,15 +45,16 @@ useEffect(() => {
   } else {
     setSelectedDate(tomorrow); // Default to tomorrow
   }
-}, [pujaData]);
+}, [date?.dates]); // Ensure it updates when dates change
+
 
 // Handle date selection
 const handleDateSelect = (date) => {
-  if (date < tomorrow) { // Prevent selecting today or past dates
-    alert("Please select a future date.");
+  if (date < tomorrow) {
+    toast.error("Please select a future date.");
     return;
   }
-  setSelectedDate(date);
+  setSelectedDate(new Date(date)); // Ensure it's properly updated
   setShowCalendar(false);
 };
 
@@ -76,6 +77,11 @@ const handleDateSelect = (date) => {
     }
 
     const selectedPackage = pujaData;
+    const formatDate = (date) => {
+      const offset = date.getTimezoneOffset(); // Get timezone offset in minutes
+      const localDate = new Date(date.getTime() - offset * 60 * 1000); // Adjust to local time
+      return localDate.toISOString().split("T")[0]; // Extract YYYY-MM-DD
+    };
 
     if (selectedPackage) {
       const formData = {
@@ -86,7 +92,7 @@ const handleDateSelect = (date) => {
         payment_id: "1232",
         payment_detail: "123",
         payment_status: "NA",
-        date: selectedDate.toISOString().split("T")[0],
+       date: formatDate(selectedDate), // Use the corrected date
         currency: "INR",
         payment_type: "cashfree",
         user_id: JSON.parse(localStorage.getItem("formData") || "{}").Device_id || "",

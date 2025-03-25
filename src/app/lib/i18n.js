@@ -147,8 +147,8 @@ i18n
           //    /sankalpage
 
           SankalpFormFillNameGotraAddress:
-            "Sankalp Form Fill Name, Gotra & Address",
-          PaySelectapaymentmethod: "Pay Select a payment method",
+            "Form Fill Name & Gotra ",
+          PaySelectapaymentmethod: "Select a payment method",
           ChoosePreviousSankalpDetail: "Choose Previous Sankalp Detail",
           AddSankalpFormDetail: "Add Sankalp Form Detail",
           NameofMembersParticipatingInPooja:
