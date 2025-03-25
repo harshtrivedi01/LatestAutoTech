@@ -302,7 +302,7 @@ export default function Poojadetailpage() {
    
 
       {/* Sections */}
-      <section id="about-pooja" className="min-h-[500px]"> <Content detail={pujaData}  /> </section>
+      <section id="about-pooja" className=""> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className="min-h-[400px]"> <Benifit detail={pujaData} /> </section>
       <section id="pooja-package" className="relative z-40">
         <PoojaPackage detail={pujaData} />
