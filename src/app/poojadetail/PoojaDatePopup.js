@@ -59,30 +59,76 @@ const handleDateSelect = (date) => {
 };
 
   // Handle form submission
+  // const handleSubmit = () => {
+  //   if (!isLoggedIn) {
+  //     localStorage.setItem("redirectPath", pathname);
+  //     router.push("/login");
+  //     return;
+  //   }
+
+  //   if (!selectedDate) {
+  //     alert("Please select a date.");
+  //     return;
+  //   }
+
+  //   if (selectedDate <= today) {
+  //     alert("Please select a future date.");
+  //     return;
+  //   }
+
+  //   const selectedPackage = pujaData;
+  //   const formatDate = (date) => {
+  //     const offset = date.getTimezoneOffset(); // Get timezone offset in minutes
+  //     const localDate = new Date(date.getTime() - offset * 60 * 1000); // Adjust to local time
+  //     return localDate.toISOString().split("T")[0]; // Extract YYYY-MM-DD
+  //   };
+
+  //   if (selectedPackage) {
+  //     const formData = {
+  //       type: "book_puja",
+  //       puja_id: id,
+  //       package_id: selectedPackage.id,
+  //       amount: selectedPackage.price.toString(),
+  //       payment_id: "1232",
+  //       payment_detail: "123",
+  //       payment_status: "NA",
+  //      date: formatDate(selectedDate), // Use the corrected date
+  //       currency: "INR",
+  //       payment_type: "cashfree",
+  //       user_id: JSON.parse(localStorage.getItem("formData") || "{}").Device_id || "",
+  //     };
+
+  //     localStorage.setItem("pujaBookingData", JSON.stringify(formData));
+
+  //     // Redirect to Sankalp page
+  //     router.push("/sankalpage");
+  //   }
+  // };
+
   const handleSubmit = () => {
     if (!isLoggedIn) {
       localStorage.setItem("redirectPath", pathname);
       router.push("/login");
       return;
     }
-
+  
     if (!selectedDate) {
       alert("Please select a date.");
       return;
     }
-
+  
     if (selectedDate <= today) {
       alert("Please select a future date.");
       return;
     }
-
+  
     const selectedPackage = pujaData;
     const formatDate = (date) => {
-      const offset = date.getTimezoneOffset(); // Get timezone offset in minutes
-      const localDate = new Date(date.getTime() - offset * 60 * 1000); // Adjust to local time
-      return localDate.toISOString().split("T")[0]; // Extract YYYY-MM-DD
+      const offset = date.getTimezoneOffset();
+      const localDate = new Date(date.getTime() - offset * 60 * 1000);
+      return localDate.toISOString().split("T")[0];
     };
-
+  
     if (selectedPackage) {
       const formData = {
         type: "book_puja",
@@ -92,18 +138,24 @@ const handleDateSelect = (date) => {
         payment_id: "1232",
         payment_detail: "123",
         payment_status: "NA",
-       date: formatDate(selectedDate), // Use the corrected date
+        date: formatDate(selectedDate),
         currency: "INR",
         payment_type: "cashfree",
         user_id: JSON.parse(localStorage.getItem("formData") || "{}").Device_id || "",
       };
-
+  
       localStorage.setItem("pujaBookingData", JSON.stringify(formData));
-
-      // Redirect to Sankalp page
-      router.push("/sankalpage");
+  
+      // Redirect to Cart if sankalp_status is "0", else proceed to Sankalp page
+      if (pujaData?.sankalp_status == 0) {
+        localStorage.setItem("pujaBookingData", JSON.stringify(formData)); // Store in localStorage for Cart
+        router.push("/cart");
+      } else {
+        router.push("/sankalpage");
+      }
     }
   };
+  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 p-4">
