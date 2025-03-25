@@ -16,7 +16,7 @@ export default function List({ module_category_details }) {
   const { t } = useTranslation();
 
   if (!module_category_details) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   const serviceImages = {

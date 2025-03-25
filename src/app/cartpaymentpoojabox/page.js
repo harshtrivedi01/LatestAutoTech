@@ -3,7 +3,7 @@ import Payment from "./Payment.js"; // Ensure this component uses useSearchParam
 
 export default function page() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div></div>}>
       <Payment />
     </Suspense>
   );

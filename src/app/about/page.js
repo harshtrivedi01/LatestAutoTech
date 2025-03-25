@@ -35,7 +35,7 @@ export default function Page() {
   };
 
   if (!pujaData) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (

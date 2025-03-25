@@ -8,7 +8,7 @@ import Testimonials from "../poojadetail/Testimonials";
 export default function page() {
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div></div>}>
     <AuthGuard>
     <div className="container p-60">
       <div className=" p-0">

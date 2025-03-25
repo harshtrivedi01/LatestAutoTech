@@ -325,10 +325,26 @@ i18n
         YourPoojahassuccesssfullyconductedbyPunuyaSetuon:"Your Pooja has successsfully conducted by PunuyaSetu on",
         WATCHPOOJAVIDEO:"WATCH POOJA VIDEO",
         Member:"Member",
+        Pujavideo:"Puja Video",
+        ChooseYourPuja:"Choose Your Puja",
+SelectyourPujafromtheList:"Select your Puja from the List",
+YourInformation:"Your Information",
+AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform:"After selecting the Puja, fill in the information of your Name and Gotra in the provided form.",
+ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"The video of your Puja completed with your name and Gotra will be shared on WhatsApp."
         },
       },
       hi: {
         translation: {
+          Pujavideo:"पूजा वीडियो",
+          ChooseYourPuja: "अपनी पूजा चुनें",
+
+          SelectyourPujafromtheList: "सूची से अपनी पूजा चुनें",
+
+          YourInformation: "आपकी जानकारी",
+
+          AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform: "पूजा चुनने के बाद, दिए गए फॉर्म में अपने नाम और गोत्र की जानकारी भरें।",
+
+          ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp: "आपके नाम और गोत्र के साथ पूरी की गई आपकी पूजा का वीडियो WhatsApp पर शेयर किया जाएगा।",
           Member:"सदस्य",
           Bookingstatus:"बुकिंग स्थिति",
           PoojaandParticipantsDetails: "पूजा और प्रतिभागियों का विवरण",

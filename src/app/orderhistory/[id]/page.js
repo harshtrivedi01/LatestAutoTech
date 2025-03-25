@@ -51,7 +51,7 @@ export default function Page() {
     fetchOrderDetails();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p></p>;
   if (!order) return <p>    {t("Nobookinghistoryavailable")}</p>;
   const steps = [`${t("pending")}`, `${t("confirmed")}`, `${t("picked_up")}`, `${t("delivered")}`];
   const currentStatus = order.delivery_status;

@@ -51,7 +51,7 @@ export default function Poojaboxdetailpage() {
     }
   };
 
-  if (!pujaData) return <div>Loading...</div>;
+  if (!pujaData) return <div></div>;
   
   const handleCartAction = async (id) => {
 
