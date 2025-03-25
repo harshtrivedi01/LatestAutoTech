@@ -44,8 +44,8 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
       <div className="w-full md:w-2/3">
   {cartItems.map((item) => (
     <div key={item.id} className="w-full">
-      <div className="bg-white p-4 rounded-lg border shadow-xl">
-        <div className="flex flex-col sm:flex-row items-start gap-4">
+      <div className="bg-white p-4 rounded-lg border shadow-xl mb-3">
+        <div className="flex flex-col sm:flex-row items-start gap-5">
           {/* Image Section */}
           <div className="w-full sm:w-1/3 flex justify-center">
             <img 
