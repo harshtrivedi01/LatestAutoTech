@@ -16,19 +16,37 @@ const PoojaPackages = ({ detail }) => {
     }
   }, [detail]);
 
-  const handleParticipate = (pkg) => {
-    const isLoggedIn = localStorage.getItem("authToken"); // Check if user is logged in
+  useEffect(() => {
+    const storedPackageId = localStorage.getItem("selectedPackageId");
+  
+    if (storedPackageId && detail?.packages?.length > 0) {
+      const matchedPackage = detail.packages.find(pkg => pkg.id == parseInt(storedPackageId));
+      if (matchedPackage) {
+        setSelectedPackage(matchedPackage);
+        setShowPopup(true); // Open the popup after login
+      }
+      localStorage.removeItem("selectedPackageId"); // Clear stored ID after setting
+    } else if (detail?.packages?.length > 0) {
+      setSelectedPackage(detail.packages[0]); // Default to first package
+    }
+  }, [detail]);
+  
 
+  
+  const handleParticipate = (pkg) => {
+    const isLoggedIn = localStorage.getItem("authToken");
+  
     if (!isLoggedIn) {
       localStorage.setItem("redirectPath", pathname);
-      router.push("/login"); // Redirect to login page
+      localStorage.setItem("selectedPackageId", pkg.id); // Store only package ID
+      router.push("/login");
       return;
     }
-
+  
     setSelectedPackage(pkg);
     setShowPopup(true);
   };
-
+  
   const toggleReadMore = (pkgId) => {
     setExpandedPackages((prev) => ({
       ...prev,
@@ -39,8 +57,8 @@ const PoojaPackages = ({ detail }) => {
   const wordLimit = 20; // Adjust the word limit as needed
 
   return (
-    <div className="package z-20  bg-grey" id="Package-section">
-   <div className=" container max-w-7xl mx-auto lg:py-40 min ">
+    <div className="package p-60 bg-grey" id="Package-section">
+      <div className="container pb-40 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 mx-auto">
         <h1 className="title text-black my-5">  {t("SelectPoojapackage")}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 mb-5">
   {detail.packages?.map((pkg) => {
@@ -119,7 +137,8 @@ const PoojaPackages = ({ detail }) => {
           </ul>
         </div>
 
-      
+        {/* Participate Button */}
+        {/* Participate Button */}
 <div className="p-4 mt-auto">
   <button
     onClick={() => handleParticipate(pkg)}

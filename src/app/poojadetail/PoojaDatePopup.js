@@ -1,67 +1,182 @@
-import React, { useState, useEffect } from "react";
-import PoojaDatePopup from "./PoojaDatePopup";
-import LoginPopup from "./LoginPopup"; // Import LoginPopup component
+"use client";
+import { Calendar } from "lucide-react";
+import { usePathname, useRouter, useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import toast, { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
 
-const PoojaPackages = ({ detail }) => {
+
+const PoojaDatePopup = ({ onClose, pujaData, date }) => {
   const { t } = useTranslation();
-  const [showPopup, setShowPopup] = useState(false);
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState(null);
-  const [expandedPackages, setExpandedPackages] = useState({});
+
+
+
+
   const pathname = usePathname();
+  const router = useRouter();
+  const { id } = useParams();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+
+  // Check user login status
   useEffect(() => {
-    if (detail?.packages?.length > 0) {
-      setSelectedPackage(detail.packages[0]);
-    }
-  }, [detail]);
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
-  const handleParticipate = (pkg) => {
-    const isLoggedIn = localStorage.getItem("authToken");
+  // Store member count in localStorage
+  localStorage.setItem("membernumber", pujaData?.no_of_member);
+  localStorage.setItem("productdeatil2", JSON.stringify(pujaData));
 
+  console.log(date?.sankalp_status)
+
+  // Extract available dates
+  const availableDates = date?.dates || [];
+  const sortedDates = availableDates.map((d) => new Date(d)).sort((a, b) => a - b);
+
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+
+// Set initial date (first available date or tomorrow)
+useEffect(() => {
+  setSelectedDate(null); // Ensure calendar starts empty
+}, [date?.dates]);
+
+// Handle date selection
+const handleDateSelect = (date) => {
+  if (date < tomorrow) {
+    toast.error("Please select a future date.");
+    return;
+  }
+  setSelectedDate(date); // Store selected date
+  setShowCalendar(false);
+};
+
+
+  const handleSubmit = () => {
     if (!isLoggedIn) {
       localStorage.setItem("redirectPath", pathname);
-      setShowLoginPopup(true); // Open login popup
+      router.push("/login");
       return;
     }
-
-    setSelectedPackage(pkg);
-    setShowPopup(true);
+  
+    if (!selectedDate) {
+      toast.error("Please select a date.");
+      return;
+    }
+  
+    if (selectedDate <= today) {
+      toast.error("Please select a future date.");
+      return;
+    }
+  
+    const selectedPackage = pujaData;
+    const formatDate = (date) => {
+      const offset = date.getTimezoneOffset();
+      const localDate = new Date(date.getTime() - offset * 60 * 1000);
+      return localDate.toISOString().split("T")[0];
+    };
+  
+    if (selectedPackage) {
+      const formData = {
+        type: "book_puja",
+        puja_id: id,
+        package_id: selectedPackage.id,
+        amount: selectedPackage.price.toString(),
+        payment_id: "1232",
+        payment_detail: "123",
+        payment_status: "NA",
+        date: formatDate(selectedDate),
+        currency: "INR",
+        payment_type: "cashfree",
+        user_id: JSON.parse(localStorage.getItem("formData") || "{}").Device_id || "",
+      };
+  
+      localStorage.setItem("pujaBookingData", JSON.stringify(formData));
+  
+      // Redirect to Cart if sankalp_status is "0", else proceed to Sankalp page
+      if (date?.sankalp_status == 0) {
+        localStorage.setItem("pujaBookingData", JSON.stringify(formData)); // Store in localStorage for Cart
+        router.push("/poojabookingcart");
+      } else {
+        router.push("/sankalpage");
+      }
+    }
   };
+  
 
   return (
-    <div className="package z-40 bg-grey" id="Package-section">
-      <div className="container max-w-7xl mx-auto lg:py-40">
-        <h1 className="title text-black my-5">{t("SelectPoojapackage")}</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 mb-5">
-          {detail.packages?.map((pkg) => (
-            <div key={pkg.id} className="border text-black rounded-lg bg-white">
-              <div className="p-4">
-                <h2 className="text-lg font-bold">{pkg.name}</h2>
-                <p>₹{pkg.price}</p>
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-40 p-4">
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className="bg-white text-black rounded-lg shadow-lg p-6 max-w-xl w-full relative">
+        <button
+          className="absolute top-0 right-3 text-red-500 hover:text-red-700 text-3xl font-bold"
+          onClick={onClose}
+        >
+          &times;
+        </button>
+
+        <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
+          <div className="w-full">
+            <h3 className="text-lg font-semibold mb-1">{t("SelectaDateforPoojaBooking")}</h3>
+           
+            <p className="mb-3 bg-orange-500 py-2 text-lg text-center rounded-lg text-white font-bold">
+              {pujaData.name}
+            </p>
+
+            <button
+  className="w-full p-2 border flex gap-2 rounded-lg text-left bg-gray-100"
+  onClick={() => setShowCalendar(!showCalendar)}
+>
+  <Calendar /> {selectedDate ? selectedDate.toDateString() : "Select a Date"}
+</button>
+
+
+            {showCalendar && (
+              <div className="absolute bg-white border rounded-lg mt-2 shadow-lg">
+               <DatePicker
+  selected={selectedDate}
+  onChange={handleDateSelect}
+  inline
+  minDate={tomorrow} // Ensures today is not selectable
+/>
               </div>
-              <div className="p-4">
-                <button
-                  onClick={() => handleParticipate(pkg)}
-                  className="w-full py-3 px-4 text-white bg-orange-600 rounded-lg"
-                >
-                  {t("PARTICIPATE")}
-                </button>
-              </div>
-            </div>
-          ))}
+            )}
+          </div>
+
+          <div className="w-full md:w-1/1 date-img">
+            <img
+              src="../images/poojaPackage/date.png"
+              alt="Pooja"
+              className="rounded-lg w-full object-cover"
+              height="50%"
+              width="50%"
+            />
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <button
+            className={`w-full bg-green-600 text-white font-semibold p-2 rounded-lg transition 
+              ${isResendDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"}`}
+            onClick={handleSubmit}
+            disabled={isResendDisabled}
+          >
+            {isResendDisabled ? `${t("Saving")}...` : `${t("SaveContinue")}`}
+          </button>
         </div>
       </div>
 
-      {showPopup && selectedPackage && (
-        <PoojaDatePopup pujaData={selectedPackage} date={detail} onClose={() => setShowPopup(false)} />
-      )}
-
-      {showLoginPopup && <LoginPopup onClose={() => setShowLoginPopup(false)} />}
     </div>
   );
 };
 
-export default PoojaPackages;
+export default PoojaDatePopup;
