@@ -96,7 +96,7 @@ export default function Page() {
           {t("OrderDate")}: <span className="text-blue-700">{order.order_date}</span>
           </p>
 
-          <div className="my-8">
+          <div className="my-8 mx-2">
   {/* Status Title */}
   <div className="flex justify-between items-center mb-4">
     <div
@@ -212,8 +212,11 @@ export default function Page() {
             <p className="font-semibold text-lg">{order.address.name}</p>
             <p className="text-gray-600 text-lg">{order.address.email}</p>
             <p className="text-gray-600 text-lg">{order.address.phone}</p>
-            <p className="text-gray-600 text-lg pb-5">
+            <p className="text-gray-600 text-lg ">
               {order.address.address}, {order.address.city}, {order.address.state} - {order.address.pincode}
+            </p>
+            <p className="text-gray-600 border-t text-lg pb-5">
+              {order.address.shipping_address}
             </p>
           </div>
           <div className="mt-5">

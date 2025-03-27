@@ -645,7 +645,7 @@ export default function Poojadetailpage() {
 ) : (
   <div>
    
-     <section className="poojadetail py-10" id="home1">
+     <section className="poojadetail py-10 z-20" id="home1">
         <div className="">
           <div className="'container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
             {/* Left Side - Image Slider */}
@@ -778,7 +778,7 @@ export default function Poojadetailpage() {
       {showButton && (
       <a
       onClick={() => document.getElementById("pooja-package")?.scrollIntoView({ behavior: "smooth" })}
-      className="fixed bottom-4 sm:bottom-10 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
+      className="fixed bottom-4 sm:bottom-2 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
                  font-semibold text-sm sm:text-base md:text-lg text-white bg-green-600 rounded-lg shadow-lg 
                  hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer z-0"
     >

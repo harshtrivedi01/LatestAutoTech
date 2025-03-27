@@ -1,14 +1,15 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import api from "../lib/axiosInstance";
 import { useTranslation } from "react-i18next";
+import { FaTrash } from "react-icons/fa";
 
 export default function List({ pujaData }) {
   // Track pujaData in state to allow updates
    const { t } = useTranslation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [quantities, setQuantities] = useState({}); 
+  
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem("authToken"));
   }, []);
@@ -28,6 +29,73 @@ export default function List({ pujaData }) {
     setDataToDisplay(pujaData?.product_list || []);
   }, [pujaData]); // Dependency array to trigger when `pujaData` changes
 
+  useEffect(() => {
+    const initialQuantities = {};
+    pujaData?.cart_list?.forEach((item) => {
+      initialQuantities[item.product_id] = item.quantity;
+    });
+    setQuantities(initialQuantities);
+  }, [pujaData]);
+  
+
+  const updateCartQuantity = async (productId, change) => {
+    const product = pujaDataState.product_list.find((item) => item.id === productId);
+  
+    if (!product || !product.cart_status) {
+      toast.error("Item is not in the cart.");
+      return;
+    }
+  
+    const newQuantity = (quantities[productId] || product.quantity) + change;
+  
+    if (newQuantity < 1) {
+      toast.error("Quantity cannot be less than 1");
+      return;
+    }
+  
+    if (newQuantity > product.current_stock) {
+      toast.error("Cannot exceed available stock");
+      return;
+    }
+  
+    // Update quantity locally first
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: newQuantity,
+    }));
+  
+    try {
+      let formData = new FormData();
+      formData.append("type", "update_cart_quantity");
+      formData.append(
+        "update_detail",
+        JSON.stringify([{ product_id: productId, quantity: newQuantity }])
+      );
+  
+      const response = await api.post("/cart", formData);
+  
+      if (response.status === 200) {
+        toast.success(`Quantity updated to ${newQuantity}`);
+  
+        // Update product quantity in pujaDataState
+        setPujaDataState((prevState) => ({
+          ...prevState,
+          product_list: prevState.product_list.map((item) =>
+            item.id === productId ? { ...item, quantity: newQuantity } : item
+          ),
+        }));
+      } else {
+        toast.error(response.data?.message || "Failed to update quantity");
+      }
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+      toast.error("Error updating cart. Please try again.");
+    }
+  };
+  
+  
+  
+
   const handleCartAction = async (id, currentStatus) => {
     try {
       let formData = new FormData();
@@ -37,7 +105,7 @@ export default function List({ pujaData }) {
 
       const response = await api.post("/cart", formData);
 
-      if (response.data.status === 0) {
+      if (response.data.status == 0) {
         toast.error(response.data.message || "Action failed!");
       } else {
         toast.success(response.data.message || (currentStatus ? "Removed from cart!" : "Added to cart!"));
@@ -116,19 +184,59 @@ export default function List({ pujaData }) {
                       <span className="text-red-700 text-lg ms-3">({Math.floor(product.discount)}% {t("off")})</span>
                     </p>
                   </div>
-                   {product.stock ? (
+                   {product.current_stock >=0 ? (
                       <div className="">
                         {isLoggedIn ? (
-                           <a
-                           onClick={() => handleCartAction(product.id, product.cart_status)}
-                           className="flex cursor-pointer items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-                         >
-                           <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                             <path strokeLinecap="round" strokeLinejoin="round" d={product.cart_status ? "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" : "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"} />
-                           </svg>
-                           {product.cart_status ? `${t("Removefromcart")}` : `${t("Addtocart")}`}
-                         </a>
+                       <>
+                      {!product.cart_status && (
+  <a
+    onClick={() => handleCartAction(product.id, product.cart_status)}
+    className="flex cursor-pointer items-center justify-center rounded-md bg-[#E5644E] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+    {t("Addtocart")}
+  </a>
+)}
 
+{/* Show Quantity Counter only if product is in cart */}
+{product.cart_status && (
+  <div className="mt-3 flex items-center">
+    <div className="flex items-center rounded-lg shadow-lg border border-[#E5644E]">
+      {/* Decrease Quantity */}
+      <button
+        className="text-orange-600 text-lg px-3 py-1"
+        onClick={() => updateCartQuantity(product.id, -1)}
+      >
+        -
+      </button>
+
+    {/* Display Quantity */}
+    <span className="mx-2 text-gray-600">
+  {quantities[product.id] !== undefined ? quantities[product.id] : product.quantity}
+</span>
+
+
+      {/* Increase Quantity */}
+      <button
+        className="text-orange-600 text-lg px-3 py-1"
+        onClick={() => updateCartQuantity(product.id, 1)}
+      >
+        +
+      </button>
+    </div>
+
+    {/* Remove from Cart Button */}
+    <FaTrash
+      className="ms-5 text-gray-700 cursor-pointer hover:text-red-600"
+      onClick={() => handleCartAction(product.id, product.cart_status)}
+    />
+  </div>
+)}
+
+                     </>
+                     
                         )
                         : (
                          <a href="/login">
