@@ -1,18 +1,49 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+// import React from 'react';
+// import { useTranslation } from 'react-i18next';
   
-  const Content = ({detail}) =>  {
-    const { t } = useTranslation();
-	return (
-	  <div>
-        <div className=''>
+//   const Content = ({detail}) =>  {
+//     const { t } = useTranslation();
+// 	return (
+// 	  <div>
+//         <div className=''>
 
-        {/* <h2 className='title text-black'>{t("AboutPooja")}</h2> */}
-        <p className='text-gray-700 text-lg' dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
+//         {/* <h2 className='title text-black'>{t("AboutPooja")}</h2> */}
+//         <p className='text-gray-700 text-lg' dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
     
   
-        </p>
+//         </p>
       
+//         </div>
+
+// 	  </div>
+// 	);
+//   }
+  
+//   export default Content;
+  
+
+
+
+  import React from 'react';
+  
+  const Content = ({detail}) =>  {
+	return (
+	  <div className=' bg-grey content'  id="about-section" >
+        <div className='py-10 container max-w-7xl mx-auto'>
+
+        <h2 className='title'>About Pooja</h2>
+        <p dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
+     </p>
+        {/* <p>
+        Pandit ji is known for his expertise in performing Ganesh Pooja
+         and Vastu Shanti Pooja. He is highly regarded for his knowledge of
+          Vedic rituals and mantras and has over 20 years of experience conducting
+           ceremonies that invoke the blessings of Lord Ganesha for prosperity, success,
+            and the removal of obstacles.Pandit ji is known for his expertise in performing 
+            Ganesh Pooja and Vastu Shanti Pooja. He is highly regarded for his knowledge of 
+            Vedic rituals and mantras and has over 20 years of experience conducting ceremonies
+             that invoke the blessings of Lord Ganesha for prosperity, success, and the removal of obstacles.
+        </p> */}
         </div>
 
 	  </div>
@@ -20,36 +51,4 @@ import { useTranslation } from 'react-i18next';
   }
   
   export default Content;
-  
-
-
-
-  // import React from 'react';
-  
-  // const Content = ({detail}) =>  {
-	// return (
-	//   <div className='p-60 bg-grey content'  id="about-section" >
-  //       <div className='container'>
-
-  //       <h2 className='title'>About Pooja</h2>
-  //       <p >
-  //      {detail.aboutus_description || " Pandit ji is known for his expertise in performing Ganesh Pooja and Vastu Shanti Pooja. He is highly regarded for his knowledge of Vedic rituals and mantras and has over 20 years of experience conducting ceremonies that invoke the blessings of Lord Ganesha for prosperity, success,and the removal of obstacles.Pandit ji is known for his expertise in performing  Ganesh Pooja and Vastu Shanti Pooja. He is highly regarded for his knowledge of  Vedic rituals and mantras and has over 20 years of experience conducting ceremonies that invoke the blessings of Lord Ganesha for prosperity, success, and the removal of obstacles."}
-  //       </p>
-  //       {/* <p>
-  //       Pandit ji is known for his expertise in performing Ganesh Pooja
-  //        and Vastu Shanti Pooja. He is highly regarded for his knowledge of
-  //         Vedic rituals and mantras and has over 20 years of experience conducting
-  //          ceremonies that invoke the blessings of Lord Ganesha for prosperity, success,
-  //           and the removal of obstacles.Pandit ji is known for his expertise in performing 
-  //           Ganesh Pooja and Vastu Shanti Pooja. He is highly regarded for his knowledge of 
-  //           Vedic rituals and mantras and has over 20 years of experience conducting ceremonies
-  //            that invoke the blessings of Lord Ganesha for prosperity, success, and the removal of obstacles.
-  //       </p> */}
-  //       </div>
-
-	//   </div>
-	// );
-  // }
-  
-  // export default Content;
   

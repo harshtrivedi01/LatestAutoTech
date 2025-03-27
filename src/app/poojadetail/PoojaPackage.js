@@ -40,7 +40,7 @@ const PoojaPackages = ({ detail }) => {
 
   return (
     <div className="package  bg-grey" id="Package-section">
-      <div className="  px-4 ">
+   <div className=" container max-w-7xl mx-auto lg:py-40 min ">
         <h1 className="title text-black my-5">  {t("SelectPoojapackage")}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-5 mb-5">
   {detail.packages?.map((pkg) => {

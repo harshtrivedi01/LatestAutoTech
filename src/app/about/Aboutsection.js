@@ -61,9 +61,11 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
             <h3 className="text-lg text-black leading-7 md:text-sm lg:text-[17px]">
             {aboutus_imagedes1}
             </h3>
-            <button className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
+            <a 
+            href="/poojabooking"
+            className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
               <FaChevronRight className="text-[#DD531B]" />
-            </button>
+            </a>
           </div>
           <img
              src={image1}

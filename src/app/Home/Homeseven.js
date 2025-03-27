@@ -17,12 +17,12 @@ export const Homeseven = () => {
             
             <p className="text-gray-700 mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center sm:text-left leading-relaxed">
             {t("banner")}
-</p>
-
+</p><br/><br/>
+{/* 
             <i className=' flex justify-center lg:justify-start items-center'>
 
 <img src="/images/qr.png" className="object-cover object-toph-40 w-40  " alt="" height="100%" width="" />
-</i>
+</i> */}
 <h1 className="text-black text-2xl"> {t("DownloadAppfrom")}</h1>
             <div className="flex justify-center lg:justify-start items-center gap-3 mt-8">
               

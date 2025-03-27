@@ -28,6 +28,8 @@ const PoojaDatePopup = ({ onClose, pujaData, date }) => {
   localStorage.setItem("membernumber", pujaData?.no_of_member);
   localStorage.setItem("productdeatil2", JSON.stringify(pujaData));
 
+  console.log(date?.sankalp_status)
+
   // Extract available dates
   const availableDates = date?.dates || [];
   const sortedDates = availableDates.map((d) => new Date(d)).sort((a, b) => a - b);
@@ -109,12 +111,12 @@ const handleDateSelect = (date) => {
     }
   
     if (!selectedDate) {
-      alert("Please select a date.");
+      toast.error("Please select a date.");
       return;
     }
   
     if (selectedDate <= today) {
-      alert("Please select a future date.");
+      toast.error("Please select a future date.");
       return;
     }
   
@@ -143,9 +145,9 @@ const handleDateSelect = (date) => {
       localStorage.setItem("pujaBookingData", JSON.stringify(formData));
   
       // Redirect to Cart if sankalp_status is "0", else proceed to Sankalp page
-      if (pujaData?.sankalp_status == 0) {
+      if (date?.sankalp_status == 0) {
         localStorage.setItem("pujaBookingData", JSON.stringify(formData)); // Store in localStorage for Cart
-        router.push("/cart");
+        router.push("/poojabookingcart");
       } else {
         router.push("/sankalpage");
       }

@@ -136,23 +136,29 @@ export default function OtpVerificationPage() {
       );
   
       if (response.data.status == "1") {
-        // toast.success(response.data.message || "OTP verified successfully! Redirecting...");
-        const id = response.data.data.id; // Assuming the API returns a token
+        const id = response.data.data.id;
         if (id) {
-          localStorage.setItem("idToken", id); // ✅ Save token
+          localStorage.setItem("idToken", id);
         }
-        const token = response.data.data.web_token; // Assuming the API returns a token
+        const token = response.data.data.web_token;
         if (token) {
-          localStorage.setItem("authToken", token); // ✅ Save token
+          localStorage.setItem("authToken", token);
         }
   
-        // ✅ Retrieve and use the stored redirect path (or fallback to "/")
+        // ✅ Retrieve stored data
         const redirectPath = localStorage.getItem("redirectPath") || "/";
-        localStorage.removeItem("redirectPath"); // Clear it after use
+        const scrollPosition = localStorage.getItem("scrollPosition");
   
-        setTimeout(() => {
-          router.push(redirectPath);
-        }, 2000);
+        localStorage.removeItem("redirectPath");
+        localStorage.removeItem("scrollPosition");
+  
+        router.push(redirectPath).then(() => {
+          setTimeout(() => {
+            if (scrollPosition) {
+              window.scrollTo(0, parseInt(scrollPosition, 10));
+            }
+          }, 100);
+        });
       } else {
         setAttempts((prev) => prev + 1);
         toast.error(response.data.message || "Invalid OTP! Please try again.");
@@ -164,7 +170,7 @@ export default function OtpVerificationPage() {
       }
     } catch (error) {
       setAttempts((prev) => prev + 1);
-      toast.error("OTP verification failed. Please try again.");
+      // toast.error("OTP verification failed. Please try again.");
       setIsResendDisabled(false);
     }
   };
