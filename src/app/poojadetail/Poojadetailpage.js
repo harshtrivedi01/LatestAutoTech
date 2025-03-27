@@ -750,7 +750,7 @@ export default function Poojadetailpage() {
       </section>
 
       {/* Tab Section */}
-      <div className="sticky top-0 z-10 bg-white flex justify-center gap-4">
+      <div className="sticky top-0 z-20 bg-white flex justify-center gap-4">
   <div className="container flex justify-center space-x-4 border-b">
 
     {[
@@ -787,7 +787,7 @@ export default function Poojadetailpage() {
       {/* Sections */}
       <section id="about-pooja" className="min-screen-[300px]"> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className="min-screen-[400px]"> <Benifit detail={pujaData} /> </section>
-      <section id="pooja-package" className="relative z-30 ">
+      <section id="pooja-package" className="relative  ">
         <PoojaPackage detail={pujaData} />
       </section>
     
