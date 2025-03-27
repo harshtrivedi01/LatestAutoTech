@@ -25,13 +25,16 @@
 
 
   import React from 'react';
+import { useTranslation } from 'react-i18next';
   
   const Content = ({detail}) =>  {
+      const { t } = useTranslation();
+    
 	return (
 	  <div className=' bg-grey content'  id="about-section" >
         <div className='py-10 container max-w-7xl mx-auto'>
 
-        <h2 className='title'>About Pooja</h2>
+        <h2 className='title'>{t("AboutPooja")} </h2>
         <p dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
      </p>
         {/* <p>
