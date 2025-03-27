@@ -49,7 +49,8 @@ export default function Homesecond({ module_category_details }) {
           <div className="flex justify-center">
             <Heading text={t("Services")} />
           </div>
-          <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
+        <ul className="flex flex-wrap justify-center gap-6 text-center text-slate-700 px-5">
+
             {module_category_details.slice(0, 6).map((category) => {
               const { modulecategory, short_description, id, image } = category;
               // const imageSrc = image || service1;

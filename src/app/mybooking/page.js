@@ -155,6 +155,20 @@ const Page = () => {
     confirmed: "bg-green-700",
   };
 
+  
+const itemsPerPage = 9; // Change this value to set how many bookings per page
+const [currentPage, setCurrentPage] = useState(1);
+
+const bookings = searchQuery ? searchResults : Poojabookings;
+const totalPages = Math.ceil(bookings.length / itemsPerPage);
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentBookings = bookings.slice(indexOfFirstItem, indexOfLastItem);
+
+const poojaBoxOrders = searchQuery ? searchResults?.order_list ?? [] : poojaBox ?? [];
+const totalPoojaBoxPages = Math.ceil(poojaBoxOrders.length / itemsPerPage);
+const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <AuthGuard>
     <div className="bg-gray-200">
@@ -225,154 +239,229 @@ const Page = () => {
 
 {/* For pooja booking div */}
 {/* Pooja Booking Section */}
+
+
 {activeStep === `${t("PoojaBooking")}` && (
-  <div className="bg-gray-100 p-6  rounded-lg">
+  <div className="bg-gray-100 p-6 rounded-lg">
     {loading ? (
-      <p className="text-center text-lg font-semibold">  {t("SearchSomething")} </p>
+      <p className="text-center text-lg font-semibold">{t("SearchSomething")}</p>
     ) : searchQuery && searchResults.length === 0 ? (
       <p className="text-center text-lg min-h-screen text-red-500 font-semibold">
-        {t("Noresultsfoundfor")}  "{searchQuery}"
+        {t("Noresultsfoundfor")} "{searchQuery}"
       </p>
-    )  : !searchQuery && Poojabookings.length === 0 ? (
-      <p className="text-center text-lg  text-gray-500 font-semibold">
-       {t("Nobookinghistoryavailable")}
-      </p>
-    ) :(
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {(searchQuery ? searchResults : Poojabookings).map((booking) => (
-      //    <Link
-      //    key={booking.booking_id}
-      //    href={{
-      //      pathname: "/booking-details",
-      //      query: { data: JSON.stringify(booking) },
-      //    }}
-      //    className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
-      //  >
-          <div
-          onClick={() => router.push(`/booking-details/${booking.booking_id}`)}
-         className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
-       >
-         {/* Top Content Section */}
-         <div className="flex flex-col sm:flex-row items-center gap-4 text-start flex-grow">
-           <img
-             src={booking.puja_image || "/images/poojabox.png"}
-             alt="Pooja Image"
-             onError={(e) => (e.target.src = "/images/logo.png")}
-             className="w-full sm:w-5/12 h-[150px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
-           />
-           <div className="w-full sm:w-7/12 text-center sm:text-left">
-           <h2 className="text-sm font-lighter text-gray-400">
-               #{booking.booking_code}
-             </h2>
-             <h2 className="text-lg font-bold text-black">
-               {booking.puja_name}
-             </h2>
-              <h2 className="text-lg flex xs:justify-center font-bold text-black">
-            <p className="flex  items-center gap-1">
-             <span className="text-base font-semibold "> {t("Payment")}:{" "} </span>
-             <div
-               className={`${
-                 booking.payment_status === "success"
-                   ? "text-green-500"
-                   : booking.payment_status === "failed"
-                   ? "text-red-500"
-                   : "text-yellow-500"
-               } rounded-full`}
-             >
-               <p className="text-sm uppercase"> {" "}{booking.payment_status}</p>
-             </div>
-             </p>
-            </h2>
-             <p className="text-gray-800 font-semibold text-lg">
-               {t("AmountRs")} {booking.amount}/-
-             </p>
-             <p className="text-red-600 font-bold text-md">
-               {booking.package_name || "N/A"}
-             </p>
-           </div>
-         </div>
-       
-         {/* Footer Section - Always at Bottom */}
-         <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
-           <p className="text-gray-600 text-sm text-center sm:text-left">
-           <span className="font-semibold">{t("poojadate")}: </span>{booking.booking_date}<br/>
-             <span className="font-semibold">{t("Ordertimedate")} </span>{booking.create_date}
-           </p>
-         
-           <div
-             className={`${
-               booking.booking_status === "completed"
-                 ? "bg-green-500"
-                 : booking.booking_status === "cancelled"
-                 ? "bg-red-500"
-                 : "bg-yellow-500"
-             } rounded-full px-4 py-1`}
-           >
-             <p className="text-white text-sm uppercase">{booking.booking_status}</p>
-           </div>
-         </div>
-       </div>
-       
-        ))}
-      </div>
-    )}
-  </div>
-)}
-
-{activeStep === `${t("PoojaBox")}` && (
-  <div className="bg-gray-100 p-6 mt-6 rounded-lg">
-    {loading ? (
-      <p className="text-center text-lg font-semibold"> {t("wait")}...</p>
-    ) : searchQuery && (!searchResults?.order_list || searchResults?.order_list.length === 0) ? (
-      <p className="text-center text-lg text-red-500 min-h-screen font-semibold">
-         {t("Noresultsfoundfor")} "{searchQuery}"
-      </p>
-    ) : (!poojaBox || poojaBox.length === 0) ? (
-      <p className="text-center text-gray-600 min-h-screen text-lg font-semibold">
+    ) : !searchQuery && Poojabookings.length === 0 ? (
+      <p className="text-center text-lg text-gray-500 font-semibold">
         {t("Nobookinghistoryavailable")}
       </p>
     ) : (
-      <div className="grid grid-row-1 sm:grid-row-2 md:grid-row-3 gap-5">
-        {(searchQuery ? searchResults?.order_list ?? [] : poojaBox ?? []).map((order) => (
-          <div
-            key={order.order_id}
-            className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all"
-            onClick={() => router.push(`/orderhistory/${order.order_id}`)}
-          >
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <img
-                src={order.image || "/images/logo.png"}
-                alt={order.product_names}
-                className="w-full sm:w-4/12 h-[180px] object-contain shadow-md rounded-lg"
-                onError={(e) => (e.target.src = "/images/logo.png")}
-              />
-              <div className="w-full sm:w-8/12 text-center sm:text-left">
-                <h2 className="text-[15px] font-[500] text-[#855318] font-semibold">
-                {order.product_names || order.product_name}
-                </h2>
-                <p className="text-gray-500 text-sm"> {t("OrderID")} {order.order_code}</p>
-                <p className="text-gray-500 text-sm">{t("DeliveryDate")} {order.delivery_date || order.order_date}</p>
-                <p className="text-gray-800 font-[500] text-[14px]">
-                {t("AmountRs")} {Math.floor(order.grand_total)}/-
-                </p>
-                <p className="text-gray-500 text-sm">  {t("DiscountRS")} {Math.floor(order.discount) || Math.floor(order.total_discount)||"NA"}/-</p>
-                {/* <p className="text-gray-500 text-sm">Payment Status: {order.payment_status}</p> */}
-                <div
-                  className={`${
-                    statusColorspoojabox[order.delivery_status] || "bg-gray-500"
-                  } rounded-full w-28 px-4 py-1 mt-3 mx-auto sm:mx-0`}
-                >
-                  <p className="text-white text-sm uppercase">{order.delivery_status}</p>
+      <>
+        {/* Pooja Booking List */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {currentBookings.map((booking) => (
+            <div
+              key={booking.booking_id}
+              onClick={() => router.push(`/booking-details/${booking.booking_id}`)}
+              className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
+            >
+              {/* Content */}
+              <div className="flex flex-col sm:flex-row items-center gap-4 text-start flex-grow">
+                {/* Image Section */}
+                <div className="w-full sm:w-5/12 flex justify-center">
+                  <img
+                    src={booking.puja_image || "/images/poojabox.png"}
+                    alt="Pooja Image"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                    className="w-[150px] h-[150px] sm:w-[180px] sm:h-[180px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
+                  />
+                </div>
+
+                {/* Details Section */}
+                <div className="w-full sm:w-7/12 text-center sm:text-left">
+                  <h2 className="text-sm font-light text-gray-400">#{booking.booking_code}</h2>
+                  <h2 className="text-lg font-bold text-black">{booking.puja_name}</h2>
+                  <p className="text-red-600 font-bold text-md">{booking.package_name || "N/A"}</p>
+
+                  {/* Payment Status */}
+                  <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
+                    <span className="text-base font-semibold">{t("Payment")}: </span>
+                    <div
+                      className={`${
+                        booking.payment_status === "success"
+                          ? "text-green-600"
+                          : booking.payment_status === "failed"
+                          ? "text-red-500"
+                          : "text-yellow-600"
+                      } rounded-full`}
+                    >
+                      <p className="text-sm uppercase font-bold"> {booking.payment_status}</p>
+                    </div>
+                  </div>
+
+                  {/* Amount */}
+                  <p className="text-black font-semibold text-base mt-1">
+                    {t("AmountRs")} {booking.amount}/-
+                  </p>
+
+                  {/* Booking Status */}
+                  <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
+                    <span className="text-base font-semibold">{t("booking")}: </span>
+                    <div
+                      className={`${
+                        booking.payment_status === "success"
+                          ? "text-green-600"
+                          : booking.payment_status === "failed"
+                          ? "text-red-500"
+                          : "text-yellow-600"
+                      } font-bold`}
+                    >
+                      {booking.payment_status === "success"
+                        ? t("Confirmed")
+                        : booking.payment_status === "failed"
+                        ? t("Failed")
+                        : t("Pending")}
+                    </div>
+                  </div>
+
+                  {/* Pooja Status */}
+                  <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
+                    <span className="text-base font-semibold">{t("Pooja")}: </span>
+                    <div
+                      className={`${
+                        booking.booking_status === "success"
+                          ? "text-green-500"
+                          : booking.booking_status === "failed"
+                          ? "text-red-500"
+                          : "text-yellow-600"
+                      } font-bold`}
+                    >
+                      {booking.booking_status === "success"
+                        ? t("Confirmed")
+                        : booking.booking_status === "failed"
+                        ? t("Failed")
+                        : t("Pending")}
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              {/* Footer Section */}
+              <div className="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
+                <p className="text-gray-600 text-sm text-center sm:text-left">
+                  <span className="font-semibold">{t("poojadate")}: </span>
+                  {booking.booking_date}
+                  <br />
+                  <span className="font-semibold">{t("Ordertimedate")} </span>
+                  {booking.create_date}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 mx-1 border rounded-md disabled:opacity-50 bg-gray-200 hover:bg-gray-300"
+          >
+            {t("Prev")}
+          </button>
+
+          <span className="px-4 py-2 font-base">
+            {t("Page")} {currentPage} {t("of")} {totalPages}
+          </span>
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 mx-1 border rounded-md disabled:opacity-50 bg-gray-200 hover:bg-gray-300"
+          >
+            {t("Next")}
+          </button>
+        </div>
+      </>
     )}
   </div>
 )}
 
+  {/* Pooja Box Section */}
+  {activeStep === `${t("PoojaBox")}` && (
+      <div className="bg-gray-100 p-6 mt-6 rounded-lg">
+        {loading ? (
+          <p className="text-center text-lg font-semibold">{t("wait")}...</p>
+        ) : searchQuery && (!searchResults?.order_list || searchResults?.order_list.length === 0) ? (
+          <p className="text-center text-lg text-red-500 min-h-screen font-semibold">
+            {t("Noresultsfoundfor")} "{searchQuery}"
+          </p>
+        ) : !poojaBox || poojaBox.length === 0 ? (
+          <p className="text-center text-gray-600 min-h-screen text-lg font-semibold">
+            {t("Nobookinghistoryavailable")}
+          </p>
+        ) : (
+          <>
+            {/* Pooja Box List */}
+            <div className="grid grid-row gap-5">
+              {currentPoojaBoxOrders.map((order) => (
+                <div
+                  key={order.order_id}
+                  className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all"
+                  onClick={() => router.push(`/orderhistory/${order.order_id}`)}
+                >
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    <img
+                      src={order.image || "/images/logo.png"}
+                      alt={order.product_names}
+                      className="w-full sm:w-4/12 h-[180px] object-contain shadow-md rounded-lg"
+                      onError={(e) => (e.target.src = "/images/logo.png")}
+                    />
+                    <div className="w-full sm:w-8/12 text-center sm:text-left">
+                      <h2 className="text-[15px] font-[500] text-[#855318] font-semibold">
+                        {order.product_names || order.product_name}
+                      </h2>
+                      <p className="text-gray-500 text-sm">{t("OrderID")} {order.order_code}</p>
+                      <p className="text-gray-500 text-sm">{t("DeliveryDate")} {order.delivery_date || order.order_date}</p>
+                      <p className="text-gray-800 font-[500] text-[14px]">
+                        {t("AmountRs")} {Math.floor(order.grand_total)}/-
+                      </p>
+                      <p className="text-gray-500 text-sm">{t("DiscountRS")} {Math.floor(order.discount) || Math.floor(order.total_discount) || "NA"}/-</p>
+                      <div
+                        className={`${
+                          statusColorspoojabox[order.delivery_status] || "bg-gray-500"
+                        } rounded-full w-28 px-4 py-1 mt-3 mx-auto sm:mx-0`}
+                      >
+                        <p className="text-white text-sm uppercase">{order.delivery_status}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 mx-1 border rounded-md disabled:opacity-50 bg-gray-200 hover:bg-gray-300"
+              >
+                {t("Prev")}
+              </button>
+              <span className="px-4 py-2 font-base">
+                {t("Page")} {currentPage} {t("of")} {totalPoojaBoxPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPoojaBoxPages))}
+                disabled={currentPage === totalPoojaBoxPages}
+                className="px-4 py-2 mx-1 border rounded-md disabled:opacity-50 bg-gray-200 hover:bg-gray-300"
+              >
+                {t("Next")}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    )}
 
 
 

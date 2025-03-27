@@ -3,7 +3,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { Contact, LogOut } from "lucide-react";
+import { Contact, LogOut, Phone } from "lucide-react";
 
 i18n
   .use(LanguageDetector) // Auto-detect browser language
@@ -150,7 +150,7 @@ i18n
             "Form Fill Name & Gotra ",
           PaySelectapaymentmethod: "Select a payment method",
           ChoosePreviousSankalpDetail: "Choose Previous Sankalp Detail",
-          AddSankalpFormDetail: "Add Sankalp Form Detail",
+          AddSankalpFormDetail: "Please fill Sanckalp form",
           NameofMembersParticipatingInPooja:
             "Name of Members Participating In Pooja",
           firstmembername: "First member name",
@@ -330,11 +330,37 @@ i18n
 SelectyourPujafromtheList:"Select your Puja from the List",
 YourInformation:"Your Information",
 AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform:"After selecting the Puja, fill in the information of your Name and Gotra in the provided form.",
-ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"The video of your Puja completed with your name and Gotra will be shared on WhatsApp."
+ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"The video of your Puja completed with your name and Gotra will be shared on WhatsApp.",
+
+Poojabookingdate:"Pooja Booking Date",
+RedirectingIn:"Redirecting to home",
+
+PaymentStatus:"Payment Status",
+PoojaStatus:"Pooja Status",
+BookingStatus:"Booking Status",
+DeliveryAddress:"Delivery Address",
+Enterdeliveryaddress:"Enter delivery address",
+ShippingAddress:"Shipping Address",
+Entershippingaddress:"Enter Shipping Address",
+notifyforfutureupdates:"Notify for future Updates",
+Phone:"Phone",
+
         },
       },
       hi: {
         translation: {
+
+          Phone:"फ़ोन",
+          notifyforfutureupdates:"भविष्य के अपडेट के लिए सूचित करें",
+          ShippingAddress:"शिपिंग पता",
+Entershippingaddress:"शिपिंग पता दर्ज करें",
+          Enterdeliveryaddress:"डिलीवरी पता दर्ज करें",
+DeliveryAddress:"डिलीवरी पता",
+          PaymentStatus:"भुगतान स्थिति",
+          PoojaStatus:"पूजा स्थिति",
+          BookingStatus:"बुकिंग स्थिति",
+          RedirectingIn:"होम पर पुनर्निर्देशित किया जा रहा है",
+          Poojabookingdate:"पूजा बुकिंग तिथि",
           Pujavideo:"पूजा वीडियो",
           ChooseYourPuja: "अपनी पूजा चुनें",
 
@@ -595,7 +621,7 @@ Popularity:"लोकप्रियता",
             "संकल्प फॉर्म भरें नाम, गोत्र और पता",
           PaySelectapaymentmethod: "भुगतान करें भुगतान विधि चुनें",
           ChoosePreviousSankalpDetail: "पिछला संकल्प विवरण चुनें",
-          AddSankalpFormDetail: "संकल्प फॉर्म विवरण जोड़ें",
+          AddSankalpFormDetail: "कृपया संकल्प फॉर्म भरें",
           NameofMembersParticipatingInPooja:
             "पूजा में भाग लेने वाले सदस्यों का नाम",
           firstmembername: "प्रथम सदस्य का नाम",

@@ -460,6 +460,9 @@ export default function Poojadetailpage() {
     
   const glideRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
 
   useEffect(() => {
     if (glideRef.current) {

@@ -163,9 +163,11 @@ export default function BookingDetailspage() {
               </p>
             )}
 
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg font-semibold">{t("Payment")}:</h1>
-              <span
+<div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+  {/* Payment Status */}
+  <div className="flex items-center gap-2">
+    <h1 className="text-lg font-semibold text-gray-800">{t("PaymentStatus")}:</h1>
+    <span
                 className={`text-lg uppercase font-medium ${
                   order.payment_status === "success"
                     ? "text-green-600"
@@ -176,22 +178,51 @@ export default function BookingDetailspage() {
               >
                 {getSafeValue(order.payment_status)}
               </span>
-            </div>
+  </div>
 
-            <div className="flex items-center gap-2 mt-1">
-              <h1 className="text-lg font-semibold">{t("Bookingstatus")}:</h1>
-              <span
-                className={`text-lg uppercase font-medium ${
-                  order.booking_status === "completed"
-                    ? "text-green-600"
-                    : order.booking_status === "cancelled"
-                    ? "text-red-600"
-                    : "text-yellow-600"
-                }`}
-              >
-                {statusLabelMap[order.booking_status] || order.booking_status}
-              </span>
-            </div>
+
+
+  
+</div>
+
+  {/* Booking Status */}
+  <div className="flex items-center g my-2 gap-2">
+    <h1 className="text-lg font-semibold text-gray-800">{t("PoojaStatus")}:</h1>
+    <span
+      className={`text-lg uppercase font-medium ${
+        order.booking_status === "completed"
+          ? "text-green-600"
+          : order.booking_status === "cancelled"
+          ? "text-red-600"
+          : "text-yellow-600"
+      }`}
+    >
+      {order.booking_status === "completed"
+        ? t("Confirmed")
+        : order.booking_status === "cancelled"
+        ? t("Failed")
+        : t("Pending")}
+    </span>
+  </div>
+
+<div className="flex items-center gap-2">
+    <h1 className="text-lg font-semibold text-gray-800">{t("BookingStatus")}:</h1>
+    <span
+      className={`text-lg uppercase font-medium ${
+        order.payment_status === "success"
+          ? "text-green-600"
+          : order.payment_status === "failed"
+          ? "text-red-600"
+          : "text-yellow-600"
+      }`}
+    >
+      {order.payment_status === "success"
+        ? t("Confirmed")
+        : order.payment_status === "failed"
+        ? t("Failed")
+        : t("Pending")}
+    </span>
+  </div>
           </div>
         </div>
 
@@ -200,20 +231,25 @@ export default function BookingDetailspage() {
   <p className="text-xl font-semibold mb-2">{t("PoojaUpdates")}</p>
 
   <div className="shadow-lg border rounded-lg p-4 bg-white min-w-[320px]">
-    <div className="mb-4">
-      <span className="font-semibold">{t("Bookingstatus")}: </span>
-      <span
-        className={`font-medium uppercase ${
-          order.booking_status === "completed"
-            ? "text-green-600"
-            : order.booking_status === "cancelled"
-            ? "text-red-600"
-            : "text-yellow-600"
-        }`}
-      >
-        {statusLabelMap[order.booking_status] || order.booking_status}
-      </span>
-    </div>
+    {/* Booking Status */}
+  <div className="flex items-center g my-2 gap-2">
+    <h1 className="text-lg font-semibold text-gray-800">{t("PoojaStatus")}:</h1>
+    <span
+      className={`text-lg uppercase font-medium ${
+        order.booking_status === "completed"
+          ? "text-green-600"
+          : order.booking_status === "cancelled"
+          ? "text-red-600"
+          : "text-yellow-600"
+      }`}
+    >
+      {order.booking_status === "completed"
+        ? t("Confirmed")
+        : order.booking_status === "cancelled"
+        ? t("Failed")
+        : t("Pending")}
+    </span>
+  </div>
 
     {/* Only show progress steps if status is valid and steps exist */}
     {stepStatus.some((step) => step.condition) &&

@@ -21,7 +21,7 @@ export default function Address() {
   }, []);
   const router = useRouter();
   const [pujaData, setPujaData] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const [countries, setCountries] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -41,6 +41,8 @@ export default function Address() {
     city_id: "",
     pincode: "",
     address: "",
+    shipping_address:"",
+    notification: false, // Default to true
   });
   const [phoneError, setPhoneError] = useState("");
 
@@ -102,6 +104,10 @@ export default function Address() {
     // Address validation
     if (!formData.address.trim()) {
       errors.address = `${t("Addressisrequired")}`;
+    }
+
+    if (!formData.shipping_address.trim()) {
+      errors.shipping_address	= `${t("Addressisrequired")}`;
     }
 
     setFormErrors(errors);
@@ -204,6 +210,8 @@ export default function Address() {
       city_id: address.city_id,
       pincode: address.pincode,
       address: address.address,
+      shipping_address:address.shipping_address	,
+      notification: address.notification, // Default to true
     });
 
     fetchStates(address.country_id); // Load states
@@ -298,6 +306,8 @@ export default function Address() {
         city_id: "",
         pincode: "",
         address: "",
+        shipping_address:"",
+        notification: "", // Default to true
       });
 
     } catch (error) {
@@ -308,9 +318,13 @@ export default function Address() {
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-
+    const { name, value, type, checked } = e.target;
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value, // Handle checkboxes correctly
+    }));
+  
     if (name === "country_id") {
       setStates([]); // Clear states before fetching
       setCities([]); // Clear cities before fetching
@@ -320,6 +334,7 @@ export default function Address() {
       fetchCities(value);
     }
   };
+  
 
   const sliderSettings = {
     dots: false,
@@ -367,9 +382,9 @@ export default function Address() {
   
   return (
   <>
-    <div className="container">
-      <h1 className=" f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 my-10">{t("ShoppingCart")} </h1>
-      <div className="flex flex-col m-5 lg:mx-40 md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
+    <div className="container max-w-7xl mx-auto">
+      <h1 className=" f-34 mb-2 m-5 font-semibold text-lg  my-10">{t("ShoppingCart")} </h1>
+      <div className="flex flex-col m-5  md:flex-row items-center bg-orange-100 rounded-2xl cart  px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40  justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center  md:mb-0">
           <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white">
             <span className="font-bold">1</span>
@@ -406,7 +421,7 @@ export default function Address() {
         </div>
       </div>
 
-      <section className="mb-4 mx-4 md:mx-10 lg:mx-20 xl:mx-40 max-w-full">
+      <section className="mb-4 mx-4  max-w-full">
 
         <div className="mx-auto">
           {/* Dropdown to Toggle Form */}
@@ -435,30 +450,61 @@ export default function Address() {
     />
   </label>
 
-  {/* Address Card */}
-  <div className="w-full sm:flex-1 max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[650px] rounded-lg border shadow-md bg-white p-4 flex justify-between gap-4">
-    <div className="flex-1 min-w-0">
-      <h3 className="font-semibold text-sm sm:text-base lg:text-lg break-words">
+ {/* Address Card */}
+<div className="w-full sm:flex-1 max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[650px] 
+  rounded-lg border shadow-md bg-white p-4 flex justify-between gap-4 h-full">
+
+  {/* Address Content */}
+  <div className="flex-1 min-w-0 flex flex-col justify-between">
+    
+    {/* Name */}
+    {address.name && (
+      <h3 className="font-semibold text-sm sm:text-base lg:text-lg whitespace-normal break-words">
         {limitWords(address.name, 5)}
       </h3>
-      <p className="text-sm sm:text-base text-gray-700 break-words">
-        {address.address}, {address.city} <br />
-        {address.state}, {address.pincode}
-      </p>
-      <p className="text-sm sm:text-base text-gray-700 break-words">{address.phone_no}</p>
-      <p className="text-sm sm:text-base text-gray-700 break-words text-wrap">
-        {limitWords(address.email, 5)}
-      </p>
-    </div>
+    )}
 
-    {/* Edit Icon */}
-    <div className="shrink-0">
-      <EditIcon
-        className="text-orange-500 cursor-pointer text-lg sm:text-xl lg:text-2xl"
-        onClick={() => handleEditClick(address)}
-      />
-    </div>
+    {/* Address */}
+    {(address.address || address.city || address.state || address.pincode) && (
+      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+        <span className="text-black">{t("Address")}: </span>
+        {[address.address, address.city, address.state, address.pincode].filter(Boolean).join(", ")}
+      </p>
+    )}
+
+    {/* Shipping Address */}
+    {address.shipping_address && (
+      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+        <span className="text-black">{t("ShippingAddress")}: </span>
+        {address.shipping_address}
+      </p>
+    )}
+
+    {/* Phone Number */}
+    {address.phone_no && (
+      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+        <span className="text-black">{t("Phone")}: </span> {address.phone_no}
+      </p>
+    )}
+
+    {/* Email */}
+    {address.email && (
+      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+        <span className="text-black">{t("Email")}: </span> {limitWords(address.email, 5)}
+      </p>
+    )}
   </div>
+
+  {/* Edit Icon */}
+  <div className="shrink-0 flex items-start">
+    <EditIcon
+      className="text-orange-500 cursor-pointer text-lg sm:text-xl lg:text-2xl"
+      onClick={() => handleEditClick(address)}
+    />
+  </div>
+</div>
+
+
 </div>
 
                     </div>
@@ -484,7 +530,8 @@ export default function Address() {
                 </button>
               </div>
             ) : (
-              <p className="text-center text-gray-600">{t("AddressnotavailablePleaseaddyouraddresstocontinue")}</p>
+              // <p className="text-center text-gray-600">{t("AddressnotavailablePleaseaddyouraddresstocontinue")}</p>
+              ""
             )}
           </div>
 
@@ -505,6 +552,8 @@ export default function Address() {
                     city_id: "",
                     pincode: "",
                     address: "",
+                    shipping_address:""	,
+                    notification: "", // Default to true
                   });
                 }
                 setShowForm(!showForm);
@@ -575,10 +624,10 @@ export default function Address() {
 
 
 
-<label className="block mb-2">{t("Address")}
+<label className="block mb-2">{t("DeliveryAddress")}
   <input
     type="text"
-    placeholder={t("Enteryourfulladdress")}
+    placeholder={t("Enterdeliveryaddress")}
     value={formData.address}
     maxLength={50}
     onChange={(e) => {
@@ -591,6 +640,25 @@ export default function Address() {
     className="w-full p-2 mt-1 rounded-lg border"
   />
   {formErrors.address && <p className="error text-red-500 text-sm">{formErrors.address}</p>}
+</label>
+
+
+<label className="block mb-2">{t("ShippingAddress")}
+  <input
+    type="text"
+    placeholder={t("Entershippingaddress")}
+    value={formData.shipping_address}
+    maxLength={50}
+    onChange={(e) => {
+      const value = e.target.value;
+      // Address validation: allow letters, numbers, spaces, commas, and periods only
+      if (/^[A-Za-z0-9\s,.'-]*$/.test(value)) {
+        setFormData({ ...formData, shipping_address	: value });
+      }
+    }}
+    className="w-full p-2 mt-1 rounded-lg border"
+  />
+  {formErrors.shipping_address	 && <p className="error text-red-500 text-sm">{formErrors.shipping_address}</p>}
 </label>
 
                 <label className="block mb-2">{t("Country")}
@@ -651,6 +719,21 @@ export default function Address() {
   />
   {formErrors.pincode && <p className="error text-red-500 text-sm">{formErrors.pincode}</p>}
 </label>
+
+<div className="flex items-center mb-2 gap-2">
+  <input
+    type="checkbox"
+    id="notification"
+    name="notification"
+    checked={formData.notification}
+    onChange={handleChange}
+    className="w-4 h-4"
+  />
+  <label htmlFor="notification" className="text-sm sm:text-base text-gray-700">
+  {t("notifyforfutureupdates")}
+   
+  </label>
+</div>
 
               </div>
 

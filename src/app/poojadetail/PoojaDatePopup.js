@@ -84,6 +84,8 @@ const handleDateSelect = (date) => {
       const localDate = new Date(date.getTime() - offset * 60 * 1000);
       return localDate.toISOString().split("T")[0];
     };
+
+    localStorage.setItem("poojadate", formatDate(selectedDate));
   
     if (selectedPackage) {
       const formData = {

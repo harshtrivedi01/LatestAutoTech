@@ -18,11 +18,14 @@ const Payment = () => {
   const searchParams = useSearchParams(); // Hook to access query parameters
   const [currentStep, setCurrentStep] = useState(2);
   const bookingId = searchParams.get("bookingId");
+  const poojadate = localStorage.getItem("poojadate");
   useEffect(() => {
     const redirectedFlag = localStorage.getItem("redirected");
     const sessionId = localStorage.getItem("payment_session_id");
     const productDetail = localStorage.getItem("productdeatil");
     const productDetail2 = localStorage.getItem("productdeatil2");
+    const poojadate = localStorage.getItem("poojadate");
+
 
           // If redirected or no payment data, show Home button
           if  (!sessionId && !productDetail && !productDetail2) {
@@ -151,8 +154,8 @@ const Payment = () => {
 
   return (
     <AuthGuard>
-      <h1 className="container max-w-7xl mx-auto f-34 mb-2 font-semibold text-lg text-black lg:mx-40  mx-10">  {t("ShoppingCart")} </h1>
-      <div className="flex lg:mx-40  mx-5 flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
+      <h1 className=" f-34 mb-4 font-semibold text-lg text-black ">  {t("ShoppingCart")} </h1>
+      <div className="flex  flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center mb-4 md:mb-0">
           <div
             className={`w-10 h-10 flex items-center justify-center rounded-full ${currentStep === 2 ? "bg-green-500 text-white" : " bg-green-500 text-white"
@@ -176,9 +179,9 @@ const Payment = () => {
           {t("PaySelectapaymentmethod")}    </p>
         </div>
       </div>
-      <div className=" lg:mx-40  mx-5  p-60">
-        <div className="container">
-          <div className="flex flex-col md:flex-row gap-6">
+      <div className="   ">
+        <div className="items-center">
+          <div className="flex flex-col items-center lg:flex-row gap-6">
             {/* Left Section */}
             <div className="w-full md:w-2/3">
   <div className="bg-white p-4 rounded-lg shadow">
@@ -188,7 +191,7 @@ const Payment = () => {
         <img
           src={data?.image || ""}
           alt="Pooja"
-          className="rounded-2xl object-contain w-full h-40 sm:h-48 md:h-56"
+          className="rounded-2xl object-fill w-full h-40 sm:h-48 md:h-56"
           onError={(e) => (e.target.src = "/images/logo.png")}
         />
       </div>
@@ -227,10 +230,14 @@ const Payment = () => {
             {/* Right Section */}
             <div className="w-full max-w-lg mx-auto lg:p-8 items-center">
               <div className="bg-white rounded-2xl shadow-lg border border-orange-500 p-6">
-                <h2 className="text-lg font-medium mb-6">  {t("OrderSummary")} </h2>
+                <h2 className="text-xl font-medium mb-6">  {t("OrderSummary")} </h2>
                 <dl className="flex items-center justify-between gap-4 my-5">
-                  <dt className="text-xl font-normal text-gray-500">  {t("SubTotal")} </dt>
-                  <dd className="text-xl font-medium text-gray-900">₹{Math.floor(datapackage?.price) || "0"}/-</dd>
+                  <dt className="text-lg font-normal text-gray-500">  {t("Poojabookingdate")} </dt>
+                  <dd className="text-lg font-medium text-gray-900 underline">{poojadate}</dd>
+                </dl>
+                <dl className="flex items-center justify-between gap-4 my-5">
+                  <dt className="text-lg font-normal text-gray-500">  {t("SubTotal")} </dt>
+                  <dd className="text-lg font-medium text-gray-900">₹{Math.floor(datapackage?.price) || "0"}/-</dd>
                 </dl>
                 <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
                   <dt className="text-2xl font-bold text-gray-900">  {t("Total")} </dt>

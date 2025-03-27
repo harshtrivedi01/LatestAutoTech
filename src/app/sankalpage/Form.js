@@ -266,7 +266,7 @@ console.log(packagedetail.amount)
       {/* <h1 className="font-medium my-4 text-2xl">{t("ChoosePreviousSankalpDetail")}</h1> */}
 
       <div className="flex justify-between items-center bg-white p-2 px-4 shadow-md rounded-lg cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        <h2 className="text-lg font-semibold text-gray-800">+ {t("AddSankalpFormDetail")}</h2>
+        <h2 className="text-lg font-semibold text-gray-800">{t("AddSankalpFormDetail")}</h2>
         {isOpen ? <FaChevronUp className="text-gray-600" /> : <FaChevronDown className="text-gray-600" />}
       </div>
 

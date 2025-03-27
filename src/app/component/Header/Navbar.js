@@ -264,18 +264,22 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a data-translate href="/about" className="text-black hover:text-orange-700">
-                {t("About")} 
-                </a>
-              </li>
-              <li>
                 <a data-translate href="/service" className="text-black hover:text-orange-700">
                 {t("Service")} 
                 </a>
               </li>
+              
               <li>
-                <a data-translate href="/contact" className="text-black hover:text-orange-700">
-                {t("Contact")} 
+                <a data-translate href="/poojabooking" className="text-black hover:text-orange-700">
+                {t("PoojaBooking")} 
+                </a>
+              </li>
+            
+             
+             
+              <li>
+                <a data-translate href="/poojabox" className="text-black hover:text-orange-700">
+                {t("PoojaBox")} 
                 </a>
               </li>
               <li>

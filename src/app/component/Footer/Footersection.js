@@ -61,11 +61,11 @@ export default function Footersection() {
 	return (
 		<>
 			<footer className=" px-4 divide-y text-gray-800 bg-gray-100">
-				<div className="container mx-auto py-10 flex flex-col lg:flex-row justify-between space-y-8 lg:space-y-0">
+				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto  py-10 flex flex-col lg:flex-row justify-between space-y-8 lg:space-y-0">
 					{/* Logo and Contact Info */}
 					<div className="lg:w-1/3 space-y-5">
 						<a href="/" className="flex items-center space-x-3">
-							<img src="/images/logo.png" alt="logo" className="w-9 h-16" />
+							<img src="/images/logo.png" alt="logo" className="w-8 h-16" />
 							<span className="text-3xl font-semibold">{t("PunyaSetu")}</span>
 						</a>
 						<div>

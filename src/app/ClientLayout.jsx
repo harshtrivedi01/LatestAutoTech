@@ -1,4 +1,3 @@
-// app/ClientLayout.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,6 +6,7 @@ import NavbarWrapper from "./component/Header/NavbarWrapper";
 import FooterWrapper from "./component/Footer/FooterWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FaArrowUp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa6"; // Import WhatsApp icon
 import LoadingScreen from "./component/LoadingScreen";
 import { setLoadingFunction } from "./utils/loadingState";
 
@@ -28,7 +28,7 @@ export default function ClientLayout({ children }) {
     setLoadingFunction(setLoading);
   }, []);
 
-  // Scroll event to show back-to-top button
+  // Scroll event to show Back to Top button
   useEffect(() => {
     const handleScroll = () => {
       setShowButton(window.scrollY > 300);
@@ -41,6 +41,12 @@ export default function ClientLayout({ children }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const openWhatsApp = () => {
+    const phoneNumber = "7340099503"; // Replace with your actual WhatsApp number
+    const message = encodeURIComponent("Hello! I need assistance.");
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+  };
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} />
@@ -51,6 +57,15 @@ export default function ClientLayout({ children }) {
       <SpeedInsights />
       <FooterWrapper />
 
+      {/* Always visible WhatsApp Button */}
+      <button
+        onClick={openWhatsApp}
+        className="fixed bottom-10 left-5 lg:left-10 bg-green-500 text-white lg:p-3 p-2 rounded-full shadow-md hover:bg-green-600 transition-all z-50"
+      >
+        <FaWhatsapp className="text-xl sm:text-2xl" />
+      </button>
+
+      {/* Back to Top Button (visible only when scrolling down) */}
       {showButton && (
         <button
           onClick={scrollToTop}

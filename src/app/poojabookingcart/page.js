@@ -10,8 +10,8 @@ export default function page() {
   return (
     <Suspense fallback={<div></div>}>
     <AuthGuard>
-    <div className="container p-60">
-      <div className=" p-0">
+    <div className="container max-w-7xl mx-auto ">
+      <div className=" py-10">
        
 
 <Payment/>

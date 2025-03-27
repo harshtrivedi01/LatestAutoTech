@@ -40,7 +40,7 @@ export default function Cartlist({ handleNextStep, list, updateCartQuantity, qua
 
   return (
     <>
-      <div className="flex flex-col  md:flex-row gap-6  sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6">
+      <div className="flex flex-col  md:flex-row gap-6  sm:px-6 md:px-10  py-6">
       <div className="w-full md:w-2/3">
   {cartItems.map((item) => (
     <div key={item.id} className="w-full">
