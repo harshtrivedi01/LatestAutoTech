@@ -787,12 +787,12 @@ export default function Poojadetailpage() {
       {/* Sections */}
       <section id="about-pooja" className="min-screen-[300px]"> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className="min-screen-[400px]"> <Benifit detail={pujaData} /> </section>
-      <section id="pooja-package" className="relative z-10 ">
+      <section id="pooja-package" className="relative  ">
         <PoojaPackage detail={pujaData} />
       </section>
     
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black  relative z-00"> <Testimonials/></section>
+      <section id="Homeeight-section" className="text-black  relative -z-10"> <Testimonials/></section>
       <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
   </div>
 )}
