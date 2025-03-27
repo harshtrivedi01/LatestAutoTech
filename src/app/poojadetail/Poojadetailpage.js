@@ -739,7 +739,7 @@ export default function Poojadetailpage() {
   </p>
 )}
     </div>
-    <a  onClick={() => scrollToSection(`${t("pooja-package")}`)}
+    <a  onClick={() => scrollToSection("pooja-package")}
         id="package"
         className="w-full cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
             {t("SelectPoojapackage")}
@@ -750,7 +750,7 @@ export default function Poojadetailpage() {
       </section>
 
       {/* Tab Section */}
-      <div className="sticky top-0 z-20 bg-white flex justify-center gap-4">
+      <div className="sticky top-0 z-10 bg-white flex justify-center gap-4">
   <div className="container flex justify-center space-x-4 border-b">
 
     {[
@@ -775,9 +775,9 @@ export default function Poojadetailpage() {
       {showButton && (
       <a
       onClick={() => document.getElementById("pooja-package")?.scrollIntoView({ behavior: "smooth" })}
-      className="fixed bottom-6 sm:bottom-10 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
+      className="fixed bottom-4 sm:bottom-10 left-1/3 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
                  font-semibold text-sm sm:text-base md:text-lg text-white bg-green-600 rounded-lg shadow-lg 
-                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer z-20"
+                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer z-0"
     >
        {t("SelectPoojapackage")}
     </a>     
@@ -787,12 +787,12 @@ export default function Poojadetailpage() {
       {/* Sections */}
       <section id="about-pooja" className="min-screen-[300px]"> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className="min-screen-[400px]"> <Benifit detail={pujaData} /> </section>
-      <section id="pooja-package" className="relative  ">
+      <section id="pooja-package" className="relative z-10 ">
         <PoojaPackage detail={pujaData} />
       </section>
     
       <section id="Downloadapp-section" className="text-black"> <Homeseven  detail={pujaData} /></section>
-      <section id="Homeeight-section" className="text-black  relative z-0"> <Testimonials/></section>
+      <section id="Homeeight-section" className="text-black  relative z-00"> <Testimonials/></section>
       <section id="Faq-section" className="text-black"> <Faq  detail={pujaData} /> </section>
   </div>
 )}
