@@ -154,7 +154,7 @@ const Content = () => {
       </div>
 
       {/* Login Popup - Show when not logged in */}
-      {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} onClose={() => setShowLoginPopup(false)} />}
+      {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} handleClose={handleCloseForm} onClose={() => setShowLoginPopup(false)} />}
 
       {/* Proceed Form - Show when Proceed is clicked */}
       {showForm && <ProceedForm handleClose={handleCloseForm} />}

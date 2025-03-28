@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ProceedForm from "./ProceedForm";
 
-const LoginPopup = ({ onClose }) => {
+const LoginPopup = ({ onClose ,handleClose}) => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -120,8 +121,19 @@ const LoginPopup = ({ onClose }) => {
         data
       );
 
-      if (response.data.status === "1") {
+      if (response.data.status == "1") {
         const id = response.data.data.id;
+
+        if (response.data.status == "1") {
+            const id = response.data.data.id;
+            if (id) {
+              localStorage.setItem("idToken", id);
+            }
+            const token = response.data.data.web_token;
+            if (token) {
+              localStorage.setItem("authToken", token);
+            }
+        }    
         setUserId(id); // ✅ Store verified user ID
         setIsOtpVerified(true); // ✅ Open the form instead of redirecting
         toast.success("OTP verified successfully!");
@@ -201,24 +213,7 @@ const LoginPopup = ({ onClose }) => {
 
         {/* Registration Form */}
         {isOtpVerified && (
-          <form className="mt-4">
-            <input
-              type="text"
-              placeholder="Enter your name"
-              className="w-full border p-3 rounded mt-2"
-            />
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full border p-3 rounded mt-2"
-            />
-            <button
-              type="submit"
-              className="w-full bg-green-500 text-white font-semibold py-3 rounded-full mt-4"
-            >
-              Complete Registration
-            </button>
-          </form>
+         <ProceedForm handleClose={handleClose}/>
         )}
 
         <button onClick={onClose} className="w-full text-gray-500 text-sm mt-4">
