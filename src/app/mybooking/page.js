@@ -540,7 +540,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       {[
         {
           pandit_image: "/images/pandit1.jpg",
-          booking_code: "PB12345",
+          booking_code: "PB12345PB12345",
           pandit_name: "Offer water to loard shiva",
           booking_status: "success",
           net_amount: "Free",
@@ -548,7 +548,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
         },
         {
           pandit_image: "/images/pandit2.jpg",
-          booking_code: "PB12346",
+          booking_code: "PB12346PB12345",
           pandit_name: "Offer water to loard shiva",
           booking_status: "pending",
           net_amount: "751",
@@ -556,7 +556,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
         },
         {
           pandit_image: "/images/pandit3.jpg",
-          booking_code: "PB12347",
+          booking_code: "PB12347PB12345",
           pandit_name: "Offer water to loard shiva",
           booking_status: "cancelled",
           net_amount: "601",
@@ -591,7 +591,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
                 {booking.booking_status}
               </p>
               <p className="text-red-600 font-bold text-md">
-              {t("amount")}{booking.net_amount}/-
+              {t("amount")} {booking.net_amount}/-
               </p>
             </div>
           </div>

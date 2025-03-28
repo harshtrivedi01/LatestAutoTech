@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ProceedForm from "./ProceedForm";
+import { useTranslation } from "react-i18next";
 
-const LoginPopup = ({ onClose ,handleClose}) => {
+const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
+    const { t } = useTranslation();
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -49,6 +51,17 @@ const LoginPopup = ({ onClose ,handleClose}) => {
     }
   }, [timer]);
 
+  const handleBackspace = (index, e) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (e.key === "Backspace" && otp[index] === "") {
+      let newOtp = [...otp];
+      newOtp[index] = "";
+      setOtpValues(newOtp);
+    }
+  };
+  
   // Handle phone number input
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, ""); // Allow only numbers
@@ -154,29 +167,67 @@ const LoginPopup = ({ onClose ,handleClose}) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-xl font-bold text-center">
-          {isOtpVerified ? "Complete Registration" : "Login"}
-        </h2>
-
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-75">
+      <div className="bg-white p-6 rounded-3xl py-10 m-3 shadow-lg ">
+      <div className="flex justify-center">
+            <img
+              width={45}
+              className=""
+              src="/images/logo.png"
+              alt="logo"
+            />
+          </div>
+        
         {/* Phone Input */}
         {!isOtpSent && !isOtpVerified && (
           <>
-            <p className="text-center text-gray-600">Enter your phone number</p>
+          <h2 className="text-4xl mt-3 font-bold text-center">
+        {t("Signin")}
+        </h2>
+
+            <p className="font-semibol text-[15px] text-center py-4" dangerouslySetInnerHTML={{ __html:`${t("signdis")}` }}>
+
+</p>
             <input
               type="tel"
               value={phone}
               onChange={handlePhoneChange}
               maxLength="10"
               placeholder="Enter phone number"
-              className="w-full border p-3 mt-4 rounded"
+              className="p-2 border-[1px] text-sm rounded-lg w-full appearance-none
+              [&::-webkit-outer-spin-button]:appearance-none 
+              [&::-webkit-inner-spin-button]:appearance-none 
+              [&::-moz-appearance]:textfield
+              focus:outline-none"
             />
+             <div className="flex justify-center my-3 text-sm">
+  <p className="text-center mt-4 text-sm text-gray-700">
+    {t("by")}<br />
+    <a
+      href="terms&conditions"
+      className="text-[#FA8128] hover:underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t("TermsANDConditions")}
+    </a>
+    {" "}{t("and")}{" "}
+    <a
+      href="privacypolicy"
+      className="text-[#FA8128] hover:underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t("PrivacyPolicy")}
+    </a>
+    {" "}{t("andof")}
+  </p>
+</div>
             <button
               onClick={handleGetOtp}
-              className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full mt-4"
+              className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 mt-5"
             >
-              Get OTP
+             {t("sendotp")}
             </button>
           </>
         )}
@@ -184,9 +235,12 @@ const LoginPopup = ({ onClose ,handleClose}) => {
         {/* OTP Input */}
         {isOtpSent && !isOtpVerified && (
           <>
-            <p className="text-center text-gray-600">
-              We've sent an OTP to {phone}
-            </p>
+           <p className="font-bold text-3xl text-center my-2"> {t("OTPVerification")}</p>
+
+           <p className="text-center mt-4 text-lg font-semibold text-gray-700">
+          {t("WesentyouaonetimeOTPonthis")} <br />
+          {t("MobileNumber")} +91 <span className="text-[#FA8128] hover:underline">{phone}</span>
+          </p>
             <form onSubmit={handleOtpSubmit} className="mt-4">
               <div className="flex justify-center gap-2">
                 {otp.map((digit, index) => (
@@ -195,17 +249,20 @@ const LoginPopup = ({ onClose ,handleClose}) => {
                     type="text"
                     maxLength="1"
                     value={digit}
+                    onKeyDown={(e) => handleBackspace(index, e.target.value)}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
-                    className="w-12 h-12 border text-center text-xl font-bold"
+                     className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
                   />
                 ))}
               </div>
               <button
                 type="submit"
-                className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full mt-6"
+              
                 disabled={isResendDisabled}
-              >
-                Verify OTP
+
+              className="w-full bg-[#E5644E] rounded-xl p-2 mt-5 shadow-2xl text-white font-bold transition duration-200 "
+    >
+     {t("submit")}
               </button>
             </form>
           </>
@@ -213,10 +270,15 @@ const LoginPopup = ({ onClose ,handleClose}) => {
 
         {/* Registration Form */}
         {isOtpVerified && (
-         <ProceedForm handleClose={handleClose}/>
-        )}
+   <ProceedForm handleClose={() => { 
+    handleClose(); // ✅ Ensure it closes the modal
+    onClose(); // ✅ Also close the login popup
+  }}  // ✅ Also close the login popup
+  totalPrice={totalPrice} />
+)}
 
-        <button onClick={onClose} className="w-full text-gray-500 text-sm mt-4">
+
+        <button onClick={onClose} className="w-full text-black font-semibold text-sm mt-4">
           Cancel
         </button>
       </div>

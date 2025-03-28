@@ -153,15 +153,15 @@ export default function Chadhavadetail() {
 ) : (
   <div>
    
-     <section className="poojadetail py-10 z-20" id="home1">
+     <section className="poojadetail  z-20" id="home1">
         <div className="">
-          <div className="z-10 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
+          <div className="z-10 py-7 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
 
 
-<div className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px]">
+<div className="w-full  h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px]">
   <div className="glide" ref={glideRef}>
     <div className="glide__track" data-glide-el="track">
-      <ul className="glide__slides">
+      <ul className="glide__slides rounded-3xl">
         {images.map((img, idx) => (
           <li className="glide__slide flex justify-center border rounded-3xl" key={idx}>
             <Image
@@ -169,7 +169,7 @@ export default function Chadhavadetail() {
               alt="Puja"
               width={800} // Set a higher base width
               height={600} // Set a higher base height
-              className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px] max-w-[1000px] rounded-3xl shadow-lg object-contain"
+              className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px] max-w-[1000px] rounded-3xl shadow-lg object-cover"
             />
           </li>
         ))}
@@ -177,7 +177,7 @@ export default function Chadhavadetail() {
     </div>
 
     {/* Dots (Pagination) Below the Slider */}
-    <div className="glide__bullets flex justify-center my-5 mb-10" data-glide-el="controls[nav]">
+    <div className="glide__bullets flex justify-center my-3 mb-10" data-glide-el="controls[nav]">
       {images.map((_, idx) => (
         <button
           key={idx}

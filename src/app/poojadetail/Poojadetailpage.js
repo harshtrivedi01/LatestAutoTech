@@ -592,8 +592,8 @@ export default function Poojadetailpage() {
   
   useEffect(() => {
     const handleScroll = () => {
-      const aboutSection = document.getElementById(`${t("AboutPooja")}`);
-      const benefitSection = document.getElementById(`${t("PoojaBenefits")}`);
+      const aboutSection = document.getElementById("about-pooja");
+      const benefitSection = document.getElementById("about-pooja");
       const packageSection = document.getElementById("pooja-package");
       const downloadAppSection = document.getElementById("Downloadapp-section");
       const homeEightSection = document.getElementById("Homeeight-section");
@@ -780,7 +780,7 @@ export default function Poojadetailpage() {
       onClick={() => document.getElementById("pooja-package")?.scrollIntoView({ behavior: "smooth" })}
       className="fixed bottom-4 sm:bottom-2 left-1/2 transform -translate-x-1/2 px-8 py-3 sm:px-12 sm:py-4 md:px-16 md:py-5 lg:px-20 lg:py-4 
                  font-semibold text-sm sm:text-base md:text-lg text-white bg-green-600 rounded-lg shadow-lg 
-                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer z-0"
+                 hover:bg-green-700 hover:scale-105 transition-transform duration-300 animate-pulse cursor-pointer s"
     >
        {t("SelectPoojapackage")}
     </a>     
@@ -788,7 +788,7 @@ export default function Poojadetailpage() {
    
 
       {/* Sections */}
-      <section id="about-pooja" className="z-10"> <Content detail={pujaData}  /> </section>
+      <section id="about-pooja" className="z-20"> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className=""> <Benifit detail={pujaData} /> </section>
       <section id="pooja-package" className="relative  ">
         <PoojaPackage detail={pujaData} />

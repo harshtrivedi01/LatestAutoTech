@@ -16,12 +16,7 @@ const Content = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-  // Check login status from localStorage (or API)
-  useEffect(() => {
-    const loggedInStatus = localStorage.getItem("authToken");
-    setIsLoggedIn(loggedInStatus === "true");
-  }, []);
-
+ 
   // Subscription data
   const subscriptionData = {
     Weekly: [
@@ -53,22 +48,26 @@ const Content = () => {
   // Calculate total price
   const totalPrice = selectedItems.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  // Handle proceed button click
-  const handleProceedClick = () => {
-    if (!isLoggedIn) {
-      setShowLoginPopup(true); // Show login popup if user is not logged in
-    } else {
-      setShowForm(true);
-    }
-  };
+// Check login status from localStorage (or API)
+useEffect(() => {
+  const authToken = localStorage.getItem("authToken");
+  setIsLoggedIn(!!authToken); // ✅ Check if token exists
+}, []);
 
-  // Handle successful login
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", "true");
-    setShowLoginPopup(false);
+const handleProceedClick = () => {
+  if (!isLoggedIn) {
+    setShowLoginPopup(true); // ✅ Show login popup only if user is not logged in
+  } else {
     setShowForm(true);
-  };
+  }
+};
+
+const handleLoginSuccess = (token) => {
+  setIsLoggedIn(true);
+  localStorage.setItem("authToken", token); // ✅ Store actual auth token from backend
+  setShowLoginPopup(false);
+  setShowForm(true);
+};
 
   // Handle form close
   const handleCloseForm = () => {
@@ -120,13 +119,13 @@ const Content = () => {
 
         {/* Order Summary (Hide if empty) */}
         {selectedItems.length > 0 && (
-          <div className="w-full mt-12 md:w-1/3 bg-white p-6 rounded-lg shadow-lg sticky top-4 border transition-all duration-300 flex flex-col h-full">
-            <h3 className="text-2xl font-semibold text-center mb-4">Order Summary</h3>
+          <div className="w-full mt-12 md:w-1/3 bg-white  p-6 rounded-lg shadow-lg sticky top-4 border border-orange-600 transition-all duration-300 flex flex-col h-full">
+            <h3 className="text-2xl font-semibold text-start border-b border-orange-400 pb-2 mb-4">Order Summary</h3>
             {selectedItems.map(({ id, title, price, qty }) => (
-              <div key={id} className="flex justify-between items-center border-b pb-2">
+              <div key={id} className="flex justify-between items-center border-b pb-3 mt-3">
                 <div>
-                  <p className="text-lg font-semibold">{title}</p>
-                  <p className="text-sm text-gray-600">x{qty}</p>
+                  <p className="text-base text-gray-700">{title}
+                  <span className="text-sm text-gray-600"> {" "}(x{qty})</span></p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-orange-600">Rs. {price * qty}/-</p>
@@ -154,10 +153,21 @@ const Content = () => {
       </div>
 
       {/* Login Popup - Show when not logged in */}
-      {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} handleClose={handleCloseForm} onClose={() => setShowLoginPopup(false)} />}
+      {showLoginPopup && (
+  <LoginPopup 
+    onLoginSuccess={handleLoginSuccess} 
+    totalPrice={totalPrice} 
+    handleClose={() => { 
+      setShowLoginPopup(false); // ✅ Close Login Popup
+      setShowForm(false); // ✅ Ensure ProceedForm is also hidden
+    }} 
+    onClose={() => setShowLoginPopup(false)} 
+  />
+)}
+
 
       {/* Proceed Form - Show when Proceed is clicked */}
-      {showForm && <ProceedForm handleClose={handleCloseForm} />}
+      {showForm && <ProceedForm handleClose={handleCloseForm} totalPrice={totalPrice} />}
     </div>
   );
 };
