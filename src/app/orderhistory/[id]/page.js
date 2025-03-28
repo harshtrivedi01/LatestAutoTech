@@ -206,16 +206,22 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="lg:w-4/12 w-full pt-10 lg:pt-24">
+        <div className="lg:w-5/12 w-full pt-10 lg:pt-24">
           <div className="border-b-2 border-gray-200 ">
             <h3 className="text-gray-800 text-xl font-semibold mb-2">{t("AddressDetails")}</h3>
             <p className="font-semibold text-lg">{order.address.name}</p>
             <p className="text-gray-600 text-lg">{order.address.email}</p>
             <p className="text-gray-600 text-lg">{order.address.phone}</p>
+            <p className="text-black text-lg border-t mt-2 underline">
+            {t("DeliveryAddress")}
+            </p>
             <p className="text-gray-600 text-lg ">
               {order.address.address}, {order.address.city}, {order.address.state} - {order.address.pincode}
             </p>
-            <p className="text-gray-600 border-t text-lg pb-5">
+            <p className="text-black text-lg  mt-2 underline">
+            {t("ShippingAddress")}
+            </p>
+            <p className="text-gray-600  text-lg pb-5">
               {order.address.shipping_address}
             </p>
           </div>

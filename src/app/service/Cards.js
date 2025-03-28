@@ -31,8 +31,8 @@ export default function Cards({ onlinepoojawork }) {
   }, []);
 
   const images = [
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
+    "/images/service.jpeg",
+    "/images/service.jpeg",
     "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_001.d7bef497.webp&w=1920&q=75",
   ];
 
@@ -82,38 +82,42 @@ export default function Cards({ onlinepoojawork }) {
         </div>
 
         {/* Right Side Image Slider */}
-        <div className="w-full sm:w-1/2 md:w-1/3">
-          <div className="glide" ref={glideRef}>
-            <div className="glide__track" data-glide-el="track">
-              <ul className="glide__slides">
-                {images.map((img, idx) => (
-                  <li className="glide__slide" key={idx}>
-                    <Image
-                      src={img}
-                      alt="Puja"
-                      width={400}
-                      height={300}
-                      className="rounded-3xl shadow-lg w-full"
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="w-full h-full sm:w-1/2 md:w-1/3">
+  <div className="glide" ref={glideRef}>
+    <div className="glide__track" data-glide-el="track">
+      <ul className="glide__slides flex items-center">
+        {images.map((img, idx) => (
+          <li className="glide__slide flex items-center justify-center h-[300px]" key={idx}>
+            <Image
+              src={img}
+              alt="Puja"
+              width={400}
+              height={300}
+              className="rounded-3xl shadow-lg w-full h-full object-cover"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
 
-            {/* Dots (Pagination) Below the Slider */}
-            <div className="glide__bullets flex justify-center mt-4" data-glide-el="controls[nav]">
-              {images.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`glide__bullet w-3 h-3 mx-1 rounded-full transition-all ${
-                    activeIndex === idx ? "bg-orange-700 " : "bg-gray-400"
-                  }`}
-                  data-glide-dir={`=${idx}`}
-                ></button>
-              ))}
-            </div>
-          </div>
-        </div>
+    {/* Dots (Pagination) Below the Slider */}
+    <div
+      className="glide__bullets flex justify-center mt-4"
+      data-glide-el="controls[nav]"
+    >
+      {images.map((_, idx) => (
+        <button
+          key={idx}
+          className={`glide__bullet w-3 h-3 mx-1 rounded-full transition-all ${
+            activeIndex === idx ? "bg-orange-700" : "bg-gray-400"
+          }`}
+          data-glide-dir={`=${idx}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   );
