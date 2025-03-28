@@ -469,10 +469,10 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
 
 
 
-        {/* pandit booking div */}
+        {/* pandit booking div
         {activeStep ===`${t("chadhava")}` && (
   <div className="bg-gray-100 p-6 mt-12 rounded-lg">
-    {Panditbookings.length > 0 ? (
+    {Panditbookings.length ? (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {Panditbookings.map((booking, index) => (
           <div
@@ -491,7 +491,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
               />
               <div className="text-center sm:text-left w-full sm:w-7/12">
                 <p className="text-gray-500 text-sm">
-                  #{booking.booking_code}
+                  #{booking.booking_code} ||
                 </p>
                 <h2 className="text-lg font-bold text-black">
                   Pt.{booking.pandit_name}
@@ -532,8 +532,95 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       </div>
     )}
   </div>
-)}
+)} */}
 
+{activeStep === `${t("chadhava")}` && (
+  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {[
+        {
+          pandit_image: "/images/pandit1.jpg",
+          booking_code: "PB12345",
+          pandit_name: "Offer water to loard shiva",
+          booking_status: "success",
+          net_amount: "Free",
+          booking_date: "25th March 2025",
+        },
+        {
+          pandit_image: "/images/pandit2.jpg",
+          booking_code: "PB12346",
+          pandit_name: "Offer water to loard shiva",
+          booking_status: "pending",
+          net_amount: "751",
+          booking_date: "26th March 2025",
+        },
+        {
+          pandit_image: "/images/pandit3.jpg",
+          booking_code: "PB12347",
+          pandit_name: "Offer water to loard shiva",
+          booking_status: "cancelled",
+          net_amount: "601",
+          booking_date: "27th March 2025",
+        },
+      ].map((booking, index) => (
+        <div
+          key={index}
+          className="border-[#87521B] bg-white border-[2px] rounded-lg p-4"
+        >
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <img
+              src={booking.pandit_image}
+              alt="Pooja Image"
+              onError={(e) => (e.target.src = "/images/logo.png")}
+              className="w-full sm:w-5/12 h-[140px] border-2 border-white object-contain shadow-md shadow-gray-400 rounded-lg"
+            />
+            <div className="text-center sm:text-left w-full sm:w-7/12">
+              
+              <h2 className="text-lg font-bold text-black">
+                {booking.pandit_name}
+              </h2>
+              <p
+                className={`${
+                  booking.booking_status === "success"
+                    ? "text-green-700"
+                    : booking.booking_status === "pending"
+                    ? "text-yellow-600"
+                    : "text-red-600"
+                } font-semibold text-md`}
+              >
+                {booking.booking_status}
+              </p>
+              <p className="text-red-600 font-bold text-md">
+                Amount Rs.{booking.net_amount}/-
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-500 text-sm mt-3">
+          OrderId:  #{booking.booking_code} 
+              </p>
+          <div className="flex flex-col sm:flex-row justify-between items-center  gap-3">
+        
+            <p className="text-gray-600 text-sm text-center sm:text-left">
+              <span className="font-semibold">Order time & date:</span>{" "}
+              {booking.booking_date}
+            </p>
+            <div
+              className={`${
+                booking.booking_status === "success"
+                  ? "bg-green-600"
+                  : booking.booking_status === "pending"
+                  ? "bg-yellow-500"
+                  : "bg-red-500"
+              } rounded-full px-4 py-1`}
+            >
+              <p className="text-white text-sm">{booking.booking_status}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
         {/* pooja box div */}
       
