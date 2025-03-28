@@ -23,8 +23,8 @@ const Page = () => {
   const router = useRouter();
   const steps = [
     { id: 1, title: `${t("PoojaBooking")}`  },
-    // { id: 2, title: "Pandit Booking" },
-    { id: 3, title: `${t("PoojaBox")}` },
+    { id: 3, title: `${t("chadhava")}` },
+    { id: 2, title: `${t("PoojaBox")}` },
   ];
 
   useEffect(() => {
@@ -470,7 +470,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
 
 
         {/* pandit booking div */}
-        {activeStep === "Pandit Booking" && (
+        {activeStep ===`${t("chadhava")}` && (
   <div className="bg-gray-100 p-6 mt-12 rounded-lg">
     {Panditbookings.length > 0 ? (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
