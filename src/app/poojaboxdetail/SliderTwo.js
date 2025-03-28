@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import api from "../lib/axiosInstance";
 import { useTranslation } from "react-i18next";
+import { FaTrash } from "react-icons/fa";
 
 const SliderTwo = () => {
   const { t } = useTranslation();
@@ -20,6 +21,123 @@ const SliderTwo = () => {
   useEffect(() => {
     fetchPujaData();
   }, []);
+
+  const [quantities, setQuantities] = useState({});
+
+// Function to get the displayed quantity ensuring a minimum of 1
+const getDisplayedQuantity = (product) => {
+  return quantities[product.id] > 0
+    ? quantities[product.id]
+    : product.quantity > 0
+    ? product.quantity
+    : 1;
+};
+
+// Function to update quantity
+const updateCartQuantity = async (productId, change) => {
+  const product = pujaData.find((item) => item.id === productId);
+
+  if (!product || !product.cart_status) {
+    toast.error("Item is not in the cart.");
+    return;
+  }
+
+  const currentQuantity = quantities[productId] ?? product.quantity ?? 1;
+  const newQuantity = currentQuantity + change;
+
+  if (newQuantity < 1) {
+    toast.error("Quantity cannot be less than 1");
+    return;
+  }
+
+  if (newQuantity > product.current_stock) {
+    toast.error("Cannot exceed available stock");
+    return;
+  }
+
+  try {
+    let formData = new FormData();
+    formData.append("type", "update_cart_quantity");
+    formData.append("update_detail", JSON.stringify([{ product_id: productId, quantity: newQuantity }]));
+
+    const response = await api.post("/cart", formData);
+
+    if (response.status === 200) {
+      toast.success(`Quantity updated to ${newQuantity}`);
+
+      // Update local state
+      setQuantities((prev) => ({
+        ...prev,
+        [productId]: newQuantity,
+      }));
+
+      // Update pujaData state
+      setPujaData((prevState) =>
+        prevState.map((item) =>
+          item.id === productId ? { ...item, quantity: newQuantity } : item
+        )
+      );
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 10);
+    } else {
+      toast.error(response.data?.message || "Failed to update quantity");
+    }
+  } catch (error) {
+    console.error("Error updating quantity:", error);
+    toast.error("Error updating cart. Please try again.");
+  }
+};
+
+
+// Updated `handleCartAction`
+const handleCartAction = async (id, index) => {
+  const isLoggedIn = localStorage.getItem("authToken");
+
+  if (!isLoggedIn) {
+    toast.error("Please login to continue");
+    router.push("/login");
+    return;
+  }
+
+  try {
+    let formData = new FormData();
+    const isCurrentlyInCart = cartStatus[index];
+    const actionType = isCurrentlyInCart ? "remove_cart" : "add_to_cart";
+
+    formData.append("type", actionType);
+    formData.append("product_id", id);
+
+    if (!isCurrentlyInCart) {
+      formData.append("quantity", quantities[id] ?? 1);
+    }
+
+    const response = await api.post("/cart", formData);
+    
+    if (response.data.status === 0) {
+      toast.error(response.data.message || "Action failed!");
+    } else {
+      setCartStatus((prevStatus) => {
+        const updatedStatus = [...prevStatus];
+        updatedStatus[index] = !isCurrentlyInCart;
+        return updatedStatus;
+      });
+
+      toast.success(
+        response.data.message ||
+        (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
+      );
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 10);
+    }
+  } catch (error) {
+    toast.error("Something went wrong! Please try again.");
+    console.error("Error handling cart action:", error);
+  }
+};
 
   function decodeHtml(html) {
     var txt = document.createElement("textarea");
@@ -53,54 +171,54 @@ const SliderTwo = () => {
     setIsLoggedIn(!!token);
   }, []);
 
-  const handleCartAction = async (id, index) => {
-    const isLoggedIn = localStorage.getItem("authToken"); // or "user_data"
+  // const handleCartAction = async (id, index) => {
+  //   const isLoggedIn = localStorage.getItem("authToken"); // or "user_data"
   
-    if (!isLoggedIn) {
-      toast.error("Please login to continue");
-      router.push("/login");
-      return;
-    }
-    try {
-      let formData = new FormData();
-      const isCurrentlyInCart = cartStatus[index];
-      const actionType = isCurrentlyInCart ? "remove_cart" : "add_to_cart";
+  //   if (!isLoggedIn) {
+  //     toast.error("Please login to continue");
+  //     router.push("/login");
+  //     return;
+  //   }
+  //   try {
+  //     let formData = new FormData();
+  //     const isCurrentlyInCart = cartStatus[index];
+  //     const actionType = isCurrentlyInCart ? "remove_cart" : "add_to_cart";
   
-      formData.append("type", actionType);
-      formData.append("product_id", id);
+  //     formData.append("type", actionType);
+  //     formData.append("product_id", id);
   
-      if (!isCurrentlyInCart) {
-        formData.append("quantity", "1");
-      }
+  //     if (!isCurrentlyInCart) {
+  //       formData.append("quantity", "1");
+  //     }
   
-      const response = await api.post("/cart", formData);
-      console.log("Cart Action Response:", response.data);
+  //     const response = await api.post("/cart", formData);
+  //     console.log("Cart Action Response:", response.data);
   
-      if (response.data.status === 0) {
-        toast.error(response.data.message || "Action failed!");
-      } else {
-        // ✅ Update cart status in state
-        setCartStatus((prevStatus) => {
-          const updatedStatus = [...prevStatus];
-          updatedStatus[index] = !isCurrentlyInCart;
-          return updatedStatus;
-        });
+  //     if (response.data.status === 0) {
+  //       toast.error(response.data.message || "Action failed!");
+  //     } else {
+  //       // ✅ Update cart status in state
+  //       setCartStatus((prevStatus) => {
+  //         const updatedStatus = [...prevStatus];
+  //         updatedStatus[index] = !isCurrentlyInCart;
+  //         return updatedStatus;
+  //       });
   
-        toast.success(
-          response.data.message ||
-            (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
-        );
+  //       toast.success(
+  //         response.data.message ||
+  //           (isCurrentlyInCart ? "Removed from cart!" : "Added to cart!")
+  //       );
   
-        // ✅ Reload the page after success
-        setTimeout(() => {
-          window.location.reload();
-        }, 10); // Adding a small delay to allow toast to display
-      }
-    } catch (error) {
-      toast.error("Something went wrong! Please try again.");
-      console.error("Error handling cart action:", error);
-    }
-  };
+  //       // ✅ Reload the page after success
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 10); // Adding a small delay to allow toast to display
+  //     }
+  //   } catch (error) {
+  //     toast.error("Something went wrong! Please try again.");
+  //     console.error("Error handling cart action:", error);
+  //   }
+  // };
   
 
   useEffect(() => {
@@ -115,8 +233,39 @@ const SliderTwo = () => {
     }
   }, []);
 
+  const deleteCartItem = async (id, index) => {
+    try {
+      let formData = new FormData();
+      formData.append("type", "remove_cart");
+      formData.append("product_id", id);
+  
+      const response = await api.post("/cart", formData);
+      console.log("Delete Cart Item Response:", response.data);
+  
+      if (response.data.status == 0) {
+        toast.error(response.data.message || "Failed to remove item!");
+      } else {
+        toast.success(response.data.message || "Item removed from cart!");
+        setCartStatus((prevStatus) => {
+          const updatedStatus = [...prevStatus];
+          updatedStatus[index] = false;
+          return updatedStatus;
+        });
+  
+        // Optionally reload or update cart data
+        setTimeout(() => {
+          window.location.reload();
+        }, 10);
+      }
+    } catch (error) {
+      toast.error("Something went wrong! Please try again.");
+      console.error("Error deleting cart item:", error);
+    }
+  };
+  
+
   return (
-    <div className={`py-10 ${isSpecialPage ? "bg-[#FFDCC0]" : "bg-white"} p-6 transition-all duration-300`}>
+    <div className={`py-10 ${isSpecialPage ? "bg-[#FFDCC0]" : "bg-white"}  transition-all duration-300`}>
       <div className="md:mb-12 mb-8 text-center">
         <h2 className="text-gray-800 text-[42px] font-bold">   {t("RelatedPoojaBox")}</h2>
       </div>
@@ -225,28 +374,64 @@ const SliderTwo = () => {
       {t("outOfStock")}
     </span>
   ) : (
-    <button
-      onClick={() => handleCartAction(product.id, index)}
-      className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
-        ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
-      `}
+    <>
+    {/* Add to Cart Button (Shown only when item is NOT in cart) */}
+    {!cartStatus[index] && (
+     <button
+     onClick={() => handleCartAction(product.id, index)}
+     className={`flex items-center justify-center w-full rounded-md px-5 py-2.5 text-center text-sm font-medium text-white
+       ${cartStatus[index] ? "bg-red-600 hover:bg-red-700" : "bg-[#E5644E] hover:bg-orange-700"}
+     `}
+   >
+     <svg
+       xmlns="http://www.w3.org/2000/svg"
+       className="mr-2 h-6 w-6"
+       fill="none"
+       viewBox="0 0 24 24"
+       stroke="currentColor"
+       strokeWidth={2}
+     >
+       <path
+         strokeLinecap="round"
+         strokeLinejoin="round"
+         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+       />
+     </svg>
+     {cartStatus[index] ? t("Removefromcart") : t("Addtocart")}
+   </button>
+    )}
+  
+    {/* Quantity Update & Delete Button (Only show when item is in the cart) */}
+    {cartStatus[index] && (
+  <div className="flex items-center mt-3">
+    {/* Quantity Buttons */}
+    <div className="flex items-center rounded-lg shadow-lg border border-[#E5644E]">
+
+  <button
+      onClick={() => updateCartQuantity(product.id, -1)}
+     className="text-orange-600 text-lg px-3 py-1"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="mr-2 h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
-      {cartStatus[index] ? t("Removefromcart") : t("Addtocart")}
+      -
     </button>
+    <span className="mx-2 text-gray-600">{quantities[product.id] ?? product.quantity ?? 1}</span>
+    <button
+      onClick={() => updateCartQuantity(product.id, 1)}
+      className="text-orange-600 text-lg px-3 py-1"
+    >
+      +
+    </button>
+  </div>
+
+    {/* Delete Item Button */}
+    <FaTrash
+      className="ms-5 text-gray-700 cursor-pointer hover:text-red-600"
+      onClick={() => deleteCartItem(product.id, index)}
+    />
+  </div>
+)}
+  </>
+  
+  
   )}
 </div>
 

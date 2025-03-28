@@ -53,7 +53,7 @@ const Testimonials = () => {
   }, []);
 
  return (
-  <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7]" : "bg-[#FFDCC0]"} p-6 transition-all duration-300`}>
+  <div className={`py-10 ${isSpecialPage ? "bg-[#FFD7]" : "bg-[#FFDCC0]"}  transition-all duration-300`}>
     <div className="mb-8 text-center">
     <h2 className="text-gray-800 text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold">
   {t("WhatOurClientsSayAboutUs")}

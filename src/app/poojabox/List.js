@@ -32,10 +32,11 @@ export default function List({ pujaData }) {
   useEffect(() => {
     const initialQuantities = {};
     pujaData?.cart_list?.forEach((item) => {
-      initialQuantities[item.product_id] = item.quantity;
+      initialQuantities[item.product_id] = item.quantity || 1; // Ensure a default of 1
     });
     setQuantities(initialQuantities);
   }, [pujaData]);
+  
   
 
   const updateCartQuantity = async (productId, change) => {
@@ -46,7 +47,8 @@ export default function List({ pujaData }) {
       return;
     }
   
-    const newQuantity = (quantities[productId] || product.quantity) + change;
+    const currentQuantity = quantities[productId] ?? product.quantity ?? 1;
+    const newQuantity = currentQuantity + change;
   
     if (newQuantity < 1) {
       toast.error("Quantity cannot be less than 1");
@@ -58,7 +60,6 @@ export default function List({ pujaData }) {
       return;
     }
   
-    // Update quantity locally first
     setQuantities((prev) => ({
       ...prev,
       [productId]: newQuantity,
@@ -92,6 +93,8 @@ export default function List({ pujaData }) {
       toast.error("Error updating cart. Please try again.");
     }
   };
+  
+  
   
   
   
@@ -214,8 +217,14 @@ export default function List({ pujaData }) {
 
     {/* Display Quantity */}
     <span className="mx-2 text-gray-600">
-  {quantities[product.id] !== undefined ? quantities[product.id] : product.quantity}
+  {quantities[product.id] > 0 
+    ? quantities[product.id] 
+    : product.quantity > 0 
+    ? product.quantity 
+    : 1}
 </span>
+
+
 
 
       {/* Increase Quantity */}

@@ -431,109 +431,101 @@ export default function Address() {
           </h1>
           <br />
 
-          <div className="w-full px-4 relative text-wrap">
-            {pujaData?.address_list?.length > 0 ? (
-              <div className="relative">
-                {/* Slider */}
-                <Slider ref={sliderRef} {...sliderSettings} className="p-4">
-                  {pujaData.address_list.map((address) => (
-                    <div key={address.id} className="px-8 w-full">
-                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-start w-full">
-  {/* Radio Button */}
-  <label className="flex items-start sm:items-center pt-2 sm:pt-0">
-    <input
-      type="radio"
-      name="default_address"
-      checked={selectedAddress === address.id}
-      onChange={() => handleAddressSelect(address.id)}
-      className="form-radio w-5 h-5 sm:w-6 sm:h-6 border border-orange-500 accent-orange-500"
-    />
-  </label>
+          {pujaData?.address_list?.length > 0 && (
+  <div className="w-full px-4 relative text-wrap">
+    <div className="relative">
+      {/* Slider */}
+      <Slider ref={sliderRef} {...sliderSettings} className="p-4">
+        {pujaData.address_list.map((address) => (
+          <div key={address.id} className="px-8 w-full">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-start w-full">
+              {/* Radio Button */}
+              <label className="flex items-start sm:items-center pt-2 sm:pt-0">
+                <input
+                  type="radio"
+                  name="default_address"
+                  checked={selectedAddress === address.id}
+                  onChange={() => handleAddressSelect(address.id)}
+                  className="form-radio w-5 h-5 sm:w-6 sm:h-6 border border-orange-500 accent-orange-500"
+                />
+              </label>
 
- {/* Address Card */}
-<div className="w-full sm:flex-1 max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[650px] 
-  rounded-lg border shadow-md bg-white p-4 flex justify-between gap-4 h-full">
+              {/* Address Card */}
+              <div className="w-full sm:flex-1 max-w-full sm:max-w-[500px] md:max-w-[600px] lg:max-w-[650px] 
+                rounded-lg border shadow-md bg-white p-4 flex justify-between gap-4 h-full">
 
-  {/* Address Content */}
-  <div className="flex-1 min-w-0 flex flex-col justify-between">
-    
-    {/* Name */}
-    {address.name && (
-      <h3 className="font-semibold text-sm sm:text-base lg:text-lg whitespace-normal break-words">
-        {limitWords(address.name, 5)}
-      </h3>
-    )}
+                {/* Address Content */}
+                <div className="flex-1 min-w-0 flex flex-col justify-between">
+                  {/* Name */}
+                  {address.name && (
+                    <h3 className="font-semibold text-sm sm:text-base lg:text-lg whitespace-normal break-words">
+                      {limitWords(address.name, 5)}
+                    </h3>
+                  )}
 
-    {/* Address */}
-    {(address.address || address.city || address.state || address.pincode) && (
-      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
-        <span className="text-black">{t("Address")}: </span>
-        {[address.address, address.city, address.state, address.pincode].filter(Boolean).join(", ")}
-      </p>
-    )}
+                  {/* Address */}
+                  {(address.address || address.city || address.state || address.pincode) && (
+                    <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+                      <span className="text-black">{t("Address")}: </span>
+                      {[address.address, address.city, address.state, address.pincode].filter(Boolean).join(", ")}
+                    </p>
+                  )}
 
-    {/* Shipping Address */}
-    {address.shipping_address && (
-      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
-        <span className="text-black">{t("ShippingAddress")}: </span>
-        {address.shipping_address}
-      </p>
-    )}
+                  {/* Shipping Address */}
+                  {address.shipping_address && (
+                    <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+                      <span className="text-black">{t("ShippingAddress")}: </span>
+                      {address.shipping_address}
+                    </p>
+                  )}
 
-    {/* Phone Number */}
-    {address.phone_no && (
-      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
-        <span className="text-black">{t("Phone")}: </span> {address.phone_no}
-      </p>
-    )}
+                  {/* Phone Number */}
+                  {address.phone_no && (
+                    <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+                      <span className="text-black">{t("Phone")}: </span> {address.phone_no}
+                    </p>
+                  )}
 
-    {/* Email */}
-    {address.email && (
-      <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
-        <span className="text-black">{t("Email")}: </span> {limitWords(address.email, 5)}
-      </p>
-    )}
-  </div>
+                  {/* Email */}
+                  {address.email && (
+                    <p className="text-sm sm:text-base text-gray-700 whitespace-normal break-words">
+                      <span className="text-black">{t("Email")}: </span> {limitWords(address.email, 5)}
+                    </p>
+                  )}
+                </div>
 
-  {/* Edit Icon */}
-  <div className="shrink-0 flex items-start">
-    <EditIcon
-      className="text-orange-500 cursor-pointer text-lg sm:text-xl lg:text-2xl"
-      onClick={() => handleEditClick(address)}
-    />
-  </div>
-</div>
-
-
-</div>
-
-                    </div>
-
-                  ))}
-                </Slider>
-
-                {/* Navigation Buttons */}
-                <button
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 disabled:opacity-50"
-                  onClick={() => sliderRef.current?.slickPrev()}
-                  disabled={!pujaData || pujaData.address_list.length <= 1}
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-700" />
-                </button>
-
-                <button
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 disabled:opacity-50"
-                  onClick={() => sliderRef.current?.slickNext()}
-                  disabled={!pujaData || pujaData.address_list.length <= 1}
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-700" />
-                </button>
+                {/* Edit Icon */}
+                <div className="shrink-0 flex items-start">
+                  <EditIcon
+                    className="text-orange-500 cursor-pointer text-lg sm:text-xl lg:text-2xl"
+                    onClick={() => handleEditClick(address)}
+                  />
+                </div>
               </div>
-            ) : (
-              // <p className="text-center text-gray-600">{t("AddressnotavailablePleaseaddyouraddresstocontinue")}</p>
-              ""
-            )}
+            </div>
           </div>
+        ))}
+      </Slider>
+
+      {/* Navigation Buttons */}
+      <button
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 disabled:opacity-50"
+        onClick={() => sliderRef.current?.slickPrev()}
+        disabled={!pujaData || pujaData.address_list.length <= 1}
+      >
+        <ChevronLeft className="w-6 h-6 text-gray-700" />
+      </button>
+
+      <button
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 disabled:opacity-50"
+        onClick={() => sliderRef.current?.slickNext()}
+        disabled={!pujaData || pujaData.address_list.length <= 1}
+      >
+        <ChevronRight className="w-6 h-6 text-gray-700" />
+      </button>
+    </div>
+  </div>
+)}
 
           <br /> <br />
           <div className="mt-4 border rounded-lg shadow-2xl">
@@ -720,16 +712,16 @@ export default function Address() {
   {formErrors.pincode && <p className="error text-red-500 text-sm">{formErrors.pincode}</p>}
 </label>
 
-<div className="flex items-center mb-2 gap-2">
+<div className="flex items-center mb-3 gap-2">
   <input
     type="checkbox"
     id="notification"
     name="notification"
     checked={formData.notification}
     onChange={handleChange}
-    className="w-4 h-4"
+    className="w-4 h-4 border-2 border-orange-400 bg-orange-500"
   />
-  <label htmlFor="notification" className="text-sm sm:text-base text-gray-700">
+  <label htmlFor="notification" className="text-sm  text-gray-700">
   {t("notifyforfutureupdates")}
    
   </label>
@@ -747,7 +739,7 @@ export default function Address() {
         <button
           onClick={handleNextStep}
           disabled={isButtonDisabled}
-          className={`mt-7 px-20 py-2  rounded-lg text-white font-medium ${isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"
+          className={`mt-7 px-20 py-2  rounded-lg text-white font-medium ${isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-[#E5644E] hover:bg-orange-600"
             }`}
         >
           {t("Proceedtonextstep")}

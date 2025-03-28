@@ -44,8 +44,8 @@ export default function List({ module_category_details }) {
 
   return (
     <div>
-      <div className="bg-[#FFFFFF] py-5">
-        <div id="features" className="mx-auto max-w-6xl">
+      <div className="bg-[#FFFFFF] py-10">
+        <div id="features" className>
           
         <ul className="flex flex-wrap justify-center gap-6 text-center text-slate-700 px-5">
             {module_category_details.slice(0, 6).map((category) => {
@@ -64,7 +64,7 @@ export default function List({ module_category_details }) {
               return (
                 <li
                   key={id}
-                  className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center flex flex-col justify-between"
+                  className="w-[400px] h-[400px] flex flex-col justify-between items-center rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center"
                   style={{
                     backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`,
                     backgroundSize: "cover",

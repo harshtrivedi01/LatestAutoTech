@@ -49,68 +49,66 @@ export default function Homesecond({ module_category_details }) {
           <div className="flex justify-center">
             <Heading text={t("Services")} />
           </div>
-        <ul className="flex flex-wrap justify-center gap-6 text-center text-slate-700 px-5">
+          <ul className="flex flex-wrap justify-center gap-6 text-center text-slate-700 px-5">
+  {module_category_details.slice(0, 6).map((category) => {
+    const { modulecategory, short_description, id, image } = category;
+    const imageSrc = service1;
+    const bookingUrl = bookingUrls[modulecategory] || "#";
 
-            {module_category_details.slice(0, 6).map((category) => {
-              const { modulecategory, short_description, id, image } = category;
-              // const imageSrc = image || service1;
-              const imageSrc =  service1;
-              const bookingUrl = bookingUrls[modulecategory] || "#";
+    // Show limited words
+    const words = short_description?.split(" ") || [];
+    const limitedText =
+      words.length > MAX_WORDS
+        ? words.slice(0, MAX_WORDS).join(" ") + "..."
+        : short_description;
 
-              // Show limited words
-              const words = short_description?.split(" ") || [];
-              const limitedText =
-                words.length > MAX_WORDS
-                  ? words.slice(0, MAX_WORDS).join(" ") + "..."
-                  : short_description;
+    return (
+      <li
+        key={id}
+        className="w-[400px] h-[400px] flex flex-col justify-between items-center rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="flex flex-col items-center h-full">
+          <img
+            src={imageSrc}
+            alt={modulecategory}
+            width={119}
+            height={136}
+            className="h-[136px] w-[119px] object-contain"
+            onError={(e) => (e.target.src = "/images/logo.png")}
+          />
+          <div className="my-3 font-display">
+            <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
+              {modulecategory}
+            </h1>
+          </div>
+          <div className="flex-grow">
+            <p
+              className="mt-1.5 text-[17px] leading-6 mx-2 text-black"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(limitedText),
+              }}
+            ></p>
+          </div>
+        </div>
+        <div className="mt-auto">
+          <a
+            href={bookingUrl}
+            rel="noopener noreferrer"
+            className="px-8 py-2 mt-4 shadow-gray-400 shadow-xl text-white bg-[#E5644E] rounded-xl hover:bg-[#7B2502]"
+          >
+            {t("BookNow")}
+          </a>
+        </div>
+      </li>
+    );
+  })}
+</ul>
 
-              return (
-                <li
-                  key={id}
-                  className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center flex flex-col justify-between"
-                  style={{
-                    backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    minHeight: "400px",
-                  }}
-                >
-                  <div>
-                    <img
-                      src={imageSrc}
-                      alt={modulecategory}
-                      width={119}
-                      height={136}
-                      className="mx-auto h-[136px] w-[119px] object-contain"
-                      onError={(e) => (e.target.src = "/images/logo.png")}
-                    />
-                    <div className="my-3 font-display">
-                      <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
-                        {modulecategory}
-                      </h1>
-                    </div>
-                    <div>
-                      <p
-                        className="mt-1.5 text-[17px] leading-6 mx-2 text-black"
-                        dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(limitedText),
-                        }}
-                      ></p>
-                    </div>
-                  </div>
-                  <div className="mt-auto">
-                    <a
-                      href={bookingUrl}
-                      rel="noopener noreferrer"
-                      className="px-8 py-2 mt-4 shadow-gray-400 shadow-xl text-white bg-[#E5644E] rounded-xl hover:bg-[#7B2502]"
-                    >
-                      {t("BookNow")}
-                    </a>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
         </div>
       </div>
     </div>
