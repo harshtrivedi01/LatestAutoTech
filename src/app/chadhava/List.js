@@ -18,6 +18,7 @@ const PanditCard = ({ pandit }) => {
 
   return (
     <div className="bg-white shadow-md rounded-xl p-2 border border-gray-200 w-full max-w-sm mx-auto flex flex-col items-center">
+        <Link href={`/chadhavadetail/4`}>
       {/* Image Section */}
       <div className="w-full flex justify-center">
         <img
@@ -38,12 +39,13 @@ const PanditCard = ({ pandit }) => {
         </p>
 
         {/* Book Now Button */}
-        <Link href={`/chadhavadetail/4`}>
+      
           <button className="block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
             {t("booknow")}
           </button>
-        </Link>
+       
       </div>
+      </Link>
     </div>
   );
 };

@@ -7,9 +7,9 @@ const TabOne = () => {
   const [showForm, setShowForm] = useState(false);
 
   const data1 = [
-    { id: 1, image: "/images/logo.png", title: "Offer a Prayer Thread", description: "Short description...", price: 51.00 },
-    { id: 2, image: "/images/logo.png", title: "Make a Grand Offering", description: "Short description...", price: 51.00 },
-    { id: 3, image: "/images/logo.png", title: "Offer a Prayer Thread", description: "Short description...", price: 51.00 },
+    { id: 1, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description.Offer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer Thread..", price: 51.00 },
+    { id: 2, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Make a Grand Offering", description: "Short descriptionOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer Thread...", price: 51.00 },
+    { id: 3, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short descriptionOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer Thread...", price: 51.00 },
 
   ];
 
@@ -60,7 +60,7 @@ const TabOne = () => {
         <h3 className="text-2xl font-semibold text-start">Choose an Offering</h3>
         {data1.map((item) => (
           <div key={item.id} className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
-            <img src={item.image} alt={item.title} className="w-20 h-20 md:w-40 md:h-40 border-2 border-orange-400 object-contain p-3 rounded-lg" />
+            <img src={item.image} alt={item.title} className="w-20 h-20 md:w-40 md:h-40 border-2 border-orange-400 object-contain rounded-lg" />
             <div className="ml-4 space-y-2">
               <h3 className="text-lg font-semibold">{item.title}</h3>
               <p className="text-sm text-gray-600">{item.description}</p>
@@ -84,31 +84,45 @@ const TabOne = () => {
 
       {/* Calculation Summary (Only visible when showProceed is true) */}
       {showProceed && (
-       <div className="w-full md:w-1/3 bg-gray-100 p-6 rounded-lg shadow-lg sticky top-4 mt-10 border transition-all duration-300 flex flex-col h-full">
-       <h3 className="text-xl font-semibold text-center mb-4">Order Summary</h3>
-     
-       {/* Content Wrapper for Proper Alignment */}
-       <div className="flex flex-col gap-4 flex-grow">
-         <div className="flex justify-between border-b pb-2">
-           <p className="text-lg font-semibold">Total Offerings:</p>
-           <p className="text-lg">{totalQuantity}</p>
-         </div>
-         <div className="flex justify-between">
-           <p className="text-lg font-semibold">Total Price:</p>
-           <p className="text-lg text-orange-600">Rs. {totalPrice}/-</p>
-         </div>
-       </div>
-     
-       {/* Button Stays at the Bottom */}
-       <button 
-         className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full mt-6"
-         onClick={handleProceedClick}
-       >
-         Proceed
-       </button>
-     </div>
-     
-      )}
+  <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-lg sticky top-4 mt-10 border transition-all duration-300 flex flex-col h-full">
+    <h3 className="text-2xl font-semibold text-center mb-4">Order Summary</h3>
+<br/>
+    {/* List Selected Offerings */}
+    <div className="flex flex-col gap-4 flex-grow">
+      {Object.entries(offers).map(([id, qty]) => {
+        const product = data1.find((item) => item.id === parseInt(id));
+        return (
+          <div key={id} className="flex justify-between items-center border-b pb-2">
+            <div>
+              <p className="text-lg font-semibold mb-3">{product.title}</p>
+              <p className="text-sm text-gray-600"></p>
+            </div>
+            <div className="text-right">
+              <p className="text-lg font-semibold">x{qty}</p>
+              <p className="text-sm text-orange-600">Rs. {product.price * qty}/-</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    {/* Total Price & Proceed Button */}
+    <div className="mt-4  pt-4">
+      <div className="flex justify-between">
+        <p className="text-lg font-semibold">Total Price:</p>
+        <p className="text-lg text-orange-600">Rs. {totalPrice}/-</p>
+      </div>
+
+      <button 
+        className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full mt-6"
+        onClick={handleProceedClick}
+      >
+        Proceed
+      </button>
+    </div>
+  </div>
+)}
+
 
       {showForm && <ProceedForm handleClose={handleCloseForm} handleSubmit={handleSubmit} />}
     </div>

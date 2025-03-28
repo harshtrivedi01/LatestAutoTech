@@ -344,12 +344,13 @@ ShippingAddress:"Shipping Address",
 Entershippingaddress:"Enter Shipping Address",
 notifyforfutureupdates:"Notify for future Updates",
 Phone:"Phone",
+chadhava:"Chadhava",
 
         },
       },
       hi: {
         translation: {
-
+          chadhava:"चढवा",
           Phone:"फ़ोन",
           notifyforfutureupdates:"भविष्य के अपडेट के लिए सूचित करें",
           ShippingAddress:"शिपिंग पता",
