@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ProceedForm from "./ProceedForm.js"; // Import form component
 
-const TabOne = () => {
-  const [offers, setOffers] = useState({});
-  const [showProceed, setShowProceed] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-
+const TabOne = ({ offers, setOffers, showProceed, setShowProceed, showForm, setShowForm }) => {
   const data1 = [
-    { id: 1, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description.Offer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer Thread..", price: 51.00 },
-    { id: 2, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Make a Grand Offering", description: "Short descriptionOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer Thread...", price: 51.00 },
-    { id: 3, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short descriptionOffer a Prayer ThreadOffer a Prayer ThreadOffer a Prayer Thread...", price: 51.00 },
-
+    { id: 1, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description...", price: 51.00 },
+    { id: 2, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Make a Grand Offering", description: "Short description...", price: 51.00 },
+    { id: 3, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description...", price: 51.00 },
   ];
 
   const handleOfferClick = (id) => {
@@ -50,13 +45,13 @@ const TabOne = () => {
   const handleCloseForm = () => setShowForm(false);
   const handleSubmit = (formData) => {
     console.log("Form Submitted:", formData);
-    setShowForm(false); // Close form after submission
+    setShowForm(false);
   };
 
   return (
     <div className="flex flex-col md:flex-row gap-6">
-      {/* Offerings List (Covers full width when summary is hidden) */}
-      <div className={`${showProceed ? "md:w-2/3" : "w-full"} transition-all duration-300`}>
+      {/* Offerings List */}
+      <div className={` w-full transition-all duration-300`}>
         <h3 className="text-2xl font-semibold text-start">Choose an Offering</h3>
         {data1.map((item) => (
           <div key={item.id} className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
@@ -82,47 +77,7 @@ const TabOne = () => {
         ))}
       </div>
 
-      {/* Calculation Summary (Only visible when showProceed is true) */}
-      {showProceed && (
-  <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-lg sticky top-4 mt-10 border transition-all duration-300 flex flex-col h-full">
-    <h3 className="text-2xl font-semibold text-center mb-4">Order Summary</h3>
-<br/>
-    {/* List Selected Offerings */}
-    <div className="flex flex-col gap-4 flex-grow">
-      {Object.entries(offers).map(([id, qty]) => {
-        const product = data1.find((item) => item.id === parseInt(id));
-        return (
-          <div key={id} className="flex justify-between items-center border-b pb-2">
-            <div>
-              <p className="text-lg font-semibold mb-3">{product.title}</p>
-              <p className="text-sm text-gray-600"></p>
-            </div>
-            <div className="text-right">
-              <p className="text-lg font-semibold">x{qty}</p>
-              <p className="text-sm text-orange-600">Rs. {product.price * qty}/-</p>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-
-    {/* Total Price & Proceed Button */}
-    <div className="mt-4  pt-4">
-      <div className="flex justify-between">
-        <p className="text-lg font-semibold">Total Price:</p>
-        <p className="text-lg text-orange-600">Rs. {totalPrice}/-</p>
-      </div>
-
-      <button 
-        className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full mt-6"
-        onClick={handleProceedClick}
-      >
-        Proceed
-      </button>
-    </div>
-  </div>
-)}
-
+    
 
       {showForm && <ProceedForm handleClose={handleCloseForm} handleSubmit={handleSubmit} />}
     </div>

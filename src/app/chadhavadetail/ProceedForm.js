@@ -115,7 +115,7 @@ const ProceedForm = ({ handleClose, handleSubmit }) => {
       </div>
 
       {/* Buttons */}
-      <div className="flex flex-wrap justify-between gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
 
   <button
     className="w-full sm:w-auto px-6 sm:px-10 md:px-16 py-2 bg-orange-500 text-white rounded-full"
