@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 			<div className="items-center gap-12">
 			  <div>
 				<h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-				Chadhava Seva
+				{t("ChadhavaSeva")}
 				</h2>
 				<p className="leading-relaxed text-lg text-gray-600">
 				Book experienced Chadhava online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!

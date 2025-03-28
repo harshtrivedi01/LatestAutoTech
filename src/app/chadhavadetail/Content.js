@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import TabOne from "./TabOne.js";
 import TabTwo from "./TabTwo.js";
 import ProceedForm from "./ProceedForm.js";
+import LoginPopup from "./LoginPopup.js"; // Import login popup
 
 const Content = () => {
   const { t } = useTranslation();
@@ -12,6 +13,14 @@ const Content = () => {
   const [offers, setOffers] = useState({});
   const [showProceed, setShowProceed] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  // Check login status from localStorage (or API)
+  useEffect(() => {
+    const loggedInStatus = localStorage.getItem("authToken");
+    setIsLoggedIn(loggedInStatus === "true");
+  }, []);
 
   // Subscription data
   const subscriptionData = {
@@ -46,6 +55,18 @@ const Content = () => {
 
   // Handle proceed button click
   const handleProceedClick = () => {
+    if (!isLoggedIn) {
+      setShowLoginPopup(true); // Show login popup if user is not logged in
+    } else {
+      setShowForm(true);
+    }
+  };
+
+  // Handle successful login
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    localStorage.setItem("isLoggedIn", "true");
+    setShowLoginPopup(false);
     setShowForm(true);
   };
 
@@ -131,6 +152,9 @@ const Content = () => {
           </div>
         )}
       </div>
+
+      {/* Login Popup - Show when not logged in */}
+      {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} onClose={() => setShowLoginPopup(false)} />}
 
       {/* Proceed Form - Show when Proceed is clicked */}
       {showForm && <ProceedForm handleClose={handleCloseForm} />}
