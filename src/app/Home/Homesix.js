@@ -69,10 +69,10 @@ const CustomSlider = ({ bottomslider_list = fallbackData }) => {
             
           >
             <div
-              className=" relative flex flex-col items-center justify-center drop-shadow-2xl 
+              className=" relative flex flex-col items-center justify-center drop-shadow-xl 
                          h-[250px] sm:h-[300px] md:h-[350px] 
                          rounded-[30px] sm:rounded-[40px] md:rounded-[50px]  
-                         w-full bg-white shadow-lg overflow-hidden"
+                         w-full bg-white  overflow-hidden"
               style={{
                 // backgroundImage: `url(${item.bottomslider})`,
                 backgroundImage: `url(/images/image.png)`  ||`url(/images/image.png)` ,
