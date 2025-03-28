@@ -53,6 +53,7 @@ const TabTwo = ({ offers, setOffers }) => {
   return (
     <div className="flex flex-col gap-6">
       {/* Tabs */}
+      <h3 className="text-2xl font-semibold text-center">Choose a Subscription</h3>
       <div className="flex justify-center space-x-4 mb-4">
         {["Weekly", "Monthly", "Yearly"].map((tab) => (
           <button
@@ -69,10 +70,10 @@ const TabTwo = ({ offers, setOffers }) => {
 
       {/* Offerings */}
       <div className="w-full transition-all duration-300">
-        <h3 className="text-lg font-semibold text-center">Choose a Subscription</h3>
+       
         {data1.map((item) => (
           <div key={item.id} className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
-            <img src={item.image} alt={item.title} className="w-20 h-20 border-2 border-orange-400 object-contain p-3 rounded-lg" />
+            <img src={item.image} alt={item.title} className="w-40 h-40 border-2 border-orange-400 object-contain  rounded-lg" />
             <div className="ml-4 space-y-2">
               <h3 className="text-lg font-semibold">{item.title}</h3>
               <p className="text-sm text-gray-600">{item.description}</p>
