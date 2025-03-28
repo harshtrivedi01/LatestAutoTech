@@ -1,27 +1,3 @@
-// import React from 'react';
-// import { useTranslation } from 'react-i18next';
-  
-//   const Content = ({detail}) =>  {
-//     const { t } = useTranslation();
-// 	return (
-// 	  <div>
-//         <div className=''>
-
-//         {/* <h2 className='title text-black'>{t("AboutPooja")}</h2> */}
-//         <p className='text-gray-700 text-lg' dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>
-    
-  
-//         </p>
-      
-//         </div>
-
-// 	  </div>
-// 	);
-//   }
-  
-//   export default Content;
-  
-
 
 
   import React from 'react';

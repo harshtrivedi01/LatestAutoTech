@@ -62,7 +62,7 @@ i18n
           banner: "Experience divine blessings at your fingertips! Access online Pooja services, book expert Pandit Ji, and explore Damgiri spiritual guidance—all in one app",
           ReadMore: "Read More",
           ReadLess: "Read Less",
-          DownloadAPP: "Download APP",
+          DownloadAPP: "Download App",
           DownloadAppfrom: "Download App from",
           Services: "Our Services",
           Company: "Company",
@@ -196,7 +196,7 @@ i18n
 
           MyBooking: "My Booking",
           SearchSomething: "Search pooja...",
-          PoojaBooking: "Pooja Booking",
+          PoojaBooking: "Pooja",
           PoojaBox: "Pooja Box",
           LaxmiPoojaBoxDailyPoojaBox: "Laxmi Pooja Box, Daily Pooja Box",
           LaxmiPoojaBox: "Laxmi Pooja Box",
@@ -205,7 +205,7 @@ i18n
           AmountRs: "Amount ₹",
           DiscountRS: "Discount ₹",
 
-          Ordertimedate: "Order time & date:",
+          Ordertimedate: "Order Time & Date:",
 
           //    /orderhistory/87
 
@@ -663,7 +663,7 @@ Popularity:"लोकप्रियता",
 
           MyBooking: "मेरी बुकिंग",
           SearchSomething: "कुछ खोजें...",
-          PoojaBooking: "पूजा बुकिंग",
+          PoojaBooking: "पूजा ",
           PoojaBox: "पूजा बॉक्स",
           LaxmiPoojaBoxDailyPoojaBox: "लक्ष्मी पूजा बॉक्स, दैनिक पूजा बॉक्स",
           LaxmiPoojaBox: "लक्ष्मी पूजा बॉक्स",

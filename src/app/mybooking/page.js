@@ -277,10 +277,13 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
 
                 {/* Details Section */}
                 <div className="w-full sm:w-7/12 text-center sm:text-left">
-                  <h2 className="text-sm font-light text-gray-400">#{booking.booking_code}</h2>
+               
                   <h2 className="text-lg font-bold text-black">{booking.puja_name}</h2>
                   <p className="text-red-600 font-bold text-md">{booking.package_name || "N/A"}</p>
-
+ {/* Amount */}
+ <p className="text-black font-semibold text-base mt-1">
+                    {t("AmountRs")} {booking.amount}/-
+                  </p>
                   {/* Payment Status */}
                   <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
                     <span className="text-base font-semibold">{t("Payment")}: </span>
@@ -297,10 +300,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
                     </div>
                   </div>
 
-                  {/* Amount */}
-                  <p className="text-black font-semibold text-base mt-1">
-                    {t("AmountRs")} {booking.amount}/-
-                  </p>
+                 
 
                   {/* Booking Status */}
                   <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
@@ -347,6 +347,10 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
               {/* Footer Section */}
               <div className="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
                 <p className="text-gray-600 text-sm text-center sm:text-left">
+                <h2 className="text-sm font-light text-gray-400"></h2>
+                <span className="font-semibold">{t("OrderID")} </span>
+                #{booking.booking_code}
+                  <br />
                   <span className="font-semibold">{t("poojadate")}: </span>
                   {booking.booking_date}
                   <br />

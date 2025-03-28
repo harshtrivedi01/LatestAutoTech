@@ -223,10 +223,10 @@ export default function Navbar() {
               
               <li>
                 <a data-translate
-                  href="/service"
+                  href="/chadhava"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                   {t("Service")} 
+                {t("chadhava")}
                 </a>
               </li>
               <li>
@@ -235,6 +235,14 @@ export default function Navbar() {
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
                   {t("PoojaBooking")} 
+                </a>
+              </li>
+              <li>
+                <a data-translate
+                  href="/chadhava"
+                  className="block py-2 px-3 text-black hover:bg-gray-100"
+                >
+                  {t("chadhava")} 
                 </a>
               </li>
               <li>
@@ -248,10 +256,10 @@ export default function Navbar() {
            
               <li>
                 <a data-translate
-                  href="/join"
+                  href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                 {t("Join")} 
+                {t("DownloadAPP")} 
                 </a>
               </li>
             </ul>
@@ -260,23 +268,23 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex md:items-center md:w-auto md:order-1">
             <ul className="flex flex-row space-x-8 text-lg font-semibold">
-              <li>
+              {/* <li>
                 <a data-translate href="/" className="text-black hover:text-orange-700">
                 {t("Home")}
                 </a>
-              </li>
-              <li>
-                <a data-translate href="/service" className="text-black hover:text-orange-700">
-                {t("Service")} 
-                </a>
-              </li>
+              </li> */}
+              
               
               <li>
                 <a data-translate href="/poojabooking" className="text-black hover:text-orange-700">
                 {t("PoojaBooking")} 
                 </a>
               </li>
-            
+              <li>
+                <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
+                {t("chadhava")} 
+                </a>
+              </li>
              
              
               <li>
@@ -285,10 +293,11 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a data-translate href="/join" className="text-black hover:text-orange-700">
-                {t("Join")} 
+                <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
+                {t("DownloadAPP")} 
                 </a>
               </li>
+             
               <li></li>
             </ul>
           </div>

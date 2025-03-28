@@ -1,31 +1,33 @@
 "use client";
 import React from 'react';
 
-	import List from '../pandit/List';
+	import List from './List';
+import { useTranslation } from 'react-i18next';
 
   
   const Panditlist = () =>  {
+	 const { t } = useTranslation();
 	const handleSearch = (e) => {
 		e.preventDefault();
 		fetchPujaData(searchQuery);
 	  };
 	return (
 		<div className="bg-[#FFEEE2]">
-		<div className="p-60 overflow-hidden">
-		  <div className="container">
+		<div className="container max-w-7xl mx-auto py-10 overflow-hidden">
+		  <div className="">
 			<div className="items-center gap-12">
 			  <div>
 				<h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-				Pandit ji
+				Chadhava Seva
 				</h2>
 				<p className="leading-relaxed text-lg text-gray-600">
-				Book experienced Pandit Ji online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!
+				Book experienced Chadhava online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!
 				</p>
 				<div className="mt-5">
 				  <form  className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden ">
 					<input 
 					  type="text"
-					  placeholder="Search pandit here..."
+					  placeholder="Search Chadhava here..."
 					//   value={searchQuery}
 					//   onChange={(e) => setSearchQuery(e.target.value)}
 					  className="w-full outline-none bg-transparent text-gray-600 text-lg"
