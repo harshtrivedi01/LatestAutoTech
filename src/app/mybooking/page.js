@@ -329,14 +329,14 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
                       className={`${
                         booking.booking_status === "success"
                           ? "text-green-500"
-                          : booking.booking_status === "failed"
+                          : booking.booking_status === "cancelled"
                           ? "text-red-500"
                           : "text-yellow-600"
                       } font-bold`}
                     >
                       {booking.booking_status === "success"
                         ? t("Confirmed")
-                        : booking.booking_status === "failed"
+                        : booking.booking_status === "cancelled"
                         ? t("Failed")
                         : t("Pending")}
                     </div>
