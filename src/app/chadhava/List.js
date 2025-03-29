@@ -1,65 +1,80 @@
+import { CalendarIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import { useTranslation } from "react-i18next";
+export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
-const pandits = Array(3).fill({
-  name: "Mr. Prem Prakash",
-  location: "Jaipur",
-  speciality: "Ganesh Poojan",
-  experience: "3 Years",
-  language: "English",
-  rating: 5,
-  reviews: 135,
-  image: "/images/logo.png", // Replace with actual image URL
-});
 
-const PanditCard = ({ pandit }) => {
+export default function List({ pujaData }) {
   const { t } = useTranslation();
+  console.log("Puja Data in List Component:", pujaData);
+
+  const dataToDisplay = pujaData?.chadhava_list || pujaData?.data?.chadhava_list || [];
 
   return (
-    <div className="bg-white shadow-md rounded-xl p-2 border border-gray-200 w-full max-w-sm mx-auto flex flex-col items-center">
-        <Link href={`/chadhavadetail/4`}>
-      {/* Image Section */}
-      <div className="w-full flex justify-center">
-        <img
-          src={pandit.image}
-          alt="Pandit Ji"
-          className="w-40 h-40 rounded-lg object-contain"
-        />
-      </div>
+    <div className="max-w-7xl mx-auto my-8 px-2">
+      {dataToDisplay.length === 0 ? (
+        <div className="text-center text-xl font-semibold text-gray-600">
+        {t("Noresultsfoundfor")}
+        </div>
+      ) : (
+        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
+          {dataToDisplay.map((puja, index) => (
+            <li key={index} className="h-full">
+              <div className="bg-white  rounded-lg shadow-lg bg-gray-800 border-gray-700 flex flex-col min-h-[480px] h-full">
+                {/* Image Section */}
+                <a href={`chadhavadetail/${puja.id}`} className="flex justify-center">
+                  <img
+                    className="h-60  object-cove rounded-t-lg"
+                    src={puja.image || "/images/logo.png" }
+                    alt={puja.title}
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </a>
 
-      {/* Content Section */}
-      <div className="p-2 text-center">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-red-800">
-          Ganaga Mata Temple
-        </h5>
-        <p className="border-b-2 border-[#BA1A1A] w-20 mx-auto my-2"></p>
-        <p className="mb-3 text-gray-700 text-base">
-          Reducing mental agitation and enhancing clarity of thought. Brings balance and...
-        </p>
+                {/* Content Section */}
+                <div className="p-5 flex flex-col flex-grow">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-red-800 text-center ">
+                    {puja.name || "Puja Title"}
+                  </h5>
+                  <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
+                 
+                  <p className="mb-1 font-semibold text-xl text-black flex-grow">
+  {puja.sub_title
+    ? puja.sub_title.split(" ").slice(0, 12).join(" ") + (puja.sub_title.split(" ").length > 12 ? "..." : "")
+    :  " "}
+</p>
 
-        {/* Book Now Button */}
-      
-          <button className="block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
-            {t("BookNow")}
-          </button>
-       
-      </div>
-      </Link>
+
+{puja.short_description && (
+ <p className="mb-1 text-gray-700 text-base flex-grow">
+ {puja.short_description
+   ? puja.short_description.split(" ").slice(0, 12).join(" ") + (puja.short_description.split(" ").length > 12 ? "..." : "")
+   :  " "}
+</p>
+)}
+
+
+                  {/* Date Section */}
+                  {puja.date && (
+  <p className="my-2 w-1/2 text-base flex gap-2 text-gray-400 font-bold items-center">
+    <CalendarIcon className="text-yellow-600" /> {puja.date}
+  </p>
+)}
+
+                  {/* Button at Bottom */}
+                  <div className="mt-auto">
+                    <Link href={`poojadetail/${puja.id}`}>
+                      <button className="text-center block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
+                      {t("PARTICIPATE")}
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
-};
-
-const List = () => {
-  return (
-    <div className=" py-6 flex justify-center">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-        {pandits.map((pandit, index) => (
-          <PanditCard key={index} pandit={pandit} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default List;
+}

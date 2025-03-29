@@ -35,11 +35,11 @@ export default function Poojabookingpage() {
   const fetchPujaDatalist = async () => {
 	try {
 	  let formData = new FormData();
-	  formData.append("type", "new_puja_list");
-	  formData.append("page", "1");
-	  // formData.append("page", "1"); // Ensure it's a string
+	  formData.append("type", "chadhava_list");
+	//   formData.append("page", "1");
+	//   // formData.append("page", "1"); // Ensure it's a string
   
-	  const response = await api.post("/puja", formData);
+	  const response = await api.post("/chadhava.php", formData);
   
 	  console.log("Puja API Response:", response.data);
 	  setPujaDatalist(response.data)
@@ -60,19 +60,19 @@ export default function Poojabookingpage() {
 		<div className="container max-w-7xl  mx-auto">
 		  <div className=" items-center gap-12">
 			<div>
-			  <h2 className="lg:text-3xl text-black md:text-2xl text-3xl font-bold mb-4">
-			  {t("UpComming")}
-			  </h2>
-			  <p className="leading-relaxed text-lg text-gray-600">
-			  {t("PerformRetuals")}
-			  </p>
+			<h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
+				{t("ChadhavaSeva")}
+				</h2>
+				<p className="leading-relaxed text-lg text-gray-600">
+				Book experienced Chadhava online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!
+				</p>
 
 		  
 			  <div className="mt-5">
 				<form onSubmit={handleSearch} className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden font-[sans-serif]">
 				  <input 
 					type="text"
-				   placeholder={t("SearchSomething")}
+					placeholder={t("SearchChadhavahere")}
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 					className="w-full outline-none bg-transparent text-gray-600 text-lg"

@@ -195,7 +195,7 @@ i18n
           //    /mybooking
 
           MyBooking: "My Booking",
-          SearchSomething: "Search pooja...",
+          SearchSomething: "Search Pooja...",
           PoojaBooking: "Pooja",
           PoojaBox: "Pooja Box",
           LaxmiPoojaBoxDailyPoojaBox: "Laxmi Pooja Box, Daily Pooja Box",
@@ -381,10 +381,10 @@ Weekly:"साप्ताहिक",
           Subscription:"सदस्यता",
           Proceed:"आगे बढ़ें",
 
-          SearchChadhavahere:"चढवा को यहां खोजें...",
-          ChadhavaSeva:"चढवा सेवा",
+          SearchChadhavahere:"चढ़ावा को यहां खोजें...",
+          ChadhavaSeva:"चढ़ावा सेवा",
           Benefitsofofferings:"प्रसाद के लाभ",
-          chadhava:"चढवा",
+          chadhava:"चढ़ावा",
           Phone:"फ़ोन",
           notifyforfutureupdates:"भविष्य के अपडेट के लिए सूचित करें",
           ShippingAddress:"शिपिंग पता",
