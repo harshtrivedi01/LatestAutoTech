@@ -94,7 +94,7 @@ export default function Poojaboxpage() {
                 >
                   <input
                     type="text"
-                    placeholder={t("SearchSomething")}
+                    placeholder={t("SearchSomethingpoojabox")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full outline-none bg-transparent text-gray-600 text-lg"

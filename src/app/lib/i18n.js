@@ -196,6 +196,7 @@ i18n
 
           MyBooking: "My Booking",
           SearchSomething: "Search Pooja...",
+          SearchSomethingpoojabox: "Search Pooja Box...",
           PoojaBooking: "Pooja",
           PoojaBox: "Pooja Box",
           LaxmiPoojaBoxDailyPoojaBox: "Laxmi Pooja Box, Daily Pooja Box",
@@ -698,6 +699,7 @@ Popularity:"लोकप्रियता",
 
           MyBooking: "मेरी बुकिंग",
           SearchSomething: "पूजा खोजें...",
+          SearchSomethingpoojabox:"पूजा बॉक्स खोजें...",
           PoojaBooking: "पूजा ",
           PoojaBox: "पूजा बॉक्स",
           LaxmiPoojaBoxDailyPoojaBox: "लक्ष्मी पूजा बॉक्स, दैनिक पूजा बॉक्स",

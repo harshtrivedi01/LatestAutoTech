@@ -187,7 +187,8 @@ export default function Homesecond({ module_category_details }) {
                   : short_description;
 
               return (
-                <li
+                <a
+                href={bookingUrl}
                   key={id}
                   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center flex flex-col justify-between"
                   style={{
@@ -229,7 +230,7 @@ export default function Homesecond({ module_category_details }) {
                       {t("BookNow")}
                     </a>
                   </div>
-                </li>
+                  </a>
               );
             })}
           </ul>

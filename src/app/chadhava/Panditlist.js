@@ -20,11 +20,11 @@ export default function Poojabookingpage() {
   const fetchPujaData = async (search) => {
 	try {
 	  let formData = new FormData();
-	  formData.append("type", "new_puja_search");
-	  formData.append("page", "1");
+	  formData.append("type", "chadhava_search");
+	//   formData.append("page", "1");
 	  formData.append("search", search);
 
-	  const response = await api.post("/puja", formData);
+	  const response = await api.post("/chadhava.php", formData);
 
 	  setPujaData(response.data?.data || []); 
 	} catch (error) {

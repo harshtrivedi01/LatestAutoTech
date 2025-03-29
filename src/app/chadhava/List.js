@@ -33,12 +33,12 @@ export default function List({ pujaData }) {
 
                 {/* Content Section */}
                 <div className="p-5 flex flex-col flex-grow">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-red-800 text-center ">
+                  <h5 className="mb-2 text-xl font-bold tracking-tight text-red-800 text-center ">
                     {puja.name || "Puja Title"}
                   </h5>
                   <p className="border-b-2 border-[#BA1A1A] mx-20 my-2"></p>
                  
-                  <p className="mb-1 font-semibold text-xl text-black flex-grow">
+                  <p className="mb-1 font-semibold text-lg text-black flex-grow">
   {puja.sub_title
     ? puja.sub_title.split(" ").slice(0, 12).join(" ") + (puja.sub_title.split(" ").length > 12 ? "..." : "")
     :  " "}
@@ -64,9 +64,9 @@ export default function List({ pujaData }) {
                   {/* Button at Bottom */}
                   <div className="mt-auto">
                     <Link href={`poojadetail/${puja.id}`}>
-                      <button className="text-center block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
-                      {t("PARTICIPATE")}
-                      </button>
+                    <button className="block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
+            {t("BookNow")}
+          </button>
                     </Link>
                   </div>
                 </div>
