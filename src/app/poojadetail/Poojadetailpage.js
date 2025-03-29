@@ -423,6 +423,7 @@ import { useEffect, useRef, useState } from "react";
 import './Poojadetail.css';
 import Content from "./Content";
 import Benifit from "./Benifit";
+import PoojaProccess from "./PoojaProccess.js";
 import PoojaPackage from "./PoojaPackage";
 import Faq from "./Faq";
 import Homeeight from "../Home/Homeeight";
@@ -759,7 +760,10 @@ export default function Poojadetailpage() {
     {[
       { id: "about-pooja", label: `${t("AboutPooja")}` },
       { id: "pooja-benefits", label: `${t("PoojaBenefits")}`},
+      { id: "PoojaProcess", label: `${t("PoojaProcess")}`},
       { id: "pooja-package", label: `${t("PoojaPackage")}`},
+   
+
     ].map((tab) => (
       <button
         key={tab.id}
@@ -790,6 +794,7 @@ export default function Poojadetailpage() {
       {/* Sections */}
       <section id="about-pooja" className="z-20"> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className=""> <Benifit detail={pujaData} /> </section>
+      <section  id="PoojaProcess" className=""> <PoojaProccess detail={pujaData} /> </section>
       <section id="pooja-package" className="relative  ">
         <PoojaPackage detail={pujaData} />
       </section>
