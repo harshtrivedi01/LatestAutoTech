@@ -221,23 +221,8 @@ export default function Navbar() {
                   {t("PoojaBooking")} 
                 </a>
               </li>
-              <li>
-                <a data-translate
-                  href="/chadhava"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                {t("chadhava")}
-                </a>
-              </li>
-             
-              <li>
-                <a data-translate
-                  href="/chadhava"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                  {t("chadhava")} 
-                </a>
-              </li>
+            
+              
               <li>
                 <a data-translate
                   href="/poojabox"
@@ -247,6 +232,14 @@ export default function Navbar() {
                 </a>
               </li>
            
+              <li>
+                <a data-translate
+                  href="/chadhava"
+                  className="block py-2 px-3 text-black hover:bg-gray-100"
+                >
+                  {t("chadhava")} 
+                </a>
+              </li>
               <li>
                 <a data-translate
                   href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank"

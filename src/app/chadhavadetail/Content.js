@@ -152,7 +152,7 @@ const Content = ({ detail }) => {
                   <div className="ml-4 space-y-2">
                     <h3 className="text-lg font-semibold">{item.name}</h3>
                     <h3 className="text-sm">{item.description}</h3>
-                    <p className="text-lg text-orange-600">₹{item.price}/-</p>
+                    <p className="text-lg text-orange-600">₹{item.price}/- Per {item.type}</p>
                     {selectedItem ? (
                       <div className="flex items-center mt-5">
                         <button className="px-3 py-1 bg-green-600 text-white rounded-l-lg" onClick={() => handleDecrease(item.id)}>-</button>
