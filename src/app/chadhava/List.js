@@ -20,6 +20,7 @@ export default function List({ pujaData }) {
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-2 xl:p-5">
           {dataToDisplay.map((puja, index) => (
             <li key={index} className="h-full">
+              <Link href={`chadhavadetail/${puja.id}`}>
               <div className="bg-white  rounded-lg shadow-lg bg-gray-800 border-gray-700 flex flex-col min-h-[480px] h-full">
                 {/* Image Section */}
                 <a href={`chadhavadetail/${puja.id}`} className="flex justify-center">
@@ -63,7 +64,7 @@ export default function List({ pujaData }) {
 
                   {/* Button at Bottom */}
                   <div className="mt-auto">
-                    <Link href={`poojadetail/${puja.id}`}>
+                    <Link href={`chadhavadetail/${puja.id}`}>
                     <button className="block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
             {t("BookNow")}
           </button>
@@ -71,6 +72,7 @@ export default function List({ pujaData }) {
                   </div>
                 </div>
               </div>
+              </Link>
             </li>
           ))}
         </ul>

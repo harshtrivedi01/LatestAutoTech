@@ -94,14 +94,14 @@ export default function Chadhavadetail() {
   const fetchPujaData = async () => {
     try {
       let formData = new FormData();
-      formData.append("type", "new_puja_detail");
-      formData.append("puja_id", id);
+      formData.append("type", "chadhava_detail");
+      formData.append("chadhava_id", id);
   
-      const response = await api.post("/puja", formData);
+      const response = await api.post("/chadhava.php", formData);
   
       if (response.data?.data) {
-        localStorage.setItem("productdeatil", JSON.stringify(response.data.data));
-        setPujaData(response.data.data);
+        localStorage.setItem("productdetail", JSON.stringify(response.data.data)); // Store only relevant data
+        setPujaData(response.data.data); // Store only 'data' inside pujaData
         setIsError(false); // Reset error state
       } else {
         throw new Error("Invalid response data");
@@ -109,9 +109,10 @@ export default function Chadhavadetail() {
     } catch (error) {
       console.error("Error fetching puja data:", error);
       setErrorMessage(`${t("SomethingwentwrongPleasetryagainlater")}`);
-      setIsError(true); // Hide the page
+      setIsError(true);
     }
   };
+  
   
   
   const imageUrl = pujaData?.image || "/images/logo.png";
@@ -165,7 +166,7 @@ export default function Chadhavadetail() {
         {images.map((img, idx) => (
           <li className="glide__slide flex justify-center border rounded-3xl" key={idx}>
             <Image
-             src={ "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742469909727.jpg&w=1920&q=75"}
+             src={ pujaData?.chadhava_detail?.image}
               alt="Puja"
               width={800} // Set a higher base width
               height={600} // Set a higher base height
@@ -204,26 +205,33 @@ export default function Chadhavadetail() {
 </i>
 
 
-              <h5 className="mb-2 text-2xl font-bold text-start  tracking-tight text-[#BA1A1A] ">
-              Shani Gochar- Amavasya Shani Dosh Shanti Hawan Aahuti Mahadaan
-              <div className="w-40 sm:w-60 md:w-72 lg:w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
+<h5 className="mb-2 text-lg sm:text-xl md:text-2xl font-bold text-start tracking-tight text-[#BA1A1A]">
+  {pujaData?.chadhava_detail?.name}
+  <div className="w-32 sm:w-60 md:w-72 lg:w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
+</h5>
 
-              </h5>
+<h5 className="mb-2 text-base sm:text-lg md:text-xl mt-4 text-start font-semibold text-gray-900">
+  {pujaData?.chadhava_detail?.sub_title
+    ? pujaData.chadhava_detail.sub_title.length > 200
+      ? pujaData.chadhava_detail.sub_title.slice(0, 200) + "..."
+      : pujaData.chadhava_detail.sub_title
+    : ""}
+</h5>
 
-              <h5 className="mb-2 text-xl mt-4 text-start font-semibold  text-gray-900 text-black">
-              Have you been facing delays, struggles, and unexplained hardships
-              </h5>
-              <div>
-      <p className="mb-3 font-normal text-start flex justify-start text-gray-700 text-xl text-gray-400">
-        {isExpanded ? text : `${text.substring(0, 200)}...`}
-      </p>
-      <button 
-        onClick={() => setIsExpanded(!isExpanded)} 
-        className="text-orange-500 font-semibold cursor-pointer"
-      >
-        {isExpanded ? `${t("ReadLess")}` : `${t("ReadMore")}`}
-      </button>
-    </div>
+<div>
+  <p className="mb-3 font-normal text-start flex justify-start text-gray-700 text-sm sm:text-base md:text-lg text-gray-400">
+    {isExpanded
+      ? pujaData?.chadhava_detail?.description
+      : `${pujaData?.chadhava_detail?.description.substring(0, 200)}...`}
+  </p>
+  <button 
+    onClick={() => setIsExpanded(!isExpanded)} 
+    className="text-orange-500 font-semibold cursor-pointer"
+  >
+    {isExpanded ? `${t("ReadLess")}` : `${t("ReadMore")}`}
+  </button>
+</div>
+
              
             </div>
           </div>
