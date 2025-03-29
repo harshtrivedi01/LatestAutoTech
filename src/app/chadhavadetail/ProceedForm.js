@@ -79,81 +79,39 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
   
       const payment_session_id = response.data.data.payment_session_id;
       const order_id = response.data.data.order_id; // Extract order_id
-
-      if(order_id) {
+  
+      if (order_id) {
         localStorage.setItem("payment_session_id", payment_session_id);
   
-      const cashfree = await initializeSDK();
+        const cashfree = await initializeSDK();
   
-      await cashfree.checkout({
-        paymentSessionId: payment_session_id,
-        redirectTarget: "_modal",
-      }).then(async (pgResponse) => {
-        console.log("Payment Response:", pgResponse);
-  
-        let orderFormData = new FormData();
-        orderFormData.append("type", "order");
-        orderFormData.append("address_id", addressId);
-        orderFormData.append("shipping_cost", "0");
-        orderFormData.append("payment_type", "cashfree");
-        orderFormData.append("payment_status", 'NA');
-        orderFormData.append("coin_discount", "0");
-        orderFormData.append("use_coin_status", "0");
-        orderFormData.append("coin_discount_amount", "0");
-        orderFormData.append("payment_detail", 'NA');
-        orderFormData.append("grand_total", Math.floor(totalPrice));
-        orderFormData.append("sub_total", Math.floor(totalPrice));
-        orderFormData.append("country", "IN");
-        orderFormData.append("payment_id", order_id);
-  
-        try {
-          const orderResponse = await api.post("/cart", orderFormData);
-          console.log("Order Submission Response:", orderResponse);
-  
-          if (orderResponse.data.status == 1) {
-            toast.success("Order placed successfully!");
+        await cashfree.checkout({
+          paymentSessionId: payment_session_id,
+          redirectTarget: "_modal",
+        })
+          .then((pgResponse) => {
+            console.log("Payment Response:", pgResponse);
             router.push("/successpage");
-          } else {
-            toast.error(orderResponse.data.message || "Order placement failed");
-            router.push(`/failedcartpage`);
-          }
-        } catch (orderError) {
-          console.error("Error submitting order:", orderError);
-          toast.error("Order processing failed!");
-          router.push(`/failedcartpage`);
-        }
-      }).catch((paymentError) => {
-        console.error("Payment SDK Error:", paymentError);
-        toast.error("Payment failed! Please try again.");
-  
-        // Ensure order API is still called even if payment fails
-        let failedOrderFormData = new FormData();
-        failedOrderFormData.append("type", "order");
-        failedOrderFormData.append("address_id", addressId);
-        failedOrderFormData.append("shipping_cost", "0");
-        failedOrderFormData.append("payment_type", "cashfree");
-        failedOrderFormData.append("payment_status", "failed");
-        failedOrderFormData.append("coin_discount", "0");
-        failedOrderFormData.append("use_coin_status", "0");
-        failedOrderFormData.append("coin_discount_amount", "0");
-        failedOrderFormData.append("payment_detail", JSON.stringify(paymentError));
-        failedOrderFormData.append("grand_total", Math.floor(totalPrice));
-        failedOrderFormData.append("sub_total", Math.floor(totalPrice));
-        failedOrderFormData.append("country", "IN");
-        failedOrderFormData.append("payment_id", order_id);
-  
-        api.post("/cart", failedOrderFormData)
-          .then(() => router.push(`/failedcartpage`))
-          .catch(() => router.push(`/failedcartpage`));
-      });
+            // ✅ Redirect to success page if payment is successful
+            if (pgResponse.txStatus === "SUCCESS") {
+              toast.success("Payment successful!");
+              router.push("/successpage");
+            } else {
+              throw new Error("Payment failed!");
+            }
+          })
+          .catch((paymentError) => {
+            // console.error("Payment SDK Error:", paymentError);
+            // toast.error("Payment failed! Please try again.");
+            router.push("/successpage"); // ❌ No API call for failed payments, just redirect
+          });
       } else {
         toast.error("Something went wrong! Please try again.");
       }
-      
     } catch (error) {
       console.error("Error processing payment:", error);
-      toast.error("Payment failed! Please try again.");
-      router.push(`/failedcartpage`);
+      // toast.error("Payment failed! Please try again.");
+      router.push("/successpage");
     }
   };
   

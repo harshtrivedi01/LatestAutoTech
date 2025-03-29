@@ -20,7 +20,17 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
   const [language, setLanguage] = useState(navigator.language || "en"); // Browser language
   const [userId, setUserId] = useState(null); // ✅ Store verified user ID
   const inputRefs = useRef([]);
+  const [isLoading, setIsLoading] = useState(false);
 
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleGetOtp();
+      handleOtpSubmit();
+    }
+  };
+
+  
   // Get User Location (Longitude & Latitude)
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -95,7 +105,7 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
       toast.error("Please enter a valid 10-digit phone number.");
       return;
     }
-
+    setIsLoading(true); // Disable button
     const data = new FormData();
     data.append("type", "login");
     data.append("phone", phone);
@@ -120,6 +130,9 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
       }
     } catch (error) {
       toast.error("Error sending OTP. Try again later.");
+    }
+    finally {
+      setIsLoading(false); // Enable button again
     }
   };
 
@@ -233,12 +246,17 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
     {" "}{t("andof")}
   </p>
 </div>
-            <button
-              onClick={handleGetOtp}
-              className="w-full bg-[#E5644E] rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 mt-5"
-            >
-             {t("sendotp")}
-            </button>
+<button
+  onClick={handleGetOtp}
+  disabled={isLoading}
+  onKeyDown={handleKeyDown} // Handle Enter key
+  className={`w-full rounded-xl p-2 shadow-2xl text-white font-bold transition duration-200 mt-5 ${
+    isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#E5644E]"
+  }`}
+>
+  {isLoading ? "Sending..." : t("sendotp")}
+</button>
+
           </>
         )}
 
@@ -267,14 +285,21 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
               
                 ))}
               </div>
+              
               <button
                 type="submit"
               
                 disabled={isResendDisabled}
+                onKeyDown={handleKeyDown}
+           
 
-              className="w-full bg-[#E5644E] rounded-xl p-2 mt-5 shadow-2xl text-white font-bold transition duration-200 "
-    >
-     {t("submit")}
+              className={`w-full bg-[#E5644E] rounded-xl p-2 mt-5 shadow-2xl text-white font-bold transition duration-200  ${
+                isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#E5644E]"
+              }`}
+            >
+              {isLoading ? "Sending..." : t("submit")}
+    
+     
               </button>
             </form>
           </>
