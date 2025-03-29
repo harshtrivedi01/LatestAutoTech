@@ -52,7 +52,7 @@ const Content = () => {
 useEffect(() => {
   const authToken = localStorage.getItem("authToken");
   setIsLoggedIn(!!authToken); // ✅ Check if token exists
-}, []);
+}, []); 
 
 const handleProceedClick = () => {
   if (!isLoggedIn) {
