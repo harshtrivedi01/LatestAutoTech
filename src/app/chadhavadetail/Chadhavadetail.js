@@ -139,11 +139,11 @@ export default function Chadhavadetail() {
   ✨This Mahayog won’t return anytime soon!🙅‍♀️ Don’t miss this divine opportunity to balance your karma and seek Shani Dev’s blessings. Book your Shani Shani Dosh Shanti Hawan Aahuti Mahadaan today.`;
 
   
-  const images = [
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_001.d7bef497.webp&w=1920&q=75",
-  ];
+  const images = Array.isArray(pujaData?.chadhava_detail?.image)
+  ? pujaData.chadhava_detail.image
+  : pujaData?.chadhava_detail?.image
+  ? [pujaData.chadhava_detail.image]
+  : [];
 
   return (
     <>
@@ -158,39 +158,52 @@ export default function Chadhavadetail() {
         <div className="">
           <div className="z-10 py-7 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
 
+          <div className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px]">
+  {images.length > 1 ? (
+    <div className="glide" ref={glideRef}>
+      <div className="glide__track" data-glide-el="track">
+        <ul className="glide__slides rounded-3xl">
+          {images.map((img, idx) => (
+            <li className="glide__slide flex justify-center border rounded-3xl" key={idx}>
+              <img
+                src={img}
+                alt="Puja"
+                width={800}
+                height={600}
+                className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px] max-w-[1000px] rounded-3xl shadow-lg object-cover"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
 
-<div className="w-full  h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px]">
-  <div className="glide" ref={glideRef}>
-    <div className="glide__track" data-glide-el="track">
-      <ul className="glide__slides rounded-3xl">
-        {images.map((img, idx) => (
-          <li className="glide__slide flex justify-center border rounded-3xl" key={idx}>
-            <img
-             src={ pujaData?.chadhava_detail?.image}
-              alt="Puja"
-              width={800} // Set a higher base width
-              height={600} // Set a higher base height
-              className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px] max-w-[1000px] rounded-3xl shadow-lg object-cover"
-            />
-          </li>
+      {/* Dots (Pagination) */}
+      <div className="glide__bullets flex justify-center my-3 mb-10" data-glide-el="controls[nav]">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            className={`glide__bullet w-2 h-2 mx-1 rounded-full transition-all ${
+              activeIndex === idx ? "bg-orange-500 scale-125" : "bg-gray-400"
+            }`}
+            data-glide-dir={`=${idx}`}
+          ></button>
         ))}
-      </ul>
+      </div>
     </div>
-
-    {/* Dots (Pagination) Below the Slider */}
-    <div className="glide__bullets flex justify-center my-3 mb-10" data-glide-el="controls[nav]">
-      {images.map((_, idx) => (
-        <button
-          key={idx}
-          className={`glide__bullet w-2 h-2 mx-1 rounded-full transition-all ${
-            activeIndex === idx ? "bg-orange-500 scale-125" : "bg-gray-400"
-          }`}
-          data-glide-dir={`=${idx}`}
-        ></button>
-      ))}
+  ) : (
+    // Single Image (No Slider)
+    <div className="flex justify-center border rounded-3xl">
+      <img
+        src={images[0]}
+        alt="Puja"
+        width={800}
+        height={600}
+        className="w-full h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[300px] max-w-[1000px] rounded-3xl shadow-lg object-cover"
+      />
     </div>
-  </div>
+  )}
 </div>
+
 
 
         
