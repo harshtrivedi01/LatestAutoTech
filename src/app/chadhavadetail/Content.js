@@ -134,7 +134,7 @@ const Content = ({ detail }) => {
                 <button
                   key={tab}
                   className={`px-4 py-2 rounded-lg font-semibold transition ${
-                    activeSubscriptionTab === tab ? "bg-orange-500 text-white" : "bg-gray-200"
+                    activeSubscriptionTab === tab ? "bg-orange-500 text-white"       : "bg-gray-200"
                   }`}
                   onClick={() => setActiveSubscriptionTab(tab)}
                 >
