@@ -531,7 +531,7 @@ export default function Poojadetailpage() {
   const [showButton, setShowButton] = useState(true);
   
   useEffect(() => {
-    const sectionIds = ["about-pooja", "pooja-benefits", "pooja-package"];
+    const sectionIds = ["about-pooja", "pooja-benefits", "pooja-package","PoojaProcess"];
     
     const observer = new IntersectionObserver(
       (entries) => {
