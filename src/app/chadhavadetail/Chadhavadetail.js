@@ -12,7 +12,7 @@ import Benifit from "./Benifit.js";
 
 import Homeeight from "../Home/Homeeight";
 import { Homeseven } from "../Home/Homeseven";
-
+import Faq from "./Faq.js"
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { Calendar, CalendarIcon } from "lucide-react";
@@ -21,7 +21,7 @@ import api from "../lib/axiosInstance";
 import { useTranslation } from "react-i18next";
 import Glide from "@glidejs/glide";
 import "@glidejs/glide/dist/css/glide.core.min.css";
-import Faq from "../poojadetail/Faq";
+
 import Testimonials from "../poojadetail/Testimonials";
 
 
@@ -165,7 +165,7 @@ export default function Chadhavadetail() {
       <ul className="glide__slides rounded-3xl">
         {images.map((img, idx) => (
           <li className="glide__slide flex justify-center border rounded-3xl" key={idx}>
-            <Image
+            <img
              src={ pujaData?.chadhava_detail?.image}
               alt="Puja"
               width={800} // Set a higher base width
@@ -242,8 +242,8 @@ export default function Chadhavadetail() {
       {/* Sections */}
       <section id="" className="z-10 bg-gray-100 py-10"> <Content detail={pujaData}  /> </section>
       <section  id="pooja-benefits" className=""> <Benifit detail={pujaData} /> </section>
- 
-      <section  id="pooja-benefits" className=""> <Faq/> </section>
+      <section  > <Faq detail={pujaData} /></section>
+     
 
   </div>
 )}

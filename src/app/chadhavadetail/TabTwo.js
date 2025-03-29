@@ -1,37 +1,24 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const TabTwo = ({ offers, setOffers }) => {
-  const [selectedTab, setSelectedTab] = useState("Weekly");
+const TabTwo = ({ offers, setOffers, products = [] }) => {
   const { t } = useTranslation();
-  const subscriptionData = {
-    Weekly: [
-      { id: 1, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description..", price: 51.00 },
-      { id: 2, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Make a Grand Offering", description: "Short description...", price: 51.00 },
-      { id: 3, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description...", price: 51.00 },
-    ],
-    Monthly: [
-      { id: 4, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Monthly Prayer", description: "Short description..", price: 101.00 },
-      { id: 5, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Make a Monthly Offering", description: "Short description...", price: 101.00 },
-    ],
-    Yearly: [
-      { id: 6, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Yearly Prayer", description: "Short description..", price: 501.00 },
-      { id: 7, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Make a Grand Yearly Offering", description: "Short description...", price: 501.00 },
-    ],
-  };
+  const [selectedTab, setSelectedTab] = useState("week");
 
-  const data1 = subscriptionData[selectedTab];
+  // Group products by type (week, month, year)
+  const groupedProducts = products.reduce((acc, product) => {
+    const category = product.type.toLowerCase();
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(product);
+    return acc;
+  }, {});
 
-  const tabKeys = {
-    [t("Weekly")]: "Weekly",
-    [t("Monthly")]: "Monthly",
-    [t("Yearly")]: "Yearly",
-  };
-  
+  const availableTabs = Object.keys(groupedProducts);
+  const selectedProducts = groupedProducts[selectedTab] || [];
+
   const handleTabChange = (tab) => {
-    setSelectedTab(tabKeys[tab]); // Convert translated tab back to original key
+    setSelectedTab(tab);
   };
-  
 
   const handleOfferClick = (id) => {
     setOffers((prev) => ({
@@ -63,45 +50,51 @@ const TabTwo = ({ offers, setOffers }) => {
       {/* Tabs */}
       <h3 className="text-2xl font-semibold text-center">{t("ChooseaSubscription")}</h3>
       <div className="flex justify-center space-x-4 mb-4">
-      {Object.keys(tabKeys).map((tab) => (
-  <button
-    key={tab}
-    className={`px-4 py-2 rounded-lg font-semibold transition ${
-      tabKeys[tab] === selectedTab ? "bg-orange-500 text-white" : "bg-gray-200"
-    }`}
-    onClick={() => handleTabChange(tab)}
-  >
-    {tab}
-  </button>
-))}
-
+        {availableTabs.length > 0 ? (
+          availableTabs.map((tab) => (
+            <button
+              key={tab}
+              className={`px-4 py-2 rounded-lg font-semibold transition ${
+                tab === selectedTab ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+              onClick={() => handleTabChange(tab)}
+            >
+              {t(tab.charAt(0).toUpperCase() + tab.slice(1))} {/* Capitalize first letter */}
+            </button>
+          ))
+        ) : (
+          <p className="text-gray-500">{t("NoSubscriptionOptions")}</p>
+        )}
       </div>
 
       {/* Offerings */}
       <div className="w-full transition-all duration-300">
-       
-        {data1.map((item) => (
-          <div key={item.id} className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
-            <img src={item.image} alt={item.title} className="w-40 h-40 border-2 border-orange-400 object-contain  rounded-lg" />
-            <div className="ml-4 space-y-2">
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.description}</p>
-              <p className="text-lg text-orange-600">₹{item.price}/-</p>
+        {selectedProducts.length > 0 ? (
+          selectedProducts.map((item) => (
+            <div key={item.id} className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
+              <img src={item.image || "https://via.placeholder.com/150"} alt={item.name} className="w-40 h-40 border-2 border-orange-400 object-contain rounded-lg" />
+              <div className="ml-4 space-y-2">
+                <h3 className="text-lg font-semibold">{item.name}</h3>
+                <p className="text-sm text-gray-600">{item.description || "No description available"}</p>
+                <p className="text-lg text-orange-600">₹{item.price}/-</p>
 
-              {offers[item.id] ? (
-                <div className="flex items-center mt-5">
-                  <button className="px-3 py-1 bg-green-600 text-white rounded-l-lg font-semibold" onClick={() => handleDecrease(item.id)}>-</button>
-                  <span className="px-4 py-1 bg-green-600 text-white font-semibold">{offers[item.id]}</span>
-                  <button className="px-3 py-1 bg-green-600 text-white rounded-r-lg font-semibold" onClick={() => handleIncrease(item.id)}>+</button>
-                </div>
-              ) : (
-                <button className="text-sm text-white bg-green-600 px-4 py-2 mt-5 rounded-lg shadow-2xl font-semibold" onClick={() => handleOfferClick(item.id)}>
-                  {t("Offer")}
-                </button>
-              )}
+                {offers[item.id] ? (
+                  <div className="flex items-center mt-5">
+                    <button className="px-3 py-1 bg-green-600 text-white rounded-l-lg font-semibold" onClick={() => handleDecrease(item.id)}>-</button>
+                    <span className="px-4 py-1 bg-green-600 text-white font-semibold">{offers[item.id]}</span>
+                    <button className="px-3 py-1 bg-green-600 text-white rounded-r-lg font-semibold" onClick={() => handleIncrease(item.id)}>+</button>
+                  </div>
+                ) : (
+                  <button className="text-sm text-white bg-green-600 px-4 py-2 mt-5 rounded-lg shadow-2xl font-semibold" onClick={() => handleOfferClick(item.id)}>
+                    {t("Offer")}
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-gray-600 mt-4">{t("NoProductsAvailable")}</p>
+        )}
       </div>
     </div>
   );

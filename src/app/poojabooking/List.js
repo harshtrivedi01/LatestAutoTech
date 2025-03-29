@@ -24,7 +24,7 @@ export default function List({ pujaData }) {
                 {/* Image Section */}
                 <a href={`poojadetail/${puja.id}`} className="flex justify-center">
                   <img
-                    className="h-60  object-cove rounded-t-lg"
+                    className="h-52  object-cove rounded-t-lg"
                     src={puja.image || "/images/logo.png" }
                     alt={puja.title}
                     onError={(e) => (e.target.src = "/images/logo.png")}
