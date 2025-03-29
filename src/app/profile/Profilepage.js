@@ -285,7 +285,7 @@ const Profilepage = () => {
         <div className=" bg-[#FFEEE2] p-10 ">
         <h2 className="container max-w-7xl  mx-auto text-3xl font-bold">{t("Profile")}</h2>
       </div>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
        <form onSubmit={handleSubmit} className="container bg-white w-full overflow-hidden ">
        <div className=" h-40 bg-[#FEEE2] flex mt-10 justify-center">
           <div className="relative">
