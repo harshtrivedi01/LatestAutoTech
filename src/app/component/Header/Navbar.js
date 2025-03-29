@@ -212,23 +212,7 @@ export default function Navbar() {
               <li>
               <Language/>
               </li>
-              <li>
-                <a data-translate
-                  href="/"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                 {t("Home")}
-                </a>
-              </li>
-              
-              <li>
-                <a data-translate
-                  href="/chadhava"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                {t("chadhava")}
-                </a>
-              </li>
+            
               <li>
                 <a data-translate
                   href="/poojabooking"
@@ -237,6 +221,15 @@ export default function Navbar() {
                   {t("PoojaBooking")} 
                 </a>
               </li>
+              <li>
+                <a data-translate
+                  href="/chadhava"
+                  className="block py-2 px-3 text-black hover:bg-gray-100"
+                >
+                {t("chadhava")}
+                </a>
+              </li>
+             
               <li>
                 <a data-translate
                   href="/chadhava"
