@@ -363,10 +363,12 @@ PoojaProcess:"Pooja Process",
 SankalpForm:"Sankalp Form",
 Chadhavawillbe:"Chadhava will be offered by the name provided below",
 discriptions:"  For further details please check PunuyaSetu app frequently and keep updated version of app",
+orderhistory: "Order History",
         },
       },
       hi: {
         translation: {
+          orderhistory: "ऑर्डर इतिहास",
           PoojaProcess:"पूजा प्रक्रिया",
           discriptions:" अधिक जानकारी के लिए कृपया PunuyaSetu ऐप को बार-बार जांचें और ऐप का अपडेटेड संस्करण रखें",
           SubmitPay:" सबमिट करें और भुगतान करें",
