@@ -5,12 +5,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
+const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: "", gotra: "" });
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter(); // Initialize useRouter
+    const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -52,114 +53,99 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
       handlePayment(); // Send form data
     }
   };
-  const initializeSDK = async () => {
-    return await load({ mode: "sandbox" }); // Change to "production" for live
-  };
+   const initializeSDK = async () => {
+     return await load({ mode: "sandbox" });
+   };
+ 
+   const handlePayment = async () => {
+     setLoading(true);
+ 
+     try {
+       let formData = new FormData();
+       formData.append("type", "cashfree_payment_order");
+       formData.append("order_type", "chadhava");
+       formData.append("amount", totalPrice);
+       formData.append("currency", "INR");
+ 
+       const response = await api.post("/orders", formData);
+       const result = await response.data;
+ 
+       if (result.status === "1" && result.data.payment_session_id) {
+         
+ 
+         const cashfree = await initializeSDK();
+         await cashfree
+           .checkout({
+             paymentSessionId: result.data.payment_session_id,
+             redirectTarget: "_modal",
+           })
+           .then(async (pgResponse) => {
+             console.log("Cashfree Response:", pgResponse);
+ 
+             // Extract payment status
+             let paymentStatus =
+               pgResponse.paymentDetails?.paymentMessage === "Payment finished. Check status."
+                 ? "success"
+                 : "failed";
+ 
+             // Extract reference ID if available
+             let paymentId = pgResponse.paymentDetails?.referenceId || "N/A";
+ 
+             // Call puja booking API
+             const bookingResponse = await completePujaBooking(
+               result.data.order_id, // Correct order ID
+               paymentId,
+               paymentStatus
+             );
+ 
+             if (bookingResponse.status === "1") {
+          
+               router.push("/successpage");
+             } else {
+               router.push("/failed");
+             }
+           });
+       } else {
+         console.error("Payment API Error:", result.message);
+         alert("Failed to initiate payment. Please try again.");
+       }
+     } catch (error) {
+       console.error("Payment Request Error:", error);
+       alert("Something went wrong. Please try again.");
+     } finally {
+       setLoading(false);
+     }
+   };
+ 
   
-  const handlePayment = async () => {
-    if (!totalPrice) {
-      toast.error("Your cart is empty!");
-      return;
-    }
-  
+   const completePujaBooking = async (orderId, paymentId, paymentStatus) => {
     try {
-      let formData = new FormData();
-      formData.append("type", "cashfree_payment_order");
-      formData.append("order_type", "pooja");
-      formData.append("amount", Math.floor(totalPrice));
-      formData.append("currency", "INR");
-  
-      const response = await api.post("/orders", formData);
-      console.log("Order API Response:", response.data);
-  
-      if (response.data.status !== "1") {
-        toast.error(response.data.message || "Payment initiation failed");
-        return;
-      }
-  
-      const payment_session_id = response.data.data.payment_session_id;
-      const order_id = response.data.data.order_id; // Extract order_id
-
-      if(order_id) {
-        localStorage.setItem("payment_session_id", payment_session_id);
-  
-      const cashfree = await initializeSDK();
-  
-      await cashfree.checkout({
-        paymentSessionId: payment_session_id,
-        redirectTarget: "_modal",
-      }).then(async (pgResponse) => {
-        console.log("Payment Response:", pgResponse);
-  
-        let orderFormData = new FormData();
-        orderFormData.append("type", "order");
-        orderFormData.append("address_id", addressId);
-        orderFormData.append("shipping_cost", "0");
-        orderFormData.append("payment_type", "cashfree");
-        orderFormData.append("payment_status", 'NA');
-        orderFormData.append("coin_discount", "0");
-        orderFormData.append("use_coin_status", "0");
-        orderFormData.append("coin_discount_amount", "0");
-        orderFormData.append("payment_detail", 'NA');
-        orderFormData.append("grand_total", Math.floor(totalPrice));
-        orderFormData.append("sub_total", Math.floor(totalPrice));
-        orderFormData.append("country", "IN");
-        orderFormData.append("payment_id", order_id);
-  
-        try {
-          const orderResponse = await api.post("/cart", orderFormData);
-          console.log("Order Submission Response:", orderResponse);
-  
-          if (orderResponse.data.status == 1) {
-            toast.success("Order placed successfully!");
-            router.push("/successpage");
-          } else {
-            toast.error(orderResponse.data.message || "Order placement failed");
-            router.push(`/failedcartpage`);
-          }
-        } catch (orderError) {
-          console.error("Error submitting order:", orderError);
-          toast.error("Order processing failed!");
-          router.push(`/failedcartpage`);
-        }
-      }).catch((paymentError) => {
-        console.error("Payment SDK Error:", paymentError);
-        toast.error("Payment failed! Please try again.");
-  
-        // Ensure order API is still called even if payment fails
-        let failedOrderFormData = new FormData();
-        failedOrderFormData.append("type", "order");
-        failedOrderFormData.append("address_id", addressId);
-        failedOrderFormData.append("shipping_cost", "0");
-        failedOrderFormData.append("payment_type", "cashfree");
-        failedOrderFormData.append("payment_status", "failed");
-        failedOrderFormData.append("coin_discount", "0");
-        failedOrderFormData.append("use_coin_status", "0");
-        failedOrderFormData.append("coin_discount_amount", "0");
-        failedOrderFormData.append("payment_detail", JSON.stringify(paymentError));
-        failedOrderFormData.append("grand_total", Math.floor(totalPrice));
-        failedOrderFormData.append("sub_total", Math.floor(totalPrice));
-        failedOrderFormData.append("country", "IN");
-        failedOrderFormData.append("payment_id", order_id);
-  
-        api.post("/cart", failedOrderFormData)
-          .then(() => router.push(`/failedcartpage`))
-          .catch(() => router.push(`/failedcartpage`));
-      });
-      } else {
-        toast.error("Something went wrong! Please try again.");
-      }
-      
+      let formDataToSend = new FormData();
+      formDataToSend.append("type", "chadhava_order");
+      formDataToSend.append("chadhava_id", id); // Correct order ID
+      formDataToSend.append("amount", totalPrice);
+      formDataToSend.append("payment_id", orderId);
+      formDataToSend.append("payment_detail", "");
+      formDataToSend.append("payment_status", paymentStatus); // Dynamic payment status
+      formDataToSend.append("payment_type", "cashfree");
+      formDataToSend.append("currency", "inr"); // Default to INR if not provided
+      formDataToSend.append("name", formData.name); // Add name
+      formDataToSend.append("gotra", formData.gotra); // Add gotra
+      formDataToSend.append("carts", JSON.stringify(carts)); // Send carts data
+      const response = await api.post("/chadhava", formDataToSend);
+      return response.data; // Return response for handling in `initiatePayment`
     } catch (error) {
-      console.error("Error processing payment:", error);
-      toast.error("Payment failed! Please try again.");
-      router.push(`/failedcartpage`);
+      console.error("API Error:", error);
+      return { status: "0" }; // Return failed status to handle redirection
     }
   };
+  
+ 
   
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4 overflow-hidden">
+
         <Toaster position="top-right" reverseOrder={false} />
     <div className="bg-orange-50 border border-orange-600 relative p-8 md:p-10 rounded-2xl shadow-lg w-full max-w-lg md:max-w-2xl">
 
@@ -173,7 +159,7 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
         <p className="text-sm text-gray-600 text-start mb-4">
         {t("Chadhavawillbe")}
         </p>
-
+{/* {id} {totalPrice} */}
         {/* Name Field */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">{t("Name")}</label>

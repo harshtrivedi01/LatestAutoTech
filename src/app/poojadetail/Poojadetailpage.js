@@ -650,7 +650,7 @@ export default function Poojadetailpage() {
         <div className="">
           <div className="z-10 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
             {/* Left Side - Image Slider */}
-            {/* <div className="md:col-span-1 flex justify-center">
+            <div className="md:col-span-1 flex justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={index}
@@ -663,7 +663,7 @@ export default function Poojadetailpage() {
                 >
                   <div className="h-[200px] w-full flex justify-center img-ratio">
                     <img
-                      className="w-full  object-contain h-full"
+                      className="w-full  object-contain h-full rounded-2xl"
                       src={ pujaData?.image || "/images/logo.png"}
                       alt="Pooja Banner"
                       height="100%"
@@ -673,8 +673,8 @@ export default function Poojadetailpage() {
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </div> */}
-
+            </div>
+{/* 
 <div className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[400px]">
   <div className="glide" ref={glideRef}>
     <div className="glide__track" data-glide-el="track">
@@ -693,7 +693,7 @@ export default function Poojadetailpage() {
       </ul>
     </div>
 
-    {/* Dots (Pagination) Below the Slider */}
+  
     <div className="glide__bullets flex justify-center my-5 mb-10" data-glide-el="controls[nav]">
       {images.map((_, idx) => (
         <button
@@ -706,7 +706,7 @@ export default function Poojadetailpage() {
       ))}
     </div>
   </div>
-</div>
+</div> */}
 
 
         
@@ -752,22 +752,18 @@ export default function Poojadetailpage() {
           </div>
         </div>
       </section>
-
-      {/* Tab Section */}
-      <div className="sticky top-0 z-10 bg-white flex justify-center gap-4">
-  <div className="container flex justify-center space-x-4 border-b">
-
+{/* Tab Section */}
+<div className="sticky top-0 z-10 bg-white flex justify-center px-2 sm:px-4 shadow-md">
+  <div className="container flex justify-start sm:justify-center space-x-2 sm:space-x-4 border-b overflow-x-auto flex-nowrap scroll-smooth snap-x scrollbar-hide w-full">
     {[
       { id: "about-pooja", label: `${t("AboutPooja")}` },
-      { id: "pooja-benefits", label: `${t("PoojaBenefits")}`},
-      { id: "PoojaProcess", label: `${t("PoojaProcess")}`},
-      { id: "pooja-package", label: `${t("PoojaPackage")}`},
-   
-
+      { id: "pooja-benefits", label: `${t("PoojaBenefits")}` },
+      { id: "PoojaProcess", label: `${t("PoojaProcess")}` },
+      { id: "pooja-package", label: `${t("PoojaPackage")}` },
     ].map((tab) => (
       <button
         key={tab.id}
-        className={`px-6 py-3 w-full font-medium transition-all duration-300 
+        className={`px-4 sm:px-6 py-2 sm:py-3 min-w-[100px] sm:min-w-[140px] font-medium transition-all duration-300 whitespace-nowrap snap-start
           ${activeTab === tab.id ? "bg-[#E5644E] text-white rounded-t-lg" : "text-gray-600"}`}
         onClick={() => scrollToSection(tab.id)}
       >
@@ -776,6 +772,8 @@ export default function Poojadetailpage() {
     ))}
   </div>
 </div>
+
+
 
 
     

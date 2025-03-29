@@ -364,10 +364,17 @@ SankalpForm:"Sankalp Form",
 Chadhavawillbe:"Chadhava will be offered by the name provided below",
 discriptions:"  For further details please check PunuyaSetu app frequently and keep updated version of app",
 orderhistory: "Order History",
+Free:"Free",
+Per:"Per",
+chadavasevadis:"	Book experienced Chadhava online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!"
         },
       },
       hi: {
         translation: {
+          
+          chadavasevadis: "अपनी सभी पूजा आवश्यकताओं के लिए अनुभवी चड्ढवा को ऑनलाइन बुक करें। विवाह, हवन, गृह प्रवेश और बहुत कुछ के लिए विशेषज्ञ वैदिक अनुष्ठान। सत्यापित और जानकार पुजारियों के साथ परेशानी मुक्त बुकिंग। आज अपने आध्यात्मिक समारोहों के लिए सर्वोत्तम मार्गदर्शन प्राप्त करें!",
+          Per:"प्रति",
+          Free:"निःशुल्क",
           orderhistory: "ऑर्डर इतिहास",
           PoojaProcess:"पूजा प्रक्रिया",
           discriptions:" अधिक जानकारी के लिए कृपया PunuyaSetu ऐप को बार-बार जांचें और ऐप का अपडेटेड संस्करण रखें",

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
     
 	return (
 	  <div className=' bg-grey content'  id="about-section" >
-        <div className='py-20 container max-w-7xl mx-auto'>
+        <div className='py-10 container max-w-7xl mx-auto'>
 
         <h2 className='title'>{t("AboutPooja")} </h2>
         <p dangerouslySetInnerHTML={{ __html: detail?.puja_description}}>

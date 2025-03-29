@@ -61,28 +61,31 @@ const Page = () => {
     const fetchBookings = async () => {
       try {
         let formData = new FormData();
-        formData.append("type", "booking_history");
+        formData.append("type", "order_list");
+        formData.append("page", 1);
   
-        const response = await api.post("/panditji", formData);
-  
+        const response = await api.post("/chadhava", formData);
         console.log("Full Response:", response);
-        console.log("Response Data:", response?.data);
+        console.log("Response Data:", response.data);
   
-
-        const bookingList = response.data.data.booking_list ?? []; // Default to []
-        if (!Array.isArray(bookingList)) {
-          console.error("Invalid booking_list format:", response.data);
-          setPanditbookings([]);
-        } else {
+        const bookingList = response?.data?.data?.orders || [];
+        console.log("Booking List:", bookingList);
+  
+        if (Array.isArray(bookingList) && bookingList.length > 0) {
           setPanditbookings(bookingList);
+        } else {
+          console.warn("No bookings found.");
+          setPanditbookings([]);
         }
       } catch (error) {
         console.error("Error fetching bookings:", error);
+        setPanditbookings([]);
       }
     };
   
     fetchBookings();
   }, []);
+  
   
   useEffect(() => {
     const fetchBookings = async () => {
@@ -535,95 +538,75 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
 )} */}
 
 {activeStep === `${t("chadhava")}` && (
-  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {[
-        {
-          pandit_image: "/images/pandit1.jpg",
-          booking_code: "PB12345PB12345",
-          pandit_name: "Offer water to loard shiva",
-          booking_status: "success",
-          net_amount: "Free",
-          booking_date: "25th March 2025",
-        },
-        {
-          pandit_image: "/images/pandit2.jpg",
-          booking_code: "PB12346PB12345",
-          pandit_name: "Offer water to loard shiva",
-          booking_status: "pending",
-          net_amount: "751",
-          booking_date: "26th March 2025",
-        },
-        {
-          pandit_image: "/images/pandit3.jpg",
-          booking_code: "PB12347PB12345",
-          pandit_name: "Offer water to loard shiva",
-          booking_status: "cancelled",
-          net_amount: "601",
-          booking_date: "27th March 2025",
-        },
-      ].map((booking, index) => (
-        <div
-          key={index}
-          onClick={() => router.push(`/chadhavabooking/${2}`)}
-          className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer"
-        >
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <img
-              src={booking.pandit_image}
-              alt="Pooja Image"
-              onError={(e) => (e.target.src = "/images/logo.png")}
-              className="w-full sm:w-5/12 h-[140px] border-2 border-white object-contain shadow-md shadow-gray-400 rounded-lg"
-            />
-            <div className="text-center sm:text-left w-full sm:w-7/12">
+  <div className="bg-gray-100 p-6  rounded-lg">
+    <div className="grid grid-row-1 sm:grid-row-2 lg:grid-row-3 gap-5">
+      {Panditbookings.length > 0 ? (
+        Panditbookings.map((booking, index) => (
+          <div
+            key={index}
+          onClick={() =>
+            router.push(`/chadhavabooking/${booking.order_id}?booking=${encodeURIComponent(JSON.stringify(booking))}`)
+
+}
+
+            className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer"
+          >
+        
+                <p className="font-semibold text-lg md:text-lg">{booking.chadhava_name}</p>
+            {/* Display Items List */}
+            <div className="mt-2">
               
-              <h2 className="text-lg font-bold text-black">
-                {booking.pandit_name}
-              </h2>
-              {/* <p
-                className={`${
-                  booking.booking_status === "success"
-                    ? "text-green-700"
-                    : booking.booking_status === "pending"
-                    ? "text-yellow-600"
-                    : "text-red-600"
-                } font-semibold text-md`}
-              >
-                {booking.booking_status}
-              </p> */}
-              <p className="text-red-600 font-bold text-md">
-              <span className="font-semibold text-black">       {t("AmountRs")}  :</span>{" "}
-            {booking.net_amount}/-
+            <ul className="list-disc list-inside space-y-4  overflow-y-auto pr-2">
+  {booking.items.map((item, idx) => (
+    <li key={idx} className="flex items-center gap-4">
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-16 h-16 object-cover border-2 border-gray-300 rounded-md"
+      />
+      <div>
+        <p className="font-semibold text-sm md:text-base">{item.name}</p>
+        <p className="text-xs text-gray-600">{t("Qty")}: {item.quantity}</p>
+        <p className="text-xs text-gray-600">  {t("AmountRs")}: {item.price}/-</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
+            </div>
+            <p className="text-gray-500 text-sm mt-3">
+                  <span className="font-semibold text-gray-600">{t("OrderID")}</span>{" "}
+                  #{booking.order_code}
+                </p>
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 ">
+              
+              <p className="text-gray-600 text-sm text-center sm:text-left">
+                <span className="font-semibold">{t("Ordertimedate")}:</span>{" "}
+                {new Date(booking.created_at).toLocaleString()}
               </p>
+              <div
+                className={`rounded-full px-4 py-1 ${
+                  booking.payment_status === "success"
+                    ? "bg-green-600"
+                    : booking.payment_status === "pending"
+                    ? "bg-yellow-500"
+                    : "bg-red-500"
+                }`}
+              >
+                <p className="text-white text-sm">{booking.payment_status}</p>
+              </div>
             </div>
           </div>
-          <p className="text-gray-500 text-sm mt-3">
-          <span className="font-semibold text-gray-600">    {t("OrderID")} </span>{" "}
-       #{booking.booking_code} 
-              </p>
-          <div className="flex flex-col sm:flex-row justify-between items-center  gap-3">
-        
-            <p className="text-gray-600 text-sm text-center sm:text-left">
-              <span className="font-semibold">{t("Ordertimedate")}</span>{" "}
-              {booking.booking_date}
-            </p>
-            {/* <div
-              className={`${
-                booking.booking_status === "success"
-                  ? "bg-green-600"
-                  : booking.booking_status === "pending"
-                  ? "bg-yellow-500"
-                  : "bg-red-500"
-              } rounded-full px-4 py-1`}
-            >
-              <p className="text-white text-sm">{booking.booking_status}</p>
-            </div> */}
-          </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="text-center text-gray-600">No bookings found.</p>
+      )}
     </div>
   </div>
 )}
+
+
+
 
         {/* pooja box div */}
       

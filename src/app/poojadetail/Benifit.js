@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
   const Benifit = ({detail}) =>  {
       const { t } = useTranslation();
 	return (
-	  <div className='py-20' id="benefit-section">
+	  <div className='py-10' id="benefit-section">
     
 
      

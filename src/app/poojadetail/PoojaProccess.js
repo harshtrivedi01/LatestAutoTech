@@ -5,13 +5,13 @@ const PoojaProcess = ({ detail }) => {
   const { t } = useTranslation();
 
   return (
-    <div id="process-section">
+    <div id="process-section" className="py-10">
       <div className="container max-w-7xl mx-auto">
         <h2 className="title mb-6">{t("PoojaProcess")}</h2>
 
         {detail?.process ? (
           <div
-            className="bg-white p-6 rounded-lg shadow-md text-gray-800 leading-relaxed space-y-4"
+            className="bg-white p-6 rounded-lg  text-gray-800 leading-relaxed space-y-4"
             dangerouslySetInnerHTML={{ __html: detail.process }}
           />
         ) : (
