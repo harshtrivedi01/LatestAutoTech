@@ -97,6 +97,7 @@ const Content = ({ detail }) => {
         {/* One-Time Products */}
         {activeSection === "One-Time" && (
           <div>
+             <h3 className="text-2xl font-semibold text-start">{t("ChooseanOffering")}</h3>
             {detail?.onetime_products?.map((item) => {
               const selectedItem = selectedItems.find((i) => i.id === item.id);
               return (
@@ -104,6 +105,7 @@ const Content = ({ detail }) => {
                   <img src={item.image} alt={item.name} className="w-40 h-40 object-contain rounded-lg" />
                   <div className="ml-4 space-y-2">
                     <h3 className="text-lg font-semibold">{item.name}</h3>
+                       <h3 className="text-sm">{item.description}</h3>
                     <p className="text-lg text-orange-600">₹{item.price}/-</p>
                     {selectedItem ? (
                       <div className="flex items-center mt-5">
@@ -126,7 +128,7 @@ const Content = ({ detail }) => {
         {/* Subscription Products with Tabs */}
         {activeSection === "Subscription" && (
           <div>
-            {/* Subscription Tabs */}
+          <h3 className="text-2xl font-semibold text-start my-3">{t("ChooseaSubscription")}</h3>
             <div className="flex justify-center space-x-4 mb-4">
               {availableSubscriptionTabs.map((tab) => (
                 <button
@@ -149,6 +151,7 @@ const Content = ({ detail }) => {
                   <img src={item.image} alt={item.name} className="w-40 h-40 object-contain rounded-lg" />
                   <div className="ml-4 space-y-2">
                     <h3 className="text-lg font-semibold">{item.name}</h3>
+                    <h3 className="text-sm">{item.description}</h3>
                     <p className="text-lg text-orange-600">₹{item.price}/-</p>
                     {selectedItem ? (
                       <div className="flex items-center mt-5">
@@ -171,24 +174,24 @@ const Content = ({ detail }) => {
 
       {/* Order Summary */}
       {selectedItems.length > 0 && (
-        <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-lg sticky top-4 border transition-all duration-300 flex flex-col h-full">
-          <h3 className="text-2xl font-semibold text-center mb-4">Order Summary</h3>
+        <div className="w-full md:w-2/4 mt-10 bg-white p-6 rounded-2xl border-orange-400 shadow-lg sticky top-4 border transition-all duration-300 flex flex-col h-full">
+          <h3 className="text-2xl font-semibold text-start border-b pb-2 border-orange-400 mb-4">Order Summary</h3>
           {selectedItems.map(({ id, name, price, qty }) => (
-            <div key={id} className="flex justify-between items-center border-b pb-2">
+            <div key={id} className="flex space-y-3 justify-between items-center  pb-2">
               <div>
-                <p className="text-lg font-semibold">{name}</p>
-                <p className="text-sm text-gray-600">x{qty}</p>
+                <p className="text-lg font-">{name} x{qty}</p>
+             
               </div>
               <div className="text-right">
-                <p className="text-sm text-orange-600">Rs. {price * qty}/-</p>
+                <p className="text-base text-orange-600">Rs. {price * qty}/-</p>
               </div>
             </div>
           ))}
 
           {/* Total Price */}
-          <div className="mt-4 pt-4">
-            <div className="flex justify-between">
-              <p className="text-lg font-semibold">Total Price:</p>
+          <div className=" pt-4">
+            <div className="flex justify-between border-t pt-4">
+              <p className="text-lg font-semibold">Total </p>
               <p className="text-lg text-orange-600">Rs. {totalPrice}/-</p>
             </div>
 
@@ -199,10 +202,10 @@ const Content = ({ detail }) => {
           </div>
         </div>
       )}
-  {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} handleClose={handleCloseForm} onClose={() => setShowLoginPopup(false)} />}
+  {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} totalPrice={totalPrice} handleClose={handleCloseForm} onClose={() => setShowLoginPopup(false)} />}
 
 {/* Proceed Form - Show when Proceed is clicked */}
-{showForm && <ProceedForm handleClose={handleCloseForm} />}
+{showForm && <ProceedForm handleClose={handleCloseForm} totalPrice={totalPrice} />}
     </div>
   );
 };
