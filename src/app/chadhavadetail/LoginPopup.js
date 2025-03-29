@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ProceedForm from "./ProceedForm";
@@ -19,6 +19,7 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
   const [latitude, setLatitude] = useState("");
   const [language, setLanguage] = useState(navigator.language || "en"); // Browser language
   const [userId, setUserId] = useState(null); // ✅ Store verified user ID
+  const inputRefs = useRef([]);
 
   // Get User Location (Longitude & Latitude)
   useEffect(() => {
@@ -52,16 +53,35 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
   }, [timer]);
 
   const handleBackspace = (index, e) => {
-    if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-    if (e.key === "Backspace" && otp[index] === "") {
+    if (e.key === "Backspace") {
       let newOtp = [...otp];
+  
+      // If the field is empty, move focus to the previous field
+      if (!otp[index] && index > 0) {
+        inputRefs.current[index - 1]?.focus();
+      }
+  
+      // Clear the current field
       newOtp[index] = "";
-      setOtpValues(newOtp);
+      setOtp(newOtp);
     }
   };
   
+  // Handle OTP input change
+  const handleOtpChange = (index, value) => {
+    if (/^\d$/.test(value)) { // Allow only single digit numbers
+      let newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+  
+      // Move to next input field if available
+      if (index < otp.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
+  
+
   // Handle phone number input
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, ""); // Allow only numbers
@@ -69,16 +89,6 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
       setPhone(value);
     }
   };
-
-  // Handle OTP input change
-  const handleOtpChange = (index, value) => {
-    if (!isNaN(value) && value.length <= 1) {
-      let newOtp = [...otp];
-      newOtp[index] = value;
-      setOtp(newOtp);
-    }
-  };
-
   // Handle Get OTP request
   const handleGetOtp = async () => {
     if (phone.length !== 10) {
@@ -244,15 +254,17 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
             <form onSubmit={handleOtpSubmit} className="mt-4">
               <div className="flex justify-center gap-2">
                 {otp.map((digit, index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    maxLength="1"
-                    value={digit}
-                    onKeyDown={(e) => handleBackspace(index, e.target.value)}
-                    onChange={(e) => handleOtpChange(index, e.target.value)}
-                     className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
-                  />
+                <input
+                key={index}
+                ref={(el) => (inputRefs.current[index] = el)}
+                type="text"
+                maxLength="1"
+                value={otp[index] || ""}
+                onKeyDown={(e) => handleBackspace(index, e)}
+                onChange={(e) => handleOtpChange(index, e.target.value)}
+                className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
+              />
+              
                 ))}
               </div>
               <button

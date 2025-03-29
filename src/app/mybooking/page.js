@@ -565,7 +565,8 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       ].map((booking, index) => (
         <div
           key={index}
-          className="border-[#87521B] bg-white border-[2px] rounded-lg p-4"
+          onClick={() => router.push(`/chadhavabooking/${2}`)}
+          className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer"
         >
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <img
@@ -579,7 +580,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
               <h2 className="text-lg font-bold text-black">
                 {booking.pandit_name}
               </h2>
-              <p
+              {/* <p
                 className={`${
                   booking.booking_status === "success"
                     ? "text-green-700"
@@ -589,14 +590,16 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
                 } font-semibold text-md`}
               >
                 {booking.booking_status}
-              </p>
+              </p> */}
               <p className="text-red-600 font-bold text-md">
-              {t("amount")} {booking.net_amount}/-
+              <span className="font-semibold text-black">       {t("Amount")} :</span>{" "}
+            {booking.net_amount}/-
               </p>
             </div>
           </div>
           <p className="text-gray-500 text-sm mt-3">
-          {t("OrderID")}  #{booking.booking_code} 
+          <span className="font-semibold text-gray-600">    {t("OrderID")} </span>{" "}
+       #{booking.booking_code} 
               </p>
           <div className="flex flex-col sm:flex-row justify-between items-center  gap-3">
         
@@ -604,7 +607,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
               <span className="font-semibold">Order Time & Date:</span>{" "}
               {booking.booking_date}
             </p>
-            <div
+            {/* <div
               className={`${
                 booking.booking_status === "success"
                   ? "bg-green-600"
@@ -614,7 +617,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
               } rounded-full px-4 py-1`}
             >
               <p className="text-white text-sm">{booking.booking_status}</p>
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
