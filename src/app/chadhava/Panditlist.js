@@ -21,13 +21,13 @@ import { useTranslation } from 'react-i18next';
 				{t("ChadhavaSeva")}
 				</h2>
 				<p className="leading-relaxed text-lg text-gray-600">
-				Book experienced Chadhava online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!
+				Book  Chadhava online for all your puja needs. Expert Vedic rituals for weddings, havans, griha pravesh, and more. Hassle-free booking with verified and knowledgeable priests. Get the best guidance for your spiritual ceremonies today!
 				</p>
 				<div className="mt-5">
 				  <form  className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden ">
 					<input 
 					  type="text"
-					  placeholder="Search Chadhava here..."
+					  placeholder={t("SearchChadhavahere")}
 					//   value={searchQuery}
 					//   onChange={(e) => setSearchQuery(e.target.value)}
 					  className="w-full outline-none bg-transparent text-gray-600 text-lg"

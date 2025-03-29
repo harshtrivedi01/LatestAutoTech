@@ -143,14 +143,14 @@ i18n
           City: "City",
           PinCode: "Pin Code",
           UpdateProfile: "Update Profile",
-
+          SubmitPay:" Submit & Pay",
           //    /sankalpage
 
           SankalpFormFillNameGotraAddress:
             "Form Fill Name & Gotra ",
           PaySelectapaymentmethod: "Select a payment method",
           ChoosePreviousSankalpDetail: "Choose Previous Sankalp Detail",
-          AddSankalpFormDetail: "Please fill Sanckalp form",
+          AddSankalpFormDetail: "Please fill Sankalp form",
           NameofMembersParticipatingInPooja:
             "Name of Members Participating In Pooja",
           firstmembername: "First member name",
@@ -346,11 +346,43 @@ notifyforfutureupdates:"Notify for future Updates",
 Phone:"Phone",
 chadhava:"Chadhava",
 Benefitsofofferings:"Benefits of offerings",
+ChadhavaSeva:"Chadhava Seva",
+SearchChadhavahere:"Search Chadhava here...",
 
+OneTime:"One Time",
+Subscription:"Subscription",
+Proceed:"Proceed",
+ChooseanOffering:"Choose an Offering",
+Offer:"Offer",
+ChooseaSubscription:"Choose a Subscription",
+Yearly:"Yearly",
+Monthly:"Monthly",
+Weekly:"Weekly",
+
+SankalpForm:"Sankalp Form",
+Chadhavawillbe:"Chadhava will be offered by the name provided below",
+discriptions:"  For further details please check PunuyaSetu app frequently and keep updated version of app",
         },
       },
       hi: {
         translation: {
+          discriptions:" अधिक जानकारी के लिए कृपया PunuyaSetu ऐप को बार-बार जांचें और ऐप का अपडेटेड संस्करण रखें",
+          SubmitPay:" सबमिट करें और भुगतान करें",
+          SankalpForm:"संकल्प प्रपत्र",
+          Chadhavawillbe:"चाधवा को नीचे दिए गए नाम से पेश किया जाएगा",
+
+          ChooseanOffering:"एक प्रस्ताव चुनें",
+Offer:"प्रस्ताव",
+ChooseaSubscription:"एक सदस्यता चुनें",
+Yearly:"वार्षिक",
+Monthly:"मासिक",
+Weekly:"साप्ताहिक",
+          OneTime:"एक बार",
+          Subscription:"सदस्यता",
+          Proceed:"आगे बढ़ें",
+
+          SearchChadhavahere:"चढवा को यहां खोजें...",
+          ChadhavaSeva:"चढवा सेवा",
           Benefitsofofferings:"प्रसाद के लाभ",
           chadhava:"चढवा",
           Phone:"फ़ोन",
@@ -665,7 +697,7 @@ Popularity:"लोकप्रियता",
           //    /mybooking
 
           MyBooking: "मेरी बुकिंग",
-          SearchSomething: "कुछ खोजें...",
+          SearchSomething: "पूजा खोजें...",
           PoojaBooking: "पूजा ",
           PoojaBox: "पूजा बॉक्स",
           LaxmiPoojaBoxDailyPoojaBox: "लक्ष्मी पूजा बॉक्स, दैनिक पूजा बॉक्स",

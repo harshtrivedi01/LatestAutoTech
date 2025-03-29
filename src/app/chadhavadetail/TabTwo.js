@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const TabTwo = ({ offers, setOffers }) => {
   const [selectedTab, setSelectedTab] = useState("Weekly");
-
+  const { t } = useTranslation();
   const subscriptionData = {
     Weekly: [
       { id: 1, image: "https://www.srimandir.com/_next/image?url=https%3A%2F%2Fsrm-cdn.a4b.io%2Fyoda%2F1742584202337.png&w=96&q=75", title: "Offer a Prayer Thread", description: "Short description..", price: 51.00 },
@@ -21,9 +22,16 @@ const TabTwo = ({ offers, setOffers }) => {
 
   const data1 = subscriptionData[selectedTab];
 
-  const handleTabChange = (tab) => {
-    setSelectedTab(tab);
+  const tabKeys = {
+    [t("Weekly")]: "Weekly",
+    [t("Monthly")]: "Monthly",
+    [t("Yearly")]: "Yearly",
   };
+  
+  const handleTabChange = (tab) => {
+    setSelectedTab(tabKeys[tab]); // Convert translated tab back to original key
+  };
+  
 
   const handleOfferClick = (id) => {
     setOffers((prev) => ({
@@ -53,19 +61,20 @@ const TabTwo = ({ offers, setOffers }) => {
   return (
     <div className="flex flex-col gap-6">
       {/* Tabs */}
-      <h3 className="text-2xl font-semibold text-center">Choose a Subscription</h3>
+      <h3 className="text-2xl font-semibold text-center">{t("ChooseaSubscription")}</h3>
       <div className="flex justify-center space-x-4 mb-4">
-        {["Weekly", "Monthly", "Yearly"].map((tab) => (
-          <button
-            key={tab}
-            className={`px-4 py-2 rounded-lg font-semibold transition ${
-              selectedTab === tab ? "bg-orange-500 text-white" : "bg-gray-200"
-            }`}
-            onClick={() => handleTabChange(tab)}
-          >
-            {tab}
-          </button>
-        ))}
+      {Object.keys(tabKeys).map((tab) => (
+  <button
+    key={tab}
+    className={`px-4 py-2 rounded-lg font-semibold transition ${
+      tabKeys[tab] === selectedTab ? "bg-orange-500 text-white" : "bg-gray-200"
+    }`}
+    onClick={() => handleTabChange(tab)}
+  >
+    {tab}
+  </button>
+))}
+
       </div>
 
       {/* Offerings */}
@@ -77,7 +86,7 @@ const TabTwo = ({ offers, setOffers }) => {
             <div className="ml-4 space-y-2">
               <h3 className="text-lg font-semibold">{item.title}</h3>
               <p className="text-sm text-gray-600">{item.description}</p>
-              <p className="text-lg text-orange-600">Rs. {item.price}/-</p>
+              <p className="text-lg text-orange-600">₹{item.price}/-</p>
 
               {offers[item.id] ? (
                 <div className="flex items-center mt-5">
@@ -87,7 +96,7 @@ const TabTwo = ({ offers, setOffers }) => {
                 </div>
               ) : (
                 <button className="text-sm text-white bg-green-600 px-4 py-2 mt-5 rounded-lg shadow-2xl font-semibold" onClick={() => handleOfferClick(item.id)}>
-                  Offer
+                  {t("Offer")}
                 </button>
               )}
             </div>

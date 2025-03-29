@@ -120,7 +120,7 @@ const handleLoginSuccess = (token) => {
         {/* Order Summary (Hide if empty) */}
         {selectedItems.length > 0 && (
           <div className="w-full mt-12 md:w-1/3 bg-white  p-6 rounded-lg shadow-lg sticky top-4 border border-orange-600 transition-all duration-300 flex flex-col h-full">
-            <h3 className="text-2xl font-semibold text-start border-b border-orange-400 pb-2 mb-4">Order Summary</h3>
+            <h3 className="text-2xl font-semibold text-start border-b border-orange-400 pb-2 mb-4">   {t("OrderSummary")}</h3>
             {selectedItems.map(({ id, title, price, qty }) => (
               <div key={id} className="flex justify-between items-center border-b pb-3 mt-3">
                 <div>
@@ -128,7 +128,7 @@ const handleLoginSuccess = (token) => {
                   <span className="text-sm text-gray-600"> {" "}(x{qty})</span></p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-orange-600">Rs. {price * qty}/-</p>
+                  <p className="text-sm text-orange-600">₹{price * qty}/-</p>
                 </div>
               </div>
             ))}
@@ -136,8 +136,8 @@ const handleLoginSuccess = (token) => {
             {/* Total Price */}
             <div className="mt-4 pt-4">
               <div className="flex justify-between">
-                <p className="text-lg font-semibold">Total Price:</p>
-                <p className="text-lg text-orange-600">Rs. {totalPrice}/-</p>
+                <p className="text-lg font-semibold">{t("Total")}</p>
+                <p className="text-lg text-orange-600">₹{totalPrice}/-</p>
               </div>
 
               {/* Proceed Button */}
@@ -145,7 +145,7 @@ const handleLoginSuccess = (token) => {
                 className="w-full bg-orange-500 text-white font-semibold py-3 rounded-full mt-6"
                 onClick={handleProceedClick}
               >
-                Proceed
+                {t("Proceed")}
               </button>
             </div>
           </div>

@@ -592,7 +592,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
                 {booking.booking_status}
               </p> */}
               <p className="text-red-600 font-bold text-md">
-              <span className="font-semibold text-black">       {t("Amount")} :</span>{" "}
+              <span className="font-semibold text-black">       {t("AmountRs")}  :</span>{" "}
             {booking.net_amount}/-
               </p>
             </div>
@@ -604,7 +604,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
           <div className="flex flex-col sm:flex-row justify-between items-center  gap-3">
         
             <p className="text-gray-600 text-sm text-center sm:text-left">
-              <span className="font-semibold">Order Time & Date:</span>{" "}
+              <span className="font-semibold">{t("Ordertimedate")}</span>{" "}
               {booking.booking_date}
             </p>
             {/* <div

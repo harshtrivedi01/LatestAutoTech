@@ -221,7 +221,7 @@ export default function Chadhavadetail() {
         onClick={() => setIsExpanded(!isExpanded)} 
         className="text-orange-500 font-semibold cursor-pointer"
       >
-        {isExpanded ? "Read Less" : "Read More"}
+        {isExpanded ? `${t("ReadLess")}` : `${t("ReadMore")}`}
       </button>
     </div>
              

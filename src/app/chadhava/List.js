@@ -41,7 +41,7 @@ const PanditCard = ({ pandit }) => {
         {/* Book Now Button */}
       
           <button className="block w-full uppercase p-3 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
-            {t("booknow")}
+            {t("BookNow")}
           </button>
        
       </div>

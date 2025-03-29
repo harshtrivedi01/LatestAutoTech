@@ -2,12 +2,15 @@ import { load } from "@cashfreepayments/cashfree-js";
 import React, { useState } from "react";
 import api from "../lib/axiosInstance";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: "", gotra: "" });
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
-
+  const router = useRouter(); // Initialize useRouter
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -166,18 +169,18 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
         >
           X
         </button>
-        <h2 className="text-2xl font-semibold text-start">Sankalp Form</h2>
+        <h2 className="text-2xl font-semibold text-start">{t("SankalpForm")}</h2>
         <p className="text-sm text-gray-600 text-start mb-4">
-          Chadhava will be offered by the name provided below
+        {t("Chadhavawillbe")}
         </p>
 
         {/* Name Field */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Name</label>
+          <label className="block text-sm font-medium text-gray-700">{t("Name")}</label>
           <input
             type="text"
             name="name"
-            placeholder="Enter Name"
+            placeholder={t("Enteryourname")}
             value={formData.name}
             onChange={(e) => {
               if (/^[A-Za-z\s]*$/.test(e.target.value)) {
@@ -192,11 +195,11 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
 
         {/* Gotra Field */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Gotra</label>
+          <label className="block text-sm font-medium text-gray-700">{t("Gotra")}</label>
           <input
             type="text"
             name="gotra"
-            placeholder="Enter Gotra"
+            placeholder={t("EnteryourGotra")}
             value={formData.gotra}
             onChange={(e) => {
               if (/^[A-Za-z\s]*$/.test(e.target.value)) {
@@ -218,7 +221,7 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
             onChange={handleCheckboxChange}
             className="mr-2"
           />
-          <label className="text-sm text-gray-700">I don't know my Gotra</label>
+          <label className="text-sm text-gray-700">{t("IdontknowmyGotra")}</label>
         </div>
 
         {/* Buttons */}
@@ -227,7 +230,8 @@ const ProceedForm = ({ handleClose, handleSubmit,totalPrice }) => {
   className="w-full px-8 sm:px-10 py-2 text-lg bg-orange-500 text-white rounded-full"
   onClick={onSubmit}
 >
-  Submit & Pay
+{t("SubmitPay")}
+ 
 </button>
 
         </div>

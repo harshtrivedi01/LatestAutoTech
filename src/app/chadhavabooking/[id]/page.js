@@ -125,12 +125,12 @@ export default function BookingDetailspage() {
     <div className="bg-white">
       <div className="py-10 text-start px-5 bg-[#FFEEE2]">
         <h2 className="container max-w-7xl text-xl sm:text-2xl md:text-3xl font-bold">
-          {t("PoojaBooking")}
+          {t("chadhava")}
         </h2>
       </div>
 
       <div className="container max-w-7xl mb-5 ">
-        <p className="py-4 mt-2 text-xl font-semibold">{t("PoojaandParticipantsDetails")}</p>
+      
 
         {/* Booking Details */}
         <div className="flex flex-wrap md:flex-nowrap gap-4 mt-2 space-y-4 shadow-lg border rounded-lg px-4">
@@ -148,7 +148,7 @@ export default function BookingDetailspage() {
           <div className="w-full md:w-7/12">
             <h2 className="text-xl font-bold text-black my-2 border-b">
         
-Offer water to loard shiva({getSafeValue(order.booking_date)})
+Offer water to loard shiva
             </h2>
             {order.create_date && (
               <p className="text-gray-600 text-sm my-5">
@@ -164,7 +164,7 @@ Offer water to loard shiva({getSafeValue(order.booking_date)})
 
 
 <p className="text-gray-600 text-sm my-5">
-              For further details please check PunuyaSetu app frequently and keep updated version of app
+{t("discriptions")}
               </p>
 
 
