@@ -14,7 +14,12 @@ export default function Page() {
   const pathname = usePathname();
   const [countdown, setCountdown] = useState(3);
   const [hasReloaded, setHasReloaded] = useState(false); // Track if reloaded
-
+ useEffect(() => {
+    if (window.location.pathname === "/chadhava") {
+      localStorage.removeItem("activeSection"); // Remove the token
+      localStorage.removeItem("activeSubscriptionTab"); // Remove the token
+    }
+  }, []);
   useEffect(() => {
     const previousUrl = sessionStorage.getItem("previousUrl"); // Get stored previous URL
 
