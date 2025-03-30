@@ -1,5 +1,6 @@
 import { CalendarIcon } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
@@ -7,7 +8,12 @@ export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 export default function List({ pujaData }) {
   const { t } = useTranslation();
   console.log("Puja Data in List Component:", pujaData);
-
+   useEffect(() => {
+      if (window.location.pathname === "/chadhava") {
+        localStorage.removeItem("activeSection"); // Remove the token
+        localStorage.removeItem("activeSubscriptionTab"); // Remove the token
+      }
+    }, []);
   const dataToDisplay = pujaData?.chadhava_list || pujaData?.data?.chadhava_list || [];
 
   return (
