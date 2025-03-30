@@ -65,7 +65,7 @@ export default function Chadhavadetail() {
 
       glideInstance.mount();
 
-      return () => glideInstance.destroy(); // Cleanup on unmount
+      return () => glideInstance.destroy(); // Cleanup on unmount // Cleanup on unmount
     }
   }, []);
 
