@@ -581,7 +581,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
             <div className="flex flex-col sm:flex-row justify-between items-center gap-3 ">
               
               <p className="text-gray-600 text-sm text-center sm:text-left">
-                <span className="font-semibold">{t("Ordertimedate")}:</span>{" "}
+                <span className="font-semibold">{t("Ordertimedate")}</span>{" "}
                 {new Date(booking.created_at).toLocaleString()}
               </p>
               <div
