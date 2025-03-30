@@ -1,13 +1,31 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import AuthGuard from "../component/AuthGuard";
 import { useTranslation } from "react-i18next";
 
 export default function Page() {
-    const { t } = useTranslation();
-  const router = useRouter(); // Initialize the router
+  const { t } = useTranslation();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [hasReloaded, setHasReloaded] = useState(false); // Track reload state
+
+  useEffect(() => {
+    const previousUrl = sessionStorage.getItem("previousUrl"); // Get stored previous URL
+
+    // Check if the previous page was /chadhavadetail/[id] and reload once
+    if (previousUrl?.startsWith("/chadhavadetail/") && !hasReloaded) {
+      sessionStorage.setItem("hasReloaded", "true"); // Store reload state
+      setHasReloaded(true);
+      window.location.reload(); // Reload the page
+    }
+  }, [hasReloaded]);
+
+  useEffect(() => {
+    sessionStorage.setItem("previousUrl", pathname); // Store current path as previous
+  }, [pathname]);
 
   const handleTryAgain = () => {
     router.back(); // Go to the previous page
@@ -22,18 +40,15 @@ export default function Page() {
           </div>
           <div className="text-center">
             <h3 className="md:text-2xl text-base text-[#F21E1EED] font-semibold text-center">
-            {t("failed")}
+              {t("failed")}
             </h3>
-            <p className="text-[#4A4A4A] my-5 font-semibold">
-            {t("faileddis")}
-            </p>
-
+            <p className="text-[#4A4A4A] my-5 font-semibold">{t("faileddis")}</p>
             <div className="py-10 text-center">
               <button
                 onClick={handleTryAgain}
                 className="px-20 rounded-lg bg-[#F21E1EED] hover:bg-red-500 text-white font-semibold py-3"
               >
-                  {t("tryagain")}
+                {t("tryagain")}
               </button>
             </div>
           </div>

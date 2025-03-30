@@ -117,6 +117,8 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
               );
   
               if (bookingResponse.status === "1") {
+                localStorage.removeItem("activeSection"); // Remove the token
+                localStorage.removeItem("activeSubscriptionTab"); // Remove the token
                 router.push("/successpage");
               } else {
                 router.push("/failed");
