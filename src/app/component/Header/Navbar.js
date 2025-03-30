@@ -266,16 +266,17 @@ export default function Navbar() {
                 {t("PoojaBooking")} 
                 </a>
               </li>
-              <li>
-                <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
-                {t("chadhava")} 
-                </a>
-              </li>
+             
              
              
               <li>
                 <a data-translate href="/poojabox" className="text-black hover:text-orange-700">
                 {t("PoojaBox")} 
+                </a>
+              </li>
+              <li>
+                <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
+                {t("chadhava")} 
                 </a>
               </li>
               <li>

@@ -314,7 +314,7 @@ useEffect(() => {
   </div>
 )}
 
-  {showLoginPopup && <LoginPopup onLoginSuccess={handleLoginSuccess} totalPrice={totalPrice} handleClose={handleCloseForm} onClose={() => setShowLoginPopup(false)} />}
+  {showLoginPopup && <LoginPopup  id={detail.chadhava_detail.id} carts={orderSummary}  onLoginSuccess={handleLoginSuccess} totalPrice={totalPrice} handleClose={handleCloseForm} onClose={() => setShowLoginPopup(false)} />}
 
 {/* Proceed Form - Show when Proceed is clicked */}
 {showForm && (

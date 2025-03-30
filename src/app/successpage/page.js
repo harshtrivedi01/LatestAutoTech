@@ -14,6 +14,13 @@ export default function Page() {
   const pathname = usePathname();
   const [countdown, setCountdown] = useState(3);
   const [hasReloaded, setHasReloaded] = useState(false); // Track if reloaded
+
+    // Scroll to top on mount
+    useEffect(() => {
+      window.scrollTo(0, 0);
+  }, []);
+
+
  useEffect(() => {
     if (window.location.pathname === "/chadhava") {
       localStorage.removeItem("activeSection"); // Remove the token
@@ -44,6 +51,15 @@ export default function Page() {
       clearTimeout(redirectTimeout);
     };
   }, [hasReloaded]);
+
+  useEffect(() => {
+    const hasReloaded = sessionStorage.getItem("hasReloaded"); // Check if already reloaded
+
+    if (!hasReloaded) {
+      sessionStorage.setItem("hasReloaded", "true"); // Mark as reloaded
+      window.location.reload(); // Reload the page once
+    }
+  }, []);
 
   useEffect(() => {
     sessionStorage.setItem("previousUrl", pathname); // Store current path as previous

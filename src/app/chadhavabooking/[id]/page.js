@@ -2,6 +2,7 @@
 import { useParams, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import AuthGuard from "./../../component/AuthGuard";
 
 export default function BookingDetailspage() {
   const { t } = useTranslation();
@@ -25,7 +26,9 @@ export default function BookingDetailspage() {
   if (!order) return <div className="text-center py-10 text-red-500">No booking data found.</div>;
 
   return (
-    <div className="bg-white ">
+  <AuthGuard>
+
+<div className="bg-white ">
       <div className="py-10 text-start px-5 bg-[#FFEEE2]">
         <h2 className="container max-w-7xl text-xl sm:text-2xl md:text-3xl font-bold">
           {t("chadhava")}
@@ -81,5 +84,6 @@ export default function BookingDetailspage() {
 
     
     </div>
+  </AuthGuard>
   );
 }

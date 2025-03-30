@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import ProceedForm from "./ProceedForm";
 import { useTranslation } from "react-i18next";
 
-const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
+const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
     const { t } = useTranslation();
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -360,7 +360,7 @@ const LoginPopup = ({ onClose ,handleClose,totalPrice}) => {
     handleClose(); // ✅ Ensure it closes the modal
     onClose(); // ✅ Also close the login popup
   }}  // ✅ Also close the login popup
-  totalPrice={totalPrice} />
+  totalPrice={totalPrice} id={id} carts={carts} />
 )}
 
 

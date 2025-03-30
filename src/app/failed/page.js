@@ -10,18 +10,19 @@ export default function Page() {
   const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
-  const [hasReloaded, setHasReloaded] = useState(false); // Track reload state
 
   useEffect(() => {
-    const previousUrl = sessionStorage.getItem("previousUrl"); // Get stored previous URL
+    window.scrollTo(0, 0);
+  }, []);
 
-    // Check if the previous page was /chadhavadetail/[id] and reload once
-    if (previousUrl?.startsWith("/chadhavadetail/") && !hasReloaded) {
-      sessionStorage.setItem("hasReloaded", "true"); // Store reload state
-      setHasReloaded(true);
-      window.location.reload(); // Reload the page
+  useEffect(() => {
+    const hasReloaded = sessionStorage.getItem("hasReloaded"); // Check if already reloaded
+
+    if (!hasReloaded) {
+      sessionStorage.setItem("hasReloaded", "true"); // Mark as reloaded
+      window.location.reload(); // Reload the page once
     }
-  }, [hasReloaded]);
+  }, []);
 
   useEffect(() => {
     sessionStorage.setItem("previousUrl", pathname); // Store current path as previous

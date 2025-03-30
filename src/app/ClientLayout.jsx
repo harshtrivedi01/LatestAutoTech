@@ -53,6 +53,7 @@ export default function ClientLayout({ children }) {
       <NavbarWrapper />
 
       {loading && <LoadingScreen />}
+      
       {children}
       <SpeedInsights />
       <FooterWrapper />
