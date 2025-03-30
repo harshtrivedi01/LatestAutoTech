@@ -333,7 +333,7 @@ YourInformation:"Your Information",
 AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform:"After selecting the Puja, fill in the information of your Name and Gotra in the provided form.",
 ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"The video of your Puja completed with your name and Gotra will be shared on WhatsApp.",
 
-Poojabookingdate:"Pooja Booking Date",
+Poojabookingdate:"Pooja Date",
 RedirectingIn:"Redirecting to home",
 
 PaymentStatus:"Payment Status",
@@ -406,7 +406,7 @@ DeliveryAddress:"डिलीवरी पता",
           PoojaStatus:"पूजा स्थिति",
           BookingStatus:"बुकिंग स्थिति",
           RedirectingIn:"होम पर पुनर्निर्देशित किया जा रहा है",
-          Poojabookingdate:"पूजा बुकिंग तिथि",
+          Poojabookingdate:"पूजा तिथि",
           Pujavideo:"पूजा वीडियो",
           ChooseYourPuja: "अपनी पूजा चुनें",
 
