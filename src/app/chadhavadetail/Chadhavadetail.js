@@ -132,13 +132,6 @@ export default function Chadhavadetail() {
 
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const text = `Shani Amavasya and Shani Gochar are powerful on their own, but when they align, they create a once-in-years Mahayog—an extraordinary time to cleanse past karmas and seek Shani Dev’s blessings. Scriptures reveal that rituals made during this cosmic confluence can dissolve karmic burdens and bring long-awaited relief.✨
-
-  🛕At Shani Shingnapur, where Shani Dev resides in His Swayambhu (self-manifested) form, performing Hawan Aahuti Mahadaan on this day is believed to be the ultimate remedy for Shani Doshas. The sacred fire of the Hawan 🔥burns away negative influences, while Mahadaan (divine offerings) pleases Shani Dev, attracting stability, success, and divine protection.😇
-
-  ✨This Mahayog won’t return anytime soon!🙅‍♀️ Don’t miss this divine opportunity to balance your karma and seek Shani Dev’s blessings. Book your Shani Shani Dosh Shanti Hawan Aahuti Mahadaan today.`;
-
-  
   const images = Array.isArray(pujaData?.chadhava_detail?.image)
   ? pujaData.chadhava_detail.image
   : pujaData?.chadhava_detail?.image
@@ -218,25 +211,40 @@ export default function Chadhavadetail() {
 </i>
 
 
-<h5 className="mb-2 text-lg sm:text-xl md:text-2xl font-bold text-start tracking-tight text-[#BA1A1A]">
-  {pujaData?.chadhava_detail?.name}
-  <div className="w-32 sm:w-60 md:w-72 lg:w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
-</h5>
+<>
+  <h5
+    className="mb-2 text-lg sm:text-xl md:text-2xl font-bold text-start tracking-tight text-[#BA1A1A]"
+    dangerouslySetInnerHTML={{
+      __html: pujaData?.chadhava_detail?.name || "",
+    }}
+  ></h5>
 
-<h5 className="mb-2 text-base sm:text-lg md:text-xl mt-4 text-start font-semibold text-gray-900">
-  {pujaData?.chadhava_detail?.sub_title
-    ? pujaData.chadhava_detail.sub_title.length > 200
-      ? pujaData.chadhava_detail.sub_title.slice(0, 200) + "..."
-      : pujaData.chadhava_detail.sub_title
-    : ""}
-</h5>
+  {/* Underline Div */}
+  <div className="w-32 sm:w-60 md:w-72 lg:w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
+</>
+
+
+<h5
+  className="mb-2 text-base sm:text-lg md:text-xl mt-4 text-start font-semibold text-gray-900"
+  dangerouslySetInnerHTML={{
+    __html: pujaData?.chadhava_detail?.sub_title
+      ? pujaData.chadhava_detail.sub_title.length > 200
+        ? pujaData.chadhava_detail.sub_title.slice(0, 200) + "..."
+        : pujaData.chadhava_detail.sub_title
+      : "",
+  }}
+></h5>
+
 
 <div>
-  <p className="mb-3 font-normal text-start flex justify-start text-gray-700 text-sm sm:text-base md:text-lg text-gray-400">
-    {isExpanded
-      ? pujaData?.chadhava_detail?.description
-      : `${pujaData?.chadhava_detail?.description.substring(0, 200)}...`}
-  </p>
+<p
+  className="mb-3 font-normal text-start flex justify-start text-gray-700 text-sm sm:text-base md:text-lg text-gray-400"
+  dangerouslySetInnerHTML={{
+    __html: isExpanded
+      ? pujaData?.chadhava_detail?.description || ""
+      : `${pujaData?.chadhava_detail?.description?.substring(0, 200) || ""}...`,
+  }}
+></p>
   <button 
     onClick={() => setIsExpanded(!isExpanded)} 
     className="text-orange-500 font-semibold cursor-pointer"

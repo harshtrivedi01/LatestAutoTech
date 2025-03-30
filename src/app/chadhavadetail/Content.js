@@ -173,8 +173,12 @@ useEffect(() => {
                 <div key={`onetime-${item.id}`}  className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
                   <img src={item.image} alt={item.name} className="w-40 h-40 object-contain rounded-lg" />
                   <div className="ml-4 space-y-2">
-                    <h3 className="text-lg font-semibold">{item.name}</h3>
-                       <h3 className="text-sm">{item.description}</h3>
+                    <h3 className="text-lg font-semibold"  dangerouslySetInnerHTML={{
+      __html: item.name,
+    }}></h3>
+                       <h3 className="text-sm" dangerouslySetInnerHTML={{
+      __html: item.description,
+    }}></h3>
                        <p className="text-lg text-orange-600">
   {item.price > 0 ? `₹${item.price}/-` : t("Free")}
 </p>
@@ -230,8 +234,12 @@ useEffect(() => {
                 <div  key={`subscription-${item.id}-${item.type}`} className="flex items-center bg-white p-4 rounded-lg shadow mt-4">
                   <img src={item.image} alt={item.name} className="w-40 h-40 object-contain rounded-lg" />
                   <div className="ml-4 space-y-2">
-                    <h3 className="text-lg font-semibold">{item.name}</h3>
-                    <h3 className="text-sm">{item.description}</h3>
+                  <h3 className="text-lg font-semibold"  dangerouslySetInnerHTML={{
+      __html: item.name,
+    }}></h3>
+                       <h3 className="text-sm" dangerouslySetInnerHTML={{
+      __html: item.description,
+    }}></h3>
                     <p className="text-lg text-orange-600">₹{item.price}/-   {t("Per")} {item.type}</p>
                     {selectedItem ? (
                       <div className="flex items-center mt-5">

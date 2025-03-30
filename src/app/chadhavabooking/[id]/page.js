@@ -48,7 +48,7 @@ export default function BookingDetailspage() {
       <div className="text-center space-y-2 sm:text-left">
         <p className="font-semibold">{item.name}</p>
         <p className="text-xs text-gray-600">{t("Qty")}: {item.quantity}</p>
-        <p className="text-xs text-green-600">  {t("AmountRs")}: {item.price || t("Free")}/-</p>
+        {/* <p className="text-xs text-green-600">  {t("AmountRs")}: {item.price || t("Free")}/-</p> */}
       </div>
     </li>
   ))}
@@ -62,9 +62,21 @@ export default function BookingDetailspage() {
         <div className="w-full md:w-2/3 space-y-3">
           <h3 className="text-xl font-semibold">{order.chadhava_name }</h3>
           <p><strong>{t("OrderDate")}: </strong>{order.created_at}</p>
-          <p className="text-green-600"><strong>{t("AmountRs")}:</strong> {order.amount || t("Free")}/-</p>
-         
+          <p className="text-green-600"><strong>{t("AmountRs")}:</strong> {order.total_amount || t("Free")}/-</p>
+          <div
+                className={`rounded-full w-20 px-4 py-1 ${
+                  order.payment_status === "success"
+                    ? "bg-green-600"
+                    : order.payment_status === "pending"
+                    ? "bg-yellow-500"
+                    : "bg-red-500"
+                }`}
+              >
+                <p className="text-white  text-sm">{order.payment_status}</p>
+              </div>
         </div>
+
+       
       </div>
 
     

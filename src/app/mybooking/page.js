@@ -188,7 +188,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
           </div>
         </div>
       </div>
-
+{/* 
       <div className="max-w-7xl flex justify-betweeni tems-center mx-auto pt-14 px-5 ">
   <div className="flex-grow  mr-4">
   <form onSubmit={handleSearch} className="flex px-4 py-2 rounded-md border-2 border-orange-400 bg-white overflow-hidden">
@@ -213,10 +213,10 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
   </div>
 
 
-</div>
+</div> */}
 
 
-      <div className="max-w-7xl mx-auto py-10 pb-14 px-5">
+      <div className="max-w-7xl mx-auto py-5 pb-14 px-5">
         <div className="flex pb-8">
         <div className="flex border-y-[1px] py-2 gap-4 w-full">
   {steps.map((step) => (
@@ -472,71 +472,6 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
 
 
 
-        {/* pandit booking div
-        {activeStep ===`${t("chadhava")}` && (
-  <div className="bg-gray-100 p-6 mt-12 rounded-lg">
-    {Panditbookings.length ? (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {Panditbookings.map((booking, index) => (
-          <div
-            key={index}
-            className="border-[#87521B] bg-white border-[2px] rounded-lg p-4"
-          >
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <img
-                src={booking.pandit_image}
-                alt="Pooja Image"
-                onError={(e) =>
-                  (e.target.src =
-                    "/images/logo.png")
-                }
-                className="w-full sm:w-5/12 h-[140px] border-2 border-white object-cover shadow-md shadow-gray-400 rounded-lg"
-              />
-              <div className="text-center sm:text-left w-full sm:w-7/12">
-                <p className="text-gray-500 text-sm">
-                  #{booking.booking_code} ||
-                </p>
-                <h2 className="text-lg font-bold text-black">
-                  Pt.{booking.pandit_name}
-                </h2>
-                <p
-                  className={`${
-                    booking.booking_status === "success"
-                      ? "text-green-700"
-                      : "text-red-600"
-                  } font-semibold text-md`}
-                >
-                  {booking.booking_status}
-                </p>
-                <p className="text-red-600 font-bold text-md">
-                  Paid Rs.{booking.net_amount}/-
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row justify-between items-center mt-3 gap-3">
-              <p className="text-gray-600 text-sm text-center sm:text-left">
-                <span className="font-semibold">Order time & date:</span>{" "}
-                {booking.booking_date}
-              </p>
-              <div
-                className={`${
-                  statusColors[booking.booking_status]
-                } rounded-full px-4 py-1`}
-              >
-                <p className="text-white text-sm">{booking.booking_status}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div className="text-center text-gray-500 text-lg font-semibold">
-        No bookings found.
-      </div>
-    )}
-  </div>
-)} */}
-
 {activeStep === `${t("chadhava")}` && (
   <div className="bg-gray-100 p-6  rounded-lg">
     <div className="grid grid-row-1 sm:grid-row-2 lg:grid-row-3 gap-5">
@@ -567,7 +502,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       <div>
         <p className="font-semibold text-sm md:text-base">{item.name}</p>
         <p className="text-xs text-gray-600">{t("Qty")}: {item.quantity}</p>
-        <p className="text-xs text-gray-600">  {t("AmountRs")}: {item.price || t("Free")}/-</p>
+        {/* <p className="text-xs text-gray-600">  {t("AmountRs")}: {item.price || t("Free")}/-</p> */}
       </div>
     </li>
   ))}

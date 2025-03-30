@@ -66,7 +66,7 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
         let formDataToSend = new FormData();
         formDataToSend.append("type", "chadhava_order");
         formDataToSend.append("chadhava_id", id);
-        formDataToSend.append("amount", totalPrice);
+        formDataToSend.append("total", totalPrice);
         formDataToSend.append("payment_id", "NULL"); // No payment ID when total is 0
         formDataToSend.append("payment_detail", "");
         formDataToSend.append("payment_status", "success"); // Mark as success since no payment is needed
@@ -144,7 +144,7 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
       let formDataToSend = new FormData();
       formDataToSend.append("type", "chadhava_order");
       formDataToSend.append("chadhava_id", id); // Correct order ID
-      formDataToSend.append("amount", totalPrice);
+      formDataToSend.append("total", totalPrice);
       formDataToSend.append("payment_id", orderId);
       formDataToSend.append("payment_detail", "");
       formDataToSend.append("payment_status", paymentStatus); // Dynamic payment status
