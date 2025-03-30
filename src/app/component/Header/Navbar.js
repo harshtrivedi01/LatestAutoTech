@@ -204,7 +204,7 @@ export default function Navbar() {
 
           {/* Mobile Sidebar */}
           <div
-            className={`absolute top-24 left-0 w-full bg-white md:hidden transition-transform duration-300 ${
+            className={`z-30 absolute top-24 left-0 w-full bg-white md:hidden transition-transform duration-300 ${
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >

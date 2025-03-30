@@ -98,7 +98,7 @@ const Homefirst = ({ sliderList = [] }) => {
   onClick={prevSlide}
   className="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 
              bg-white/50 text-black p-2 sm:p-3 rounded-full hover:bg-black/70 transition 
-             z-20 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
+             z-10 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
 >
   <ChevronLeft size={20} className="sm:size-28" />
 </button>
@@ -108,14 +108,14 @@ const Homefirst = ({ sliderList = [] }) => {
   onClick={nextSlide}
   className="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 
              bg-white/50 text-black p-2 sm:p-3 rounded-full hover:bg-black/70 transition 
-             z-20 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
+             z-10 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
 >
   <ChevronRight size={20} className="sm:size-28" />
 </button>
 
 
       {/* Dots Indicator */}
-      <div className="absolute flex -translate-x-1/2 bottom-4 left-1/2 space-x-2 z-20">
+      <div className="absolute flex -translate-x-1/2 bottom-4 left-1/2 space-x-2 z-10">
         {sliderList.map((_, i) => (
           <button
             key={i}

@@ -531,24 +531,24 @@ export default function Poojadetailpage() {
   const [showButton, setShowButton] = useState(true);
   
   useEffect(() => {
-    const sectionIds = ["about-pooja", "pooja-benefits", "PoojaProcess", "pooja-package"];
+    const sectionIds = ["about-pooja", "pooja-benefits", "pooja-package","PoojaProcess"];
+    
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isManualScroll.current) return; // Ignore auto updates when clicking
-
-        const visibleSection = entries.find((entry) => entry.isIntersecting);
-        if (visibleSection) {
-          setActiveTab(visibleSection.target.id);
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveTab(entry.target.id);
+          }
+        });
       },
-      { threshold: 0.5 } // Adjust for better visibility detection
+      { threshold: 0.6 } // Adjust threshold to detect visibility better
     );
-
+  
     sectionIds.forEach((id) => {
       const section = document.getElementById(id);
       if (section) observer.observe(section);
     });
-
+  
     return () => {
       sectionIds.forEach((id) => {
         const section = document.getElementById(id);
@@ -556,6 +556,7 @@ export default function Poojadetailpage() {
       });
     };
   }, []);
+  
   
   
   
@@ -620,29 +621,27 @@ export default function Poojadetailpage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
-  const tabRefs = useRef({}); // Store refs for tabs
-
-  // Function to scroll to section
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
-
-      // Immediately update active tab
-      setActiveTab(id);
+  
+      // Ensure active tab updates instantly on click
+      setTimeout(() => setActiveTab(id), 300); 
     }
   };
+  
+  const tabRefs = useRef({}); // Store refs for buttons
 
-  // Auto-scroll active tab into view
-  useEffect(() => {
-    if (activeTab && tabRefs.current[activeTab]) {
-      tabRefs.current[activeTab].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center", // Keeps it centered in the tab list
-      });
-    }
-  }, [activeTab]); // Runs whenever `activeTab` changes // Runs whenever activeTab changes
+useEffect(() => {
+  if (activeTab && tabRefs.current[activeTab]) {
+    tabRefs.current[activeTab].scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center", // Keeps it centered
+    });
+  }
+}, [activeTab]); // Runs whenever activeTab changes
 
   return (
     <>
@@ -760,8 +759,6 @@ export default function Poojadetailpage() {
           </div>
         </div>
       </section>
-
-      
       <div className="sticky top-0 z-10 bg-white flex justify-center px-2 sm:px-4 shadow-md">
     <div className="container flex justify-start sm:justify-center space-x-2 sm:space-x-4 border-b overflow-x-auto flex-nowrap scroll-smooth snap-x scrollbar-hide w-full">
       {[
