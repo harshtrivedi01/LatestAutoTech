@@ -35,20 +35,16 @@ export default function FaqPage() {
   };
 
   return (
-    <div className="faq p-10 bg-[#FFF8F5] min-h-screen">
-      <div className="container max-w-7xl">
-      <div className=" p-60 overflow-hidden">
-        <div className="container">
-          <div className="items-center gap-10">
-            <div>
-              <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-">
-              {t("FAQ")}
-              </h2>
-            </div>
-          </div>
-        </div>
+    <div className="faq py-10 bg-[#FFF8F5] min-h-screen">
+      <div className="container max-w-7xl mx-auto">
+      <div className="  overflow-hidden ">
+       
       
       </div>
+
+      <h2 className="lg:text-2xl md:text-xl text-2xl font-bold mb-5">
+              {t("FAQ")}
+              </h2>
         <div className="space-y-4 ">
           {pujaData?.map((faq, index) => (
             <div key={index} className="border-b border-slate-200 bg-white px-2">
