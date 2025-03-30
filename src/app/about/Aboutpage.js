@@ -16,7 +16,8 @@ export default function Aboutpage({heading,description,image}) {
             <p className="text-lg lg:text-xl mt-6 t" dangerouslySetInnerHTML={{ __html:(description) }}></p>
             <p className="mt-5 md:mt-10 mb-5">
               <a
-                href="/join"
+              href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank"
+
                 type="button"
                 className="text-white hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-bold rounded-2xl shadow-2xl px-2 lg:px-10 lg:py-3 py-2 text-center bg-orange-600 hover:bg-orange-700 focus:ring-orange-800"
                 style={{ backgroundColor: "#E5644E" }}
@@ -27,7 +28,7 @@ export default function Aboutpage({heading,description,image}) {
 
           </div>
           <div className="lg:w-1/2 items-center flex justify-center">
-            <img className="" src={image||"/images/aboutimage.png"}
+            <img className="object-cover" src={image||"/images/aboutimage.png"}
                onError={(e) => (e.target.src ="/images/aboutimage.png") }
             /></div>
           <div className="flex absolute w-80 hidden lg:flex lg:right-20 lg:top-96 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">

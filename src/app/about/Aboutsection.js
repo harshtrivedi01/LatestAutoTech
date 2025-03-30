@@ -39,10 +39,8 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
            dangerouslySetInnerHTML={{ __html:(description) }}>
           </p>
         </div>
-        <br />
-        <br />
-        <br /> <br />
-        <br />
+      
+       
         <div>
           <div className=" ">
           <div className="container mx-auto px-4 py-8">

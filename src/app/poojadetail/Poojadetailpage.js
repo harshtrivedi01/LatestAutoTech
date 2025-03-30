@@ -531,24 +531,24 @@ export default function Poojadetailpage() {
   const [showButton, setShowButton] = useState(true);
   
   useEffect(() => {
-    const sectionIds = ["about-pooja", "pooja-benefits", "pooja-package","PoojaProcess"];
-    
+    const sectionIds = ["about-pooja", "pooja-benefits", "PoojaProcess", "pooja-package"];
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveTab(entry.target.id);
-          }
-        });
+        if (isManualScroll.current) return; // Ignore auto updates when clicking
+
+        const visibleSection = entries.find((entry) => entry.isIntersecting);
+        if (visibleSection) {
+          setActiveTab(visibleSection.target.id);
+        }
       },
-      { threshold: 0.6 } // Adjust threshold to detect visibility better
+      { threshold: 0.5 } // Adjust for better visibility detection
     );
-  
+
     sectionIds.forEach((id) => {
       const section = document.getElementById(id);
       if (section) observer.observe(section);
     });
-  
+
     return () => {
       sectionIds.forEach((id) => {
         const section = document.getElementById(id);
@@ -556,7 +556,6 @@ export default function Poojadetailpage() {
       });
     };
   }, []);
-  
   
   
   
@@ -621,21 +620,29 @@ export default function Poojadetailpage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
+  const tabRefs = useRef({}); // Store refs for tabs
+
+  // Function to scroll to section
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
-  
-      // Ensure active tab updates instantly on click
-      setTimeout(() => setActiveTab(id), 300); 
+
+      // Immediately update active tab
+      setActiveTab(id);
     }
   };
-  
-  const images = [
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_004.6b33d4c4.webp&w=1920&q=75",
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_001.d7bef497.webp&w=1920&q=75",
-  ];
+
+  // Auto-scroll active tab into view
+  useEffect(() => {
+    if (activeTab && tabRefs.current[activeTab]) {
+      tabRefs.current[activeTab].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center", // Keeps it centered in the tab list
+      });
+    }
+  }, [activeTab]); // Runs whenever `activeTab` changes // Runs whenever activeTab changes
 
   return (
     <>
@@ -753,26 +760,28 @@ export default function Poojadetailpage() {
           </div>
         </div>
       </section>
-{/* Tab Section */}
-<div className="sticky top-0 z-10 bg-white flex justify-center px-2 sm:px-4 shadow-md">
-  <div className="container flex justify-start sm:justify-center space-x-2 sm:space-x-4 border-b overflow-x-auto flex-nowrap scroll-smooth snap-x scrollbar-hide w-full">
-    {[
-      { id: "about-pooja", label: `${t("AboutPooja")}` },
-      { id: "pooja-benefits", label: `${t("PoojaBenefits")}` },
-      { id: "PoojaProcess", label: `${t("PoojaProcess")}` },
-      { id: "pooja-package", label: `${t("PoojaPackage")}` },
-    ].map((tab) => (
-      <button
-        key={tab.id}
-        className={`px-3 sm:px-6 py-2 sm:py-3 min-w-[120px] sm:min-w-[140px] font-medium transition-all duration-300 whitespace-nowrap snap-start text-xs sm:text-sm truncate
-          ${activeTab === tab.id ? "bg-[#E5644E] text-white rounded-t-lg" : "text-gray-600"}`}
-        onClick={() => scrollToSection(tab.id)}
-      >
-        {tab.label}
-      </button>
-    ))}
+
+      
+      <div className="sticky top-0 z-10 bg-white flex justify-center px-2 sm:px-4 shadow-md">
+    <div className="container flex justify-start sm:justify-center space-x-2 sm:space-x-4 border-b overflow-x-auto flex-nowrap scroll-smooth snap-x scrollbar-hide w-full">
+      {[
+        { id: "about-pooja", label: t("AboutPooja") },
+        { id: "pooja-benefits", label: t("PoojaBenefits") },
+        { id: "PoojaProcess", label: t("PoojaProcess") },
+        { id: "pooja-package", label: t("PoojaPackage") },
+      ].map((tab) => (
+        <button
+          key={tab.id}
+          ref={(el) => (tabRefs.current[tab.id] = el)} // Assign ref
+          className={`px-3 sm:px-6 py-2 sm:py-3 min-w-[120px] sm:min-w-[140px] font-medium transition-all duration-300 whitespace-nowrap snap-start text-xs sm:text-sm truncate
+            ${activeTab === tab.id ? "bg-[#E5644E] text-white rounded-t-lg" : "text-gray-600"}`}
+          onClick={() => scrollToSection(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
   </div>
-</div>
 
 
 
