@@ -26,15 +26,15 @@ useEffect(() => {
 }, []);
 
 
-// Persist the active section
-useEffect(() => {
-  localStorage.setItem("activeSection", activeSection);
-}, [activeSection]);
+// // Persist the active section
+// useEffect(() => {
+//   localStorage.setItem("activeSection", activeSection);
+// }, [activeSection]);
 
-// Persist the active subscription tab
-useEffect(() => {
-  localStorage.setItem("activeSubscriptionTab", activeSubscriptionTab);
-}, [activeSubscriptionTab]);
+// // Persist the active subscription tab
+// useEffect(() => {
+//   localStorage.setItem("activeSubscriptionTab", activeSubscriptionTab);
+// }, [activeSubscriptionTab]);
 
 // Save cart whenever it changes
 useEffect(() => {
