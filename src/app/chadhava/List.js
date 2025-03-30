@@ -27,11 +27,11 @@ export default function List({ pujaData }) {
           {dataToDisplay.map((puja, index) => (
             <li key={index} className="h-full">
               <Link href={`chadhavadetail/${puja.id}`}>
-              <div className="bg-white  rounded-lg shadow-lg bg-gray-800 border-gray-700 flex flex-col min-h-[480px] h-full">
+              <div className="bg-white  rounded-lg shadow-lg bg-gray-800 border-gray-700 flex flex-col min-h-[400px] h-full">
                 {/* Image Section */}
-                <a href={`chadhavadetail/${puja.id}`} className="flex justify-center">
+                <a href={`chadhavadetail/${puja.id}`} className="flex justify-center object-cover">
                   <img
-                    className="h-60  object-cove rounded-t-lg"
+                    className="h-52 w-full  object-cove rounded-t-lg"
                     src={puja.image || "/images/logo.png" }
                     alt={puja.title}
                     onError={(e) => (e.target.src = "/images/logo.png")}
