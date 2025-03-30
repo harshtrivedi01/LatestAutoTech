@@ -181,7 +181,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
             <div className="items-center gap-12">
               <div>
                 <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-                {t("booking")}
+                {t("orderhistory")}
                 </h2>
               </div>
             </div>
