@@ -58,64 +58,83 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
    };
  
    const handlePayment = async () => {
-     setLoading(true);
- 
-     try {
-       let formData = new FormData();
-       formData.append("type", "cashfree_payment_order");
-       formData.append("order_type", "chadhava");
-       formData.append("amount", totalPrice);
-       formData.append("currency", "INR");
- 
-       const response = await api.post("/orders", formData);
-       const result = await response.data;
- 
-       if (result.status === "1" && result.data.payment_session_id) {
-         
- 
-         const cashfree = await initializeSDK();
-         await cashfree
-           .checkout({
-             paymentSessionId: result.data.payment_session_id,
-             redirectTarget: "_modal",
-           })
-           .then(async (pgResponse) => {
-             console.log("Cashfree Response:", pgResponse);
- 
-             // Extract payment status
-             let paymentStatus =
-               pgResponse.paymentDetails?.paymentMessage === "Payment finished. Check status."
-                 ? "success"
-                 : "failed";
- 
-             // Extract reference ID if available
-             let paymentId = pgResponse.paymentDetails?.referenceId || "N/A";
- 
-             // Call puja booking API
-             const bookingResponse = await completePujaBooking(
-               result.data.order_id, // Correct order ID
-               paymentId,
-               paymentStatus
-             );
- 
-             if (bookingResponse.status === "1") {
-          
-               router.push("/successpage");
-             } else {
-               router.push("/failed");
-             }
-           });
-       } else {
-         console.error("Payment API Error:", result.message);
-         alert("Failed to initiate payment. Please try again.");
-       }
-     } catch (error) {
-       console.error("Payment Request Error:", error);
-       alert("Something went wrong. Please try again.");
-     } finally {
-       setLoading(false);
-     }
-   };
+    setLoading(true);
+  
+    try {
+      if (totalPrice === 0) {
+        // Directly call /chadhava API if totalPrice is 0
+        let formDataToSend = new FormData();
+        formDataToSend.append("type", "chadhava_order");
+        formDataToSend.append("chadhava_id", id);
+        formDataToSend.append("amount", totalPrice);
+        formDataToSend.append("payment_id", "NULL"); // No payment ID when total is 0
+        formDataToSend.append("payment_detail", "");
+        formDataToSend.append("payment_status", "success"); // Mark as success since no payment is needed
+        formDataToSend.append("payment_type", "none"); // Indicate no payment gateway used
+        formDataToSend.append("currency", "inr");
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("gotra", formData.gotra);
+        formDataToSend.append("carts", JSON.stringify(carts));
+  
+        const response = await api.post("/chadhava", formDataToSend);
+        const result = response.data;
+  
+        if (result.status === "1") {
+          router.push("/successpage"); // Redirect to success page
+        } else {
+          router.push("/failed"); // Redirect to failure page
+        }
+      } else {
+        // Proceed with the payment process as usual
+        let formData = new FormData();
+        formData.append("type", "cashfree_payment_order");
+        formData.append("order_type", "chadhava");
+        formData.append("amount", totalPrice);
+        formData.append("currency", "INR");
+  
+        const response = await api.post("/orders", formData);
+        const result = response.data;
+  
+        if (result.status === "1" && result.data.payment_session_id) {
+          const cashfree = await initializeSDK();
+          await cashfree
+            .checkout({
+              paymentSessionId: result.data.payment_session_id,
+              redirectTarget: "_modal",
+            })
+            .then(async (pgResponse) => {
+              let paymentStatus =
+                pgResponse.paymentDetails?.paymentMessage === "Payment finished. Check status."
+                  ? "success"
+                  : "failed";
+  
+              let paymentId = pgResponse.paymentDetails?.referenceId || "N/A";
+  
+              const bookingResponse = await completePujaBooking(
+                result.data.order_id,
+                paymentId,
+                paymentStatus
+              );
+  
+              if (bookingResponse.status === "1") {
+                router.push("/successpage");
+              } else {
+                router.push("/failed");
+              }
+            });
+        } else {
+          console.error("Payment API Error:", result.message);
+          alert("Failed to initiate payment. Please try again.");
+        }
+      }
+    } catch (error) {
+      console.error("Payment Request Error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
  
   
    const completePujaBooking = async (orderId, paymentId, paymentStatus) => {

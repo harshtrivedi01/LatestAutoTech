@@ -646,7 +646,7 @@ export default function Poojadetailpage() {
 ) : (
   <div>
    
-     <section className="poojadetail py-10 z-20" id="home1">
+     <section className="poojadetail py-5 z-20" id="home1">
         <div className="">
           <div className="z-10 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
             {/* Left Side - Image Slider */}
@@ -661,16 +661,17 @@ export default function Poojadetailpage() {
                   className="w-full flex justify-center items-center text-white text-center text-3xl font-bold bg-cover bg-center rounded-xl"
                   style={{ backgroundImage: `url(${slides[index].image})` }}
                 >
-                  <div className="h-[200px] w-full flex justify-center img-ratio">
-                    <img
-                      className="w-full  object-contain h-full rounded-2xl"
-                      src={ pujaData?.image || "/images/logo.png"}
-                      alt="Pooja Banner"
-                      height="100%"
-                      width="100%"
-                      onError={(e) => (e.target.src = "/images/logo.png")}
-                    />
-                  </div>
+                 <div className="w-full flex justify-center">
+  <div className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+    <img
+      className="w-full h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[300px] object-contain rounded-2xl"
+      src={pujaData?.image || "/images/logo.png"}
+      alt="Pooja Banner"
+      onError={(e) => (e.target.src = "/images/logo.png")}
+    />
+  </div>
+</div>
+
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -745,7 +746,7 @@ export default function Poojadetailpage() {
     </div>
     <a  onClick={() => scrollToSection("pooja-package")}
         id="package"
-        className="w-full cursor-pointer block uppercase text-center px-6 py-4 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
+        className="w-full cursor-pointer block uppercase text-center px-6 py-3 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
             {t("SelectPoojapackage")}
               </a>
             </div>
@@ -763,7 +764,7 @@ export default function Poojadetailpage() {
     ].map((tab) => (
       <button
         key={tab.id}
-        className={`px-4 sm:px-6 py-2 sm:py-3 min-w-[100px] sm:min-w-[140px] font-medium transition-all duration-300 whitespace-nowrap snap-start
+        className={`px-3 sm:px-6 py-2 sm:py-3 min-w-[120px] sm:min-w-[140px] font-medium transition-all duration-300 whitespace-nowrap snap-start text-xs sm:text-sm truncate
           ${activeTab === tab.id ? "bg-[#E5644E] text-white rounded-t-lg" : "text-gray-600"}`}
         onClick={() => scrollToSection(tab.id)}
       >
@@ -772,6 +773,7 @@ export default function Poojadetailpage() {
     ))}
   </div>
 </div>
+
 
 
 

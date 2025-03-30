@@ -567,7 +567,7 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       <div>
         <p className="font-semibold text-sm md:text-base">{item.name}</p>
         <p className="text-xs text-gray-600">{t("Qty")}: {item.quantity}</p>
-        <p className="text-xs text-gray-600">  {t("AmountRs")}: {item.price}/-</p>
+        <p className="text-xs text-gray-600">  {t("AmountRs")}: {item.price || t("Free")}/-</p>
       </div>
     </li>
   ))}

@@ -7,7 +7,7 @@ export const Homeseven = () => {
   const { t } = useTranslation();
   return (
     <div className="bg-[#FFEEE2] px-5 py-10 sm:py-20">
-      <div className="max-w-screen-xl mx-auto bg-[#FFD7AA] rounded-[40px] sm:rounded-[70px]  py-10  sm:py-16">
+      <div className="max-w-screen-xl mx-auto bg-[#FFD7AA] rounded-[40px] sm:rounded-[70px]  py-10  ">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
           {/* Text Section */}
           <div className="text-center lg:text-left px-6 sm:px-12">

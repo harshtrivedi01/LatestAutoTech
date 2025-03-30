@@ -48,7 +48,7 @@ export default function BookingDetailspage() {
       <div className="text-center space-y-2 sm:text-left">
         <p className="font-semibold">{item.name}</p>
         <p className="text-xs text-gray-600">{t("Qty")}: {item.quantity}</p>
-        <p className="text-xs text-gray-600">  {t("AmountRs")}: {item.price}/-</p>
+        <p className="text-xs text-green-600">  {t("AmountRs")}: {item.price || t("Free")}/-</p>
       </div>
     </li>
   ))}
@@ -62,7 +62,7 @@ export default function BookingDetailspage() {
         <div className="w-full md:w-2/3 space-y-3">
           <h3 className="text-xl font-semibold">{order.chadhava_name }</h3>
           <p><strong>{t("OrderDate")}: </strong>{order.created_at}</p>
-          <p><strong>{t("AmountRs")}:</strong> {order.amount || t("Free")}/-</p>
+          <p className="text-green-600"><strong>{t("AmountRs")}:</strong> {order.amount || t("Free")}/-</p>
          
         </div>
       </div>
