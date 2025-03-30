@@ -25,6 +25,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+     unoptimized: true,
     domains: ['punyasetu-bucket.s3.ap-south-1.amazonaws.com','clickpanditji.com','www.srimandir.com'],
   
     remotePatterns: [
