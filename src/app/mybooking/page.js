@@ -258,112 +258,107 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       </p>
     ) : (
       <>
-        {/* Pooja Booking List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {currentBookings.map((booking) => (
-            <div
-              key={booking.booking_id}
-              onClick={() => router.push(`/booking-details/${booking.booking_id}`)}
-              className="border-[#87521B] bg-white border-[2px] rounded-lg p-2 cursor-pointer flex flex-col justify-between h-full"
-            >
-              {/* Content */}
-              <div className="flex flex-col flex-row  gap-4 text-start flex-grow">
-                {/* Image Section */}
-                <div className="w-full  flex justify-center">
-                  <img
-                    src={booking.puja_image || "/images/poojabox.png"}
-                    alt="Pooja Image"
-                    onError={(e) => (e.target.src = "/images/logo.png")}
-                    className="w-[150px] h-[150px] sm:w-[180px] sm:h-[180px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
-                  />
-                </div>
-
-                {/* Details Section */}
-                <div className="w-full sm:w-7/12 text-center sm:text-left">
-               
-                  <h2 className="text-lg font-bold text-black">{booking.puja_name}</h2>
-                  <p className="text-red-600 font-bold text-md">{booking.package_name || "N/A"}</p>
- {/* Amount */}
- <p className="text-black font-semibold text-base mt-1">
-                    {t("AmountRs")} {booking.amount}/-
-                  </p>
-                  {/* Payment Status */}
-                  <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
-                    <span className="text-base font-semibold">{t("Payment")}: </span>
-                    <div
-                      className={`${
-                        booking.payment_status === "success"
-                          ? "text-green-600"
-                          : booking.payment_status === "failed"
-                          ? "text-red-500"
-                          : "text-yellow-600"
-                      } rounded-full`}
-                    >
-                      <p className="text-sm uppercase font-bold"> {booking.payment_status}</p>
-                    </div>
-                  </div>
-
-                 
-
-                  {/* Booking Status */}
-                  <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
-                    <span className="text-base font-semibold">{t("booking")}: </span>
-                    <div
-                      className={`${
-                        booking.payment_status === "success"
-                          ? "text-green-600"
-                          : booking.payment_status === "failed"
-                          ? "text-red-500"
-                          : "text-yellow-600"
-                      } font-bold`}
-                    >
-                      {booking.payment_status === "success"
-                        ? t("Confirmed")
-                        : booking.payment_status === "failed"
-                        ? t("Failed")
-                        : t("Pending")}
-                    </div>
-                  </div>
-
-                  {/* Pooja Status */}
-                  <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
-                    <span className="text-base font-semibold">{t("Pooja")}: </span>
-                    <div
-                      className={`${
-                        booking.booking_status === "success"
-                          ? "text-green-500"
-                          : booking.booking_status === "cancelled"
-                          ? "text-red-500"
-                          : "text-yellow-600"
-                      } font-bold`}
-                    >
-                      {booking.booking_status === "success"
-                        ? t("Confirmed")
-                        : booking.booking_status === "cancelled"
-                        ? t("Failed")
-                        : t("Pending")}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Footer Section */}
-              <div className="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3">
-                <p className="text-gray-600 text-sm text-center sm:text-left">
-                <h2 className="text-sm font-light text-gray-400"></h2>
-                <span className="font-semibold">{t("OrderID")} </span>
-                #{booking.booking_code}
-                  <br />
-                  <span className="font-semibold">{t("poojadate")}: </span>
-                  {booking.booking_date}
-                  <br />
-                  <span className="font-semibold">{t("Ordertimedate")} </span>
-                  {booking.create_date}
-                </p>
-              </div>
-            </div>
-          ))}
+      {/* Pooja Booking List */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+  {currentBookings.map((booking) => (
+    <div
+      key={booking.booking_id}
+      onClick={() => router.push(`/booking-details/${booking.booking_id}`)}
+      className="border-[#87521B] bg-white border-[2px] rounded-lg p-4 cursor-pointer flex flex-col justify-between h-full shadow-md hover:shadow-lg transition-shadow"
+    >
+      {/* Content */}
+      <div className="flex flex-col  items-center sm:items-start gap-4 flex-grow">
+        {/* Image Section */}
+        <div className=" flex justify-center">
+          <img
+            src={booking.puja_image || "/images/poojabox.png"}
+            alt="Pooja Image"
+            onError={(e) => (e.target.src = "/images/logo.png")}
+            className="w-full h-[150px]  sm:h-[180px] border-2 border-white object-contain shadow-lg shadow-gray-400 rounded-lg"
+          />
         </div>
+
+        {/* Details Section */}
+        <div className="w-full text-center sm:text-left">
+          <h2 className="text-lg font-bold text-black">{booking.puja_name}</h2>
+          <p className="text-red-600 font-bold text-md">{booking.package_name || "N/A"}</p>
+
+          {/* Amount */}
+          <p className="text-black font-semibold text-base mt-1">
+            {t("AmountRs")} {booking.amount}/-
+          </p>
+
+          {/* Payment Status */}
+          <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
+            <span className="text-base font-semibold">{t("Payment")}: </span>
+            <span
+              className={`text-sm uppercase font-bold ${
+                booking.payment_status === "success"
+                  ? "text-green-600"
+                  : booking.payment_status === "failed"
+                  ? "text-red-500"
+                  : "text-yellow-600"
+              }`}
+            >
+              {booking.payment_status}
+            </span>
+          </div>
+
+          {/* Booking Status */}
+          <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
+            <span className="text-base font-semibold">{t("booking")}: </span>
+            <span
+              className={`font-bold ${
+                booking.payment_status === "success"
+                  ? "text-green-600"
+                  : booking.payment_status === "failed"
+                  ? "text-red-500"
+                  : "text-yellow-600"
+              }`}
+            >
+              {booking.payment_status === "success"
+                ? t("Confirmed")
+                : booking.payment_status === "failed"
+                ? t("Failed")
+                : t("Pending")}
+            </span>
+          </div>
+
+          {/* Pooja Status */}
+          <div className="flex justify-center sm:justify-start items-center gap-2 mt-1">
+            <span className="text-base font-semibold">{t("Pooja")}: </span>
+            <span
+              className={`font-bold ${
+                booking.booking_status === "success"
+                  ? "text-green-500"
+                  : booking.booking_status === "cancelled"
+                  ? "text-red-500"
+                  : "text-yellow-600"
+              }`}
+            >
+              {booking.booking_status === "success"
+                ? t("Confirmed")
+                : booking.booking_status === "cancelled"
+                ? t("Failed")
+                : t("Pending")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3 border-t pt-3 w-full text-center sm:text-left">
+        <p className="text-gray-600 text-sm">
+          <span className="font-semibold">{t("OrderID")}: </span>#{booking.booking_code}
+          <br />
+          <span className="font-semibold">{t("poojadate")}: </span>{booking.booking_date}
+          <br />
+          <span className="font-semibold">{t("Ordertimedate")}: </span>{booking.create_date}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
 
         {/* Pagination Controls */}
         <div className="flex justify-center mt-6">
