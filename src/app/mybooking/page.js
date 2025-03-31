@@ -264,12 +264,12 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
             <div
               key={booking.booking_id}
               onClick={() => router.push(`/booking-details/${booking.booking_id}`)}
-              className="border-[#87521B] bg-white border-[2px] rounded-lg p-5 cursor-pointer flex flex-col justify-between h-full"
+              className="border-[#87521B] bg-white border-[2px] rounded-lg p-2 cursor-pointer flex flex-col justify-between h-full"
             >
               {/* Content */}
-              <div className="flex flex-col sm:flex-row items-center gap-4 text-start flex-grow">
+              <div className="flex flex-col flex-row  gap-4 text-start flex-grow">
                 {/* Image Section */}
-                <div className="w-full sm:w-5/12 flex justify-center">
+                <div className="w-full  flex justify-center">
                   <img
                     src={booking.puja_image || "/images/poojabox.png"}
                     alt="Pooja Image"

@@ -222,6 +222,14 @@ export default function Navbar() {
                 </a>
               </li>
             
+              <li>
+                <a data-translate
+                  href="/chadhava"
+                  className="block py-2 px-3 text-black hover:bg-gray-100"
+                >
+                  {t("chadhava")} 
+                </a>
+              </li>
               
               <li>
                 <a data-translate
@@ -232,14 +240,6 @@ export default function Navbar() {
                 </a>
               </li>
            
-              <li>
-                <a data-translate
-                  href="/chadhava"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                  {t("chadhava")} 
-                </a>
-              </li>
               <li>
                 <a data-translate
                   href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank"
@@ -267,18 +267,18 @@ export default function Navbar() {
                 </a>
               </li>
              
-             
+              <li>
+                <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
+                {t("chadhava")} 
+                </a>
+              </li>
              
               <li>
                 <a data-translate href="/poojabox" className="text-black hover:text-orange-700">
                 {t("PoojaBox")} 
                 </a>
               </li>
-              <li>
-                <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
-                {t("chadhava")} 
-                </a>
-              </li>
+             
               <li>
                 <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
                 {t("DownloadAPP")} 

@@ -66,7 +66,7 @@ i18n
           DownloadAppfrom: "Download App from",
           Services: "Our Services",
           Company: "Company",
-          FAQ: "Frequently Asked Questions",
+          FAQ: "FAQ",
           PrivacyPolicy: "Privacy Policy",
           TermsANDConditions: "Terms & Conditions",
           SocialMedia: "Social Media",

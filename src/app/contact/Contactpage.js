@@ -116,10 +116,10 @@ export default function ContactPage() {
               <MdEmail className="text-xl" />
               <span className="text-sm text-light m-4">{pujaData?.email}</span>
             </div>
-            <div className="flex items-center mt-5">
+            {/* <div className="flex items-center mt-5">
               <FaLocationDot className="text-xl" />
               <span className="text-sm text-light m-4" dangerouslySetInnerHTML={{ __html:(pujaData?.address) }}></span>
-            </div>
+            </div> */}
             <br /><br /><br /><br />
         <div className="grid grid-cols-6 g">
         <a rel="noopener noreferrer" target="_blank"  href={pujaData?.social_links?.twitter} title="Twitter" className="flex items-center p-1">

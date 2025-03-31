@@ -67,7 +67,7 @@ const Homefirst = ({ sliderList = [] }) => {
       {/* Carousel Wrapper */}
       <div
         ref={sliderRef}
-        className="relative h-52 sm:h-72 md:h-[430px] overflow-hidden rounded-xl flex items-center"
+        className="relative h-36 sm:h-72 md:h-[430px] overflow-hidden rounded-xl flex items-center"
       >
         {sliderList.map((slide, index) => (
           <div
@@ -81,11 +81,11 @@ const Homefirst = ({ sliderList = [] }) => {
               onClick={() => handleSlideClick(index)}
             >
               <Image
-                src={slide.slider || "/images/sliderbackground.jpg"}
+                src={ "/images/banner.jpg"}
                 alt={`Slide ${slide.id}`}
                 layout="fill"
                 
-                className="rounded- cursor-pointer  rounded-lg"
+                className="rounded- cursor-pointer object-fill  rounded-lg"
   onError={(e) => e.target.src = "/images/sliderbackground.jpg"}
               />
             </div>

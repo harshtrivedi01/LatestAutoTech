@@ -37,9 +37,9 @@ useEffect(() => {
 // }, [activeSubscriptionTab]);
 
 // Save cart whenever it changes
-useEffect(() => {
-  localStorage.setItem("orderSummary", JSON.stringify(selectedItems));
-}, [selectedItems]);
+// useEffect(() => {
+//   localStorage.setItem("orderSummary", JSON.stringify(selectedItems));
+// }, [selectedItems]);
 
   const handleLoginSuccess = (token) => {
     localStorage.setItem("authToken", token); // Store the token with correct key
