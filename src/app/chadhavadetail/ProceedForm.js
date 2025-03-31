@@ -54,7 +54,7 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
     }
   };
    const initializeSDK = async () => {
-     return await load({ mode: "sandbox" });
+     return await load({ mode: "production" });
    };
  
    const handlePayment = async () => {

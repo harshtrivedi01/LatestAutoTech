@@ -132,7 +132,7 @@ const updateCartQuantity = async (productId, change) => {
 
 
   const initializeSDK = async () => {
-    return await load({ mode: "sandbox" }); // Change to "production" for live
+    return await load({ mode: "production" }); // Change to "production" for live
   };
   
   const handlePayment = async () => {
