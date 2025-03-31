@@ -67,7 +67,7 @@ const Homefirst = ({ sliderList = [] }) => {
       {/* Carousel Wrapper */}
       <div
         ref={sliderRef}
-        className="relative h-36 sm:h-72 md:h-[430px] overflow-hidden rounded-xl flex items-center"
+        className="relative h-52 sm:h-72 md:h-[430px] overflow-hidden rounded-xl flex items-center"
       >
         {sliderList.map((slide, index) => (
           <div
