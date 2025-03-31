@@ -66,32 +66,33 @@ const Homefirst = ({ sliderList = [] }) => {
     <div id="carousel" className="relative w-full">
       {/* Carousel Wrapper */}
       <div
-        ref={sliderRef}
-        className="relative h-52 sm:h-72 md:h-[430px] overflow-hidden rounded-xl flex items-center"
+  ref={sliderRef}
+  className="relative w-full overflow-hidden rounded-xl flex items-center 
+             aspect-[5/2] sm:aspect-[5/2] md:aspect-[16/4] lg:aspect-[16/4] xl:aspect-[21/5]"
+>
+  {sliderList.map((slide, index) => (
+    <div
+      key={index}
+      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+        index === currentIndex ? "opacity-100 z-10" : "opacity-0"
+      }`}
+    >
+      <div
+        className="relative w-full h-full cursor-pointer"
+        onClick={() => handleSlideClick(index)}
       >
-        {sliderList.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              index === currentIndex ? "opacity-100 z-10" : "opacity-0"
-            }`}
-          >
-            <div
-              className="relative w-full h-full cursor-pointer"
-              onClick={() => handleSlideClick(index)}
-            >
-              <Image
-                src={ "/images/banner.jpg"}
-                alt={`Slide ${slide.id}`}
-                layout="fill"
-                
-                className="rounded- cursor-pointer object-fill  rounded-lg"
-  onError={(e) => e.target.src = "/images/sliderbackground.jpg"}
-              />
-            </div>
-          </div>
-        ))}
+        <Image
+          src={"/images/banner.jpg"}
+          alt={`Slide ${slide.id}`}
+          layout="fill"
+          className="rounded-lg cursor-pointer object-conain"
+          onError={(e) => e.target.src = "/images/sliderbackground.jpg"}
+        />
       </div>
+    </div>
+  ))}
+</div>
+
 
     {/* Left Navigation Button */}
 <button
