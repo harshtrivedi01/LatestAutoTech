@@ -51,7 +51,7 @@ export default function Homesecond({ module_category_details }) {
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {
               const { modulecategory, short_description, id } = category;
-              // Use serviceImages mapping to get the correct image
+      
               const imageSrc = serviceImages[modulecategory] || service1; // Default to service1 if category not found
               const bookingUrl = bookingUrls[modulecategory] || "#";
 
