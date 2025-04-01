@@ -1,3 +1,6 @@
+
+
+
 // "use client";
 // import Image from "next/image";
 // import service1 from "../../../public/images/logo.png";
@@ -26,15 +29,17 @@
 //     "Granth": service4,
 //     "Online Classes": service5,
 //     "Live Darshan": service6,
+    
 //   };
 
 //   const bookingUrls = {
-//     "चढावा": "#",
+//     "चढ़ावा": "/chadhava",
 //     "Pooja Box": "/poojabox",
 //     "Pooja": "/poojabooking",
 //     "Granth": "#",
 //     "Online Classes": "#",
 //     "Live Darshan": "#",
+//     "Chadhava":"/chadhava",
 //     "गुरु जी": "#",
 //     "पूजा": "/poojabooking",
 //     "पूजा बॉक्स": "/poojabox",
@@ -49,8 +54,7 @@
 //           <div className="flex justify-center">
 //             <Heading text={t("Services")} />
 //           </div>
-//         <ul className="flex flex-wrap justify-center gap-6 text-center text-slate-700 px-5">
-
+//           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
 //             {module_category_details.slice(0, 6).map((category) => {
 //               const { modulecategory, short_description, id, image } = category;
 //               // const imageSrc = image || service1;
@@ -65,7 +69,8 @@
 //                   : short_description;
 
 //               return (
-//                 <li
+//                 <a
+//                 href={bookingUrl}
 //                   key={id}
 //                   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center flex flex-col justify-between"
 //                   style={{
@@ -107,7 +112,7 @@
 //                       {t("BookNow")}
 //                     </a>
 //                   </div>
-//                 </li>
+//                   </a>
 //               );
 //             })}
 //           </ul>
@@ -116,6 +121,8 @@
 //     </div>
 //   );
 // }
+
+
 
 "use client";
 import Image from "next/image";
@@ -143,13 +150,17 @@ export default function Homesecond({ module_category_details }) {
     "Pandit Ji": service2,
     "Pooja": "/images/pooja.png",
     "Pooja Box": "/images/pooja box.png",
-"Chadhava":  "/images/Chadhava.png",
+    "Chadhava":  "/images/Chadhava.png",
+
+    "पूजा": "/images/pooja.png",
+    "पूजा बॉक्स": "/images/pooja box.png",
+    "चढ़ावा":  "/images/Chadhava.png",
     "Live Darshan": service6,
     // Add any additional categories and corresponding images here
   };
 
   const bookingUrls = {
-    "चढावा": "#",
+    "चढ़ावा": "chadhava",
     "Pooja Box": "/poojabox",
     "Pooja": "/poojabooking",
     "Granth": "#",
@@ -200,9 +211,9 @@ export default function Homesecond({ module_category_details }) {
                     <img
                       src={imageSrc}
                       alt={modulecategory}
-                      width={119}
-                      height={136}
-                      className="mx-auto h-[136px] w-[119px] object-contain"
+                      width={136}
+                      height={300}
+                      className="mx-auto h-[136px] w-[300px] object-cover"
                       onError={(e) => (e.target.src = "/images/logo.png")}
                     />
                     <div className="my-3 font-display">

@@ -312,9 +312,10 @@ const updateCartQuantity = async (productId, change) => {
         <div className="flex flex-col md:flex-row items-start gap-4">
           {/* Image */}
           <img 
-            src={"/images/logo.png" || item.image} 
+            src={item.image || "/images/logo.png" } 
             alt={item.product_name} 
             className="rounded-lg object-contain h-32 w-32 sm:h-40 sm:w-40"
+            onError={(e) => (e.target.src = "/images/logo.png")}
           />
           
           {/* Product Details */}

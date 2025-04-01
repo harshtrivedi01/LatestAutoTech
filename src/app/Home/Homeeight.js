@@ -37,7 +37,7 @@ const Homeeight = ({ pujaData, detail }) => {
         </h2>
       </div>
 
-      <div className=" container relative w-full mx-auto ">
+      <div className="  container max-w-7xl  mx-auto relative w-full  ">
         {/* Slider */}
         <Splide
           ref={splideRef}
@@ -63,41 +63,40 @@ const Homeeight = ({ pujaData, detail }) => {
           {testimonials && testimonials.length > 0 ? (
   testimonials.map((testimonial, index) => (
     <SplideSlide key={testimonial.id || index}>
-      <div className=" p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg shadow-lg">
-        <div className="flex items-center gap-4">
-          {/* Client image */}
-          <img
-                    // src={testimonial?.image || "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
-                    src={"https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
-                    className="w-14 h-14 rounded-full border-2 shadow object-contain"
-                    alt={testimonial?.name || "Client"}
-                    onError={(e) => (e.target.src = "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")}
-                  />
-          <div>
-            {/* Client name */}
-            <h4 className="text-gray-800 text-lg font-semibold">
-              {testimonial?.name || "Client Name"}
-            </h4>
-          </div>
-        </div>
-
-        {/* Testimonial short description */}
-        <p className="font-semibold text-black mt-4">
-          {testimonial?.testimonials_description
-            ? testimonial.testimonials_description.split("\r\n")[0].slice(0, 50) +
-              (testimonial.testimonials_description.split("\r\n")[0].length > 50 ? "..." : "")
-            : "It was a very good experience"}
-        </p>
-
-        {/* Full testimonial description */}
-        <div className="mt-4">
-          <p className="text-sm text-black">
-            {testimonial?.testimonials_description?.split("\r\n")[1] ||
-              "The service was amazing. I never had to wait that long for my food."}
-          </p>
+    <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg shadow-lg min-h-[260px]">
+      <div className="flex items-center gap-4">
+        {/* Client image */}
+        <img
+          src={
+            "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
+          }
+          className="w-14 h-14 rounded-full border-2 shadow object-contain"
+          alt={testimonial?.name || "Client"}
+          onError={(e) => (e.target.src = "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")}
+        />
+        <div>
+          {/* Client name */}
+          <h4 className="text-gray-800 text-lg font-semibold">
+            {testimonial?.name || "Client Name"}
+          </h4>
         </div>
       </div>
-    </SplideSlide>
+  
+      <p className="font-semibold text-black mt-4">
+                  {testimonial?.heading || "It was a very good experience"}
+                </p>
+      {/* Testimonial short description */}
+      <p className="text-sm text-black mt-4">
+        {testimonial?.testimonials_description
+          ? testimonial.testimonials_description.split("\r\n")[0].slice(0, 200) +
+            (testimonial.testimonials_description.split("\r\n")[0].length > 200 ? "..." : "")
+          : "It was a very good experience"}
+      </p>
+  
+      
+    </div>
+  </SplideSlide>
+  
   ))
 ) : (
   <div className="text-center text-gray-500 text-lg font-semibold py-10">No data available</div>

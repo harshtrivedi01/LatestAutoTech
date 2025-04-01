@@ -69,7 +69,7 @@ export default function Footersection() {
 							<span className="text-3xl font-semibold">{t("PunyaSetu")}</span>
 						</a>
 						<div>
-							<h1 className="font-bold text-lg">{pujaData?.name || "M/S Satsambhav Technologies Private Limited"}</h1>
+							<h1 className="font-bold text-lg">{pujaData?.name || " Satsambhav Technologies Private Limited"}</h1>
 							<div className="mt-3 space-y-2">
 								<p className="flex items-center">
 									<a href={`mailto:${pujaData?.email || "report@punyasetu.com"}`} className="flex items-center text-gray-800 hover:text-orange-600">

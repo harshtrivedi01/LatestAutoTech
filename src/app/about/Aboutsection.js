@@ -122,10 +122,11 @@ export default function Aboutsection({description,bottomName,link,images, aboutu
       </div>
     </div>
 
-    <div className="col-span-2 sm:col-span-1 md:col-span-2 h-full flex flex-col">
+    <div className="col-span-2 sm:col-span-2 md:col-span-2 h-[400px] lg:h-full flex flex-col">
       <a href={""} className="group relative flex flex-col h-full overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow">
         <img
-         src={image4}
+          // src={pujaData?.data?.aboutus_images.image4}
+          src={"/images/hawan.jpg"}
           onError={(e) => (e.target.src = "/images/logo.png")}
           alt=""
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"

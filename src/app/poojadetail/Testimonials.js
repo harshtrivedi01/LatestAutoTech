@@ -86,7 +86,7 @@ const Testimonials = () => {
         >
           {testimonials.map((testimonial, index) => (
             <SplideSlide key={testimonial.id || index}>
-              <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg">
+             <div className="p-6 mx-auto relative max-w-md mb-10 bg-white rounded-lg shadow-lg min-h-[240px]">
                 <div className="flex items-center gap-4">
                   <img
                     // src={testimonial?.image || "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"}
@@ -96,7 +96,7 @@ const Testimonials = () => {
                     onError={(e) => (e.target.src = "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")}
                   />
                   <div>
-                    <h4 className="text-gray-800 text-lg font-semibold">{testimonial?.name || "Client Name"}</h4>
+                    <h4 className="text-gray-800 text-lg font-semibold">{testimonial?.name }</h4>
                   </div>
                 </div>
 
@@ -105,10 +105,12 @@ const Testimonials = () => {
                 </p>
 
                 <div className="mt-4">
-                  <p className="text-sm text-black">
-                    {testimonial?.testimonials_description?.split("\r\n")[1] ||
-                      "The service was amazing. I never had to wait that long for my food."}
-                  </p>
+                <p className="text-black text-sm mt-4">
+        {testimonial?.testimonials_description
+          ? testimonial.testimonials_description.split("\r\n")[0].slice(0, 150) +
+            (testimonial.testimonials_description.split("\r\n")[0].length > 150 ? "..." : "")
+          : "It was a very good experience"}
+      </p>
                 </div>
               </div>
             </SplideSlide>

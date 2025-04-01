@@ -74,12 +74,12 @@ const Homefirst = () => {
   };
 
   return (
-    <div id="carousel" className="relative w-full">
+    <div id="carousel" className="relative w-full  container max-w-7xl  mx-auto">
       {/* Carousel Wrapper */}
       <div
         ref={sliderRef}
         className="relative w-full overflow-hidden rounded-xl flex items-center 
-                   aspect-[4/2] sm:aspect-[5/2] md:aspect-[16/4] lg:aspect-[16/4] xl:aspect-[21/5]"
+                   aspect-[4/2] sm:aspect-[5/2] md:aspect-[16/4] lg:aspect-[16/4] xl:aspect-[21/6]"
       >
         {[...Array(totalSlides)].map((_, index) => {
           const { mobile, desktop } = getBannerImage(index);

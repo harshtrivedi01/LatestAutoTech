@@ -310,7 +310,7 @@ const [isExpanded, setIsExpanded] = useState(false);
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-orange-500 underline text-base font-semibold"
         >
-          {isExpanded ? "Read Less" : "Read More"}
+          {isExpanded ? `${t("ReadLess")}` : `${t("ReadMore")}`}
         </button>
       )}
     </div>  
