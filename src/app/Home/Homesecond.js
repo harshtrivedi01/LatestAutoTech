@@ -127,11 +127,8 @@
 "use client";
 import Image from "next/image";
 import service1 from "../../../public/images/logo.png";
-import service2 from "../../../public/images/logo.png";
-import service3 from "../../../public/images/logo.png";
-import service4 from "../../../public/images/logo.png";
-import service5 from "../../../public/images/logo.png";
-import service6 from "../../../public/images/logo.png";
+
+
 import Heading from "../component/Headingname/Heading";
 import DOMPurify from "dompurify";
 import { useTranslation } from "react-i18next";
@@ -146,8 +143,7 @@ export default function Homesecond({ module_category_details }) {
   }
 
   const serviceImages = {
-    "Guru Ji": service1,
-    "Pandit Ji": service2,
+   
     "Pooja": "/images/pooja.png",
     "Pooja Box": "/images/pooja box.png",
     "Chadhava":  "/images/Chadhava.png",
@@ -155,7 +151,7 @@ export default function Homesecond({ module_category_details }) {
     "पूजा": "/images/pooja.png",
     "पूजा बॉक्स": "/images/pooja box.png",
     "चढ़ावा":  "/images/Chadhava.png",
-    "Live Darshan": service6,
+  
     // Add any additional categories and corresponding images here
   };
 
