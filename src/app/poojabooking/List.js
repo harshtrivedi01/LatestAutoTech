@@ -35,7 +35,7 @@ export default function List({ pujaData }) {
                   {/* Image Section */}
                   <Link href={`poojadetail/${puja.id}`} className="flex justify-center">
                     <img
-                      className="h-56 w-full object-cover rounded-t-lg"
+                      className="h-56 w-full object-fill rounded-t-lg"
                       src={puja.image || "/images/logo.png"}
                       alt={puja.title}
                       onError={(e) => (e.target.src = "/images/logo.png")}
@@ -55,11 +55,7 @@ export default function List({ pujaData }) {
                         : ""}
                     </p>
 
-                    {puja.short_description && (
-                      <p className="text-gray-700 text-sm text-center flex-grow">
-                        {puja.short_description.split(" ").slice(0, 20).join(" ") + (puja.short_description.split(" ").length > 20 ? "..." : "")}
-                      </p>
-                    )}
+                 
 
                     {/* Date Section */}
                     {puja.date && (

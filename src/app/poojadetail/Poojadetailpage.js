@@ -201,6 +201,12 @@ useEffect(() => {
   }
 }, [activeTab]); // Runs whenever activeTab changes
 
+const [isExpanded, setIsExpanded] = useState(false);
+
+  const truncatedDescription = pujaData?.short_description
+    ? pujaData?.short_description.split(" ").slice(0, 30).join(" ") + (pujaData?.short_description.split(" ").length > 30 ? "..." : "")
+    : "";
+    
   return (
     <>
     {isError ? (
@@ -210,9 +216,9 @@ useEffect(() => {
 ) : (
   <div>
    
-     <section className="poojadetail py-5 z-20" id="home1">
+     <section className="poojadetail pb-5 pt-2 z-20" id="home1">
         <div className="">
-          <div className="z-10 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 p-3" >
+          <div className="z-10 container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-5 p-3" >
             {/* Left Side - Image Slider */}
             <div className="md:col-span-1 flex justify-center">
               <AnimatePresence mode="wait">
@@ -283,19 +289,31 @@ useEffect(() => {
 </i>
 
               <h5 className="mb-2 text-2xl font-bold text-start  tracking-tight text-[#BA1A1A] ">
-              { pujaData?.name||" Saturday ‘City of Mahakaal’ Special"}
+              { pujaData?.name||" "}
               <div className="w-40 sm:w-60 md:w-72 lg:w-80 h-0.5 mt-2 bg-[#BA1A1A]"></div>
 
               </h5>
 
               <h5 className="mb-2 text-xl mt-4 text-start font-semibold  text-gray-900 text-black">
-              {pujaData?.sub_title || " 11,000 Hanuman Mool Mantra Jaap and Hanuman Chalisa Path"}
+              {pujaData?.sub_title || ""}
               </h5>
-              <p className="mb-3 font-normal text-start text-gray-700 text-xl text-gray-400">
-  {pujaData?.short_description
-    ? pujaData?.short_description .split(" ").slice(0, 30).join(" ") + (pujaData?.short_description .split(" ").length > 30 ? "..." : "")
-    : ""}
-</p>      
+              <div>
+              <p 
+  className="mb-3 font-normal text-start text-gray-700 text-lg sm:text-sm md:text-lg lg:text-lg text-gray-400"
+  dangerouslySetInnerHTML={{
+    __html: isExpanded ? pujaData?.short_description : truncatedDescription
+  }}
+/>
+
+      {pujaData?.short_description?.split(" ").length > 30 && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="text-orange-500 underline text-base font-semibold"
+        >
+          {isExpanded ? "Read Less" : "Read More"}
+        </button>
+      )}
+    </div>  
              <div>
      
              {(pujaData?.date || (Array.isArray(pujaData?.dates) && pujaData.dates.length > 0)) && (
@@ -306,7 +324,7 @@ useEffect(() => {
     </div>
     <a  onClick={() => scrollToSection("pooja-package")}
         id="package"
-        className="w-full cursor-pointer block uppercase text-center px-6 py-3 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
+        className="w-full mt-3 cursor-pointer block uppercase text-center px-6 py-3 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800" >
             {t("SelectPoojapackage")}
               </a>
             </div>

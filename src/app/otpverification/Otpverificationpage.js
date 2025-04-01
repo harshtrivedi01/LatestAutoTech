@@ -290,7 +290,7 @@ export default function OtpVerificationPage() {
         key={index}
         ref={(el) => (inputRefs.current[index] = el)}
         className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
-        type="text"
+        type="tel" // Changed to "tel" for numeric keypad
         maxLength="1"
         value={val}
         onChange={(e) => handleChange(index, e)}

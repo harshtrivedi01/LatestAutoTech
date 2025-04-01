@@ -206,9 +206,10 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
             placeholder={t("Enteryourname")}
             value={formData.name}
             onChange={(e) => {
+              handleChange(e); 
               if (/^[A-Za-z\s]*$/.test(e.target.value)) {
                 setFormData({ ...formData, name: e.target.value });
-                handleChange(e); 
+               
                 setErrors({ ...errors, name: "" });
               }
             }}

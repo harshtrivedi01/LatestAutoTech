@@ -193,6 +193,11 @@ const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
     const data = new FormData();
    data.append("phone", phone);
    data.append("type", "resend otp");
+   data.append("Language", language);
+   data.append("Longitude", longitude);
+   data.append("Latitude", latitude);
+   data.append("Ip_address", ipAddress);
+   data.append("Device_id", "upen");
    try {
      setTimer(60);
      setResendVisible(false);
@@ -310,32 +315,35 @@ const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
     </p>
 
     <form onSubmit={handleOtpSubmit} className="mt-4">
-      <div className="flex justify-center gap-2">
-        {otp.map((digit, index) => (
-          <input
-            key={index}
-            ref={(el) => (inputRefs.current[index] = el)}
-            type="text"
-            maxLength="1"
-            value={otp[index] || ""}
-            onKeyDown={(e) => handleBackspace(index, e)}
-            onChange={(e) => handleOtpChange(index, e.target.value)}
-            className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
-          />
-        ))}
-      </div>
+  <div className="flex justify-center gap-2">
+    {otp.map((digit, index) => (
+      <input
+        key={index}
+        ref={(el) => (inputRefs.current[index] = el)}
+        type="tel" // Changed to "tel" for numeric keypad
+        inputMode="numeric" // Ensures numeric input on all devices
+        pattern="[0-9]*" // Restricts input to numbers
+        maxLength="1"
+        value={otp[index] || ""}
+        onKeyDown={(e) => handleBackspace(index, e)}
+        onChange={(e) => handleOtpChange(index, e.target.value)}
+        className="w-14 h-14 sm:w-16 sm:h-16 text-center border rounded-2xl text-lg focus:ring-2 ring-blue-700"
+      />
+    ))}
+  </div>
 
-      <button
-        type="submit"
-        disabled={isResendDisabled}
-        onKeyDown={handleKeyDown}
-        className={`w-full bg-[#E5644E] rounded-xl p-2 mt-5 shadow-2xl text-white font-bold transition duration-200 ${
-          isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#E5644E]"
-        }`}
-      >
-        {isLoading ? "Sending..." : t("submit")}
-      </button>
-    </form>
+  <button
+    type="submit"
+    disabled={isResendDisabled}
+    onKeyDown={handleKeyDown}
+    className={`w-full bg-[#E5644E] rounded-xl p-2 mt-5 shadow-2xl text-white font-bold transition duration-200 ${
+      isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#E5644E]"
+    }`}
+  >
+    {isLoading ? "Sending..." : t("submit")}
+  </button>
+</form>
+
 
     {/* Resend OTP Button */}
     <div className="text-center mt-4">
@@ -365,7 +373,7 @@ const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
 
 
         <button onClick={onClose} className="w-full text-black font-semibold text-sm mt-4">
-          Cancel
+        {t("Cancle")}  
         </button>
       </div>
     </div>

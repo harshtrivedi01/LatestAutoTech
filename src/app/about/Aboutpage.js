@@ -28,7 +28,7 @@ export default function Aboutpage({heading,description,image}) {
 
           </div>
           <div className="lg:w-1/2 items-center flex justify-center">
-            <img className="object-cover" src={image||"/images/aboutimage.png"}
+            <img className="object-cover w-96" src={image||"/images/aboutimage.png"}
                onError={(e) => (e.target.src ="/images/aboutimage.png") }
             /></div>
           <div className="flex absolute w-80 hidden lg:flex lg:right-20 lg:top-96 sm:w-1/2 bg-white md:w-80 mb-8 md:mb-0 p-5 shadow-md rounded-xl mr-3 ml-3">
@@ -52,7 +52,7 @@ export default function Aboutpage({heading,description,image}) {
                 </div>
 
                 <div className="float-right">
-                  <p className="text-2xl font-bold float-right">10K +</p>
+                  <p className="text-2xl font-bold float-right">100K +</p>
 
                 </div>
               </span>
