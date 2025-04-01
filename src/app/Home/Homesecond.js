@@ -118,15 +118,8 @@
 // }
 
 
-
 "use client";
 import Image from "next/image";
-import service1 from "../../../public/images/logo.png";
-import service2 from "../../../public/images/logo.png";
-import service3 from "../../../public/images/logo.png";
-import service4 from "../../../public/images/logo.png";
-import service5 from "../../../public/images/logo.png";
-import service6 from "../../../public/images/logo.png";
 import Heading from "../component/Headingname/Heading";
 import DOMPurify from "dompurify";
 import { useTranslation } from "react-i18next";
@@ -140,14 +133,12 @@ export default function Homesecond({ module_category_details }) {
     return <div></div>;
   }
 
+  // ✅ Use direct paths for images
   const serviceImages = {
-    "Guru Ji": service1,
-    "Pandit Ji": service2,
-    "Pooja": service3,
-    "Granth": service4,
-    "Online Classes": service5,
-    "Live Darshan": service6,
-    
+    "Pooja": "/images/Pooja.png",
+    "Pooja Box": "/images/Poojaboxservice.png",
+    "Live Darshan": "/images/Chadhava.png",
+    "Chadhava": "/images/Chadhava.png",
   };
 
   const bookingUrls = {
@@ -157,7 +148,7 @@ export default function Homesecond({ module_category_details }) {
     "Granth": "#",
     "Online Classes": "#",
     "Live Darshan": "#",
-    "Chadhava":"/chadhava",
+    "Chadhava": "/chadhava",
     "गुरु जी": "#",
     "पूजा": "/poojabooking",
     "पूजा बॉक्स": "/poojabox",
@@ -174,9 +165,8 @@ export default function Homesecond({ module_category_details }) {
           </div>
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {
-              const { modulecategory, short_description, id, image } = category;
-              // const imageSrc = image || service1;
-              const imageSrc =  service1;
+              const { modulecategory, short_description, id } = category;
+              const imageSrc = serviceImages[modulecategory] || "/images/logo.png";
               const bookingUrl = bookingUrls[modulecategory] || "#";
 
               // Show limited words
@@ -188,24 +178,24 @@ export default function Homesecond({ module_category_details }) {
 
               return (
                 <a
-                href={bookingUrl}
+                  href={bookingUrl}
                   key={id}
                   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center flex flex-col justify-between"
                   style={{
-                    backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`,
+                    backgroundImage: `url('/assets/Service/BOOK_POOJA.jpg')`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     minHeight: "400px",
                   }}
                 >
                   <div>
-                    <img
+                    {/* ✅ Correct Image Usage */}
+                    <Image
                       src={imageSrc}
                       alt={modulecategory}
                       width={119}
                       height={136}
-                      className="mx-auto h-[136px] w-[119px] object-contain"
-                      onError={(e) => (e.target.src = "/images/logo.png")}
+                      className="mx-auto h-[156px] w-[219px] object-cover"
                     />
                     <div className="my-3 font-display">
                       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
@@ -230,7 +220,7 @@ export default function Homesecond({ module_category_details }) {
                       {t("BookNow")}
                     </a>
                   </div>
-                  </a>
+                </a>
               );
             })}
           </ul>
