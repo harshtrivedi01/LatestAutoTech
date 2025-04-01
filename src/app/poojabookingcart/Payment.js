@@ -7,7 +7,7 @@ import api from "../lib/axiosInstance";
 import Testimonials from "../poojadetail/Testimonials";
 import { CheckIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
+import Loader from "../component/LoadingScreen.js"
 const Payment = () => {
   const { t } = useTranslation();
   const [data, setData] = useState(null);
@@ -133,10 +133,6 @@ const Payment = () => {
   };
 
 
-
-
-
-
   if (redirected) {
     return (
       <div className="text-center items-center py-60">
@@ -154,6 +150,10 @@ const Payment = () => {
 
   return (
     <AuthGuard>
+      {loading && (
+ <Loader/>
+)}
+
       <h1 className=" f-34 mb-4 font-semibold text-lg text-black ">  {t("ShoppingCart")} </h1>
       <div className="flex  flex-col md:flex-row items-center bg-orange-100 rounded-2xl justify-center p-8 md:p-30 mb-4">
         <div className="flex items-center mb-4 md:mb-0">
@@ -244,12 +244,23 @@ const Payment = () => {
                   <dd className="text-xl font-bold text-gray-900">₹{Math.floor(datapackage?.price) || "0"}/-</dd>
                 </dl>
                 <button
-                  onClick={initiatePayment}
-                  disabled={loading}
-                  className="w-full common-btn text-white font-semibold py-2 mt-5 rounded-lg bg-orange-500"
-                >
-                  {loading ? `${t("Checkout")}`   : `${t("PayNow")}`}
-                </button>
+  onClick={initiatePayment}
+  disabled={loading}
+  className="w-full flex justify-center items-center common-btn text-white font-semibold py-2 mt-5 rounded-lg bg-orange-500"
+>
+  {loading ? (
+    <>
+      <svg
+        className="animate-spin h-5 w-5 mr-2 border-t-2 border-white rounded-full"
+        viewBox="0 0 24 24"
+      ></svg>
+      {t("Checkout")}
+    </>
+  ) : (
+    t("PayNow")
+  )}
+</button>
+
               </div>
             </div>
           </div>

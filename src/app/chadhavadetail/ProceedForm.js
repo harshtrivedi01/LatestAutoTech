@@ -4,20 +4,33 @@ import api from "../lib/axiosInstance";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import LoadingScreen from "../component/LoadingScreen";
 
 const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({ name: "", gotra: "" });
+  const [formData, setFormData] = useState({ name: typeof window !== "undefined" ? localStorage.getItem("userName") || "" : "", gotra: "" });
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter(); // Initialize useRouter
     const [loading, setLoading] = useState(false);
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    // Clear error when user types
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => {
+        const newFormData = { ...prev, [name]: value };
+    
+        // Save to localStorage
+        if (typeof window !== "undefined") {
+          localStorage.setItem(`user${name.charAt(0).toUpperCase() + name.slice(1)}`, value);
+        }
+    
+        return newFormData;
+      });
+    
+      // Clear error when user types
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+    };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -166,6 +179,9 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4 overflow-hidden">
+{loading && (
+  <LoadingScreen/>
+)}
 
         <Toaster position="top-right" reverseOrder={false} />
     <div className="bg-orange-50 border border-orange-600 relative p-8 md:p-10 rounded-2xl shadow-lg w-full max-w-lg md:max-w-2xl">
@@ -192,6 +208,7 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
             onChange={(e) => {
               if (/^[A-Za-z\s]*$/.test(e.target.value)) {
                 setFormData({ ...formData, name: e.target.value });
+                handleChange(e); 
                 setErrors({ ...errors, name: "" });
               }
             }}
@@ -234,11 +251,30 @@ const ProceedForm = ({ handleClose, carts,totalPrice, id }) => {
         {/* Buttons */}
         <div className="flex flex-wrap justify-center gap-4">
         <button
-  className="w-full px-8 sm:px-10 py-2 text-lg bg-orange-500 text-white rounded-full"
+  className="w-full px-8 sm:px-10 py-2 text-lg bg-orange-500 text-white rounded-full flex items-center justify-center"
   onClick={onSubmit}
+  disabled={loading}
 >
-{t("SubmitPay")}
- 
+  {loading ? (
+    <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+        fill="none"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8H4z"
+      ></path>
+    </svg>
+  ) : (
+    t("SubmitPay")
+  )}
 </button>
 
         </div>

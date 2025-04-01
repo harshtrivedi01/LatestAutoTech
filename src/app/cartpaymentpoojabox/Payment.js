@@ -9,6 +9,7 @@ import { CheckIcon } from "lucide-react";
 import { load } from "@cashfreepayments/cashfree-js";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import LoadingScreen from "../component/LoadingScreen";
 export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 const Payment = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Payment = () => {
   const router = useRouter(); 
   const searchParams = useSearchParams();
   const addressId = searchParams.get("addressId");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchPujaData();
   }, []);
@@ -136,6 +138,7 @@ const updateCartQuantity = async (productId, change) => {
   };
   
   const handlePayment = async () => {
+    setLoading(true);
     if (!subtotal) {
       toast.error("Your cart is empty!");
       return;
@@ -234,6 +237,9 @@ const updateCartQuantity = async (productId, change) => {
       toast.error("Payment failed! Please try again.");
       router.push(`/failedcartpage`);
     }
+    finally {
+      setLoading(false);
+    }
   };
   
 
@@ -255,7 +261,9 @@ const updateCartQuantity = async (productId, change) => {
   return (
     <AuthGuard className=" bg-gray-50 ">
         <Toaster position="top-right" reverseOrder={false} />
-           
+        {loading && (
+  <LoadingScreen/>
+)}
      <div className="container">
      <h1 className="f-34 mb-2 m-5 font-semibold text-lg md:mx-10 lg:mx-20 xl:mx-40 mt-5">  {t("ShoppingCart")} </h1>
   {/* Progress Steps */}
@@ -407,13 +415,34 @@ const updateCartQuantity = async (productId, change) => {
       <span className="text-gray-600 text-lg font-semibold">{t("Total")}</span>
       <span className="text-gray-800 font-semibold text-lg">₹{Math.floor(finalTotal)}</span>
     </div>
-
     <button
-      className="w-full common-btn text-white font-semibold py-2 rounded-lg mb-2"
-      onClick={handlePayment}
-    >
-     {t("PayNow")}
-    </button>
+ className="w-full common-btn text-white font-semibold py-2 rounded-lg mb-2"
+  onClick={handlePayment}
+  disabled={loading}
+>
+  {loading ? (
+    <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+        fill="none"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8H4z"
+      ></path>
+    </svg>
+  ) : (
+    t("PayNow")
+  )}
+</button>
+
+  
   </div>
 </div>
 
