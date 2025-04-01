@@ -295,7 +295,7 @@ i18n
           off:"off",
           Noproductsavailable:"No products available",
           reviews:"reviews",
-          Pujadescriptiongoeshere:"Puja description goes here.",
+          Pujadescriptiongoeshere:"Pooja description goes here.",
 
          SortByAll:" Sort By All",
          LowtoHigh:"Low to High",
@@ -325,12 +325,15 @@ i18n
         YourPoojahassuccesssfullyconductedbyPunuyaSetuon:"Your Pooja has successsfully conducted by PunuyaSetu on",
         WATCHPOOJAVIDEO:"WATCH POOJA VIDEO",
         Member:"Member",
-        Pujavideo:"Puja Video",
-        ChooseYourPuja:"Choose Your Puja",
-SelectyourPujafromtheList:"Select your Puja from the List",
-YourInformation:"Your Information",
-AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform:"After selecting the Puja, fill in the information of your Name and Gotra in the provided form.",
-ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"The video of your Puja completed with your name and Gotra will be shared on WhatsApp.",
+       
+ChooseYourPuja:"Choose Your Pooja Package",
+SelectyourPujafromtheList:"Select your Pooja from the List",
+
+YourInformation:"Select your Preferred Date",
+AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform:"After selecting the Pooja, Select a preferred date for ritual",
+
+Pujavideo:"Fill out the Sankalp form and Make payment",
+ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"After selecting the Pooja & Date, Fill in the information of your Name and Gotra in the provided form. then procced to make payment using our secure online payment",
 
 Poojabookingdate:"Pooja Date",
 RedirectingIn:"Redirecting to home",
@@ -407,16 +410,17 @@ DeliveryAddress:"डिलीवरी पता",
           BookingStatus:"बुकिंग स्थिति",
           RedirectingIn:"होम पर पुनर्निर्देशित किया जा रहा है",
           Poojabookingdate:"पूजा तिथि",
-          Pujavideo:"पूजा वीडियो",
+
+          Pujavideo:"संकल्प फॉर्म भरें और भुगतान करें",
           ChooseYourPuja: "अपनी पूजा चुनें",
 
           SelectyourPujafromtheList: "सूची से अपनी पूजा चुनें",
 
-          YourInformation: "आपकी जानकारी",
+          YourInformation: "अपनी पसंदीदा तिथि चुनें",
 
-          AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform: "पूजा चुनने के बाद, दिए गए फॉर्म में अपने नाम और गोत्र की जानकारी भरें।",
+          AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform: "पूजा चुनने के बाद, अनुष्ठान के लिए पसंदीदा तिथि चुनें",
 
-          ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp: "आपके नाम और गोत्र के साथ पूरी की गई आपकी पूजा का वीडियो WhatsApp पर शेयर किया जाएगा।",
+          ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp: "पूजा और तिथि चुनने के बाद, दिए गए फॉर्म में अपने नाम और गोत्र की जानकारी भरें। फिर हमारे सुरक्षित ऑनलाइन भुगतान का उपयोग करके भुगतान करने के लिए आगे बढ़ें",
           Member:"सदस्य",
           Bookingstatus:"बुकिंग स्थिति",
           PoojaandParticipantsDetails: "पूजा और प्रतिभागियों का विवरण",

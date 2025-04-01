@@ -85,9 +85,9 @@ export default function Cards({ onlinepoojawork }) {
         <div className="w-full h-full sm:w-1/2 md:w-1/3">
   <div className="glide" ref={glideRef}>
     <div className="glide__track" data-glide-el="track">
-      <ul className="glide__slides flex items-center">
+      <ul className="glide__slides ">
         {images.map((img, idx) => (
-          <li className="glide__slide flex items-center justify-center h-[300px]" key={idx}>
+          <li className="glide__slide flex items-center justify-center" key={idx}>
             <Image
               src={img}
               alt="Puja"
