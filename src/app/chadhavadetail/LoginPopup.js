@@ -117,7 +117,7 @@ const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
 
     try {
       const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/authentication",
+        "http://13.50.195.64/websiteapi//authentication",
         data
       );
 
@@ -153,7 +153,7 @@ const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
 
     try {
       const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/authentication",
+        "http://13.50.195.64/websiteapi//authentication",
         data
       );
 
@@ -203,7 +203,7 @@ const LoginPopup = ({carts, id, onClose ,handleClose,totalPrice}) => {
      setResendVisible(false);
      // toast.info("Resending OTP...");
 
-     const response = await axios.post("https://dakshhousing.com/satsambhav/websiteapi/authentication", data);
+     const response = await axios.post("http://13.50.195.64/websiteapi//authentication", data);
 
      if (response.data.status == "1") {
        toast.success(response.data.message || "OTP verified successfully!");

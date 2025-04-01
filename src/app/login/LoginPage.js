@@ -138,7 +138,7 @@ export default function LoginPage() {
       });
 
       const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/authentication",
+        "http://13.50.195.64/websiteapi//authentication",
         data
       );
 

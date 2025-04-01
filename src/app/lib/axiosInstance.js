@@ -2,7 +2,7 @@
 // import { showLoading, hideLoading } from "../utils/loadingState"; // Utility functions for loading state
 
 // const api = axios.create({
-//   baseURL: "https://dakshhousing.com/satsambhav/websiteapi",
+//   baseURL: "http://13.50.195.64/websiteapi/",
 // });
 
 // // Logout Function
@@ -69,7 +69,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://dakshhousing.com/satsambhav/websiteapi",
+  baseURL: "http://13.50.195.64/websiteapi/",
 });
 
 // Logout Function

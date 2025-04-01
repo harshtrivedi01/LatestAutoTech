@@ -74,7 +74,7 @@ export default function EnterNumber({ onSendOtp }) {
       });
 
       const response = await axios.post(
-        "https://dakshhousing.com/satsambhav/websiteapi/authentication",
+        "http://13.50.195.64/websiteapi//authentication",
         data
       );
 

@@ -43,7 +43,7 @@ export default function Footersection() {
 
 
 			const response = await axios.post(
-				"https://dakshhousing.com/satsambhav/websiteapi/footer",
+				"http://13.50.195.64/websiteapi//footer",
 				formData,
 				{
 					headers: header
