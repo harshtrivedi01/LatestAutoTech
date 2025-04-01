@@ -160,7 +160,7 @@ export default function Homesecond({ module_category_details }) {
   };
 
   const bookingUrls = {
-    "चढ़ावा": "chadhava",
+    "चढ़ावा": "/chadhava",
     "Pooja Box": "/poojabox",
     "Pooja": "/poojabooking",
     "Granth": "#",
