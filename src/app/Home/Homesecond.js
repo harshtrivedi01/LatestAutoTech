@@ -137,12 +137,15 @@ export default function Homesecond({ module_category_details }) {
   const serviceImages = {
     "Pooja": "/images/Pooja.png",
     "Pooja Box": "/images/Poojaboxservice.png",
-    "Live Darshan": "/images/Chadhava.png",
     "Chadhava": "/images/Chadhava.png",
+
+    "पूजा": "/images/Pooja.png",
+    "पूजा बॉक्स": "/images/Poojaboxservice.png",
+    "चढ़ावा": "/images/Chadhava.png",
   };
 
   const bookingUrls = {
-    "चढावा": "#",
+    "चढ़ावा": "/chadhava",
     "Pooja Box": "/poojabox",
     "Pooja": "/poojabooking",
     "Granth": "#",
@@ -182,7 +185,7 @@ export default function Homesecond({ module_category_details }) {
                   key={id}
                   className="rounded-tl-[40px] rounded-br-[40px] rounded-lg border-[5.65px] border-[#BA1A1A] px-6 py-8 shadow-sm relative overflow-hidden bg-cover bg-center flex flex-col justify-between"
                   style={{
-                    backgroundImage: `url('/assets/Service/BOOK_POOJA.jpg')`,
+                    backgroundImage: `url('/Assests/Service/BOOK POOJA.jpg')`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     minHeight: "400px",
