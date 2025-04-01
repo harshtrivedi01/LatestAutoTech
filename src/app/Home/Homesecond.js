@@ -81,7 +81,7 @@ export default function Homesecond({ module_category_details }) {
                       width={136}
                       height={300}
                       className="mx-auto h-[136px] w-[300px] object-cover"
-                      onError={(e) => (e.target.src = "/images/logo.png")}
+                     
                     />
                     <div className="my-3 font-display">
                       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
