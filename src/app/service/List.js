@@ -1,12 +1,6 @@
 
 "use client";
 import Image from "next/image";
-import service1 from "../../../public/images/logo.png";
-import service2 from "../../../public/images/logo.png";
-import service3 from "../../../public/images/logo.png";
-import service4 from "../../../public/images/logo.png";
-import service5 from "../../../public/images/logo.png";
-import service6 from "../../../public/images/logo.png";
 import Heading from "../component/Headingname/Heading";
 import DOMPurify from "dompurify";
 import { useTranslation } from "react-i18next";
@@ -20,22 +14,19 @@ export default function List({ module_category_details }) {
     return <div></div>;
   }
 
+  // ✅ Use direct paths for images
   const serviceImages = {
-    "Guru Ji": service1,
-    "Pandit Ji": service2,
-    "Pooja": "/images/pooja.png",
-    "Pooja Box": "/images/pooja box.png",
-    "Chadhava":  "/images/Chadhava.png",
+    "Pooja": "/images/Pooja.png",
+    "Pooja Box": "/images/Poojaboxservice.png",
+    "Chadhava": "/images/Chadhava.png",
 
-    "पूजा": "/images/pooja.png",
-    "पूजा बॉक्स": "/images/pooja box.png",
-    "चढ़ावा":  "/images/Chadhava.png",
-    "Live Darshan": service6,
-    // Add any additional categories and corresponding images here
+    "पूजा": "/images/Pooja.png",
+    "पूजा बॉक्स": "/images/Poojaboxservice.png",
+    "चढ़ावा": "/images/Chadhava.png",
   };
 
   const bookingUrls = {
-    "चढ़ावा": "chadhava",
+    "चढ़ावा": "/chadhava",
     "Pooja Box": "/poojabox",
     "Pooja": "/poojabooking",
     "Granth": "#",
@@ -59,8 +50,7 @@ export default function List({ module_category_details }) {
           <ul className="grid grid-cols-1 px-5 gap-6 text-center text-slate-700 md:grid-cols-3">
             {module_category_details.slice(0, 6).map((category) => {
               const { modulecategory, short_description, id } = category;
-              // Use serviceImages mapping to get the correct image
-              const imageSrc = serviceImages[modulecategory] || service1; // Default to service1 if category not found
+              const imageSrc = serviceImages[modulecategory] || "/images/logo.png";
               const bookingUrl = bookingUrls[modulecategory] || "#";
 
               // Show limited words
@@ -83,13 +73,13 @@ export default function List({ module_category_details }) {
                   }}
                 >
                   <div>
-                  <img
+                    {/* ✅ Correct Image Usage */}
+                    <Image
                       src={imageSrc}
                       alt={modulecategory}
-                      width={136}
-                      height={300}
-                      className="mx-auto h-[136px] min-w-[300px] object-cover"
-                      onError={(e) => (e.target.src = "/images/logo.png")}
+                      width={119}
+                      height={136}
+                      className="mx-auto h-[156px] w-[219px] object-cover"
                     />
                     <div className="my-3 font-display">
                       <h1 className="text-4xl font-bold bg-gradient-to-b from-[#E14303] to-[#7B2502] py-1 bg-clip-text text-transparent">
