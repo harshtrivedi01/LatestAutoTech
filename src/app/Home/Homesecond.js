@@ -17,11 +17,11 @@ export default function Homesecond({ module_category_details }) {
   const serviceImages = {
    
     "Pooja": "/images/pooja.png",
-    "Pooja Box": "/images/pooja box.png",
+    "Pooja Box": "/images/poojaboxservice.png",
     "Chadhava":  "/images/Chadhava.png",
 
     "पूजा": "/images/pooja.png",
-    "पूजा बॉक्स": "/images/pooja box.png",
+    "पूजा बॉक्स": "/images/poojaboxservice.png",
     "चढ़ावा":  "/images/Chadhava.png",
   
   };
