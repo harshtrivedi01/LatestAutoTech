@@ -33,7 +33,8 @@ export default function Cards({ onlinepoojawork }) {
   const images = [
     "/images/service.jpeg",
     "/images/service.jpeg",
-    "https://www.srimandir.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_puja_process_001.d7bef497.webp&w=1920&q=75",
+    "/images/service.jpeg",
+    "/images/service.jpeg",
   ];
 
   return (
@@ -46,15 +47,10 @@ export default function Cards({ onlinepoojawork }) {
         {/* Left Side Content */}
         <div className="space-y-6 sm:space-y-10 max-w-4xl text-center md:text-left">
           {[
-            { title:  `${t("ChooseYourPuja")}`, desc: `${t("SelectyourPujafromtheList")}` },
-            {
-              title: `${t("YourInformation")}`,
-              desc: `${t("AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform")}`,
-            },
-            {
-              title: `${t("Pujavideo")}`,
-              desc: `${t("ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp")}`,
-            },
+            { title:  `${t("step1")}`, desc: `${t("step1dis")}` },
+            { title:  `${t("step2")}`, desc: `${t("step2dis")}` },
+            { title:  `${t("step3")}`, desc: `${t("step3dis")}` },
+            { title:  `${t("step4")}`, desc: `${t("step4dis")}` },
           ].map((item, index) => (
             <div
               className={`flex flex-col sm:flex-row items-center md:items-start text-center sm:text-left transition-opacity duration-300 ${
@@ -87,13 +83,13 @@ export default function Cards({ onlinepoojawork }) {
     <div className="glide__track" data-glide-el="track">
       <ul className="glide__slides ">
         {images.map((img, idx) => (
-          <li className="glide__slide flex items-center justify-center" key={idx}>
+          <li className="glide__slide flex items-center h-full justify-center" key={idx}>
             <Image
               src={img}
               alt="Puja"
               width={400}
               height={300}
-              className="rounded-3xl shadow-lg w-full h-full object-cover"
+              className="rounded-3xl shadow-lg  h-full object-cover"
             />
           </li>
         ))}

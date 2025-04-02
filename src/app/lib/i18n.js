@@ -326,14 +326,17 @@ i18n
         WATCHPOOJAVIDEO:"WATCH POOJA VIDEO",
         Member:"Member",
        
-ChooseYourPuja:"Choose Your Pooja Package",
-SelectyourPujafromtheList:"Select your Pooja from the List",
+step1:"Choose Your Pooja ",
+step1dis:"Select your Pooja from the List",
 
-YourInformation:"Select your Preferred Date",
-AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform:"After selecting the Pooja, Select a preferred date for ritual",
+step2:"Fill out the Sankalp form",
+step2dis:"After selecting the Puja, fill in the information of your Name and Gotra in the provided form.",
 
-Pujavideo:"Fill out the Sankalp form and Make payment",
-ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp:"After selecting the Pooja & Date, Fill in the information of your Name and Gotra in the provided form. then procced to make payment using our secure online payment",
+step3:"Secure online payment",
+step3dis:"After filling in the information of your Name and Gotra in the provided form. then procced to make payment using our secure online payment",
+
+step4:"Puja video",
+step4dis:"The video of your Puja completed with your name and Gotra will be shared on PunyaSetu App.",
 
 Poojabookingdate:"Pooja Date",
 RedirectingIn:"Redirecting to home",
@@ -411,16 +414,24 @@ DeliveryAddress:"डिलीवरी पता",
           RedirectingIn:"होम पर पुनर्निर्देशित किया जा रहा है",
           Poojabookingdate:"पूजा तिथि",
 
-          Pujavideo:"संकल्प फॉर्म भरें और भुगतान करें",
-          ChooseYourPuja: "अपनी पूजा चुनें",
+        
 
-          SelectyourPujafromtheList: "सूची से अपनी पूजा चुनें",
 
-          YourInformation: "अपनी पसंदीदा तिथि चुनें",
+          step1: "अपनी पूजा चुनें",
 
-          AfterselectingthePujafillintheinformationofyourNameandGotraintheprovidedform: "पूजा चुनने के बाद, अनुष्ठान के लिए पसंदीदा तिथि चुनें",
+          step1dis: "सूची से अपनी पूजा चुनें",
 
-          ThevideoofyourPujacompletedwithyournameandGotrawillbesharedonWhatsApp: "पूजा और तिथि चुनने के बाद, दिए गए फॉर्म में अपने नाम और गोत्र की जानकारी भरें। फिर हमारे सुरक्षित ऑनलाइन भुगतान का उपयोग करके भुगतान करने के लिए आगे बढ़ें",
+          step2: "संकल्प फ़ॉर्म भरें",
+
+          step2dis: "पूजा चुनने के बाद, दिए गए फ़ॉर्म में अपना नाम और गोत्र की जानकारी भरें.",
+
+          step3:"सुरक्षित ऑनलाइन भुगतान",
+          step3dis:"प्रदान किए गए फ़ॉर्म में अपना नाम और गोत्र की जानकारी भरने के बाद, हमारे सुरक्षित ऑनलाइन भुगतान का उपयोग करके भुगतान करने के लिए आगे बढ़ें",
+       
+          step4:"पूजा वीडियो",
+          step4dis:"आपके नाम और गोत्र के साथ पूरी की गई आपकी पूजा का वीडियो पुण्यसेतु ऐप पर साझा किया जाएगा.",
+          
+       
           Member:"सदस्य",
           Bookingstatus:"बुकिंग स्थिति",
           PoojaandParticipantsDetails: "पूजा और प्रतिभागियों का विवरण",
