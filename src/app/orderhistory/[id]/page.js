@@ -93,7 +93,7 @@ export default function Page() {
           {t("OrderID")} #{order.code}
           </h2>
           <p className="text-gray-700 text-lg">
-          {t("OrderDate")}: <span className="text-blue-700">{order.order_date}</span>
+          {t("OrderDate")}: <span className="text-blue-700">{order.order_date} </span>
           </p>
 
           <div className="my-8 mx-2">

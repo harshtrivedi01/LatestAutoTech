@@ -349,11 +349,11 @@ const currentPoojaBoxOrders = poojaBoxOrders.slice(indexOfFirstItem, indexOfLast
       {/* Footer Section */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-5 gap-3 border-t pt-3 w-full text-center sm:text-left">
         <p className="text-gray-600 text-sm">
-          <span className="font-semibold">{t("OrderID")}: </span>#{booking.booking_code}
+          <span className="font-semibold">{t("OrderID")} </span>#{booking.booking_code}
           <br />
           <span className="font-semibold">{t("poojadate")}: </span>{booking.booking_date}
           <br />
-          <span className="font-semibold">{t("Ordertimedate")}: </span>{booking.create_date}
+          <span className="font-semibold">{t("Ordertimedate")}: </span> {new Date(booking.create_date).toLocaleString()}
         </p>
       </div>
     </div>

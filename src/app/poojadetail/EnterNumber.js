@@ -74,7 +74,7 @@ export default function EnterNumber({ onSendOtp }) {
       });
 
       const response = await axios.post(
-        "http://13.50.195.64/websiteapi//authentication",
+        "http://13.50.195.64/websiteapi/authentication",
         data
       );
 

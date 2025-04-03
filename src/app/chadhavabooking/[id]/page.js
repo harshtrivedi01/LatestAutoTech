@@ -64,7 +64,7 @@ export default function BookingDetailspage() {
         
         <div className="w-full md:w-2/3 space-y-3">
           <h3 className="text-xl font-semibold">{order.chadhava_name }</h3>
-          <p><strong>{t("OrderDate")}: </strong>{order.created_at}</p>
+          <p><strong>{t("OrderDate")}: </strong>  {new Date(order.created_at).toLocaleString()}</p>
           <p className="text-green-600"><strong>{t("AmountRs")}:</strong> {order.total_amount || t("Free")}/-</p>
           <div
                 className={`rounded-full w-20 px-4 py-1 ${

@@ -61,7 +61,7 @@ export default function Navbar() {
 
 
 			const response = await axios.post(
-			"http://13.50.195.64/websiteapi//cartcount",
+			"http://13.50.195.64/websiteapi/cartcount",
 				formData,
 				{
 					headers: header

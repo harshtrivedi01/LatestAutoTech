@@ -87,14 +87,14 @@ api.interceptors.request.use(
     const userId = localStorage.getItem("idToken");
     const formData = JSON.parse(localStorage.getItem("formData") || "{}");
 
-    config.headers["language"] = selectedLanguage;
+    config.headers["Language"] = selectedLanguage;
     config.headers["User_id"] = userId;
     config.headers["User_type"] = userId ? "user" : "guest";
     config.headers["Device_id"] = "upen";
     config.headers["Longitude"] = formData.Longitude || "";
     config.headers["Latitude"] = formData.Latitude || "";
     config.headers["Ip_address"] = formData.Ip_address || "";
-    config.headers["web_token"] = localStorage.getItem("authToken");
+    config.headers["Web_token"] = localStorage.getItem("authToken");
 
     return config;
   },

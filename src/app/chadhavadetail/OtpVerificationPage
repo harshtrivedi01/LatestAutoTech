@@ -34,7 +34,7 @@ export default function OtpVerificationPage({ phone, closePopup }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://13.50.195.64/websiteapi//authentication",
+        "http://13.50.195.64/websiteapi/authentication",
         { otp: otp.join(""), phone }
       );
 

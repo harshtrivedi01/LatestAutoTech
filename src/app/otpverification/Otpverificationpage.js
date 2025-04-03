@@ -131,7 +131,7 @@ export default function OtpVerificationPage() {
   
     try {
       const response = await axios.post(
-        "http://13.50.195.64/websiteapi//authentication",
+        "http://13.50.195.64/websiteapi/authentication",
         data
       );
   
@@ -185,7 +185,7 @@ export default function OtpVerificationPage() {
       setResendVisible(false);
       // toast.info("Resending OTP...");
 
-      const response = await axios.post("http://13.50.195.64/websiteapi//authentication", data);
+      const response = await axios.post("http://13.50.195.64/websiteapi/authentication", data);
 
       if (response.data.status == "1") {
         toast.success(response.data.message || "OTP verified successfully!");

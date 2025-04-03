@@ -333,7 +333,7 @@ step2:"Fill out the Sankalp form",
 step2dis:"After selecting the Puja, fill in the information of your Name and Gotra in the provided form.",
 
 step3:"Secure online payment",
-step3dis:"After filling in the information of your Name and Gotra in the provided form. then procced to make payment using our secure online payment",
+step3dis:"After filling in the information of your Name and Gotra in the provided form, then procced to make payment using our secure online payment",
 
 step4:"Puja video",
 step4dis:"The video of your Puja completed with your name and Gotra will be shared on PunyaSetu App.",
