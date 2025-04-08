@@ -100,7 +100,7 @@ export default function Cards({ onlinepoojawork }) {
           key={idx}
           className={`glide__bullet w-3 h-3 mx-1 rounded-full transition-all ${
             activeIndex === idx ? "bg-orange-700" : "bg-gray-400"
-          }`}
+          }`}  
           data-glide-dir={`=${idx}`}
         ></button>
       ))}
