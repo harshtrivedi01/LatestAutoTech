@@ -30,131 +30,180 @@ export default function Homethird({pujaData}) {
   
   return (
     <div className="relative w-full min-h-scree bg-white">
-      <div
-        className=" bg-[#FFFFFF] px-2 "
-        style={{
-          backgroundImage: `url('/images/about.jpg')`,
-          backgroundSize: "cover",
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          
-        }}
-      ><br/> <br/><br/><br/><br/><br/><br/>
-        <div className="mx-auto max-w-6xl relative">
-          <div className="flex justify-center">
-            <Heading text={t("About")} color="white" />
-          </div>
-
-          <p
-  className="text-center text-white text-base sm:text-lg md:text-xl lg:text-2xl px-4 md:px-8 lg:px-12"
-  dangerouslySetInnerHTML={{
-    __html: limitWords(pujaData?.data?.aboutus_description, 40),
-  }}
-></p>
-
-        </div>
-        <br />
-       
-       
-        <br />
-        <div>
-          <div className="container ">
-            <div className="   ">
-              <section className="">
-              <div className=" mx-auto max-w-screen-xl ">
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 h-full">
-    
-    <div className="h-full w-full flex flex-col">
-      <div className="grid flex-grow h-full ">
-        <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl p-4 bg-white ">
-          <div className="relative z-10 flex flex-col gap-4">
-            <h3 className="text-2xl font-medium text-[#894112]">
-              {pujaData?.data?.aboutus_imagehed1}
-            </h3>
-            <h3 className="text-lg text-black leading-7 md:text-sm lg:text-[17px]">
-              {pujaData?.data?.aboutus_imagedes1}
-            </h3>
-            <a  href={"/poojabooking"} className="p-3 w-fit text-white bg-[#FFDCC04F] rounded-full hover:bg-[#7B2502]">
-              <FaChevronRight className="text-[#DD531B]" />
-            </a>
-          </div>
-          <img
-            src={pujaData?.data?.aboutus_images.image1}
-            alt=""
-            className="absolute right-0 bottom-0 h-20 w-20 object-cover"
-            onError={(e) => (e.target.src = "/images/logo.png")}
-          />
-        </div>
-      </div>
       
-      <br />
+        {/* News Section */}
+        <div className="bg-gray-50  px-4">
+          <div className="mx-auto max-w-6xl">
+            <div className="flex justify-center mb-1">
+              <Heading text={t("News & Updates")} color="text-[#894112]" />
+            </div>
 
-      <div className="grid h-full">
-        <a href={""} className="group relative flex flex-col h-full overflow-hidden rounded-2xl px-4 pb-4 pt-40">
-          <img
-            src={pujaData?.data?.aboutus_images.image2}
-            alt=""
-            className="absolute inset-2 h-full w-full rounded-2xl object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-            onError={(e) => (e.target.src = "/images/logo.png")}
-          />
-        </a>
-      </div>
-    </div>
+            {/* Masonry Grid with Different Sizes */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-max">
+              
+              {/* Featured Large Card - Spans 2 columns */}
+              <div className="col-span-1 sm:col-span-2 lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-102 group">
+                <div className="relative w-full h-80 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="Featured News"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
+                </div>
+                <div className="p-8 relative -mt-24 z-10 bg-gradient-to-t from-white via-white">
+                  <span className="inline-block bg-[#DD531B] text-white px-4 py-1 rounded-full text-xs font-bold mb-3">Featured</span>
+                  <p className="text-sm text-[#DD531B] font-semibold mb-2">May 02, 2026</p>
+                  <h3 className="text-2xl lg:text-3xl font-bold text-[#894112] mb-3 leading-tight">
+                    Ancient Rituals and Modern Practices
+                  </h3>
+                  <p className="text-gray-600 text-base leading-7 mb-5 line-clamp-4">
+                    Discover how traditional spiritual practices continue to hold significance in the modern world and how you can integrate them into your daily life for enhanced spiritual wellbeing.
+                  </p>
+                  <a href="#" className="inline-flex items-center text-[#DD531B] font-bold hover:text-[#7B2502] transition-colors text-lg">
+                    Read Full Story <FaChevronRight className="ml-2" />
+                  </a>
+                </div>
+              </div>
 
-    <div className="col-span-2 sm:col-span-1 md:col-span-2 h-full flex flex-col">
-      <div className="relative flex flex-col bg-white overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow">
-        <Image
-          src={music}
-          alt=""
-          className="absolute top-20 left-10 h-14 w-16 object-cover"
-          onError={(e) => (e.target.src = "/images/logo.png")}
-        />
-        <div className="relative z-10 mt-10 md:mt-16 px-4 text-start md:text-left">
-          <h3 className="text-xl text-black font-semibold xs:text-xl md:text-2xl">
-            {pujaData?.data?.aboutus_imagehed2} -{" "}
-            <span className="font-normal">{pujaData?.data?.aboutus_imagedes2}</span>
-          </h3>
-          <h3 className="text-xl text-black font-semibold mt-6 xs:text-xl md:text-xl">
-            {pujaData?.data?.aboutus_imagehed3} -{" "}
-            <span className="font-normal">{pujaData?.data?.aboutus_imagedes3}</span>
-          </h3>
-          <a href={pujaData?.data?.aboutus_link} target="_blank" rel="noopener noreferrer">
-            <button className="p-2 px-8 shadow-black shadow-2xl mt-10 text-lg text-white bg-[#E5644E] rounded-2xl hover:bg-[#7B2502]">
-              {pujaData?.data?.aboutus_bottom_name}
-            </button>
-          </a>
-        </div>
-        <Image
-          src={Anahata}
-          alt=""
-          className="absolute right-10 h-44 w-44 top-0 object-cover"
-          onError={(e) => (e.target.src = "/images/logo.png")}
-        />
-      </div>
-    </div>
+              {/* Medium Card 1 */}
+              <div className="col-span-1 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative w-full h-48 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="News"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-xs text-[#DD531B] font-bold mb-2">May 01, 2026</p>
+                  <h3 className="text-lg font-bold text-[#894112] mb-2 line-clamp-2">
+                    Benefits of Sacred Chanting
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-5 line-clamp-7 mb-3">
+                    Learn about spiritual benefits...  Learn about spiritual benefits 
+                     Learn about spiritual benefits  Learn about spiritual benefits  Learn
+                      about spiritual benefits  Learn about spiritual benefits  Learn about
+                       spiritual benefits  Learn about spiritual benefits  Learn about spiritual benefits
+                       benefits
+                 
+                  </p>
+                  <a href="#" className="text-[#DD531B] text-sm font-semibold hover:text-[#7B2502]">
+                    Read More →
+                  </a>
+                </div>
+              </div>
 
-    <div className="col-span-2 sm:col-span-2 md:col-span-2 h-[400px] lg:h-full flex flex-col">
-      <a href={""} className="group relative flex flex-col h-full overflow-hidden rounded-2xl px-4 pb-4 pt-40 flex-grow">
-        <img
-          // src={pujaData?.data?.aboutus_images.image4}
-          src={"/images/hawan.jpg"}
-          onError={(e) => (e.target.src = "/images/logo.png")}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5" />
-      </a>
-    </div>
+              {/* Medium Card 2 */}
+              <div className="col-span-1 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative w-full h-48 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="News"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-xs text-[#DD531B] font-bold mb-2">April 30, 2026</p>
+                  <h3 className="text-lg font-bold text-[#894112] mb-2 line-clamp-2">
+                    Seasonal Rituals Guide
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-5  mb-3">
+                    Explore seasonal celebrations Learn about spiritual benefits...  Learn about spiritual benefits 
+                     Learn about spiritual benefits  Learn about spiritual benefits  Learn
+                      about spiritual benefits  Learn about spiritual benefits  Learn about
+                       spiritual benefits  Learn about spiritual benefits  Le0arn about spiritual 
+                       benefits
+                  </p>
+                  <a href="#" className="text-[#DD531B] text-sm font-semibold hover:text-[#7B2502]">
+                    Read More →
+                  </a>
+                </div>
+              </div>
 
-  </div>
-</div>
+              {/* Small Card 1 */}
+              <div className="col-span-1 sm:col-span-1 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative w-full h-32 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="News"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-[#DD531B] font-bold mb-1">April 29, 2026</p>
+                  <h3 className="text-base font-bold text-[#894112] line-clamp-2">
+                    Puja Essentials
+                  </h3>
+                </div>
+              </div>
 
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-              </section>
+              {/* Small Card 2 */}
+              <div className="col-span-1 sm:col-span-1 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative w-full h-32 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="News"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-[#DD531B] font-bold mb-1">April 28, 2026</p>
+                  <h3 className="text-base font-bold text-[#894112] line-clamp-2">
+                    Mantra Power
+                  </h3>
+                </div>
+              </div>
+
+              {/* Small Card 3 */}
+              <div className="col-span-1 sm:col-span-1 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative w-full h-32 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="News"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-[#DD531B] font-bold mb-1">April 27, 2026</p>
+                  <h3 className="text-base font-bold text-[#894112] line-clamp-2">
+                    Meditation Tips
+                  </h3>
+                </div>
+              </div>
+
+              {/* Small Card 4 */}
+              <div className="col-span-1 sm:col-span-1 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative w-full h-32 overflow-hidden">
+                  <img
+                    src="/images/logo.png"
+                    alt="News"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => (e.target.src = "/images/logo.png")}
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-[#DD531B] font-bold mb-1">April 26, 2026</p>
+                  <h3 className="text-base font-bold text-[#894112] line-clamp-2">
+                    Temple Etiquette
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-center mt-14">
+              <a href="#" className="px-10 py-4 bg-[#E5644E] text-white rounded-full font-bold hover:bg-[#7B2502] transition-all duration-300 transform hover:scale-105 shadow-lg">
+                View All News & Updates
+              </a>
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

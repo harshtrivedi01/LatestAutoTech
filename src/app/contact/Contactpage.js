@@ -114,7 +114,7 @@ export default function ContactPage() {
             </div>
             <div className="flex items-center mt-5">
               <MdEmail className="text-xl" />
-              <span className="text-sm text-light m-4">{pujaData?.email || "info@punyasetu.com"}</span>
+              <span className="text-sm text-light m-4">{pujaData?.email || "info@LatestAutoTech.com"}</span>
             </div>
             {/* <div className="flex items-center mt-5">
               <FaLocationDot className="text-xl" />

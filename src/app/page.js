@@ -16,9 +16,9 @@ import api from "./lib/axiosInstance";
 export default function Page() {
   const [pujaData, setPujaData] = useState([]);
 
-  useEffect(() => {
-      fetchPujaData();   
-  }, []);
+  // useEffect(() => {
+  //     fetchPujaData();   
+  // }, []);
 
   const fetchPujaData = async () => {
     try {
@@ -38,11 +38,11 @@ export default function Page() {
   return (
  <>
    <Homefirst sliderList={pujaData?.data?.slider_list} />
-   <Homesecond module_category_details={pujaData?.data?.module_category_details} />
+   {/* <Homesecond module_category_details={pujaData?.data?.module_category_details} /> */}
    <Homethird  pujaData={pujaData}/>
    {/* <Homefourth  pujaData={pujaData}/> */}
    {/* <Homefive  pujaData={pujaData}/> */}
-   <Homesix  pujaData={pujaData} bottomslider_list={pujaData?.data?.bottomslider_list} />
+   {/* <Homesix  pujaData={pujaData} bottomslider_list={pujaData?.data?.bottomslider_list} /> */}
    <Homeeight  pujaData={pujaData}/>
    <Homeseven  pujaData={pujaData}/>
   

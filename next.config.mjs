@@ -26,7 +26,7 @@ const nextConfig = {
   },
   images: {
      unoptimized: true,
-    domains: ['punyasetu-bucket.s3.ap-south-1.amazonaws.com','clickpanditji.com','www.srimandir.com'],
+    domains: ['LatestAutoTech-bucket.s3.ap-south-1.amazonaws.com','clickpanditji.com','www.srimandir.com'],
   
     remotePatterns: [
       {

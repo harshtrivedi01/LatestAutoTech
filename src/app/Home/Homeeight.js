@@ -7,11 +7,55 @@ import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 
+// Fallback mock testimonials data when API is not working
+const MOCK_TESTIMONIALS = [
+  {
+    id: 1,
+    name: "Rajesh Kumar",
+    heading: "Exceptional Service Quality",
+    testimonials_description: "The puja arrangements were outstanding! The pandits were well-trained and the entire ceremony was conducted with utmost devotion and professionalism. Highly recommended for anyone seeking authentic rituals.",
+  },
+  {
+    id: 2,
+    name: "Priya Sharma",
+    heading: "Very Professional Team",
+    testimonials_description: "Amazing experience! The team was punctual, respectful, and ensured every detail was perfect. The prayers felt meaningful and sacred. I will definitely book again for my family celebrations.",
+  },
+  {
+    id: 3,
+    name: "Amit Patel",
+    heading: "Best Pooja Service",
+    testimonials_description: "I was impressed by the dedication and knowledge of the pandits. They explained each ritual beautifully and made the entire experience spiritual and memorable. Great service overall!",
+  },
+  {
+    id: 4,
+    name: "Sneha Gupta",
+    heading: "Highly Satisfied",
+    testimonials_description: "The booking process was smooth and the execution was flawless. The pandits completed the puja with precision and devotion. Truly a blessing to have found such a reliable service.",
+  },
+  {
+    id: 5,
+    name: "Vikram Singh",
+    heading: "Trustworthy & Reliable",
+    testimonials_description: "Everything was handled professionally. From customization options to the actual ceremony, every step was well-organized. I had complete peace of mind throughout the entire process.",
+  },
+  {
+    id: 6,
+    name: "Ananya Verma",
+    heading: "Outstanding Experience",
+    testimonials_description: "The pandits were knowledgeable and performed the rituals with great attention to detail. The whole team was courteous and helpful. Would definitely recommend to my friends and family.",
+  },
+];
+
 const Homeeight = ({ pujaData, detail }) => {
   const { t } = useTranslation();
   const splideRef = useRef(null); // Reference for Splide instance
   const pathname = usePathname(); 
-  const testimonials = pujaData?.data?.testimonials || detail?.testimonials || [];
+  
+  // Use API data if available, otherwise fall back to mock data
+  const testimonials = (pujaData?.data?.testimonials || detail?.testimonials || []).length > 0
+    ? (pujaData?.data?.testimonials || detail?.testimonials)
+    : MOCK_TESTIMONIALS;
 
   const isSpecialPage = pathname.includes("/poojadetail/");
 

@@ -412,7 +412,7 @@ const Profilepage = () => {
                   <input
                     id="email"
                     value={formData.email}
-                    placeholder="punyasetu1210@gmail.com"
+                    placeholder="LatestAutoTech1210@gmail.com"
                     type="email" name="email" onChange={handleChange} 
                     className="px-5 py-[12px] rounded-lg border w-full shadow-lg text-gray-600 text-md outline-none"
                   />

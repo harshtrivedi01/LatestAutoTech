@@ -11,30 +11,30 @@ export default function Footersection() {
 	const [pujaData, setPujaData] = useState(null);
 	const [header, setHeader] = useState(null); // Initialize header state
 
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			const formData = JSON.parse(localStorage.getItem("formData") || "{}");
-			const authToken = localStorage.getItem("authToken");
+	// useEffect(() => {
+	// 	if (typeof window !== "undefined") {
+	// 		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+	// 		const authToken = localStorage.getItem("authToken");
 
-			const newHeader = {
-				language: "en",
-				userId: "2",
-				user_type: "user",
-				Device_id: "upen",
-				Longitude: formData.Longitude || "",
-				Latitude: formData.Latitude || "",
-				Ip_address: formData.Ip_address || "",
-				web_token: authToken || "",
-			};
+	// 		const newHeader = {
+	// 			language: "en",
+	// 			userId: "2",
+	// 			user_type: "user",
+	// 			Device_id: "upen",
+	// 			Longitude: formData.Longitude || "",
+	// 			Latitude: formData.Latitude || "",
+	// 			Ip_address: formData.Ip_address || "",
+	// 			web_token: authToken || "",
+	// 		};
 
-			setHeader(newHeader);
-			fetchPujaData(newHeader);
-		}
-	}, []);
+	// 		setHeader(newHeader);
+	// 		fetchPujaData(newHeader);
+	// 	}
+	// }, []);
 
-	useEffect(() => {
-		fetchPujaData();
-	}, []);
+	// useEffect(() => {
+	// 	fetchPujaData();
+	// }, []);
 
 	const fetchPujaData = async () => {
 		try {
@@ -65,19 +65,18 @@ export default function Footersection() {
 					{/* Logo and Contact Info */}
 					<div className="lg:w-1/3 space-y-5">
 						<a href="/" className="flex items-center space-x-3">
-							<img src="/images/logo.png" alt="logo" className="w-8 h-16" />
-							<span className="text-3xl font-semibold">{t("PunyaSetu")}</span>
+							<img src="/images/logo.png" alt="logo" className="w-60 h-12" />
+					
 						</a>
 						<div>
-							<h1 className="font-bold text-lg">{pujaData?.name || " Satsambhav Technologies Private Limited"}</h1>
 							<div className="mt-3 space-y-2">
 								<p className="flex items-center">
-									<a href={`mailto:${pujaData?.email || "report@punyasetu.com"}`} className="flex items-center text-gray-800 hover:text-orange-600">
+									<a href={`mailto:${pujaData?.email || "report@LatestAutoTech.com"}`} className="flex items-center text-gray-800 hover:text-orange-600">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 mr-2 bg-orange-600 p-2 rounded-full text-white text-xl sm:mr-2">
 											<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
 											<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
 										</svg>
-										<span>{pujaData?.email || "report@punyasetu.com"}</span>
+										<span>{pujaData?.email || "report@LatestAutoTech.com"}</span>
 									</a>
 								</p>
 
@@ -147,7 +146,7 @@ export default function Footersection() {
 						</nav>
 					</div>
 				</div>
-				<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">{t("PunyaSetuIncAllrightsreserved")}</div>
+				<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">{t("LatestAutoTechIncAllrightsreserved")}</div>
 			</footer>
 
 

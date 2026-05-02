@@ -82,7 +82,7 @@ export default function Poojaboxpage() {
           <div className="items-center gap-12">
             <div>
               <h2 className="lg:text-3xl md:text-2xl text-3xl font-bold mb-4">
-              {t("PoojaBoxonPunyasetu")}
+              {t("PoojaBoxonLatestAutoTech")}
               </h2>
               <p className="leading-relaxed text-lg text-gray-600"> {t("PoojaBoxdis")} </p>
 

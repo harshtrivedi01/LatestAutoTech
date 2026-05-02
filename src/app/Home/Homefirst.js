@@ -46,22 +46,22 @@ const Homefirst = () => {
     const banners = {
       en: {
         mobile: [
-          { src: "/images/1mobilebannerenglish.jpg", url: "/poojabooking" },
-          { src: "/images/2mobilebannerenglish.jpg", url: "/chadhava" },
+          { src: "https://img.freepik.com/free-psd/new-smartphone-social-media-cover-design-template_47987-25433.jpg", url: "/poojabooking" },
+          { src: "https://img.freepik.com/premium-psd/breaking-news-template-news-banner-design-news-notification_451189-1762.jpg", url: "/chadhava" },
         ],
         desktop: [
-          { src: "/images/englishdesktop1.jpg", url: "/poojabooking" },
-          { src: "/images/englishdesktop2.jpg", url: "/chadhava" },
+          { src: "https://img.freepik.com/free-psd/new-smartphone-social-media-cover-design-template_47987-25433.jpg", url: "/poojabooking" },
+          { src: "https://img.freepik.com/premium-psd/breaking-news-template-news-banner-design-news-notification_451189-1762.jpg", url: "/chadhava" },
         ],
       },
       hi: {
         mobile: [
-          { src: "/images/1punyasetumobilebannerhindi.jpg", url: "/poojabooking" },
-          { src: "/images/2punyasetumobilebannerhindi.jpg", url: "/chadhava" },
+          { src: "https://img.freepik.com/free-psd/new-smartphone-social-media-cover-design-template_47987-25433.jpg", url: "/poojabooking" },
+          { src: "https://img.freepik.com/free-psd/new-smartphone-social-media-cover-design-template_47987-25433.jpg", url: "/chadhava" },
         ],
         desktop: [
-          { src: "/images/hindidesktop1.jpg", url: "/poojabooking" },
-          { src: "/images/hindidesktop2.jpg", url: "/chadhava" },
+          { src: "https://img.freepik.com/free-psd/new-smartphone-social-media-cover-design-template_47987-25433.jpg", url: "/poojabooking" },
+          { src: "https://img.freepik.com/free-psd/new-smartphone-social-media-cover-design-template_47987-25433.jpg", url: "/chadhava" },
         ],
       },
     };
@@ -74,7 +74,7 @@ const Homefirst = () => {
   };
 
   return (
-    <div id="carousel" className="relative w-full  container max-w-7xl  mx-auto">
+    <div id="carousel" className="relative w-full  container max-w-7xl mt-5  mx-auto">
       {/* Carousel Wrapper */}
       <div
         ref={sliderRef}

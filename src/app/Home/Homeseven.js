@@ -12,17 +12,17 @@ export const Homeseven = () => {
           {/* Text Section */}
           <div className="text-center lg:text-left px-6 sm:px-12">
             <h2 className="text-3xl sm:text-6xl font-bold text-gray-900">
-            {t("Get")} <span className="text-[#9E200B]">{t("PunyaSetu")}</span>  {t("app")}
+            {t("Get")} <span className="text-[#9E200B]">{t("LatestAutoTech")}</span>  {t("app")}
             </h2>
             
             <p className="text-gray-700 mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center sm:text-left leading-relaxed">
-            {t("banner")}
+           Stay updated on the latest in phones, cars, and bikes.
 </p><br/><br/>
 
 <h1 className="text-black text-2xl"> {t("DownloadAppfrom")}</h1>
             <div className="flex justify-center lg:justify-start items-center gap-3 mt-8">
               
-              <a target="_blank" href="https://apps.apple.com/us/app/punyasetu/id6683311967" className="w-32 transition duration-300 hover:shadow-lg">
+              <a target="_blank" href="https://apps.apple.com/us/app/LatestAutoTech/id6683311967" className="w-32 transition duration-300 hover:shadow-lg">
                 <img src="https://kitwind.io/assets/kometa/app-store.png" className="object-cover w-full h-auto" alt="App Store" />
               </a>
               <a target="_blank"  href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" className="w-32 transition duration-300 hover:shadow-lg">

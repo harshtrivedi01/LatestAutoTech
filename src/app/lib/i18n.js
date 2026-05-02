@@ -15,7 +15,7 @@ i18n
           Home: "Home",
           language: "Language",
           About: "About",
-          PunyaSetu: "PunyaSetu",
+          LatestAutoTech: "LatestAutoTech",
           Service: "Service",
           Contact: "Contact Us",
           Join: "Join Us",
@@ -76,9 +76,9 @@ i18n
           Reviews: "What Our Clients Say About Us",
           submit: "Submit",
           OurService: "Our Service",
-          Working: "How does PUNYASETU Online Pooja Work?",
-          UpComming: "Pooja on Punyasetu",
-          PerformRetuals: "Book pooja online with your name and gotra, and gain blessings from the divine. Experience spiritual fulfillment and divine blessings with Punyasetu.",
+          Working: "How does LatestAutoTech Online Pooja Work?",
+          UpComming: "Pooja on LatestAutoTech",
+          PerformRetuals: "Book pooja online with your name and gotra, and gain blessings from the divine. Experience spiritual fulfillment and divine blessings with LatestAutoTech.",
           CommingSoon: "Comming Soon",
           // Address: "M/S Satsambhav Technologies Private Limited",
           SelectPoojapackage: "Select Pooja Package",
@@ -92,10 +92,10 @@ i18n
           AboutPooja: "About Pooja",
 
           PoojaPackage: "Pooja Package",
-          GetPunyaSetuApp: "Get PunyaSetu App",
+          GetLatestAutoTechApp: "Get LatestAutoTech App",
           DownloadontheAppStore: "Download on the App Store",
           getitonPlayStore: "get it on Play Store",
-          PoojaBoxonPunyasetu: "Pooja Box on Punyasetu",
+          PoojaBoxonLatestAutoTech: "Pooja Box on LatestAutoTech",
           Addtocart: "Add to cart",
           Productremovedfromcartsuccessfully:
             "Product removed from cart successfully",
@@ -167,8 +167,8 @@ i18n
           AddNewMember: "Add New Member",
           Get: "Get",
           app: "app",
-          PunyaSetuIncAllrightsreserved:
-            "© 2025 PunyaSetu, Inc. All rights reserved.",
+          LatestAutoTechIncAllrightsreserved:
+            "© 2025 LatestAutoTech, Inc. All rights reserved.",
 
           //     /poojabookingcart?bookingId=277
 
@@ -218,10 +218,10 @@ i18n
           GrandTotal: "Grand Total",
 
           Signin: "Sign in",
-          signdis: "Access all Punyasetu services, Explore pooja services <br/> and discover a variety of spiritual offerings.",
+          signdis: "Access all LatestAutoTech services, Explore pooja services <br/> and discover a variety of spiritual offerings.",
 
           by: "By proceeding you agree to the",
-          andof: "and of PUNYASETU",
+          andof: "and of LatestAutoTech",
           and: "and",
           sendotp: "Send OTP",
           backto: "Back To",
@@ -336,7 +336,7 @@ step3:"Secure online payment",
 step3dis:"After filling in the information of your Name and Gotra in the provided form, then procced to make payment using our secure online payment",
 
 step4:"Puja video",
-step4dis:"The video of your Puja completed with your name and Gotra will be shared on PunyaSetu App.",
+step4dis:"The video of your Puja completed with your name and Gotra will be shared on LatestAutoTech App.",
 
 Poojabookingdate:"Pooja Date",
 RedirectingIn:"Redirecting to home",
@@ -372,7 +372,7 @@ orderhistory: "Order History",
 Free:"Free",
 Per:"Per",
 PoojaBoxdis:" Book Pooja Box for Embodiment of Wealth and Abundance, Bringing Harmony and Success to Your Life. this carefully curated box invites divine blessings into your home, creating a spiritually enriching experience that brings peace, prosperity, and success.",
-chadavasevadis:"Experience the divine with Punyasetu's Chadhava Seva. Offer your heartfelt Chadhava at renowned temples across India and receive divine blessings, Book your Chadhava online with your name and gotra, ensuring a spiritually fulfilling experience from anywhere in the world."
+chadavasevadis:"Experience the divine with LatestAutoTech's Chadhava Seva. Offer your heartfelt Chadhava at renowned temples across India and receive divine blessings, Book your Chadhava online with your name and gotra, ensuring a spiritually fulfilling experience from anywhere in the world."
         },
       },
       hi: {
@@ -535,7 +535,7 @@ Popularity:"लोकप्रियता",
           Home: "होम",
           language: "भाषा",
           About: "हमारे बारे में",
-          PunyaSetu: "पुण्यसेतु",
+          LatestAutoTech: "पुण्यसेतु",
           Service: "सेवा",
           Contact: "हमसे संपर्क करें",
           Join: "हमसे जुड़ें",
@@ -574,7 +574,7 @@ Popularity:"लोकप्रियता",
           tryagain: "पुनः प्रयास करें",
 
           BackToHome: "घर वापिस",
-          PunyaSetuIncAllrightsreserved:
+          LatestAutoTechIncAllrightsreserved:
             "© 2025 पुण्यसेतु, इंक. सभी अधिकार सुरक्षित।",
 
           SelectaDateforPoojaBooking: "पूजा बुकिंग के लिए तिथि चुनें",
@@ -621,7 +621,7 @@ Popularity:"लोकप्रियता",
           app: "ऐप",
           DownloadontheAppStore: "ऐप स्टोर से डाउनलोड करें",
           getitonPlayStore: "इसे प्ले स्टोर पर प्राप्त करें",
-          PoojaBoxonPunyasetu: "पुण्यसेतु पर पूजा बॉक्स",
+          PoojaBoxonLatestAutoTech: "पुण्यसेतु पर पूजा बॉक्स",
           Addtocart: "कार्ट में जोड़ें",
           Productremovedfromcartsuccessfully:
             "उत्पाद को कार्ट से सफलतापूर्वक हटा दिया गया",

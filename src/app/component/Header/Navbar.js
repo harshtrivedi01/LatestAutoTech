@@ -20,39 +20,39 @@ export default function Navbar() {
 
   const [pujaData, setPujaData] = useState([]);
   const [header, setHeader] = useState(null); // Initialize header state
-  useEffect(() => {
-      fetchPujaData();   
-  }, []);
+  // useEffect(() => {
+  //     fetchPujaData();   
+  // }, []);
 	
 
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			const formData = JSON.parse(localStorage.getItem("formData") || "{}");
-			const authToken = localStorage.getItem("authToken");
-      const selectedLanguage = localStorage.getItem("selectedLanguage") || "en";
-      const userId = localStorage.getItem("idToken");
+	// useEffect(() => {
+	// 	if (typeof window !== "undefined") {
+	// 		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+	// 		const authToken = localStorage.getItem("authToken");
+  //     const selectedLanguage = localStorage.getItem("selectedLanguage") || "en";
+  //     const userId = localStorage.getItem("idToken");
 
-			const newHeader = {
-				language: selectedLanguage,
-				userId:userId,
-				user_type:  userId ? "user" : "guest",
-				Device_id: "upen",
-				Longitude: formData.Longitude || "",
-				Latitude: formData.Latitude || "",
-				Ip_address: formData.Ip_address || "",
-				web_token: authToken || "",
-        "Content-Type": "application/json",
+	// 		const newHeader = {
+	// 			language: selectedLanguage,
+	// 			userId:userId,
+	// 			user_type:  userId ? "user" : "guest",
+	// 			Device_id: "upen",
+	// 			Longitude: formData.Longitude || "",
+	// 			Latitude: formData.Latitude || "",
+	// 			Ip_address: formData.Ip_address || "",
+	// 			web_token: authToken || "",
+  //       "Content-Type": "application/json",
 
-			};
+	// 		};
 
-			setHeader(newHeader);
-			fetchPujaData(newHeader);
-		}
-	}, []);
+	// 		setHeader(newHeader);
+	// 		fetchPujaData(newHeader);
+	// 	}
+	// }, []);
 
-	useEffect(() => {
-		fetchPujaData();
-	}, []);
+	// useEffect(() => {
+	// 	fetchPujaData();
+	// }, []);
 
 	const fetchPujaData = async () => {
 		try {
@@ -76,30 +76,30 @@ export default function Navbar() {
 		}
 	};
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      setIsLoggedIn(true);
-      setProfileImage("/Assests/Service/Vector.png");
-    }
+  // useEffect(() => {
+  //   const token = localStorage.getItem("authToken");
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //     setProfileImage("/Assests/Service/Vector.png");
+  //   }
 
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowDropdown(false); 
-      }
-    };
+  //   const handleClickOutside = (e) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+  //       setShowDropdown(false); 
+  //     }
+  //   };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    setIsLoggedIn(false);
-    window.location.reload();
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("authToken");
+  //   setIsLoggedIn(false);
+  //   window.location.reload();
+  // };
 
   return (
     <>
@@ -108,12 +108,10 @@ export default function Navbar() {
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
               src="/images/logo.png"
-              className="h-16 mb-2"
-              alt="PunyaSetu Logo"
+              className="h-6 mb-2"
+              alt="LatestAutoTech Logo"
             />
-            <span className="self-center text-2xl lg:text-3xl font-semibold whitespace-nowrap text-black">
-            {t("PunyaSetu")}
-            </span>
+           
           </a>
 
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -121,7 +119,7 @@ export default function Navbar() {
         <Language/>
         </div>
 
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <div className="flex items-center lg:gap-2">
                 <div className="relative" ref={dropdownRef}>
                   <img
@@ -174,7 +172,7 @@ export default function Navbar() {
                    {t("Login")}
                 </button>
               </Link>
-            )}
+            )} */}
 
             {/* Mobile Menu Button */}
 
@@ -204,7 +202,7 @@ export default function Navbar() {
 
           {/* Mobile Sidebar */}
           <div
-            className={`z-30 absolute top-24 left-0 w-full bg-white md:hidden transition-transform duration-300 ${
+            className={`z-30 absolute top-16 left-0 w-full bg-white md:hidden transition-transform duration-300 ${
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
@@ -218,7 +216,7 @@ export default function Navbar() {
                   href="/poojabooking"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  {t("PoojaBooking")} 
+                 Smartphones
                 </a>
               </li>
             
@@ -227,7 +225,7 @@ export default function Navbar() {
                   href="/chadhava"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                  {t("chadhava")} 
+                 Cars
                 </a>
               </li>
               
@@ -236,7 +234,7 @@ export default function Navbar() {
                   href="/poojabox"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                   {t("PoojaBox")} 
+                  Bike
                 </a>
               </li>
            
@@ -245,7 +243,7 @@ export default function Navbar() {
                   href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank"
                   className="block py-2 px-3 text-black hover:bg-gray-100"
                 >
-                {t("DownloadAPP")} 
+               EV
                 </a>
               </li>
             </ul>
@@ -263,25 +261,25 @@ export default function Navbar() {
               
               <li>
                 <a data-translate href="/poojabooking" className="text-black hover:text-orange-700">
-                {t("PoojaBooking")} 
+               Smartphones
                 </a>
               </li>
              
               <li>
                 <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
-                {t("chadhava")} 
+               Cars
                 </a>
               </li>
              
               <li>
                 <a data-translate href="/poojabox" className="text-black hover:text-orange-700">
-                {t("PoojaBox")} 
+              Bikes
                 </a>
               </li>
              
               <li>
                 <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
-                {t("DownloadAPP")} 
+             EV
                 </a>
               </li>
              

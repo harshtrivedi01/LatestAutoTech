@@ -11,7 +11,7 @@ import app from "../../../public/Assests/Service/downloadapp.png";
            <div className="max-w-xl mb-6">
             
              <h2 className=" text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl sm:leading-none max-w-lg mb-6 whitespace-nowrap">
-             Get <span className="inline-block text-[#9E200B]"> Punyasetu</span> App
+             Get <span className="inline-block text-[#9E200B]"> LatestAutoTech</span> App
               
              </h2>
              <p className="text-gray-700 my-10 text-base md:text-2xl">
