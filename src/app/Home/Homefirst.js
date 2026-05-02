@@ -105,7 +105,6 @@ const Homefirst = () => {
                   />
                 </div>
 
-                {/* Desktop Image */}
                 <div className="hidden sm:block" onClick={() => router.push(desktop.url)}>
                   <Image
                     src={desktop.src}
