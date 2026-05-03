@@ -110,7 +110,7 @@ export default function Navbar() {
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
               src="/images/logo.png"
-              className="h-6 mb-2"
+              className="h-6 "
               alt="LatestAutoTech Logo"
             />
           </a>
@@ -121,7 +121,7 @@ export default function Navbar() {
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full md:w-[400px]  px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full md:w-[400px]  px-4 py-1 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
                 {/* Add search icon here, e.g., <FiSearch /> */}
