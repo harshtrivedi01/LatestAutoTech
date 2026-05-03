@@ -8,6 +8,7 @@ import Language from "../Language/Language";
 import { useTranslation } from "react-i18next";
 import api from "../../lib/axiosInstance";
 import axios from "axios";
+// Add import for search icon if needed, e.g., import { FiSearch } from "react-icons/fi";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,58 +24,58 @@ export default function Navbar() {
   // useEffect(() => {
   //     fetchPujaData();   
   // }, []);
-	
+    
 
-	// useEffect(() => {
-	// 	if (typeof window !== "undefined") {
-	// 		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
-	// 		const authToken = localStorage.getItem("authToken");
+    // useEffect(() => {
+    // 	if (typeof window !== "undefined") {
+    // 		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
+    // 		const authToken = localStorage.getItem("authToken");
   //     const selectedLanguage = localStorage.getItem("selectedLanguage") || "en";
   //     const userId = localStorage.getItem("idToken");
 
-	// 		const newHeader = {
-	// 			language: selectedLanguage,
-	// 			userId:userId,
-	// 			user_type:  userId ? "user" : "guest",
-	// 			Device_id: "upen",
-	// 			Longitude: formData.Longitude || "",
-	// 			Latitude: formData.Latitude || "",
-	// 			Ip_address: formData.Ip_address || "",
-	// 			web_token: authToken || "",
+    // 		const newHeader = {
+    // 			language: selectedLanguage,
+    // 			userId:userId,
+    // 			user_type:  userId ? "user" : "guest",
+    // 			Device_id: "upen",
+    // 			Longitude: formData.Longitude || "",
+    // 			Latitude: formData.Latitude || "",
+    // 			Ip_address: formData.Ip_address || "",
+    // 			web_token: authToken || "",
   //       "Content-Type": "application/json",
 
-	// 		};
+    // 		};
 
-	// 		setHeader(newHeader);
-	// 		fetchPujaData(newHeader);
-	// 	}
-	// }, []);
+    // 		setHeader(newHeader);
+    // 		fetchPujaData(newHeader);
+    // 	}
+    // }, []);
 
-	// useEffect(() => {
-	// 	fetchPujaData();
-	// }, []);
+    // useEffect(() => {
+    // 	fetchPujaData();
+    // }, []);
 
-	const fetchPujaData = async () => {
-		try {
-			let formData = new FormData();
-			formData.append("type", "cart_count");
+    const fetchPujaData = async () => {
+        try {
+            let formData = new FormData();
+            formData.append("type", "cart_count");
 
 
-			const response = await axios.post(
-			"http://13.50.195.64/websiteapi/cartcount",
-				formData,
-				{
-					headers: header
+            const response = await axios.post(
+            "http://13.50.195.64/websiteapi/cartcount",
+                formData,
+                {
+                    headers: header
 
-				}
-			);
+                }
+            );
       console.log("Puja API Response:",response.data?.data?.cart_count);
       setPujaData(response.data?.data?.cart_count);
 
-		} catch (error) {
-			console.error("Error fetching puja data:", error);
-		}
-	};
+        } catch (error) {
+            console.error("Error fetching puja data:", error);
+        }
+    };
 
   // useEffect(() => {
   //   const token = localStorage.getItem("authToken");
@@ -104,20 +105,38 @@ export default function Navbar() {
   return (
     <>
       <nav className="bg-white relative  w-full z-20 top-0 start-0 border-b border-gray-200 ">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl flex items-center gap-2 mx-auto p-4 pb-2">
+          {/* Logo Section */}
           <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
             <img
               src="/images/logo.png"
               className="h-6 mb-2"
               alt="LatestAutoTech Logo"
             />
-           
           </a>
 
+          {/* Search Bar Section - Centered */}
+          <div className="flex-1 flex justify-center">
+            <div className="relative ">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="w-full md:w-[400px]  px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+                {/* Add search icon here, e.g., <FiSearch /> */}
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Actions Section */}
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <div className="md:flex hidden">
-        <Language/>
-        </div>
+            <div className="md:flex hidden">
+              <Language/>
+            </div>
 
             {/* {isLoggedIn ? (
               <div className="flex items-center lg:gap-2">
@@ -174,118 +193,44 @@ export default function Navbar() {
               </Link>
             )} */}
 
-            {/* Mobile Menu Button */}
-
-            <button
-              type="button"
-              className="inline-flex items-center p-2 w-8 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-            </button>
+            
           </div>
+        </div>
 
-          {/* Mobile Sidebar */}
-          <div
-            className={`z-30 absolute top-16 left-0 w-full bg-white md:hidden transition-transform duration-300 ${
-              isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
-          >
-            <ul className="flex flex-col text-lg p-4 font-semibold border-t border-gray-200 bg-gray-50">
-              <li>
-              <Language/>
-              </li>
+       
+
+        {/* Desktop Menu */}
+        <div className="py-2">
+          <ul className="flex flex-row justify-center space-x-8 text-lg font-semibold">
+    
             
-              <li>
-                <a data-translate
-                  href="/poojabooking"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                 Smartphones
-                </a>
-              </li>
             
-              <li>
-                <a data-translate
-                  href="/chadhava"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                 Cars
-                </a>
-              </li>
-              
-              <li>
-                <a data-translate
-                  href="/poojabox"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-                  Bike
-                </a>
-              </li>
+            <li>
+              <a data-translate href="/poojabooking" className="text-black hover:text-orange-700">
+             Phones
+              </a>
+            </li>
            
-              <li>
-                <a data-translate
-                  href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank"
-                  className="block py-2 px-3 text-black hover:bg-gray-100"
-                >
-               EV
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex md:items-center md:w-auto md:order-1">
-            <ul className="flex flex-row space-x-8 text-lg font-semibold">
-              {/* <li>
-                <a data-translate href="/" className="text-black hover:text-orange-700">
-                {t("Home")}
-                </a>
-              </li> */}
-              
-              
-              <li>
-                <a data-translate href="/poojabooking" className="text-black hover:text-orange-700">
-               Smartphones
-                </a>
-              </li>
-             
-              <li>
-                <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
-               Cars
-                </a>
-              </li>
-             
-              <li>
-                <a data-translate href="/poojabox" className="text-black hover:text-orange-700">
-              Bikes
-                </a>
-              </li>
-             
-              <li>
-                <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
-             EV
-                </a>
-              </li>
-             
-              <li></li>
-            </ul>
-          </div>
+            <li>
+              <a data-translate href="/chadhava" className="text-black hover:text-orange-700">
+             Cars
+              </a>
+            </li>
+           
+            <li>
+              <a data-translate href="/poojabox" className="text-black hover:text-orange-700">
+            Bikes
+              </a>
+            </li>
+           
+            <li>
+              <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
+           EVs
+              </a>
+            </li>
+           
+            <li></li>
+          </ul>
         </div>
       </nav>
     </>
