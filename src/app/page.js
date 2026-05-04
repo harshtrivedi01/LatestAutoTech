@@ -43,8 +43,8 @@ export default function Page() {
    {/* <Homefourth  pujaData={pujaData}/> */}
    {/* <Homefive  pujaData={pujaData}/> */}
    {/* <Homesix  pujaData={pujaData} bottomslider_list={pujaData?.data?.bottomslider_list} /> */}
-   <Homeeight  pujaData={pujaData}/>
-   <Homeseven  pujaData={pujaData}/>
+   {/* <Homeeight  pujaData={pujaData}/>
+   <Homeseven  pujaData={pujaData}/> */}
   
  
  </>
