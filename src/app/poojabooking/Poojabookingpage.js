@@ -1,45 +1,93 @@
 'use client';
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+
 
 export default function Poojabookingpage() {
-  const { t } = useTranslation();
-  const [articles, setArticles] = useState([]);
+  const articles = [
+    {
+      id: 1,
+      title:
+        "Flagship Phone Showdown: iPhone vs Samsung vs Google Pixel",
+      description:
+        "Comparing the latest flagship smartphones from Apple, Samsung, and Google to see which one comes out on top.",
+      author: "Emma Jh",
+      date: "Jan 28",
+      image:
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 2,
+      title:
+        "Samsung Galaxy S24 Ultra: First Impressions & Hands-On Review",
+      description:
+        "A detailed hands-on review of Samsung’s newest flagship smartphone with camera and AI upgrades.",
+      author: "John Deo",
+      date: "Feb 02",
+      image:
+        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=1200&auto=format&fit=crop",
+    },
+     {
+      id: 3,
+      title:
+        "Samsung Galaxy S24 Ultra: First Impressions & Hands-On Review",
+      description:
+        "A detailed hands-on review of Samsung’s newest flagship smartphone with camera and AI upgrades.",
+      author: "John Deo",
+      date: "Feb 02",
+      image:
+        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=1200&auto=format&fit=crop",
+    },
+  ];
 
-  useEffect(() => {
-    // Dummy data for article listing with added date and image for news-like feel
-    const dummyArticles = [
-      { id: 1, title: "Article One", summary: "This is the summary of article one.", date: "2023-10-01", image: "https://www.nytimes.com/wirecutter/reviews/best-android-phone/" },
-      { id: 2, title: "Article Two", summary: "This is the summary of article two.", date: "2023-10-02", image: "https://www.nytimes.com/wirecutter/reviews/best-android-phone/" },
-      { id: 3, title: "Article Three", summary: "This is the summary of article three.", date: "2023-10-03", image: "https://www.nytimes.com/wirecutter/reviews/best-android-phone/" },
-      { id: 4, title: "Article Four", summary: "This is the summary of article four.", date: "2023-10-04", image: "https://www.nytimes.com/wirecutter/reviews/best-android-phone/" },
-    ];
-    setArticles(dummyArticles);
-  }, []);
-
-  // Array of height classes for varying card sizes
-  const cardHeights = ['h-64', 'h-80', 'h-48', 'h-72'];
 
   return (
-    <div className="bg-[#FFEEE2] min-h-screen pb-10">
-      <div className="font-sans pt-10 overflow-hidden">
-        <div className="container max-w-7xl mx-auto px-4">
-       
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articles.map(article => (
-              <div key={article.id} className={`bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow ${cardHeights[article.id % cardHeights.length]} flex flex-col justify-between overflow-hidden`}>
-                <img src={article.image} alt={article.title} className="w-full h-32 object-cover rounded-t-lg" />
-                <div className="p-6 flex flex-col justify-between flex-grow">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{article.title}</h3>
-                    <p className="text-gray-600 mb-4">{article.summary}</p>
-                  </div>
-                  <div className="text-sm text-gray-500">{article.date}</div>
-                </div>
-              </div>
-            ))}
+    <div className="min-h-screen bg-[#f5f5f5] py-6">
+      <div className="max-w-6xl mx-auto px-4">
+        
+     
+
+
+        {/* Article Cards */}
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+  {articles.map((article) => (
+    <div
+      key={article.id}
+      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 group"
+    >
+      {/* Image */}
+      <div className="overflow-hidden">
+        <img
+          src={article.image}
+          alt={article.title}
+          className="w-full h-[220px] md:h-[240px] object-cover group-hover:scale-105 transition duration-500"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-5">
+        <h2 className="text-[24px] md:text-[28px] leading-tight font-bold text-gray-900 mb-3">
+          {article.title}
+        </h2>
+
+        <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-5">
+          {article.description}
+        </p>
+
+        {/* Author */}
+        <div className="flex items-center gap-3 text-gray-500 text-sm">
+          <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-xs font-semibold">
+            {article.author.charAt(0)}
           </div>
+
+          <span>{article.author}</span>
+
+          <span>•</span>
+
+          <span>{article.date}</span>
         </div>
+      </div>
+    </div>
+  ))}
+</div>
       </div>
     </div>
   );

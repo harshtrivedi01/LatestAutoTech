@@ -177,7 +177,7 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
+              <a data-translate href="/poojabookingcart" target="_blank" className="text-black hover:text-orange-700">
                 EVs
               </a>
             </li>
