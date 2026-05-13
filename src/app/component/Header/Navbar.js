@@ -21,39 +21,7 @@ export default function Navbar() {
 
   const [pujaData, setPujaData] = useState([]);
   const [header, setHeader] = useState(null); // Initialize header state
-  // useEffect(() => {
-  //     fetchPujaData();   
-  // }, []);
-    
-
-    // useEffect(() => {
-    // 	if (typeof window !== "undefined") {
-    // 		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
-    // 		const authToken = localStorage.getItem("authToken");
-  //     const selectedLanguage = localStorage.getItem("selectedLanguage") || "en";
-  //     const userId = localStorage.getItem("idToken");
-
-    // 		const newHeader = {
-    // 			language: selectedLanguage,
-    // 			userId:userId,
-    // 			user_type:  userId ? "user" : "guest",
-    // 			Device_id: "upen",
-    // 			Longitude: formData.Longitude || "",
-    // 			Latitude: formData.Latitude || "",
-    // 			Ip_address: formData.Ip_address || "",
-    // 			web_token: authToken || "",
-  //       "Content-Type": "application/json",
-
-    // 		};
-
-    // 		setHeader(newHeader);
-    // 		fetchPujaData(newHeader);
-    // 	}
-    // }, []);
-
-    // useEffect(() => {
-    // 	fetchPujaData();
-    // }, []);
+  
 
     const fetchPujaData = async () => {
         try {
@@ -134,7 +102,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a data-translate href="https://play.google.com/store/apps/details?id=free.temple.mandir.darshan.dev.puja.panditji.sri.guruji.pravachan" target="_blank" className="text-black hover:text-orange-700">
+              <a data-translate href="/poojabookingcart" className="text-black hover:text-orange-700">
                   EVs
                 </a>
               </li>
@@ -177,7 +145,7 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a data-translate href="/poojabookingcart" target="_blank" className="text-black hover:text-orange-700">
+              <a data-translate href="/poojabookingcart" className="text-black hover:text-orange-700">
                 EVs
               </a>
             </li>
