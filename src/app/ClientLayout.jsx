@@ -41,11 +41,7 @@ export default function ClientLayout({ children }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const openWhatsApp = () => {
-    const phoneNumber = "7340099503"; // Replace with your actual WhatsApp number
-    const message = encodeURIComponent("Hello! I need assistance.");
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
-  };
+
 
   return (
     <>

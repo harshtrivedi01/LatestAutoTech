@@ -45,31 +45,6 @@ export default function Navbar() {
         }
     };
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("authToken");
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //     setProfileImage("/Assests/Service/Vector.png");
-  //   }
-
-  //   const handleClickOutside = (e) => {
-  //     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-  //       setShowDropdown(false); 
-  //     }
-  //   };
-
-  //   document.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
-
-  // const handleLogout = () => {
-  //   localStorage.removeItem("authToken");
-  //   setIsLoggedIn(false);
-  //   window.location.reload();
-  // };
-
   return (
     <>
       <nav className="bg-white relative w-full z-20 top-0 start-0 border-b border-gray-200">

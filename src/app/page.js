@@ -17,23 +17,7 @@ export default function Page() {
   const [pujaData, setPujaData] = useState([]);
 
   // useEffect(() => {
-  //     fetchPujaData();   
-  // }, []);
 
-  const fetchPujaData = async () => {
-    try {
-      let formData = new FormData();
-      formData.append("type", "home");
-  
-      const response = await api.post("/home", formData); // Use the new axios instance
-  
-      console.log("Puja API Response:", response.data);
-      setPujaData(response.data)
-     
-    } catch (error) {
-      console.error("Error fetching puja data:", error);
-    }
-  };
 
   return (
  <>
