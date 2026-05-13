@@ -36,16 +36,15 @@ export default function Homethird({pujaData}) {
           <div className="mx-auto max-w-6xl pt-3">
          
    {/* Latest Post Section */}
-        <div className="">
-          <div className="flex items-center gap-5 mb-10">
-            <div className="bg-black text-white px-6 py-3 text-xl font-bold uppercase">
-              Latest Post
-            </div>
+       <div className="w-full">
+  <div className="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-10">
+    <div className="bg-black text-white px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg md:text-xl font-bold uppercase whitespace-nowrap">
+      Latest Post
+    </div>
 
-            <div className="flex-1 border-t border-black"></div>
-          </div>
-
-        </div>
+    <div className="flex-1 border-t border-black"></div>
+  </div>
+</div>
             {/* <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
               <div className="flex flex-wrap gap-2 bg-white rounded-full border border-[#DD531B]/30 p-1 shadow-sm">
                 <button className="px-4 py-2 rounded-full bg-[#DD531B] text-white text-sm font-semibold">Latest</button>

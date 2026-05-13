@@ -199,17 +199,16 @@ const Homefirst = () => {
     //   </div>
     // </div>
 
-       <div className="  py-10">
+       <div className="  py-5">
       <div className="max-w-6xl mx-auto px-4">
         
-        {/* Top Border */}
-        <div className="border-t border-black mb-10"></div>
+    
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-1">
           
           {/* Left Large Card */}
-          <div className="lg:col-span-2 relative group overflow-hidden h-[420px]">
+          <div className="lg:col-span-2 relative group overflow-hidden h-[220px] lg:h-[420px]">
             <img
               src={newsData[0].image}
               alt=""
@@ -225,9 +224,9 @@ const Homefirst = () => {
                 {newsData[0].category}
               </span>
 
-              <h2 className="text-white text-4xl leading-tight font-semibold mb-4">
-                {newsData[0].title}
-              </h2>
+             <h2 className="text-white text-xl sm:text-3xl md:text-4xl leading-snug md:leading-tight font-semibold mb-4 break-words">
+  {newsData[0].title}
+</h2>
 
               <p className="text-white text-sm font-medium">
                 {newsData[0].author} - {newsData[0].date}
@@ -253,13 +252,13 @@ const Homefirst = () => {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 p-5 z-10">
-                  <span className="bg-black text-white text-[11px] font-semibold px-3 py-1 inline-block mb-3">
+                  {/* <span className="bg-black text-white text-[11px] font-semibold px-3 py-1 inline-block mb-3">
                     {item.category}
-                  </span>
+                  </span> */}
 
-                  <h3 className="text-white text-[18px] leading-snug font-semibold">
-                    {item.title}
-                  </h3>
+              <h3 className="text-white text-[14px] sm:text-lg md:text-[15px] leading-snug font-semibold break-words">
+  {item.title}
+</h3>
                 </div>
               </div>
             ))}

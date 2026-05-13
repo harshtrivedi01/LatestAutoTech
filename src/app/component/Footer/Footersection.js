@@ -9,54 +9,7 @@ import { useTranslation } from "react-i18next";
 export default function Footersection() {
 	const { t } = useTranslation();
 	const [pujaData, setPujaData] = useState(null);
-	const [header, setHeader] = useState(null); // Initialize header state
-
-	// useEffect(() => {
-	// 	if (typeof window !== "undefined") {
-	// 		const formData = JSON.parse(localStorage.getItem("formData") || "{}");
-	// 		const authToken = localStorage.getItem("authToken");
-
-	// 		const newHeader = {
-	// 			language: "en",
-	// 			userId: "2",
-	// 			user_type: "user",
-	// 			Device_id: "upen",
-	// 			Longitude: formData.Longitude || "",
-	// 			Latitude: formData.Latitude || "",
-	// 			Ip_address: formData.Ip_address || "",
-	// 			web_token: authToken || "",
-	// 		};
-
-	// 		setHeader(newHeader);
-	// 		fetchPujaData(newHeader);
-	// 	}
-	// }, []);
-
-	// useEffect(() => {
-	// 	fetchPujaData();
-	// }, []);
-
-	const fetchPujaData = async () => {
-		try {
-			let formData = new FormData();
-			formData.append("type", "footer");
-
-
-			const response = await axios.post(
-				"http://13.50.195.64/websiteapi/footer",
-				formData,
-				{
-					headers: header
-				}
-			);
-
-			console.log("Puja API Response:", response.data);
-			setPujaData(response.data.data);
-
-		} catch (error) {
-			console.error("Error fetching puja data:", error);
-		}
-	};
+	
 
 	return (
 		<>
@@ -64,10 +17,10 @@ export default function Footersection() {
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto  py-10 flex flex-col lg:flex-row justify-between space-y-8 lg:space-y-0">
 					{/* Logo and Contact Info */}
 					<div className="lg:w-1/3 space-y-5">
-						<a href="/" className="flex items-center space-x-3">
+						{/* <a href="/" className="flex items-center space-x-3">
 							<img src="/images/logo.png" alt="logo" className="w-60 h-12" />
 					
-						</a>
+						</a> */}
 						<div>
 							<div className="mt-3 space-y-2">
 								<p className="flex items-center">
@@ -80,14 +33,14 @@ export default function Footersection() {
 									</a>
 								</p>
 
-								<p className="flex items-center">
+								{/* <p className="flex items-center">
 									<a href={`tel:+91${pujaData?.contact_no}`} className="flex items-center text-gray-800 hover:text-green-600">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 mr-2 bg-green-500 p-2 rounded-full text-white text-xl sm:mr-2">
 											<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
 										</svg>
 										<span>+91 {pujaData?.contact_no}</span>
 									</a>
-								</p>
+								</p> */}
 
 
 							</div>
@@ -95,7 +48,7 @@ export default function Footersection() {
 					</div>
 
 					{/* Footer Links */}
-					<div className="grid grid-cols-2 ga lg:w-2/3 lg:grid-cols-3">
+					{/* <div className="grid grid-cols-2 ga lg:w-2/3 lg:grid-cols-3">
 						<nav>
 							<h6 className="footer-title font-semibold text-lg mb-3">{t("Services")}</h6>
 							<ul className="space-y-2">
@@ -144,7 +97,7 @@ export default function Footersection() {
 								</a>
 							</div>
 						</nav>
-					</div>
+					</div> */}
 				</div>
 				<div className="py-6 text-[16px] border-t border-[#FA8128] text-center text-gray-600">{t("LatestAutoTechIncAllrightsreserved")}</div>
 			</footer>
