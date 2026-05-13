@@ -58,22 +58,22 @@ export default function Page() {
         <img
           src={article.image}
           alt={article.title}
-          className="w-full h-[220px] md:h-[240px] object-cover group-hover:scale-105 transition duration-500"
+          className="w-full h-[120px] md:h-[240px] object-cover group-hover:scale-105 transition duration-500"
         />
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h2 className="text-[24px] md:text-[28px] leading-tight font-bold text-gray-900 mb-3">
+      <div className="p-3">
+        <h2 className="text-[20px] md:text-[28px] leading-tight font-bold text-gray-900 mb-3">
           {article.title}
         </h2>
 
-        <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-5">
+        <p className="text-gray-600 text-sm md:text-base leading-relaxed ">
           {article.description}
         </p>
 
         {/* Author */}
-        <div className="flex items-center gap-3 text-gray-500 text-sm">
+        {/* <div className="flex items-center gap-3 text-gray-500 text-sm">
           <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-xs font-semibold">
             {article.author.charAt(0)}
           </div>
@@ -83,7 +83,7 @@ export default function Page() {
           <span>•</span>
 
           <span>{article.date}</span>
-        </div>
+        </div> */}
       </div>
     </div>
   ))}
