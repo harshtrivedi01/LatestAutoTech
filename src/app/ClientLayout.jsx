@@ -54,13 +54,6 @@ export default function ClientLayout({ children }) {
       <SpeedInsights />
       <FooterWrapper />
 
-      {/* Always visible WhatsApp Button */}
-      <button
-        onClick={openWhatsApp}
-        className="fixed bottom-10 right-5 lg:right-11 bg-green-600 text-white lg:p-5 p-3.5 rounded-full shadow-md hover:bg-green-700 transition-all z-50"
-      >
-        <FaWhatsapp className="text-xl sm:text-2xl" />
-      </button>
 
       {/* Back to Top Button (visible only when scrolling down) */}
       {showButton && (
