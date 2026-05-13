@@ -15,7 +15,7 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "700", "900"],
 });
-
+<meta name="google-site-verification" content="z24DoP8dSzClbNxAWfBPKHQ_sv1bQE1MFEkUOSKvPyc" />
 // Metadata
 export const metadata = {
   title: "LatestAutoTech",
@@ -23,7 +23,9 @@ export const metadata = {
   icons: {
     icon: "/favicon.ico", // Place your favicon in /public/
   },
+  
 };
+<meta name="google-site-verification" content="z24DoP8dSzClbNxAWfBPKHQ_sv1bQE1MFEkUOSKvPyc" />
 
 export default function RootLayout({ children }) {
   return (
