@@ -2,7 +2,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./reduxrtk/providers";
+
 import { LanguageProvider } from "../context/LanguageContext";
 import I18nProvider from "./providers";
 import ClientLayout from "./ClientLayout";
@@ -31,13 +31,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} font-roboto antialiased bg-white text-black`}>
-        <Providers>
+   
           <LanguageProvider>
             <I18nProvider>
               <ClientLayout>{children}</ClientLayout>
             </I18nProvider>
           </LanguageProvider>
-        </Providers>
+        
       </body>
     </html>
   );

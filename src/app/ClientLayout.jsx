@@ -6,41 +6,9 @@ import NavbarWrapper from "./component/Header/NavbarWrapper";
 import FooterWrapper from "./component/Footer/FooterWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FaArrowUp } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa6"; // Import WhatsApp icon
-import LoadingScreen from "./component/LoadingScreen";
-import { setLoadingFunction } from "./utils/loadingState";
 
 export default function ClientLayout({ children }) {
   const [showButton, setShowButton] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  // Load Cashfree SDK
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => document.body.removeChild(script);
-  }, []);
-
-  // Set global loading function
-  useEffect(() => {
-    setLoadingFunction(setLoading);
-  }, []);
-
-  // Scroll event to show Back to Top button
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowButton(window.scrollY > 300);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
 
 
   return (
@@ -48,7 +16,7 @@ export default function ClientLayout({ children }) {
       <ToastContainer position="top-right" autoClose={5000} />
       <NavbarWrapper />
 
-      {loading && <LoadingScreen />}
+    
       
       {children}
       <SpeedInsights />

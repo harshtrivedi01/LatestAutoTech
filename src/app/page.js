@@ -2,34 +2,16 @@
 
 
 import Homefirst from "./Home/Homefirst";
-import Homesecond from "./Home/Homesecond";
 import Homethird from "./Home/Homethird";
-import Homefourth from "./Home/Homefourth";
-import Homefive from "./Home/Homefive";
-import Homesix from "./Home/Homesix";
-import { Homeseven } from "./Home/Homeseven";
-import Homeeight from "./Home/Homeeight";
-import { useEffect, useState } from "react";
-import api from "./lib/axiosInstance";
-// export const dynamic = "force-dynamic"; // Ensures it's rendered on the server
 
 export default function Page() {
-  const [pujaData, setPujaData] = useState([]);
-
-  // useEffect(() => {
 
 
   return (
  <>
-   <Homefirst sliderList={pujaData?.data?.slider_list} />
-   {/* <Homesecond module_category_details={pujaData?.data?.module_category_details} /> */}
-   <Homethird  pujaData={pujaData}/>
-   {/* <Homefourth  pujaData={pujaData}/> */}
-   {/* <Homefive  pujaData={pujaData}/> */}
-   {/* <Homesix  pujaData={pujaData} bottomslider_list={pujaData?.data?.bottomslider_list} /> */}
-   {/* <Homeeight  pujaData={pujaData}/>
-   <Homeseven  pujaData={pujaData}/> */}
-  
+   <Homefirst  />
+   <Homethird  />
+
  
  </>
   );
