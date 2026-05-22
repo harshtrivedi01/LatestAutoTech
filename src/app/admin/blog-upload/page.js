@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import BlogUploadClient from "./BlogUploadClient";
 
 export const metadata = {
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function BlogUploadPage() {
-  return <BlogUploadClient />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BlogUploadClient />
+    </Suspense>
+  );
 }
